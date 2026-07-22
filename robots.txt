@@ -1,0 +1,3 @@
+# Preview host — client work in progress. Not for indexing.
+User-agent: *
+Disallow: /
