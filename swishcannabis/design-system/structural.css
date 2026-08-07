@@ -326,19 +326,14 @@
   transition: transform var(--ds-dur) var(--ds-ease);
 }
 
-/* UNIFORM PRODUCT SHADOW. The six cutouts do NOT carry a consistent baked shadow - alpha analysis
-   put semi-transparent coverage at 2.5% to 4.2% across five of them with no designed shadow band,
-   so pre-rolls read flat next to flower and edibles. A CSS drop-shadow follows each cutout ALPHA
-   SILHOUETTE rather than its bounding box, so it grounds every product identically whatever the
-   source. Two stacked shadows: a tight contact shadow and a softer cast, which is what reads as
-   "sitting on the shelf" rather than "floating". Suppressed under reduced-motion? No - a shadow is
-   not motion, so it stays. */
-.rs-tile__media img {
-  filter: drop-shadow(0 2px 2px rgba(4, 63, 102, .18)) drop-shadow(0 10px 12px rgba(4, 63, 102, .16));
-}
-.rs-feat__card img {
-  filter: drop-shadow(0 2px 2px rgba(4, 63, 102, .16)) drop-shadow(0 9px 11px rgba(4, 63, 102, .14));
-}
+/* NO CSS DROP-SHADOW HERE, DELIBERATELY. Every product cutout already carries a BAKED shadow -
+   measured by compositing each on white: flower 3.73%, pipe 4.08%, concentrates 2.86%, edibles
+   2.28%, and both new cutouts at 3.02% and 3.46%. An earlier pass added a CSS drop-shadow because
+   a first measurement said the shadows were absent; that test was wrong (it looked for mid-luminance
+   grey, while an alpha shadow is near-black at low alpha, so it excluded exactly what it sought).
+   The filter was therefore DOUBLING every shadow. The real defect was two ODD assets: an old
+   pre-roll with a weaker shadow and a rectangular vape screenshot. Both are now proper 548x476
+   cutouts, so the baked shadows match and no CSS shadow is needed. */
 .rs-tile:hover .rs-tile__media img { transform: scale(1.06); }
 
 /* the label BAR at the foot of the tile (D22's own wording).
