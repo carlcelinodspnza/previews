@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400..700&display=swap">
 <link rel="stylesheet" href="design-system/tokens.css?v=aa2c63a2">
   <link rel="stylesheet" href="design-system/chrome.css?v=65fdc8b5">
-  <link rel="stylesheet" href="design-system/structural.css?v=73f37bfa">
+  <link rel="stylesheet" href="design-system/structural.css?v=a1c83d85">
 
 </head>
 <body>
@@ -307,10 +307,10 @@ html.sw-age-ok #sw-agegate { display: none; }
           
           <span class="rs-hero__mural" aria-hidden="true"></span>
           <figure class="rs-hero__frame">
-            <img src="assets/hero-storefront-1640.webp"
-                   srcset="assets/hero-storefront-600.webp 600w, assets/hero-storefront-900.webp 900w, assets/hero-storefront-1200.webp 1200w, assets/hero-storefront-1640.webp 1640w"
+            <img src="assets/hero-storefront-1200.webp"
+                   srcset="assets/hero-storefront-600.webp 600w, assets/hero-storefront-900.webp 900w, assets/hero-storefront-1200.webp 1200w, assets/hero-storefront-1800.webp 1800w"
                    sizes="100vw"
-                 width="1640" height="645"
+                 width="1200" height="476"
                  fetchpriority="high" decoding="async"
                  alt="The Swish Cannabis storefront from the street: a black building with a white script Swish sign and the 10701 numerals down the entry column, painted murals running along the side wall, and the parking lot in front with an EV charging station and marked spaces.">
           </figure>
@@ -431,7 +431,30 @@ html.sw-age-ok #sw-agegate { display: none; }
         </div>
         <div class="col col--span-8 rs-deals__ladders sw-rise" style="--i:1">
           
-          <table class="rs-ladder">
+          
+            <ul class="rs-dealcards">
+              <li class="rs-dealcard rs-dealcard--every">
+                <div class="rs-dealcard__body">
+                  <p class="rs-dealcard__day">EVERY DAY</p>
+                  <p class="rs-dealcard__term">30% OFF</p>
+                  <p class="rs-dealcard__sub">All 1/2 ounces and full ounces</p>
+                </div>
+                <img class="rs-dealcard__art" src="assets/Flower_1.webp" width="548" height="476"
+                     loading="lazy" decoding="async"
+                     alt="A single cannabis flower bud, purple and green with orange hairs">
+              </li>
+              <li class="rs-dealcard rs-dealcard--shatter">
+                <div class="rs-dealcard__body">
+                  <p class="rs-dealcard__day">SHATTERDAY</p>
+                  <p class="rs-dealcard__term">UP TO 30% OFF</p>
+                  <p class="rs-dealcard__sub">STIIIZY, SLUGGERS, Rosin Tech Labs and all concentrates</p>
+                </div>
+                <img class="rs-dealcard__art" src="assets/Concentrates_1.webp" width="516" height="476"
+                     loading="lazy" decoding="async"
+                     alt="A dab tool lifting a strand of golden cannabis concentrate">
+              </li>
+            </ul>
+            <table class="rs-ladder">
             <caption class="sr-only">Confirmed offers, by day</caption>
             <tbody>
               <tr class="rs-ladder__day"><th scope="rowgroup" colspan="2">EVERY DAY</th></tr>

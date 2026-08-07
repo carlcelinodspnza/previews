@@ -326,6 +326,19 @@
   transition: transform var(--ds-dur) var(--ds-ease);
 }
 
+/* UNIFORM PRODUCT SHADOW. The six cutouts do NOT carry a consistent baked shadow - alpha analysis
+   put semi-transparent coverage at 2.5% to 4.2% across five of them with no designed shadow band,
+   so pre-rolls read flat next to flower and edibles. A CSS drop-shadow follows each cutout ALPHA
+   SILHOUETTE rather than its bounding box, so it grounds every product identically whatever the
+   source. Two stacked shadows: a tight contact shadow and a softer cast, which is what reads as
+   "sitting on the shelf" rather than "floating". Suppressed under reduced-motion? No - a shadow is
+   not motion, so it stays. */
+.rs-tile__media img {
+  filter: drop-shadow(0 2px 2px rgba(4, 63, 102, .18)) drop-shadow(0 10px 12px rgba(4, 63, 102, .16));
+}
+.rs-feat__card img {
+  filter: drop-shadow(0 2px 2px rgba(4, 63, 102, .16)) drop-shadow(0 9px 11px rgba(4, 63, 102, .14));
+}
 .rs-tile:hover .rs-tile__media img { transform: scale(1.06); }
 
 /* the label BAR at the foot of the tile (D22's own wording).
@@ -1019,4 +1032,73 @@ main .sw-btn { min-height: 44px; }
 }
 @media (max-width: 759px) {
   .rs-signup__art, .rs-band--tray { background-image: url("../assets/swish-band-760.webp"); }
+}
+
+
+/* ==========================================================================================
+   DEAL CARDS. The card LANGUAGE of the client's own deal artwork - bold caps day name, an
+   oversized term, a real product cutout on a colour field - rendered in the LOCKED palette
+   rather than the rainbow gradients of the source cards. C7 is machine-measured at
+   dark_ratio 0.0 with ONE accent, and the sector blueprint bans gradients-as-decoration, so
+   copying those fields literally would break the direction the owner froze. The frozen orange
+   carries the term; navy carries the day. Two cards only, by D17.
+   ========================================================================================== */
+.rs-dealcards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-sm);
+  list-style: none;
+  margin: 0 0 var(--ds-space-md);
+  padding: 0;
+}
+.rs-dealcard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-xs);
+  min-height: 132px;
+  padding: var(--ds-space-sm);
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-surface-2);
+  overflow: hidden;
+}
+.rs-dealcard--every  { background: var(--ds-primary-soft); }
+.rs-dealcard--shatter{ background: var(--ds-accent-soft); }
+.rs-dealcard__body { position: relative; z-index: 1; max-width: 62%; }
+.rs-dealcard__day {
+  margin: 0 0 2px;
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ds-ink-heading);
+}
+.rs-dealcard__term {
+  margin: 0 0 6px;
+  font-family: var(--ds-font-display);
+  font-weight: 900;
+  font-size: clamp(24px, 3.2vw, 34px);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  color: var(--ds-accent-deep);
+}
+.rs-dealcard__sub {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ds-ink-soft);
+}
+.rs-dealcard__art {
+  width: 108px;
+  height: 108px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+@media (max-width: 767px) {
+  .rs-dealcards { grid-template-columns: 1fr; }
+  .rs-dealcard { min-height: 112px; }
+  .rs-dealcard__art { width: 88px; height: 88px; }
 }
