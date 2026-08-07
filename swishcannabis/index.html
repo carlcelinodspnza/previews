@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<!-- PREVIEW-ONLY. Injected into the ASSEMBLED copy, never into the source: the source page must
+     stay indexable for the real domain, and its locked SEO title/description exist to rank there.
+     This host is a PUBLIC GitHub Pages repo, so without this the preview could be indexed and
+     compete with the client's own site for its own terms. Matches the liquorlicense precedent.
+     robots.txt at the previews ROOT already carries Disallow: / as host-level backup; this meta
+     is the per-page belt to that braces. -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weed Dispensary North Hollywood | Swish Cannabis</title>
+<meta name="description" content="Swish Cannabis on Burbank Blvd, North Hollywood. Browse the full menu, see today's deal, open 7 days 9AM-9:55PM. Parking and EV charging on site. 21+.">
+
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400..700&display=swap">
+<link rel="stylesheet" href="design-system/tokens.css?v=aa2c63a2">
+  <link rel="stylesheet" href="design-system/chrome.css?v=65fdc8b5">
+  <link rel="stylesheet" href="design-system/structural.css?v=8f9cd2b9">
+
+</head>
+<body>
+
+
+
+
+<script>
+/* Runs BEFORE the gate markup below is parsed, so a returning verified visitor never sees a flash
+   of the gate. Sets a class on the root element; the CSS keys off it. Wrapped so a storage
+   exception (Safari private mode throws on localStorage) can never leave the page ungated. */
+(function () {
+  var ok = false;
+  try { ok = window.localStorage.getItem('sw_age_verified') === 'yes'; } catch (e) { ok = false; }
+  if (!ok) { try { ok = /(?:^|;\s*)age_verification=verified(?:;|$)/.test(document.cookie); } catch (e) { ok = false; } }
+  if (ok) { document.documentElement.className += ' sw-age-ok'; }
+})();
+</script>
+
+<style>
+/* Scroll lock while the gate is up. Pure CSS, so it holds even if the script never runs. */
+html:not(.sw-age-ok), html:not(.sw-age-ok) body { overflow: hidden; }
+html.sw-age-ok #sw-agegate { display: none; }
+
+#sw-agegate {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;              /* above every --ds-z-* rung, including toast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  overflow-y: auto;
+  background-color: #0b0b0b;        /* paints instantly, before the mural decodes */
+  background-image:
+    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+    url("assets/agegate-mural-900.webp");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  color: var(--ds-ink-on-dark, #ffffff);
+  font-family: var(--ds-font-display, 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+/* Serve the heavier mural only where it is actually resolvable. 900w is 21 KB, 1600w is 96 KB; the
+   source they came from was 505 KB and sat in front of first paint on EVERY page. */
+@media (min-width: 901px) {
+  #sw-agegate {
+    background-image:
+      linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+      url("assets/agegate-mural-1600.webp");
+  }
+}
+
+/* 960px, not a narrower reading measure: the LIVE title sets on ONE line at desktop (it spans about
+   900px at 60px/900), and a 640px box wrapped it to two. The copy and the buttons keep their own
+   tighter maxima below, so only the title uses the extra width. */
+.sw-agegate__inner { width: 100%; max-width: 960px; text-align: center; margin: auto; outline: 0; }
+
+.sw-agegate__logo {
+  display: block;
+  width: min(538px, 78vw);
+  height: auto;
+  margin: 0 auto 26px;
+}
+
+.sw-agegate__title {
+  margin: 0 0 22px;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: clamp(28px, 6.6vw, 60px);
+  line-height: 1.16;
+  letter-spacing: .005em;
+  color: var(--ds-ink-on-dark, #ffffff);
+  text-wrap: balance;
+}
+
+.sw-agegate__copy {
+  margin: 0 auto 30px;
+  max-width: 42ch;
+  font-size: clamp(15px, 2.4vw, 18px);
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--ds-ink-on-dark, #ffffff);
+}
+
+.sw-agegate__actions { display: grid; gap: 14px; max-width: 410px; margin: 0 auto; }
+
+.sw-agegate__btn {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  padding: 17px 29px;
+  border: 0;
+  border-radius: 25px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform .18s ease, filter .18s ease;
+}
+.sw-agegate__btn:hover { filter: brightness(.94); }
+.sw-agegate__btn:active { transform: scale(.97); }
+.sw-agegate__btn:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
+
+/* Black on the frozen orange measures about 11:1. This is the live value, kept as-is. */
+.sw-agegate__btn--yes { background: var(--ds-accent, #ff8c09); color: var(--ds-ink, #000000); }
+.sw-agegate__btn--no  { background: #ffffff; color: var(--ds-ink, #000000); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-agegate__btn { transition: none; }
+  .sw-agegate__btn:active { transform: none; }
+}
+</style>
+
+<div id="sw-agegate" role="dialog" aria-modal="true" aria-labelledby="sw-agegate-title">
+  <div class="sw-agegate__inner" tabindex="-1">
+    <img class="sw-agegate__logo" src="assets/agegate-logo-white.webp"
+         alt="Swish Cannabis" width="538" height="271" decoding="async">
+    <h1 class="sw-agegate__title" id="sw-agegate-title">ARE YOU 21 YEARS OF AGE?</h1>
+    
+<p class="sw-agegate__copy">
+      This Website Contains Information on Adult Only Cannabis Use.
+    </p>
+    <div class="sw-agegate__actions">
+      <button type="button" class="sw-agegate__btn sw-agegate__btn--yes" data-agegate="yes">Yes</button>
+      <button type="button" class="sw-agegate__btn sw-agegate__btn--no" data-agegate="no">No</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var gate = document.getElementById('sw-agegate');
+  if (!gate || document.documentElement.classList.contains('sw-age-ok')) return;
+
+  function grant() {
+    try { window.localStorage.setItem('sw_age_verified', 'yes'); } catch (e) { /* storage blocked; the cookie below still carries it */ }
+    try {
+      var d = new Date();
+      d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);   /* 365 days, matching the platform script */
+      document.cookie = 'age_verification=verified;expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+    } catch (e) { /* no-op */ }
+    document.documentElement.classList.add('sw-age-ok');
+    if (gate.parentNode) { gate.parentNode.removeChild(gate); }
+    var main = document.getElementById('main') || document.querySelector('main');
+    if (main) { main.setAttribute('tabindex', '-1'); main.focus({ preventScroll: true }); }
+  }
+
+  function deny() { window.location.href = 'https://www.google.com/'; }
+
+  gate.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('[data-agegate]');
+    if (!btn) { return; }
+    ev.preventDefault();
+    if (btn.getAttribute('data-agegate') === 'yes') { grant(); } else { deny(); }
+  });
+
+  /* Focus trap. A gate is not dismissible, so Escape is swallowed and Tab cycles inside. */
+  var focusables = gate.querySelectorAll('button');
+  var first = focusables[0], last = focusables[focusables.length - 1];
+  gate.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') { ev.preventDefault(); return; }
+    if (ev.key !== 'Tab') { return; }
+    var a = document.activeElement;
+    /* Focus starts on the dialog container, which is neither button. Without this branch a
+       Shift+Tab from there would walk backwards out of the gate. */
+    if (a !== first && a !== last) { ev.preventDefault(); (ev.shiftKey ? last : first).focus(); return; }
+    if (ev.shiftKey && a === first) { ev.preventDefault(); last.focus(); }
+    else if (!ev.shiftKey && a === last) { ev.preventDefault(); first.focus(); }
+  });
+  /* Anything outside the gate that steals focus gets pulled back. */
+  document.addEventListener('focusin', function (ev) {
+    if (document.documentElement.classList.contains('sw-age-ok')) { return; }
+    if (!gate.contains(ev.target)) { ev.stopPropagation(); first.focus(); }
+  });
+
+  /* Focus the DIALOG, not the Yes button. Focusing a button on load makes Chrome paint its
+     :focus-visible ring for mouse users too, which is not how the live gate looks. Focusing the
+     dialog still moves the reading position into the gate and still lets the trap work, and the
+     ring then only ever appears once someone actually Tabs. */
+  var inner = gate.querySelector('.sw-agegate__inner');
+  if (inner) { inner.focus({ preventScroll: true }); }
+  else if (first) { first.focus({ preventScroll: true }); }
+})();
+</script>
+
+
+
+
+
+
+<script>document.documentElement.className += " js";</script>
+
+<a class="sw-skip" href="#main">Skip to content</a>
+
+
+<header class="sw-hdr" id="sw-hdr">
+  <div class="sw-hdr__inner hb-inner">
+
+    <a class="sw-hdr__logo" href="index.html" aria-label="Swish Cannabis, home">
+      <img src="assets/swishcannabis.com_sites_sgen_swishcannabis_com_uploads_2024_08_main_logo.png"
+           width="283" height="134"
+           alt="Swish Cannabis, the hand lettered Swish script wordmark with a cannabis leaf droplet over the letter i">
+    </a>
+
+    <nav class="sw-hdr__nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="https://swishcannabis.com/shop">Menu</a></li>
+        <li><a href="https://swishcannabis.com/dispensary-locations">Location</a></li>
+        <li><a href="https://swishcannabis.com/contact-us">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    
+    <div class="sw-hdr__act">
+      <a class="sw-btn sw-btn--primary sw-hdr__cta" href="https://swishcannabis.com/shop">ORDER NOW</a>
+
+      
+      <button class="sw-burger" type="button" id="sw-burger"
+              aria-controls="mobile-drawer" aria-expanded="false" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<div class="sw-scrim" id="sw-scrim" hidden></div>
+
+
+<aside class="sw-drawer drawer" id="mobile-drawer" aria-hidden="true" aria-label="Menu">
+
+  <div class="sw-drawer__head">
+    <img src="assets/swishcannabis.com_sites_sgen_swishcannabis_com_uploads_2024_08_main_logo.png"
+         width="283" height="134" alt="Swish Cannabis">
+    <button class="sw-close" type="button" id="sw-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <nav class="sw-drawer__nav" aria-label="Primary mobile">
+    <ul>
+      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li><a href="https://swishcannabis.com/shop">Menu</a></li>
+      <li><a href="https://swishcannabis.com/dispensary-locations">Location</a></li>
+      <li><a href="https://swishcannabis.com/contact-us">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="sw-drawer__cta">
+    <a class="sw-btn sw-btn--primary sw-btn--block" href="https://swishcannabis.com/shop">ORDER NOW</a>
+    <p class="sw-spec">
+      10701 Burbank Blvd, North Hollywood, CA 91601<br>
+      Open 7 days, <span class="sw-num">9AM to 9:55PM</span><br>
+      <a class="sw-link" href="tel:+17472031404">+1 747-203-1404</a>
+    </p>
+  </div>
+
+</aside>
+
+<main id="main">
+
+
+  
+  <section class="rs-hero rs-band rs-band--flush">
+    <div class="container container--full">
+      <div class="row">
+        <div class="col col--full">
+          
+          <span class="rs-hero__mural" aria-hidden="true"></span>
+          <figure class="rs-hero__frame">
+            <img src="assets/weedmaps/427589013_flower_bulk_wcc.jpg"
+                 width="4032" height="3024"
+                 fetchpriority="high" decoding="async"
+                 alt="Open shelving inside Swish Cannabis stacked with packaged flower under a lit Flowers sign, with the vape and concentrate walls running back toward the entrance.">
+          </figure>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-rail rs-band rs-band--paper rs-band--tight">
+    <div class="container">
+      <div class="row">
+        <div class="col col--full">
+          
+          <div class="rs-shelf sw-rise" style="--i:0">
+            
+            <div class="rs-shelf__head">
+              <h2 class="rs-h2">Our products</h2>
+              <p class="rs-lede">Six categories, on the shelves in the store. Pick one and it opens in the menu below.</p>
+            </div>
+            <ul class="rs-shelf__grid">
+              <li class="rs-shelf__cell">
+                <a class="rs-tile" href="#menu">
+                  <span class="rs-tile__media"><img src="assets/Flower_1.webp" width="548" height="476" loading="lazy" decoding="async" alt="A single cannabis flower bud, purple and green with orange hairs"></span>
+                  <span class="rs-tile__label">SHOP FLOWER</span>
+                </a>
+              </li>
+              <li class="rs-shelf__cell">
+                <a class="rs-tile" href="#menu">
+                  <span class="rs-tile__media"><img src="assets/Preroll_1.webp" width="548" height="476" loading="lazy" decoding="async" alt="Three pre-rolled joints stacked on top of each other"></span>
+                  <span class="rs-tile__label">SHOP PRE-ROLLS</span>
+                </a>
+              </li>
+              <li class="rs-shelf__cell">
+                <a class="rs-tile" href="#menu">
+                  <span class="rs-tile__media"><img src="assets/Screenshot_2024_08_19_at_3_18_00_PM_2.webp" width="414" height="383" loading="lazy" decoding="async" alt="A vape cartridge filled with amber oil, fitted to a battery"></span>
+                  <span class="rs-tile__label">SHOP VAPES</span>
+                </a>
+              </li>
+              <li class="rs-shelf__cell">
+                <a class="rs-tile" href="#menu">
+                  <span class="rs-tile__media"><img src="assets/Concentrates_1.webp" width="516" height="476" loading="lazy" decoding="async" alt="A dab tool lifting a strand of golden cannabis concentrate"></span>
+                  <span class="rs-tile__label">SHOP CONCENTRATES</span>
+                </a>
+              </li>
+              <li class="rs-shelf__cell">
+                <a class="rs-tile" href="#menu">
+                  <span class="rs-tile__media"><img src="assets/Edibles_1.webp" width="548" height="476" loading="lazy" decoding="async" alt="Three sugar-coated gummy cubes stacked up, pink, orange and blue"></span>
+                  <span class="rs-tile__label">SHOP EDIBLES</span>
+                </a>
+              </li>
+              <li class="rs-shelf__cell">
+                <a class="rs-tile" href="#menu">
+                  <span class="rs-tile__media"><img src="assets/Pipe_1.webp" width="548" height="476" loading="lazy" decoding="async" alt="A green glass hand pipe"></span>
+                  <span class="rs-tile__label">SHOP ACCESSORIES</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-intro rs-band rs-band--paper rs-band--ruled rs-band--ruled-under">
+    <div class="container">
+      <div class="row">
+        <div class="col col--full">
+          <div class="rs-intro__inner sw-rise" style="--i:1">
+            <h1 class="rs-h1">Your Trusted Weed Dispensary in North Hollywood</h1>
+            <p class="rs-lede">Swish Cannabis is a licensed California dispensary on Burbank Blvd, carrying flower, pre-rolls, vapes, concentrates, edibles and accessories for in-store pickup. The menu on this page shows what is in stock and what it costs. Open 7 days, 9AM to 9:55PM.</p>
+            <p class="rs-actions">
+              <a class="sw-btn sw-btn--primary" href="https://swishcannabis.com/shop">ORDER NOW</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-split rs-band rs-band--wash rs-band--open">
+    <div class="container">
+      
+      <div class="row">
+        <div class="col col--span-6 rs-split__text sw-rise" style="--i:1">
+          <p class="sw-eyebrow">On Burbank Blvd</p>
+          <h2 class="rs-h2">The black building on Burbank Blvd</h2>
+          <p class="rs-body">Swish is the black building with the white script sign across the front and the address numerals painted down the entry column. The murals run along the side wall facing the lot, so the building is easy to pick out from the street.</p>
+          <p class="rs-body">Parking is on site. There is an EV charging station in the lot and an accessible space marked out.</p>
+        </div>
+        <div class="col col--span-6 rs-split__media">
+          <figure class="rs-media rs-media--exterior sw-rise" style="--i:0">
+            <img src="assets/pre_footer_img_bg1.webp"
+                 width="1640" height="645" loading="lazy" decoding="async"
+                 alt="The Swish Cannabis storefront: a black building with a white script Swish sign and the 10701 numerals by the door, murals along the side wall, and the parking lot with its EV charging station in front.">
+          </figure>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section id="deals" class="rs-deals rs-band rs-band--tray">
+    <div class="container">
+      <div class="row">
+        <div class="col col--span-4 rs-deals__head sw-rise" style="--i:0">
+          <p class="sw-eyebrow">Running now</p>
+          <h2 class="rs-h2">Deals</h2>
+          <p class="rs-lede">Two offers running now.</p>
+        </div>
+        <div class="col col--span-8 rs-deals__ladders sw-rise" style="--i:1">
+          
+          <table class="rs-ladder">
+            <caption class="sr-only">Confirmed offers, by day</caption>
+            <tbody>
+              <tr class="rs-ladder__day"><th scope="rowgroup" colspan="2">EVERY DAY</th></tr>
+              <tr>
+                <th scope="row">All 1/2 ounces and full ounces</th>
+                <td class="rs-ladder__val"><span class="sw-num">30%</span> off</td>
+              </tr>
+              <tr class="rs-ladder__fine">
+                <td colspan="2">Last chance products. Some exclusions apply.</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr class="rs-ladder__day"><th scope="rowgroup" colspan="2">SHATTERDAY</th></tr>
+              <tr>
+                <th scope="row">STIIIZY</th>
+                <td class="rs-ladder__val"><span class="sw-num">30%</span> off</td>
+              </tr>
+              <tr>
+                <th scope="row">SLUGGERS / Rosin Tech Labs</th>
+                <td class="rs-ladder__val"><span class="sw-num">25%</span> off</td>
+              </tr>
+              <tr>
+                <th scope="row">WYLD</th>
+                <td class="rs-ladder__val">B2G1 <span class="sw-num">$1</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Good Tide</th>
+                <td class="rs-ladder__val">BOGO for <span class="sw-num">$1</span></td>
+              </tr>
+              <tr>
+                <th scope="row">All concentrates</th>
+                <td class="rs-ladder__val"><span class="sw-num">10%</span> off</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="col col--span-4 rs-deals__notecol sw-rise" style="--i:1">
+          <p class="rs-deals__note">Other offers run through the week. Ask at the counter or check the menu below for what is running.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section id="menu" class="rs-menu rs-band rs-band--paper">
+    <div class="container">
+      <div class="row">
+        <div class="col col--full">
+          <h2 class="rs-h2">The full menu</h2>
+          <p class="rs-lede">The live menu, with current prices. Browse it right here, or head straight to <a href="https://swishcannabis.com/shop">the full menu</a>.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col--full sw-rise" style="--i:0">
+          <div class="rs-embed">
+            
+            <iframe src="https://swishcannabis.wm.store?" id="wm-store-embed"
+                    title="Swish Cannabis live menu"
+                    allow="geolocation"
+                    sandbox="allow-forms allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-modals"
+                    frameborder="0" loading="lazy"
+                    style="width: 100%; display: block; min-height: 100vh; height: 457px;"></iframe>
+          </div>
+          
+          <p class="rs-menu__fallback">The menu is at <a href="https://swishcannabis.com/shop">swishcannabis.com/shop</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-why rs-band rs-band--wash rs-band--open">
+    <div class="container">
+      
+      <div class="row">
+        <div class="col col--span-7 rs-split__text sw-rise" style="--i:1">
+          <p class="sw-eyebrow">One open room</p>
+          <h2 class="rs-h2">Why shop at Swish</h2>
+          <p class="rs-body">The shop is one open room. Product sits out on lit shelves with the price on the tag, so you can read the whole floor before you buy anything.</p>
+          <ul class="rs-pillars">
+            <li>
+              <h3>Wide Range of Products</h3>
+              <p>Pre-rolls, flower, concentrates, edibles, vapes and accessories. Six categories in one room, and what is in stock today is on the menu with its price.</p>
+            </li>
+            <li>
+              <h3>Competitive Pricing</h3>
+              <p>Every row on the shelf carries a printed price tag, and the menu is readable from home before you make the drive. Deals run on top of the shelf price, so ask in store or check the menu for what is on today.</p>
+            </li>
+            <li>
+              <h3>Straight From The Shelf</h3>
+              <p>The floor is open and the product sits out on lit shelves with its tag facing you, not locked behind a counter. Walk the wall, read the label, then buy it.</p>
+            </li>
+          </ul>
+        </div>
+        <div class="col col--span-5 rs-split__media">
+          <figure class="rs-media rs-media--interior sw-rise" style="--i:0">
+            <img src="assets/weedmaps/427493163_inside_mural.jpg"
+                 width="3024" height="4032" loading="lazy" decoding="async"
+                 alt="The hand-painted mural inside Swish Cannabis: a woman's face in profile beneath a large multicolour mandala headdress, painted floor to ceiling across the sales-floor wall.">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-feat rs-band rs-band--paper">
+    <div class="container">
+      <div class="row">
+        <div class="col col--full">
+          <h2 class="rs-h2">Featured products</h2>
+          <p class="rs-lede">A sample of what we carry. The menu is the current word on price and stock, so check it there before you come in.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col--full">
+          
+          <ul class="rs-feat__rail">
+            <li>
+              <figure class="rs-feat__card rs-lift">
+                <img src="assets/image_1__6_.webp" width="898" height="781" loading="lazy" decoding="async" alt="Two Jeeter Horchata infused pre-roll packs, a Baby Jeeter jar and a Jeeter XL tube, cut out inside the navy ring">
+                <figcaption>Infused pre-rolls</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="rs-feat__card rs-lift">
+                <img src="assets/image_2__5_.webp" width="930" height="781" loading="lazy" decoding="async" alt="Two dense frosted cannabis buds with orange hairs, cut out inside the navy ring">
+                <figcaption>Indoor flower</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="rs-feat__card rs-lift">
+                <img src="assets/image_3__3_.webp" width="930" height="781" loading="lazy" decoding="async" alt="A Sun Smoke live rosin carton beside its open glass jar of golden rosin, cut out inside the navy ring">
+                <figcaption>Live rosin</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="rs-feat__card rs-lift">
+                <img src="assets/image_4__3_.webp" width="787" height="766" loading="lazy" decoding="async" alt="A pink Minis pouch of Pink Cupcakes indoor flower, cut out inside the navy ring">
+                <figcaption>Flower minis</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure class="rs-feat__card rs-lift">
+                <img src="assets/image_5__2_.webp" width="920" height="803" loading="lazy" decoding="async" alt="A silver Dr Bradley's Rx pouch of cannabis infused topical gel with two single use sachets beside it, cut out inside the navy ring">
+                <figcaption>Topical gel</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-brands rs-band rs-band--tray rs-band--tight rs-band--ruled rs-band--ruled-under">
+    <div class="container">
+      <div class="row">
+        <div class="col col--full">
+          <h2 class="rs-h2">Your favorite brands</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col--full">
+          
+          <ul class="rs-brands__row">
+            <li class="rs-brands__mark">STIIIZY</li>
+            <li class="rs-brands__mark">Jeeter</li>
+            <li class="rs-brands__mark">WYLD</li>
+            <li class="rs-brands__mark">Raw Garden</li>
+            <li class="rs-brands__mark">PLUGplay</li>
+            <li class="rs-brands__mark">Claw Cannabis</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section id="visit" class="rs-visit rs-band rs-band--paper">
+    <div class="container">
+      <div class="row">
+        <div class="col col--span-7 sw-rise" style="--i:0">
+          <p class="sw-eyebrow">One store</p>
+          <h2 class="rs-h2">Visit us</h2>
+          <p class="rs-lede">One store, and this is it. In-store pickup at 10701 Burbank Blvd, open seven days.</p>
+          <dl class="rs-facts rs-facts__grid">
+            <div>
+              <dt>Address</dt>
+              <dd>Swish Cannabis<br>10701 Burbank Blvd<br>North Hollywood, CA 91601</dd>
+            </div>
+            <div>
+              <dt>Hours</dt>
+              <dd>Open 7 days<br><span class="sw-num">9AM to 9:55PM</span></dd>
+            </div>
+            <div>
+              <dt>Contact</dt>
+              <dd><a href="tel:+17472031404"><span class="sw-num">+1 747-203-1404</span></a><br><a href="mailto:hi@swishcannabis.com">hi@swishcannabis.com</a></dd>
+            </div>
+            <div>
+              <dt>When you get here</dt>
+              <dd>Parking on site, with an EV charging station<br>Accessible<br>ATM on site</dd>
+            </div>
+          </dl>
+          <p class="rs-licence">Licensed California retailer. License <b>C10-0000976-LIC</b></p>
+          <p class="rs-actions">
+            <a class="sw-btn sw-btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=10701%20Burbank%20Blvd%2C%20North%20Hollywood%2C%20CA%2091601">GET DIRECTIONS</a>
+          </p>
+        </div>
+        <div class="col col--span-5 sw-rise" style="--i:1">
+          <div class="rs-map">
+            <iframe src="https://www.google.com/maps?q=10701%20Burbank%20Blvd%2C%20North%20Hollywood%2C%20CA%2091601&amp;output=embed"
+                    title="Map showing Swish Cannabis at 10701 Burbank Blvd, North Hollywood"
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <section class="rs-signup rs-band rs-band--open">
+    <div class="container">
+      <div class="row">
+        <div class="col col--span-7 sw-rise" style="--i:0">
+          <h2 class="rs-h2">Join our community</h2>
+          <p class="rs-signup__offer">SIGN UP NOW AND GET 20% OFF YOUR FIRST PURCHASE!</p>
+          
+          <form class="rs-form" data-form-waiver="No mailing list endpoint is documented in the handoff; wire at the templates step.">
+            <div class="row">
+              <div class="col col--span-8">
+                <label class="sr-only" for="rs-email">Your email address</label>
+                <input id="rs-email" name="email" type="email" autocomplete="email" placeholder="Your email address" required>
+              </div>
+              <div class="col col--span-4">
+                <button class="sw-btn sw-btn--primary sw-btn--block" type="submit">SIGN UP NOW</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+<section class="sw-precta">
+  <div class="sw-wrap sw-precta__grid sw-rise" style="--i:0">
+    <div>
+      <p class="sw-eyebrow">Pickup at the counter</p>
+      <h2>The full menu is live</h2>
+      <p>
+        Order online, collect in store at 10701 Burbank Blvd. Open seven days,
+        <span class="sw-num">9AM to 9:55PM</span>.
+      </p>
+    </div>
+    <a class="sw-btn sw-btn--primary" href="https://swishcannabis.com/shop">ORDER NOW</a>
+  </div>
+</section>
+
+
+<footer class="sw-foot surface-dark" id="sw-foot">
+
+  <div class="sw-foot__ground" aria-hidden="true">
+    <img src="assets/pre_footer_img_bg1.webp" width="1640" height="645" loading="lazy" alt="">
+    <span class="sw-foot__veil"></span>
+  </div>
+
+  <div class="sw-foot__inner">
+    <div class="sw-wrap">
+
+      <div class="sw-foot__grid">
+
+        <div class="sw-fcol sw-fcol--brand">
+          <span class="sw-foot__plate">
+            <img src="assets/swishcannabis.com_sites_sgen_swishcannabis_com_uploads_2024_08_main_logo.png"
+                 width="283" height="134" loading="lazy"
+                 alt="Swish Cannabis hand lettered script wordmark">
+          </span>
+          <address class="sw-fcol__addr">10701 Burbank Blvd<br>North Hollywood, CA 91601</address>
+          <p class="sw-fcol__contact">
+            <a href="tel:+17472031404">+1 747-203-1404</a><br>
+            <a href="mailto:hi@swishcannabis.com">hi@swishcannabis.com</a>
+          </p>
+          <p class="sw-foot__lic"><span class="sw-foot__lic-k">Licence No</span><span class="sw-foot__lic-v">C10-0000976-LIC</span></p>
+        </div>
+
+        
+        <div class="sw-fcol sw-fcol--hours">
+          <h2 class="sw-fcol__title">OPENING HOURS</h2>
+          <table class="sw-hours">
+            <caption class="sr-only">Opening hours, Monday to Sunday</caption>
+            <tbody>
+              <tr><th scope="row">Monday</th><td>9AM to 9:55PM</td></tr>
+              <tr><th scope="row">Tuesday</th><td>9AM to 9:55PM</td></tr>
+              <tr><th scope="row">Wednesday</th><td>9AM to 9:55PM</td></tr>
+              <tr><th scope="row">Thursday</th><td>9AM to 9:55PM</td></tr>
+              <tr><th scope="row">Friday</th><td>9AM to 9:55PM</td></tr>
+              <tr><th scope="row">Saturday</th><td>9AM to 9:55PM</td></tr>
+              <tr><th scope="row">Sunday</th><td>9AM to 9:55PM</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sw-fcol sw-fcol--links">
+          <h2 class="sw-fcol__title">LINKS</h2>
+          <ul class="sw-foot__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="https://swishcannabis.com/shop">Shop</a></li>
+            <li><a href="https://swishcannabis.com/blog">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="sw-fcol sw-fcol--visit">
+          <h2 class="sw-fcol__title">VISIT</h2>
+          <ul class="sw-foot__links">
+            <li><a href="https://swishcannabis.com/contact-us">Contact Us</a></li>
+            <li><a href="https://swishcannabis.com/getting-here">Getting Here</a></li>
+            <li><a href="https://swishcannabis.com/about-us">About us</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="sw-foot__bar">
+        <p class="sw-foot__copy">&copy; 2026 Swish Cannabis. All rights reserved.</p>
+        <p class="sw-foot__age">Adults 21 and over only.</p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ------------------------------------------------------------------------------------------
+   Chrome behaviour. Four small, independent pieces. Everything visual is CSS off the tokens;
+   this file only toggles state classes and ARIA.
+   ------------------------------------------------------------------------------------------ */
+
+/* 1 · the condense. The counter loses height and gains hairline weight once browsing starts. */
+(function () {
+  var hdr = document.getElementById('sw-hdr');
+  if (!hdr) return;
+  var ticking = false;
+  function apply() {
+    hdr.classList.toggle('is-condensed', window.scrollY > 40);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(apply); }
+  }, { passive: true });
+  apply();
+})();
+
+/* 2 · the drawer. Same four items as the bar; opened from the rightmost header control. */
+(function () {
+  var burger = document.getElementById('sw-burger');
+  var drawer = document.getElementById('mobile-drawer');
+  var scrim  = document.getElementById('sw-scrim');
+  var close  = document.getElementById('sw-close');
+  if (!burger || !drawer || !scrim) return;
+
+  function setOpen(open) {
+    drawer.classList.toggle('is-open', open);
+    scrim.classList.toggle('is-open', open);
+    scrim.hidden = !open;
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('sw-locked', open);
+    if (open) {
+      var first = drawer.querySelector('.sw-drawer__nav a');
+      if (first) first.focus();
+    } else {
+      burger.focus();
+    }
+  }
+
+  burger.addEventListener('click', function () {
+    setOpen(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  scrim.addEventListener('click', function () { setOpen(false); });
+  if (close) close.addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) setOpen(false);
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 1100 && drawer.classList.contains('is-open')) setOpen(false);
+  });
+})();
+
+/* 3 · staggered scroll reveal, gated behind prefers-reduced-motion. */
+(function () {
+  var nodes = document.querySelectorAll('.sw-rise');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < nodes.length; i++) nodes[i].classList.add('is-in');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+  for (var j = 0; j < nodes.length; j++) io.observe(nodes[j]);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+/* ==========================================================================================
+   SWISH CANNABIS  ·  BRAND-CARD CONCEPT C  ·  "SHOPFRONT"
+   Token sheet. THE ONLY FILE IN THIS CONCEPT THAT CARRIES A BRAND HEX.
+
+   CONTRACT
+   Emitted against .claude/design-system-unified/00-globals/tokens/BRAND-TOKEN-SCHEMA.md
+   (flat --ds-* namespace) and its canonical companion 00-globals/tokens/tokens.css.
+   Radius uses the CONSTRAINED role names --ds-r-control / --ds-r-surface / --ds-r-pill.
+
+   THE FREEZE (owner directive, decisions-ledger.md standing directive, 2026-08-06):
+     "All existing Swish branding stays exactly as it is ... a new arrangement of familiar
+      Swish elements, not a new look."
+   Every value marked [FROZEN] below is transcribed from C6 swishcannabis-tokens-spec.md and
+   is NOT a design decision. Every value marked [DERIVED] is a tone of a frozen value, computed
+   here only to fill a schema role the frozen record does not name (a11y accent steps, the dark
+   surface flip). NOTHING introduces a new hue.
+
+   SURFACE (C7 §2, machine measured): light dominant, dark_ratio 0.0 area weighted over 9
+   sections. The page canvas is white and stays white. The .surface-dark block below is the
+   token flip the schema requires; it is NOT a licence to build a dark page. It is grounded in
+   a real artefact: the store itself is a black corrugated building carrying the wordmark in
+   white (assets/pre_footer_img_bg1.webp), so "Swish on dark" is a thing that physically exists.
+
+   SECTOR (40-research/composition-shop-fashion.md): retail / ecommerce. Its verified
+   anti-pattern svgDividers=0 is encoded below as --ds-divider-h: 0px so the rule travels with
+   the tokens. Premium here is type + whitespace + masked/zoomed imagery + ONE accent.
+   ========================================================================================== */
+
+:root{
+
+  /* ---- COLOUR · the frozen rails ------------------------------------------------------ */
+  --ds-primary:        #043f66;   /* [FROZEN] deep navy. C6 §2: H1s, every section heading, primary
+                                     button fills, carousel controls. 41 occurrences. In concept C
+                                     this is THE FIXTURE COLOUR: rings, label plates, hairline rails. */
+  --ds-accent:         #ff8c09;   /* [FROZEN] orange. C6 §2: the ORDER NOW call to action and its
+                                     hover. 26 occurrences. The ONE accent. Nothing else is orange. */
+  --ds-bg-surface:     #ffffff;   /* [FROZEN] page canvas. The dominant surface on every page. */
+  --ds-ink:            #000000;   /* [FROZEN] body text. */
+  --ds-bg-surface-2:   #f5f5f5;   /* [FROZEN] C6 §2 records #f5f5f5 as the sticky header band. Promoted
+                                     here to the elevated / card surface role so the shelf tray tone is
+                                     a value the brand already owns, not a new grey. */
+
+  /* ---- COLOUR · derived roles the frozen record does not name ------------------------- */
+  --ds-primary-deep:   #02273f;   /* [DERIVED] the DARK GROUND role (schema: near black, NOT a brighter
+                                     shade of --ds-primary). A deepened tone of the frozen navy.
+                                     --ds-ink-on-dark #ffffff on it = 15.4:1 (WCAG AA pass, min 4.5). */
+  --ds-primary-soft:   #e6eef4;   /* [DERIVED] pale navy tint. Eyebrow grounds, soft label plates. */
+  --ds-accent-ink:     #9e5100;   /* [DERIVED] darkened orange for SMALL TEXT ON LIGHT. The frozen
+                                     #ff8c09 measures 2.33:1 on white as small text, a WCAG AA fail,
+                                     so it is never used for small type. Computed WCAG 2.x ratios:
+                                     5.78:1 on #ffffff · 5.30:1 on --ds-bg-surface-2 #f5f5f5 ·
+                                     4.93:1 on --ds-primary-soft #e6eef4 · 5.09:1 on --ds-accent-soft. */
+  --ds-accent-soft:    #ffeed9;   /* [DERIVED] tinted accent ground for the soft label plate. */
+
+  /* ---- D18 · the ONE measured exception to the freeze --------------------------------- */
+  --ds-on-accent:      #043f66;   /* [OWNER-DECIDED, D18 2026-08-06] The label colour ON the frozen
+                                     orange CTA. The live site uses WHITE, which measures 2.33:1 on
+                                     #ff8c09 against a WCAG AA minimum of 4.5:1 -- roughly half, on the
+                                     site's primary conversion control, in a state-regulated category.
+                                     Navy on the same orange measures 4.72:1 and PASSES. The owner was
+                                     shown all three measurements at the brand-card checkpoint and chose
+                                     this. EVERYTHING ELSE about the button is untouched: the #ff8c09
+                                     fill, the pill radius, the scale(0.93) press-in and the 0.35s
+                                     transition all carry through exactly as frozen. Any primary-CTA
+                                     label MUST use this token, never a raw white. */
+  --ds-accent-deep:    #8f4900;   /* [DERIVED] deepened accent. 6.73:1 on #ffffff; --ds-ink-on-dark on
+                                     it = 6.73:1. Dark band CTA surface + small accent text on light. */
+  --ds-accent-light:   #ffa542;   /* [DERIVED] lightened accent, the accent FOREGROUND on dark grounds.
+                                     7.85:1 on --ds-primary-deep · 10.7:1 on --ds-ink. */
+  --ds-bg-warm:        #f2f6f9;   /* [DERIVED] the alternate band tint. NOT warm in this brand: it is a
+                                     ~4% wash of the frozen navy, because a warm cream would be a new
+                                     hue and the freeze forbids one. Schema role name kept as is. */
+  --ds-ink-heading:    #043f66;   /* [FROZEN] THEME POLAR heading ink. The schema default for a light
+                                     brand is = --ds-primary-deep, but C6 §2 records the live site
+                                     painting every H1 and section heading in #043f66. The freeze wins
+                                     over the schema default; the deviation is deliberate and recorded.
+                                     11.0:1 on --ds-bg-surface. */
+  --ds-ink-soft:       #3d4a54;   /* [DERIVED] secondary text. A desaturated tint of the navy rather
+                                     than a generic grey (pattern library F1). 9.11:1 on white. */
+  --ds-line:           #d9e0e6;   /* [DERIVED] hairline. The shelf rule. Section transitions in this
+                                     sector are hairline + whitespace + band contrast, never a divider. */
+  --ds-ink-on-dark:    #ffffff;   /* [FROZEN] the canvas white, reused as ink on dark surfaces. */
+  --ds-scrim:          rgba(4,63,102,.55);  /* [DERIVED] navy tinted legibility scrim. */
+
+  /* optional semantic roles (schema): declared so a later state has a home. Not brand colours. */
+  --ds-warning:        #b3261e;
+  --ds-warning-soft:   #fbe9e7;
+  --ds-success:        #1c7c47;
+  --ds-success-soft:   #e4f2ea;
+  --ds-signature:      #043f66;   /* no third personality colour exists. Points at the navy on purpose. */
+
+  /* ---- TYPE · frozen families -------------------------------------------------------- */
+  --ds-font-display: 'Montserrat','Montserrat Fallback',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ds-font-body:    'Poppins','Poppins Fallback',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ds-font-mono:    ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  /* [FROZEN] C6 §3: Montserrat display (variable 100 to 900), Poppins body, both Google Fonts.
+     --ds-font-mono is NOT a brand face. It is the spec/price numeral face only (pattern E3), so a
+     figure never reads as body copy and so digits stay tabular in the price rails. */
+
+  /* ---- RADIUS · the concept's UI signature ------------------------------------------- */
+  --ds-r-control: 2px;    /* labels, tags, inputs, steppers. Near square. The shop fashion blueprint
+                             calls for sharp geometry; the freeze reserves round for the CTA, so the
+                             sharp impulse lands on the shelf talker instead. */
+  --ds-r-surface: 8px;    /* cards, panels, media frames. Tight, tray like, not a soft SaaS card. */
+  --ds-r-pill:  999px;    /* [FROZEN] C6 §4: the button is a full pill. The ONLY round thing here. */
+
+  /* ---- ELEVATION · ink tinted, never black (pattern D1 / TOP-12 #3) ------------------- */
+  --ds-shadow-rest:  0 1px 2px rgba(4,63,102,.06);
+  --ds-shadow-card:  0 1px 2px rgba(4,63,102,.06), 0 10px 24px rgba(4,63,102,.09);
+  --ds-shadow-lift:  0 2px 4px rgba(4,63,102,.08), 0 22px 48px rgba(4,63,102,.15);
+  --ds-shadow-card-2stop: 0 4px 10px rgba(4,63,102,.05), 0 16px 34px rgba(4,63,102,.10);
+
+  /* ---- MOTION ------------------------------------------------------------------------ */
+  --ds-dur:       .35s;   /* [FROZEN] C6 §4 records the button transition at 0.35s. That measured
+                             value becomes the system's base duration, so every surface settles at
+                             the same rate the owner's button already does. */
+  --ds-ease:      cubic-bezier(.05,.5,.3,1);   /* fast start, long settle (pattern C8). */
+  --ds-dur-fast:  .2s;
+  --ds-dur-slow:  .6s;
+  --ds-ease-out:  cubic-bezier(.16,1,.3,1);
+  --ds-dur-data:  1.4s;
+  --ds-press-scale: .93;  /* [FROZEN] C6 §4: "every button scales down slightly". Extension token, not
+                             in the schema, because this press is a named brand signature. */
+
+  /* ---- SPACE + LAYOUT ---------------------------------------------------------------- */
+  --ds-space-2xs: 4px;
+  --ds-space-xs:  8px;
+  --ds-space-sm:  14px;
+  --ds-space-md:  24px;
+  --ds-space-lg:  40px;
+  --ds-space-xl:  64px;
+  --ds-space-2xl: 96px;
+  --ds-section-py:    clamp(56px,7vw,96px);
+  --ds-container-max: 1160px;
+  --ds-rail:      12px;   /* the modular shelf gutter. Product tiers sit on this rail. */
+
+  /* ---- GRADIENT GROUP ---------------------------------------------------------------- */
+  /* The sector file is explicit that premium here is type, whitespace, masked imagery and ONE
+     accent, NOT gradients. Only the transition device is emitted: the image bottom fade
+     (pattern A6 / TOP-12 #8), which is how a photo meets the next band without a divider.
+     --ds-grad-brand / --ds-grad-hero / --ds-grad-text are deliberately NOT emitted. */
+  --ds-fade-to-paper: linear-gradient(180deg,rgba(255,255,255,0) 0%,var(--ds-bg-surface) 68%);
+
+  /* ---- GLOBALS OVERLAY (modern wow) -------------------------------------------------- */
+  --ds-hairline:     rgba(4,63,102,.12);
+  --ds-inset-hi:     inset 0 1px 0 rgba(255,255,255,.70);
+  --ds-glow:         0 0 0 6px rgba(255,140,9,.20);   /* a tight ring bloom on the CTA, not a halo. */
+  --ds-glow-wash:    radial-gradient(60% 60% at 50% 42%,rgba(4,63,102,.07),transparent 72%);
+  --ds-grain:        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  --ds-grid:         linear-gradient(rgba(4,63,102,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(4,63,102,.055) 1px,transparent 1px);
+  --ds-grid-size:    48px 48px;
+  --ds-divider-h:    0px;   /* SECTOR RULE, encoded. composition-shop-fashion.md + pattern library
+                               §0.5 verify svgDividers=0 across all 10 inspected shop demos. This
+                               brand ships ZERO shape dividers. The token records the zero. */
+  --ds-glass-bg:     rgba(255,255,255,.82);
+  --ds-glass-blur:   blur(14px) saturate(150%);
+  --ds-glass-border: rgba(4,63,102,.14);
+  /* --ds-icon-tint is NOT emitted: every icon in this concept is inline SVG on currentColor, so the
+     source image recolour filter has no consumer. Emitting an unverified filter chain would be a
+     value nobody checked. */
+
+  /* ---- MOTIF · the navy ringed circular cutout --------------------------------------- */
+  --ds-motif-ring:      2px;                 /* the ring weight at the small size. */
+  --ds-motif-ring-lg:   3px;                 /* the ring weight at the stage size. */
+  --ds-motif-inset:     8%;                  /* how far the ring sits inside the frame, so the product
+                                                can break the ring line the way the live cutouts do. */
+
+  /* ---- Z INDEX ----------------------------------------------------------------------- */
+  --ds-z-below:   -1;
+  --ds-z-base:     0;
+  --ds-z-raised:   1;
+  --ds-z-sticky:  1000;
+  --ds-z-overlay: 1040;
+  --ds-z-drawer:  1050;
+  --ds-z-modal:   1060;
+  --ds-z-toast:   1080;
+
+  /* ---- OPACITY ----------------------------------------------------------------------- */
+  --ds-opacity-muted:    .72;
+  --ds-opacity-disabled: .38;
+  --ds-opacity-faint:    .12;
+  --ds-opacity-scrim:    .55;
+  --ds-opacity-texture:  .40;
+  --ds-opacity-veil:     .85;
+}
+
+/* ==========================================================================================
+   .surface-dark  ·  THE FLIP
+   The SAME custom properties, re-pointed. Add class="surface-dark" to any subtree and every
+   component in this concept re-skins with no component CSS change.
+
+   It is a token capability, not a page direction. C7 §2 and the measured dark_ratio 0.0 keep
+   the canvas white. This flip exists for the one place the brand is genuinely dark in the real
+   world: the black corrugated building with the wordmark reversed out in white.
+   ========================================================================================== */
+.surface-dark{
+  --ds-bg-surface:    #02273f;
+  --ds-bg-surface-2:  #043f66;
+  --ds-bg-warm:       #05334f;
+  --ds-primary:       #e8f1f7;   /* the fixture inverts: rings and label plates go pale navy. */
+  --ds-primary-deep:  #011c2e;
+  --ds-primary-soft:  rgba(255,255,255,.09);
+  --ds-accent:        #ff8c09;   /* unchanged. The frozen orange already clears on the deep navy. */
+  --ds-accent-ink:    #ffa542;   /* small accent text flips to the light step on a dark ground. */
+  --ds-accent-soft:   rgba(255,140,9,.16);
+  --ds-accent-deep:   #ff8c09;
+  --ds-accent-light:  #ffa542;
+  --ds-ink:           #ffffff;
+  --ds-ink-heading:   #ffffff;
+  --ds-ink-soft:      #b9cbd8;
+  --ds-line:          rgba(255,255,255,.18);
+  --ds-ink-on-dark:   #ffffff;
+  --ds-scrim:         rgba(1,20,33,.62);
+  --ds-shadow-rest:   0 1px 2px rgba(0,0,0,.30);
+  --ds-shadow-card:   0 1px 2px rgba(0,0,0,.34), 0 12px 30px rgba(0,0,0,.42);
+  --ds-shadow-lift:   0 2px 4px rgba(0,0,0,.38), 0 26px 56px rgba(0,0,0,.52);
+  --ds-shadow-card-2stop: 0 4px 10px rgba(0,0,0,.30), 0 18px 40px rgba(0,0,0,.44);
+  --ds-hairline:      rgba(255,255,255,.16);
+  --ds-inset-hi:      inset 0 1px 0 rgba(255,255,255,.12);
+  --ds-glow:          0 0 0 6px rgba(255,140,9,.28);
+  --ds-glow-wash:     radial-gradient(60% 60% at 50% 42%,rgba(255,140,9,.10),transparent 72%);
+  --ds-grid:          linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  --ds-glass-bg:      rgba(2,39,63,.72);
+  --ds-glass-border:  rgba(255,255,255,.16);
+  --ds-fade-to-paper: linear-gradient(180deg,rgba(2,39,63,0) 0%,var(--ds-bg-surface) 68%);
+  --ds-warning:       #ff8a80;
+  --ds-warning-soft:  rgba(255,138,128,.16);
+  --ds-success:       #7ddba4;
+  --ds-success-soft:  rgba(125,219,164,.16);
+  --ds-signature:     #e8f1f7;
+}

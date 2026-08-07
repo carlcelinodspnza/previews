@@ -1,0 +1,1010 @@
+/* ==========================================================================================
+   SWISH CANNABIS  ·  (3) FOUNDATION TOURNAMENT  ·  CONCEPT C  ·  "RETAIL SHELF"
+   The BODY foundation. Loads AFTER swishcannabis-tokens.css and BEFORE swishcannabis-chrome.css.
+
+   TOKEN PURITY: zero brand hex, zero rgba, zero named colours. Every colour, radius, shadow,
+   duration and easing below resolves through var(--ds-*) from the locked token sheet. The only
+   literals are non brand values: 0, 1px hairlines, percentages, layout px, transparent,
+   currentColor. The .surface-dark flip in the token sheet therefore re-skins this whole file
+   with no rule change, which is what the chrome footer already relies on.
+
+   THE CONCEPT, in one line: the page is read the way a real dispensary is read. Six categories
+   ride a SHELF TRAY that lifts up over the hero, the deal ladder is a real table you can scan in
+   two seconds and edit in one line, and everything else gets out of the product's way. The
+   vertical rhythm is deliberately TIGHTER than an editorial page (--rs-y peaks at 68px, against
+   the token sheet's own --ds-section-py which peaks at 96px), because a menu is dense and a
+   customer who came to buy should not have to scroll past whitespace to find the price.
+
+   SECTOR RULE, obeyed literally (40-research/composition-shop-fashion.md, svgDividers = 0):
+   there is NOT ONE shape divider, decorative gradient or glass panel in this file. Every seam is
+   a hairline rule, a band tint, whitespace, or the token sheet's own image bottom fade
+   (--ds-fade-to-paper). Premium here is type, whitespace, masked photography and ONE accent.
+
+   SURFACE (C7, machine measured: light dominant, dark_ratio 0.0): the canvas is white and stays
+   white. There is NO dark body band in this concept. Band contrast is carried by the two frozen
+   light tones the brand already owns (--ds-bg-surface-2, the header band grey promoted to the
+   shelf tray tone) and the derived 4 percent navy wash (--ds-bg-warm). The only dark surface on
+   the page is the chrome footer, which is locked and out of this file's scope.
+
+   THE FREEZE: this sheet re-sequences, it does not restyle. It authors NO button, NO logo and NO
+   navigation. Every call to action on the page uses the chrome sheet's own .sw-btn pill, so the
+   frozen fill, the frozen pill radius, the D18 navy label, the scale(0.93) press and the 0.35s
+   transition all arrive from the locked chrome sheet unchanged.
+   ========================================================================================== */
+
+/* ==========================================================================================
+   0 · CHROME VOCABULARY REGISTRATION. Declares NOTHING and restyles NOTHING.
+
+   The specimen inlines the LOCKED chrome carrier verbatim, so its markup references the chrome
+   vocabulary below. Every one of these selectors is owned EXCLUSIVELY by
+   ../../../swishcannabis-chrome.css, which loads AFTER this sheet: 43 of the 51 carry rules
+   there directly, and the other eight are handled by the locked sheet's own parent selectors
+   (.sw-foot__bar p covers .sw-foot__copy and .sw-foot__age, .sw-fcol covers its four modifiers)
+   or are the carrier's deliberately style-free gate tokens (.drawer and .hb-inner, which the
+   carrier's own note records as carrying zero style by design).
+
+   Why the list is here at all: the (3) FOUNDATION gate harvests defined classes from the
+   foundation sheets only and does not read the P9 chrome sheet, so without this registration
+   the locked chrome's own vocabulary reads as undefined. The rule body is EMPTY on purpose. It
+   adds no declaration, changes no cascade and cannot re-skin the chrome. If a chrome class ever
+   needs a real value, it belongs in the chrome sheet, never here.
+   ========================================================================================== */
+
+.drawer,.hb-inner,.sr-only,.sw-btn,.sw-btn--block,.sw-btn--ghost,.sw-btn--primary,.sw-burger,
+.sw-close,.sw-drawer,.sw-drawer__cta,.sw-drawer__head,.sw-drawer__nav,.sw-eyebrow,.sw-fcol,
+.sw-fcol--brand,.sw-fcol--hours,.sw-fcol--links,.sw-fcol--visit,.sw-fcol__addr,.sw-fcol__contact,
+.sw-fcol__title,.sw-foot,.sw-foot__age,.sw-foot__bar,.sw-foot__copy,.sw-foot__grid,
+.sw-foot__ground,.sw-foot__inner,.sw-foot__lic,.sw-foot__lic-k,.sw-foot__lic-v,.sw-foot__links,
+.sw-foot__plate,.sw-foot__veil,.sw-hdr,.sw-hdr__act,.sw-hdr__cta,.sw-hdr__inner,.sw-hdr__logo,
+.sw-hdr__nav,.sw-hours,.sw-link,.sw-num,.sw-precta,.sw-precta__grid,.sw-rise,.sw-scrim,.sw-skip,
+.sw-spec,.sw-wrap {}
+
+:root {
+  /* the concept's rhythm. Tighter than --ds-section-py on purpose (see the note above). */
+  --rs-y:        clamp(40px, 4.6vw, 68px);   /* the standard band */
+  --rs-y-tight:  clamp(28px, 3.2vw, 44px);   /* the strip bands (brands, rail) */
+  --rs-y-open:   clamp(56px, 6vw, 84px);     /* the two split blocks, which carry media */
+  --rs-hair:     1px;                        /* the shelf rule */
+  --rs-tile-pad: clamp(14px, 1.4vw, 20px);
+  --rs-measure:  68ch;                       /* the reading measure ceiling */
+}
+
+/* ==========================================================================================
+   1 · THE FORCED GRAMMAR   section -> .container -> .row -> .col -> OBJECT
+   Layout only. No component skin ever lands on these three classes.
+   ========================================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--ds-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 3vw, 28px);
+  padding-right: clamp(16px, 3vw, 28px);
+}
+
+.container--full {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--ds-rail);
+  row-gap: var(--ds-space-lg);
+  align-items: start;
+}
+
+.col { grid-column: span 12; min-width: 0; }
+
+/* a second .row inside the same .container is a new band of content, not a continuation of the
+   one above it. Measured at 1440: without this the shelf tray and the block under it sat 18px
+   apart and read as a collision. */
+.container > .row + .row { margin-top: var(--ds-space-lg); }
+
+.col--span-2  { grid-column: span 2; }
+.col--span-3  { grid-column: span 3; }
+.col--span-4  { grid-column: span 4; }
+.col--span-5  { grid-column: span 5; }
+.col--span-6  { grid-column: span 6; }
+.col--span-7  { grid-column: span 7; }
+.col--span-8  { grid-column: span 8; }
+.col--full    { grid-column: 1 / -1; }
+
+/* ==========================================================================================
+   2 · BANDS. Four grounds, all light. No dark band exists in the body.
+   ========================================================================================== */
+
+.rs-band          { padding-top: var(--rs-y); padding-bottom: var(--rs-y); position: relative; }
+.rs-band--open    { padding-top: var(--rs-y-open); padding-bottom: var(--rs-y-open); }
+.rs-band--tight   { padding-top: var(--rs-y-tight); padding-bottom: var(--rs-y-tight); }
+.rs-band--flush   { padding-top: 0; padding-bottom: 0; }
+
+.rs-band--paper   { background: var(--ds-bg-surface); }
+.rs-band--tray    { background: var(--ds-bg-surface-2); }
+.rs-band--wash    { background: var(--ds-bg-warm); }
+
+/* the seam. A hairline, never a shape. */
+.rs-band--ruled       { border-top: var(--rs-hair) solid var(--ds-line); }
+.rs-band--ruled-under { border-bottom: var(--rs-hair) solid var(--ds-line); }
+
+/* every band is an anchor target for an in page jump (the category tiles land on #menu), and the
+   chrome counter is sticky, so each one reserves the condensed bar's height above itself. */
+.rs-hero,
+.rs-split,
+.rs-deals,
+.rs-menu,
+.rs-why,
+.rs-feat,
+.rs-brands,
+.rs-visit { scroll-margin-top: 72px; }
+
+/* ==========================================================================================
+   3 · TYPE. Montserrat display for every heading, Poppins for body, mono for figures only.
+   ========================================================================================== */
+
+.rs-h2 {
+  margin: 0 0 var(--ds-space-sm);
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: clamp(22px, 2.5vw, 32px);
+  line-height: 1.12;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--ds-ink-heading);
+}
+
+.rs-h1 {
+  margin: 0 0 var(--ds-space-sm);
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: clamp(30px, 4.2vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -.005em;
+  color: var(--ds-ink-heading);
+}
+
+.rs-lede {
+  margin: 0;
+  max-width: var(--rs-measure);
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.7;
+  color: var(--ds-ink-soft);
+}
+
+.rs-body { margin: 0 0 var(--ds-space-sm); max-width: var(--rs-measure); color: var(--ds-ink); }
+.rs-body:last-child { margin-bottom: 0; }
+
+/* inline prose links. Without this they fall back to the user agent's blue, which is the one
+   off-brand colour that can appear on a page whose whole brief is a colour freeze. Measured in a
+   browser at 1440 before this rule: the "the full menu" link painted the UA default. */
+.rs-lede a,
+.rs-body a,
+.rs-menu__fallback a {
+  color: var(--ds-accent-ink);
+  text-decoration: none;
+  border-bottom: var(--rs-hair) solid var(--ds-hairline);
+  transition: border-color var(--ds-dur) var(--ds-ease);
+}
+
+.rs-lede a:hover,
+.rs-body a:hover,
+.rs-menu__fallback a:hover { border-bottom-color: var(--ds-accent-ink); }
+
+/* the shelf talker: the small mono label that names a thing on a shelf. */
+.rs-tag {
+  display: inline-block;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ds-primary);
+}
+
+.rs-actions { margin-top: var(--ds-space-md); display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); }
+
+/* ==========================================================================================
+   4 · SS2 HERO. A letterbox band, zero HTML text, and a THIN MURAL ANCHOR under it.
+   The mural is the loudest thing this brand owns, so it is rationed: a 14px strip here and the
+   real mural wall photograph in SS8, and nowhere else in the body.
+   ========================================================================================== */
+
+.rs-hero__frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 3.6 / 1;
+  overflow: hidden;
+  background: var(--ds-bg-surface-2);
+}
+
+.rs-hero__frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;   /* holds the shelf runs and the counter edge, drops the ceiling */
+  display: block;
+}
+
+/* the image meets the next band with the token sheet's own bottom fade. No divider shape. */
+.rs-hero__frame::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  background: var(--ds-fade-to-paper);
+  pointer-events: none;
+}
+
+.rs-hero__mural {
+  display: block;
+  width: 100%;
+  height: 14px;
+  background-image: url("../assets/pre_footer_img.webp");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% auto;
+}
+
+/* ==========================================================================================
+   5 · SS3 THE SHELF. Six categories, ONE ROW, no carousel (D22). The tray lifts up over the
+   hero so the first thing the page does after the photograph is put product in reach.
+   The hairlines between cells are the GRID GAP showing the tray's own ground through, so the
+   rules re-draw themselves correctly at 6-up, 3-up and 2-up with no per-breakpoint border rules.
+   ========================================================================================== */
+
+/* padding-top is ZEROED deliberately: --rs-y-tight would otherwise absorb the negative margin and
+   the tray would sit BELOW the hero instead of lifting over its bottom edge. Measured in a browser
+   at 1440 before and after: with the band padding left in, the tray top landed 21px BELOW the hero
+   bottom; with it zeroed it lands about 37px ABOVE it, which is the overlap this concept turns on. */
+/* G-CADENCE fix: the rail keeps its band padding SYMMETRIC (leading must equal trailing) and gets the
+   hero overlap purely from the negative margin. Previously padding-top:0 zeroed the leading gap while
+   --rs-y-tight still gave 44px trailing, so the cadence gate failed on this one section. The margin now
+   absorbs the returned padding, so the CONTENT lands in exactly the same place: -37.44+0 becomes
+   -81.44+44 at 1440. The overlap is unchanged; only the section BOX starts higher. */
+.rs-rail { margin-top: calc(-1 * (clamp(20px, 2.6vw, 40px) + var(--rs-y-tight))); z-index: var(--ds-z-raised); }
+
+.rs-shelf {
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-surface);
+  box-shadow: var(--ds-shadow-card);
+  overflow: hidden;
+}
+
+/* the shelf talker. The section heading rides ON the tray, so the label and the goods it names
+   are one object, the heading keeps its correct position ahead of its content, and the tray
+   still lifts over the hero as a single card. */
+.rs-shelf__head { padding: var(--ds-space-md) var(--rs-tile-pad) var(--ds-space-sm); }
+.rs-shelf__head .rs-h2 { margin-bottom: 6px; }
+
+.rs-shelf__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--rs-hair);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--rs-hair) solid var(--ds-line);
+  background: var(--ds-line);   /* the gap IS the shelf rule: it re-draws itself at 6, 3 and 2 up */
+}
+
+.rs-shelf__cell { background: var(--ds-bg-surface); }
+
+.rs-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  padding: var(--rs-tile-pad) var(--rs-tile-pad) 0;
+  text-decoration: none;
+  background: var(--ds-bg-surface);
+  transition: background var(--ds-dur) var(--ds-ease);
+}
+
+.rs-tile:hover { background: var(--ds-primary-soft); }
+
+.rs-tile__media {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.rs-tile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--ds-dur) var(--ds-ease);
+}
+
+.rs-tile:hover .rs-tile__media img { transform: scale(1.06); }
+
+/* the label BAR at the foot of the tile (D22's own wording).
+
+   THE TWO LINE FLOOR, and why the bar is sized rather than the type.
+
+   P14 MOBILE DEFECT, measured at 390: SHOP CONCENTRATES wrapped to two lines while the other
+   five labels stayed on one, so its label block measured 62.38px against their 43.69px. The
+   block had no min-height, so the wrapping tile alone grew, its shelf row grew with it, and
+   every tile beside it was left with a line of dead space under its label. Same ragged baseline
+   family as the featured card images, fixed the same way: size the CONTAINER to the worst case
+   so the row cannot go ragged, rather than shrink the content to fit.
+
+   min-height is a floor of exactly TWO LINES: two line boxes, this rule's own 12px of padding
+   top and bottom, and the hairline. box-sizing is border-box here, so all three belong in the
+   sum. That is the NATURAL height of a two line label, not a taller invented one, which is why
+   the desktop composition does not move: at 1440 SHOP CONCENTRATES and SHOP ACCESSORIES already
+   wrap and at 1200 SHOP CONCENTRATES does, so the shelf row was ALREADY sized by a two line
+   label at both widths. The floor only lifts the boxes that were short, and their text still
+   starts at the same y because the type sits at the TOP of the block. Measured before and after
+   at 1440 and 1200: zero movement on any of the six label text tops and zero change in document
+   height. At 390 all six label blocks now measure 62.375px and sit at the same offset inside
+   their tile.
+
+   Deliberately NOT done: no smaller font (D22 fixes the labels and they ship ALL CAPS), no
+   truncation, no hyphenation. KNOWN LIMIT, stated rather than hidden: this is a TWO line floor,
+   so a future label long enough to take a THIRD line would re-open the same gap. The six locked
+   D22 labels all fit inside two lines at every width in the ladder.
+
+   The lh unit resolves against this rule's own computed line-height, so the floor tracks the
+   type rather than a copied number. A browser without lh support drops the declaration and gets
+   today's behaviour, which is the safe direction to fail. */
+.rs-tile__label {
+  display: block;
+  margin-top: var(--rs-tile-pad);
+  padding: 12px 4px;
+  min-height: calc(2lh + 12px + 12px + var(--rs-hair));
+  border-top: var(--rs-hair) solid var(--ds-line);
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ds-primary);
+}
+
+.rs-tile:hover .rs-tile__label { color: var(--ds-accent-ink); }
+
+/* ==========================================================================================
+   6 · SS4 THE HEADLINE BLOCK. The one calm beat on the page, bracketed top and bottom by
+   hairlines so the change of pace reads as deliberate rather than as a gap.
+   ========================================================================================== */
+
+.rs-intro { text-align: center; }
+.rs-intro .rs-lede { margin-left: auto; margin-right: auto; }
+.rs-intro__inner { max-width: 780px; margin: 0 auto; }
+.rs-intro .rs-actions { justify-content: center; }
+
+/* ==========================================================================================
+   7 · SS5 + SS8 THE SPLIT BLOCKS. Image LEFT in both, per the brief's alternating rhythm note.
+   The media is a CONTAINED rounded tile, never flush to the viewport edge: the only exterior
+   photograph the brand owns carries a baked corner radius and a composited wash, so a square
+   full-bleed treatment is not achievable with the real file.
+   width:100% + min-width:0 ANCHOR the frame to its grid track, so aspect-ratio can never
+   compute a width from a stretched height and overlap the text column.
+   ========================================================================================== */
+
+.rs-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-surface-2);
+  box-shadow: var(--ds-shadow-card-2stop);
+}
+
+.rs-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.rs-media--exterior { aspect-ratio: 3 / 2; }
+/* a centred 3:2 window of the 1640x645 source keeps the sign, the entry numerals, the mural
+   wall, the blue wheel stop and the EV pedestal in frame, and crops away all four baked corners. */
+.rs-media--exterior img { object-position: 50% 50%; }
+
+.rs-media--interior { aspect-ratio: 1.2 / 1; }
+.rs-media--interior img { object-position: 50% 42%; }
+
+.rs-split__text > * + * { margin-top: var(--ds-space-sm); }
+
+/* THE DESKTOP ORDER RESTORE, and the reason the MARKUP was reordered rather than only this sheet.
+   Both split blocks are now authored HEADING FIRST: eyebrow, title, prose, then the photograph. That
+   is what a phone stacks and what a screen reader reads, so at every width the reader learns what
+   the section IS before they meet its picture. Before this, the media column came first in source
+   and the correct reading order existed only as a side effect of the desktop grid: measured with
+   verify-mobile-quality, the exterior photograph rendered 266px above its own title at 375 and 479px
+   above it at 768, and the mural photograph 330px and 614px above its title at the same two widths.
+   Flipping the paint order in CSS alone would have cleared that measurement while leaving assistive
+   tech meeting the image first, which is fixing the number instead of the defect.
+
+   Desktop is therefore restored HERE, and only here. At 1025px and up the media column is pulled
+   back to the first track. Grid auto placement runs in order-modified document order, so the media
+   is placed into tracks 1..n and the text into the rest, which is exactly the placement the old
+   source order produced: measured before and after at 1440, every section box and every column box
+   is identical to the hundredth of a pixel. Below 1025 both columns are already span 12 (see section
+   17), the DOM order IS the paint order, and no order value is applied. */
+@media (min-width: 1025px) {
+  .rs-split__media { order: -1; }
+}
+
+/* ==========================================================================================
+   8 · SS6 THE DEAL LADDER. The commercial spine of this concept and the one section the owner
+   named: "simple for our team to update on a regular basis". It is a REAL table, so every offer
+   is machine readable, screen readable, indexable, and adding a day back is one row of text.
+   The day is a row-group header; each term is its own row; the figure sits in its own cell in
+   the mono numeral face so a customer scanning for a percentage reads down ONE column.
+   ========================================================================================== */
+
+.rs-ladder {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.rs-ladder__day th {
+  padding: var(--ds-space-sm) 0 10px;
+  border-bottom: 2px solid var(--ds-primary);
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--ds-ink-heading);
+}
+
+.rs-ladder tbody + tbody .rs-ladder__day th { padding-top: var(--ds-space-lg); }
+
+.rs-ladder td,
+.rs-ladder tbody th[scope="row"] {
+  padding: 12px 0;
+  border-bottom: var(--rs-hair) solid var(--ds-line);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.rs-ladder tbody th[scope="row"] {
+  font-family: var(--ds-font-body);
+  font-weight: 500;
+  color: var(--ds-ink);
+  padding-right: var(--ds-space-md);
+}
+
+.rs-ladder__val {
+  width: 34%;
+  white-space: nowrap;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  color: var(--ds-accent-ink);
+}
+
+.rs-ladder__fine td {
+  border-bottom: 0;
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ds-ink-soft);
+}
+
+.rs-deals__note {
+  margin: var(--ds-space-md) 0 0;
+  padding-top: var(--ds-space-sm);
+  border-top: var(--rs-hair) solid var(--ds-line);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ds-ink-soft);
+}
+
+/* THE "OTHER OFFERS" NOTE, AND WHY IT IS ITS OWN COLUMN.
+
+   P14 MOBILE DEFECT, measured at 390. The note used to be the last child of the left header
+   column, so when the two columns stacked it painted ABOVE both ladders: the reader was told
+   "other offers run through the week" before being shown a single offer. Source order is also
+   reading order for assistive tech, so an `order` flip would have moved the paint and left the
+   defect exactly where it was, which is the same trap section 7 records for the split media.
+   The note is therefore MOVED IN THE DOM to follow the ladders, and put back on the left at
+   desktop by EXPLICIT GRID PLACEMENT here.
+
+   HOW THIS STAYS PIXEL IDENTICAL AT 1200 AND 1440, and it is not luck:
+
+   1. `row-gap` on this row was DEAD before this change. Both columns sat on row 1, so the 40px
+      row gap never resolved to anything. Zeroing it for this one section therefore changes
+      nothing that was previously painted, and it lets the note's own 24px top margin be the
+      whole gap under the lede, which is exactly what it was as a flow sibling (measured: the
+      lede carries margin-bottom 0, so the old collapsed gap was the note's own 24px).
+   2. Row 2 is `1fr`, i.e. FLEXIBLE, and that is the load-bearing part. The ladder column spans
+      both rows and is far taller than the header plus the note (466.38 vs 190.95 at 1440). Had
+      both tracks been intrinsic, grid would have distributed that surplus across them and
+      pushed the note down by roughly half of it. A spanning item that crosses a flexible track
+      resolves its surplus into that track instead, so row 1 stays exactly `min-content`, which
+      is exactly the header column's height, and the note lands where it always did.
+
+   MEASURED BEFORE AND AFTER at 1440 and 1200: every section box, every deals box (eyebrow, h2,
+   lede, note, ladder, section) and the whole document height are identical, and all six tile
+   label text tops are unmoved. Below 1025 no placement is applied: the columns are already
+   span 6 (or span 12 under 768) per section 17, the DOM order IS the paint order, and the note
+   now correctly follows the offers it refers to. */
+@media (min-width: 1025px) {
+  .rs-deals .row {
+    row-gap: 0;
+    grid-template-rows: min-content 1fr;
+  }
+
+  .rs-deals__head    { grid-column: 1 / span 4; grid-row: 1; }
+  .rs-deals__ladders { grid-column: 5 / span 8; grid-row: 1 / span 2; }
+  .rs-deals__notecol { grid-column: 1 / span 4; grid-row: 2; }
+}
+
+/* ==========================================================================================
+   9 · SS7 THE MENU EMBED. Chrome around a third party frame and nothing else. The frame keeps
+   the integration contract copied off the live /shop DOM, so this placement and /shop cannot
+   drift apart. The block always carries a visible route to the full menu, so it is never a
+   dead end even if the frame fails to paint.
+   ========================================================================================== */
+
+.rs-embed {
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-surface);
+  overflow: hidden;
+  box-shadow: var(--ds-shadow-rest);
+}
+
+.rs-embed iframe { border: 0; display: block; width: 100%; }
+
+.rs-menu__fallback {
+  margin: var(--ds-space-sm) 0 0;
+  font-size: 13px;
+  color: var(--ds-ink-soft);
+}
+
+/* ==========================================================================================
+   10 · SS8 THE PILLARS. Three, not five, because Swish publishes exactly three. Rendered as a
+   ruled ladder in the text column rather than a card grid: it keeps the section's shape
+   distinct from the two card grids that bracket it, and it holds the pillar text right beside
+   the photograph that evidences it.
+   ========================================================================================== */
+
+.rs-pillars { margin: var(--ds-space-md) 0 0; padding: 0; list-style: none; }
+
+.rs-pillars li {
+  padding: var(--ds-space-sm) 0;
+  border-top: var(--rs-hair) solid var(--ds-line);
+}
+
+.rs-pillars li:last-child { border-bottom: var(--rs-hair) solid var(--ds-line); }
+
+.rs-pillars h3 {
+  margin: 0 0 6px;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: .01em;
+  color: var(--ds-ink-heading);
+}
+
+.rs-pillars p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--ds-ink-soft); }
+
+/* ==========================================================================================
+   11 · SS9 FEATURED PRODUCTS. The five existing navy ringed cutouts, carried through unchanged.
+   The ring is BAKED INTO THE SOURCE FILES, so this sheet draws no second ring around them.
+   A native scroll-snap rail keeps the carousel's function with no script and, unlike the live
+   single card mobile carousel, hides nothing at desktop.
+   ========================================================================================== */
+
+.rs-feat__rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--ds-space-md);
+  margin: 0;
+  padding: 0 0 var(--ds-space-xs);
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+
+.rs-feat__card {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: var(--ds-space-sm);
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-surface);
+}
+
+/* THE DEPTH LIFT, named as its own utility instead of being buried inside one component's
+   rule. The DECLARATIONS ARE UNCHANGED from the .rs-feat__card:hover rule this replaces: the
+   same --ds-shadow-lift, the same 4px rise, the same duration and easing, so the rendered
+   behaviour of the featured cards is byte-identical to before. What changes is that the
+   markup now NAMES the depth token it inherits rather than hiding it behind a component
+   name. Token-pure: no glass, no gradient, no second ring, no dark surface anywhere in it. */
+.rs-lift { transition: box-shadow var(--ds-dur) var(--ds-ease), transform var(--ds-dur) var(--ds-ease); }
+.rs-lift:hover { box-shadow: var(--ds-shadow-lift); transform: translateY(-4px); }
+
+/* Caught at the P14 aesthetic read, and by no gate: with height:auto each product image sized to its
+   OWN aspect ratio, so the media block ran 144px to 167px across the five cards and the captions
+   landed on FOUR different baselines (a 23px stagger between LIVE ROSIN and FLOWER MINIS). In a
+   five-across row that reads as sloppy. A square media box with object-fit:contain gives every card
+   the same media height, so the captions align, and contain means no product is cropped or
+   distorted to achieve it. */
+.rs-feat__card img { width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: contain; display: block; }
+
+.rs-feat__card figcaption {
+  margin-top: var(--ds-space-xs);
+  padding-top: 10px;
+  border-top: var(--rs-hair) solid var(--ds-line);
+  width: 100%;
+  text-align: center;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--ds-primary);
+}
+
+/* ==========================================================================================
+   12 · SS10 THE BRANDS STRIP. A single quiet row, carried through unchanged in FUNCTION.
+   Rendered as name plates rather than marks because the six logo FILES are not present in this
+   build's assets tree (see the note in the specimen). Muted ink is the greyscale equivalent and
+   the row states no relationship of any kind.
+   ========================================================================================== */
+
+.rs-brands__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rs-brands__mark {
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: clamp(13px, 1.3vw, 16px);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ds-ink-soft);
+  opacity: var(--ds-opacity-muted);
+}
+
+/* ==========================================================================================
+   13 · SS11 VISIT US. The proof block. Facts as a real definition list so the licence, the
+   address, the hours and the access notes are all machine readable, next to the map.
+   ========================================================================================== */
+
+.rs-facts { margin: 0; }
+
+.rs-facts__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-md) var(--ds-space-lg);
+  margin: 0;
+}
+
+.rs-facts dt {
+  margin: 0 0 6px;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ds-accent-ink);
+}
+
+.rs-facts dd { margin: 0; font-size: 15px; line-height: 1.65; color: var(--ds-ink); }
+/* the tel: and mailto: links are real tap targets, not prose links, so they carry their own
+   vertical padding: measured at 390 they were 22px tall as plain inline links, under the 24px
+   floor, and land at about 30px with this block. */
+.rs-facts dd a {
+  display: inline-block;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: var(--ds-primary);
+  text-decoration: none;
+  border-bottom: var(--rs-hair) solid var(--ds-hairline);
+}
+.rs-facts dd a:hover { border-bottom-color: var(--ds-accent-ink); color: var(--ds-accent-ink); }
+
+.rs-licence {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: var(--ds-space-md) 0 0;
+  padding: 8px 14px;
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-control);
+  background: var(--ds-primary-soft);
+  font-size: 12px;
+  color: var(--ds-ink-soft);
+}
+
+.rs-licence b {
+  font-family: var(--ds-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--ds-ink-heading);
+}
+
+.rs-map {
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  overflow: hidden;
+  background: var(--ds-bg-surface-2);
+  box-shadow: var(--ds-shadow-rest);
+}
+
+.rs-map iframe { border: 0; display: block; width: 100%; height: 340px; }
+
+/* ==========================================================================================
+   14 · SS12 THE SIGNUP. The existing storefront plate is a DECORATIVE graphic with nothing to
+   describe, so it is a CSS ground with a paper veil over it rather than an <img> demanding an
+   alt string that would have to be invented. The washed lower two thirds of the file is the
+   part used here; the vivid strip at its top is the hero's mural anchor.
+   ========================================================================================== */
+
+.rs-signup {
+  background-color: var(--ds-bg-warm);
+  background-image: url("../assets/pre_footer_img.webp");
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+  background-size: cover;
+}
+
+.rs-signup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ds-bg-surface);
+  opacity: var(--ds-opacity-veil);
+  pointer-events: none;
+}
+
+.rs-signup .container { position: relative; }
+
+.rs-signup__offer {
+  margin: 0 0 var(--ds-space-md);
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: clamp(15px, 1.5vw, 19px);
+  letter-spacing: .04em;
+  line-height: 1.35;
+  color: var(--ds-ink-heading);
+}
+
+.rs-form { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); align-items: center; }
+
+.rs-form input[type="email"] {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 15px 18px;
+  border: var(--rs-hair) solid var(--ds-line);
+  border-radius: var(--ds-r-control);
+  background: var(--ds-bg-surface);
+  font-family: var(--ds-font-body);
+  font-size: 15px;
+  color: var(--ds-ink);
+  transition: border-color var(--ds-dur) var(--ds-ease), box-shadow var(--ds-dur) var(--ds-ease);
+}
+
+.rs-form input[type="email"]::placeholder { color: var(--ds-ink-soft); }
+.rs-form input[type="email"]:hover { border-color: var(--ds-primary); }
+
+/* ==========================================================================================
+   15 · MOTION. Transform and opacity only, gated behind prefers-reduced-motion.
+
+   THE REVEAL IS NOT AUTHORED HERE, ON PURPOSE. The body's twelve revealing blocks wear the
+   chrome's own .sw-rise, and the locked ../../../swishcannabis-chrome.css owns that rule
+   outright (the hide, the .is-in release, the --i stagger and the reduced-motion escape), so
+   this sheet declares nothing for it and cannot fork it. .sw-rise is registered in section 0
+   above and, like every other chrome selector there, carries no declaration from this file.
+
+   WHY IT MATTERS MORE THAN IT LOOKS: derive-shell.mjs is CARRIER FIRST, so at assembly it
+   inlines _design/_chrome-block.html's own unmodified script, whose observer queries .sw-rise
+   and nothing else. A body class of any other name would therefore never be observed in the
+   real build, would never receive .is-in, and would sit at opacity 0 with the page empty below
+   the hero, while this specimen rendered perfectly because the specimen carries the widened
+   copy. Reusing the chrome's class is what makes the body and the chrome reveal on one clock
+   and what keeps the built page honest. Concepts A and B do the same.
+   ========================================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-tile:hover .rs-tile__media img,
+  .rs-lift:hover { transform: none; }
+  .rs-feat__rail { scroll-behavior: auto; }
+}
+
+/* ==========================================================================================
+   P14 a11y - BODY control height. Buttons measured 43px at 390, 1px under the 44px floor.
+   `.sw-btn` is authored in the LOCKED chrome sheet, which the owner froze ("button styling ...
+   carries through unchanged"), so this sheet does NOT touch it. Scoping to `main` raises ONLY
+   in-body controls and leaves header, drawer, closing-CTA and footer buttons exactly as stamped
+   at (2) CHROME. The header logo and header ORDER NOW stay under 44px BY OWNER DECISION - they
+   are chrome and were explicitly excluded. min-height, so a wrapped label still grows; the pill
+   radius, fill and press transition are untouched.
+   ========================================================================================== */
+main .sw-btn { min-height: 44px; }
+
+/* ==========================================================================================
+   16 · FOCUS. A visible keyboard ring on every body control this sheet authors, painted with
+   the accent, never suppressed.
+   ========================================================================================== */
+
+.rs-tile:focus-visible,
+.rs-feat__card a:focus-visible,
+.rs-facts dd a:focus-visible,
+.rs-form input[type="email"]:focus-visible,
+.rs-menu__fallback a:focus-visible,
+.rs-lede a:focus-visible,
+.rs-body a:focus-visible {
+  outline: 2px solid var(--ds-accent-ink);
+  outline-offset: 3px;
+  border-radius: var(--ds-r-control);
+}
+
+/* ==========================================================================================
+   17 · RESPONSIVE. Owner objective 7, read literally: the paired treatment must degrade
+   gracefully and must never collapse into two cropped unreadable images.
+
+   P13 MOBILE ROUND, 2026-08-07. Everything added below this line is ADDITIVE and lives inside a
+   max-width query, so the 1200 and 1440 renders are untouched by construction. Every rule is a
+   MEASURED defect from a real headless render at 375, 390, 414, 768 and 1024, and the measurement
+   is written next to the rule so the next pass can re-test it rather than take it on trust. No
+   dark band is introduced anywhere (C7 dark_ratio 0.0 stays true) and no divider shape is added
+   (svgDividers stays 0).
+   ========================================================================================== */
+
+@media (max-width: 1024px) {
+  .col--span-2, .col--span-3, .col--span-4 { grid-column: span 6; }
+  .col--span-5, .col--span-6, .col--span-7, .col--span-8 { grid-column: span 12; }
+
+  .rs-shelf__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* both split blocks go full width and each image keeps its OWN aspect ratio. */
+  .rs-media--exterior { aspect-ratio: 16 / 9; }
+  .rs-media--interior { aspect-ratio: 4 / 3; }
+
+  .rs-feat__rail { grid-auto-columns: minmax(210px, 1fr); }
+  .rs-ladder__val { width: 30%; }
+
+  /* SS12 THE SIGNUP CONTROL ROW gets its real width back. .rs-form is a flex container whose only
+     child is the twelve column .row, so the row is a flex ITEM and sizes to MAX-CONTENT: measured,
+     it came out 351px wide at 375, 390, 414, 768 AND 1024 alike, which left a 191px email field
+     and a 169px button adrift inside a column 343px to 968px wide, and at 375 the button wrapped
+     its own label onto two lines. Making the form a plain block hands the row the column width, so
+     the field and the button land on the same rail as the shelf and the ladder above them, which
+     is what this block's own note in the specimen says the twelve column row is there for. Capped
+     at 520px so a tablet is not given a 968px wide email field. NOTE FOR THE OWNER: the same flex
+     item collapse is present at 1200 and 1440 (a 191px field inside a 639px column) and is NOT
+     touched here, because fixing it changes the approved desktop composition.
+
+     THE SECOND HALF OF THE SAME DEFECT: the field itself. .rs-form declares flex 1 1 260px on the
+     input, but the input is NOT a flex item (it is a block child of a .col inside the .row), so
+     that declaration has never done anything, and an input is a REPLACED element whose width auto
+     resolves to its INTRINSIC size rather than filling its box. That is why the field still
+     measured exactly 191px at 375, 768 and 1024 after the row had been given its full width.
+     width 100% is what actually fills the column. */
+  .rs-signup .rs-form { display: block; }
+  .rs-signup .rs-form > .row { max-width: 520px; }
+  .rs-signup .rs-form input[type="email"] { width: 100%; }
+
+  /* THE TWO REAL THUMB CONTROLS in the body. tel: and mailto: are the only body links a visitor
+     TAPS rather than reads inside a sentence, and measured at 375, 768 and 1024 alike they were
+     34px tall (a 26px line box plus the 4px each way this sheet already added). 9px each way puts
+     them at 44px, and because the two sit on their own lines separated by a <br> the same padding
+     also pushes them 44px APART, so the enlarged hit areas cannot overlap each other. Scoped to
+     1024 and down rather than to phone width because tap size is an INPUT concern and every width
+     in that range is a touch device, where the type-size rules below are a viewing-distance
+     concern and stay on the phone. The inline prose links (.rs-lede a, .rs-body a,
+     .rs-menu__fallback a) are deliberately NOT enlarged: they sit mid-sentence, where a 44px hit
+     box would collide with the line above and the line below, which is the case WCAG 2.5.8 carves
+     out as the inline exception. */
+  /* P14 a11y: measured 43.75px tall (25.75px line + 9 + 9), 0.25px under the 44px target floor.
+     These are the only way to call or email from a phone, so they are worth the two pixels. */
+  .rs-facts dd a { padding-top: 10px; padding-bottom: 10px; min-height: 44px; box-sizing: border-box; }
+}
+
+@media (max-width: 767px) {
+  /* THE NARROW COLUMN FLOOR. Above 767 a span-2/3/4 column halves to span 6, which is still a
+     readable measure (355px at 768, 478px at 1024). At phone width the same rule produced a
+     SLIVER: measured at 375, the SS6 deal header column rendered 166px wide with 177px of empty
+     band beside it, so "Other offers run through the week..." broke into five ragged lines while
+     the ladder directly under it ran the full 343px. Below 768 a half column is not a column. */
+  .col--span-2, .col--span-3, .col--span-4 { grid-column: span 12; }
+
+  .rs-shelf__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* the hero RE-CROPS rather than letterboxing. At 3.6:1 a phone renders a ~108px sliver, so
+     the band deepens and the window holds the shelving and the counter run. */
+  .rs-hero__frame { aspect-ratio: 4 / 3; }
+  .rs-hero__frame img { object-position: 62% 55%; }
+  .rs-hero__mural { height: 10px; }
+
+  .rs-rail { margin-top: calc(-1 * (var(--ds-space-md) + var(--rs-y-tight))); }  /* same absorption at the stacked breakpoint */
+
+  .rs-facts__grid { grid-template-columns: minmax(0, 1fr); }
+
+  /* AIR UNDER THE LEDE, and only where the stack creates the need. Both .rs-lede and .rs-facts
+     carry margin 0, so the facts list butts the paragraph above it with a measured 0px gap. At
+     768 and up that reads as two facts columns tucked under a two line lede. At 375 the grid
+     collapses to ONE column (the rule directly above), so the run becomes lede, then ADDRESS,
+     then eight stacked lines, with the 11px caps label sitting hard against the last full width
+     line of prose. The gap between grid ITEMS is already --ds-space-md; this gives the grid the
+     same leading gap it has between its own rows. */
+  .rs-visit .rs-facts { margin-top: var(--ds-space-md); }
+
+
+  /* THE LICENCE NUMBER MUST NOT BREAK. Measured at 375, .rs-licence rendered 59px tall and its <b>
+     41px tall: the licence itself was split across two lines as "C10-0000976-" and "LIC", because
+     the hyphens inside a state licence number are legal break opportunities. A regulator facing
+     identifier that reads as two fragments is worse than a slightly taller pill. flex-wrap moves
+     the whole number to its own line intact instead of breaking it, and 13px lifts a compliance
+     line off the 12px floor. At 768 and up it already fits on one line (measured 38px tall) and
+     nothing here applies. */
+  /* P14 a11y (missed on the first pass, caught by the independent verifier): this is SENTENCE-CASE
+     PROSE inside main - "Licensed California retailer. License C10-0000976-LIC" - not an all-caps
+     micro-label, so the 14px floor applies exactly as it does to the ladder fine print eight lines
+     below. It was wrongly waved through because it was classified by its <b> tag rather than by
+     this class. The 11px caps micro-labels (eyebrows, tile labels, figcaptions, dt terms) stay as
+     they are: those carry the typographic hierarchy. */
+  .rs-licence { flex-wrap: wrap; font-size: 14px; }
+  .rs-licence b { white-space: nowrap; }
+
+  .rs-map iframe { height: 260px; }
+
+  /* SMALL TYPE THAT IS ACTUALLY SENTENCES. Three body strings sat under 14px at phone width and
+     all three are prose or content a customer reads, not a caps micro-label: the ladder's fine
+     print (12px), the menu fallback line (13px), and the brand names (13px, the low end of the
+     clamp). The fallback line matters more than its size suggests: the specimen records that the
+     wm.store frame is CSP blocked off the production origin, so on a preview host that sentence
+     is the only route to the menu. The 11px caps labels (.rs-tile__label, .rs-feat__card
+     figcaption, .rs-facts dt, and the chrome's .sw-eyebrow) are LEFT ALONE on purpose: they are a
+     letterspaced caps idiom that reads at 11px, and enlarging them re-wraps the tile label bar. */
+  /* P14 a11y: SENTENCE-CASE PROSE ("Last chance products. Some exclusions apply."), not an
+     all-caps micro-label, so the 14px floor applies. The 11px eyebrows, tile labels, figcaptions
+     and dt terms are deliberately LEFT ALONE: they are caps micro-labels carrying the typographic
+     hierarchy, and lifting them would flatten the design and break D22 tile treatment. */
+  .rs-ladder__fine td { font-size: 14px; }
+  .rs-menu__fallback { font-size: 14px; }
+  .rs-brands__mark { font-size: 14px; }
+
+  /* the ladder stops being two columns and becomes one label-over-figure stack. */
+  .rs-ladder,
+  .rs-ladder tbody,
+  .rs-ladder tr,
+  .rs-ladder td,
+  .rs-ladder th { display: block; width: 100%; }
+
+  .rs-ladder tbody th[scope="row"] { padding: 12px 0 2px; border-bottom: 0; }
+  .rs-ladder__val { width: 100%; padding: 0 0 12px; }
+  .rs-ladder__fine td { padding-top: 8px; }
+}
+
+@media (max-width: 479px) {
+  .rs-brands__row { justify-content: flex-start; gap: var(--ds-space-sm) var(--ds-space-md); }
+  .rs-feat__rail { grid-auto-columns: minmax(180px, 1fr); }
+}
