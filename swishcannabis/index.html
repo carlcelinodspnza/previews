@@ -2,12 +2,8 @@
 <html lang="en">
 <head>
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-<!-- PREVIEW-ONLY. Injected into the ASSEMBLED copy, never into the source: the source page must
-     stay indexable for the real domain, and its locked SEO title/description exist to rank there.
-     This host is a PUBLIC GitHub Pages repo, so without this the preview could be indexed and
-     compete with the client's own site for its own terms. Matches the liquorlicense precedent.
-     robots.txt at the previews ROOT already carries Disallow: / as host-level backup; this meta
-     is the per-page belt to that braces. -->
+<!-- PREVIEW-ONLY: injected into the assembled copy, never the source. This host is public; without
+     this the preview could be indexed and compete with the client site for its own terms. -->
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400..700&display=swap">
 <link rel="stylesheet" href="design-system/tokens.css?v=aa2c63a2">
   <link rel="stylesheet" href="design-system/chrome.css?v=65fdc8b5">
-  <link rel="stylesheet" href="design-system/structural.css?v=8f9cd2b9">
+  <link rel="stylesheet" href="design-system/structural.css?v=73f37bfa">
 
 </head>
 <body>
@@ -58,7 +54,7 @@ html.sw-age-ok #sw-agegate { display: none; }
   overflow-y: auto;
   background-color: #0b0b0b;        /* paints instantly, before the mural decodes */
   background-image:
-    linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+    radial-gradient(ellipse 78% 70% at 50% 46%, rgba(0,0,0,.90) 0%, rgba(0,0,0,.82) 42%, rgba(0,0,0,.46) 100%),
     url("assets/agegate-mural-900.webp");
   background-size: cover;
   background-position: 50% 50%;
@@ -72,7 +68,7 @@ html.sw-age-ok #sw-agegate { display: none; }
 @media (min-width: 901px) {
   #sw-agegate {
     background-image:
-      linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.72)),
+      radial-gradient(ellipse 70% 74% at 50% 46%, rgba(0,0,0,.90) 0%, rgba(0,0,0,.80) 40%, rgba(0,0,0,.40) 100%),
       url("assets/agegate-mural-1600.webp");
   }
 }
@@ -80,20 +76,26 @@ html.sw-age-ok #sw-agegate { display: none; }
 /* 960px, not a narrower reading measure: the LIVE title sets on ONE line at desktop (it spans about
    900px at 60px/900), and a 640px box wrapped it to two. The copy and the buttons keep their own
    tighter maxima below, so only the title uses the extra width. */
-.sw-agegate__inner { width: 100%; max-width: 960px; text-align: center; margin: auto; outline: 0; }
+.sw-agegate__inner { width: 100%; max-width: 620px; text-align: center; margin: auto; outline: 0; }
+/* The container is focused programmatically so the reading position lands inside the dialog. That
+   focus was painting a 3px ORANGE ring right around the whole gate for every visitor, because a
+   :focus rule elsewhere outranked the shorthand above. Suppress it HERE with id specificity. This
+   removes no keyboard affordance: the Yes/No buttons keep their own :focus-visible ring. */
+#sw-agegate .sw-agegate__inner:focus,
+#sw-agegate .sw-agegate__inner:focus-visible { outline: none; box-shadow: none; }
 
 .sw-agegate__logo {
   display: block;
-  width: min(538px, 78vw);
+  width: min(360px, 62vw);
   height: auto;
-  margin: 0 auto 26px;
+  margin: 0 auto 20px;
 }
 
 .sw-agegate__title {
-  margin: 0 0 22px;
+  margin: 0 0 16px;
   font-family: inherit;
   font-weight: 900;
-  font-size: clamp(28px, 6.6vw, 60px);
+  font-size: clamp(24px, 4.2vw, 40px);
   line-height: 1.16;
   letter-spacing: .005em;
   color: var(--ds-ink-on-dark, #ffffff);
@@ -101,26 +103,26 @@ html.sw-age-ok #sw-agegate { display: none; }
 }
 
 .sw-agegate__copy {
-  margin: 0 auto 30px;
+  margin: 0 auto 24px;
   max-width: 42ch;
-  font-size: clamp(15px, 2.4vw, 18px);
+  font-size: clamp(14px, 1.5vw, 16px);
   line-height: 1.5;
   font-weight: 400;
   color: var(--ds-ink-on-dark, #ffffff);
 }
 
-.sw-agegate__actions { display: grid; gap: 14px; max-width: 410px; margin: 0 auto; }
+.sw-agegate__actions { display: grid; gap: 12px; max-width: 340px; margin: 0 auto; }
 
 .sw-agegate__btn {
   -webkit-appearance: none;
   appearance: none;
   display: block;
   width: 100%;
-  padding: 17px 29px;
+  padding: 13px 26px;
   border: 0;
   border-radius: 25px;
   font-family: inherit;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
   cursor: pointer;
@@ -476,20 +478,12 @@ html.sw-age-ok #sw-agegate { display: none; }
       <div class="row">
         <div class="col col--full sw-rise" style="--i:0">
           <div class="rs-embed">
-            <!-- ============================================================================
-                 PREVIEW-ONLY NOTICE. Injected into this ASSEMBLED copy, never into the source.
-                 The source page ships the real Weedmaps iframe unchanged and it WILL render on
-                 swishcannabis.com. It cannot render here: Weedmaps sets a CSP frame-ancestors
-                 allowlist naming swishcannabis.com, *.swishcannabis.com and three SGEN staging
-                 hosts, but NOT carlcelinodspnza.github.io, so the frame is refused with
-                 ERR_BLOCKED_BY_RESPONSE. Nothing in the build can change that. REMOVE this block
-                 if the preview host is ever added to their allowlist. It must NEVER be copied
-                 back into pages/index.content.html - a visible placeholder in the source is
-                 exactly what verify-fabricated-honesty bans, and D17 forbids stand-ins.
-                 ============================================================================ -->
+            <!-- PREVIEW-ONLY. Weedmaps CSP frame-ancestors allows swishcannabis.com and three SGEN
+                 staging hosts but NOT this preview host, so the store frame is refused off-domain.
+                 Remove if the preview host is added to their allowlist. NEVER copy back to source. -->
             <div class="rs-embed__previewnote" style="border:1px solid var(--ds-line,#dcdcdc);border-radius:var(--ds-r-surface,10px);background:var(--ds-bg-warm,#f2f6f9);padding:32px 28px;text-align:center;max-width:52ch;margin:0 auto 20px;">
               <p style="margin:0 0 10px;font-weight:700;color:var(--ds-ink-heading,#043f66);font-size:15px;letter-spacing:.02em;">THE LIVE MENU RENDERS ON THE REAL DOMAIN</p>
-              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:var(--ds-ink-soft,#3d4a54);">This preview is hosted off-domain, and Weedmaps only allows its store to be framed by swishcannabis.com. The menu block below is the real embed, unchanged; it stays blank here and fills with live products and prices once the page is on swishcannabis.com.</p>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:var(--ds-ink-soft,#3d4a54);">This preview is hosted off-domain, and Weedmaps only allows its store to be framed by swishcannabis.com. The block below is the real embed, unchanged; it fills with live products and prices once the page is on swishcannabis.com.</p>
               <a href="https://swishcannabis.com/shop" style="display:inline-block;min-height:44px;line-height:44px;padding:0 26px;border-radius:25px;background:var(--ds-accent,#ff8c09);color:var(--ds-on-accent,#043f66);font-weight:700;font-size:14px;letter-spacing:.04em;text-decoration:none;">OPEN THE LIVE MENU</a>
             </div>
             

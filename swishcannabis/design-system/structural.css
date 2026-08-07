@@ -248,7 +248,7 @@
   display: block;
   width: 100%;
   height: 14px;
-  background-image: url("../assets/pre_footer_img.webp");
+  background-image: url("../assets/swish-band-1920.webp");
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: 100% auto;
@@ -769,7 +769,7 @@
 
 .rs-signup {
   background-color: var(--ds-bg-warm);
-  background-image: url("../assets/pre_footer_img.webp");
+  background-image: url("../assets/swish-band-1920.webp");
   background-repeat: no-repeat;
   background-position: 50% 100%;
   background-size: cover;
@@ -1007,4 +1007,16 @@ main .sw-btn { min-height: 44px; }
 @media (max-width: 479px) {
   .rs-brands__row { justify-content: flex-start; gap: var(--ds-space-sm) var(--ds-space-md); }
   .rs-feat__rail { grid-auto-columns: minmax(180px, 1fr); }
+}
+
+/* NEW BAND ARTWORK (owner-supplied 2026-08-07). Replaces pre_footer_img.webp in both band roles.
+   Source was a 1.19 MiB PNG at 1920x476; re-encoded to WebP at three widths (55 / 33 / 16 KB,
+   95-99% smaller) and served by breakpoint so a phone never downloads the 1920 cut. The art is a
+   torn-edge strip: mural across the top, ragged tear, white below. That is why it is used as a
+   BAND and not as the age-gate cover - see the note in _age-gate.html. */
+@media (max-width: 1279px) {
+  .rs-signup__art, .rs-band--tray { background-image: url("../assets/swish-band-1280.webp"); }
+}
+@media (max-width: 759px) {
+  .rs-signup__art, .rs-band--tray { background-image: url("../assets/swish-band-760.webp"); }
 }
