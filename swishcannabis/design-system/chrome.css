@@ -186,7 +186,9 @@ button { font: inherit; color: inherit; }
 .sw-hdr.is-condensed .sw-hdr__logo img { height: 30px; }
 
 /* ---- 3 · the rail ------------------------------------------------------------------------- */
-.sw-hdr__nav { justify-self: center; --sw-rail-gap: 13px; }
+/* D30: nav RIGHT-aligned beside the CTA, matching the live site and the other pages. It was
+   centred, which is a chrome-concept choice, not the owner style. */
+.sw-hdr__nav { justify-self: end; --sw-rail-gap: 13px; }
 .sw-hdr.is-condensed .sw-hdr__nav { --sw-rail-gap: 9px; }
 
 .sw-hdr__nav ul {
@@ -206,9 +208,14 @@ button { font: inherit; color: inherit; }
   padding: 2px 0;
   font-family: var(--ds-font-display);
   font-weight: 700;
-  font-size: 12px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
+  /* D30: the owner FROZE the labels as "Home / Menu / Location / Contact Us" - title case - and the
+     markup carries them that way. This rule was uppercasing them in CSS with heavy tracking, so the
+     rendered nav did not match what was frozen or what the other pages show. Restored to the live
+     presentation: title case, normal tracking, and a size that reads as navigation rather than as a
+     micro-label. */
+  font-size: 15px;
+  letter-spacing: .01em;
+  text-transform: none;
   white-space: nowrap;
   color: var(--ds-primary);
   text-decoration: none;

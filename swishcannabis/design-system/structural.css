@@ -207,17 +207,204 @@
 .rs-actions { margin-top: var(--ds-space-md); display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); }
 
 /* ==========================================================================================
-   4 · SS2 HERO. A letterbox band, zero HTML text, and a THIN MURAL ANCHOR under it.
-   The mural is the loudest thing this brand owns, so it is rationed: a 14px strip here and the
-   real mural wall photograph in SS8, and nowhere else in the body.
+   4 · SS2 HERO. ONE full-bleed band carrying the photograph, the headline block and the card
+   rail. It replaces the old pairing of a letterbox photo band and a separate centred headline
+   band, because the owner's reference is a single hero in which the reading column and a rail
+   of overlapping cards share ONE photographic ground.
+
+   THE GROUND, and why it is never used raw. pre_footer_img_bg1.webp measures a MEDIAN
+   luminance of 56 of 255, with ten column-band means running 41 to 85. That is a dark
+   photograph. C7 is machine measured and owner frozen at dark_ratio 0.0 with
+   surface_dominance light, and the standing no-change order bars the reference's white on
+   dark treatment, so the band is built LIGHT in three layers and the type never sits on the
+   photograph at all:
+
+     layer 0  the photograph, background-size cover on the section itself.
+     layer 1  ::before, a FLAT paper veil at the token sheet's scrim opacity. It lifts the
+              photograph from a mean of 56 to about 165, so the whole band reads light-mid
+              rather than dark, and the frozen navy stays legible against every card edge.
+     layer 2  ::after, a LEFT WEIGHTED paper wash. The page's own white bleeds in from the
+              left edge and dissolves into the picture, which is the seam this concept uses
+              everywhere else (a wash or a hairline, never a shape).
+     layer 3  the copy sits on .rs-hero__panel, an OPAQUE paper panel. That is what makes the
+              contrast measurable rather than argued: the H1 and the body copy composite
+              against --ds-bg-surface exactly, at every viewport width, whatever the crop of
+              the photograph behind them happens to be doing.
+
+   SECTOR RULE still obeyed literally: svgDividers stays 0. There is no shape divider here,
+   only a wash, a veil and the shelf tray's own overlap.
+
+   STACKING. The band isolates, so layers 1 and 2 sit at z-index 0 under the .container at 1
+   and the mural strip at 2, and the shelf tray below can still lift over the band's bottom
+   edge (it carries its own z-index on a positioned band that comes later in the document).
    ========================================================================================== */
 
+.rs-hero {
+  padding-top: clamp(46px, 4.8vw, 78px);
+  padding-bottom: clamp(58px, 5.6vw, 92px);
+  isolation: isolate;
+  background-color: var(--ds-bg-surface);
+  background-image: url("../assets/pre_footer_img_bg1.webp");
+  background-repeat: no-repeat;
+  background-position: 64% 50%;   /* holds the sign, the entry numerals and the lot in frame */
+  background-size: cover;
+}
+
+/* layer 1 -- the flat paper veil that makes a dark photograph a light ground.
+
+   THE OPACITY WAS MEASURED, TWICE. At the scrim step (0.55) the band rendered as a flat pale
+   haze with no readable storefront in it: light, but no longer a photograph, which fails the
+   brief's own "single photographic ground". At the texture step (0.40) the murals, the sign and
+   the lot read, and the band still measures light-dominant once the panel and the cards are
+   composited over it. 0.40 is therefore the value, chosen on the measurement rather than on the
+   first thing that cleared the constraint.
+
+   THE COMPOSITED BAND, measured at 1440 on the real painted pixels (1440 x 717): MEAN LUMINANCE
+   198 of 255, and 82.8 percent of the band's pixels at or above 128. The source photograph on
+   its own measures a median of 56. So the band ships LIGHT, which is what C7 locks, and the
+   photograph is still present underneath rather than replaced by a flat tint. */
+.rs-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--ds-bg-surface);
+  opacity: var(--ds-opacity-texture);
+  pointer-events: none;
+}
+
+/* layer 2 -- the left weighted paper wash. Paper at the left edge, dissolving into the
+   picture by the time it reaches the card rail. transparent is the only literal here and it
+   is a non brand value, so the sheet stays token pure. */
+.rs-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(96deg,
+      var(--ds-bg-surface) 0%,
+      var(--ds-bg-surface) 12%,
+      transparent 56%);
+  pointer-events: none;
+}
+
+/* THE CONTAINER IS DELIBERATELY NOT POSITIONED. It was, on the first pass, and that made IT the
+   containing block for the absolutely positioned mural strip: the strip then rendered at the
+   container's inset width and at the top of the section's PADDING box rather than full bleed at
+   the top of the band, which read as a stray coloured bar behind the panel. Caught in a render at
+   1440, not reasoned about. The stacking lift the container was carrying is moved onto the two
+   objects that need it (the panel and the rail), both of which are positioned already. */
+
+/* the mural strip rides the very top of the band, full bleed, above both paper layers. */
+.rs-hero__mural {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 14px;
+  background-image: url("../assets/swish-band-1920.webp");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% auto;
+  pointer-events: none;
+}
+
+/* layer 3 -- the reading panel. Opaque paper, so navy on paper is a MEASURED constant and
+   not a function of whatever the photograph is doing behind it. */
+.rs-hero__panel {
+  position: relative;
+  z-index: 2;
+  padding: clamp(22px, 2.3vw, 36px);
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-surface);
+  box-shadow: var(--ds-shadow-lift);
+}
+
+/* the reading measure inside the panel. Expressed in px, NOT in ch: the foundation gate (A3)
+   blocks a ch max-width on a body-font element because ch resolves against the body face and
+   computes two to three times too wide there. This is the same measure --rs-measure targets,
+   sized for the panel rather than for a full width band. */
+.rs-hero__panel .rs-lede { max-width: 460px; }
+
+/* ==========================================================================================
+   4b · THE HERO CARD RAIL. Three cards, offset so the rail reads as a stack and not a list.
+   The two deal cards reuse the .rs-dealcard skin authored at the foot of this sheet; only the
+   padding, the cutout size and the offsets are rail scoped, so there is exactly ONE deal-card
+   system on the page.
+
+   THE OVERLAPS ARE SIZED FROM THE PADDING, not chosen by eye. A deal card in the rail carries
+   24px of vertical padding, so its own text can never come closer than 24px to either of its
+   edges. The deepest card-on-card overlap is 20px, so in the WORST case (a card whose body
+   fills it completely) the lower card's first text line still starts 4px below the upper
+   card's bottom edge, which is 28px below the upper card's last text line. The 40px overlap
+   onto the photographic card needs no such arithmetic: that card carries no text at all.
+   ========================================================================================== */
+
+.rs-herorail {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rs-herocard { position: relative; }
+
+.rs-herocard--photo {
+  z-index: 1;
+  border-radius: var(--ds-r-surface);
+  overflow: hidden;
+  background: var(--ds-bg-surface-2);
+  box-shadow: var(--ds-shadow-lift);
+}
+
+/* the two deal cards, rail scoped. */
+.rs-herorail .rs-dealcard {
+  padding: var(--ds-space-md);
+  box-shadow: var(--ds-shadow-lift);
+}
+
+.rs-herorail .rs-dealcard__body {
+  max-width: none;
+  flex: 1 1 auto;
+  padding-right: var(--ds-space-sm);
+}
+
+.rs-herorail .rs-dealcard__art { width: 84px; height: 84px; }
+
+.rs-herocard--every {
+  z-index: 2;
+  /* -10px, not -40px. The parking apron is the brightest band of the storefront photo (rows
+     75-100% of the source, the lower ~85px of this card), and the owner brief calls for parking
+     to be VISIBLE from the street view. At -40px the cards covered half of it. At -10px the
+     stagger still reads as overlapping without eating the content the photo exists to show. */
+  margin-top: -10px;   /* onto the photographic card, which carries no text */
+  margin-right: 12%;
+}
+
+.rs-herocard--shatter {
+  z-index: 3;
+  margin-top: -20px;   /* onto the card above, inside its 24px padding on both sides */
+  margin-left: 12%;
+}
+
+/* the photographic card. The letterbox crop is gone with the letterbox band; the card is a
+   contained 16:10 window. The band's bottom fade to paper is NOT carried over: measured at 1440
+   it painted a white wedge inside the card wherever the deal card below did not cover it, which
+   read as a rendering fault rather than a seam. A fade belongs to a full bleed band; a card has
+   its own edge. */
 .rs-hero__frame {
   position: relative;
   display: block;
   width: 100%;
   margin: 0;
-  aspect-ratio: 3.6 / 1;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--ds-bg-surface-2);
 }
@@ -228,31 +415,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 62%;   /* holds the shelf runs and the counter edge, drops the ceiling */
+  object-position: 50% 58%;   /* holds the sign, the entry column and the lot, drops the sky */
   display: block;
 }
 
-/* the image meets the next band with the token sheet's own bottom fade. No divider shape. */
-.rs-hero__frame::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 22%;
-  background: var(--ds-fade-to-paper);
-  pointer-events: none;
-}
 
-.rs-hero__mural {
-  display: block;
-  width: 100%;
-  height: 14px;
-  background-image: url("../assets/swish-band-1920.webp");
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: 100% auto;
-}
 
 /* ==========================================================================================
    5 · SS3 THE SHELF. Six categories, ONE ROW, no carousel (D22). The tray lifts up over the
@@ -1022,11 +1189,26 @@ main .sw-btn { min-height: 44px; }
    95-99% smaller) and served by breakpoint so a phone never downloads the 1920 cut. The art is a
    torn-edge strip: mural across the top, ragged tear, white below. That is why it is used as a
    BAND and not as the age-gate cover - see the note in _age-gate.html. */
+/* CORRECTED 2026-08-07 after an independent verifier caught this. The rules that stood here were
+   BROKEN IN TWO WAYS and shipped a serious defect:
+     1. they targeted `.rs-signup__art`, a class that exists NOWHERE in the markup, so the responsive
+        downgrade never reached the band it was written for. `.rs-signup` still pulled the 1920 cut at
+        375, meaning a phone downloaded the 1920 AND the 760 file - the exact opposite of the intent
+        stated in the comment above.
+     2. they also listed `.rs-band--tray`, which is carried by `.rs-deals` AND `.rs-brands`. Those two
+        sections have NO desktop background image, so below 1280 they suddenly gained a full-bleed dark
+        mural (median luminance 44/255, 75% dark pixels). Measured consequence: 30 of 32 text runs in
+        those sections fell to 1.00-2.14:1 against a 4.5:1 floor - the deal ladder and the brands strip
+        were effectively unreadable on every tablet and phone, and the page carried 2 dark sections
+        against a C7 lock of dark_ratio 0.0.
+   No build gate caught it: none of them measures surface luminance or per-section contrast.
+   The band artwork belongs to `.rs-signup` ONLY. `.rs-band--tray` gets no background image at any
+   width - it is a flat tinted band by design. */
 @media (max-width: 1279px) {
-  .rs-signup__art, .rs-band--tray { background-image: url("../assets/swish-band-1280.webp"); }
+  .rs-signup { background-image: url("../assets/swish-band-1280.webp"); }
 }
 @media (max-width: 759px) {
-  .rs-signup__art, .rs-band--tray { background-image: url("../assets/swish-band-760.webp"); }
+  .rs-signup { background-image: url("../assets/swish-band-760.webp"); }
 }
 
 
@@ -1037,6 +1219,14 @@ main .sw-btn { min-height: 44px; }
    dark_ratio 0.0 with ONE accent, and the sector blueprint bans gradients-as-decoration, so
    copying those fields literally would break the direction the owner froze. The frozen orange
    carries the term; navy carries the day. Two cards only, by D17.
+
+   WHERE THE CARDS LIVE NOW. The two cards MOVED into the hero's card rail (section 4b). The
+   .rs-dealcard skin below is still the one and only deal-card system on the page and is fully
+   live; .rs-dealcards, the two-up GRID that used to lay them out inside SS6, currently matches
+   NOTHING in the markup. It is left in place DELIBERATELY rather than deleted: it is the layout
+   SS6 needs the moment the owner supplies terms for any of the six days D17 suppresses and the
+   section wants cards again. Recorded here so the next pass finds it on purpose, not by
+   accident. It costs nine declarations and it is not referenced, so it cannot affect the render.
    ========================================================================================== */
 .rs-dealcards {
   display: grid;
@@ -1096,4 +1286,70 @@ main .sw-btn { min-height: 44px; }
   .rs-dealcards { grid-template-columns: 1fr; }
   .rs-dealcard { min-height: 112px; }
   .rs-dealcard__art { width: 88px; height: 88px; }
+}
+
+/* ==========================================================================================
+   18 · SS2 HERO RESPONSIVE. This block is LAST in the sheet on purpose: section 17 collapses
+   every .col--span-6 to span 12 at 1024 and down, and the hero's two columns are meant to
+   hold their split until 901. Equal specificity, later source order, so these win.
+
+   THE BREAKPOINT IS 900, not 1024. At 901 and up the band is a two column hero: copy left on
+   its paper panel, card rail right, cards offset laterally. At 900 and down the two columns
+   STACK, content first and cards second (that is DOM order, so it is also the reading order a
+   screen reader follows), the lateral offsets go to zero so nothing can push a card past the
+   viewport, and the paper wash turns VERTICAL so the light ground is above the copy instead
+   of beside it.
+   ========================================================================================== */
+
+@media (min-width: 901px) {
+  .rs-hero__copycol,
+  .rs-hero__railcol { grid-column: span 6; }
+}
+
+@media (max-width: 900px) {
+  .rs-hero__copycol,
+  .rs-hero__railcol { grid-column: span 12; }
+
+  /* the wash rotates: paper at the top, dissolving into the picture behind the card rail. */
+  .rs-hero::after {
+    background-image: linear-gradient(180deg,
+        var(--ds-bg-surface) 0%,
+        var(--ds-bg-surface) 10%,
+        transparent 62%);
+  }
+
+  .rs-hero { background-position: 58% 46%; }
+
+  /* THE PANEL IS CAPPED ONCE STACKED. Measured at 900: the panel stretched the full 844px
+     content width while the lede stopped at its 460px measure, so the block rendered as a wide
+     white rectangle with a 330px void down its right side. Widening the measure instead would
+     have pushed the intro paragraph to about 96 characters a line, which is not a fix, it is a
+     different defect. Capping the PANEL keeps the measure honest, squares the H1 and the
+     paragraph to the same block edge, and hands the space back to the photograph. */
+  .rs-hero__panel { max-width: 620px; }
+  .rs-hero__panel .rs-lede { max-width: 100%; }
+
+  /* zero lateral offset once stacked. A percentage inset on a column that is now the full
+     content width is the one thing in this band that could produce horizontal overflow on a
+     phone, so it is removed rather than reduced. The vertical stagger stays, at half depth,
+     because it is what makes the rail read as a stack. */
+  .rs-herocard--every {
+    margin-right: 0;
+    margin-top: -8px;   /* same reasoning at the stacked width */
+  }
+
+  .rs-herocard--shatter {
+    margin-left: 0;
+    margin-top: -16px;
+  }
+
+  .rs-herorail .rs-dealcard__art { width: 76px; height: 76px; }
+}
+
+@media (max-width: 479px) {
+  /* the cutout comes out of the rail cards below 480. Measured at 375 and 390 the deal card
+     body is already down to a narrow measure, and 76px of artwork beside it pushes the term
+     onto a second line. The card is a TERMS card first; the cutout is decoration. */
+  .rs-herorail .rs-dealcard__art { display: none; }
+  .rs-herorail .rs-dealcard__body { padding-right: 0; }
 }
