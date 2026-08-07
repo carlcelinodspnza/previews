@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-<!-- PREVIEW-ONLY: injected into the assembled copy, never the source. This host is public; without
-     this the preview could be indexed and compete with the client site for its own terms. -->
+<!-- PREVIEW-ONLY: assembled copy only, never the source. -->
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,6 +62,17 @@ html.sw-age-ok #sw-agegate { display: none; }
   font-family: var(--ds-font-display, 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif);
   -webkit-font-smoothing: antialiased;
 }
+/* PORTRAIT CROP. `cover` scales a 1.70:1 landscape mural to the HEIGHT of a tall phone viewport, so at
+   390x844 only 27% of the image width is visible (244px of 900). At the default 50% that slice is
+   source x 328..572 - measured as the DARKEST, least saturated part of the artwork (saturation ~19,
+   brightness ~19), which is why the gate read as a plain black screen on a phone while looking right
+   at 1440. Shifting to 16% shows x 22..266, centred on the lion and the gold Swish wordmark, where
+   saturation peaks at 87 and brightness at 73. Desktop keeps 50% - it is landscape and shows the
+   whole frame, so it needs no shift. */
+@media (max-width: 700px) {
+  #sw-agegate { background-position: 16% 50%; }
+}
+
 /* Serve the heavier mural only where it is actually resolvable. 900w is 21 KB, 1600w is 96 KB; the
    source they came from was 505 KB and sat in front of first paint on EVERY page. */
 @media (min-width: 901px) {
@@ -478,12 +488,10 @@ html.sw-age-ok #sw-agegate { display: none; }
       <div class="row">
         <div class="col col--full sw-rise" style="--i:0">
           <div class="rs-embed">
-            <!-- PREVIEW-ONLY. Weedmaps CSP frame-ancestors allows swishcannabis.com and three SGEN
-                 staging hosts but NOT this preview host, so the store frame is refused off-domain.
-                 Remove if the preview host is added to their allowlist. NEVER copy back to source. -->
+            <!-- PREVIEW-ONLY. Weedmaps CSP frame-ancestors excludes this host. NEVER copy to source. -->
             <div class="rs-embed__previewnote" style="border:1px solid var(--ds-line,#dcdcdc);border-radius:var(--ds-r-surface,10px);background:var(--ds-bg-warm,#f2f6f9);padding:32px 28px;text-align:center;max-width:52ch;margin:0 auto 20px;">
               <p style="margin:0 0 10px;font-weight:700;color:var(--ds-ink-heading,#043f66);font-size:15px;letter-spacing:.02em;">THE LIVE MENU RENDERS ON THE REAL DOMAIN</p>
-              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:var(--ds-ink-soft,#3d4a54);">This preview is hosted off-domain, and Weedmaps only allows its store to be framed by swishcannabis.com. The block below is the real embed, unchanged; it fills with live products and prices once the page is on swishcannabis.com.</p>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.55;color:var(--ds-ink-soft,#3d4a54);">This preview is hosted off-domain, and Weedmaps only allows its store to be framed by swishcannabis.com. The block below is the real embed, unchanged.</p>
               <a href="https://swishcannabis.com/shop" style="display:inline-block;min-height:44px;line-height:44px;padding:0 26px;border-radius:25px;background:var(--ds-accent,#ff8c09);color:var(--ds-on-accent,#043f66);font-weight:700;font-size:14px;letter-spacing:.04em;text-decoration:none;">OPEN THE LIVE MENU</a>
             </div>
             
