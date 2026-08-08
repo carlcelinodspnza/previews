@@ -8,6 +8,7 @@ Each top-level folder becomes a live link:
 
 | Folder | Link |
 |---|---|
+| `swishcannabis/` | https://carlcelinodspnza.github.io/previews/swishcannabis/ |
 | `liquorlicense/` | https://carlcelinodspnza.github.io/previews/liquorlicense/ |
 
 ## Adding a preview
