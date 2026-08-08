@@ -127,48 +127,59 @@ button { font: inherit; color: inherit; }
 .sw-skip:focus { transform: none; }
 
 /* ---- 2 · the COUNTER bar ------------------------------------------------------------------
-   NAV-PATTERNS #2: one full width row, logo left, link cluster centred, action right.
-   Sticky with a condense: height reduces, the hairline gains weight, the surface goes glass. */
+   D31 (owner, 2026-08-08): "Nav should exactly match the nav this site is using" -> the live
+   site at swishcannabis.com. This SUPERSEDES the D21 chrome-concept choices for the bar and the
+   D30 sizing. Every value below was MEASURED off the live homepage at 1440 with the age gate
+   cleared, not copied from a screenshot:
+
+     bar surface   rgba(245,245,245,0.7)   was var(--ds-bg-surface), opaque white
+     bar height    86px                    was 88px
+     counter edge  NONE                    live header has no border-bottom in either state
+     logo height   67px                    live img renders 141x67 (natural 283x134)
+     nav label     Montserrat 18px / 400   was 15px / 700
+     nav tracking  normal                  was .01em
+     nav colour    #000                    was var(--ds-primary) navy
+     nav padding   7px 15px, items flush   was 2px 0 with a ~39px flex gap
+     active/hover  NO indicator at all     was an orange/navy rail segment (D21)
+     CTA           18px/700, #000 label    was 13px/700 uppercase, navy label, +.09em
+
+   NOT COPIED, flagged instead of changed silently: the live bar is `position: absolute;
+   z-index: 9999`, so it overlays the hero and scrolls away. Ours stays `position: sticky`.
+   That is a BEHAVIOUR change, not a nav style -- it would put the bar over the hero photograph
+   and drop the persistent ORDER NOW. The translucent surface IS matched, so content passing
+   under the bar reads as it does on the live site. */
 .sw-hdr {
   position: sticky;
   top: 0;
   z-index: var(--ds-z-sticky);
-  background: var(--ds-bg-surface);
+  background: rgba(245, 245, 245, 0.7);
+  -webkit-backdrop-filter: saturate(140%) blur(6px);
+  backdrop-filter: saturate(140%) blur(6px);
   transition: background-color var(--ds-dur) var(--ds-ease), box-shadow var(--ds-dur) var(--ds-ease);
 }
 
-/* the counter edge. 1px hairline at rest, 2px fixture navy once you are browsing. */
-.sw-hdr::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--ds-line);
-  transition: height var(--ds-dur) var(--ds-ease), background-color var(--ds-dur) var(--ds-ease);
-}
+/* the counter edge is REMOVED (D31). Measured on the live header: border-bottom is
+   `0px none` at rest AND after scroll, so neither the 1px hairline nor the 2px condensed
+   navy bar ships. The condensed state keeps only an opacity lift, so the bar stays legible
+   once real content is scrolling beneath it. */
 
 .sw-hdr.is-condensed {
-  background: var(--ds-glass-bg);
-  -webkit-backdrop-filter: var(--ds-glass-blur);
-  backdrop-filter: var(--ds-glass-blur);
+  background: rgba(245, 245, 245, 0.94);
   box-shadow: var(--ds-shadow-rest);
 }
-.sw-hdr.is-condensed::after { height: 2px; background: var(--ds-primary); }
 
 .sw-hdr__inner {
   max-width: var(--ds-container-max);
   margin: 0 auto;
   padding: 0 clamp(16px, 3vw, 28px);
-  min-height: 88px;
+  min-height: 86px;                       /* D31: live bar measures 86px */
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   column-gap: clamp(16px, 2.4vw, 34px);
   transition: min-height var(--ds-dur) var(--ds-ease);
 }
-.sw-hdr.is-condensed .sw-hdr__inner { min-height: 62px; }
+.sw-hdr.is-condensed .sw-hdr__inner { min-height: 66px; }
 
 /* logo LEFT, frozen. The mark is a solid black silhouette, so it only ever sits on light. */
 .sw-hdr__logo {
@@ -179,11 +190,11 @@ button { font: inherit; color: inherit; }
 }
 .sw-hdr__logo img {
   display: block;
-  height: 40px;
+  height: 67px;                           /* D31: live logo renders 141x67 from a 283x134 source */
   width: auto;
   transition: height var(--ds-dur) var(--ds-ease);
 }
-.sw-hdr.is-condensed .sw-hdr__logo img { height: 30px; }
+.sw-hdr.is-condensed .sw-hdr__logo img { height: 48px; }
 
 /* ---- 3 · the rail ------------------------------------------------------------------------- */
 /* D30: nav RIGHT-aligned beside the CTA, matching the live site and the other pages. It was
@@ -191,53 +202,51 @@ button { font: inherit; color: inherit; }
 .sw-hdr__nav { justify-self: end; --sw-rail-gap: 13px; }
 .sw-hdr.is-condensed .sw-hdr__nav { --sw-rail-gap: 9px; }
 
+/* D31: no hairline rail and NO flex gap. On the live site the items sit flush against each
+   other and ALL the spacing comes from each link's own 15px horizontal padding, which is why
+   the gap between two labels reads as 30px. Reproducing that with a gap AND padding would
+   double it, so the gap goes to zero and the padding does the work. */
 .sw-hdr__nav ul {
   margin: 0;
-  padding: 0 0 var(--sw-rail-gap);
+  padding: 0;
   list-style: none;
   display: flex;
-  align-items: flex-end;
-  gap: clamp(20px, 2.7vw, 40px);
-  border-bottom: 1px solid var(--ds-hairline);
-  transition: padding-bottom var(--ds-dur) var(--ds-ease);
+  align-items: center;
+  gap: 0;
 }
 
+/* D31: measured off the live nav link. Title case is retained from D30 (the owner froze the
+   labels "Home / Menu / Location / Contact Us" and the markup carries them that way); the size,
+   weight, tracking, colour and padding are now the live values. */
 .sw-hdr__nav a {
   position: relative;
   display: block;
-  padding: 2px 0;
+  padding: 7px 15px;
   font-family: var(--ds-font-display);
-  font-weight: 700;
-  /* D30: the owner FROZE the labels as "Home / Menu / Location / Contact Us" - title case - and the
-     markup carries them that way. This rule was uppercasing them in CSS with heavy tracking, so the
-     rendered nav did not match what was frozen or what the other pages show. Restored to the live
-     presentation: title case, normal tracking, and a size that reads as navigation rather than as a
-     micro-label. */
-  font-size: 15px;
-  letter-spacing: .01em;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: normal;
   text-transform: none;
   white-space: nowrap;
-  color: var(--ds-primary);
+  color: #000;
   text-decoration: none;
   transition: color var(--ds-dur) var(--ds-ease);
 }
-/* the rail segment: a 2px fixture bar that draws itself along the counter edge on approach. */
-.sw-hdr__nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(var(--sw-rail-gap) * -1);
-  height: 2px;
-  background: var(--ds-primary);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--ds-dur) var(--ds-ease), background-color var(--ds-dur) var(--ds-ease);
+
+/* D31: the rail segment is GONE. The live nav ships no hover indicator, no active indicator and
+   no current-page marker -- its active item is computed byte-identical to a plain one, verified
+   at 1440. Hover now moves the label colour only.
+
+   KEYBOARD FOCUS IS DELIBERATELY NOT DROPPED. Removing every indicator would leave a keyboard
+   user with no visible focus at all, which fails WCAG 2.4.7 -- an accessibility floor, not a
+   style choice, so it is not something "match the live site" should be read to waive. The ring
+   only ever appears for :focus-visible, so a mouse user sees exactly what the live site shows. */
+.sw-hdr__nav a:hover { color: var(--ds-primary); }
+.sw-hdr__nav a:focus-visible {
+  outline: 2px solid var(--ds-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
-.sw-hdr__nav a:hover::after,
-.sw-hdr__nav a:focus-visible::after { transform: scaleX(1); }
-.sw-hdr__nav a[aria-current="page"] { color: var(--ds-ink-heading); }
-.sw-hdr__nav a[aria-current="page"]::after { transform: scaleX(1); background: var(--ds-accent); }
 
 /* ---- 4 · the ONE action ------------------------------------------------------------------
    CTA-PATTERNS #1 solid pill primary. Frozen: orange fill, full pill, 0.93 press, 0.35s.
@@ -286,7 +295,27 @@ button { font: inherit; color: inherit; }
 
 .sw-btn--block { width: 100%; }
 
-.sw-hdr__cta { padding: 14px 28px; }
+/* D31: the header CTA matched to the live site, measured at 1440 -- 182x52, Montserrat 18px/700,
+   BLACK label, radius 25px, no tracking, no CSS uppercase (the markup already reads "ORDER NOW").
+   SCOPED TO THE HEADER ON PURPOSE: .sw-btn is the sitewide button and the body CTAs are not part
+   of this instruction, so nothing below the chrome moves.
+
+   D18 IS NOT VIOLATED, it is improved on. D18 changed the label from white to navy because white
+   on the frozen orange measures 2.33:1, a WCAG AA fail; navy measures 4.72:1. The live site uses
+   BLACK, which on the same frozen #ff8c09 measures ~9:1 -- better than the navy D18 settled for,
+   and the ledger already records that black "passes" in the age-gate note. The orange fill, the
+   pill, the 0.93 press and the 0.35s transition are all still frozen and untouched. */
+.sw-hdr__cta {
+  min-width: 182px;
+  min-height: 52px;
+  padding: 0 26px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: #000;
+  border-radius: 25px;
+}
 
 /* ---- 5 · hamburger. RIGHTMOST control in the bar at every collapsed width. --------------- */
 .sw-burger {
