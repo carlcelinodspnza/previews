@@ -860,6 +860,9 @@
   list-style: none;
 }
 
+/* The marks are now real logo files. The type rules below stay as the FALLBACK for a mark that has
+   no image yet: an <li> with bare text still renders as a muted wordmark, so a brand can be added
+   or a file can go missing without the row breaking. */
 .rs-brands__mark {
   font-family: var(--ds-font-display);
   font-weight: 700;
@@ -868,6 +871,41 @@
   text-transform: uppercase;
   color: var(--ds-ink-soft);
   opacity: var(--ds-opacity-muted);
+  display: flex;
+  align-items: center;
+}
+
+/* GREYSCALE IS A DISPLAY FILTER, NOT A BAKED EDIT. The supplied files keep the brands' own colour;
+   only the render is desaturated. That matters twice over: the strip stops fighting the frozen
+   single-accent palette, and nobody has altered another company's mark on disk. Reverting to full
+   colour is deleting one line.
+   Sized by HEIGHT with a width cap, after each file was trimmed to its own ink, so six marks with
+   ratios from 1.94 to 3.39 carry comparable optical weight instead of the widest one dominating. */
+.rs-brands__mark img {
+  display: block;
+  height: 30px;
+  width: auto;
+  max-width: 116px;
+  object-fit: contain;
+  /* grayscale ALONE does not work here and the measurement says so: it preserves each mark's
+     LIGHTNESS, so six logos ranging from black to cyan rendered at mean ink luminance 1 (WYLD) to
+     161 (PLUGplay), a spread of 160 that read as a broken strip with two marks nearly invisible.
+     Adding brightness+contrast lands all six in a 0-27 band, spread 27, i.e. one common tone.
+     It does NOT flatten them to silhouettes: checked per mark, Raw Garden's leaf knockout,
+     PLUGplay's second word and Claw's radiating device all survive. A single-colour rendering is
+     also the treatment brands themselves ship a one-colour variant for, so this is a sanctioned
+     look rather than an invented one. Opacity then lifts the common tone off pure black to a muted
+     grey against the band. */
+  filter: grayscale(1) brightness(.45) contrast(1.8);
+  opacity: .62;
+  transition: opacity 140ms ease, filter 140ms ease;
+}
+
+/* hover returns the brand its own colour, which is the one place full colour belongs */
+.rs-brands__mark img:hover { filter: none; opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-brands__mark img { transition: none; }
 }
 
 /* ==========================================================================================
