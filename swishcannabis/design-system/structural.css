@@ -546,12 +546,16 @@
   object-fit: cover;
 }
 
-.rs-media--exterior { aspect-ratio: 3 / 2; }
+/* 16/9, not 3/2: the storefront artwork is a WIDE 1360x602 (2.26:1) and a 3:2 frame threw away a
+   third of the building. 16/9 keeps 79% of the frame AND lands the plate within ~12px of the prose
+   column beside it, so the pair reads level without either side being forced. */
+.rs-media--exterior { aspect-ratio: 16 / 9; }
 /* a centred 3:2 window of the 1640x645 source keeps the sign, the entry numerals, the mural
    wall, the blue wheel stop and the EV pedestal in frame, and crops away all four baked corners. */
 .rs-media--exterior img { object-position: 50% 50%; }
 
-.rs-media--interior { aspect-ratio: 1.2 / 1; }
+/* 1.1 rather than 1.2 so the plate rises to meet the tightened prose column; see .rs-pillars. */
+.rs-media--interior { aspect-ratio: 1.1 / 1; }
 .rs-media--interior img { object-position: 50% 42%; }
 
 .rs-split__text > * + * { margin-top: var(--ds-space-sm); }
@@ -571,7 +575,8 @@
    whole page's grid. 48px of padding on top of the 12px gap gives a 60px gutter and costs only this
    one section. The columns were also rebalanced 7/5 -> 6/6, which grows the plate from 453x378 to
    546x455 (about 45% more area) so it holds its own against the prose. */
-.rs-why .rs-split__text { padding-left: 48px; }
+.rs-why .rs-split__text,
+.rs-split .rs-split__text { padding-left: 48px; }
 
 /* THE DESKTOP ORDER RESTORE, and the reason the MARKUP was reordered rather than only this sheet.
    Both split blocks are now authored HEADING FIRST: eyebrow, title, prose, then the photograph. That
@@ -737,17 +742,17 @@
    with that gutter opened the owner wants the lines here to close back up so each pillar reads as
    one tight unit rather than three drifting paragraphs. 18px sits between the original 14px and
    that overshoot: enough that the hairline does not clip the heading, tight enough to group. */
-.rs-pillars { margin: var(--ds-space-md) 0 0; padding: 0; list-style: none; }
+.rs-pillars { margin: 16px 0 0; padding: 0; list-style: none; }
 
 .rs-pillars li {
-  padding: 18px 0;
+  padding: 11px 0;
   border-top: var(--rs-hair) solid var(--ds-line);
 }
 
 .rs-pillars li:last-child { border-bottom: var(--rs-hair) solid var(--ds-line); }
 
 .rs-pillars h3 {
-  margin: 0 0 6px;
+  margin: 0 0 5px;
   font-family: var(--ds-font-display);
   font-weight: 700;
   font-size: 15px;
@@ -755,7 +760,7 @@
   color: var(--ds-ink-heading);
 }
 
-.rs-pillars p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ds-ink-soft); }
+.rs-pillars p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ds-ink-soft); }
 
 /* ==========================================================================================
    11 · SS9 FEATURED PRODUCTS. The five existing navy ringed cutouts, carried through unchanged.
@@ -1180,7 +1185,8 @@ main .sw-btn { min-height: 44px; }
   .rs-shelf__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   /* the 48px desktop gutter is a two-column concern only; stacked, it would just indent the prose */
-  .rs-why .rs-split__text { padding-left: 0; }
+  .rs-why .rs-split__text,
+  .rs-split .rs-split__text { padding-left: 0; }
 
   /* seven across is unreadable on a phone; 3-up keeps the glyphs at a tappable size and the
      labels on one line, and the seventh wraps to a short second row rather than a ragged third */
