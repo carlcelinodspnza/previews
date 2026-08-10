@@ -530,6 +530,15 @@
 .rs-intro__inner { max-width: 880px; margin: 0 auto; }
 .rs-intro .rs-actions { justify-content: center; }
 
+/* SS6c PLAN YOUR VISIT. Centred statement band, mirroring the intro band's own centring rather
+   than inventing a second one: same max-width, same auto margins, same centred action row. It sits
+   on --ds-bg-warm (rs-band--wash) because its neighbours are tray above and paper below, so paper
+   here would have run two identical grounds together. Light throughout, per the C7 canvas lock. */
+.rs-plan { text-align: center; }
+.rs-plan .rs-lede { margin-left: auto; margin-right: auto; }
+.rs-plan__inner { max-width: 880px; margin: 0 auto; }
+.rs-plan .rs-actions { justify-content: center; }
+
 /* ==========================================================================================
    7 · SS5 + SS8 THE SPLIT BLOCKS. Image LEFT in both, per the brief's alternating rhythm note.
    The media is a CONTAINED rounded tile, never flush to the viewport edge: the only exterior
