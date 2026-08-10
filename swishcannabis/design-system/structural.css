@@ -556,6 +556,14 @@
 
 .rs-split__text > * + * { margin-top: var(--ds-space-sm); }
 
+/* [2026-08-10] The photograph is a fixed 1.2:1 plate while the prose column next to it runs roughly
+   twice as tall, so top-aligning left a large dead area under the image. Centring it distributes
+   that space to both sides of the plate and the pair reads as a balanced spread. Done with
+   align-self rather than a taller aspect-ratio on purpose: this photograph is a WIDE 1360x907
+   interior, and deepening the plate would crop the room away at both edges, which is the one thing
+   the shot is there to show. */
+.rs-why .rs-split__media { align-self: center; }
+
 /* THE DESKTOP ORDER RESTORE, and the reason the MARKUP was reordered rather than only this sheet.
    Both split blocks are now authored HEADING FIRST: eyebrow, title, prose, then the photograph. That
    is what a phone stacks and what a screen reader reads, so at every width the reader learns what
@@ -714,17 +722,23 @@
    the photograph that evidences it.
    ========================================================================================== */
 
-.rs-pillars { margin: var(--ds-space-md) 0 0; padding: 0; list-style: none; }
+/* [2026-08-10] LOOSENED on owner note "layout here looks too tight". Measured before the change at
+   1440: each row carried only 14px of padding top and bottom (--ds-space-sm) around a 15px heading
+   plus a two-line 14px paragraph, with a hairline immediately above, so three rows of real prose
+   were packed against each other and against their own rules. The type is unchanged; only the air
+   around it moved. Row padding 14px -> 26px, heading-to-prose 6px -> 9px, and the list now clears
+   the lede by --ds-space-lg instead of --ds-space-md. */
+.rs-pillars { margin: var(--ds-space-lg) 0 0; padding: 0; list-style: none; }
 
 .rs-pillars li {
-  padding: var(--ds-space-sm) 0;
+  padding: 26px 0;
   border-top: var(--rs-hair) solid var(--ds-line);
 }
 
 .rs-pillars li:last-child { border-bottom: var(--rs-hair) solid var(--ds-line); }
 
 .rs-pillars h3 {
-  margin: 0 0 6px;
+  margin: 0 0 9px;
   font-family: var(--ds-font-display);
   font-weight: 700;
   font-size: 15px;
@@ -732,7 +746,7 @@
   color: var(--ds-ink-heading);
 }
 
-.rs-pillars p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--ds-ink-soft); }
+.rs-pillars p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ds-ink-soft); }
 
 /* ==========================================================================================
    11 · SS9 FEATURED PRODUCTS. The five existing navy ringed cutouts, carried through unchanged.
