@@ -730,7 +730,16 @@
   }
 
   .rs-deals__head    { grid-column: 1 / span 4; grid-row: 1; }
-  .rs-deals__ladders { grid-column: 5 / span 8; grid-row: 1 / span 2; }
+  /* Match the left-to-ladder gutter to the gutter BETWEEN the two ladders. Measured at 1440 they
+     were 12px and 40px, so the prose column sat almost against EVERY DAY while the two tables had
+     proper air between them, and the eye read the left block as attached to the first table.
+     The 12px is the grid's own column-gap; widening that would re-space all twelve columns on the
+     page, so the difference is made up with padding on this column alone: 12 + 28 = 40, equal to
+     the --ds-space-lg the pair already uses.
+     Scoped to this block deliberately. Measured across widths, the header only sits BESIDE the
+     ladder at 1025 and up; at 1024 and below it stacks above, so there is no left gutter to match
+     and adding the offset there would only have squeezed two already-narrow tables. */
+  .rs-deals__ladders { grid-column: 5 / span 8; grid-row: 1 / span 2; padding-left: 28px; }
   .rs-deals__notecol { grid-column: 1 / span 4; grid-row: 2; }
 }
 
