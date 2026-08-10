@@ -997,7 +997,9 @@ main .sw-btn { min-height: 44px; }
 
 .rs-cats__grid {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  /* six, matching the D22 category set exactly. It was seven while a DEALS tile existed; that tile
+     went when the deal ladder was removed on 2026-08-10, since its only honest target went with it. */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: var(--ds-space-md);
   margin: 0;
   padding: 0;
