@@ -1018,16 +1018,23 @@ main .sw-btn { min-height: 44px; }
   border-radius: var(--ds-r-surface);
 }
 
-/* the glyph carries the heading ink, so the rail reads as navigation rather than decoration */
+/* The glyphs are EXTERNAL svg assets (`assets/cat-*.svg`), not inline markup. Inlining the six cost
+   119 KB on a 42 KB page even after rounding the coordinates, which is not a trade worth making for
+   a decorative rail; as files they are cacheable and the HTML stays small.
+   The consequence, stated so nobody "fixes" it later: an <img> cannot inherit currentColor, so the
+   navy (--ds-ink-heading, #043f66) is BAKED INTO each file. Change the ink and these must be
+   re-exported. A CSS mask would have kept the recolour, but Chromium refuses to paint these
+   particular files as masks (computed mask-image/size resolve correctly and nothing renders), so
+   that route was abandoned rather than shipped half-working. Hover therefore reads as a lift plus a
+   fade instead of a colour shift. */
 .rs-cat__icon {
   display: block;
   width: 56px;
   height: 56px;
-  color: var(--ds-ink-heading);
-  transition: color 140ms ease, transform 140ms ease;
+  transition: opacity 140ms ease, transform 140ms ease;
 }
 
-.rs-cat__icon svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+.rs-cat__icon img { display: block; width: 100%; height: 100%; }
 
 /* --ds-accent-ink is the darkened orange the token sheet reserves for SMALL TEXT ON LIGHT.
    Measured on this band's --ds-bg-surface-2 ground it is 5.30:1, clear of the 4.5 floor; the
@@ -1044,7 +1051,10 @@ main .sw-btn { min-height: 44px; }
 }
 
 .rs-cat:hover .rs-cat__icon,
-.rs-cat:focus-visible .rs-cat__icon { color: var(--ds-accent-deep); transform: translateY(-2px); }
+.rs-cat:focus-visible .rs-cat__icon { opacity: .72; transform: translateY(-2px); }
+
+.rs-cat:hover .rs-cat__label,
+.rs-cat:focus-visible .rs-cat__label { color: var(--ds-accent-deep); }
 
 .rs-cat:focus-visible {
   outline: 2px solid var(--ds-accent-ink);
