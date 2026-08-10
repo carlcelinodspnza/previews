@@ -314,15 +314,14 @@
   outline-offset: 3px;
 }
 
-/* The dots sit INSIDE the frame, so the band's height is unchanged. They clear the SHELF TRAY,
-   which lifts over the band's bottom edge by design (see .rs-rail): measured at 1440 the tray box
-   starts 81px above the band's bottom, so dots pinned at bottom:10px landed ON the products card.
-   The offset reuses the tray's OWN pull-up expression, so it tracks any future change to it. */
+/* The dots sit INSIDE the frame, so the band's height is unchanged. They previously carried an
+   offset to clear the shelf tray's pull-up; with that lift removed (see .rs-rail) the band's bottom
+   edge is free again, so they return to a plain 10px inset. */
 .rs-carousel__dots {
   position: absolute;
   z-index: 2;
   left: 50%;
-  bottom: calc(clamp(20px, 2.6vw, 40px) + var(--rs-y-tight) + 10px);
+  bottom: 10px;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -387,7 +386,16 @@
    --rs-y-tight still gave 44px trailing, so the cadence gate failed on this one section. The margin now
    absorbs the returned padding, so the CONTENT lands in exactly the same place: -37.44+0 becomes
    -81.44+44 at 1440. The overlap is unchanged; only the section BOX starts higher. */
-.rs-rail { margin-top: calc(-1 * (clamp(20px, 2.6vw, 40px) + var(--rs-y-tight))); z-index: var(--ds-z-raised); }
+/* [OWNER-DECIDED 2026-08-10] THE LIFT IS REMOVED. The tray used to ride up over the band's bottom
+   edge (margin-top -81.44px at 1440), which was the right move over a PHOTOGRAPH: losing the bottom
+   of a storefront shot cost nothing. Over the deal banners it cost 81px of 333, i.e. 24% of the
+   artwork including the gummy stack and the lower outline wordmark, because .rs-rail paints an
+   OPAQUE white ground (measured rgb(255,255,255), z-index 1) across its whole box, padding included.
+   Cancelling only the padding would still have left 44px of white over the banner, so the margin
+   goes to 0 and the tray now starts exactly at the band's bottom edge. Band padding stays SYMMETRIC
+   (44/44), so G-CADENCE is unaffected. z-index is kept: the tray still needs to sit above the band
+   for its own card shadow. */
+.rs-rail { margin-top: 0; z-index: var(--ds-z-raised); }
 
 .rs-shelf {
   border: var(--rs-hair) solid var(--ds-line);
@@ -1071,14 +1079,9 @@ main .sw-btn { min-height: 44px; }
      tall, so the banner type renders small. */
   .rs-hero__mural { height: 10px; }
 
-  /* [2026-08-10] The tray NO LONGER lifts over the band at the stacked breakpoint. The overlap was
-     sized against the old 4/3 phone hero (about 520px, so an 81px lift read as a light touch); with
-     the band now a uniform 3.6:1 (108px at 390) the SAME 81px swallowed 48% of it and left a 56px
-     sliver with the artwork cut. Measured at 390 before this change: band 108px, covered 52px,
-     visible 56px. Zeroed here, so the phone shows the whole banner. Desktop keeps the lift (line
-     374): at 1440 it covers 81px of 400, the band still reads at 319px, and the motif is preserved
-     where it was designed. Band padding stays SYMMETRIC, so G-CADENCE is unaffected. */
-  .rs-rail { margin-top: 0; }
+  /* (The tray lift used to be zeroed HERE for the phone only. It is now zeroed at the BASE rule for
+     every width on owner instruction, so this override was redundant and has been removed rather
+     than left to imply a per-breakpoint difference that no longer exists.) */
 
   /* SWIPE-ONLY at the stacked breakpoint, per PROOF-SECTIONS.md #3 ("the arrow nav hides, swipe-only
      on mobile"). Measured at 390 the band is 90px tall, so the two 44px arrows occupied half its
