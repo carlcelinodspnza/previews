@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400..700&display=swap">
 <link rel="stylesheet" href="design-system/tokens.css?v=aa2c63a2">
   <link rel="stylesheet" href="design-system/chrome.css?v=4e26b184">
-  <link rel="stylesheet" href="design-system/structural.css?v=4d9ad6c6">
+  <link rel="stylesheet" href="design-system/structural.css?v=fbbeae2e">
 
 </head>
 <body>
@@ -705,9 +705,10 @@ html.sw-age-ok #sw-agegate { display: none; }
         <div class="col col--span-8 rs-deals__ladders sw-rise" style="--i:1">
           
           
+            <div class="rs-ladder-pair">
             <table class="rs-ladder">
-            <caption class="sr-only">Confirmed offers, by day</caption>
-            <tbody>
+            <caption class="sr-only">Every day offers</caption>
+<tbody>
               <tr class="rs-ladder__day"><th scope="rowgroup" colspan="2">EVERY DAY</th></tr>
               <tr>
                 <th scope="row">All 1/2 ounces and full ounces</th>
@@ -717,7 +718,10 @@ html.sw-age-ok #sw-agegate { display: none; }
                 <td colspan="2">Last chance products. Some exclusions apply.</td>
               </tr>
             </tbody>
-            <tbody>
+          </table>
+            <table class="rs-ladder">
+            <caption class="sr-only">Shatterday offers</caption>
+<tbody>
               <tr class="rs-ladder__day"><th scope="rowgroup" colspan="2">SHATTERDAY</th></tr>
               <tr>
                 <th scope="row">STIIIZY</th>
@@ -741,6 +745,7 @@ html.sw-age-ok #sw-agegate { display: none; }
               </tr>
             </tbody>
           </table>
+            </div>
         </div>
         
         <div class="col col--span-4 rs-deals__notecol sw-rise" style="--i:1">

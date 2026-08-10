@@ -624,8 +624,23 @@
   font-size: 15px;
 }
 
+/* [2026-08-10] COMPACTED on owner note "no open spaces". Measured at 1440 the section ran 599px
+   with the ladder spanning both grid rows at 466px while the left column's content ended at 276px,
+   leaving 275px of empty column beside it. Tightening rows alone could not close a gap that size,
+   so the two day-groups now sit SIDE BY SIDE instead of stacked: the taller group sets the height
+   rather than the sum of both. Each group keeps its own <table> and its own sr-only caption, so
+   the pairing is layout, not a flattening of two separate offers into one table. */
+.rs-deals { padding-top: var(--rs-y-tight); padding-bottom: var(--rs-y-tight); }
+
+.rs-ladder-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ds-space-lg);
+  align-items: start;
+}
+
 .rs-ladder__day th {
-  padding: var(--ds-space-sm) 0 10px;
+  padding: 0 0 8px;
   border-bottom: 2px solid var(--ds-primary);
   font-family: var(--ds-font-display);
   font-weight: 800;
@@ -636,11 +651,12 @@
   color: var(--ds-ink-heading);
 }
 
-.rs-ladder tbody + tbody .rs-ladder__day th { padding-top: var(--ds-space-lg); }
+/* the stacked-group lead-in is obsolete now the groups are side by side */
+.rs-ladder tbody + tbody .rs-ladder__day th { padding-top: 0; }
 
 .rs-ladder td,
 .rs-ladder tbody th[scope="row"] {
-  padding: 12px 0;
+  padding: 8px 0;
   border-bottom: var(--rs-hair) solid var(--ds-line);
   text-align: left;
   vertical-align: baseline;
@@ -1332,6 +1348,8 @@ main .sw-btn { min-height: 44px; }
   .rs-ladder,
   .rs-ladder tbody,
   .rs-ladder tr,
+  .rs-ladder-pair { grid-template-columns: 1fr; gap: var(--ds-space-md); }
+
   .rs-ladder td,
   .rs-ladder th { display: block; width: 100%; }
 
