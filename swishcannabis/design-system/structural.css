@@ -156,6 +156,18 @@
   color: var(--ds-ink-heading);
 }
 
+/* [2026-08-10] The H1 breaks after "Dispensary" on purpose. Left to wrap it read
+   "Your Trusted Weed / Dispensary in North / Hollywood" at 1200 and 1440, and
+   "...Dispensary in / North Hollywood" at 1024 and below: three different shapes, none of
+   them the intended phrasing. The break is a real <br> in the markup, not a text change.
+   It is hidden below 769px because at 390 the first line needs about 490px in a 358px column,
+   so forcing it there would produce three lines again rather than two. Note this only works
+   because .rs-intro__inner was widened 780 -> 880px: measured, that first line needs 849px at
+   the 52px cap, so at 780 the browser wrapped it regardless of any <br>. */
+.sw-br-md { display: none; }
+
+@media (min-width: 769px) { .sw-br-md { display: inline; } }
+
 .rs-h1 {
   margin: 0 0 var(--ds-space-sm);
   font-family: var(--ds-font-display);
@@ -515,7 +527,7 @@
 
 .rs-intro { text-align: center; }
 .rs-intro .rs-lede { margin-left: auto; margin-right: auto; }
-.rs-intro__inner { max-width: 780px; margin: 0 auto; }
+.rs-intro__inner { max-width: 880px; margin: 0 auto; }
 .rs-intro .rs-actions { justify-content: center; }
 
 /* ==========================================================================================
@@ -832,11 +844,16 @@
    the row states no relationship of any kind.
    ========================================================================================== */
 
+/* [2026-08-10] Centre-stacked on owner instruction: the heading centres over a centred row of
+   marks rather than a left title above a justified strip. space-between spread six items to the
+   container edges, which read as a spaced-out rule rather than a group. */
+.rs-brands .rs-h2 { text-align: center; }
+
 .rs-brands__row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--ds-space-md);
   margin: 0;
   padding: 0;
@@ -1184,6 +1201,8 @@ main .sw-btn { min-height: 44px; }
 
   .rs-shelf__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
+  .sw-br-md { display: none; }   /* below 769 the first line cannot fit; let it wrap naturally */
+
   /* the 48px desktop gutter is a two-column concern only; stacked, it would just indent the prose */
   .rs-why .rs-split__text,
   .rs-split .rs-split__text { padding-left: 0; }
@@ -1278,7 +1297,7 @@ main .sw-btn { min-height: 44px; }
 }
 
 @media (max-width: 479px) {
-  .rs-brands__row { justify-content: flex-start; gap: var(--ds-space-sm) var(--ds-space-md); }
+  .rs-brands__row { justify-content: center; gap: var(--ds-space-sm) var(--ds-space-md); }
   .rs-feat__rail { grid-auto-columns: minmax(180px, 1fr); }
 }
 
