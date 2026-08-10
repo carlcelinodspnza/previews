@@ -983,6 +983,79 @@
 main .sw-btn { min-height: 44px; }
 
 /* ==========================================================================================
+   15b · SS5b THE CATEGORY ICON RAIL (owner-directed 2026-08-10, following the reference).
+   The owner rejected the reference's treatment for this rail: it runs its icons as pale
+   silhouettes on near-black smoke tiles, and the ask was the CLEAN version, glyphs sitting
+   directly on a light ground with the label beneath. So there is no tile, no photograph and no
+   dark plate here, which also keeps the band inside C7's locked all-light canvas.
+   The band takes --ds-bg-surface-2, the sheet's second light step, so the rail reads as its own
+   surface against the white sections either side WITHOUT introducing a new tone.
+   Ink is the brand's: navy glyphs, accent-ink labels. The reference's purple is not borrowed.
+   ========================================================================================== */
+
+.rs-cats { background-color: var(--ds-bg-surface-2); }
+
+.rs-cats__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--ds-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rs-cats__item { margin: 0; }
+
+.rs-cat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 4px;
+  text-decoration: none;
+  border-radius: var(--ds-r-surface);
+}
+
+/* the glyph carries the heading ink, so the rail reads as navigation rather than decoration */
+.rs-cat__icon {
+  display: block;
+  width: 56px;
+  height: 56px;
+  color: var(--ds-ink-heading);
+  transition: color 140ms ease, transform 140ms ease;
+}
+
+.rs-cat__icon svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+
+/* --ds-accent-ink is the darkened orange the token sheet reserves for SMALL TEXT ON LIGHT.
+   Measured on this band's --ds-bg-surface-2 ground it is 5.30:1, clear of the 4.5 floor; the
+   frozen accent itself would not have been. */
+.rs-cat__label {
+  font-family: var(--ds-font-display, inherit);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.25;
+  color: var(--ds-accent-ink);
+}
+
+.rs-cat:hover .rs-cat__icon,
+.rs-cat:focus-visible .rs-cat__icon { color: var(--ds-accent-deep); transform: translateY(-2px); }
+
+.rs-cat:focus-visible {
+  outline: 2px solid var(--ds-accent-ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-cat__icon { transition: none; }
+  .rs-cat:hover .rs-cat__icon,
+  .rs-cat:focus-visible .rs-cat__icon { transform: none; }
+}
+
+/* ==========================================================================================
    16 · FOCUS. A visible keyboard ring on every body control this sheet authors, painted with
    the accent, never suppressed.
    ========================================================================================== */
@@ -1070,6 +1143,12 @@ main .sw-btn { min-height: 44px; }
   .col--span-2, .col--span-3, .col--span-4 { grid-column: span 12; }
 
   .rs-shelf__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* seven across is unreadable on a phone; 3-up keeps the glyphs at a tappable size and the
+     labels on one line, and the seventh wraps to a short second row rather than a ragged third */
+  .rs-cats__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-sm); }
+  .rs-cat__icon { width: 44px; height: 44px; }
+  .rs-cat__label { font-size: 11px; letter-spacing: .06em; }
 
   /* [OWNER-DECIDED 2026-08-10] The band holds 3.6:1 at EVERY width, so the 4/3 phone re-crop is
      gone. It existed to deepen the window over a photograph; the slides are now banners whose
