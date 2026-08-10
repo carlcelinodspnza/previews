@@ -222,26 +222,137 @@
   background: var(--ds-bg-surface-2);
 }
 
-.rs-hero__frame img {
-  position: absolute;
-  inset: 0;
+/* ------------------------------------------------------------------------------------------
+   4b · THE DEAL CAROUSEL (owner-supplied banners, 2026-08-10). The frame's 3.6:1 window is
+   UNCHANGED; only what sits inside it changed. The three banners are 931x259 = 3.595:1, so
+   they fill that window with no meaningful crop. Mechanic follows PROOF-SECTIONS.md #3: a
+   native scroll-snap-x track (no library), a 44px round prev/next pair, dots carrying
+   aria-current, and a 5s autoplay the script gates off under reduced-motion.
+   The old bottom fade is NOT carried over: it washed the lower 22% of a photograph into the
+   next band, which is right for a photo and wrong for a flat-ground banner whose outline type
+   runs to the bottom edge.
+   Controls sit on --ds-scrim, the sheet's own legibility scrim, so the pair holds contrast over
+   red, orange AND the rainbow banner instead of depending on any one slide's ground.
+   ------------------------------------------------------------------------------------------ */
+
+.rs-carousel__track {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rs-carousel__track::-webkit-scrollbar { display: none; }
+
+.rs-carousel__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.rs-carousel__slide img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 62%;   /* holds the shelf runs and the counter edge, drops the ceiling */
-  display: block;
+  object-position: 50% 50%;
 }
 
-/* the image meets the next band with the token sheet's own bottom fade. No divider shape. */
-.rs-hero__frame::after {
-  content: "";
+.rs-carousel__nav {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 22%;
-  background: var(--ds-fade-to-paper);
-  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  /* OPAQUE dark ground, not the translucent scrim. Measured 2026-08-10: --ds-scrim composited over
+     a light banner resolved to rgb(112,145,166) and the white chevron came out 3.34:1, under the
+     4.5 floor (verify-render-quality contrastHard). A translucent ground makes the ratio depend on
+     whichever slide is showing, which cannot be made safe for all three; --ds-primary-deep is the
+     sheet's DARK GROUND role and puts the chevron at 15.4:1 on every slide. */
+  background: var(--ds-primary-deep);
+  color: var(--ds-ink-on-dark);
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.rs-carousel__nav svg { width: 22px; height: 22px; }
+.rs-carousel__nav--prev { left: var(--ds-space-sm); }
+.rs-carousel__nav--next { right: var(--ds-space-sm); }
+
+.rs-carousel__nav:hover,
+.rs-carousel__nav:focus-visible {
+  background: var(--ds-accent);
+  color: var(--ds-on-accent);
+}
+
+/* the house ring is --ds-accent-ink, which is the darkened orange for small marks ON LIGHT; these
+   two controls are dark islands, so the ring takes the full accent to stay visible against them. */
+.rs-carousel__nav:focus-visible {
+  outline: 2px solid var(--ds-accent);
+  outline-offset: 3px;
+}
+
+/* The dots sit INSIDE the frame, so the band's height is unchanged. They clear the SHELF TRAY,
+   which lifts over the band's bottom edge by design (see .rs-rail): measured at 1440 the tray box
+   starts 81px above the band's bottom, so dots pinned at bottom:10px landed ON the products card.
+   The offset reuses the tray's OWN pull-up expression, so it tracks any future change to it. */
+.rs-carousel__dots {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: calc(clamp(20px, 2.6vw, 40px) + var(--rs-y-tight) + 10px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: var(--ds-primary-deep);   /* same ground as the nav pair, so the controls read as one set */
+}
+
+.rs-carousel__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ds-bg-surface);
+  opacity: .55;
+  cursor: pointer;
+  transition: background-color 140ms ease, width 140ms ease, opacity 140ms ease;
+}
+
+.rs-carousel__dot.is-active {
+  width: 22px;
+  border-radius: 999px;
+  background: var(--ds-accent);
+  opacity: 1;
+}
+
+.rs-carousel__dot:focus-visible {
+  outline: 2px solid var(--ds-bg-surface);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-carousel__nav,
+  .rs-carousel__dot { transition: none; }
 }
 
 .rs-hero__mural {
@@ -946,13 +1057,23 @@ main .sw-btn { min-height: 44px; }
 
   .rs-shelf__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-  /* the hero RE-CROPS rather than letterboxing. At 3.6:1 a phone renders a ~108px sliver, so
-     the band deepens and the window holds the shelving and the counter run. */
-  .rs-hero__frame { aspect-ratio: 4 / 3; }
-  .rs-hero__frame img { object-position: 62% 55%; }
+  /* [OWNER-DECIDED 2026-08-10] The band holds 3.6:1 at EVERY width, so the 4/3 phone re-crop is
+     gone. It existed to deepen the window over a photograph; the slides are now banners whose
+     type is baked into the artwork, and a 4/3 window under object-fit cover would show roughly
+     the middle 37% of a 3.6:1 banner and slice the day name mid word. Uniform ratio keeps every
+     banner whole. The known cost, accepted with the decision: at 390px the band is about 108px
+     tall, so the banner type renders small. */
   .rs-hero__mural { height: 10px; }
 
-  .rs-rail { margin-top: calc(-1 * (var(--ds-space-md) + var(--rs-y-tight))); }  /* same absorption at the stacked breakpoint */
+  /* [2026-08-10] The tray NO LONGER lifts over the band at the stacked breakpoint. The overlap was
+     sized against the old 4/3 phone hero (about 520px, so an 81px lift read as a light touch); with
+     the band now a uniform 3.6:1 (108px at 390) the SAME 81px swallowed 48% of it and left a 56px
+     sliver with the artwork cut. Measured at 390 before this change: band 108px, covered 52px,
+     visible 56px. Zeroed here, so the phone shows the whole banner. Desktop keeps the lift (line
+     374): at 1440 it covers 81px of 400, the band still reads at 319px, and the motif is preserved
+     where it was designed. Band padding stays SYMMETRIC, so G-CADENCE is unaffected. */
+  .rs-rail { margin-top: 0; }
+  .rs-carousel__dots { bottom: 10px; }   /* nothing lifts over the band here, so no tray offset */
 
   .rs-facts__grid { grid-template-columns: minmax(0, 1fr); }
 
