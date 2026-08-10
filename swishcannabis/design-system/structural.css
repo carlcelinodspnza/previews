@@ -217,7 +217,13 @@
   display: block;
   width: 100%;
   margin: 0;
-  aspect-ratio: 3.6 / 1;
+  /* [2026-08-10] Ratio FOLLOWS the owner-supplied banner artwork: 1680x388. It was 3.6/1 for the
+     storefront photograph, and the first banner set happened to be 3.595:1 so it fitted. This set is
+     4.329:1 with type running nearly edge to edge (x 75..1390 of 1680), so holding 3.6/1 under
+     object-fit cover would have trimmed about 141px off EACH side and cut through the wordmark and
+     the product cutouts. Expressed as the artwork's own numbers so the source of the value is
+     obvious and re-derivable. */
+  aspect-ratio: 1680 / 388;
   overflow: hidden;
   background: var(--ds-bg-surface-2);
 }
@@ -1073,7 +1079,19 @@ main .sw-btn { min-height: 44px; }
      374): at 1440 it covers 81px of 400, the band still reads at 319px, and the motif is preserved
      where it was designed. Band padding stays SYMMETRIC, so G-CADENCE is unaffected. */
   .rs-rail { margin-top: 0; }
-  .rs-carousel__dots { bottom: 10px; }   /* nothing lifts over the band here, so no tray offset */
+
+  /* SWIPE-ONLY at the stacked breakpoint, per PROOF-SECTIONS.md #3 ("the arrow nav hides, swipe-only
+     on mobile"). Measured at 390 the band is 90px tall, so the two 44px arrows occupied half its
+     height and sat over the first and last letters of the wordmark. The track is a native
+     scroll-snap-x rail, so swipe already works; the dots stay as the visible affordance and remain
+     the keyboard/AT route. Hidden with display:none so they leave the tab order too, rather than
+     being invisible but still focusable. */
+  .rs-carousel__nav { display: none; }
+
+  /* smaller dot chip so it reads as a marker on a 90px band instead of a slab */
+  .rs-carousel__dots { bottom: 7px; gap: 6px; padding: 5px 9px; }
+  .rs-carousel__dot { width: 7px; height: 7px; }
+  .rs-carousel__dot.is-active { width: 17px; }
 
   .rs-facts__grid { grid-template-columns: minmax(0, 1fr); }
 
