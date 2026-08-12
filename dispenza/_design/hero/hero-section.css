@@ -411,10 +411,26 @@
      y=439 -- a 51px overlap. Shorter model, pinned lower, and the claim lifted
      further, so the two columns become two rows with real air between them. */
   .mc-coin{
-    left:50%;top:auto;bottom:0;
-    transform:translateX(-50%) translate3d(var(--px, 0px), var(--py, 0px), 0);
+    left:50%;top:auto;
+    /* CLEAR THE STICKY ACTION DOCK. bottom:0 ran the coin to the very edge of
+       the viewport, and the mobile dock floats above that -- measured, the coin
+       passed 76px BEHIND the dock at 375x812, 390x844 and 414x896 alike. The
+       dock is 52px tall and sits var(--ds-space-md) off the bottom, so clearing
+       it is that height plus its inset plus one more gap of air. Declared as a
+       variable next to the arithmetic that uses it, because a bare "128px" here
+       silently rots the day the dock's padding changes. */
+    --mc-dock-h:52px;
+    bottom:calc(var(--mc-dock-h) + var(--ds-space-md) * 2);
+    /* --bob WAS MISSING HERE. The desktop rule gained the idle float's vertical
+       bob; this override kept the older two-term transform, so the coin simply
+       did not bob on mobile -- the float was half dead on every phone and the
+       desktop suite could never have caught it. */
+    transform:translateX(-50%)
+              translate3d(var(--px, 0px), calc(var(--py, 0px) + var(--bob, 0px)), 0);
     width:min(72%, 400px);
-    height:min(36%, 400px);
+    /* shorter to match: the coin now has to fit BETWEEN the claim and the dock,
+       not between the claim and the viewport edge */
+    height:min(30%, 320px);
   }
   /* top:50% is kept. Setting it to auto handed the absolutely-positioned block
      back to its static position, which pinned the claim to the very top of the
