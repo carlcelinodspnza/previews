@@ -154,11 +154,17 @@
    The element is now sized and placed to the SAME column the SVG coin occupies,
    driven by the same --token-cx the renderer and the stylesheet already share,
    so the 3D upgrade lands exactly where the drawn one was. */
+/* THE HOVER IS A PARALLAX, NOT A ROTATION (owner: "not as heavy to execute").
+   Turning the camera on pointermove forced model-viewer to re-render a 100k
+   triangle scene on every move. Translating the ELEMENT is a compositor
+   operation: no WebGL redraw at all, and the 3D pose keeps being driven only by
+   scroll and the idle float. --px/--py are written by hero-coin3d.js. */
 .mc-coin{
   position:absolute;
   top:50%;
   left:calc(var(--token-cx, 0.72) * 100%);
-  transform:translate(-50%, -50%);
+  transform:translate(-50%, -50%) translate3d(var(--px, 0px), var(--py, 0px), 0);
+  will-change:transform;
   width:min(44%, 560px);
   height:min(72%, 560px);
   z-index:var(--ds-z-below);pointer-events:none;display:block;
@@ -167,7 +173,12 @@
   background:transparent;
 }
 .mc-hero.has-coin3d .mc-coin{opacity:1}
-.mc-hero.has-coin3d .mc-coaster{opacity:0}
+/* DISPLAY:NONE, not opacity:0. An opacity-0 SVG is still laid out, still
+   composited, and still redrawn every frame by hero-coaster -- and during the
+   cross-fade it was visibly doubling the coin. Taking it out of the box tree
+   makes the duplicate impossible AND lets the renderer skip it entirely (see
+   hero-coaster: it stops writing DOM once the model is up). */
+.mc-hero.has-coin3d .mc-coaster{opacity:0;display:none}
 .mc-coaster__mark{fill:color-mix(in srgb, var(--ds-accent-light) 90%, white)}
 
 
@@ -345,7 +356,7 @@
      further, so the two columns become two rows with real air between them. */
   .mc-coin{
     left:50%;top:auto;bottom:0;
-    transform:translateX(-50%);
+    transform:translateX(-50%) translate3d(var(--px, 0px), var(--py, 0px), 0);
     width:min(72%, 400px);
     height:min(36%, 400px);
   }

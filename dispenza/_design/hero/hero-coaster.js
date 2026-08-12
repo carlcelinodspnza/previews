@@ -141,6 +141,9 @@
   var spin    = 0;        /* accumulated flip                                  */
   var settling = false;
   var hoverCoin = false;
+  /* the GLB coin, when it is the visible object -- the hover hit-box is taken
+     from whichever coin is on screen (see the has-coin3d branch in render) */
+  var coin3dEl = document.querySelector('.mc-coin');
   var lastBox = { x: 0, y: 0, w: 0, h: 0 };   /* the coin's screen box, for hit-testing */
 
   function progress() {
@@ -220,6 +223,26 @@
       var nx =  n[0]*cy2 + n[2]*sy2;
       var nz = -n[0]*sy2 + n[2]*cy2;
       return [nx, n[1]*ct + nz*st, -n[1]*st + nz*ct];
+    }
+
+    /* ONCE THE 3D COIN IS UP, STOP DRAWING THE SVG ONE.
+       The fallback is display:none by then, so every polygon, every milling
+       stroke and the whole painter sort were being rebuilt each frame for
+       something nobody can see. The POSE is still computed and published above,
+       because the model is slaved to it -- only the DOM writes are skipped. */
+    if (section.classList.contains('has-coin3d')) {
+      /* ONE THING STILL HAS TO BE MAINTAINED: the hover hit-box.
+         lastBox is set further down from the SVG group's bbox, and the wheel
+         flip only arms while the pointer is inside it. Returning before that
+         left lastBox frozen on a 0x0 rect -- so hovering the MODEL and
+         scrolling did nothing at all, while the fallback path kept flipping
+         correctly and hid the regression. Take the box from whatever is
+         actually on screen. */
+      try {
+        var mb = coin3dEl && coin3dEl.getBoundingClientRect();
+        if (mb && mb.width) { lastBox = { x: mb.left, y: mb.top, w: mb.width, h: mb.height }; }
+      } catch (err3) { /* not laid out yet */ }
+      return e;
     }
 
     var drawn = [], topPts = null, botPts = null, topArea = 0, topVisible = false;

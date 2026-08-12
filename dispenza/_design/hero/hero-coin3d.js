@@ -71,24 +71,51 @@
      animation: azimuth carries the flip and the idle yaw, polar carries the tilt.
      --------------------------------------------------------------------------- */
   /* ---------------------------------------------------------------------------
-     CURSOR YAW (owner: "enable left and right flip depending on where cursor is").
-     The coin turns toward the side the pointer is on -- left of it and it swings
-     left, right and it swings right -- eased so it follows rather than snaps. It
-     is ADDED to the pose hero-coaster publishes, so the scroll scrub, the idle
-     float and the wheel-flip all keep working underneath it.
+     CURSOR PARALLAX (owner: "just do a parallax effect ... so it will be not as
+     heavy to execute"). This REPLACED a cursor-driven camera rotation, which
+     looked right but forced model-viewer to re-render a 100k-triangle scene on
+     every pointer move. A translate3d on the element is a compositor operation:
+     the coin still leans toward the pointer, and the GPU scene is never touched.
+     The 3D pose is now driven ONLY by scroll and the idle float.
      --------------------------------------------------------------------------- */
-  var cursorYaw = 0, cursorTarget = 0, lastT = 0;
+  var parX = 0, parY = 0, tgtX = 0, tgtY = 0, lastT = 0, parQueued = false;
   if (!reduce.matches) {
     stage.addEventListener('pointermove', function (ev) {
       var r = mv.getBoundingClientRect();
-      var cx = r.left + r.width / 2;
-      /* normalised -1..1 across roughly two coin-widths, so the swing is legible
-         near the coin and saturates instead of spinning at the screen edges */
-      var t = (ev.clientX - cx) / Math.max(1, r.width * 0.62);
-      cursorTarget = Math.max(-1, Math.min(1, t)) * 34;      /* degrees */
-      hero.__coinCursor = { t: t, target: cursorTarget };     /* observable for tests */
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      /* normalised to the coin's own size, clamped, so the drift saturates near
+         the object instead of running away at the screen edges */
+      var nx = Math.max(-1, Math.min(1, (ev.clientX - cx) / Math.max(1, r.width * 0.7)));
+      var ny = Math.max(-1, Math.min(1, (ev.clientY - cy) / Math.max(1, r.height * 0.7)));
+      tgtX = nx * 26;                 /* px */
+      tgtY = ny * 18;
+      hero.__coinCursor = { nx: nx, ny: ny, tx: tgtX, ty: tgtY };
+      if (!parQueued) { parQueued = true; requestAnimationFrame(parallax); }
     }, { passive: true });
-    stage.addEventListener('pointerleave', function () { cursorTarget = 0; });
+    stage.addEventListener('pointerleave', function () {
+      tgtX = 0; tgtY = 0;
+      if (!parQueued) { parQueued = true; requestAnimationFrame(parallax); }
+    });
+  }
+
+  /* THE PARALLAX RUNS ON ITS OWN, AND ONLY WHILE IT IS MOVING.
+     It writes two custom properties that feed a translate3d, so the browser
+     composites it without repainting anything and without touching the WebGL
+     scene at all. It also stops scheduling frames once it has settled, so a
+     stationary pointer costs nothing. */
+  function parallax(now) {
+    parQueued = false;
+    var dt = lastT ? Math.min(64, now - lastT) : 16;
+    lastT = now;
+    var k = 1 - Math.exp(-dt / 110);
+    parX += (tgtX - parX) * k;
+    parY += (tgtY - parY) * k;
+    mv.style.setProperty('--px', parX.toFixed(2) + 'px');
+    mv.style.setProperty('--py', parY.toFixed(2) + 'px');
+    if (hero.__coinCursor) { hero.__coinCursor.px = parX; hero.__coinCursor.py = parY; }
+    if (Math.abs(tgtX - parX) > 0.05 || Math.abs(tgtY - parY) > 0.05) {
+      parQueued = true; requestAnimationFrame(parallax);
+    }
   }
 
   var last = '';
@@ -106,17 +133,28 @@
        -33.8 target after 900ms, i.e. the coin barely acknowledged the cursor.
        An exponential on elapsed time converges in a fixed ~wall-clock window at
        any frame rate. */
-    var now = (window.performance && performance.now) ? performance.now() : Date.now();
-    var dt = lastT ? Math.min(64, now - lastT) : 16;
-    lastT = now;
-    cursorYaw += (cursorTarget - cursorYaw) * (1 - Math.exp(-dt / 90));
-    if (hero.__coinCursor) { hero.__coinCursor.yaw = cursorYaw; }
 
     /* polar 90deg looks straight at the face; as the coin's own tilt falls from
        90 toward its resting angle the camera rides up over it, which is the same
        read the SVG solid gives. */
-    var polar = Math.max(4, Math.min(176, tilt));
-    var azim  = 90 + yaw + cursorYaw;
+    /* WRAP THE TUMBLE ONTO THE SPHERE -- do NOT clamp it.
+       The flip accumulates in `theta`, and a real one runs well past a half
+       turn: measured, a hover+wheel flip took theta from 93.9deg to 523deg. A
+       clamp of Math.min(176, tilt) therefore PINNED the polar at 176 for the
+       whole flip -- the model just sat at an extreme tilt and never turned
+       over, while the SVG fallback tumbled correctly and hid it.
+
+       model-viewer's polar is only meaningful over 0..180, so continuing past
+       the pole means coming back down the far side with the azimuth opposed --
+       which is exactly what turning a coin over looks like. The azimuth jump is
+       invisible because it happens AT the pole, where azimuth is degenerate. */
+    var t = tilt % 360;
+    if (t < 0) { t += 360; }
+    var overPole = 0;
+    if (t > 180) { t = 360 - t; overPole = 180; }
+    /* held off the exact poles, where the orbit is numerically degenerate */
+    var polar = Math.max(0.5, Math.min(179.5, t));
+    var azim  = 90 + yaw + overPole;
     /* ONE DECIMAL. Every distinct value forces model-viewer to redraw a 100k
        triangle scene, so the value is quantised -- but WHOLE degrees was too
        coarse: the idle yaw swings only +/-8 degrees over 9.4s, so a 1.5s sample

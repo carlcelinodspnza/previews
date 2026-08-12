@@ -120,7 +120,16 @@
   /* the emitter tracks the TOKEN, wherever the coaster has placed it, so the
      smoke stays attached to the object rather than to a hardcoded point */
   function locateSource() {
-    var g = svg.querySelector('.mc-coaster__all');
+    /* TRACK WHICHEVER COIN IS ACTUALLY ON SCREEN.
+       This used to read the SVG coin's bbox unconditionally. Once the GLB coin
+       took over, the SVG one became display:none -- so its rect is 0x0, the
+       guard below bailed, and the emitter stayed at its initial (0,0): the smoke
+       would have spawned in the top-left corner instead of around the coin.
+       Prefer the model when it is the visible one, fall back to the SVG. */
+    var coin3d = document.querySelector('.mc-coin');
+    var g = null;
+    if (coin3d && hero.classList.contains('has-coin3d')) { g = coin3d; }
+    if (!g) { g = svg.querySelector('.mc-coaster__all'); }
     if (!g) { return; }
     var b;
     try { b = g.getBoundingClientRect(); } catch (e) { return; }
