@@ -192,6 +192,31 @@
   }
   if (!hasWebGL()) { return; }          /* SVG coin stays; nothing else to do */
 
+  /* ---- TWO MESHES, PICKED BEFORE THE ELEMENT UPGRADES.
+     The owner asked for a photo-ready surface. Getting there meant keeping the
+     full-resolution mesh: measured at delivery size, the reduced meshes still
+     carry faint marks on the enamel where the full one is clean. It costs
+     2.79 MB and 966k triangles.
+
+     That is the right trade on a desktop and the wrong one on a phone, where
+     the coin renders at roughly 270px -- a size at which the 336k mesh is
+     indistinguishable -- and where the GPU is a fraction of the one this was
+     measured on (61 fps, Apple M1 via Metal). So the small-viewport path gets
+     the lighter mesh at 1.45 MB, and anyone who has asked their browser to save
+     data gets it regardless of screen size.
+
+     Swapping the attribute HERE is safe and is the only place it is: the
+     model-viewer runtime is injected on the next line, so the custom element has
+     not upgraded yet and no fetch for the default src has started. ---- */
+  (function pickMesh() {
+    var small = window.matchMedia('(max-width: 1100px)').matches;
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
+    if (small || saveData) {
+      var src = mv.getAttribute('src');
+      if (src) { mv.setAttribute('src', src.replace(/dispenza-coin\.glb$/, 'dispenza-coin-lite.glb')); }
+    }
+  }());
+
   (function loadRuntime() {
     var sc = document.createElement('script');
     sc.type = 'module';

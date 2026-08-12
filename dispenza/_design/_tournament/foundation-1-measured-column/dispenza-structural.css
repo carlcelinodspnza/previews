@@ -60,6 +60,12 @@
   --ds-step-display: clamp(46px, 6.6vw, 86px);
   --ds-step-head:    clamp(34px, 3.8vw, 48px);
   --ds-step-figure:  clamp(38px, 4.4vw, 56px);
+  /* THE METRIC BAND HAS ITS OWN STEP. --ds-step-figure is shared with
+     .mc-table__price and .mc-plan__price, so sizing the numbers off it would
+     have inflated the pricing tables too. Sized so the WIDEST figure fills its
+     column: "500+" measures 2.4355x its font-size, the column is 268px with
+     24px of padding either side, so 220 * 0.88 / 2.4355 = 79px. */
+  --ds-step-metric:  clamp(38px, 5.5vw, 80px);
   --ds-step-body:    17px;
   --ds-step-micro:   12px;
 
@@ -429,7 +435,7 @@
 .mc-figure__n{
   display:block;
   font-family:var(--ds-font-display);
-  font-size:var(--ds-step-figure);font-weight:700;
+  font-size:var(--ds-step-metric);font-weight:700;
   line-height:1;letter-spacing:-.03em;
   font-variant-numeric:tabular-nums;
   color:var(--ds-ink-heading);
@@ -444,6 +450,54 @@
   font-size:var(--ds-step-micro);font-weight:700;
   letter-spacing:.16em;text-transform:uppercase;line-height:1.5;
   color:var(--ds-ink-soft);
+}
+
+/* -- THE OUTLINED STATEMENT HEADING ---------------------------------------
+   Owner: "I like the ALL-CAPS Text outline from the original source for this
+   section ... minus the marquee effect."
+
+   The source draws that outline with a dark fill plus a white text-shadow ring
+   in eight directions, NOT -webkit-text-stroke (which it has, commented out --
+   a stroke is centred on the glyph edge and eats into the counters, while a
+   shadow ring sits entirely outside them and keeps the letterforms intact).
+   Reproduced here, with the ring in em so it scales with the type instead of
+   staying 2px as the heading grows.
+
+   SIZED TO FILL, NOT COPIED. The source sets 180px because it was a MARQUEE and
+   could run wider than the viewport. Static, it has to fit: "INFLUENCE
+   HIGHLIGHTS" at weight 900 measures 12.7661x its font-size, and the container
+   is 1120px at 1440 -- so 6vw lands at 86px and 1103px wide, just inside.
+
+   The text is NOT retyped in caps. text-transform does the shouting so the
+   authored string stays "Influence Highlights" byte-for-byte, which is what
+   verify-copy-fidelity reads. Retyping it would have silently broken the
+   corpus's verbatim match. */
+.mc-head--statement{
+  --mc-ring: max(1.5px, .016em);
+  text-transform:uppercase;
+  font-weight:900;
+  /* SIZED TO THE COLUMN'S INNER WIDTH, not the container's. The container is
+     1120px but the col carries its own gutter, leaving 1072 -- sizing off 1120
+     put the heading at 1103px wide and it WRAPPED to two lines. 1072/12.7661 =
+     84px, and 5.7vw lands at 82px / 1048px wide at 1440. */
+  font-size:clamp(30px, 5.7vw, 84px);
+  letter-spacing:-.012em;
+  line-height:1.02;
+  /* the SECTION's own background, so the glyphs read as cut out of the panel.
+     This was --ds-bg-canvas, which does not exist: var() fell back to the
+     inherited light heading ink, giving a light fill inside a white ring --
+     i.e. solid white, no outline at all. A misspelt custom property fails
+     silently and looks like a design choice; the only tell is the render. */
+  color:var(--ds-bg-surface);
+  text-shadow:
+    var(--mc-ring)  var(--mc-ring) 0 var(--ds-ink-heading),
+    calc(-1 * var(--mc-ring)) var(--mc-ring) 0 var(--ds-ink-heading),
+    var(--mc-ring)  calc(-1 * var(--mc-ring)) 0 var(--ds-ink-heading),
+    calc(-1 * var(--mc-ring)) calc(-1 * var(--mc-ring)) 0 var(--ds-ink-heading),
+    var(--mc-ring)  0 0 var(--ds-ink-heading),
+    calc(-1 * var(--mc-ring)) 0 0 var(--ds-ink-heading),
+    0 var(--mc-ring) 0 var(--ds-ink-heading),
+    0 calc(-1 * var(--mc-ring)) 0 var(--ds-ink-heading);
 }
 
 /* -- the price ladder table ------------------------------------------------- */
