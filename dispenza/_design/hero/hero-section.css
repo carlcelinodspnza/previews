@@ -136,50 +136,58 @@
    canvas and states that it must never eat pointer events, because the hover
    light and the CTAs both sit above it.
    --------------------------------------------------------------------------- */
-.mc-coaster{
-  position:absolute;inset:0;width:100%;height:100%;
-  z-index:var(--ds-z-below);pointer-events:none;display:block;
-  transition:opacity 420ms var(--ds-ease-out);
-}
-/* THE GLB COIN, and the SVG one it supersedes.
-   The drawn coin is not deleted: it paints instantly, costs nothing, and is a
-   complete object, so it holds the hero until the model reports `loaded` and
-   remains the whole answer if WebGL is unavailable or the file never arrives.
-   Both are driven by ONE pose (hero-coaster.js publishes --coin-theta/--coin-yaw),
-   so the swap cannot produce a jump. */
-/* THE MODEL GETS A BOX, NOT THE STAGE.
+/* THE COIN.
+   There is exactly ONE coin now. A hand-drawn SVG solid used to sit behind the
+   model as the no-WebGL fallback; the owner retired that object outright, so the
+   fallback is model-viewer's own poster -- a still frame of THIS model. All the
+   .mc-coaster rules that placed and cross-faded the drawn coin are gone with it.
+
+   THE MODEL GETS A BOX, NOT THE STAGE.
    inset:0 handed model-viewer the whole pin, so it fitted the coin to a
-   1440x900 frame -- it filled the hero and sat straight over the claim, and at
-   a 26deg field of view that close it was badly perspective-distorted as well.
-   The element is now sized and placed to the SAME column the SVG coin occupies,
-   driven by the same --token-cx the renderer and the stylesheet already share,
-   so the 3D upgrade lands exactly where the drawn one was. */
-/* THE HOVER IS A PARALLAX, NOT A ROTATION (owner: "not as heavy to execute").
-   Turning the camera on pointermove forced model-viewer to re-render a 100k
-   triangle scene on every move. Translating the ELEMENT is a compositor
-   operation: no WebGL redraw at all, and the 3D pose keeps being driven only by
-   scroll and the idle float. --px/--py are written by hero-coin3d.js. */
+   1440x900 frame -- it filled the hero, sat straight over the claim, and at a
+   26deg field of view that close it was badly perspective-distorted as well.
+   The element is sized and placed to its own column, driven by the --token-cx
+   the script and the stylesheet already share.
+
+   THE TRANSFORM CARRIES BOTH IDLE AND CURSOR MOTION, and neither touches WebGL:
+     --px/--py  cursor parallax        (hero-coin3d.js)
+     --bob      the idle float's rise  (hero-coin-pose.js)
+   Rotation is NOT here -- it is the camera, because it is a real 3D turn. */
 .mc-coin{
   position:absolute;
   top:50%;
   left:calc(var(--token-cx, 0.72) * 100%);
-  transform:translate(-50%, -50%) translate3d(var(--px, 0px), var(--py, 0px), 0);
+  transform:translate(-50%, -50%)
+            translate3d(var(--px, 0px), calc(var(--py, 0px) + var(--bob, 0px)), 0);
   will-change:transform;
   width:min(44%, 560px);
   height:min(72%, 560px);
-  z-index:var(--ds-z-below);pointer-events:none;display:block;
-  opacity:0;transition:opacity 520ms var(--ds-ease-out);
+  z-index:var(--ds-z-below);display:block;
+  /* THE COIN IS GRABBABLE, so it must receive pointer events -- it is the only
+     element in the hero that does. The drag is hit-tested against its box in
+     hero-coin-pose.js; the cursor affordance is set on the stage. */
+  pointer-events:auto;
   --poster-color:transparent;
   background:transparent;
+
+  /* THE FALLBACK IS A CSS POSTER, and it has to be CSS rather than the element's
+     own poster="" attribute. hero-coin3d.js only injects the model-viewer
+     runtime AFTER it confirms WebGL, so on a machine without it the custom
+     element never upgrades -- no shadow root, no children, and the poster
+     attribute is never read. Measured on a --disable-webgl run: a 560x560 box
+     with backgroundImage "none" and zero children. An empty hole, which is the
+     exact failure the retired SVG coin used to cover.
+     A background-image needs no upgrade and no script. */
+  background-image:url('../../assets/3d/coin-poster.webp');
+  background-size:contain;
+  background-position:center;
+  background-repeat:no-repeat;
 }
-.mc-hero.has-coin3d .mc-coin{opacity:1}
-/* DISPLAY:NONE, not opacity:0. An opacity-0 SVG is still laid out, still
-   composited, and still redrawn every frame by hero-coaster -- and during the
-   cross-fade it was visibly doubling the coin. Taking it out of the box tree
-   makes the duplicate impossible AND lets the renderer skip it entirely (see
-   hero-coaster: it stops writing DOM once the model is up). */
-.mc-hero.has-coin3d .mc-coaster{opacity:0;display:none}
-.mc-coaster__mark{fill:color-mix(in srgb, var(--ds-accent-light) 90%, white)}
+/* ...AND IT MUST GO THE INSTANT THE LIVE COIN ARRIVES. The model's canvas is
+   transparent around the coin, so a poster left underneath shows THROUGH as a
+   second, static coin whenever the real one turns -- the duplicate problem
+   again, in a new costume. has-coin3d is set on the model's `load` event. */
+.mc-hero.has-coin3d .mc-coin{background-image:none}
 
 
 /* ---------------------------------------------------------------------------
@@ -202,7 +210,21 @@
 .mc-hero__content{
   position:absolute;left:var(--hero-pad);top:50%;transform:translateY(-50%);
   z-index:var(--ds-z-raised);
-  width:min(46%, 620px);
+  /* THE TEXT COLUMN IS DERIVED FROM WHERE THE COIN ACTUALLY IS, not guessed.
+     min(46%, 620px) alone overlapped the coin by 33-37px everywhere from 1101px
+     to ~1380px -- a band no fixed-width test sampled, and which the old
+     renderer's runtime anti-overlap pass used to paper over by shoving the drawn
+     coin down. With that pass gone the arithmetic has to be right instead.
+
+     The third term IS the coin's left edge, expressed in the same variables the
+     coin is positioned with:
+         coin left = --token-cx * 100%  -  (coin width / 2)
+         coin width = min(44%, 560px)   ->  half = min(22%, 280px)
+     minus this column's own left offset and a 40px breathing gap. Because both
+     sides resolve against the same containing block, they cannot drift apart the
+     way two independently-tuned numbers do. */
+  width:min(46%, 620px,
+            calc(var(--token-cx, 0.72) * 100% - min(22%, 280px) - var(--hero-pad) - 40px));
   text-align:left;
   /* the claim lifts slightly as the platform lands under it, so the two read as
      one movement rather than two. Driven by --coaster-p, which the scrub writes. */
@@ -210,6 +232,28 @@
   transition:none;
 }
 .mc-hero__content .mc-actions{justify-content:flex-start}
+/* THE HEADLINE IS SIZED FROM ITS COLUMN, NOT FROM THE VIEWPORT -- above 1100px,
+   where the column is the narrower of "46% / 620px" and "whatever the coin
+   leaves free". Sizing off vw there let the two disagree: once the column was
+   derived from the coin's edge, "MARKETING" overflowed its own paint box by
+   15px at 1101, 12px at 1200 and 9px at 1280. With background-clip:text that
+   overflow does not wrap or spill -- it is simply NOT PAINTED, so the word
+   silently rendered as "MARKETIN".
+
+   The coefficient is measured, not guessed. Across 1101/1200/1280/1360/1440 the
+   rendered width of "MARKETING" was a constant 6.164x the font-size (448/72.67,
+   488/79.2, 521/84.48, 530/86). Fitting the column therefore means
+   font-size <= column / 6.164 = 16.2cqw; 16cqw leaves ~1.4% margin. The 86px cap
+   keeps the wide-viewport size exactly as approved.
+
+   Scoped to min-width:1101px on purpose: below that the layout is stacked, the
+   column is a completely different width, and its clamp is already verified
+   clean by the glyph-clipping detector at 375/414/600/768/900/1100. */
+@media (min-width:1101px){
+  .mc-hero__content{container-type:inline-size}
+  .mc-hero .mc-display{font-size:min(86px, 16cqw)}
+}
+
 /* the split, declared ONCE and read by both the CSS and the renderer */
 .mc-hero__pin{--hero-pad:clamp(24px, 7vw, 116px); --token-cx:0.72}
 
@@ -343,11 +387,23 @@
   .mc-hero .mc-display{font-size:clamp(34px, 11vw, 68px)}
   .mc-hero__stage img{object-position:60% center}
 }
-/* THE COLUMNS STACK once there is no longer room for two. The renderer makes the
-   same decision from the same measurement (VW/VH < 1.15), so the token moves to
-   the centre-bottom in the same breath that the claim goes full width -- they
-   cannot end up disagreeing about which layout is in force. */
-@media (max-aspect-ratio: 115/100), (max-width:860px){
+/* THE COLUMNS STACK once there is no longer room for two, and the trigger MUST
+   match the one that widens the claim above.
+
+   It did not. The claim went full-width (720px) at max-width:1100px while the
+   coin only left its right-hand column at max-aspect-ratio:115/100 or
+   max-width:860px -- so from 861px to 1100px on a landscape window the text was
+   full width AND the coin was still in the right column. Measured at 1100x820:
+   the claim ran to x=797 and the coin's box began at x=550, a 247px overlap, with
+   the lede visibly crossing under the coin.
+
+   The old renderer papered over this with a runtime anti-overlap pass that
+   measured the collision and shoved the drawn coin down. That pass died with the
+   SVG coin, which is what exposed the real fault underneath: two breakpoints
+   describing one decision. They are now one condition, so the layout cannot be
+   half-switched. (A comment here previously ASSERTED they matched -- they never
+   did; the assertion was checked against nothing.) */
+@media (max-aspect-ratio: 115/100), (max-width:1100px){
   /* STACKED: the model centres and drops below the claim, matching the renderer's
      own `stacked` branch (VW/VH < 1.15) so the two cannot disagree about which
      layout is in force. */

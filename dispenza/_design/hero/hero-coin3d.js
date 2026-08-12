@@ -33,7 +33,6 @@
   'use strict';
 
   var mv = document.querySelector('.mc-coin');
-  var svgCoin = document.querySelector('.mc-coaster');
   var hero = document.querySelector('.mc-hero');
   var stage = document.querySelector('.mc-hero__pin');
   if (!mv || !hero || !stage) { return; }
@@ -54,7 +53,8 @@
     hero.classList.add('has-coin3d');
   });
   mv.addEventListener('error', function () {
-    /* leave the SVG coin in place; it is already correct and already driven */
+    /* the model-viewer poster stays up: a still of this same coin, so a failed
+       load shows the right object rather than a hole or a different one */
     hero.classList.remove('has-coin3d');
   });
 

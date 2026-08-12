@@ -70,7 +70,7 @@
           <!-- ANIMATED HERO SLOT — replace media layer only -->
           <!-- Two generated layers occupy the slot: the receding hex field
                (hero-field.js) and the scroll-scrubbed hex platform
-               (hero-coaster.js, geometry measured off the owner's
+               (hero-coin-pose.js, which owns the float, the drag-spin
                hexagonal-metal-coaster.obj). Both are aria-hidden decorative
                texture -- they state nothing the claim does not already say, so
                announcing them would only add noise to a screen reader. -->
@@ -107,62 +107,22 @@
         <model-viewer class="mc-coin" src="../../../assets/3d/dispenza-coin.glb"
                       alt="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."
                       camera-orbit="90deg 90deg 2.75m" field-of-view="22deg"
-                      environment-image="../../../assets/3d/studio-violet.png"
-                      exposure="1.25" tone-mapping="aces"
+                      poster="../../../assets/3d/coin-poster.webp"
+                      environment-image="../../../assets/3d/studio-lensshine.hdr"
+                      exposure="1.15" tone-mapping="aces"
                       shadow-intensity="0"   /* floating: a contact shadow implies a surface */
                       disable-zoom disable-pan disable-tap
                       interaction-prompt="none" camera-controls="false"
                       loading="eager"></model-viewer>
 
-        <!-- The SVG solid stays as the FALLBACK, hidden once the model reports
-             loaded. It is a complete, self-contained coin with no runtime cost,
-             so a WebGL-less or slow client still gets an object in the hero
-             rather than a hole. hero-coaster.js keeps driving it either way,
-             which is also what supplies the pose the model is slaved to. -->
-        <svg class="mc-coaster" viewBox="0 0 1400 900"
-             preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-          <defs>
-            <filter id="coasterShadow" x="-60%" y="-160%" width="220%" height="420%">
-              <feGaussianBlur stdDeviation="18"/>
-            </filter>
-            <!-- POLISHED METAL IS A GRADIENT, NOT A TONE. A flat fill lit by a
-                 single Lambert term gave the rim one value across its whole face
-                 and it read as grey paint. A mirror's character is that it
-                 reflects its surroundings, so it swings bright-to-dark across the
-                 surface; these two ramps supply that, and the per-face Lambert
-                 still modulates them as the coin turns. -->
-            <linearGradient id="coinRim" x1="0.08" y1="0" x2="0.92" y2="1">
-              <stop offset="0%"   stop-color="#ffffff"/>
-              <stop offset="18%"  stop-color="#e3e3e3"/>
-              <stop offset="42%"  stop-color="#9d95a8"/>
-              <stop offset="63%"  stop-color="#f2eef7"/>
-              <stop offset="82%"  stop-color="#6d6478"/>
-              <stop offset="100%" stop-color="#3a3442"/>
-            </linearGradient>
-            <linearGradient id="coinEnamel" x1="0.1" y1="0" x2="0.9" y2="1">
-              <stop offset="0%"   stop-color="#7a4bc8"/>
-              <stop offset="38%"  stop-color="#5a2ea0"/>
-              <stop offset="72%"  stop-color="#3d1a72"/>
-              <stop offset="100%" stop-color="#2a1152"/>
-            </linearGradient>
-          </defs>
-          <!-- All three layers ride in ONE group so the anti-overlap pass can
-               translate the whole token as a unit after measuring it. -->
-          <g class="mc-coaster__all">
-            <ellipse class="mc-coaster__shadow" cx="700" cy="700" rx="0" ry="0"
-                     fill="#000" opacity="0" filter="url(#coasterShadow)"/>
-            <g class="mc-coaster__faces"></g>
-            <!-- The client's real mark, struck into the token's face. Supplied as
-                 a JPEG on pure black; keyed to alpha and cropped to its content
-                 so it composites on the dark face instead of sitting in a black
-                 square. It is laid out in a 64x64 box so it takes the SAME affine
-                 matrix the vector chevron used -- the projection code did not
-                 change to accommodate it. -->
-            <image class="mc-coaster__mark" x="0" y="0" width="64" height="64"
-                   preserveAspectRatio="xMidYMid meet" opacity="0"
-                   href="../../../assets/brand/dispenza-token-mark.png"></image>
-          </g>
-        </svg>
+        <!-- No SVG fallback coin any more. A hand-drawn parametric coin used to
+             sit behind the model for the no-WebGL path; the owner retired that
+             object outright ("this version of the coin should no longer exist"),
+             so the fallback is now a POSTER -- a still frame of this very model,
+             rendered offline. Nobody is shown a different coin: the fallback is
+             the same object, it simply does not move. model-viewer swaps the
+             poster out for the live scene once the GLB is ready, and keeps it if
+             WebGL is unavailable. -->
 
         <div class="mc-hero__content mc-type">
           <p class="mc-eyebrow" data-reveal>Since 2012</p>
@@ -194,6 +154,6 @@
 <!-- Loaded AFTER the section so the svg it fills already exists in the DOM; no
      DOMContentLoaded wrapper is needed and none is used. -->
 <script src="../../hero/hero-field.js"></script>
-<script src="../../hero/hero-coaster.js"></script>
+<script src="../../hero/hero-coin-pose.js"></script>
 <script src="../../hero/hero-coin3d.js"></script>
 <script src="../../hero/hero-smoke.js"></script>

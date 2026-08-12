@@ -35,10 +35,10 @@
   'use strict';
 
   var cv = document.querySelector('.mc-smoke');
-  var svg = document.querySelector('.mc-coaster');
+  var coin = document.querySelector('.mc-coin');
   var hero = document.querySelector('.mc-hero');
   var pin = document.querySelector('.mc-hero__pin');
-  if (!cv || !svg || !hero || !pin) { return; }
+  if (!cv || !coin || !hero || !pin) { return; }
   var ctx = cv.getContext('2d');
   if (!ctx) { return; }
 
@@ -120,19 +120,12 @@
   /* the emitter tracks the TOKEN, wherever the coaster has placed it, so the
      smoke stays attached to the object rather than to a hardcoded point */
   function locateSource() {
-    /* TRACK WHICHEVER COIN IS ACTUALLY ON SCREEN.
-       This used to read the SVG coin's bbox unconditionally. Once the GLB coin
-       took over, the SVG one became display:none -- so its rect is 0x0, the
-       guard below bailed, and the emitter stayed at its initial (0,0): the smoke
-       would have spawned in the top-left corner instead of around the coin.
-       Prefer the model when it is the visible one, fall back to the SVG. */
-    var coin3d = document.querySelector('.mc-coin');
-    var g = null;
-    if (coin3d && hero.classList.contains('has-coin3d')) { g = coin3d; }
-    if (!g) { g = svg.querySelector('.mc-coaster__all'); }
-    if (!g) { return; }
+    /* The emitter tracks the coin. This used to read the SVG coin's bbox, which
+       became 0x0 the day the model took over -- the guard below bailed and the
+       smoke would have spawned at (0,0) in the corner. There is only one coin
+       now, so there is only one box to read. */
     var b;
-    try { b = g.getBoundingClientRect(); } catch (e) { return; }
+    try { b = coin.getBoundingClientRect(); } catch (e) { return; }
     if (!b || !b.width) { return; }
     var pr = pin.getBoundingClientRect();
     src.x = b.left - pr.left + b.width / 2;
