@@ -59,6 +59,11 @@
      micro   : eyebrows, spec keys, table headers, labels. */
   --ds-step-display: clamp(46px, 6.6vw, 86px);
   --ds-step-head:    clamp(34px, 3.8vw, 48px);
+  /* one rung BELOW the section head, for sub-titles that are not the section's
+     own heading. The service titles were set at full head scale, which is why
+     each service row stood 277-330px tall and why "Web design and development"
+     wrapped to two lines inside the measure. */
+  --ds-step-sub:     clamp(24px, 2.5vw, 34px);
   --ds-step-figure:  clamp(38px, 4.4vw, 56px);
   /* THE METRIC BAND HAS ITS OWN STEP. --ds-step-figure is shared with
      .mc-table__price and .mc-plan__price, so sizing the numbers off it would
@@ -187,6 +192,29 @@
    needs a different interval, the concept is wrong, not the section.
    =========================================================================== */
 .mc-section{padding:var(--ds-rhythm) 0;background:var(--ds-bg-surface)}
+/* THE JOINT BETWEEN TWO SECTIONS IS ONE RHYTHM, NOT TWO.
+   Every section pays --ds-rhythm top AND bottom, so where two of them meet the
+   page pays it twice: measured at 1440, 151px of bottom padding plus 151px of
+   top padding = 302px of dead space between the last stat and the next eyebrow,
+   with the sections themselves flush (gap 0). That is not a rhythm, it is a
+   hole -- and it was invisible in any single-section view.
+
+   Where the background does not change there is no panel edge to breathe
+   against, so the opening padding is dropped and the interval is exactly one
+   rhythm. Where it DOES change -- into a warm panel, or out of a full-bleed
+   band -- the incoming section keeps its own opening interval, because there
+   the padding is holding content off a visible edge rather than off thin air. */
+/* ANY ANCHOR TARGET MUST CLEAR THE FIXED HEADER. The chrome is position:fixed,
+   so a jump to #main (the skip link) or to any future in-page anchor lands the
+   target UNDER the bar -- for the skip link that means a keyboard user is sent
+   to content they cannot see, which is the one job that link has. */
+section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md))}
+
+.mc-section + .mc-section:not(.mc-section--warm):not(.mc-section--band){padding-top:0}
+.mc-section--warm + .mc-section:not(.mc-section--warm):not(.mc-section--band),
+.mc-section--band + .mc-section:not(.mc-section--warm):not(.mc-section--band){
+  padding-top:var(--ds-rhythm);
+}
 
 /* The one alternate ground. Used twice on the page (the spec module and the
    closing ask) so the page has real figure/ground without a stripe pattern. */
@@ -451,6 +479,30 @@
   letter-spacing:.16em;text-transform:uppercase;line-height:1.5;
   color:var(--ds-ink-soft);
 }
+
+/* -- COMPACT SECTION VARIANT ------------------------------------------------
+   Owner, on the suite section: "give me a more compact section layout".
+
+   A modifier rather than an #id rule, because the same problem recurs on every
+   section that repeats a sub-block: the inner interval and the sub-title scale
+   are both tuned for ONE block per section, and they read as sparse the moment a
+   section carries several. Three changes, all of them scale rather than
+   invention -- nothing is repositioned, so the measured column and the
+   alternating split survive intact:
+     - the inner interval steps down 64 -> 40
+     - the split's own gutter steps down 64 -> 40, which hands the width back to
+       the media column (the image was 368px against a 640px measure)
+     - sub-titles drop to --ds-step-sub, one rung below the section head
+   Measured effect at 1440: the suite section goes 1120px -> see the render
+   check; "Web design and development" also stops wrapping. */
+.mc-section--tight .container > .row + .row{margin-top:var(--ds-space-lg)}
+.mc-section--tight .row--split{gap:var(--ds-space-lg)}
+.mc-section--tight .row--split .mc-head{
+  font-size:var(--ds-step-sub);
+  letter-spacing:-.018em;
+}
+/* the lede under a sub-title does not need the full head interval either */
+.mc-section--tight .row--split .mc-body{margin-top:var(--ds-space-sm)}
 
 /* -- THE OUTLINED STATEMENT HEADING ---------------------------------------
    Owner: "I like the ALL-CAPS Text outline from the original source for this
