@@ -1,0 +1,458 @@
+/* =============================================================================
+   dispenza-chrome.css  --  THE LOCKED CHROME (owner pick, 2026-08-12)
+   Source: _design/_tournament/chrome-1-floating-rail/ (concept 1, "floating rail").
+   Sourced VERBATIM from the chrome winner. Chrome is a LOCKED BLOCK: it is not
+   grammar-governed and must not be re-derived per page.
+   Styles resolve entirely from dispenza-tokens.css. Zero raw hex.
+   ============================================================================= */
+
+/* ===========================================================================
+   0. RESET + PAGE GROUND
+   =========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--ds-bg-surface);
+  color:var(--ds-ink);
+  font-family:var(--ds-font-body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{margin:0;padding:0;list-style:none}
+h1,h2,h3,p{margin:0}
+
+/* Focus. One visible ring for every interactive role in the frame. */
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:3px;
+  border-radius:var(--ds-r-control);
+}
+
+.skip{
+  position:absolute;left:var(--ds-space-md);top:calc(-1 * var(--ds-space-2xl));
+  z-index:var(--ds-z-modal);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  background:var(--ds-bg-surface-2);color:var(--ds-ink);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-control);
+  font-size:14px;
+}
+.skip:focus{top:var(--ds-space-md)}
+
+/* Structure grammar: section > .container > .row > .col > object. */
+.container{width:100%;max-width:var(--ds-container-max);margin:0 auto;padding:0 var(--ds-space-md)}
+.row{display:flex;flex-wrap:wrap;gap:var(--ds-space-md)}
+.row--center{justify-content:center}
+.col{min-width:0;flex:1 1 100%}
+.col--measure{max-width:760px;margin:0 auto}
+.col--span-4{flex:1 1 260px}
+
+/* ===========================================================================
+   1. THE FLOATING RAIL
+   The shell is fixed and inset; the rail inside it is the floating surface.
+   At rest it is invisible glass over the hero. Scrolled, it is the one lit thing.
+   =========================================================================== */
+.rail-shell{
+  position:fixed;top:var(--ds-space-sm);left:0;right:0;
+  z-index:var(--ds-z-sticky);
+  padding:0 var(--ds-space-md);
+}
+.rail-dock{position:relative;max-width:var(--ds-container-max);margin:0 auto}
+
+.rail{
+  position:relative;
+  display:flex;align-items:center;gap:var(--ds-space-md);
+  padding:var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-md);
+  border:1px solid transparent;
+  border-radius:var(--ds-r-pill);
+  background:transparent;
+  transition:
+    background-color var(--ds-dur) var(--ds-ease),
+    border-color var(--ds-dur) var(--ds-ease),
+    box-shadow var(--ds-dur) var(--ds-ease),
+    backdrop-filter var(--ds-dur) var(--ds-ease);
+}
+.is-stuck .rail{
+  background:var(--ds-glass-bg);
+  -webkit-backdrop-filter:var(--ds-glass-blur);
+  backdrop-filter:var(--ds-glass-blur);
+  border-color:var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+}
+
+/* THE ONE GLOW. A gradient hairline catching the rail's lower edge, plus a soft
+   wash bloom beneath it. Both appear only in the scrolled state. */
+.rail::after,.rail::before{content:"";position:absolute;pointer-events:none;opacity:0;
+  transition:opacity var(--ds-dur) var(--ds-ease)}
+.rail::after{
+  left:9%;right:9%;bottom:-1px;height:1px;
+  background:var(--ds-grad-brand);
+}
+.rail::before{
+  left:14%;right:14%;bottom:calc(-1 * var(--ds-space-md));height:var(--ds-space-md);
+  background:var(--ds-glow-wash);
+  filter:blur(6px);
+}
+.is-stuck .rail::after{opacity:1}
+.is-stuck .rail::before{opacity:var(--ds-opacity-scrim)}
+
+.rail__logo{display:inline-flex;align-items:center;flex:0 0 auto;padding:var(--ds-space-2xs) 0}
+.rail__logo img{height:26px;width:auto}
+
+.rail__nav{flex:1 1 auto;display:flex;justify-content:center}
+.rail__list{display:flex;align-items:center;gap:var(--ds-space-2xs)}
+.rail__group{position:static}
+.rail__link{
+  position:relative;
+  display:inline-flex;align-items:center;gap:var(--ds-space-2xs);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  color:var(--ds-ink);
+  font-size:14px;line-height:1.2;font-weight:500;letter-spacing:.005em;
+  transition:color var(--ds-dur-fast) var(--ds-ease-out),background-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.rail__link:hover{color:var(--ds-ink-heading);background:var(--ds-accent-soft)}
+.rail__link[aria-current="page"]{color:var(--ds-ink-heading)}
+.rail__link[aria-current="page"]::after{
+  content:"";position:absolute;left:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-2xs);
+  height:2px;border-radius:var(--ds-r-pill);background:var(--ds-primary);
+}
+.rail__caret{width:9px;height:9px;flex:0 0 auto;transition:transform var(--ds-dur-fast) var(--ds-ease-out)}
+.rail__trigger[aria-expanded="true"]{color:var(--ds-ink-heading);background:var(--ds-accent-soft)}
+.rail__trigger[aria-expanded="true"] .rail__caret{transform:rotate(180deg)}
+.rail__ext{width:9px;height:9px;flex:0 0 auto;opacity:var(--ds-opacity-muted)}
+
+.rail__actions{display:flex;align-items:center;gap:var(--ds-space-xs);flex:0 0 auto}
+
+/* ===========================================================================
+   2. BUTTONS. The brand ships exactly two variants and this frame adds none.
+   =========================================================================== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--ds-space-2xs);
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border:1px solid transparent;border-radius:var(--ds-r-pill);
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;line-height:1;
+  white-space:nowrap;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out),
+             background-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.btn--solid{background:var(--ds-primary);color:var(--ds-ink-on-dark);box-shadow:var(--ds-shadow-rest)}
+.btn--solid:hover{transform:translateY(-3px);box-shadow:var(--ds-shadow-card)}
+.btn--ghost{border-color:var(--ds-primary);color:var(--ds-accent-ink);background:transparent}
+.btn--ghost:hover{transform:translateY(-3px);background:var(--ds-accent-soft)}
+.btn--wide{width:100%}
+
+/* ===========================================================================
+   3. THE FLOATING GROUP PANELS
+   Separate surfaces with the rail's corner language, not a full-width mega band.
+   =========================================================================== */
+.rail-panel{
+  position:absolute;top:calc(100% + var(--ds-space-xs));
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-lg);
+  opacity:0;visibility:hidden;
+  transform:translateY(-6px);
+  transition:opacity var(--ds-dur) var(--ds-ease),
+             transform var(--ds-dur) var(--ds-ease),
+             visibility var(--ds-dur) var(--ds-ease);
+}
+.rail-panel.is-open{opacity:1;visibility:visible;transform:translateY(0)}
+.rail-panel--services{left:0;right:0}
+.rail-panel--team{left:50%;margin-left:-270px;width:540px}
+
+.panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-sm);margin-bottom:var(--ds-space-md);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.panel__eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.panel__note{font-size:13px;color:var(--ds-ink-soft)}
+
+.panel__grid{display:grid;gap:var(--ds-space-2xs)}
+.panel__grid--services{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-lg)}
+.panel__grid--team{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-md)}
+
+.panel__item{
+  display:block;padding:var(--ds-space-sm);
+  border:1px solid transparent;border-radius:var(--ds-r-control);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             background-color var(--ds-dur-fast) var(--ds-ease-out),
+             border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.panel__item:hover{transform:translateY(-2px);background:var(--ds-bg-warm);border-color:var(--ds-line)}
+.panel__title{display:block;font-family:var(--ds-font-display);font-size:15px;font-weight:600;color:var(--ds-ink-heading);letter-spacing:-.005em}
+.panel__desc{display:block;margin-top:var(--ds-space-2xs);font-size:13px;line-height:1.5;color:var(--ds-ink-soft)}
+
+.panel__person{display:flex;align-items:center;gap:var(--ds-space-sm)}
+.panel__mono{
+  flex:0 0 auto;width:38px;height:38px;border-radius:var(--ds-r-pill);
+  display:grid;place-items:center;
+  background:var(--ds-primary-soft);border:1px solid var(--ds-line);
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.04em;
+  color:var(--ds-accent-ink);
+}
+
+/* ===========================================================================
+   4. BURGER + MOBILE DRAWER. The drawer is the rail's own language at 375:
+   an inset floating card, not an edge-to-edge takeover.
+   =========================================================================== */
+.rail__burger{
+  display:none;flex:0 0 auto;
+  width:42px;height:42px;border-radius:var(--ds-r-pill);
+  border:1px solid var(--ds-line);
+  align-items:center;justify-content:center;
+}
+.rail__burger span{display:block;width:16px;height:2px;background:var(--ds-ink);border-radius:var(--ds-r-pill)}
+.rail__burger span + span{margin-top:4px}
+
+.drawer-scrim{
+  position:fixed;inset:0;z-index:var(--ds-z-overlay);
+  background:var(--ds-scrim);
+  opacity:0;visibility:hidden;
+  transition:opacity var(--ds-dur) var(--ds-ease),visibility var(--ds-dur) var(--ds-ease);
+}
+.is-drawer-open .drawer-scrim{opacity:1;visibility:visible}
+
+.drawer{
+  position:fixed;z-index:var(--ds-z-drawer);
+  top:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-sm);
+  width:min(340px,calc(100vw - var(--ds-space-md)));
+  display:flex;flex-direction:column;
+  padding:var(--ds-space-md);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  overflow-y:auto;
+  transform:translateX(calc(100% + var(--ds-space-lg)));
+  visibility:hidden;
+  transition:transform var(--ds-dur) var(--ds-ease),visibility var(--ds-dur) var(--ds-ease);
+}
+.is-drawer-open .drawer{transform:translateX(0);visibility:visible}
+
+.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-md);border-bottom:1px solid var(--ds-hairline)}
+.drawer-head img{height:24px;width:auto}
+.drawer-close{width:38px;height:38px;border-radius:var(--ds-r-pill);border:1px solid var(--ds-line);
+  display:grid;place-items:center;color:var(--ds-ink)}
+.drawer-nav{padding:var(--ds-space-sm) 0;flex:1 1 auto}
+.drawer-nav > ul > li + li{border-top:1px solid var(--ds-hairline)}
+.drawer-link,.acc-trigger{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--ds-space-sm);
+  width:100%;padding:var(--ds-space-sm) var(--ds-space-2xs);
+  font-family:var(--ds-font-display);font-size:16px;font-weight:600;color:var(--ds-ink);
+  text-align:left;
+}
+.drawer-link[aria-current="page"]{color:var(--ds-accent-ink)}
+.acc-trigger[aria-expanded="true"]{color:var(--ds-ink-heading)}
+.acc-trigger[aria-expanded="true"] .rail__caret{transform:rotate(180deg)}
+.acc-sub{display:none;padding:0 0 var(--ds-space-sm) var(--ds-space-sm)}
+.acc-sub.is-open{display:block}
+.acc-sub a{display:block;padding:var(--ds-space-xs) 0;font-size:14px;color:var(--ds-ink-soft)}
+.acc-sub a:hover{color:var(--ds-ink)}
+.drawer-cta{display:grid;gap:var(--ds-space-xs);padding-top:var(--ds-space-md);border-top:1px solid var(--ds-hairline)}
+
+/* ===========================================================================
+   5. STICKY ACTION BAR (mobile). A floating pill inset from all three edges,
+   the same geometry as the rail, so the frame reads as one system.
+   =========================================================================== */
+.sticky-cta{
+  position:fixed;z-index:var(--ds-z-sticky);
+  left:var(--ds-space-md);right:var(--ds-space-md);bottom:var(--ds-space-md);
+  display:none;align-items:center;gap:var(--ds-space-xs);
+  padding:var(--ds-space-2xs);
+  background:var(--ds-glass-bg);
+  -webkit-backdrop-filter:var(--ds-glass-blur);
+  backdrop-filter:var(--ds-glass-blur);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-pill);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+  transition:opacity var(--ds-dur) var(--ds-ease),transform var(--ds-dur) var(--ds-ease);
+}
+.sticky-cta .btn{flex:1 1 auto}
+.sticky-cta .btn--ghost{flex:0 1 40%}
+.sticky-cta.is-hidden{opacity:0;transform:translateY(140%);pointer-events:none}
+
+/* ===========================================================================
+   6. SCAFFOLDING BODY (hero band + one content band). Not the deliverable.
+   =========================================================================== */
+.hero{
+  position:relative;overflow:hidden;
+  background:var(--ds-bg-warm);
+  padding:calc(var(--ds-section-py) + var(--ds-space-2xl)) 0 var(--ds-section-py);
+  text-align:center;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--ds-grid);background-size:var(--ds-grid-size);
+  opacity:var(--ds-opacity-texture);
+  -webkit-mask-image:linear-gradient(180deg,black 0%,transparent 78%);
+  mask-image:linear-gradient(180deg,black 0%,transparent 78%);
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:var(--ds-divider-h);
+  background:var(--ds-fade-to-paper);
+}
+.hero .container{position:relative;z-index:var(--ds-z-raised)}
+.eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.h-hero{
+  margin:var(--ds-space-md) 0 var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:clamp(38px,5.4vw,64px);line-height:1.04;letter-spacing:-.028em;
+  font-weight:800;color:var(--ds-ink-heading);
+}
+.lead{font-size:clamp(16px,1.5vw,18px);line-height:1.65;color:var(--ds-ink-soft)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm);justify-content:center;margin-top:var(--ds-space-lg)}
+
+.suite{padding:var(--ds-section-py) 0;background:var(--ds-bg-surface)}
+.sec-head{max-width:640px;margin:0 0 var(--ds-space-xl)}
+.h2{margin-top:var(--ds-space-sm);font-family:var(--ds-font-display);font-size:clamp(26px,3vw,38px);
+  line-height:1.12;letter-spacing:-.02em;font-weight:700;color:var(--ds-ink-heading)}
+.svc{
+  display:block;height:100%;padding:var(--ds-space-lg);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.svc:hover{transform:translateY(-4px);box-shadow:var(--ds-shadow-lift)}
+.svc h3{font-family:var(--ds-font-display);font-size:18px;font-weight:600;color:var(--ds-ink-heading);letter-spacing:-.01em}
+.svc p{margin-top:var(--ds-space-xs);font-size:14px;color:var(--ds-ink-soft)}
+.svc-index{display:block;margin-bottom:var(--ds-space-sm);font-family:var(--ds-font-display);
+  font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ds-accent-ink)}
+
+/* ===========================================================================
+   7. THE FOOTER CARD. The brand signature: dark charcoal, rounded, inset from
+   the page edge, so it answers the rail as the second floating surface.
+   =========================================================================== */
+.site-footer{padding:var(--ds-space-2xl) var(--ds-space-md) var(--ds-space-lg)}
+.footer-card{
+  max-width:var(--ds-container-max);margin:0 auto;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+  overflow:hidden;
+}
+.f-row{padding:var(--ds-space-lg) var(--ds-space-lg)}
+.f-row + .f-row{border-top:1px solid var(--ds-hairline)}
+.f-row--contact{display:flex;flex-wrap:wrap;gap:var(--ds-space-xl);justify-content:space-between}
+.f-brand{flex:1 1 280px;max-width:380px}
+.f-brand img{height:28px;width:auto}
+.f-brand p{margin-top:var(--ds-space-sm);font-size:14px;color:var(--ds-ink-soft)}
+.f-contact{flex:0 1 340px;display:grid;gap:var(--ds-space-sm);align-content:start}
+.f-label{font-family:var(--ds-font-display);font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-accent-ink)}
+.f-contact a,.f-contact address{font-style:normal;font-size:15px;color:var(--ds-ink);line-height:1.5}
+.f-contact a{transition:color var(--ds-dur-fast) var(--ds-ease-out)}
+.f-contact a:hover{color:var(--ds-accent-ink)}
+.f-row--links{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ds-space-md) var(--ds-space-xl);
+  padding-top:var(--ds-space-md);padding-bottom:var(--ds-space-md)}
+.f-links{display:flex;flex-wrap:wrap;gap:var(--ds-space-md) var(--ds-space-lg)}
+.f-links a{position:relative;font-size:15px;color:var(--ds-ink);padding:var(--ds-space-2xs) 0}
+.f-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--ds-primary);transition:right var(--ds-dur) var(--ds-ease)}
+.f-links a:hover::after{right:0}
+.f-row--legal{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm) var(--ds-space-lg);
+  justify-content:space-between;align-items:center;
+  padding-top:var(--ds-space-sm);padding-bottom:var(--ds-space-sm);
+  background:var(--ds-bg-warm)}
+.f-fine{font-size:13px;color:var(--ds-ink-soft)}
+
+/* ===========================================================================
+   8. THE 375 DRAWER SPECIMEN (a second frame, so the open drawer is judgeable
+   at desktop width). It is a static reproduction, clearly labelled, and sits
+   outside the page proper.
+   =========================================================================== */
+.specimen{padding:0 var(--ds-space-md) var(--ds-space-2xl);background:var(--ds-bg-surface)}
+.specimen-inner{max-width:var(--ds-container-max);margin:0 auto;
+  border-top:1px solid var(--ds-hairline);padding-top:var(--ds-space-xl)}
+.specimen-head{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm) var(--ds-space-md);
+  align-items:baseline;justify-content:space-between;margin-bottom:var(--ds-space-lg)}
+.specimen-stage{display:flex;flex-wrap:wrap;gap:var(--ds-space-xl)}
+.device{
+  position:relative;width:375px;max-width:100%;height:640px;overflow:hidden;
+  background:var(--ds-bg-warm);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card);
+}
+.device::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--ds-grid);background-size:var(--ds-grid-size);
+  opacity:var(--ds-opacity-texture);
+}
+.device-scrim{position:absolute;inset:0;background:var(--ds-scrim)}
+.spec-bar{position:absolute;top:var(--ds-space-sm);left:var(--ds-space-sm);right:var(--ds-space-sm);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);background:var(--ds-glass-bg);border:1px solid var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-rest)}
+.spec-bar img{height:20px;width:auto}
+.spec-drawer{
+  position:absolute;top:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-sm);
+  width:300px;display:flex;flex-direction:column;overflow:hidden;
+  padding:var(--ds-space-md);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+}
+.spec-caption{max-width:340px;font-size:14px;color:var(--ds-ink-soft)}
+.spec-caption strong{color:var(--ds-ink);font-weight:600}
+.spec-caption ul{margin-top:var(--ds-space-sm);display:grid;gap:var(--ds-space-xs)}
+.spec-caption li{padding-left:var(--ds-space-sm);border-left:2px solid var(--ds-primary)}
+
+/* ===========================================================================
+   9. RESPONSIVE
+   =========================================================================== */
+@media (max-width:1023px){
+  .rail__nav,.rail__actions{display:none}
+  .rail__burger{display:inline-flex}
+  /* The compressed rail tightens its right padding so the burger hugs the rail's
+     own right edge: at 375 the burger is the rightmost control and sits within
+     4px of the header's content edge, which is the mobile-chrome rule. */
+  .rail{justify-content:space-between;padding-right:var(--ds-space-2xs)}
+  .rail-panel{display:none}
+}
+@media (max-width:900px){
+  .sticky-cta{display:flex}
+  .site-footer{padding-bottom:calc(var(--ds-space-2xl) + var(--ds-space-lg))}
+}
+@media (max-width:767px){
+  .f-row{padding:var(--ds-space-lg) var(--ds-space-md)}
+  .f-row--contact{gap:var(--ds-space-lg)}
+  .hero{padding-top:calc(var(--ds-section-py) + var(--ds-space-lg))}
+}
+
+/* ===========================================================================
+   10. REDUCED MOTION. Every transform is dropped and every surface is shown in
+   its resting, fully visible state. No information is lost.
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    transition-duration:1ms !important;
+    animation-duration:1ms !important;
+    animation-iteration-count:1 !important;
+  }
+  .btn:hover,.svc:hover,.panel__item:hover{transform:none}
+  .rail-panel,.rail-panel.is-open{transform:none}
+  .drawer{transform:translateX(0);display:none}
+  .is-drawer-open .drawer{display:flex}
+  .sticky-cta.is-hidden{transform:none}
+}

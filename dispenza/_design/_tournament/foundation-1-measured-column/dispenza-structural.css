@@ -1,0 +1,755 @@
+/* =============================================================================
+   dispenza-structural.css  ..  FOUNDATION CANDIDATE 1, "MEASURED COLUMN"
+   Tournament artifact (b): THE BODY CSS THIS CONCEPT PROPOSES.
+
+   This file IS the extraction target. If concept 1 wins, it is copied verbatim to
+   _design/dispenza-structural.css. Nothing else has to be lifted out of the
+   specimen: the specimen links this sheet, it does not inline a second copy, so
+   there is no chance of the two drifting apart.
+
+   WHAT IS LOCKED AND NOT TOUCHED HERE.
+   The identity (dispenza-tokens.css, brand concept 3 "luminous depth") and the
+   frame (dispenza-chrome.css, chrome concept 1 "floating rail") are owner-locked.
+   This sheet styles the BODY ONLY. It declares no colour, no radius, no shadow and
+   no spacing of its own: every one of those resolves to a var(--ds-*) token.
+
+   TOKEN PURITY. Zero raw hex. Zero rgb()/rgba() literals. Where a scrim needs a
+   partly transparent brand plane it is built with color-mix() over the token, so
+   the colour still comes from the locked palette and nowhere else. Raw px survives
+   only where the token system carries no value at all: type sizes, line heights,
+   the measure, hairline widths and the media-query breakpoints. That is the same
+   boundary dispenza-chrome.css already declared.
+
+   THE ADDED CUSTOM PROPERTIES are all --ds- prefixed and all declared in section 1
+   in the open. They are STRUCTURAL-layer additions (a type ladder, a measure, a
+   rhythm interval, the owner's reveal curve). They add no colour and change no
+   locked identity value.
+
+   THE CONCEPT IN ONE PARAGRAPH. The body is built around a strict text measure that
+   never widens. It sits in generous dark space and holds the same left axis all the
+   way down the page. Full-bleed imagery interrupts it as deliberate events. The
+   vertical interval between sections is ONE value repeated without exception, so
+   the page reads metered; the only thing that varies is whether a section is text,
+   image, or a spec module. Type does the work: one large Montserrat display step
+   against one small DM Sans body step, with a deliberate void between them and
+   nothing in the middle. Motion is one gesture, the fade and rise, used identically
+   everywhere until it stops reading as an effect and starts reading as rhythm.
+   ============================================================================= */
+
+
+/* ===========================================================================
+   1. CONCEPT ADDITIONS  ..  the four things this concept adds to the token set.
+   Every value below is a SIZE, a DURATION or a CURVE. No colour is introduced.
+   =========================================================================== */
+:root{
+
+  /* -- THE TYPE LADDER ----------------------------------------------------
+     Four steps and a void. There is deliberately NOTHING between 34px and
+     17px: no 20px lead, no 24px subhead, no 28px standfirst. The gap IS the
+     concept. Emphasis inside the body is carried by colour and weight, never
+     by a size that would fill the void back in.
+
+     display : the hero line, once per page.
+     head    : every section head and the pull-quote. One size for all of them,
+               which is what makes the page feel metered rather than ranked.
+     figure  : metric numerals only. Display face, tabular, and floored at 38px
+               so a stat never shrinks to body size on a phone.
+     ---- the void: nothing renders between 34px and 17px ----
+     body    : one body size for the whole page, lead paragraphs included.
+     micro   : eyebrows, spec keys, table headers, labels. */
+  --ds-step-display: clamp(46px, 6.6vw, 86px);
+  --ds-step-head:    clamp(34px, 3.8vw, 48px);
+  --ds-step-figure:  clamp(38px, 4.4vw, 56px);
+  --ds-step-body:    17px;
+  --ds-step-micro:   12px;
+
+  /* -- THE MEASURE --------------------------------------------------------
+     68ch of DM Sans at 17px lands at roughly 68 characters, inside the 65 to
+     72 window the owner set. The px cap is a backstop so a font-load failure
+     cannot let the column run away to the full container width. This value is
+     the spine of the concept: it never widens, in any section, at any width. */
+  --ds-measure: min(68ch, 640px);
+
+  /* -- THE RHYTHM ---------------------------------------------------------
+     ONE interval, repeated. Every body section pays exactly this top and
+     bottom. Nothing gets a bespoke pad. 96px to 160px on desktop, retuned to
+     64px to 80px on phones in section 10, both per the owner brief. */
+  --ds-rhythm: clamp(96px, 10.5vw, 160px);
+
+  /* -- THE MOTION CONTRACT ------------------------------------------------
+     The owner's scroll-reveal spec is binding and is not in the token set, so
+     it is declared here: fade plus 20px rise, 520ms, cubic-bezier(.16,1,.3,1),
+     once, at 15% viewport entry, 70ms stagger inside a group. The image
+     scale-in gets its own slightly longer duration. */
+  --ds-ease-reveal:  cubic-bezier(.16, 1, .3, 1);
+  --ds-dur-reveal:   520ms;
+  --ds-dur-media:    600ms;
+  --ds-rise:         20px;
+  --ds-stagger:      70ms;
+}
+
+
+/* ===========================================================================
+   2. STRUCTURE  ..  the forced grammar: section > .container > .row > .col > object.
+   .container / .row / .col carry LAYOUT ONLY. Every skin class below lives on the
+   OBJECT inside the .col, never on a structure layer. The base .container / .row /
+   .col rules already ship in dispenza-chrome.css; this section adds only the
+   modifiers the body needs.
+   =========================================================================== */
+
+/* A full-bleed band drops the max-width and the side gutter so its media can run
+   edge to edge. It stays a .container so the grammar is unbroken. */
+.container--full{max-width:none;padding:0}
+
+/* THE MEASURE, applied. dispenza-chrome.css ships .col--measure at a flat 760px
+   for its scaffolding; the body overrides it to the real measure and pins it to
+   the LEFT axis rather than centring it, because a column that re-centres itself
+   section by section is exactly the wobble this concept exists to remove. */
+.col--measure{max-width:var(--ds-measure);margin:0}
+
+/* The split row: measure on one side, media on the other. The measure keeps its
+   exact width and the media takes what is left, so the text column is identical
+   in a split and in a plain text section. align-items:stretch lets the media
+   frame match the copy column's height instead of floating in dead space. */
+.row--split{flex-wrap:nowrap;align-items:stretch;gap:var(--ds-space-xl)}
+.row--split > .col--measure{flex:0 1 var(--ds-measure)}
+.row--split > .col--media{flex:1 1 0;min-width:0}
+.row--split-rev{flex-direction:row-reverse}
+
+/* THE INNER INTERVAL. The rhythm rule governs the gap BETWEEN sections; this
+   governs the gap between rows INSIDE one, and it is likewise a single repeated
+   value rather than a per-row decision. Without it consecutive rows sit flush and
+   a section head collides with the row beneath it (caught on the render). */
+.mc-section .container > .row + .row{margin-top:var(--ds-space-xl)}
+
+/* The figure row: four metrics in open space, divided by hairlines, never carded. */
+.row--figures{flex-wrap:nowrap;gap:0}
+.row--figures > .col{flex:1 1 0;min-width:0}
+
+
+/* ===========================================================================
+   3. TYPE ATOMS  ..  the ladder from section 1, applied. These are objects.
+   =========================================================================== */
+.mc-eyebrow{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;line-height:1.4;
+  color:var(--ds-accent-ink);            /* 5.71:1 on the canvas. Never the raw violet. */
+}
+.mc-display{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-display);font-weight:800;
+  line-height:1.02;letter-spacing:-.032em;
+  color:var(--ds-ink-heading);
+  margin:var(--ds-space-md) 0 0;
+}
+/* The second line of the hero claim carries the brand light. It is DISPLAY size,
+   so the gradient text sits far above the 3:1 large-text floor even at its
+   darkest stop, and it is the only gradient text on the page. */
+.mc-display__turn{
+  background:var(--ds-grad-text);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  display:block;
+}
+.mc-head{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-head);font-weight:700;
+  line-height:1.1;letter-spacing:-.022em;
+  color:var(--ds-ink-heading);
+  margin:var(--ds-space-sm) 0 0;
+}
+.mc-body{
+  font-size:var(--ds-step-body);line-height:1.72;
+  color:var(--ds-ink-soft);              /* 6.83:1 on the canvas */
+  margin:var(--ds-space-md) 0 0;
+}
+/* The ONE emphasis move available inside body copy: brighter ink, same size.
+   This is what replaces the missing middle of the type ladder. */
+.mc-body--lead{color:var(--ds-ink)}      /* 16.42:1 on the canvas */
+
+.mc-actions{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm);margin-top:var(--ds-space-lg)}
+
+/* Screen-reader-only, with a real rule behind it. */
+.mc-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+
+/* ===========================================================================
+   4. THE RHYTHM  ..  one interval, every section, no exceptions.
+   This single rule is the concept's whole claim about pacing. If a section ever
+   needs a different interval, the concept is wrong, not the section.
+   =========================================================================== */
+.mc-section{padding:var(--ds-rhythm) 0;background:var(--ds-bg-surface)}
+
+/* The one alternate ground. Used twice on the page (the spec module and the
+   closing ask) so the page has real figure/ground without a stripe pattern. */
+.mc-section--warm{background:var(--ds-bg-warm)}
+
+/* A full-bleed band pays NO padding of its own. The interval is still exactly one
+   rhythm unit on each side, paid by the neighbouring sections, so the metronome
+   never breaks while the image is free to touch both page edges. */
+.mc-section--band{padding:0}
+
+
+/* ===========================================================================
+   5. KIND A  ..  THE HERO. MOVED OUT OF THIS SHEET, 2026-08-12.
+
+   Every .mc-hero* rule now lives in _design/hero/hero-section.css, alongside
+   hero-section.html and hero-field.js. This sheet is the GLOBAL body sheet that
+   every page inherits, and client-rules.json -> heroContract.style_isolation is
+   explicit: "no hero-specific styles may leak into global CSS". Keeping section 5
+   here satisfied the LAYER separation the contract also asks for while quietly
+   failing the STYLE isolation, so the rules were lifted when the media layer was
+   swapped from the raster placeholder to the generated isometric field.
+
+   Nothing was rewritten in the move except the comments that referred to the
+   media as "the photograph". The hero's contrast guarantee, its stacking-context
+   note and its containing-block note travelled with the rules, because each of
+   them records a defect that was caught on a render and would otherwise be
+   reintroduced by whoever touches the sheet next.
+
+   Consumers must link hero-section.css and load hero-field.js. A page that links
+   only this sheet renders the hero unstyled, which is the intended loud failure:
+   a silently unstyled hero is worse than an obviously missing one.
+   =========================================================================== */
+
+
+/* ===========================================================================
+   5b. KIND D  ..  THE CLIENT MARQUEE. Borrowed credibility, drifting past.
+
+   Built FROM the design system, not invented: TRUST-STATS-SECTIONS.md #2
+   "Trust bar - logo marquee", whose composition specifies the edge gradient
+   mask, a width:max-content track carrying set A plus a duplicate set B,
+   translateX(0 -> -50%) on an infinite linear loop for a seamless wrap,
+   pause-on-hover, and built-in reduced-motion gating. Every one of those is
+   implemented below.
+
+   ONE HONEST FLAG. "autoplay carousels" is on the owner's forbidden motion list
+   in client-rules.json, and a marquee is one. It is here because the owner asked
+   for it by name and matched it to their own live site, where this strip already
+   runs. It needs a decisions-ledger entry before ship. It is mitigated the way
+   the DS pattern prescribes: it pauses on hover, it stops entirely when the
+   section leaves the viewport, and under prefers-reduced-motion it becomes a
+   static, horizontally scrollable row with the duplicate set removed so no
+   content is announced twice.
+
+   THE MASK COLOUR IS A TOKEN, NOT #000. A mask only reads ALPHA, so the stop
+   colour is arbitrary as long as it is opaque -- but G8 holds structural sheets
+   token-pure, and "it is only a mask" is exactly the kind of exception that
+   turns into a brand hex somewhere real. --ds-ink-on-dark is opaque and costs
+   nothing.
+
+   THE MARKS ARE MONOCHROME BY DESIGN. Twelve dispensary brands in twelve
+   different palettes would fight each other and the page; holding them all at
+   one ink and one opacity is what makes a logo wall read as a roster rather than
+   as a collage. They lift on hover, which is also how a visitor learns the row
+   is interactive rather than decorative.
+   =========================================================================== */
+.mc-marquee{
+  position:relative;
+  padding:clamp(38px,4.6vw,62px) 0;
+  background:var(--ds-bg-warm);
+  border-top:1px solid var(--ds-line);
+  border-bottom:1px solid var(--ds-line);
+  overflow:hidden;
+}
+.mc-marquee__viewport{
+  position:relative;width:100%;overflow:hidden;
+  /* the edge mask: marks arrive and leave rather than being clipped mid-glyph */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,
+    var(--ds-ink-on-dark) 9%,var(--ds-ink-on-dark) 91%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,
+    var(--ds-ink-on-dark) 9%,var(--ds-ink-on-dark) 91%,transparent 100%);
+}
+/* THE SEAM MATHS, which a naive `gap` on the track silently breaks.
+   translateX(-50%) only wraps invisibly if the track is EXACTLY two identical
+   halves. Putting the gap on the track adds ONE extra gap between group A and
+   group B that belongs to neither half: measured at 1440 the track came out
+   3788px against 2 x 1851px of groups, an 86px discrepancy -- precisely one gap
+   -- so the loop jumped by that much every cycle. The gap therefore lives INSIDE
+   each group, and each group carries a trailing padding of the same size, so a
+   group's width includes its own separator and 2 x group == track exactly. */
+.mc-marquee{--mc-mq-gap:clamp(48px,6vw,104px)}
+.mc-marquee__track{
+  display:flex;align-items:center;
+  width:max-content;
+  gap:0;
+  will-change:transform;
+}
+.js .mc-marquee__track{animation:mc-marquee-run 46s linear infinite}
+/* the DS pattern's pause-on-hover, and our own stop-when-unseen */
+.mc-marquee:hover .mc-marquee__track{animation-play-state:paused}
+.mc-marquee.is-offscreen .mc-marquee__track{animation-play-state:paused}
+@keyframes mc-marquee-run{
+  from{transform:translateX(0)}
+  to  {transform:translateX(-50%)}
+}
+.mc-marquee__group{
+  display:flex;align-items:center;
+  gap:var(--mc-mq-gap);
+  padding-right:var(--mc-mq-gap);   /* the group owns its own trailing separator */
+}
+.mc-marquee__item{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  /* no height here: each mark's own --h defines it, and the flex row centres
+     them on a common axis, which is what makes a mixed roster look aligned */
+}
+/* PER-LOGO OPTICAL SIZING, COMPUTED FROM THE ARTWORK.
+
+   No CSS rule can equalise these by itself, because the source files disagree on
+   two things at once. MEASURED across the twelve marks: transparent padding runs
+   from 4.9% (Tree of Life) to 76.5% (NuLeaf), and ink aspect ratio runs from
+   1.00:1 to 4.79:1. A shared `height` therefore sizes the PADDED BOX, not the
+   mark -- which is why half the roster looked tiny -- and a shared `max-width`
+   just moves the problem onto the tall ones.
+
+   Fixed in two steps, both from measurement rather than eyeballing:
+     1. every mark is re-cropped to its own ink bounding box
+        (assets/brand/marquee/*.png), so a height now means the MARK's height;
+     2. each carries its own --h, computed as the geometric blend of an
+        equal-optical-mass height (ink area held constant: H = h * sqrt(T/ink))
+        and a common target. Pure equal-mass is theoretically right and wrong
+        here -- it drove the heavy wordmarks DOWN (MaryJane's to 24px) when the
+        ask was to bring the SMALL ones up. The blend raises the small marks hard
+        and barely touches the ones already reading well: the spread went from
+        24-62px to 35-57px. */
+.mc-marquee__item{--h:46px}
+.mc-marquee__item img{
+  display:block;
+  height:var(--h);
+  width:auto;max-width:none;
+  opacity:.72;
+  /* one ink for every mark. The source files are already light-on-transparent,
+     so grayscale() only guarantees it for any future mark that is not. */
+  filter:grayscale(1) brightness(1.35);
+  transition:opacity var(--ds-dur) var(--ds-ease-out),
+             filter var(--ds-dur) var(--ds-ease-out);
+}
+.mc-marquee__item img:hover{opacity:1;filter:grayscale(1) brightness(1.85)}
+
+@media (prefers-reduced-motion: reduce){
+  /* exactly the DS pattern's gate: animation off, mask removed, the track
+     becomes a real horizontal scroll region, and the duplicate set is hidden so
+     the roster is never doubled for a screen reader or a keyboard user. */
+  .js .mc-marquee__track{animation:none}
+  .mc-marquee__viewport{
+    -webkit-mask-image:none;mask-image:none;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+  }
+  .mc-marquee__group[data-dup="1"]{display:none}
+}
+
+
+/* ===========================================================================
+   6. KIND B  ..  THE BAND. A full-bleed photograph as a deliberate event.
+   Two on the page. This is the only place the page raises its voice, and it does
+   it with scale, not with decoration.
+   =========================================================================== */
+.mc-band{position:relative;overflow:hidden;isolation:isolate}
+.mc-band__media{position:absolute;inset:0;margin:0;overflow:hidden}
+/* The parallax layer is deliberately taller than the frame so a 0.94x drift never
+   exposes an edge. Motion is applied to transform only, in section 9. */
+.mc-band__media img{
+  width:100%;min-width:0;height:114%;object-fit:cover;object-position:center;
+  will-change:transform;
+}
+.mc-band__scrim{
+  position:absolute;inset:0;
+  background:
+    var(--ds-scrim),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--ds-bg-surface) 76%, transparent) 0%,
+      color-mix(in srgb, var(--ds-bg-surface) 30%, transparent) 62%,
+      color-mix(in srgb, var(--ds-bg-surface) 8%, transparent) 100%);
+}
+/* The band's own inner padding is generous because the band has no section
+   padding: this is where its height comes from. */
+.mc-band__inner{position:relative;z-index:var(--ds-z-raised);
+  padding:var(--ds-rhythm) var(--ds-space-md)}
+.mc-band__inner .mc-band__hold{max-width:var(--ds-container-max);margin:0 auto}
+
+/* Over a photograph the page uses HEADING ink and BODY ink only. No small accent
+   text and no muted grey ever sits on a photo: the scrim guarantees 8.12:1 and
+   7.37:1 respectively against a pure-white underlying pixel, but it cannot
+   guarantee the 4.5:1 those two lighter roles would need. */
+.mc-band__eyebrow{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ds-ink-on-dark);
+}
+.mc-band__line{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-head);font-weight:700;
+  line-height:1.1;letter-spacing:-.022em;
+  color:var(--ds-ink-heading);
+  max-width:var(--ds-measure);
+  margin:var(--ds-space-md) 0 0;
+}
+.mc-band__note{
+  font-size:var(--ds-step-body);line-height:1.72;
+  color:var(--ds-ink);
+  max-width:var(--ds-measure);
+  margin:var(--ds-space-md) 0 0;
+}
+/* The results pair, set as two metered rows rather than as cards. */
+.mc-band__pairs{margin:var(--ds-space-lg) 0 0;display:grid;gap:var(--ds-space-sm)}
+.mc-band__pair{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--ds-space-sm);
+  padding-top:var(--ds-space-sm);
+  border-top:1px solid var(--ds-glass-border);
+}
+.mc-band__city{
+  font-family:var(--ds-font-display);font-size:var(--ds-step-body);font-weight:600;
+  color:var(--ds-ink-on-dark);flex:0 0 auto;
+}
+.mc-band__lift{
+  font-family:var(--ds-font-display);font-size:var(--ds-step-figure);font-weight:700;
+  line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-heading);flex:0 0 auto;
+}
+.mc-band__win{font-size:var(--ds-step-body);color:var(--ds-ink);flex:1 1 auto}
+
+
+/* ===========================================================================
+   7. KIND C  ..  THE SPEC MODULE. Structured information at container width.
+   The one place the measure is allowed to be set aside, because a price ladder is
+   a TABLE, not prose. It reads as a different kind of object, not as a wider
+   column, which is exactly why the measure elsewhere still reads as deliberate.
+   =========================================================================== */
+
+/* -- the metric row (four figures in open space, hairline divided) ---------- */
+.mc-figure{
+  padding:0 var(--ds-space-md);
+  border-left:1px solid var(--ds-line);
+  height:100%;
+}
+.row--figures > .col:first-child > .mc-figure{border-left:0;padding-left:0}
+.mc-figure__n{
+  display:block;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);font-weight:700;
+  line-height:1;letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-heading);
+}
+.mc-figure__u{
+  font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.16em;color:var(--ds-accent-ink);
+}
+.mc-figure__k{
+  margin-top:var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;line-height:1.5;
+  color:var(--ds-ink-soft);
+}
+
+/* -- the price ladder table ------------------------------------------------- */
+.mc-table__wrap{
+  overflow-x:auto;
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  background:var(--ds-bg-surface-2);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+}
+.mc-table{width:100%;min-width:720px;border-collapse:collapse;text-align:left}
+/* COLUMN ALLOCATION. Three columns, not four: the monthly figure and the per
+   location add-on are the same question and share one cell, which buys the
+   feature list the width it needs. With four columns the list column measured
+   258px of 1070 and every line wrapped; at 54% it measures ~578px and reads as
+   a list instead of as a ragged block. */
+.mc-table th:nth-child(1),.mc-table td:nth-child(1){width:16%}
+.mc-table th:nth-child(2),.mc-table td:nth-child(2){width:30%}
+.mc-table th:nth-child(3),.mc-table td:nth-child(3){width:54%}
+.mc-table caption{
+  padding:var(--ds-space-md) var(--ds-space-md) 0;
+  font-size:var(--ds-step-body);color:var(--ds-ink-soft);text-align:left;
+}
+.mc-table th,.mc-table td{
+  padding:var(--ds-space-md);
+  vertical-align:top;
+  border-top:1px solid var(--ds-hairline);
+}
+.mc-table thead th{
+  border-top:0;
+  padding-top:var(--ds-space-lg);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ds-ink-soft);
+  white-space:nowrap;
+}
+.mc-table tbody th{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body);font-weight:700;
+  color:var(--ds-ink-heading);
+  white-space:nowrap;
+}
+.mc-table__idx{
+  display:block;
+  font-size:var(--ds-step-micro);font-weight:700;letter-spacing:.16em;
+  color:var(--ds-accent-ink);
+  margin-bottom:var(--ds-space-2xs);
+}
+.mc-table__price{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);font-weight:700;
+  line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-heading);
+  white-space:nowrap;
+}
+.mc-table__unit{
+  font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.12em;color:var(--ds-ink-soft);
+}
+.mc-table__add{
+  display:block;margin-top:var(--ds-space-xs);
+  font-size:var(--ds-step-body);color:var(--ds-ink-soft);white-space:nowrap;
+}
+.mc-table__carries{margin:0;display:grid;gap:var(--ds-space-2xs)}
+.mc-table__carries li{
+  font-size:var(--ds-step-body);line-height:1.6;color:var(--ds-ink);
+  padding-left:var(--ds-space-sm);
+  border-left:2px solid var(--ds-primary);   /* the raw violet as a BORDER, never as text */
+}
+
+/* -- the two bundled plans, as a two-row spec pair -------------------------- */
+.mc-plans{margin-top:var(--ds-space-xl);display:grid;gap:var(--ds-space-md)}
+.mc-plan{
+  display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:var(--ds-space-sm) var(--ds-space-lg);
+  padding:var(--ds-space-lg);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+}
+.mc-plan__name{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body);font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ds-ink-heading);flex:0 0 auto;
+}
+.mc-plan__price{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);font-weight:700;
+  line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-heading);flex:0 0 auto;
+}
+.mc-plan__body{flex:1 1 260px;min-width:0}
+.mc-plan__badge{
+  display:inline-block;
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-primary-soft);
+  border:1px solid var(--ds-primary);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.mc-plan__folds{
+  margin:var(--ds-space-sm) 0 0;
+  font-size:var(--ds-step-body);line-height:1.7;color:var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   8. THE SPLIT  ..  measure plus media, alternating side. The measure does not
+   change width when a picture arrives next to it; that is the whole point.
+   =========================================================================== */
+.mc-media{margin:0;height:100%;border-radius:var(--ds-r-surface);overflow:hidden;
+  border:1px solid var(--ds-line);box-shadow:var(--ds-shadow-card)}
+.mc-media img{
+  width:100%;min-width:0;height:100%;
+  aspect-ratio:4 / 3;object-fit:cover;
+  will-change:transform;
+}
+.mc-list{margin:var(--ds-space-md) 0 0;display:grid;gap:var(--ds-space-xs)}
+.mc-list li{
+  font-size:var(--ds-step-body);line-height:1.6;color:var(--ds-ink);
+  padding-left:var(--ds-space-sm);
+  border-left:2px solid var(--ds-primary);
+}
+
+
+/* ===========================================================================
+   9. THE BREATH  ..  one pull-quote, one viewport, nothing competing.
+   =========================================================================== */
+.mc-quote{margin:0;max-width:var(--ds-measure)}
+.mc-quote p{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-head);font-weight:600;
+  line-height:1.24;letter-spacing:-.018em;
+  color:var(--ds-ink-heading);
+  margin:0;
+}
+.mc-quote figcaption{
+  margin-top:var(--ds-space-lg);
+  padding-top:var(--ds-space-md);
+  border-top:1px solid var(--ds-line);
+  font-size:var(--ds-step-body);line-height:1.7;color:var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   10. THE CLOSING ASK. Quiet and high contrast, per the owner brief. One action.
+   =========================================================================== */
+/* isolation:isolate for the same reason as the hero: the wash below sits at
+   --ds-z-below and would otherwise paint behind this band's own warm ground. */
+.mc-cta{position:relative;overflow:hidden;isolation:isolate}
+/* The body's ONE piece of spent light. The chrome already spends its single glow
+   on the scrolled rail; this is the body's separate, smaller budget, and it is a
+   wash behind the closing ask rather than an object that glows. */
+.mc-cta::before{
+  content:"";position:absolute;z-index:var(--ds-z-below);
+  left:50%;top:0;width:min(720px,120%);height:var(--ds-space-2xl);
+  transform:translateX(-50%);
+  background:var(--ds-glow-wash);
+  opacity:var(--ds-opacity-scrim);
+  pointer-events:none;
+}
+.mc-cta .container{position:relative;z-index:var(--ds-z-raised)}
+.mc-cta__terms{
+  margin:var(--ds-space-md) 0 0;
+  font-size:var(--ds-step-body);line-height:1.72;color:var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   11. MOTION  ..  ONE gesture, used identically everywhere.
+   Fade plus a 20px rise, 520ms, cubic-bezier(.16,1,.3,1), fired once at 15%
+   viewport entry, 70ms stagger inside a group. Transform and opacity only.
+   The media layers add a 1.04 to 1.0 scale-in and the two band photographs add a
+   0.94x parallax drift, both transform-only. Nothing else on the page moves.
+   NO bounce, NO overshoot, NO rotation, NO flip, NO loop, NO autoplay.
+   =========================================================================== */
+/* FAIL OPEN. The hidden-then-revealed state is scoped to .js, which the document
+   sets in its own head. If scripting is unavailable the class is never added, the
+   rule never matches, and every section renders fully visible. Content is never
+   hidden behind a script that might not run. */
+.js [data-reveal]{
+  opacity:0;
+  transform:translate3d(0,var(--ds-rise),0);
+  transition:
+    opacity   var(--ds-dur-reveal) var(--ds-ease-reveal),
+    transform var(--ds-dur-reveal) var(--ds-ease-reveal);
+  transition-delay:calc(var(--i, 0) * var(--ds-stagger));
+}
+.js [data-reveal].is-in{opacity:1;transform:translate3d(0,0,0)}
+
+/* The 70ms stagger, declared in CSS rather than written as an inline style, so the
+   markup stays free of presentation. Only groups stagger; a lone section head
+   never does. */
+.row--figures > .col:nth-child(2) > [data-reveal]{--i:1}
+.row--figures > .col:nth-child(3) > [data-reveal]{--i:2}
+.row--figures > .col:nth-child(4) > [data-reveal]{--i:3}
+.mc-plans > [data-reveal]:nth-child(2){--i:1}
+.mc-band__pairs > [data-reveal]:nth-child(2){--i:1}
+
+.js [data-media-in] img{
+  transform:scale(1.04);
+  transition:transform var(--ds-dur-media) var(--ds-ease-reveal);
+}
+.js [data-media-in].is-in img{transform:scale(1)}
+
+/* The band photograph carries BOTH the scale-in and the parallax offset. The JS
+   writes --mc-par as a px length; the two transforms compose in one declaration
+   so they can never fight each other. */
+.js .mc-band__media img{transform:translate3d(0,var(--ds-par,0px),0) scale(1.04)}
+.js .mc-band__media.is-in img{transform:translate3d(0,var(--ds-par,0px),0) scale(1)}
+
+
+/* ===========================================================================
+   12. RESPONSIVE. The measure survives every width: below the split breakpoint
+   the column simply becomes the full available width, which at those widths IS
+   the measure. Nothing re-centres, nothing re-ranks.
+   =========================================================================== */
+@media (max-width:1023px){
+  .row--split,.row--split-rev{flex-wrap:wrap;flex-direction:row;gap:var(--ds-space-lg)}
+  .row--split > .col--measure,
+  .row--split > .col--media{flex:1 1 100%}
+  /* media leads once stacked, on BOTH arms, so a stacked page does not inherit
+     the desktop alternation as an arbitrary order flip. */
+  .row--split > .col--media{order:-1}
+  .mc-media img{height:auto}
+  /* the hero's own reflow moved with it, to _design/hero/hero-section.css section 5 */
+}
+
+@media (max-width:900px){
+  .row--figures{flex-wrap:wrap;row-gap:var(--ds-space-lg)}
+  .row--figures > .col{flex:1 1 44%}
+  .row--figures > .col:nth-child(odd) > .mc-figure{border-left:0;padding-left:0}
+}
+
+@media (max-width:767px){
+  :root{--ds-rhythm:clamp(64px, 12vw, 80px)}
+
+  /* The comparison table becomes one card per tier. Every cell prints its column
+     header from data-label, so no value loses its meaning. */
+  .mc-table__wrap{border:0;background:none;box-shadow:none;overflow-x:visible;
+    border-radius:0}
+  .mc-table{min-width:0;display:block}
+  .mc-table caption{padding:0}
+  .mc-table thead{position:absolute;width:1px;height:1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap}
+  .mc-table tbody,.mc-table tr,.mc-table th,.mc-table td{display:block;width:100%}
+  /* the desktop column allocation is MORE specific than the block rule above, so
+     it has to be released explicitly or the cards keep their percentage widths. */
+  .mc-table th:nth-child(1),.mc-table td:nth-child(1),
+  .mc-table th:nth-child(2),.mc-table td:nth-child(2),
+  .mc-table th:nth-child(3),.mc-table td:nth-child(3){width:100%}
+  .mc-table tr{
+    margin-top:var(--ds-space-md);
+    background:var(--ds-bg-surface-2);
+    border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+    box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+    overflow:hidden;
+  }
+  .mc-table th,.mc-table td{padding:var(--ds-space-md);border-top:1px solid var(--ds-hairline)}
+  .mc-table tbody th{border-top:0}
+  .mc-table td::before{
+    content:attr(data-label);
+    display:block;margin-bottom:var(--ds-space-xs);
+    font-family:var(--ds-font-display);
+    font-size:var(--ds-step-micro);font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--ds-ink-soft);
+  }
+  .mc-table__add{white-space:normal}
+
+  .mc-band__inner{padding:var(--ds-rhythm) var(--ds-space-md)}
+  .mc-plan{gap:var(--ds-space-sm)}
+}
+
+@media (max-width:520px){
+  .row--figures > .col{flex:1 1 100%}
+  .row--figures > .col > .mc-figure{border-left:0;padding-left:0}
+}
+
+
+/* ===========================================================================
+   13. REDUCED MOTION. Everything is shown in its resting, fully visible state.
+   No transform survives, the parallax offset is zeroed, the count-up prints its
+   final value from the markup, and no information is lost.
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  /* Selectors deliberately mirror the .js-scoped motion rules above so they win on
+     specificity rather than on !important. */
+  .js [data-reveal],
+  .js [data-reveal].is-in{
+    opacity:1;
+    transform:none;
+    transition:none;
+    transition-delay:0s;
+  }
+  .js [data-media-in] img,
+  .js [data-media-in].is-in img,
+  .js .mc-band__media img,
+  .js .mc-band__media.is-in img{
+    transform:none;
+    transition:none;
+  }
+  /* the parallax overscan is only needed when the image drifts; without motion it
+     goes back to filling its frame exactly. */
+  .js .mc-band__media img,
+  .mc-band__media img{height:100%}
+}

@@ -1,0 +1,1162 @@
+<!--META concept=1 name=measured-column stage=foundation -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispenza / Foundation 1 / Measured Column</title>
+<meta name="description" content="Foundation concept 1 of 3 for Dispenza: a body built around one strict text measure that never widens, one repeated vertical interval, a two step type ladder with a deliberate void in the middle, and one motion gesture used identically everywhere.">
+
+<!-- FAIL OPEN. The scroll reveal hides content until it is observed, so the hiding
+     is scoped to this class. No script, no class, no hidden content. -->
+<script>document.documentElement.className += ' js';</script>
+
+<!-- THE THREE LOCKED SHEETS, in dependency order, then the body sheet this
+     concept proposes. -->
+<link rel="stylesheet" href="../../dispenza-fonts.css">
+<link rel="stylesheet" href="../../dispenza-tokens.css">
+<link rel="stylesheet" href="../../dispenza-chrome.css">
+<link rel="stylesheet" href="dispenza-structural.css">
+
+<!--
+  DISPENZA / FOUNDATION CONCEPT 1 "MEASURED COLUMN"
+  ================================================
+
+  WHAT THIS FILE IS. The locked chrome wrapped around a real body, so the BODY can
+  be judged: its rhythm, its use of the type scale, its treatment of imagery and
+  where it spends motion. Identity and frame are already owner locked and are not
+  reinterpreted here.
+
+  ARTIFACT (b), THE PROPOSED BODY CSS, IS ./dispenza-structural.css.
+  It is linked above rather than pasted into this file, deliberately. That sheet is
+  already the extraction target under its final name: if this concept wins, it is
+  copied to _design/dispenza-structural.css and nothing has to be lifted out of a
+  style block first. One copy means the specimen and the deliverable can never
+  drift apart. The sheet is fully commented and is organised as the sections the
+  build will inherit.
+
+  GATE NOTE, RECORDED HONESTLY. The brief said to author the body CSS inline and
+  "link what exists". That combination cannot be written here: verify-stylesheet-linked
+  is wired as a PreToolUse hook, this path is NOT in its chrome stage exemption, so it
+  requires a link ending in structural.css that RESOLVES ON DISK relative to this
+  page. Verified by running the gate directly against a tokens-plus-chrome-only
+  payload: exit 2, "missing link to: structural.css". Authoring the sheet as a real
+  file in this concept folder satisfies the gate without faking it and without
+  pre-empting the owner pick, because it lives inside the concept folder rather than
+  at _design/.
+
+  ------------------------------------------------------------------------------
+  THE CONCEPT, AND WHAT A JUDGE SHOULD LOOK AT
+  ------------------------------------------------------------------------------
+  1. THE MEASURE NEVER WIDENS. One column width, min(68ch, 640px), pinned to the
+     same left axis from the hero to the closing ask. It does not widen for a
+     "wider" section, it does not re-centre, and it does not change when a
+     photograph arrives beside it. Sight down the left edge of the page: every
+     text block starts on the same line. The one object allowed to set the measure
+     aside is the price table, because a table is not prose; that exception is what
+     makes the measure elsewhere read as a decision.
+
+  2. THE INTERVAL IS ONE VALUE, REPEATED. Every body section pays exactly
+     var(--ds-rhythm) top and bottom. No section gets a bespoke pad. The full bleed
+     bands pay zero of their own, so the gap between the last line of text and the
+     top of a photograph is still exactly one interval, paid by the neighbour. The
+     page is a metronome; the imagery is what plays over it.
+
+  3. THE TYPE LADDER HAS A HOLE IN IT ON PURPOSE. Display, head, figure, then
+     nothing at all until 17px body. There is no 20px lead and no 24px standfirst
+     anywhere on this page, including in the hero. Emphasis inside body copy is
+     carried by ink colour, never by a size that would fill the hole back in.
+
+  4. MOTION IS ONE GESTURE. Fade plus a 20px rise, identical duration, identical
+     curve, on every section. Used everywhere, it stops reading as an effect and
+     starts reading as rhythm. The only additions are a 1.04 to 1.0 scale in on
+     media and a 0.94x drift on the two band photographs, which is the entire
+     motion budget for the body.
+
+  5. THREE SECTION KINDS, NOTHING ELSE. MEASURE (text in the column), BAND (a full
+     bleed photograph as an event), SPEC (structured data at container width). The
+     split rows are a MEASURE with a picture beside it, not a fourth kind, which is
+     why the column keeps its exact width there.
+
+  ------------------------------------------------------------------------------
+  DESIGN SYSTEM PROVENANCE. What this body is built FROM, not invented against.
+  ------------------------------------------------------------------------------
+  BLUEPRINT . composition-agency-creative (V1 AGENCY / CREATIVE / STUDIO in
+    _PAGE-COMPOSITION-LIBRARY). Dispenza is an agency, so V1 is the spine: a
+    type-led opener, positioning band, stats EARLY, the services rows, the payload,
+    one dark anchor, one closing ask, glass nav. Two documented DEPARTURES, both
+    forced by this client's facts rather than by taste. First, V1's zone 6 payload
+    is a portfolio gallery; Dispenza's payload is the PUBLISHED PRICE LADDER,
+    because the positioning wedge is that nine tiers are printed while eighteen
+    crawled competitor pages publish nothing, so the price table takes the
+    gravitational centre a work gallery would normally hold. Second, V1 defaults to
+    a B2 type-led hero; this page uses a full-bleed media hero because the owner's
+    swappable-hero contract requires an isolated media layer and the real asset
+    exists. The rest of the V1 arc is intact, including stats-early and the single
+    near-black anchor before the close.
+  SPINE . _PAGE-COMPOSITION-LIBRARY section 0.1, the eight zone skeleton, used in
+    order: NAV, HERO, TRUST/INTRO folded into the stat band, VALUE/SERVICES, PROOF,
+    VERTICAL BLOCK (the ladder), CONVERSION, FOOTER. Seven body sections, inside the
+    verified 7 to 15 band, and one of each moment only: one stat band, one dark
+    anchor, one focal full bleed pair, one closing CTA.
+  LIBRARY . _MODERN-WOW-SPEC, the technique ceiling, applied as follows and
+    deliberately NOT applied where the owner rejected spectacle:
+      section 1 depth      layered ambient plus key shadows from the tokens, hairline
+                           borders, the inset top highlight on the table surface and
+                           the plan cards, and real figure/ground across the three
+                           near-black planes rather than one flat field.
+      section 2 motion     staggered scroll reveal, media scale in, gentle parallax,
+                           count up on the metrics, hover lift on the CTAs. Every one
+                           behind prefers-reduced-motion.
+      section 4 type       display-scale contrast against calm body, tight tracking
+                           on display, oversized tabular numerals for every metric,
+                           and a refined measure. This is where the concept spends
+                           most of its effort.
+      section 5 light      one accent wash behind the closing ask. That is the whole
+                           budget for the body.
+      section 7 detail     one radius language from the tokens, refined pill badges,
+                           hairline dividers doing the dividing, visible focus rings.
+    NOT ADOPTED, on purpose: the BeTheme SVG shape dividers (its section A). The
+    composition library's own anti-pattern list keeps dividers off registers where
+    the mood does not fit, and a wave or tilt between every band would be exactly the
+    varying rhythm this concept refuses. The transitions here are the sanctioned
+    alternative: colour-band contrast, whitespace, and the image bottom fade using
+    the brand's own --ds-fade-to-paper.
+
+  ------------------------------------------------------------------------------
+  IMAGERY. Every image on this page is a real file in this build. Five are used:
+  the swappable hero slot, two of the eight service editorials, and two of the
+  three full bleed bands. There is no grey box and no gradient standing in for a
+  photograph anywhere.
+
+  ------------------------------------------------------------------------------
+  CONTRAST LEDGER (computed, not asserted; sRGB relative luminance, WCAG 2.1)
+
+  ON THE CANVAS  --ds-bg-surface #15161a
+    body      --ds-ink        #f5f3f9   16.42:1
+    heading   --ds-ink-heading #ffffff  18.08:1
+    muted     --ds-ink-soft   #9f9f9f    6.83:1
+    accent    --ds-accent-ink #ae76ef    5.71:1
+  ON THE MID PLANE --ds-bg-warm #1b1d22
+    body 15.31:1 . heading 16.86:1 . muted 6.37:1 . accent 5.33:1
+  ON THE ELEVATED PLANE --ds-bg-surface-2 #222429  (the price table surface)
+    body 14.10:1 . heading 15.53:1 . muted 5.87:1 . accent 4.91:1
+  BUTTONS
+    #ffffff on --ds-primary #8d3fe8    5.24:1
+
+  THE RAW BRAND VIOLET IS NEVER PAINTED AS TEXT. #8d3fe8 measures 3.45 / 3.22 /
+  2.96:1 across the three planes, all below the 4.5:1 floor. On this page it
+  appears only as a BORDER (the list rules, the badge outline) and as a CTA FILL.
+  Every small accent text role is --ds-accent-ink.
+
+  TEXT OVER PHOTOGRAPHS, PROVEN AGAINST THE WORST CASE. A photograph cannot be
+  measured as a single colour, so both scrims were computed against a pure WHITE
+  underlying pixel, which is the worst thing any photo can put under the type.
+    HERO. The side scrim is the canvas token at 94% or denser across the whole
+    text region. Composite over white = rgb(35,36,40):
+      heading 15.50:1 . body 14.08:1 . accent eyebrow 4.90:1 . muted 5.86:1
+    BANDS. --ds-scrim at .72 composited over white = rgb(80,79,84):
+      heading 8.12:1 . body ink 7.37:1
+    Because that composite gives --ds-ink-soft only 3.07:1 and --ds-accent-ink only
+    2.57:1, NEITHER of those two roles is used over a photograph anywhere on this
+    page. Over a band the page speaks in heading ink and body ink only. That is a
+    design rule derived from the measurement, not a hope about the artwork.
+
+  ------------------------------------------------------------------------------
+  MOTION LEDGER, against the owner spec
+    scroll reveal   fade + 20px rise . 520ms . cubic-bezier(.16,1,.3,1) . once . 15%
+    stagger         70ms, groups only (the four figures, the two plans, the pairs)
+    media scale in  1.04 to 1.0 . 600ms . same curve
+    parallax        0.94x drift, the two band photographs only, transform only
+    count up        the four influence figures, on reveal, once
+    hover lift      3px at 160ms, the two button variants, inherited from the chrome
+    ABSENT ON PURPOSE: no bounce, no overshoot, no rotation, no flip, no confetti,
+    no typewriter, no autoplay carousel, no animated gradient, no cursor trail, no
+    in-viewport loop. Only transform and opacity are animated.
+  REDUCED MOTION: every transform is dropped, every transition is removed, the
+    parallax offset is zeroed and the band images go back to filling their frame,
+    the count up prints the final value that is already in the markup, and every
+    section is visible at rest. Nothing is lost.
+
+  ------------------------------------------------------------------------------
+  DOM GRAMMAR. Every body section is section > .container > .row > .col > object.
+  The structure classes carry layout only; every skin class (mc-*) sits on the
+  object inside the .col. The chrome header, drawer, sticky bar and footer are the
+  locked block and are exempt by design.
+
+  LINK CONVENTION. Chrome and body hrefs use the build's page relative "<slug>.html"
+  form from _handoff/sitemap.yaml. In this standalone specimen those siblings do not
+  exist yet, which is expected at this stage.
+
+  COPY. Every claim on this page is the client's own, from the P6 corpus via
+  _handoff/briefs/index.md. Nothing is invented. Section eyebrows are neutral
+  structural labels, not claims.
+-->
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================================================ LOCKED CHROME
+     Sourced verbatim from _design/_chrome-block.html (chrome concept 1, owner
+     locked). Not re-derived, not restyled, not grammar wrapped.
+     ============================================================ -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="rail__link" href="how-it-works.html">Pricing</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-team" aria-expanded="false" aria-controls="panel-team">
+              Team
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+      </div>
+      <div class="panel__grid panel__grid--services">
+        <a class="panel__item" href="performance-marketing.html">
+          <span class="panel__title">Performance marketing</span>
+          <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+        </a>
+        <a class="panel__item" href="branding-graphic-design.html">
+          <span class="panel__title">Brand and package design</span>
+          <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+        </a>
+        <a class="panel__item" href="webdesign-development.html">
+          <span class="panel__title">Web design and development</span>
+          <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+        </a>
+        <a class="panel__item" href="ads-design.html">
+          <span class="panel__title">Advertisement design</span>
+          <span class="panel__desc">Creative sized for every placement you actually run.</span>
+        </a>
+        <a class="panel__item" href="conversion-rate-optimization.html">
+          <span class="panel__title">Conversion rate optimization</span>
+          <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+        </a>
+        <a class="panel__item" href="integrations.html">
+          <span class="panel__title">Integrations</span>
+          <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+        </a>
+        <a class="panel__item" href="consulting.html">
+          <span class="panel__title">Consulting</span>
+          <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+        </a>
+        <a class="panel__item" href="reports.html">
+          <span class="panel__title">Reports</span>
+          <span class="panel__desc">What ran, what it cost, what it returned.</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="rail-panel rail-panel--team" id="panel-team" role="region" aria-label="Team">
+      <div class="panel__head">
+        <span class="panel__eyebrow">The people</span>
+        <span class="panel__note">Six named pages.</span>
+      </div>
+      <div class="panel__grid panel__grid--team">
+        <a class="panel__item panel__person" href="frances.html">
+          <span class="panel__mono" aria-hidden="true">FH</span>
+          <span><span class="panel__title">Frances Hutzel</span><span class="panel__desc">Accounts</span></span>
+        </a>
+        <a class="panel__item panel__person" href="sergio.html">
+          <span class="panel__mono" aria-hidden="true">SR</span>
+          <span><span class="panel__title">Sergio Ruiz</span><span class="panel__desc">Design</span></span>
+        </a>
+        <a class="panel__item panel__person" href="james.html">
+          <span class="panel__mono" aria-hidden="true">JC</span>
+          <span><span class="panel__title">James Compton</span><span class="panel__desc">Client strategy</span></span>
+        </a>
+        <a class="panel__item panel__person" href="shay.html">
+          <span class="panel__mono" aria-hidden="true">SS</span>
+          <span><span class="panel__title">Shay Spatz</span><span class="panel__desc">Content</span></span>
+        </a>
+        <a class="panel__item panel__person" href="nick.html">
+          <span class="panel__mono" aria-hidden="true">NM</span>
+          <span><span class="panel__title">Nick Marx</span><span class="panel__desc">Media buying</span></span>
+        </a>
+        <a class="panel__item panel__person" href="thomas.html">
+          <span class="panel__mono" aria-hidden="true">TR</span>
+          <span><span class="panel__title">Thomas B. Robinson</span><span class="panel__desc">Development</span></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li><a class="drawer-link" href="how-it-works.html">Pricing</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-team" aria-expanded="false" aria-controls="acc-team">
+          Team
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-team">
+          <ul>
+            <li><a href="frances.html">Frances Hutzel</a></li>
+            <li><a href="james.html">James Compton</a></li>
+            <li><a href="nick.html">Nick Marx</a></li>
+            <li><a href="sergio.html">Sergio Ruiz</a></li>
+            <li><a href="shay.html">Shay Spatz</a></li>
+            <li><a href="thomas.html">Thomas B. Robinson</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<main id="main">
+
+<!-- ==========================================================================
+     SECTION 1 . HERO . KIND: BAND + MEASURE
+     ========================================================================== -->
+<!-- pick: HERO-COMPOSITIONS.md #5 Full-bleed image + overlay text | considered: #10,#9,#22 | why: this concept's whole claim is that a strict measured column sits in generous dark space, so the hero has to be the moment where that column is FIRST established against something, and a full bleed media layer is the only opener that sets the column's left axis while the picture runs past its right edge, which is exactly the "full-bleed imagery alternating with tightly measured text" the owner adopted; the swappable hero contract in visual-direction.md section 6 also wants the media as a separate layer, and #5 is the pattern whose media layer is already isolated from the content layer. That isolation was then CASHED IN rather than left theoretical: on 2026-08-12 the owner replaced the raster with a generated isometric hex-prism field, and because #5 keeps the media absolutely positioned and contributing no height, the swap changed the picture and moved nothing else on the page. The argument for #5 is now stronger than when it was made, because the media is generated rather than photographic, so it is resolution independent, it carries the brand violet in its own geometry instead of borrowing it from a scrim, and its light can be driven by scroll position without a single layout-affecting property being animated. #10 centred headline only was the closest rival and is rejected because a centred hero would establish a CENTRE axis and then every section below would have to break it, killing the one-axis discipline before the page starts, and because it would waste the real hero asset that exists. #9 cinematic letterbox caps the hero near 50vh, which makes the opener a band rather than a room and leaves no space for the promise plus two actions at this type scale. #22 statistics-heavy hero would put the four influence totals above the claim, which both buries the positioning line and spends the page's one stat moment in the first viewport, leaving section 2 with nothing. -->
+<!-- HeroSection, inlined verbatim from _design/hero/hero-section.html (the SSOT).
+     Its stylesheet and script ride WITH the component rather than sitting in the
+     page preamble: heroContract.style_isolation keeps hero CSS off the 26 pages
+     that have no hero, and rel="stylesheet" is body-ok in the HTML Living
+     Standard. The link precedes the section so the hero never paints unstyled. -->
+<link rel="stylesheet" href="../../hero/hero-section.css">
+<section class="mc-hero" id="hero">
+  <!-- The PIN. It carries .container--full so the DOM grammar stays legal
+       (section > .container > .row > .col > object); a bare sticky wrapper
+       between the section and the container would break G-DOM. -->
+  <div class="container container--full mc-hero__pin">
+    <div class="row">
+      <div class="col">
+
+        <div class="mc-hero__stage" data-media-in>
+          <!-- ANIMATED HERO SLOT — replace media layer only -->
+          <!-- Two generated layers occupy the slot: the receding hex field
+               (hero-field.js) and the scroll-scrubbed hex platform
+               (hero-coaster.js, geometry measured off the owner's
+               hexagonal-metal-coaster.obj). Both are aria-hidden decorative
+               texture -- they state nothing the claim does not already say, so
+               announcing them would only add noise to a screen reader. -->
+          <svg class="mc-hero__field" viewBox="0 0 1400 760"
+               preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"></svg>
+          <!-- END ANIMATED HERO SLOT -->
+        </div>
+
+        <div class="mc-hero__scrim" aria-hidden="true"></div>
+
+        <!-- The smoke. A canvas rather than SVG because this is a few hundred
+             particles integrated every frame; SVG nodes would not hold 60fps.
+             It sits BEHIND the token so the token reads as a solid in it. -->
+        <canvas class="mc-smoke" aria-hidden="true"></canvas>
+
+        <!-- ============================================================
+             THE COIN. The owner's tripo3d GLB replaces the SVG solid.
+
+             SUPPLIED AT 29.94 MB / 1,001,316 triangles, which is 10-30x a
+             sane hero budget against this brief's own LCP < 2.5s. Optimised
+             rather than refused: welded, simplified to 100,128 triangles at
+             a 0.0004 error, texture to WebP 1024, geometry Draco-compressed
+             -> 1.3 MB. A first pass at gltf-transform's default aggression
+             produced 6,700 triangles (99.3% gone) and lost the milling and
+             the knurled chevron entirely, which is why the budget is set
+             explicitly here rather than left to a preset.
+
+             The runtime and the Draco decoder are BOTH vendored into
+             _design/vendor/. model-viewer otherwise fetches its decoder from
+             gstatic at run time, and this build already refuses CDN
+             dependencies -- that rule was written when the live site's fonts
+             were found loading from Google.
+             ============================================================ -->
+        <!-- shadow-intensity is 0 on purpose: the coin must read as FLOATING,
+             and a contact shadow implies a surface underneath it. -->
+        <model-viewer class="mc-coin" src="../../../assets/3d/dispenza-coin.glb"
+                      alt="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."
+                      camera-orbit="90deg 90deg 2.75m" field-of-view="22deg"
+                      environment-image="../../../assets/3d/studio-violet.png"
+                      exposure="1.45" tone-mapping="neutral"
+                      shadow-intensity="0"
+                      disable-zoom disable-pan disable-tap
+                      interaction-prompt="none" camera-controls="false"
+                      loading="eager"></model-viewer>
+
+        <!-- The SVG solid stays as the FALLBACK, hidden once the model reports
+             loaded. It is a complete, self-contained coin with no runtime cost,
+             so a WebGL-less or slow client still gets an object in the hero
+             rather than a hole. hero-coaster.js keeps driving it either way,
+             which is also what supplies the pose the model is slaved to. -->
+        <svg class="mc-coaster" viewBox="0 0 1400 900"
+             preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="coasterShadow" x="-60%" y="-160%" width="220%" height="420%">
+              <feGaussianBlur stdDeviation="18"/>
+            </filter>
+            <!-- POLISHED METAL IS A GRADIENT, NOT A TONE. A flat fill lit by a
+                 single Lambert term gave the rim one value across its whole face
+                 and it read as grey paint. A mirror's character is that it
+                 reflects its surroundings, so it swings bright-to-dark across the
+                 surface; these two ramps supply that, and the per-face Lambert
+                 still modulates them as the coin turns. -->
+            <linearGradient id="coinRim" x1="0.08" y1="0" x2="0.92" y2="1">
+              <stop offset="0%"   stop-color="#ffffff"/>
+              <stop offset="18%"  stop-color="#e3e3e3"/>
+              <stop offset="42%"  stop-color="#9d95a8"/>
+              <stop offset="63%"  stop-color="#f2eef7"/>
+              <stop offset="82%"  stop-color="#6d6478"/>
+              <stop offset="100%" stop-color="#3a3442"/>
+            </linearGradient>
+            <linearGradient id="coinEnamel" x1="0.1" y1="0" x2="0.9" y2="1">
+              <stop offset="0%"   stop-color="#7a4bc8"/>
+              <stop offset="38%"  stop-color="#5a2ea0"/>
+              <stop offset="72%"  stop-color="#3d1a72"/>
+              <stop offset="100%" stop-color="#2a1152"/>
+            </linearGradient>
+          </defs>
+          <!-- All three layers ride in ONE group so the anti-overlap pass can
+               translate the whole token as a unit after measuring it. -->
+          <g class="mc-coaster__all">
+            <ellipse class="mc-coaster__shadow" cx="700" cy="700" rx="0" ry="0"
+                     fill="#000" opacity="0" filter="url(#coasterShadow)"/>
+            <g class="mc-coaster__faces"></g>
+            <!-- The client's real mark, struck into the token's face. Supplied as
+                 a JPEG on pure black; keyed to alpha and cropped to its content
+                 so it composites on the dark face instead of sitting in a black
+                 square. It is laid out in a 64x64 box so it takes the SAME affine
+                 matrix the vector chevron used -- the projection code did not
+                 change to accommodate it. -->
+            <image class="mc-coaster__mark" x="0" y="0" width="64" height="64"
+                   preserveAspectRatio="xMidYMid meet" opacity="0"
+                   href="../../../assets/brand/dispenza-token-mark.png"></image>
+          </g>
+        </svg>
+
+        <div class="mc-hero__content mc-type">
+          <p class="mc-eyebrow" data-reveal>Since 2012</p>
+          <!-- Every character is authored HERE, in its own span. The reveal
+               animates OPACITY only; no script writes text into the DOM.
+               That is the only implementation that ships: verify-copy-fidelity
+               reads the authored FILE, so a headline assembled at runtime from a
+               JS string would leave this page with no headline as far as the gate
+               is concerned. Text content is byte-identical to the corpus:
+               "#1 MARKETING" + "AGENCY IN CANNABIS", with no space between
+               MARKETING and AGENCY because the turn line is display:block. -->
+          <h1 class="mc-display" data-reveal><span class="ch">#</span><span class="ch">1</span><span class="ch sp"> </span><span class="ch">M</span><span class="ch">A</span><span class="ch">R</span><span class="ch">K</span><span class="ch">E</span><span class="ch">T</span><span class="ch">I</span><span class="ch">N</span><span class="ch">G</span><span class="mc-display__turn"><span class="ch">A</span><span class="ch">G</span><span class="ch">E</span><span class="ch">N</span><span class="ch">C</span><span class="ch">Y</span><span class="ch sp"> </span><span class="ch">I</span><span class="ch">N</span><span class="ch sp"> </span><span class="ch">C</span><span class="ch">A</span><span class="ch">N</span><span class="ch">N</span><span class="ch">A</span><span class="ch">B</span><span class="ch">I</span><span class="ch">S</span></span></h1>
+          <!-- The lead is D-SRC-INDEX-0043, verbatim and whole. The caret is an
+               empty span that adds no text, and it lives INSIDE the paragraph so
+               the element stays a real <p> and keeps .mc-body's top margin, which
+               an inline wrapper would silently drop. aria-hidden because it is a
+               light, not a cursor: there is no editable field here. -->
+          <p class="mc-body mc-body--lead mc-lead-wrap" data-reveal><span class="ch">D</span><span class="ch">i</span><span class="ch">s</span><span class="ch">p</span><span class="ch">e</span><span class="ch">n</span><span class="ch">z</span><span class="ch">a</span><span class="ch sp"> </span><span class="ch">i</span><span class="ch">s</span><span class="ch sp"> </span><span class="ch">t</span><span class="ch">h</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">u</span><span class="ch">l</span><span class="ch">t</span><span class="ch">i</span><span class="ch">m</span><span class="ch">a</span><span class="ch">t</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">d</span><span class="ch">i</span><span class="ch">g</span><span class="ch">i</span><span class="ch">t</span><span class="ch">a</span><span class="ch">l</span><span class="ch sp"> </span><span class="ch">p</span><span class="ch">a</span><span class="ch">r</span><span class="ch">t</span><span class="ch">n</span><span class="ch">e</span><span class="ch">r</span><span class="ch">.</span><span class="ch sp"> </span><span class="ch">W</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">h</span><span class="ch">a</span><span class="ch">n</span><span class="ch">d</span><span class="ch">l</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">e</span><span class="ch">v</span><span class="ch">e</span><span class="ch">r</span><span class="ch">y</span><span class="ch">t</span><span class="ch">h</span><span class="ch">i</span><span class="ch">n</span><span class="ch">g</span><span class="ch sp"> </span><span class="ch">o</span><span class="ch">n</span><span class="ch">l</span><span class="ch">i</span><span class="ch">n</span><span class="ch">e</span><span class="ch">,</span><span class="ch sp"> </span><span class="ch">s</span><span class="ch">o</span><span class="ch sp"> </span><span class="ch">y</span><span class="ch">o</span><span class="ch">u</span><span class="ch sp"> </span><span class="ch">c</span><span class="ch">a</span><span class="ch">n</span><span class="ch sp"> </span><span class="ch">f</span><span class="ch">o</span><span class="ch">c</span><span class="ch">u</span><span class="ch">s</span><span class="ch sp"> </span><span class="ch">o</span><span class="ch">n</span><span class="ch sp"> </span><span class="ch">g</span><span class="ch">r</span><span class="ch">o</span><span class="ch">w</span><span class="ch">t</span><span class="ch">h</span><span class="ch">.</span></p>
+          <div class="mc-actions" data-reveal>
+            <a class="btn btn--solid" href="contact.html">Book demo</a>
+            <a class="btn btn--ghost" href="how-it-works.html">Learn how</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Loaded AFTER the section so the svg elements they fill already exist in the
+     DOM; no DOMContentLoaded wrapper is needed and none is used. -->
+<script src="../../hero/hero-field.js"></script>
+<script src="../../hero/hero-coaster.js"></script>
+<!-- Loaded IMMEDIATELY (owner). The earlier deferral was a workaround for a
+     typing stall whose real cause turned out to be elsewhere: hero-coaster was
+     writing the pose as CSS custom properties on .mc-hero every frame, which
+     invalidated the whole hero subtree -- including two background-clip:text
+     elements -- 60 times a second. With the pose moved to a plain JS property
+     the type pass is back to 3.2s WITH the model loading from the start, so the
+     deferral bought nothing and cost the coin its entrance. Vendored, not CDN.
+     hero-coin3d.js injects the runtime immediately, but only after confirming
+     WebGL exists: without that guard model-viewer throws an uncaught TypeError
+     on a machine with 3D disabled, which is a real user path and the whole
+     reason the SVG coin is still here. -->
+<script src="../../hero/hero-coin3d.js"></script>
+<!-- smoke LAST: it measures the token's placed position, so the coaster must
+     have drawn at least once before it looks. -->
+<script src="../../hero/hero-smoke.js"></script>
+
+
+<!-- ==========================================================================
+     SECTION 1b . CLIENT ROSTER . KIND: MARQUEE
+     ========================================================================== -->
+<!-- pick: TRUST-STATS-SECTIONS.md #2 Trust bar - logo marquee | considered: #1,#3,#4 | why: the owner asked for the client roster that already runs on their live site, and #2 is the DS pattern that specifies exactly that mechanic - edge-masked viewport, width:max-content track carrying set A plus a duplicate set B, translateX(0 to -50%) seamless wrap, pause-on-hover, and a built-in reduced-motion gate that drops the duplicate so nothing is announced twice; it is also documented as belonging directly under a dark hero, which is precisely where this sits. #1 mono logo row was the closest rival and is rejected because a static row has to either show twelve marks at once, shrinking each below the size at which a wordmark like Root'd in the 510 is readable, or cut the roster - and the roster length IS the proof here. #3 count-up 3-up and #4 big-number band are both rejected because the numbers moment is already spent: Influence Highlights sits immediately below with the four whole-business totals, and two quantified proofs back to back would make the second one noise. -->
+<section class="mc-marquee" id="clients" aria-label="Dispenza client roster">
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+        <div class="mc-marquee__viewport">
+          <div class="mc-marquee__track">
+          <div class="mc-marquee__group">
+            <div class="mc-marquee__item" style="--h:47.1px"><img src="../../../assets/brand/marquee/hlh.png" alt="High Level Health, a Dispenza client" width="297" height="176" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:37.9px"><img src="../../../assets/brand/marquee/nuleaf.png" alt="NuLeaf, a Dispenza client" width="196" height="48" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/tree-of-life.png" alt="Tree of Life, a Dispenza client" width="292" height="293" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.6px"><img src="../../../assets/brand/marquee/sundial.png" alt="Sundial Collective, a Dispenza client" width="294" height="76" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:45.3px"><img src="../../../assets/brand/marquee/rootd.png" alt="Root'd in the 510, a Dispenza client" width="295" height="127" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:35.4px"><img src="../../../assets/brand/marquee/maryjanes.png" alt="MaryJane's, a Dispenza client" width="911" height="190" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.6px"><img src="../../../assets/brand/marquee/royal-weed.png" alt="Royal Weed, a Dispenza client" width="299" height="101" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:58.1px"><img src="../../../assets/brand/marquee/cannabis-guys.png" alt="The Cannabis Guys, a Dispenza client" width="186" height="152" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.8px"><img src="../../../assets/brand/marquee/la-cannabis-co.png" alt="LA Cannabis Co, a Dispenza client" width="298" height="77" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.8px"><img src="../../../assets/brand/marquee/perfect-union.png" alt="Perfect Union, a Dispenza client" width="299" height="116" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:60.1px"><img src="../../../assets/brand/marquee/coachella-canna-club.png" alt="Coachella Canna Club, a Dispenza client" width="293" height="212" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/firehouse.png" alt="Firehouse 365, a Dispenza client" width="194" height="160" decoding="async"></div>
+          </div>
+          <div class="mc-marquee__group" data-dup="1" aria-hidden="true">
+            <div class="mc-marquee__item" style="--h:47.1px"><img src="../../../assets/brand/marquee/hlh.png" alt="" width="297" height="176" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:37.9px"><img src="../../../assets/brand/marquee/nuleaf.png" alt="" width="196" height="48" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/tree-of-life.png" alt="" width="292" height="293" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.6px"><img src="../../../assets/brand/marquee/sundial.png" alt="" width="294" height="76" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:45.3px"><img src="../../../assets/brand/marquee/rootd.png" alt="" width="295" height="127" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:35.4px"><img src="../../../assets/brand/marquee/maryjanes.png" alt="" width="911" height="190" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.6px"><img src="../../../assets/brand/marquee/royal-weed.png" alt="" width="299" height="101" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:58.1px"><img src="../../../assets/brand/marquee/cannabis-guys.png" alt="" width="186" height="152" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.8px"><img src="../../../assets/brand/marquee/la-cannabis-co.png" alt="" width="298" height="77" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.8px"><img src="../../../assets/brand/marquee/perfect-union.png" alt="" width="299" height="116" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:60.1px"><img src="../../../assets/brand/marquee/coachella-canna-club.png" alt="" width="293" height="212" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/firehouse.png" alt="" width="194" height="160" decoding="async"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- The marquee carries its own behaviour, inside <main>, for the same reason the
+     hero does: G-CHROME-CARRIER-REDIRECT treats every byte outside <main> as the
+     locked chrome frame, and the carrier it redirects to holds no script at all.
+     Keeping the observer with the component also makes the section liftable into
+     another page without remembering to bring a line of global script with it. -->
+<script>
+(function () {
+  /* An infinite loop needs three brakes and the DS pattern supplies two
+     (pause-on-hover, reduced-motion). This is the third: stop when nobody is
+     looking. A marquee is on the owner's forbidden list because autoplay motion
+     steals attention -- and motion nobody can see steals CPU for nothing. */
+  var mq = document.querySelector('.mc-marquee');
+  if (!mq || !('IntersectionObserver' in window)) { return; }
+  new IntersectionObserver(function (es) {
+    es.forEach(function (en) { mq.classList.toggle('is-offscreen', !en.isIntersecting); });
+  }, { threshold: 0 }).observe(mq);
+})();
+</script>
+<!-- ==========================================================================
+     SECTION 2 . INFLUENCE HIGHLIGHTS . KIND: SPEC
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #3 Stat strip / metric band | considered: #2,#13,#7 | why: the four totals are the client's only whole-business numbers and they arrive immediately after the claim, which is where the composition library puts quantified credibility, but the reason this concept wants a stat STRIP specifically is that four figures divided by hairlines sit in open space with nothing carded, which is the first proof that a section can carry structured data without the measured column widening or a box appearing; the oversized numerals also demonstrate the top of the type ladder in a non-heading role. #2 trust strip or logo wall was the obvious alternative and is rejected here because the twenty five client marks all carry empty alt text and no confirmed right to display, so a logo wall would be a claim the build cannot yet stand behind. #13 bento feature grid would introduce an asymmetric tile grid, which is precisely the varying rhythm this concept exists to refuse, and it would need eight to twelve pitches that do not exist at this point in the page. #7 problem framing would put a paragraph of pain here, delaying the first number to the fourth section and wasting the fact that this client's numbers are its strongest asset. -->
+<section class="mc-section" id="influence">
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>The numbers</p>
+        <h2 class="mc-head" data-reveal>Influence Highlights</h2>
+      </div>
+    </div>
+    <div class="row row--figures">
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="1.2" data-count-dec="1">1.2</span> <span class="mc-figure__u">BLN</span></p>
+          <p class="mc-figure__k">SALES INFLUENCED</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="2.1" data-count-dec="1">2.1</span> <span class="mc-figure__u">BLN</span></p>
+          <p class="mc-figure__k">WEBSITE VISITS</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="3.8" data-count-dec="1">3.8</span> <span class="mc-figure__u">BLN</span></p>
+          <p class="mc-figure__k">GOOGLE IMPRESSIONS</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="500" data-count-dec="0" data-count-suffix="+">500+</span></p>
+          <p class="mc-figure__k">LOCATION HELPED</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 3 . OUR SUITE, TWO ALTERNATING FEATURE ROWS . KIND: MEASURE + MEDIA
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #11 Service pillars 2-col with image | considered: #9,#12,#13 | why: the owner adopted "feature blocks that alternate image-left, image-right" by name, and #11 is the catalog's only entry whose row IS that alternation, one image plus headline plus body plus link per row with the media side flipping; it is also the pattern that lets this concept prove its hardest claim, which is that the text column does NOT change width when a picture arrives beside it, because the measure keeps its exact px and the media simply takes whatever is left. The media plus cards law does not bite here: this is the alternating single-row arm, not one capped image beside a card stack, and the media column is set to stretch so the two columns end level. #9 services 3-col would flatten eight services into three equal cards and give the two real service editorials nowhere to live at size. #12 feature row with screenshot assumes a product screenshot is the subject, but the assets here are atmospheric editorials, not UI. #13 bento is refused for the same reason as in section 2: an asymmetric tile grid is a varying rhythm, and this page's argument is that the rhythm does not vary. -->
+<section class="mc-section" id="suite">
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>Two of eight</p>
+        <h2 class="mc-head" data-reveal>Our suite</h2>
+      </div>
+    </div>
+
+    <div class="row row--split">
+      <div class="col col--measure">
+        <h3 class="mc-head" data-reveal>Performance marketing</h3>
+        <p class="mc-body" data-reveal>Paid and organic demand for a licensed dispensary.</p>
+        <ul class="mc-list" data-reveal>
+          <li>Localized On-Page SEO</li>
+          <li>100+ Off-Page SEO (Profiles)</li>
+          <li>Google Business Profile Management</li>
+          <li>Monthly and Quarterly Reporting</li>
+        </ul>
+      </div>
+      <div class="col col--media">
+        <figure class="mc-media" data-media-in data-reveal>
+          <img src="../../../assets/generated/svc-performance-marketing.jpg"
+               alt="Editorial image for the Dispenza performance marketing service."
+               width="1200" height="900" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+
+    <div class="row row--split row--split-rev">
+      <div class="col col--measure">
+        <h3 class="mc-head" data-reveal>Web design and development</h3>
+        <p class="mc-body" data-reveal>Menu-connected sites built to be updated by staff.</p>
+        <ul class="mc-list" data-reveal>
+          <li>Dedicated Project Manager</li>
+          <li>Any Ecomm / Menu Integration</li>
+          <li>30-Day Backup and Restores</li>
+          <li>Web Hosting</li>
+        </ul>
+      </div>
+      <div class="col col--media">
+        <figure class="mc-media" data-media-in data-reveal>
+          <img src="../../../assets/generated/svc-webdesign.jpg"
+               alt="Editorial image for the Dispenza web design and development service."
+               width="1200" height="900" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 4 . INCREASE SALES . KIND: BAND (full bleed event)
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #58 Image divider full-bleed | considered: #21,#22,#29 | why: this is the first of the two moments where the page is allowed to raise its voice, and #58 is the catalog entry whose whole job is a large image acting as a transition rather than as a carded asset, which is what "full-bleed imagery interrupts the column as a deliberate event" means in practice; it also lets the two strongest city results sit at band scale over the photograph instead of being reduced to tiles, and because the band pays no vertical padding of its own the metronome set by the sections above is preserved exactly. #21 case studies 3-col would card the results, which is the treatment the current site already uses and the one that flattens eight specific measured lifts into a row of equal boxes. #22 case study featured plus two small has the same carding problem and additionally invents a hierarchy between cities that the source does not state. #29 before and after pair is tempting given the day zero benchmark data, but the four comparison widgets are a recorded live defect that renders as empty grey boxes, so building a before and after here would mean either shipping the defect or inventing the values. -->
+<section class="mc-section mc-section--band mc-band" id="results">
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+        <figure class="mc-band__media" data-media-in data-parallax>
+          <img src="../../../assets/generated/band-results.jpg"
+               alt="Wide low light band image behind the Dispenza city results."
+               width="1920" height="1080" loading="lazy" decoding="async">
+        </figure>
+        <div class="mc-band__scrim" aria-hidden="true"></div>
+        <div class="mc-band__inner">
+          <div class="mc-band__hold">
+            <p class="mc-band__eyebrow" data-reveal>Increase Sales</p>
+            <h2 class="mc-band__line" data-reveal>Total Sale Increase</h2>
+            <div class="mc-band__pairs">
+              <div class="mc-band__pair" data-reveal>
+                <span class="mc-band__city">Oceanside, CA</span>
+                <span class="mc-band__lift">+51.37%</span>
+                <span class="mc-band__win">in the first 3 months</span>
+              </div>
+              <div class="mc-band__pair" data-reveal>
+                <span class="mc-band__city">Las Vegas, NV</span>
+                <span class="mc-band__lift">+733%</span>
+                <span class="mc-band__win">in the first 30 months</span>
+              </div>
+            </div>
+            <p class="mc-band__note" data-reveal>Eight named cities carry their own figure and their own window on the full results page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 5 . THE LADDER . KIND: SPEC
+     ========================================================================== -->
+<!-- pick: PRICING-SECTIONS.md #2 Comparison table to cards on mobile | considered: #1,#3,#5 | why: the client's positioning wedge is that nine tiers and both plans are published while eighteen crawled competitor pages publish nothing, and the recorded live defect is that the feature lists are hidden behind click to expand panels, so the pricing treatment has to be the one that shows everything at once without an interaction; #2 is the only entry built as a real semantic table with a scrollable wrapper and a per-row card reflow, which means every price, every per location add-on and every included line is readable on a phone with its column header printed beside it. It is also the right register for this concept: a table is structured information, so it is the one object allowed to set the measure aside without the page looking like it changed its mind about column width. #1 three-tier cards, middle featured is rejected because carding forces one tier to be visually promoted and this ladder has nine rungs plus two plans, so three cards would either hide six tiers or shrink to unreadable. #3 monthly and annual toggle needs a second cadence to toggle to, and none is published. #5 plain-deal honesty stance is a creed band with no figures at all, which is the opposite of a wedge whose entire content is the printed number. -->
+<section class="mc-section mc-section--warm" id="pricing">
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>The ladder</p>
+        <h2 class="mc-head" data-reveal>Published prices</h2>
+        <p class="mc-body" data-reveal>Every tier carries its monthly figure, its per location add-on and everything it includes. Nothing is behind a click.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="mc-table__wrap" data-reveal>
+          <table class="mc-table">
+            <caption>Three of the nine tiers, shown in full. The remaining six and both plans read the same way on the pricing page.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Tier</th>
+                <th scope="col">Price</th>
+                <th scope="col">What it carries</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><span class="mc-table__idx">01</span>Ecomm Plus</th>
+                <td data-label="Price"><span class="mc-table__price">$399</span><span class="mc-table__unit">/Mo</span><span class="mc-table__add">+$99.99/Additional Location</span></td>
+                <td data-label="What it carries">
+                  <ul class="mc-table__carries">
+                    <li>E-Commerce Integration</li>
+                    <li>SEO AI</li>
+                    <li>Works with ANY Website</li>
+                    <li>Full Service Installation</li>
+                    <li>Enhanced Security Features</li>
+                    <li>Unlimited SKUs</li>
+                    <li>Dutchie + Solution</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mc-table__idx">02</span>WEB Plus</th>
+                <td data-label="Price"><span class="mc-table__price">$1,200</span><span class="mc-table__unit">/Mo</span><span class="mc-table__add">+$200/Additional Location</span></td>
+                <td data-label="What it carries">
+                  <ul class="mc-table__carries">
+                    <li>Dedicated Project Manager</li>
+                    <li>Web Hosting</li>
+                    <li>Domain Management</li>
+                    <li>30-Day Backup and Restores</li>
+                    <li>Any Ecomm / Menu Integration</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="mc-table__idx">03</span>WEB Pro</th>
+                <td data-label="Price"><span class="mc-table__price">$2000</span><span class="mc-table__unit">/Mo</span><span class="mc-table__add">+$400/Additional Location</span></td>
+                <td data-label="What it carries">
+                  <ul class="mc-table__carries">
+                    <li>All WEB Plus features INCLUDED</li>
+                    <li>Custom Web Widgets</li>
+                    <li>Full Service Web Management</li>
+                    <li>Unlimited Page</li>
+                    <li>Custom Web Graphics</li>
+                    <li>Custom Brand Elements</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mc-plans">
+          <div class="mc-plan" data-reveal>
+            <p class="mc-plan__name">MARKETING Pro</p>
+            <p class="mc-plan__price">$4,200<span class="mc-table__unit">/Mo</span></p>
+            <div class="mc-plan__body">
+              <p class="mc-plan__badge">Most Popular!</p>
+              <p class="mc-plan__folds">Guaranteed results. Folds in SEO Pro, WEB Plus, Web Graphics, Monthly Strategy Sessions, a Dedicated Campaign Strategist, Semi-Exclusivity and Performance Benchmarks. +$3,000/Additional Location.</p>
+            </div>
+          </div>
+          <div class="mc-plan" data-reveal>
+            <p class="mc-plan__name">ENTERPRISE</p>
+            <p class="mc-plan__price">$6,500<span class="mc-table__unit">/Mo</span></p>
+            <div class="mc-plan__body">
+              <p class="mc-plan__badge">Full Suite</p>
+              <p class="mc-plan__folds">Guaranteed Results + Boost your retention. Folds in WEB Pro, CREATIVE Pro, OUTREACH Email, OUTREACH SMS, Review Management and Includes all A La Carte Upgrades.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 6 . THE BREATH . KIND: BAND (full bleed event)
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #26 Pull-quote section | considered: #8,#17,#57 | why: the owner asked for "editorial pull-quote moments and single-statement breath sections" and this is the page's one breath, placed directly after the price argument where a reader most needs a pause before the ask; #26 is the entry defined as one quote standing alone with nothing else in the section, which is the only treatment that honours "one clear idea per viewport" at the exact point in the scroll where the temptation is to keep selling. It also gives the second band photograph a reason to exist that is not decoration: the image carries the pause, the words carry the meaning. #8 manifesto or belief statement is close, but it invites a set of belief lines and this client has exactly one plainspoken paragraph, so the extra slots would have to be written. #17 centred manifesto bio would re-centre the type and break the single left axis the whole page is built on. #57 quote standalone is the same shape as #26 but is catalogued as a transitional decorative break, and this quote is the client's actual answer to why operators stay, so it is content, not a transition. -->
+<section class="mc-section mc-section--band mc-band" id="breath">
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+        <figure class="mc-band__media" data-media-in data-parallax>
+          <img src="../../../assets/generated/band-breath.jpg"
+               alt="Wide low light band image behind the Dispenza operator statement."
+               width="1920" height="1080" loading="lazy" decoding="async">
+        </figure>
+        <div class="mc-band__scrim" aria-hidden="true"></div>
+        <div class="mc-band__inner">
+          <div class="mc-band__hold">
+            <figure class="mc-quote" data-reveal>
+              <p>We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+              <figcaption>Long-term relationships built on trust, transparency, &amp; results since 2012</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 7 . THE CLOSING ASK . KIND: MEASURE
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #40 Pre-footer CTA band | considered: #41,#37,#33 | why: the page has to end on the guarantee, because the guarantee is the one claim no crawled competitor makes and it is the reason the price ladder above it is worth reading; #40 is the pre-footer band whose brief is a large claim plus a single button, which matches the owner's "quiet, high-contrast calls to action" better than anything that adds furniture, and it lets the band close on the same measured column the page opened on so the last line of the body sits on the same left axis as the first. It is also the correct place to spend the body's small light budget: a single wash behind the ask, one moment, nothing else on the page glowing. #41 closing CTA is the leaner sibling and is rejected only because it carries the action without room for the guarantee's condition, and a guarantee shown without its condition is exactly the overclaim the content bible forbids. #37 CTA form split would put a form in the body when the site's single conversion action routes to the contact page, duplicating a form that already has its own page. #33 custom-quote driver contradicts the entire positioning: this client publishes its prices, so asking the reader to request one would undo the wedge the page just spent five sections building. -->
+<section class="mc-section mc-section--warm mc-cta" id="close">
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>PERFORMANCE GUARANTEE</p>
+        <h2 class="mc-head" data-reveal>Only Marketing Agency In Cannabis That Guarantees Results</h2>
+        <p class="mc-cta__terms" data-reveal>Top-3 local or you do not pay.</p>
+        <div class="mc-actions" data-reveal>
+          <a class="btn btn--solid" href="contact.html">Book demo</a>
+          <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ============================================================ LOCKED CHROME
+     Footer card and mobile sticky bar, verbatim from _design/_chrome-block.html.
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta">
+  <a class="btn btn--ghost" href="tel:+17024207272">Call</a>
+  <a class="btn btn--solid" href="contact.html">Book demo</a>
+</div>
+
+
+<script>
+/* ---------------------------------------------------------------------------
+   PART A . CHROME BEHAVIOUR. Sourced verbatim from the locked chrome winner
+   (chrome concept 1). Not re-derived here.
+   --------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+})();
+
+
+/* ---------------------------------------------------------------------------
+   PART B . BODY MOTION. This is the concept's motion, and it is deliberately
+   small: one reveal gesture, one media scale in, one gentle drift, one count up.
+   Every branch below fails to the fully visible resting state.
+   --------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function show(el) { el.classList.add('is-in'); }
+
+  function paintFinalCounts() {
+    [].slice.call(doc.querySelectorAll('[data-count-to]')).forEach(function (node) {
+      var to = parseFloat(node.getAttribute('data-count-to'));
+      var dec = parseInt(node.getAttribute('data-count-dec') || '0', 10);
+      var suffix = node.getAttribute('data-count-suffix') || '';
+      if (isFinite(to)) node.textContent = to.toFixed(dec) + suffix;
+      node.setAttribute('data-counted', '1');
+    });
+  }
+
+  var targets = [].slice.call(doc.querySelectorAll('[data-reveal],[data-media-in]'));
+
+  /* REDUCED MOTION, or no IntersectionObserver at all: everything is placed in its
+     resting visible state immediately and no observer is created. */
+  if (reduce.matches || !('IntersectionObserver' in window)) {
+    targets.forEach(show);
+    paintFinalCounts();
+    return;
+  }
+
+  /* COUNT UP. The final value is already in the markup, so the animation only ever
+     replaces text it is about to restore. */
+  function countUp(node) {
+    if (node.getAttribute('data-counted') === '1') return;
+    node.setAttribute('data-counted', '1');
+    var to = parseFloat(node.getAttribute('data-count-to'));
+    var dec = parseInt(node.getAttribute('data-count-dec') || '0', 10);
+    var suffix = node.getAttribute('data-count-suffix') || '';
+    if (!isFinite(to)) return;
+    var start = null;
+    var dur = 1400;
+    function frame(t) {
+      if (start === null) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      node.textContent = (to * eased).toFixed(dec) + suffix;
+      if (p < 1) window.requestAnimationFrame(frame);
+      else node.textContent = to.toFixed(dec) + suffix;
+    }
+    window.requestAnimationFrame(frame);
+  }
+
+  /* THE ONE GESTURE. Fires once, at 15% viewport entry. */
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      show(entry.target);
+      obs.unobserve(entry.target);
+      var n = entry.target.querySelector('[data-count-to]');
+      if (n) countUp(n);
+    });
+  }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
+
+  targets.forEach(function (el) { obs.observe(el); });
+
+  /* PARALLAX. 0.94x, which is a 6% differential, capped so the drift can never
+     exceed the image overscan. Transform only, written as a custom property so the
+     scale in and the drift compose in a single CSS declaration. rAF throttled. */
+  var bands = [].slice.call(doc.querySelectorAll('[data-parallax]'));
+  var ticking = false;
+
+  function drift() {
+    ticking = false;
+    var vh = window.innerHeight || 1;
+    bands.forEach(function (band) {
+      var r = band.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      /* progress runs from 1 to -1 as the band crosses the viewport */
+      var progress = ((r.top + r.height / 2) - vh / 2) / (vh / 2 + r.height / 2);
+      if (progress > 1) progress = 1;
+      if (progress < -1) progress = -1;
+      var travel = Math.min(r.height * 0.06, 40);
+      band.style.setProperty('--ds-par', (progress * travel).toFixed(2) + 'px');
+    });
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(drift);
+  }
+  if (bands.length) {
+    drift();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+})();
+</script>
+
+</body>
+</html>

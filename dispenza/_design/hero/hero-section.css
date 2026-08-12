@@ -1,0 +1,379 @@
+/* =============================================================================
+   hero-section.css  --  THE HEROSECTION COMPONENT SHEET. Self-contained.
+
+   client-rules.json -> heroContract is explicit on two points:
+     component:       "HeroSection, its own file, self-contained"
+     style_isolation: "no hero-specific styles may leak into global CSS"
+   so every .mc-hero* rule lives here rather than in dispenza-structural.css, the
+   global body sheet all 27 pages inherit.
+
+   -----------------------------------------------------------------------------
+   REVISION 2026-08-12 (third of the day, owner-directed).
+   The hero became a PINNED SCROLL STAGE: a tall track with a sticky
+   viewport-height pin, holding the isometric field, a centre-anchored scrim, the
+   scroll-scrubbed hex platform (hero-coaster.js) and centred type.
+
+   The previous LEFT MEASURED COLUMN arrangement is preserved verbatim in
+   ./_prev-column/ -- restoring it is a three-file copy, because the owner's brief
+   for this pass began "maybe", and a design direction that is being explored
+   should not destroy the one it is being compared against.
+
+   ONE ARCHITECTURAL TENSION, RECORDED NOT BURIED. foundation-1's own selection
+   rationale rejected a centred hero in as many words: a centred hero "would
+   establish a CENTRE axis and then every section below would have to break it,
+   killing the one-axis discipline before the page starts". That reasoning has not
+   become wrong -- the hero is now the one section on the page that does not sit
+   on the left axis. It is defensible ONLY because the hero is now a pinned stage
+   rather than a band: it is a room the visitor passes through before the document
+   begins, so its axis reads as a separate space rather than as the first
+   contradiction of the page's spine. If that reading does not survive the owner's
+   eye, the fix is _prev-column/, not a patch here.
+   ============================================================================= */
+
+
+/* ---------------------------------------------------------------------------
+   1. THE TRACK AND THE PIN
+   The section is a SCROLL TRACK. Its only job is to be tall enough to give the
+   scrub somewhere to happen. Everything visible lives in the sticky pin, so the
+   composition holds still while the scroll drives the object inside it.
+
+   The pin carries .container--full so the DOM grammar stays legal:
+   section > .container > .row > .col > object. Putting a bare wrapper div
+   between the section and the container would break G-DOM.
+   --------------------------------------------------------------------------- */
+.mc-hero{
+  position:relative;
+  height:250vh;                       /* track: 1 viewport of pin + 1.5 of scrub */
+  background:var(--ds-bg-surface);
+}
+.mc-hero__pin{
+  position:sticky;top:0;
+  height:100vh;
+  overflow:hidden;
+  /* isolation:isolate is LOAD BEARING. Without it the pin establishes no
+     stacking context and a z-index:--ds-z-below child paints BEHIND the
+     section's own opaque background, which makes every media layer invisible.
+     Caught on a render, not in review. */
+  isolation:isolate;
+  display:flex;align-items:center;
+}
+.mc-hero__pin > .row{flex:1 1 auto;width:100%}
+.mc-hero__pin > .row > .col{position:relative;width:100%;height:100vh}
+/* the hero dissolves into the canvas rather than butting against it */
+.mc-hero__pin::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:var(--ds-divider-h);
+  background:var(--ds-fade-to-paper);pointer-events:none;z-index:var(--ds-z-raised);
+}
+
+
+/* ---------------------------------------------------------------------------
+   2. THE MEDIA LAYER  ..  everything below this line is the swappable slot
+   --------------------------------------------------------------------------- */
+.mc-hero__stage{position:absolute;inset:0;z-index:var(--ds-z-below)}
+/* kept so a raster can be dropped back into the slot without touching CSS */
+.mc-hero__stage img{width:100%;height:100%;object-fit:cover;object-position:70% center}
+.mc-hero__field{width:100%;height:100%;display:block}
+
+/* Prism faces are filled INLINE by hero-field.js from colours mixed out of the
+   locked tokens at runtime, so there is no hardcoded colour in this sheet or in
+   that script and the field cannot drift from dispenza-tokens.css. This rule
+   carries only the resting hairline. */
+.mc-hero__field .iso-top{stroke:var(--ds-primary);stroke-width:.9;stroke-opacity:.34}
+/* the travelling light: the SAME top-face outlines, brighter, revealed through a
+   moving window. The blur sits on the GROUP, not on ~1,100 polygons. */
+.mc-hero__lit{filter:var(--hero-glow)}
+.mc-hero__field .iso-lit{
+  fill:none;stroke:var(--ds-accent-light);stroke-width:1.5;stroke-linejoin:round;
+}
+
+/* THE LEGIBILITY GUARANTEE, NOW CENTRE-ANCHORED (owner: "make sure the dark area
+   is in the middle").
+
+   Two earlier versions of this scrim are worth remembering, because each was
+   correct for the composition it was written against and wrong for the next one:
+     v1 stopped at viewport PERCENTAGES, so on a 2560 screen it left a 720px dead
+        black band to the left of a centred 1120px column;
+     v2 anchored to the container, which fixed that for LEFT-set type.
+   The type is now centred, so the dense region is an ellipse on the middle of the
+   stage and the field survives at every edge. The guarantee is unchanged in kind:
+   type still sits on a KNOWN colour, so its contrast is a measured fact rather
+   than a property of whatever is dropped into the media slot later. */
+.mc-hero__scrim{
+  position:absolute;inset:0;z-index:var(--ds-z-below);
+  background:
+    radial-gradient(62% 60% at 50% 44%,
+      color-mix(in srgb, var(--ds-bg-surface) 97%, transparent) 0%,
+      color-mix(in srgb, var(--ds-bg-surface) 95%, transparent) 40%,
+      color-mix(in srgb, var(--ds-bg-surface) 62%, transparent) 70%,
+      color-mix(in srgb, var(--ds-bg-surface) 12%, transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ds-bg-surface) 62%, transparent) 0%,
+      color-mix(in srgb, var(--ds-bg-surface) 0%, transparent) 26%);
+}
+
+/* the hover light: a second copy of the top-face outlines at full brightness,
+   revealed only through a soft circle that follows the pointer. Moving one
+   <circle> is O(1); testing 1,100 polygons per pointermove would not be. */
+.mc-hero__hot{filter:var(--hero-glow);opacity:0;transition:opacity 260ms var(--ds-ease-out)}
+.mc-hero.is-pointing .mc-hero__hot{opacity:1}
+.mc-hero__field .iso-hot{
+  fill:none;stroke:var(--ds-accent-light);stroke-width:2.2;stroke-linejoin:round;
+}
+
+/* THE FLOOR POOL IS GONE (owner, 2026-08-12: "remove the purple blur at the
+   bottom"). It was a blurred radial wash across the lower 56% of the pin, added
+   when the caret was the hero's only light source and the bottom of the stage
+   needed something in it. With the coin, its smoke and the field's own travelling
+   light all present, it had become a haze sitting on top of the hexagons and
+   flattening them -- visible as a violet smear along the bottom edge. Deleted
+   rather than dialled down: nothing else referenced it for legibility, and the
+   contrast guarantee comes from .mc-hero__scrim, not from here. */
+
+
+/* ---------------------------------------------------------------------------
+   3. THE PLATFORM  ..  the scroll-scrubbed solid (hero-coaster.js)
+   Geometry, shading and the scrub all live in the script; this only places the
+   canvas and states that it must never eat pointer events, because the hover
+   light and the CTAs both sit above it.
+   --------------------------------------------------------------------------- */
+.mc-coaster{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:var(--ds-z-below);pointer-events:none;display:block;
+  transition:opacity 420ms var(--ds-ease-out);
+}
+/* THE GLB COIN, and the SVG one it supersedes.
+   The drawn coin is not deleted: it paints instantly, costs nothing, and is a
+   complete object, so it holds the hero until the model reports `loaded` and
+   remains the whole answer if WebGL is unavailable or the file never arrives.
+   Both are driven by ONE pose (hero-coaster.js publishes --coin-theta/--coin-yaw),
+   so the swap cannot produce a jump. */
+/* THE MODEL GETS A BOX, NOT THE STAGE.
+   inset:0 handed model-viewer the whole pin, so it fitted the coin to a
+   1440x900 frame -- it filled the hero and sat straight over the claim, and at
+   a 26deg field of view that close it was badly perspective-distorted as well.
+   The element is now sized and placed to the SAME column the SVG coin occupies,
+   driven by the same --token-cx the renderer and the stylesheet already share,
+   so the 3D upgrade lands exactly where the drawn one was. */
+.mc-coin{
+  position:absolute;
+  top:50%;
+  left:calc(var(--token-cx, 0.72) * 100%);
+  transform:translate(-50%, -50%);
+  width:min(44%, 560px);
+  height:min(72%, 560px);
+  z-index:var(--ds-z-below);pointer-events:none;display:block;
+  opacity:0;transition:opacity 520ms var(--ds-ease-out);
+  --poster-color:transparent;
+  background:transparent;
+}
+.mc-hero.has-coin3d .mc-coin{opacity:1}
+.mc-hero.has-coin3d .mc-coaster{opacity:0}
+.mc-coaster__mark{fill:color-mix(in srgb, var(--ds-accent-light) 90%, white)}
+
+
+/* ---------------------------------------------------------------------------
+   4. THE CENTRED CLAIM
+   --------------------------------------------------------------------------- */
+/* WIDTH IS LOAD BEARING, AND NOT FOR THE USUAL REASON.
+   The claim is background-clip:text, which paints ONLY inside the element's own
+   background box. A glyph that overflows the box therefore gets no paint at all
+   and vanishes -- it does not spill, it disappears. The first pass set this to
+   20ch, but `ch` resolves against the CONTENT font-size (16px), giving ~320px
+   while "MARKETING" alone sets ~600px at display size, so the headline rendered
+   as "MARI", "AGEN", "CANI" with everything past the box silently gone.
+   Sized in absolute units against the display type instead, and never narrower
+   than the longest single word can set. */
+/* TEXT LEFT, TOKEN RIGHT (owner, 2026-08-12). The claim returns to the left axis
+   -- which also settles the tension logged when this hero went centred, because
+   the page's one-axis discipline is no longer broken by its opening section. The
+   token floats in the right half; hero-coaster.js reads the same split so the two
+   halves cannot disagree about where the divide is. */
+.mc-hero__content{
+  position:absolute;left:var(--hero-pad);top:50%;transform:translateY(-50%);
+  z-index:var(--ds-z-raised);
+  width:min(46%, 620px);
+  text-align:left;
+  /* the claim lifts slightly as the platform lands under it, so the two read as
+     one movement rather than two. Driven by --coaster-p, which the scrub writes. */
+  margin-top:calc(var(--coaster-p, 0) * -6vh);
+  transition:none;
+}
+.mc-hero__content .mc-actions{justify-content:flex-start}
+/* the split, declared ONCE and read by both the CSS and the renderer */
+.mc-hero__pin{--hero-pad:clamp(24px, 7vw, 116px); --token-cx:0.72}
+
+/* the smoke sits between the field and the token: the token is IN it, not
+   behind it, and it must never eat a click meant for a CTA */
+.mc-smoke{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  z-index:var(--ds-z-below);pointer-events:none;
+}
+
+/* the type is a window onto a light field: background-color is the solid ink
+   token FIRST, so the lights only ever ADD brightness and contrast can never be
+   a function of where the caret happens to be */
+.mc-display{
+  background-color:var(--ds-ink-heading);
+  background-image:
+    radial-gradient(420px circle at var(--lx,-999px) var(--ly,-999px),
+      #ffffff 0%,
+      color-mix(in srgb, var(--ds-accent-light) 80%, white) 30%,
+      transparent 62%);
+  background-repeat:no-repeat;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+}
+.mc-display__turn{
+  background-color:transparent;
+  background-image:
+    radial-gradient(420px circle at var(--lx,-999px) var(--ly,-999px),
+      #ffffff 0%,
+      color-mix(in srgb, var(--ds-accent-light) 70%, white) 32%,
+      transparent 62%),
+    var(--ds-grad-text);
+  background-repeat:no-repeat;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+}
+
+
+/* ---------------------------------------------------------------------------
+   5. THE TYPE REVEAL  (owner reference: the Klickpin / Envato "Glow Type Cursor"
+   clip, matched closely at the owner's third request for it.)
+
+   HOW THIS TYPES WITHOUT THE TEXT LIVING IN JAVASCRIPT. Every character is in the
+   HTML from the first byte, wrapped in its own span, and the reveal only animates
+   OPACITY. Nothing is written into the DOM by a script.
+
+   That is not a stylistic preference, it is the only implementation that can
+   ship here: verify-copy-fidelity reads the authored FILE and requires every
+   registry verbatim to be present in it, so a headline assembled at runtime from
+   a JS string would leave the page with no headline as far as the gate is
+   concerned. It is also strictly better for a screen reader and for a crawler,
+   both of which see the finished sentence rather than a stuttering one.
+   --------------------------------------------------------------------------- */
+/* NO PER-CHARACTER TRANSITION, and the reason is measured rather than stylistic.
+   With a 90ms fade on each of 128 spans, the pass took 7.25s at 1440 but only
+   3.38s at 375 -- identical character count, identical timers. The gap is
+   REPAINT: .mc-display is background-clip:text, so changing any child's opacity
+   invalidates the whole clipped text layer, and that layer is several times
+   larger at desktop display size. Toggling opacity outright removes 128
+   overlapping transitions and the cost with them. At a 23ms cadence the fade was
+   never legible anyway -- characters overlapped -- and an instant appearance is
+   closer to the reference clip's mechanic than a fade is. */
+.js .mc-type .ch{opacity:0}
+.js .mc-type .ch.is-on{opacity:1}
+
+/* ---------------------------------------------------------------------------
+   THE CURSOR IS GONE (owner, 2026-08-12).
+
+   It was a hexagonal block with a large radial bloom, built to match the
+   reference clip's glowing cursor. Removed on request. What is NOT removed is
+   what it was carrying: the light it threw still settles onto the finished claim,
+   now anchored to the LAST CHARACTER of the lead instead of to a cursor element
+   (hero-field.js). So the room still lights when the sentence lands; there is
+   simply nothing sitting after the full stop.
+
+   The type reveal is unaffected -- characters still appear in sequence. A
+   typewriter without a cursor is just a progressive reveal, which is arguably
+   closer to the owner's own motion spec than the cursor ever was.
+   --------------------------------------------------------------------------- */
+.mc-lead-wrap{position:relative;display:block}
+
+/* THE TYPE ITSELF GLOWS. In the clip every character carries a soft halo and the
+   ONE highlighted word is both saturated and noticeably brighter than its
+   neighbours. Here the turn line is that word: it already carries the brand
+   gradient, and now it carries the bloom too. */
+.mc-display{
+  filter:drop-shadow(0 0 18px color-mix(in srgb, var(--ds-primary) 26%, transparent));
+}
+.mc-display__turn{
+  filter:
+    drop-shadow(0 0 14px color-mix(in srgb, var(--ds-accent-light) 55%, transparent))
+    drop-shadow(0 0 46px color-mix(in srgb, var(--ds-primary) 42%, transparent));
+}
+
+
+/* ---------------------------------------------------------------------------
+   6. REDUCED MOTION  ..  freeze everything, lose nothing.
+   Every state the animated path can reach is reachable here: the field keeps its
+   geometry, the platform is drawn already landed, every character is visible, the
+   caret is placed and lit. What is removed is movement, not content.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce){
+  .mc-hero{height:100vh}                 /* no scrub, so no track is needed */
+  .mc-hero__pin{position:relative;height:100vh}
+  .mc-hero__lit{filter:none}
+  .mc-hero__field .iso-lit{stroke-opacity:.42}
+  .mc-hero__hot{display:none}
+  .mc-display{background-image:none;-webkit-text-fill-color:var(--ds-ink-heading);
+              color:var(--ds-ink-heading)}
+  .mc-display__turn{background-image:var(--ds-grad-text);-webkit-text-fill-color:transparent}
+  .js .mc-type .ch{opacity:1;transition:none}
+  .mc-hero__content{margin-top:0}
+}
+
+
+/* ---------------------------------------------------------------------------
+   7. REFLOW
+   --------------------------------------------------------------------------- */
+@media (max-width:1100px){
+  .mc-hero{height:220vh}
+  /* 18ch here reproduced the desktop clipping bug at every width below 1100:
+     the paint box computed to ~197px while the claim set wider, so with
+     background-clip:text the overflow did not wrap or spill, it VANISHED --
+     "MARKETING" rendered as "MARKET" and "CANNABIS" as "CANNAE". A detector was
+     written for exactly this (it measures every character's right edge against
+     its paint box) and reported glyph loss at 375/414/600/768/900/1100 while
+     1280 and up were clean. Both halves are fixed here: a box that is not capped
+     by a body-relative unit, and a hero type scale whose longest word
+     ("MARKETING", 9 characters) fits that box at every width in the range. */
+  .mc-hero__content{width:min(100% - var(--ds-space-md) * 2, 720px)}
+  .mc-hero .mc-display{font-size:clamp(34px, 11vw, 68px)}
+  .mc-hero__stage img{object-position:60% center}
+}
+/* THE COLUMNS STACK once there is no longer room for two. The renderer makes the
+   same decision from the same measurement (VW/VH < 1.15), so the token moves to
+   the centre-bottom in the same breath that the claim goes full width -- they
+   cannot end up disagreeing about which layout is in force. */
+@media (max-aspect-ratio: 115/100), (max-width:860px){
+  /* STACKED: the model centres and drops below the claim, matching the renderer's
+     own `stacked` branch (VW/VH < 1.15) so the two cannot disagree about which
+     layout is in force. */
+  /* MEASURED at 375x812: the claim ran to y=490 while the model started at
+     y=439 -- a 51px overlap. Shorter model, pinned lower, and the claim lifted
+     further, so the two columns become two rows with real air between them. */
+  .mc-coin{
+    left:50%;top:auto;bottom:0;
+    transform:translateX(-50%);
+    width:min(72%, 400px);
+    height:min(36%, 400px);
+  }
+  /* top:50% is kept. Setting it to auto handed the absolutely-positioned block
+     back to its static position, which pinned the claim to the very top of the
+     pin (measured: content bottom at y=67 on a 812px stage). */
+  .mc-hero__content{
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:min(100% - var(--ds-space-md) * 2, 720px);
+    text-align:center;
+    margin-top:-17vh;
+  }
+  .mc-hero__content .mc-actions{justify-content:center}
+}
+@media (max-width:700px){
+  /* the pin still holds a full viewport, but the scrub is shortened: a phone
+     scrolls in bigger relative jumps, so a long track reads as a stall. */
+  .mc-hero{height:190vh}
+  .mc-hero__scrim{
+    background:
+      radial-gradient(88% 46% at 50% 42%,
+        color-mix(in srgb, var(--ds-bg-surface) 97%, transparent) 0%,
+        color-mix(in srgb, var(--ds-bg-surface) 94%, transparent) 46%,
+        color-mix(in srgb, var(--ds-bg-surface) 40%, transparent) 82%,
+        transparent 100%),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--ds-bg-surface) 66%, transparent) 0%,
+        color-mix(in srgb, var(--ds-bg-surface) 0%, transparent) 24%);
+  }
+}

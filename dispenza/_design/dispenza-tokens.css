@@ -1,0 +1,195 @@
+/* =============================================================================
+   dispenza-tokens.css  --  THE LOCKED BRAND IDENTITY (C6 + brand-card pick)
+   Locked 2026-08-12 from the owner pick at the BRAND CARD tournament:
+   concept 3, "luminous depth" (_design/_tournament/brand-3-luminous-depth/).
+
+   FROZEN RAILS carried verbatim from C6 (owner: "keep 100% of the brand identity"):
+     brand violet #8d3fe8 . deep violet #420f7b . dark surface #222429
+     muted #9f9f9f . hairline #e3e3e3 . Montserrat display + DM Sans body
+     exactly two button variants . white wordmark + violet chevron
+
+   DIRECTION: leads DARK (owner decision D20). :root IS the dark canvas;
+   .surface-dark re-states the same vars so a nested dark band stays consistent.
+
+   ACCESSIBILITY CORRECTION APPLIED AT LOCK (the one value changed from the concept):
+     --ds-accent-ink  #8d3fe8 -> #ae76ef
+   Measured: #8d3fe8 on #15161a = 3.45:1 and on #222429 = 2.96:1, both BELOW the
+   4.5:1 AA floor for small text. Because this brand leads dark, :root is already the
+   dark canvas, so accent-ink must be the light variant (#ae76ef on #15161a = 5.71:1)
+   exactly as the .surface-dark flip already declared. The raw brand violet remains
+   the ACCENT (fills, borders, large display) where 3:1 is the applicable floor; it is
+   never painted as small text. Smallest change that clears the floor, using a colour
+   already in the concept.
+   ============================================================================= */
+
+:root {
+
+  /* ── COLOR (17 required) ──────────────────────────────────────────────── */
+
+  /* FROZEN. The brand ACCENT and every CTA/border/gradient surface.
+     As a SURFACE it is flawless: white on it measures 5.24:1.
+     As TEXT on any near-black plane it measures 3.45 / 3.22 / 2.96:1 - below
+     4.5:1. It is therefore never painted as text on dark anywhere on this
+     sheet; --ds-accent-light carries that job. See §03. */
+  --ds-primary:        #8d3fe8;
+
+  /* THE DARK GROUND (schema: near-black, NOT a deeper shade of the accent).
+     The deepest of three planes. Tinted toward the brand ink rather than pure
+     #000 per DESIGN-LIB F1 - a hair of violet sits in the blue channel.
+     --ds-ink-on-dark on it = 18.08:1. */
+  --ds-primary-deep:   #15161a;
+
+  /* Tinted violet wash for soft plates. Alpha, so it reads as light passing
+     through the plane rather than as a second opaque colour. */
+  --ds-primary-soft:   rgba(141,63,232,.14);
+
+  /* FROZEN, same value as --ds-primary. Large display / borders / icons only. */
+  --ds-accent:         #8d3fe8;
+
+  /* Small accent TEXT on LIGHT grounds. On the one light band the TRUE frozen
+     violet already clears the bar (#8d3fe8 on #ffffff = 5.24:1), so no darkened
+     substitute is invented for light - the brand colour itself is the ink. */
+  --ds-accent-ink:     #ae76ef;
+
+  --ds-accent-soft:    rgba(141,63,232,.10);
+
+  /* FROZEN deep violet. Dark-band CTA surface + the deep stop of the signature
+     gradient. --ds-ink-on-dark on it = 13.24:1; it on white = 13.24:1. */
+  --ds-accent-deep:    #420f7b;
+
+  /* DERIVED - the only new colour on this sheet, and it exists for one reason.
+     Same hue (267.7°) and same saturation (78.6%) as #8d3fe8; lightness raised
+     57.8% → 70%. This is accent FOREGROUND on dark grounds: 5.71:1 on the
+     canvas, 5.33:1 on the mid plane, 4.91:1 on the elevated plane - all three
+     clear 4.5:1, which #8d3fe8 does not. Stated in the open in §03. */
+  --ds-accent-light:   #ae76ef;
+
+  /* Second gradient stop = the frozen deep violet. */
+  --ds-accent-2:       #420f7b;
+
+  /* ── GROUNDS - three near-black planes at slightly different values.
+     This ladder IS the concept: depth read as value, not as decoration. ── */
+  --ds-bg-surface:     #15161a;  /* plane 0 - the page canvas */
+  --ds-bg-warm:        #1b1d22;  /* plane 1 - the mid plane, recessed panels */
+  --ds-bg-surface-2:   #222429;  /* plane 2 - FROZEN. The elevated/card surface */
+
+  /* ── INKS (dark polarity - all light by construction) ─────────────────── */
+  --ds-ink:            #f5f3f9;  /* 16.42:1 on canvas - body/default text */
+  --ds-ink-heading:    #ffffff;  /* 18.08:1 on canvas - schema: dark brand → LIGHT ink */
+  --ds-ink-soft:       #9f9f9f;  /* FROZEN muted. 6.83 / 6.37 / 5.87:1 across the three planes */
+  --ds-ink-on-dark:    #ffffff;
+
+  /* FROZEN #e3e3e3, carried at hairline alpha. On dark, a card border is
+     translucent rather than solid (DESIGN-LIB I2). */
+  --ds-line:           rgba(227,227,227,.12);
+
+  --ds-scrim:          rgba(12,10,18,.72);  /* brand-tinted, not neutral black */
+
+  /* ── COLOR (optional) ─────────────────────────────────────────────────── */
+  --ds-warning:        #e9af43;  /* framework default, recorded NOT brand (C6 §2) */
+  --ds-warning-soft:   rgba(233,175,67,.14);
+  --ds-success:        #57d367;  /* framework default, recorded NOT brand (C6 §2) */
+  --ds-success-soft:   rgba(87,211,103,.14);
+  --ds-signature:      #e3e3e3;  /* FROZEN hairline, doubling as the third tone */
+
+  /* ── GRADIENT / EXTRA SHADOW ──────────────────────────────────────────────
+     The signature motif. One angle held constant across every deployment
+     (DESIGN-LIB F2) so the light always falls from the same direction. */
+  --ds-grad-brand:     linear-gradient(100deg,#420f7b 0%,#8d3fe8 100%);
+  --ds-grad-text:      linear-gradient(100deg,#ae76ef 0%,#8d3fe8 100%);
+  --ds-grad-hero:      linear-gradient(100deg,#420f7b 9%,#8d3fe8 100%);
+  --ds-fade-to-paper:  linear-gradient(180deg,rgba(21,22,26,0) 0%,#15161a 65%);
+  --ds-shadow-rest:    0 1px 3px rgba(0,0,0,.42);
+  --ds-shadow-card-2stop: 0 2px 8px rgba(0,0,0,.44), 0 12px 30px rgba(66,15,123,.20);
+
+  /* ── TYPOGRAPHY (2 required + 1 optional) ─────────────────────────────── */
+  --ds-font-display:   'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ds-font-body:      'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ds-font-mono:      ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+
+  /* ── RADIUS (3 role tokens - never chip/sm/md/lg/xl) ──────────────────── */
+  --ds-r-control:      7px;    /* buttons, inputs, badges, tags, chips */
+  --ds-r-surface:      14px;   /* cards, panels, media frames */
+  --ds-r-pill:         999px;
+
+  /* ── SHADOW (2 required) - layered ambient + key, never a single flat drop.
+     Tinted toward the brand ink and given a faint VIOLET cast, so an elevated
+     surface reads as sitting in violet-tinted light rather than in soot
+     (WOW §1, DESIGN-LIB D1). Negative spread tucks the key shadow under. ── */
+  --ds-shadow-card:    0 2px 10px rgba(0,0,0,.50), 0 18px 44px -12px rgba(66,15,123,.34);
+  --ds-shadow-lift:    0 6px 20px rgba(0,0,0,.54), 0 34px 76px -16px rgba(141,63,232,.36);
+
+  /* ── SPACING + LAYOUT ─────────────────────────────────────────────────── */
+  --ds-space-2xs: 4px;
+  --ds-space-xs:  8px;
+  --ds-space-sm:  14px;
+  --ds-space-md:  24px;
+  --ds-space-lg:  40px;
+  --ds-space-xl:  64px;
+  --ds-space-2xl: 96px;
+  --ds-section-py:    clamp(72px,10vw,136px);  /* generous - restraint is space */
+  --ds-container-max: 1120px;
+
+  /* ── MOTION ───────────────────────────────────────────────────────────── */
+  --ds-ease:      cubic-bezier(.05,.5,.3,1);   /* the settle curve, DESIGN-LIB C8 */
+  --ds-dur:       220ms;
+  --ds-dur-data:  1.4s;
+
+  /* ── Z-INDEX ──────────────────────────────────────────────────────────── */
+  --ds-z-below:   -1;
+  --ds-z-base:     0;
+  --ds-z-raised:   1;
+  --ds-z-sticky:  1000;
+  --ds-z-overlay: 1040;
+  --ds-z-drawer:  1050;
+  --ds-z-modal:   1060;
+  --ds-z-toast:   1080;
+
+  /* ── OPACITY ──────────────────────────────────────────────────────────── */
+  --ds-opacity-muted:    .72;
+  --ds-opacity-disabled: .45;
+  --ds-opacity-faint:    .12;
+  --ds-opacity-scrim:    .55;
+  --ds-opacity-texture:  .40;
+  --ds-opacity-veil:     .85;
+
+  /* ── GLOBALS OVERLAY (15) - the locked design LANGUAGE ────────────────── */
+  --ds-glass-bg:     rgba(34,36,41,.72);
+  --ds-glass-blur:   blur(16px) saturate(170%);
+  --ds-glass-border: rgba(227,227,227,.14);
+  --ds-hairline:     rgba(227,227,227,.10);
+  --ds-inset-hi:     inset 0 1px 0 rgba(255,255,255,.07);
+  --ds-glow:         0 0 48px rgba(141,63,232,.40);
+  --ds-glow-wash:    radial-gradient(closest-side,rgba(141,63,232,.34),rgba(66,15,123,.16) 55%,transparent 100%);
+  --ds-grain:        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --ds-grid:         linear-gradient(rgba(141,63,232,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(141,63,232,.07) 1px,transparent 1px);
+  --ds-grid-size:    44px 44px;
+  --ds-divider-h:    80px;
+  --ds-dur-fast:     160ms;
+  --ds-dur-slow:     600ms;
+  --ds-ease-out:     cubic-bezier(.2,.6,.2,1);
+  /* Declared for the shared-chrome contract (mega/drawer source-icon recolour).
+     ⚠ UNVERIFIED: this chain was composed, not measured against #8d3fe8 - no
+     source icon on this sheet consumes it. Re-measure at P8 before first use. */
+  --ds-icon-tint:    brightness(0) saturate(100%) invert(35%) sepia(72%) saturate(3600%) hue-rotate(258deg) brightness(96%) contrast(101%);
+}
+
+.surface-dark {
+  --ds-bg-surface:   #15161a;
+  --ds-bg-warm:      #1b1d22;
+  --ds-bg-surface-2: #222429;
+  --ds-ink:          #f5f3f9;
+  --ds-ink-heading:  #ffffff;
+  --ds-ink-soft:     #9f9f9f;
+  --ds-ink-on-dark:  #ffffff;
+  --ds-accent-ink:   #ae76ef;
+  --ds-accent-light: #ae76ef;
+  --ds-line:         rgba(227,227,227,.12);
+  --ds-hairline:     rgba(227,227,227,.10);
+  --ds-glass-bg:     rgba(34,36,41,.72);
+  --ds-glass-border: rgba(227,227,227,.14);
+  --ds-inset-hi:     inset 0 1px 0 rgba(255,255,255,.07);
+  --ds-shadow-card:  0 2px 10px rgba(0,0,0,.50), 0 18px 44px -12px rgba(66,15,123,.34);
+  background:var(--ds-bg-surface);
+  color:var(--ds-ink);
+}
