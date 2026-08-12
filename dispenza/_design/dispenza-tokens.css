@@ -64,11 +64,36 @@
      clear 4.5:1, which #8d3fe8 does not. Stated in the open in §03. */
   --ds-accent-light:   #ae76ef;
 
+  /* Accent text ON the deep-violet card ground. --ds-accent-light straight is
+     only 4.19:1 on --ds-accent-deep, under the 4.5 small-text floor. This is
+     that violet mixed 80/20 toward white: measured 5.37:1 on #420f7b, still
+     unmistakably brand rather than plain white. A NAMED token rather than an
+     inline color-mix(): the value is a brand decision, it belongs in the one
+     file allowed to carry brand hex, and a resolved rgb() is legible to every
+     contrast tool (color-mix computes to color(srgb ...), which two separate
+     parsers in my own harness silently mis-read). */
+  --ds-accent-on-deep: #be91f2;
+
   /* Second gradient stop = the frozen deep violet. */
   --ds-accent-2:       #420f7b;
 
   /* ── GROUNDS - three near-black planes at slightly different values.
      This ladder IS the concept: depth read as value, not as decoration. ── */
+  /* ── THE LIGHT BAND. Not invented: the locked brand card records the SOURCE
+     site's own palette as page canvas #ffffff with #000000 ink, and the accent
+     notes above were already written against it ("on the one light band the TRUE
+     frozen violet already clears the bar, #8d3fe8 on #ffffff = 5.24:1"). The
+     ground existed in the spec and in the client's live site; only the tokens
+     were missing. Measured against #ffffff:
+        --ds-ink-on-light  #000000  21.00:1
+        --ds-ink-soft-light #4a4a52  8.59:1   (muted copy still clears AA body)
+        --ds-accent (#8d3fe8)        5.24:1   (accent TEXT, per the note above)
+        --ds-accent-deep (#420f7b)  13.24:1   (card grounds, white text on them) */
+  --ds-bg-light:       #ffffff;
+  --ds-ink-on-light:   #000000;
+  --ds-ink-soft-light: #4a4a52;
+  --ds-line-on-light:  rgba(0,0,0,.14);
+
   --ds-bg-surface:     #15161a;  /* plane 0 - the page canvas */
   --ds-bg-warm:        #1b1d22;  /* plane 1 - the mid plane, recessed panels */
   --ds-bg-surface-2:   #222429;  /* plane 2 - FROZEN. The elevated/card surface */

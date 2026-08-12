@@ -480,6 +480,210 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   color:var(--ds-ink-soft);
 }
 
+/* THE LEDE'S LINE BREAK, and why it is conditional.
+   Owner: bring "so you" down to the second line. Left to itself the lede broke
+   as "...everything online, so you / can focus on growth.", splitting the clause.
+   The break is forced AFTER the comma so the second line reads as one thought.
+
+   It is a <br> placed after the SPACE span, not in place of it -- the lede is
+   authored one character per span, and swapping the space for a <br> would make
+   a tag-strip yield "online,so" and break the corpus verbatim that
+   verify-copy-fidelity matches against.
+
+   Conditional on width: below the split layout the column is a different shape
+   and a hard break there would strand a short first line. */
+.mc-lede-break{display:none}
+@media (min-width:1101px){ .mc-lede-break{display:inline} }
+
+/* -- THE LIGHT SECTION -------------------------------------------------------
+   Owner: "I want this section to be against white."
+
+   Implemented as a SCOPED TOKEN FLIP, not as a set of per-element colour
+   overrides. The section redefines the same variables the type atoms already
+   consume, so .mc-eyebrow / .mc-head / .mc-body / .mc-head--statement all work
+   unchanged inside it -- there is no light-mode copy of any component, and none
+   can drift from its dark original. Anything added to this section later
+   inherits correct colours for free.
+
+   The values come from the locked brand card, which records the client's own
+   live palette (#ffffff canvas, #000000 ink) -- see dispenza-tokens.css. */
+.mc-section--light{
+  background:var(--ds-bg-light);
+  --ds-ink:          var(--ds-ink-on-light);
+  --ds-ink-heading:  var(--ds-ink-on-light);
+  --ds-ink-soft:     var(--ds-ink-soft-light);
+  --ds-line:         var(--ds-line-on-light);
+  /* the accent as TEXT on white: the frozen violet itself clears AA (5.24:1),
+     so the light variant used on dark grounds is NOT carried over here */
+  --ds-accent-ink:   var(--ds-accent);
+  --ds-bg-surface:   var(--ds-bg-light);
+}
+/* the outlined statement, on white: same technique, inverted. The fill takes the
+   ground and the ring takes the brand violet, which is what the source does. */
+.mc-section--light .mc-head--statement{
+  color:var(--ds-bg-light);
+  text-shadow:
+    var(--mc-ring)  var(--mc-ring) 0 var(--ds-accent),
+    calc(-1 * var(--mc-ring)) var(--mc-ring) 0 var(--ds-accent),
+    var(--mc-ring)  calc(-1 * var(--mc-ring)) 0 var(--ds-accent),
+    calc(-1 * var(--mc-ring)) calc(-1 * var(--mc-ring)) 0 var(--ds-accent),
+    var(--mc-ring)  0 0 var(--ds-accent),
+    calc(-1 * var(--mc-ring)) 0 0 var(--ds-accent),
+    0 var(--mc-ring) 0 var(--ds-accent),
+    0 calc(-1 * var(--mc-ring)) 0 var(--ds-accent);
+}
+
+/* -- THE RESULT CARDS (eight cities, one card each) --------------------------
+   The brief calls for EIGHT named cities, "one card each, every lift carrying
+   its own window". The source shows five at a time inside a carousel; a
+   carousel is on the owner's forbidden-motion list, and more to the point the
+   roster length IS the proof here, so all eight are laid out at once and none
+   is reachable only by waiting.
+
+   Grid, not flex: the cards must share one height per row so the rules and the
+   percentages line up across the row, which a flex row with wrapping does not
+   guarantee. auto-fit + minmax gives 4 / 3 / 2 / 1 across the range with no
+   breakpoint of its own. */
+.mc-results{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+  gap:var(--ds-space-md);
+  margin-top:var(--ds-space-xl);
+}
+.mc-result{
+  display:flex;flex-direction:column;
+  background:var(--ds-accent-deep);
+  color:var(--ds-ink-on-dark);
+  border-radius:var(--ds-r-card, 18px);
+  padding:var(--ds-space-md);
+  min-height:100%;
+}
+.mc-result__city{
+  display:flex;align-items:center;gap:var(--ds-space-xs);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ds-ink-on-dark);
+  padding-bottom:var(--ds-space-sm);
+  border-bottom:1px solid rgba(255,255,255,.28);
+}
+.mc-result__city::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--ds-ink-on-dark);flex:0 0 auto;
+}
+.mc-result__label{
+  margin:var(--ds-space-md) 0 0;
+  font-size:var(--ds-step-body);
+  color:rgba(255,255,255,.92);
+}
+.mc-result__lift{
+  display:flex;align-items:baseline;gap:var(--ds-space-xs);
+  margin:var(--ds-space-xs) 0 0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(28px, 2.6vw, 38px);font-weight:800;
+  letter-spacing:-.02em;line-height:1.1;
+  font-variant-numeric:tabular-nums;
+}
+.mc-result__arrow{font-weight:700;opacity:.95}
+.mc-result__win{
+  margin:auto 0 0;padding-top:var(--ds-space-md);
+  font-size:var(--ds-step-body);
+  color:rgba(255,255,255,.86);
+}
+
+/* -- SECTION 4 . THE PROMISE (the guarantee statement) -----------------------
+   The claim the client makes, set as the page's plainest possible statement: no
+   card, no image, no ornament competing with it. The one typographic move is
+   that the guarantee half takes the brand violet, which is how the source
+   distinguishes it -- and on white the frozen violet clears AA as text (5.24:1),
+   so the emphasis costs nothing in legibility.
+
+   Prep holds this claim under decision D11 for the owner's claims checkpoint;
+   the build reproduces it verbatim and adds nothing. */
+.mc-promise{text-align:center;margin-inline:auto}
+.mc-promise .mc-head{
+  /* MEASURE IN em, NOT ch. The foundation gate blocked a ch here twice and its
+     concern is correct: `ch` is the width of the font's "0" glyph, so it silently
+     resolves against whatever face the element actually inherits -- put it on a
+     wrapper and it measures the BODY font while sizing DISPLAY text, computing
+     2-3x too wide. `em` resolves against this element's own font-size, so it
+     cannot be wrong about which type it is measuring. */
+  max-width:13em;margin-inline:auto;
+  font-size:clamp(30px, 4.4vw, 58px);
+  line-height:1.12;letter-spacing:-.02em;
+  text-transform:uppercase;font-weight:800;
+}
+.mc-promise__key{color:var(--ds-accent-ink);display:block}
+.mc-promise .mc-actions{justify-content:center}
+
+/* -- SECTION 5 . PERFORMANCE BENCHMARKS -------------------------------------
+   Four day-0-against-the-month tables, "reproduced whole, with room, instead of
+   stacked into one dense block" (brief). A table is the honest object here: the
+   content IS rows of label/value pairs at two points in time, and carding it
+   would turn a comparison into four decorations.
+
+   Grid rather than a flex row so the four cards share a height and their rows
+   align across the set -- the whole point is reading ACROSS the tables. */
+.mc-bench{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+  gap:var(--ds-space-md);
+  margin-top:var(--ds-space-xl);
+}
+.mc-bench__card{
+  display:flex;flex-direction:column;
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-card, 18px);
+  overflow:hidden;
+  background:var(--ds-bg-warm);
+}
+/* the fourth card is the client's own result and takes the brand ground, which
+   is the distinction the source draws between the benchmark set and Dispenza */
+.mc-bench__card--ours{background:var(--ds-accent-deep);border-color:transparent}
+.mc-bench__head{
+  display:grid;place-items:center;
+  min-height:112px;padding:var(--ds-space-md);
+  background:rgba(255,255,255,.06);
+}
+.mc-bench__card--ours .mc-bench__head{background:rgba(255,255,255,.10)}
+.mc-bench__brand{
+  font-family:var(--ds-font-display);font-weight:800;
+  font-size:clamp(17px, 1.5vw, 21px);letter-spacing:-.01em;
+  text-align:center;color:var(--ds-ink-heading);
+}
+.mc-bench__body{padding:var(--ds-space-md);display:grid;gap:var(--ds-space-sm)}
+.mc-bench__when{
+  /* NO text-transform. The source sets these in title case -- "Day 0", "1 Month",
+     "12 Month" -- and they are corpus verbatims in that exact form. Uppercasing
+     them would have been a silent divergence from both the reference and the
+     content, visible to a reader and invisible to a gate that reads the authored
+     file. (The eyebrow above IS uppercased, because the source shouts that one.) */
+  font-family:var(--ds-font-display);font-size:var(--ds-step-body);font-weight:700;
+  letter-spacing:0;color:var(--ds-ink);
+}
+/* LIGHTENED ON THE VIOLET CARD. --ds-accent-light straight is 4.19:1 on
+   --ds-accent-deep -- under the 4.5 floor for text this size (17px bold is below
+   WCAG's 18.66px bold large-text cutoff, so the small-text floor applies). The
+   source uses the flat accent here; accessibility wins over exact mimicry,
+   which the owner's own spec requires. --ds-accent-on-deep is that violet
+   mixed toward white: measured 5.37:1, still unmistakably brand. */
+.mc-bench__card--ours .mc-bench__when{
+  color:var(--ds-accent-on-deep);
+}
+.mc-bench__row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--ds-space-sm);
+  font-size:var(--ds-step-body);color:var(--ds-ink-soft);
+}
+.mc-bench__card--ours .mc-bench__row{color:rgba(255,255,255,.86)}
+.mc-bench__v{
+  font-weight:700;font-variant-numeric:tabular-nums;
+  color:var(--ds-ink);flex:0 0 auto;
+}
+.mc-bench__card--ours .mc-bench__v{color:var(--ds-ink-on-dark)}
+.mc-bench__rule{height:1px;background:var(--ds-line);margin:var(--ds-space-xs) 0}
+.mc-bench__card--ours .mc-bench__rule{background:rgba(255,255,255,.22)}
+
 /* -- COMPACT SECTION VARIANT ------------------------------------------------
    Owner, on the suite section: "give me a more compact section layout".
 
