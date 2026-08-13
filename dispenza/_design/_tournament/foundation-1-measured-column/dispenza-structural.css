@@ -940,8 +940,18 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    item again, exactly as it was before the wrapper existed. */
 .mc-media--plain picture{display:contents}
 .mc-media--plain img{
-  width:auto;max-width:100%;height:auto;max-height:320px;
-  aspect-ratio:auto;object-fit:contain;
+  /* A DEFINITE HEIGHT, NOT width:auto + max-height. The auto version deadlocked:
+     a replaced element has no intrinsic size until it LOADS, and as a
+     shrink-to-fit grid item that made it 0x0 -- which meant the lazy loader saw
+     zero area and never fetched it, so it never got a size. Measured in a real
+     browser: currentSrc "", naturalWidth 0, box 0x0, forever. Headless happened
+     to dodge it, which is exactly why it reached the owner.
+     Height is definite, width comes from the width/height ATTRIBUTES' ratio, so
+     the box exists before a single byte arrives. */
+  height:min(320px, 46vw);
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
 }
 
 .mc-list{margin:var(--ds-space-md) 0 0;display:grid;gap:var(--ds-space-xs)}
