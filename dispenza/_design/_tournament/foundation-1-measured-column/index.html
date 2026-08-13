@@ -776,8 +776,7 @@
         </div>
       </div>
     </div>
-      </div>
-    </div>
+
     <div class="row">
       <div class="col">
         <!-- MAP LEFT, CAROUSEL RIGHT.
@@ -1520,13 +1519,20 @@
         var x = o * (w * SPREAD);
         var sc = Math.pow(SCALE, a);
         c.style.transform = 'translateX(calc(-50% + ' + x.toFixed(1) + 'px)) scale(' + sc.toFixed(3) + ')';
-        c.style.opacity   = Math.pow(FADE, a).toFixed(3);
+        /* THREE CARDS, NOT EIGHT. The buttons already carry navigation, so the
+           deeper cards were adding blurred clutter rather than information --
+           beyond one step out they are hidden entirely. They stay in the DOM
+           (opacity, not display) so every city verbatim remains readable to
+           assistive tech and to verify-copy-fidelity. */
+        var shown = a <= 1;
+        c.style.opacity   = shown ? Math.pow(FADE, a).toFixed(3) : '0';
         c.style.filter    = a ? 'blur(' + (a * BLUR).toFixed(1) + 'px)' : 'none';
+        c.style.visibility = shown ? 'visible' : 'hidden';
         c.style.zIndex    = String(100 - a);
         c.classList.toggle('is-active', i === active);
         /* a card the reader cannot see should not be announced as content they
            can act on, but it stays in the tree and in the text */
-        c.setAttribute('aria-hidden', a > 2 ? 'true' : 'false');
+        c.setAttribute('aria-hidden', shown ? 'false' : 'true');
       });
       count.textContent = (active + 1) + ' / ' + cards.length;
       prev.disabled = false;

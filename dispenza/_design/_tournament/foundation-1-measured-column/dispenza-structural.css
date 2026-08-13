@@ -617,7 +617,9 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 /* -- THE RESULTS SPLIT: map left, carousel right ---------------------------- */
 .mc-results__split{
   display:grid;
-  grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);
+  /* the fan is three cards wide now, not eight, so the deck needs less room and
+     the map can sit closer to it */
+  grid-template-columns:minmax(0,0.92fr) minmax(0,1.08fr);
   gap:var(--ds-space-xl);
   align-items:center;
   margin-top:var(--ds-space-xl);
@@ -628,7 +630,15 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    and the whole PAGE scrolled horizontally at every width, not just this one.
    The desktop rule already used minmax(0,...); this one did not. */
 @media (max-width:900px){ .mc-results__split{grid-template-columns:minmax(0,1fr)} }
-.mc-results__map{margin:0}
+/* THE MAP MOVES TOWARD THE DECK RATHER THAN GROWING INTO ITS COLUMN.
+   Widening its column just made the graphic bigger and left the same 190px of
+   dead air between the two — "closer" is about the GAP, not the track width. So
+   the map takes a cap and is pushed to the end of its column, which closes the
+   distance without shrinking either element. */
+.mc-results__map{
+  margin:0 0 0 auto;
+  max-width:min(100%, 420px);
+}
 .mc-results__map img{width:100%;height:auto;display:block}
 
 /* -- THE DECK, AND WHY IT IS NOT THE THING THE SPEC BANS --------------------
@@ -691,8 +701,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   .mc-deck.is-fanned .mc-result{transition:none}
 }
 
+/* THE CONTROLS SIT UNDER THE MAIN CARD. The active card is centred in the
+   stage, so centring the bar in the stage puts it directly beneath it rather
+   than hanging off the left edge. */
 .mc-deck__bar{
-  display:flex;align-items:center;gap:var(--ds-space-sm);
+  display:flex;align-items:center;justify-content:center;
+  gap:var(--ds-space-sm);
   margin-top:var(--ds-space-md);
 }
 .mc-deck__btn{
