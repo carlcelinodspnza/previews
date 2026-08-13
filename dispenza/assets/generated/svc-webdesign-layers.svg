@@ -3,42 +3,45 @@
   <style><![CDATA[
     /* THE LAYERS DRIFT.
        Written INSIDE the asset on purpose: CSS animations run in an SVG loaded
-       through an img element, so the 43KB of geometry stays out of the page and
-       the motion still works -- and prefers-reduced-motion is still honoured,
-       because media queries evaluate in the image document too.
+       through an img element, so the 43KB of geometry stays out of the page.
+       (The reduced-motion decision is NOT made here -- an SVG in an img is an
+       isolated document and does not reliably receive the user's preference, so
+       the page swaps to a static twin via a picture source instead.)
 
        WRAPPED IN CDATA, and that is not decoration. An SVG with an XML prolog is
        parsed as strict XML, where a bare "<" inside a style element is a parse
-       error -- the first version of this comment contained the literal tag name
+       error -- an earlier version of this comment contained a literal tag name
        in angle brackets and silently broke the ENTIRE file: it stopped parsing,
-       the classes below never existed in the document, and the animation test
-       reported 0.00% pixel change with no error anywhere. CDATA makes the block
-       opaque to the XML parser, so no future edit can do the same.
+       the classes below never existed, and the animation test reported 0.00%
+       pixel change with no error anywhere.
 
-       Four plates, four mutually prime periods, four phase offsets, so the stack
-       never returns to the same arrangement on a visible cycle -- a slow breath
-       rather than a loop. Amplitude ~1.4% of the viewBox height: enough to
-       separate the plates as they pass, small enough that they never collide
-       (they sit ~380 units apart). Vertical only -- the owner's motion spec
-       forbids rotation, and a tilting plate would break the isometric
-       projection the artwork is drawn in. */
+       AMPLITUDE IS IN USER UNITS, AND THAT IS THE WHOLE TRAP. This viewBox is
+       2149.9 tall and renders at ~320px, a scale of 0.149 -- so the first pass's
+       "15px" translate was 2.2 SCREEN PIXELS. It was running correctly and was
+       simply too small to see. Sized from the render backwards instead:
+           80 units x 0.149 = 11.9 screen px
+           70 units x 0.149 = 10.4 screen px
+       Periods shortened to 5-8s so the movement reads within a glance rather
+       than over a quarter of a minute. The plates sit ~380 units apart, so even
+       two adjacent plates swinging in opposition close by 160 and never touch.
+
+       Four mutually prime periods and four phase offsets, so the stack never
+       returns to the same arrangement on a visible cycle. Vertical only -- the
+       owner's motion spec forbids rotation, and a tilting plate would break the
+       isometric projection the artwork is drawn in. */
     .pl { will-change: transform; }
-    .pl1 { animation: pl-a 9.1s ease-in-out infinite; }
-    .pl2 { animation: pl-b 11.3s ease-in-out infinite; animation-delay: -2.4s; }
-    .pl3 { animation: pl-a 13.7s ease-in-out infinite; animation-delay: -5.1s; }
-    .pl4 { animation: pl-b 10.3s ease-in-out infinite; animation-delay: -7.6s; }
+    .pl1 { animation: pl-a 5.3s ease-in-out infinite; }
+    .pl2 { animation: pl-b 6.7s ease-in-out infinite; animation-delay: -1.6s; }
+    .pl3 { animation: pl-a 7.9s ease-in-out infinite; animation-delay: -3.4s; }
+    .pl4 { animation: pl-b 6.1s ease-in-out infinite; animation-delay: -4.9s; }
 
     @keyframes pl-a {
-      0%, 100% { transform: translateY(-15px); }
-      50%      { transform: translateY(15px); }
+      0%, 100% { transform: translateY(-80px); }
+      50%      { transform: translateY(80px); }
     }
     @keyframes pl-b {
-      0%, 100% { transform: translateY(13px); }
-      50%      { transform: translateY(-13px); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .pl { animation: none !important; }
+      0%, 100% { transform: translateY(70px); }
+      50%      { transform: translateY(-70px); }
     }
   ]]></style>
 <defs>
