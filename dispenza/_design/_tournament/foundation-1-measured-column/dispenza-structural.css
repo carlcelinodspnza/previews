@@ -217,7 +217,17 @@
 section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md))}
 
 .mc-section + .mc-section:not(.mc-section--warm):not(.mc-section--band){padding-top:0}
+/* --light belongs in this list for the SAME reason --warm and --band do, and was the
+   one ground change left out of it. #benchmarks follows the WHITE #results, so the
+   joint is the biggest background change on the page -- and the collapse rule above
+   was still treating it as "same ground, no edge to breathe against", paying it zero
+   opening rhythm. Measured at 1440 that left the eyebrow 0px off the white/dark seam
+   while the section paid 151px BELOW its cards: the section read as top-jammed with a
+   hole under it. Every other section across a visible ground change (influence,
+   pricing, close) opens on a full 151.2px, so this restores the metronome rather than
+   inventing a value for one section. */
 .mc-section--warm + .mc-section:not(.mc-section--warm):not(.mc-section--band),
+.mc-section--light + .mc-section:not(.mc-section--warm):not(.mc-section--band),
 .mc-section--band + .mc-section:not(.mc-section--warm):not(.mc-section--band){
   padding-top:var(--ds-rhythm);
 }
