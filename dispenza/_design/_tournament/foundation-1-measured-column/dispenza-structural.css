@@ -533,10 +533,78 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
     0 calc(-1 * var(--mc-ring)) 0 var(--ds-accent);
 }
 
+/* -- THE INCREASE-SALES MARQUEE BAND -----------------------------------------
+   Owner: set the heading against a dark purple ground as a TRANSITION, in white
+   outline, duplicated enough to read as a marquee.
+
+   It earns the "transition" word literally: the section above is dark, this
+   section is white, and the band is the deep brand violet that sits between the
+   two -- so the page steps dark -> violet -> white instead of cutting.
+
+   The outline is the same technique as the statement heading (dark fill, ring
+   drawn by an eight-direction text-shadow) with the ring in white and the fill
+   in the band's own violet, so the glyphs read as cut out of the band.
+
+   MOTION: one continuous translation of a duplicated set, identical mechanically
+   to the client-logo marquee already recorded in D-MOTION-01 -- no slides, no
+   timer, nothing reachable only by waiting, and the duplicate is hidden from
+   assistive tech so the phrase is announced once. Reduced motion stops it dead. */
+.mc-salesband{
+  background:var(--ds-accent-deep);
+  overflow:hidden;
+  padding:var(--ds-space-lg) 0;
+  position:relative;
+}
+.mc-salesband__track{
+  display:flex;width:max-content;
+  will-change:transform;
+  animation:mc-salesband-run 26s linear infinite;
+}
+.mc-salesband__set{display:flex;flex:0 0 auto}
+/* the h2 carries set A: strip the heading's own block spacing so it sits in the
+   marquee row rather than pushing the band open */
+.mc-head--band{margin:0;font-size:inherit;line-height:1}
+.mc-salesband__word{
+  --mc-ring: max(1.5px, .018em);
+  font-family:var(--ds-font-display);
+  font-size:clamp(38px, 7vw, 96px);
+  font-weight:900;letter-spacing:-.012em;line-height:1;
+  text-transform:uppercase;white-space:nowrap;
+  padding-right:.36em;
+  color:var(--ds-accent-deep);
+  text-shadow:
+    var(--mc-ring)  var(--mc-ring) 0 var(--ds-ink-on-dark),
+    calc(-1 * var(--mc-ring)) var(--mc-ring) 0 var(--ds-ink-on-dark),
+    var(--mc-ring)  calc(-1 * var(--mc-ring)) 0 var(--ds-ink-on-dark),
+    calc(-1 * var(--mc-ring)) calc(-1 * var(--mc-ring)) 0 var(--ds-ink-on-dark),
+    var(--mc-ring)  0 0 var(--ds-ink-on-dark),
+    calc(-1 * var(--mc-ring)) 0 0 var(--ds-ink-on-dark),
+    0 var(--mc-ring) 0 var(--ds-ink-on-dark),
+    0 calc(-1 * var(--mc-ring)) 0 var(--ds-ink-on-dark);
+}
+@keyframes mc-salesband-run{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+@media (prefers-reduced-motion: reduce){
+  .mc-salesband__track{animation:none}
+}
+
+/* -- THE SECTION'S OWN CLAIM + CTA ------------------------------------------- */
+/* CENTRED, matching the reference: the claim is the section's own voice and sits
+   under the band like a statement, not like a left-aligned paragraph beside
+   empty space. The ch measure sits on the paragraphs (body font) where `ch`
+   resolves correctly, not on this wrapper. */
+.mc-results__say{
+  margin:var(--ds-space-xl) auto 0;
+  text-align:center;
+}
+.mc-results__say .mc-body{max-width:56ch;margin-inline:auto}
+.mc-results__say .mc-actions{justify-content:center}
+.mc-results__say .mc-body{font-size:clamp(17px, 1.5vw, 20px);line-height:1.6}
+.mc-results__say .mc-actions{margin-top:var(--ds-space-lg)}
+
 /* -- THE RESULTS SPLIT: map left, carousel right ---------------------------- */
 .mc-results__split{
   display:grid;
-  grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);
+  grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);
   gap:var(--ds-space-xl);
   align-items:center;
   margin-top:var(--ds-space-xl);
@@ -581,10 +649,40 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   scrollbar-width:none;
 }
 .mc-carousel__track::-webkit-scrollbar{display:none}
+/* THREE CARDS IN VIEW, THE MIDDLE ONE FOREMOST.
+   Sized so three fit the widened column; the neighbours stay visible and dimmed
+   so it reads as a deck with more behind it, which is what tells a reader it is
+   a carousel at all -- no dots required. `centre` snapping (not `start`) is what
+   puts the active card in the middle rather than against the left edge. */
 .mc-carousel__track > *{
-  scroll-snap-align:start;
-  flex:0 0 min(78%, 260px);
+  scroll-snap-align:center;
+  flex:0 0 min(64%, 208px);
+  /* the resting state is the BACK of the deck; .is-active promotes one card */
+  opacity:.42;
+  transform:scale(.9);
+  transition:opacity 320ms var(--ds-ease-out), transform 320ms var(--ds-ease-out);
 }
+.mc-carousel__track > .is-active{
+  opacity:1;
+  transform:scale(1);
+}
+@media (prefers-reduced-motion: reduce){
+  .mc-carousel__track > *{transition:none}
+}
+/* EDGE SPACERS OF ONE CARD WIDTH — not half a track, and not zero.
+   Both extremes were tried and both broke something real:
+     half-a-track spacers  let card 1 reach dead centre, but ate exactly the
+                           space the third card needed (2 visible at the ends,
+                           against the owner's "at least 3 showing").
+     no spacers            gave 3 visible, but card 1 could only be foremost at
+                           scrollLeft 0 — where card 2 is ALREADY centred. So
+                           "advance to card 2" computed a negative scroll,
+                           clamped to 0, and the next button did nothing at all.
+   One card width is the setting where both hold: card 1 sits 26px off centre —
+   near enough to be the promoted card — while three cards stay in view and every
+   card, first and last included, can be reached and promoted. */
+.mc-carousel__track::before,
+.mc-carousel__track::after{content:"";flex:0 0 min(64%, 208px)}
 @media (prefers-reduced-motion: reduce){
   .mc-carousel__track{scroll-behavior:auto}
 }

@@ -725,10 +725,51 @@
      ========================================================================== -->
 <!-- pick: SECTION-COMPONENTS.md #3 stat grid on an inverted ground | considered: #58,#21,#22 | why: the owner asked for this section against WHITE, matching the treatment their own live site gives it, and the eight city results are the page's strongest asset so each one gets its own card rather than two being shown and six deferred to another page. The light ground is the page's ONE inversion, which is what makes it read as the proof moment rather than as another dark panel. #58 image divider full-bleed is what this replaced and is rejected now because a photographic band cannot carry eight discrete figures without becoming a list on top of a picture. #21 case studies 3-col and #22 featured-plus-two both card the results at a size that forces either a subset or a carousel, and a carousel is on the owner's forbidden-motion list AND hides the roster length that is doing the persuading. -->
 <section class="mc-section mc-section--light mc-section--tight" id="results">
-  <div class="container">
+  <!-- FULL-BLEED BAND. It is the transition between the dark section above and
+       this white one, so it has to run edge to edge -- constrained to the
+       container it read as a block sitting IN the section rather than as the
+       seam between two. Hence container--full, outside the measured column. -->
+  <div class="container container--full">
     <div class="row">
       <div class="col">
-        <h2 class="mc-head mc-head--statement" data-reveal>Increase Sales</h2>
+        <div class="mc-salesband">
+        <div class="mc-salesband__track">
+          <h2 class="mc-salesband__set mc-head--band">
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+          </h2>
+          <div class="mc-salesband__set" aria-hidden="true">
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- The heading is now a full-bleed violet band: the transition between the
+         dark section above and this white one, with the phrase outlined in white
+         and duplicated to run as a marquee. Set A is the real one; set B is a
+         visual duplicate and is hidden from assistive tech so the phrase is
+         announced ONCE. The h2 is kept for the document outline and is visually
+         carried by set A. -->
+    <div class="row">
+      <div class="col">
+        <div class="mc-results__say">
+          <p class="mc-body" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</p>
+          <p class="mc-body" data-reveal>We only charge for our guaranteed results.</p>
+          <div class="mc-actions" data-reveal>
+            <a class="btn btn--solid" href="contact.html">Book demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
       </div>
     </div>
     <div class="row">
@@ -1427,20 +1468,67 @@
       return s ? Math.round(track.scrollLeft / s) : 0;
     }
     function sync() {
-      var atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-      /* AT THE END, THE LAST CARD IS THE CURRENT ONE. index() reports whichever
-         card sits at the LEFT edge, and at maximum scroll that is card 7 while
-         card 8 is plainly on screen with nowhere further to go -- the counter
-         read "7 / 8" at the end of the track. Clamp to what the reader sees. */
-      var i = atEnd ? cards.length - 1
-                    : Math.min(cards.length - 1, Math.max(0, index()));
+      var active = promote();
+      /* THE BUTTONS FOLLOW THE PROMOTED CARD, NOT RAW scrollLeft.
+         With centre snapping the resting scroll position is not 0 and not the
+         maximum -- it is wherever the snap landed -- so a scrollLeft comparison
+         reported "not at the start" while card 1 was plainly foremost, and
+         failed to disable `next` on the last card. The deck's own state is the
+         honest source: if the first card is promoted there is nothing before it. */
+      var i = active;
       count.textContent = (i + 1) + ' / ' + cards.length;
       /* disabled at the ends, so the control tells the truth about what it does */
+      /* the buttons answer "can this move?", which is a fact about the scroll
+         extremes; the counter answers "which card am I on", which promote()
+         has just clamped to agree with them at both ends */
       prev.disabled = track.scrollLeft <= 2;
-      next.disabled = atEnd;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
     }
-    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+    /* PROMOTE WHATEVER IS IN THE MIDDLE.
+       The deck reads as a carousel because the centre card is foremost and its
+       neighbours are dimmed and set back -- that is the affordance, not the
+       dots. Which card is central is a fact about scroll position, so it is
+       measured every scroll rather than tracked in a variable that can drift out
+       of sync with a swipe, a keypress or a trackpad flick. */
+    function promote() {
+      /* Purely geometric now: the one-card spacers put card 1 within 26px of
+         centre at rest and card 8 likewise at the end, so nearest-to-centre
+         names the right card at every position without special-casing. */
+      var mid = track.scrollLeft + track.clientWidth / 2;
+      var best = 0, bestD = Infinity;
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        var centre = c.offsetLeft + c.offsetWidth / 2;
+        var d = Math.abs(centre - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      return mark(best);
+    }
+    function mark(i) {
+      for (var j = 0; j < cards.length; j++) {
+        cards[j].classList.toggle('is-active', j === i);
+      }
+      return i;
+    }
+
+    /* THE BUTTONS MOVE THE DECK BY ONE PROMOTED CARD, and that is not the same
+       as scrolling by one card width. Because the first card is promoted while
+       sitting left of centre, a fixed-width scroll from the start landed the
+       geometric centre on card THREE -- pressing next once skipped card 2
+       entirely. Scroll to the position that centres the wanted card instead, so
+       the control does exactly what its counter says. */
+    function centreOf(i) {
+      var c = cards[Math.max(0, Math.min(cards.length - 1, i))];
+      var target = c.offsetLeft + c.offsetWidth / 2 - track.clientWidth / 2;
+      return Math.max(0, Math.min(track.scrollWidth - track.clientWidth, target));
+    }
+    function go(delta) {
+      var i = cards.findIndex(function (c) { return c.classList.contains('is-active'); });
+      if (i < 0) { i = 0; }
+      track.scrollTo({ left: centreOf(i + delta), behavior: 'smooth' });
+    }
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
     track.addEventListener('scroll', function () {
       window.clearTimeout(root.__t);
       root.__t = window.setTimeout(sync, 90);
