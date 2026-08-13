@@ -615,22 +615,42 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 
 .mc-svc{display:flex;flex-direction:column;min-width:0}
 .mc-svc__media{
-  /* 16:10, FILLED EDGE TO EDGE. This was built as a 4:3 padded well with the
-     contents centred and `contain`, to suit a square gauge and a portrait
-     illustration -- and that substitution is precisely what stopped it looking
-     like the option the owner picked. Option B's media is a landscape photograph
-     that fills its frame; the frame IS the image. Restored to that. */
+  /* OPTION B's FRAME, holding art that cannot be cropped.
+     B's media is 16:10 and full-bleed, which is right for a photograph. The
+     gauge is square and the layers illustration is portrait, so `cover` would
+     crop both — it would cut the plates off the artwork and clip the gauge's
+     own glow. They therefore sit INSIDE the frame at full height with no
+     padding, which is the closest honest reading of B for art that has to stay
+     whole. The frame, the ratio, the card structure and the copy block are all
+     B's; only the fit differs, because the content differs. */
   aspect-ratio:16 / 10;
+  position:relative;
+  display:grid;place-items:center;
   border:1px solid var(--ds-line);
   border-radius:var(--ds-r-surface);
   background:var(--ds-bg-warm);
   overflow:hidden;
 }
+/* <picture> is source selection, not layout — kept out of the box tree so the
+   image's sizing resolves against the well and not against a zero-width wrapper */
+.mc-svc__media picture{display:contents}
 .mc-svc__media img{
+  position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:cover;
+  object-fit:contain;          /* whole artwork, never cropped */
   display:block;
 }
+/* a photograph CAN fill the frame, and should — this is the B treatment for any
+   service whose media is a photo rather than a diagram */
+.mc-svc__media--photo img{object-fit:cover}
+
+/* the gauge fills the well's height rather than holding a fixed max-width, so it
+   has the same presence in the frame that a photograph would */
+.mc-svc__media .mc-gauge{
+  width:auto;height:100%;max-width:100%;margin:0;
+  aspect-ratio:1 / 1;
+}
+.mc-svc__media .mc-gauge__n{font-size:clamp(26px, 3vw, 40px)}
 
 .mc-svc h3{margin:var(--ds-space-md) 0 0;font-size:var(--ds-step-sub)}
 .mc-svc .mc-body{margin-top:var(--ds-space-sm)}
