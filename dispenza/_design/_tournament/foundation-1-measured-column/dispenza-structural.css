@@ -323,7 +323,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   height:var(--mc-case-h, 430px);
   transition:flex-grow 520ms var(--ds-ease-out), height 520ms var(--ds-ease-out);
 }
-.mc-case.is-open{flex-grow:6;height:auto}
+/* AN OPEN CARD IS THE SAME HEIGHT AS A SHUT ONE (owner). Left to size itself it
+   ran 594px against the 430px spines, so the row had a step in it. Capping the
+   height alone would CLIP the numbers, which is the one thing this component may
+   not do, so the band and the panel are scaled by the same ratio the card has to
+   lose (430/594 = 0.72) and the fit is measured, not assumed. */
+.mc-case.is-open{flex-grow:6;height:var(--mc-case-h, 430px)}
 
 /* TWO PIECES OF ART, ONE PER STATE, AND NEITHER IS DECORATION I ADDED.
    The supplied files already carry each mark burnt into the photograph: the
@@ -343,7 +348,7 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   overflow:hidden;
   transition:height 520ms var(--ds-ease-out);
 }
-.mc-case.is-open .mc-case__tab{height:var(--mc-case-band-h, 176px)}
+.mc-case.is-open .mc-case__tab{height:var(--mc-case-band-h, 124px)}
 .mc-case__tab:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:-4px}
 
 .mc-case__art{
@@ -363,26 +368,31 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 
 .mc-case__panel{
   position:relative;
-  padding:var(--ds-space-lg);
+  padding:var(--mc-case-pad, 26px);
   min-width:var(--mc-case-open-w, 380px);
   opacity:0;pointer-events:none;
   transition:opacity 340ms var(--ds-ease-out);
 }
 .mc-case.is-open .mc-case__panel{opacity:1;pointer-events:auto}
-.mc-case__rule{height:1px;background:rgba(255,255,255,.72);margin:0 0 var(--ds-space-md)}
+.mc-case__rule{height:1px;background:rgba(255,255,255,.72);margin:0 0 14px}
 
+/* the period headings carry the ladder's step-sub at full size elsewhere; inside
+   a card that must hold two of them plus four rows in 430px they take the scaled
+   size, which keeps the ladder's RATIO to the rows rather than its absolute px */
 .mc-case__panel .mc-bench__when{
   font-family:var(--ds-font-display);font-weight:800;
-  font-size:var(--ds-step-sub);color:var(--ds-ink-on-dark);
-  margin:0 0 var(--ds-space-sm);
+  font-size:clamp(19px, 1.6vw, 24px);line-height:1.2;
+  color:var(--ds-ink-on-dark);
+  margin:0 0 10px;
 }
 .mc-case__panel .mc-bench__row{
   display:flex;align-items:baseline;justify-content:space-between;
   gap:var(--ds-space-md);
-  margin:0 0 var(--ds-space-sm);
+  margin:0 0 9px;
+  font-size:clamp(14px, 1.05vw, 15.5px);line-height:1.35;
   color:var(--ds-ink-on-dark);
 }
-.mc-case__panel .mc-bench__row + .mc-bench__when{margin-top:var(--ds-space-md)}
+.mc-case__panel .mc-bench__row + .mc-bench__when{margin-top:14px}
 .mc-case__panel .mc-bench__v{font-variant-numeric:tabular-nums;white-space:nowrap}
 
 @media (prefers-reduced-motion: reduce){
