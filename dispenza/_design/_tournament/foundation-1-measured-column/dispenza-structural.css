@@ -192,6 +192,12 @@
    needs a different interval, the concept is wrong, not the section.
    =========================================================================== */
 .mc-section{padding:var(--ds-rhythm) 0;background:var(--ds-bg-surface)}
+/* A SECTION THAT OPENS WITH A FULL-BLEED BAND PAYS NO TOP RHYTHM. The band IS
+   the transition between the dark page and this one, so it has to touch the
+   section above it. With the standard 151px of top padding it could not: on a
+   light section that padding paints a 151px WHITE STRIP between the dark section
+   and the purple band, which is the band failing at the one job it has. */
+.mc-section--banded{padding-top:0}
 /* THE JOINT BETWEEN TWO SECTIONS IS ONE RHYTHM, NOT TWO.
    Every section pays --ds-rhythm top AND bottom, so where two of them meet the
    page pays it twice: measured at 1440, 151px of bottom padding plus 151px of
