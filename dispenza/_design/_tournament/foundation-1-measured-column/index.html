@@ -762,8 +762,14 @@
     <div class="row">
       <div class="col">
         <div class="mc-results__say">
-          <p class="mc-body" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</p>
-          <p class="mc-body" data-reveal>We only charge for our guaranteed results.</p>
+          <!-- Owner: these should be H2. Note for the document outline: this
+               section's own heading is the marquee band above, which is also an
+               h2 — so the section now carries three. That is a deliberate,
+               owner-directed choice for visual weight, not an oversight; say the
+               word and the band can drop to a decorative div so these two are
+               the only headings here. -->
+          <h2 class="mc-head mc-results__line" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</h2>
+          <h2 class="mc-head mc-results__line" data-reveal>We only charge for our guaranteed results.</h2>
           <div class="mc-actions" data-reveal>
             <a class="btn btn--solid" href="contact.html">Book demo</a>
           </div>
@@ -788,8 +794,8 @@
                  width="949" height="636" decoding="async">
           </figure>
 
-          <div class="mc-carousel" data-carousel data-reveal>
-            <div class="mc-carousel__track" tabindex="0" role="group"
+          <div class="mc-deck" data-deck data-reveal>
+            <div class="mc-deck__stage" role="group"
                  aria-label="Total sale increase by city, eight results">
               <div class="mc-result">
                 <p class="mc-result__city">Oceanside, CA</p>
@@ -840,20 +846,20 @@
                 <p class="mc-result__win">in the first 30 months</p>
               </div>
             </div>
-            <div class="mc-carousel__bar">
-              <button class="mc-carousel__btn" type="button" data-car-prev aria-label="Previous result">
+            <div class="mc-deck__bar">
+              <button class="mc-deck__btn" type="button" data-deck-prev aria-label="Previous result">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
                         stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <button class="mc-carousel__btn" type="button" data-car-next aria-label="Next result">
+              <button class="mc-deck__btn" type="button" data-deck-next aria-label="Next result">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
                         stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <span class="mc-carousel__count" data-car-count aria-live="polite">1 / 8</span>
+              <span class="mc-deck__count" data-deck-count aria-live="polite">1 / 8</span>
             </div>
-          </div>
+          </div>        </div>
 
         </div>      </div>
     </div>
@@ -1437,104 +1443,128 @@
   }
 
   /* ---------------------------------------------------------------------------
-     THE CAROUSEL. Manual, and deliberately so.
+     THE DECK. A fan, and manual.
 
-     The owner's motion spec forbids "autoplay carousels". There is no timer in
-     here: it advances only when a person advances it. The mechanism is the
-     track's own scroll position -- these buttons just call scrollBy -- so swipe,
-     trackpad, shift+wheel and arrow keys all work without this script, and if it
-     never runs the section degrades to a scrollable row rather than to one
-     visible card.
+     The owner's motion spec forbids "autoplay carousels": there is no timer in
+     here. It moves on a button, a drag, or an arrow key.
 
-     The count is announced through aria-live, so a screen-reader user is told
-     where they are rather than being silently moved.
+     Every card is placed from the CENTRE and offset by its distance from the
+     active one, so they overlap and recede in depth the way the reference does —
+     largest and foremost in the middle, falling back symmetrically both ways.
+     The falloff is per-step and multiplicative, which is what makes the far
+     cards drop away sharply rather than fading in a flat gradient:
+
+        offset o = i - active
+        x       = o * SPREAD                       (SPREAD < card width => overlap)
+        scale   = SCALE^|o|
+        opacity = FADE^|o|
+        blur    = |o| * BLUR                       (depth cue that survives a light ground)
+        z       = 100 - |o|
+
+     Blur matters here specifically because the ground is WHITE: on the dark
+     reference a receding card fades toward black and reads as distance, but
+     fading toward white just looks washed out. Defocus reads as depth on any
+     ground.
+
+     ALL EIGHT CARDS STAY IN THE DOM — they are transformed, never removed — so
+     nothing is hidden from assistive tech or from verify-copy-fidelity. Only the
+     foremost card takes pointer events, so a click cannot land on a card the
+     reader cannot read.
      --------------------------------------------------------------------------- */
-  [].slice.call(doc.querySelectorAll('[data-carousel]')).forEach(function (root) {
-    var track = root.querySelector('.mc-carousel__track');
-    var prev  = root.querySelector('[data-car-prev]');
-    var next  = root.querySelector('[data-car-next]');
-    var count = root.querySelector('[data-car-count]');
-    var cards = [].slice.call(track.children);
-    if (!track || !cards.length) { return; }
+  [].slice.call(doc.querySelectorAll('[data-deck]')).forEach(function (root) {
+    var stage = root.querySelector('.mc-deck__stage');
+    var cards = [].slice.call(stage.querySelectorAll('.mc-result'));
+    var prev  = root.querySelector('[data-deck-prev]');
+    var next  = root.querySelector('[data-deck-next]');
+    var count = root.querySelector('[data-deck-count]');
+    if (!cards.length) { return; }
 
-    function step() {
-      /* measure the real step from the first two cards rather than assuming a
-         width: the flex basis is a clamp, so it changes with the viewport */
-      if (cards.length < 2) { return cards[0].getBoundingClientRect().width; }
-      return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
-    }
-    function index() {
-      var s = step();
-      return s ? Math.round(track.scrollLeft / s) : 0;
-    }
-    function sync() {
-      var active = promote();
-      /* THE BUTTONS FOLLOW THE PROMOTED CARD, NOT RAW scrollLeft.
-         With centre snapping the resting scroll position is not 0 and not the
-         maximum -- it is wherever the snap landed -- so a scrollLeft comparison
-         reported "not at the start" while card 1 was plainly foremost, and
-         failed to disable `next` on the last card. The deck's own state is the
-         honest source: if the first card is promoted there is nothing before it. */
-      var i = active;
-      count.textContent = (i + 1) + ' / ' + cards.length;
-      /* disabled at the ends, so the control tells the truth about what it does */
-      /* the buttons answer "can this move?", which is a fact about the scroll
-         extremes; the counter answers "which card am I on", which promote()
-         has just clamped to agree with them at both ends */
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-    }
-    /* PROMOTE WHATEVER IS IN THE MIDDLE.
-       The deck reads as a carousel because the centre card is foremost and its
-       neighbours are dimmed and set back -- that is the affordance, not the
-       dots. Which card is central is a fact about scroll position, so it is
-       measured every scroll rather than tracked in a variable that can drift out
-       of sync with a swipe, a keypress or a trackpad flick. */
-    function promote() {
-      /* Purely geometric now: the one-card spacers put card 1 within 26px of
-         centre at rest and card 8 likewise at the end, so nearest-to-centre
-         names the right card at every position without special-casing. */
-      var mid = track.scrollLeft + track.clientWidth / 2;
-      var best = 0, bestD = Infinity;
-      for (var i = 0; i < cards.length; i++) {
-        var c = cards[i];
-        var centre = c.offsetLeft + c.offsetWidth / 2;
-        var d = Math.abs(centre - mid);
-        if (d < bestD) { bestD = d; best = i; }
-      }
-      return mark(best);
-    }
-    function mark(i) {
-      for (var j = 0; j < cards.length; j++) {
-        cards[j].classList.toggle('is-active', j === i);
-      }
-      return i;
+    var SPREAD = 0.56;    /* of card width — under 1 so the cards overlap */
+    var SCALE  = 0.86;
+    var FADE   = 0.38;    /* per step: 1 -> .38 -> .14 — they sit back hard */
+    var BLUR   = 1.6;     /* px per step */
+    var active = 0;
+
+    /* the fan is applied by script, so with JS off the stage stays a plain
+       readable column instead of eight cards piled on one spot */
+    root.classList.add('is-fanned');
+
+    function measure() {
+      /* the stage is absolutely positioned, so it needs an explicit height and
+         card width — both taken from the real rendered card, never assumed */
+      /* A FLOOR AS WELL AS A CEILING. 42% of the column is right on a desktop
+         and far too tight on a phone: at 375 it computed 144px and the figure
+         ("+51.37%") overflowed its own card by 15px. The card has a minimum
+         readable width; the fan can overflow the stage instead, which it is
+         clipped and masked to handle. */
+      var w = Math.max(196, Math.min(248, Math.round(root.clientWidth * 0.42)));
+      stage.style.setProperty('--mc-card-w', w + 'px');
+      cards.forEach(function (c) { c.style.width = w + 'px'; });
+      var tallest = 0;
+      cards.forEach(function (c) { tallest = Math.max(tallest, c.offsetHeight); });
+      stage.style.setProperty('--mc-deck-h', (tallest + 8) + 'px');
+      return w;
     }
 
-    /* THE BUTTONS MOVE THE DECK BY ONE PROMOTED CARD, and that is not the same
-       as scrolling by one card width. Because the first card is promoted while
-       sitting left of centre, a fixed-width scroll from the start landed the
-       geometric centre on card THREE -- pressing next once skipped card 2
-       entirely. Scroll to the position that centres the wanted card instead, so
-       the control does exactly what its counter says. */
-    function centreOf(i) {
-      var c = cards[Math.max(0, Math.min(cards.length - 1, i))];
-      var target = c.offsetLeft + c.offsetWidth / 2 - track.clientWidth / 2;
-      return Math.max(0, Math.min(track.scrollWidth - track.clientWidth, target));
+    function render() {
+      var w = parseFloat(stage.style.getPropertyValue('--mc-card-w')) || 248;
+      var n = cards.length;
+      cards.forEach(function (c, i) {
+        /* WRAP-AROUND OFFSET, shortest way round. A plain (i - active) puts every
+           other card on one side, so at rest the whole fan ran off to the right
+           with nothing behind the first card -- the reference has cards on BOTH
+           sides at all times. Taking the offset modulo the deck and folding it
+           into [-n/2, n/2] makes the stack symmetric wherever you are in it. */
+        var o = ((i - active + n + n / 2) % n) - n / 2;
+        var a = Math.abs(o);
+        var x = o * (w * SPREAD);
+        var sc = Math.pow(SCALE, a);
+        c.style.transform = 'translateX(calc(-50% + ' + x.toFixed(1) + 'px)) scale(' + sc.toFixed(3) + ')';
+        c.style.opacity   = Math.pow(FADE, a).toFixed(3);
+        c.style.filter    = a ? 'blur(' + (a * BLUR).toFixed(1) + 'px)' : 'none';
+        c.style.zIndex    = String(100 - a);
+        c.classList.toggle('is-active', i === active);
+        /* a card the reader cannot see should not be announced as content they
+           can act on, but it stays in the tree and in the text */
+        c.setAttribute('aria-hidden', a > 2 ? 'true' : 'false');
+      });
+      count.textContent = (active + 1) + ' / ' + cards.length;
+      prev.disabled = false;
+      next.disabled = false;
     }
-    function go(delta) {
-      var i = cards.findIndex(function (c) { return c.classList.contains('is-active'); });
-      if (i < 0) { i = 0; }
-      track.scrollTo({ left: centreOf(i + delta), behavior: 'smooth' });
+
+    function go(d) {
+      /* the deck wraps, so there is no dead end -- and therefore nothing to
+         disable. The buttons stay live and the counter keeps telling the truth. */
+      active = (active + d + cards.length) % cards.length;
+      render();
     }
     prev.addEventListener('click', function () { go(-1); });
     next.addEventListener('click', function () { go(1); });
-    track.addEventListener('scroll', function () {
-      window.clearTimeout(root.__t);
-      root.__t = window.setTimeout(sync, 90);
-    }, { passive: true });
-    window.addEventListener('resize', sync);
-    sync();
+
+    /* keyboard: the bar is focusable through its buttons, and the stage itself
+       answers the arrow keys once anything inside the deck has focus */
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
+    });
+
+    /* drag / swipe — the reference is a thing you push, so it should be */
+    var dx = 0, dragging = false, id = null;
+    stage.addEventListener('pointerdown', function (e) {
+      dragging = true; id = e.pointerId; dx = e.clientX;
+      try { stage.setPointerCapture(id); } catch (err) {}
+    });
+    stage.addEventListener('pointerup', function (e) {
+      if (!dragging) { return; }
+      dragging = false;
+      var moved = e.clientX - dx;
+      if (Math.abs(moved) > 40) { go(moved < 0 ? 1 : -1); }
+      try { stage.releasePointerCapture(e.pointerId); } catch (err) {}
+    });
+
+    measure(); render();
+    window.addEventListener('resize', function () { measure(); render(); });
   });
 
   /* THE ONE GESTURE. Fires once, at 15% viewport entry. */

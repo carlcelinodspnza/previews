@@ -552,7 +552,7 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 .mc-salesband{
   background:var(--ds-accent-deep);
   overflow:hidden;
-  padding:var(--ds-space-lg) 0;
+  padding:var(--ds-space-sm) 0;      /* slimmer: the band is a seam, not a panel */
   position:relative;
 }
 .mc-salesband__track{
@@ -565,9 +565,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    marquee row rather than pushing the band open */
 .mc-head--band{margin:0;font-size:inherit;line-height:1}
 .mc-salesband__word{
-  --mc-ring: max(1.5px, .018em);
+  /* SLEEKER: a finer ring and a smaller cap height. At 96px with an .018em ring
+     the band read as a heavy slab; the reference is a thin outline running as a
+     ribbon, so the type comes down and the stroke gets lighter with it. */
+  --mc-ring: max(1px, .011em);
   font-family:var(--ds-font-display);
-  font-size:clamp(38px, 7vw, 96px);
+  font-size:clamp(26px, 4vw, 54px);
   font-weight:900;letter-spacing:-.012em;line-height:1;
   text-transform:uppercase;white-space:nowrap;
   padding-right:.36em;
@@ -597,6 +600,16 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   text-align:center;
 }
 .mc-results__say .mc-body{max-width:56ch;margin-inline:auto}
+/* the claim lines are headings now, at head scale but with the measure and the
+   rhythm of a statement rather than of a section title */
+.mc-results__line{
+  /* 24ch broke both lines into three; the display face is wide and these are
+     sentences, not titles */
+  max-width:34ch;margin:0 auto var(--ds-space-md);
+  font-size:clamp(22px, 2.6vw, 34px);
+  line-height:1.25;letter-spacing:-.018em;
+}
+.mc-results__line + .mc-results__line{margin-top:var(--ds-space-sm)}
 .mc-results__say .mc-actions{justify-content:center}
 .mc-results__say .mc-body{font-size:clamp(17px, 1.5vw, 20px);line-height:1.6}
 .mc-results__say .mc-actions{margin-top:var(--ds-space-lg)}
@@ -618,89 +631,81 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 .mc-results__map{margin:0}
 .mc-results__map img{width:100%;height:auto;display:block}
 
-/* -- THE CAROUSEL, AND WHY IT IS NOT THE THING THE SPEC BANS -----------------
-   The owner's binding motion spec forbids "autoplay carousels". This one does
-   not autoplay: there is no timer anywhere in it. It moves only when a person
-   moves it -- button, swipe, trackpad, or arrow key -- which is the opposite of
-   the failure that rule exists to prevent (content sliding out from under a
-   reader who is still on it).
+/* -- THE DECK, AND WHY IT IS NOT THE THING THE SPEC BANS --------------------
+   The owner's motion spec forbids "autoplay carousels". This does not autoplay:
+   there is no timer in it. It moves only on a button, a drag or an arrow key.
+   The rule exists to stop content sliding out from under a reader; a control
+   that only moves on input is the opposite of that failure.
 
-   Built on native scroll-snap rather than transforms, which buys the whole
-   accessibility story for free: every one of the eight cards is in the DOM and
-   in the accessibility tree at all times, the track is keyboard-scrollable
-   without any script, touch and trackpad gestures work natively, and if the
-   JavaScript never runs the section degrades to a scrollable row rather than to
-   a single visible card. The buttons are an affordance on top, not the
-   mechanism. */
-.mc-carousel{
+   A FAN, NOT A ROW. The first build was a flat scroll-snap row with gaps, which
+   is a different object from the reference: there, cards OVERLAP and recede in
+   depth, the middle one largest and in front, the rest falling back
+   symmetrically on both sides. That cannot be expressed by a scrolling row at
+   any set of opacity values, so the mechanism is a transform stack instead:
+   every card is positioned from the centre and offset by its distance from the
+   active one.
+
+   ACCESSIBILITY IS UNCHANGED by the switch: all eight cards remain in the DOM
+   and in the accessibility tree — they are transformed, never removed — so
+   nothing is hidden from a screen reader, from find-in-page, or from
+   verify-copy-fidelity. Cards that are not the active one are inert to the
+   pointer so a click always lands on what the reader can actually read.
+
+   WITHOUT JAVASCRIPT it degrades to a plain readable column (the fan is applied
+   by a class the script adds), rather than to eight cards piled on one spot. */
+.mc-deck{position:relative}
+.mc-deck__stage{display:grid;gap:var(--ds-space-md)}      /* no-JS: a plain column */
+
+.mc-deck.is-fanned .mc-deck__stage{
+  display:block;
   position:relative;
-  /* belt and braces against the same class of overflow: a scroll container
-     inside a flex/grid item must be allowed to shrink */
-  min-width:0;
+  height:var(--mc-deck-h, 260px);
+  /* CLIP THE FAN TO ITS COLUMN. Unclipped, the receding cards ran the full width
+     of the section and sat on top of the map in the left column -- the deck was
+     drawing outside the box it was given. The reference clips at the viewport
+     edge; here the column edge is the equivalent. */
+  overflow:hidden;
+  /* the outermost cards should fade INTO the edge rather than stop at a hard
+     cut, which is what makes the stack read as continuing past the frame */
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  mask-image:linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
 }
-.mc-carousel__track{
-  display:flex;gap:var(--ds-space-md);
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  padding-bottom:var(--ds-space-xs);
-  /* the scrollbar is hidden but the element is still a scroll container --
-     keyboard and assistive scrolling are unaffected */
-  scrollbar-width:none;
+.mc-deck.is-fanned .mc-result{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:var(--mc-card-w, 248px);
+  margin:0;
+  transform-origin:50% 50%;
+  transition:transform 420ms var(--ds-ease-out),
+             opacity   420ms var(--ds-ease-out),
+             filter    420ms var(--ds-ease-out);
+  will-change:transform, opacity;
 }
-.mc-carousel__track::-webkit-scrollbar{display:none}
-/* THREE CARDS IN VIEW, THE MIDDLE ONE FOREMOST.
-   Sized so three fit the widened column; the neighbours stay visible and dimmed
-   so it reads as a deck with more behind it, which is what tells a reader it is
-   a carousel at all -- no dots required. `centre` snapping (not `start`) is what
-   puts the active card in the middle rather than against the left edge. */
-.mc-carousel__track > *{
-  scroll-snap-align:center;
-  flex:0 0 min(64%, 208px);
-  /* the resting state is the BACK of the deck; .is-active promotes one card */
-  opacity:.42;
-  transform:scale(.9);
-  transition:opacity 320ms var(--ds-ease-out), transform 320ms var(--ds-ease-out);
-}
-.mc-carousel__track > .is-active{
-  opacity:1;
-  transform:scale(1);
-}
+/* only the foremost card takes the pointer: a click must land on what is
+   readable, not on a dimmed card behind it */
+.mc-deck.is-fanned .mc-result{pointer-events:none}
+.mc-deck.is-fanned .mc-result.is-active{pointer-events:auto}
+
 @media (prefers-reduced-motion: reduce){
-  .mc-carousel__track > *{transition:none}
+  .mc-deck.is-fanned .mc-result{transition:none}
 }
-/* EDGE SPACERS OF ONE CARD WIDTH — not half a track, and not zero.
-   Both extremes were tried and both broke something real:
-     half-a-track spacers  let card 1 reach dead centre, but ate exactly the
-                           space the third card needed (2 visible at the ends,
-                           against the owner's "at least 3 showing").
-     no spacers            gave 3 visible, but card 1 could only be foremost at
-                           scrollLeft 0 — where card 2 is ALREADY centred. So
-                           "advance to card 2" computed a negative scroll,
-                           clamped to 0, and the next button did nothing at all.
-   One card width is the setting where both hold: card 1 sits 26px off centre —
-   near enough to be the promoted card — while three cards stay in view and every
-   card, first and last included, can be reached and promoted. */
-.mc-carousel__track::before,
-.mc-carousel__track::after{content:"";flex:0 0 min(64%, 208px)}
-@media (prefers-reduced-motion: reduce){
-  .mc-carousel__track{scroll-behavior:auto}
-}
-.mc-carousel__bar{
+
+.mc-deck__bar{
   display:flex;align-items:center;gap:var(--ds-space-sm);
   margin-top:var(--ds-space-md);
 }
-.mc-carousel__btn{
+.mc-deck__btn{
   width:40px;height:40px;border-radius:50%;
   border:1px solid var(--ds-line);
   background:transparent;color:var(--ds-ink);
   display:grid;place-items:center;cursor:pointer;
   transition:border-color var(--ds-dur) var(--ds-ease), color var(--ds-dur) var(--ds-ease);
 }
-.mc-carousel__btn:hover:not(:disabled){border-color:var(--ds-accent);color:var(--ds-accent)}
-.mc-carousel__btn:disabled{opacity:.35;cursor:default}
-.mc-carousel__btn svg{width:16px;height:16px;display:block}
-.mc-carousel__count{
+.mc-deck__btn:hover:not(:disabled){border-color:var(--ds-accent);color:var(--ds-accent)}
+.mc-deck__btn:disabled{opacity:.35;cursor:default}
+.mc-deck__btn svg{width:16px;height:16px;display:block}
+.mc-deck__count{
   font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
   letter-spacing:.14em;color:var(--ds-ink-soft);font-variant-numeric:tabular-nums;
 }
