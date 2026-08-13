@@ -828,7 +828,7 @@
         <figure class="mc-results__map" data-reveal>
         <img src="../../../assets/generated/results-map.webp"
         alt="Map of North America with the states and provinces Dispenza operates in highlighted."
-        width="896" height="598" decoding="async">
+        width="940" height="628" decoding="async">
         </figure>
       </div>
     </div>
@@ -956,10 +956,38 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="mc-bench">
-        <div class="mc-bench__card" data-reveal>
-          <div class="mc-bench__head"><p class="mc-bench__brand">Low Key</p></div>
-          <div class="mc-bench__body">
+        <!-- AN ACCORDION OF CLIENT CARDS. Shut, a card is its storefront under the
+             brand violet with the mark reading up the spine; open, the photograph
+             desaturates and the numbers appear beside it. The photography and the
+             marks are the client's own, supplied by the owner, who confirmed the
+             rights to display them.
+
+             EVERY FIGURE IS REAL TEXT. The supplied artwork has the numbers baked
+             into the image. Shipping that would put corpus data somewhere a
+             screen reader, find-in-page and verify-copy-fidelity cannot reach, so
+             only the PHOTOGRAPH and the LOGO come from the artwork. Every label
+             and value below is this section's existing markup, lifted across
+             unchanged rather than retyped.
+
+             ALL FOUR PANELS STAY IN THE DOM whether open or shut. They are
+             clipped by the card, never removed, so no client's numbers depend on
+             a click in order to exist. -->
+        <div class="mc-cases" data-cases>
+      <article class="mc-case is-open" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="true" aria-controls="case-lowkey">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../../../assets/brand/cases/lowkey-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../../../assets/brand/cases/lowkey-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Low Key</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-lowkey">
+          <div class="mc-case__rule" aria-hidden="true"></div>
           <p class="mc-bench__when">Day 0</p>
           <p class="mc-bench__row"><span>SoLV Weed Dispensary</span><span class="mc-bench__v">0.00</span></p>
           <p class="mc-bench__row"><span>Direction Requests</span><span class="mc-bench__v">291</span></p>
@@ -967,11 +995,23 @@
           <p class="mc-bench__when">1 Month</p>
           <p class="mc-bench__row"><span>SoLV Increase- Weed Dispensary</span><span class="mc-bench__v">100.00</span></p>
           <p class="mc-bench__row"><span>Direction Requests Increase</span><span class="mc-bench__v">+100%</span></p>
-          </div>
         </div>
-        <div class="mc-bench__card" data-reveal>
-          <div class="mc-bench__head"><p class="mc-bench__brand">Root'd in the 510</p></div>
-          <div class="mc-bench__body">
+      </article>
+      <article class="mc-case" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="false" aria-controls="case-rootd">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../../../assets/brand/cases/rootd-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../../../assets/brand/cases/rootd-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Root'd in the 510</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-rootd">
+          <div class="mc-case__rule" aria-hidden="true"></div>
           <p class="mc-bench__when">Day 0</p>
           <p class="mc-bench__row"><span>SoLV Weed</span><span class="mc-bench__v">0.00</span></p>
           <p class="mc-bench__row"><span>Direction Requests</span><span class="mc-bench__v">709</span></p>
@@ -979,11 +1019,23 @@
           <p class="mc-bench__when">12 Month</p>
           <p class="mc-bench__row"><span>SoLV Increase- Weed</span><span class="mc-bench__v">59.62</span></p>
           <p class="mc-bench__row"><span>Direction Requests Increase</span><span class="mc-bench__v">+49.08%</span></p>
-          </div>
         </div>
-        <div class="mc-bench__card" data-reveal>
-          <div class="mc-bench__head"><p class="mc-bench__brand">Kanna</p></div>
-          <div class="mc-bench__body">
+      </article>
+      <article class="mc-case" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="false" aria-controls="case-kanna">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../../../assets/brand/cases/kanna-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../../../assets/brand/cases/kanna-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Kanna</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-kanna">
+          <div class="mc-case__rule" aria-hidden="true"></div>
           <p class="mc-bench__when">Day 0</p>
           <p class="mc-bench__row"><span>SoLV Weed Dispensary</span><span class="mc-bench__v">0.00</span></p>
           <p class="mc-bench__row"><span>Direction Requests</span><span class="mc-bench__v">181</span></p>
@@ -991,11 +1043,23 @@
           <p class="mc-bench__when">3 Month</p>
           <p class="mc-bench__row"><span>SoLV Increase- Weed Dispensary</span><span class="mc-bench__v">93.37%</span></p>
           <p class="mc-bench__row"><span>Direction Requests Increase</span><span class="mc-bench__v">+32.51%</span></p>
-          </div>
         </div>
-        <div class="mc-bench__card mc-bench__card--ours" data-reveal>
-          <div class="mc-bench__head"><p class="mc-bench__brand">Cookies Sunland Park</p></div>
-          <div class="mc-bench__body">
+      </article>
+      <article class="mc-case" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="false" aria-controls="case-cookies">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../../../assets/brand/cases/cookies-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../../../assets/brand/cases/cookies-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Cookies Sunland Park</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-cookies">
+          <div class="mc-case__rule" aria-hidden="true"></div>
           <p class="mc-bench__when">Day 0</p>
           <p class="mc-bench__row"><span>SoLV Weed Dispensary</span><span class="mc-bench__v">0.00</span></p>
           <p class="mc-bench__row"><span>Website Visits</span><span class="mc-bench__v">291</span></p>
@@ -1003,12 +1067,50 @@
           <p class="mc-bench__when">1 Month</p>
           <p class="mc-bench__row"><span>SoLV Increase- Weed Dispensary</span><span class="mc-bench__v">99.17</span></p>
           <p class="mc-bench__row"><span>Website Visits Increase</span><span class="mc-bench__v">+100%</span></p>
-          </div>
         </div>
+      </article>
         </div>
       </div>
     </div>
   </div>
+    <!-- The accordion carries its own behaviour, INSIDE <main>, for the same reason
+         the marquee and the divider do: every byte outside <main> is locked chrome. -->
+    <script>
+    (function () {
+      /* NO TIMELINE, so it is not the autoplay carousel the motion spec bans: it
+         moves on a click or a key and never on its own. One panel open at a time.
+         The panels are only ever CLIPPED by their card, never removed, so all four
+         clients' numbers stay in the DOM and in the accessibility tree whatever is
+         open. aria-expanded is what tells assistive tech which one is showing. */
+      var wrap = document.querySelector('[data-cases]');
+      if (!wrap) { return; }
+      var cases = [].slice.call(wrap.querySelectorAll('[data-case]'));
+
+      function open(card) {
+        cases.forEach(function (c) {
+          var on = (c === card);
+          c.classList.toggle('is-open', on);
+          var t = c.querySelector('[data-case-tab]');
+          if (t) { t.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+        });
+      }
+
+      cases.forEach(function (c, i) {
+        var tab = c.querySelector('[data-case-tab]');
+        if (!tab) { return; }
+        tab.addEventListener('click', function () { open(c); });
+        tab.addEventListener('keydown', function (e) {
+          var n = null;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { n = cases[(i + 1) % cases.length]; }
+          if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { n = cases[(i - 1 + cases.length) % cases.length]; }
+          if (!n) { return; }
+          e.preventDefault();
+          open(n);
+          n.querySelector('[data-case-tab]').focus();
+        });
+      });
+    }());
+    </script>
 </section>
 
 

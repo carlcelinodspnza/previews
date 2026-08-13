@@ -286,6 +286,119 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    as a collage. They lift on hover, which is also how a visitor learns the row
    is interactive rather than decorative.
    =========================================================================== */
+/* -- THE CLIENT CASE ACCORDION ----------------------------------------------
+   Shut, a card is its storefront under the brand violet with the mark reading up
+   the spine. Open, the photograph desaturates and the numbers appear beside it.
+
+   IT IS NOT ON THE FORBIDDEN LIST. The spec bans autoplay carousels and anything
+   looping in the viewport; this has no timeline at all and moves only on a click
+   or a key. One panel is open at a time, which is what makes it an accordion
+   rather than four independent toggles.
+
+   THE PANELS ARE NEVER REMOVED, only clipped by the card. All four clients'
+   numbers are in the DOM at every moment, so nothing anyone published depends on
+   a visitor clicking to exist -- not for a screen reader, not for find-in-page,
+   not for verify-copy-fidelity. min-width on the panel is what makes that safe to
+   animate: without it the text would reflow through a dozen line-break layouts
+   as the card widens, which is both ugly and expensive. */
+.mc-cases{
+  display:flex;
+  gap:var(--ds-space-md);
+  align-items:flex-start;
+  margin-top:var(--ds-space-xl);
+}
+.mc-case{
+  position:relative;
+  flex:0 1 var(--mc-case-w, 152px);
+  min-width:0;
+  overflow:hidden;
+  border-radius:var(--ds-r-card, 18px);
+  background:var(--ds-bg-warm);
+  /* A SHUT CARD IS EXACTLY ITS ART, and the panel is CLIPPED by it rather than
+     removed. Left to size itself the card was 430px of photograph followed by
+     ~450px of dead ground, because an invisible panel still takes height. Height
+     is not display:none for a reason: a clipped element is still rendered, so the
+     numbers stay in the accessibility tree and in find-in-page, which is the
+     whole point of never removing them. */
+  height:var(--mc-case-h, 430px);
+  transition:flex-grow 520ms var(--ds-ease-out), height 520ms var(--ds-ease-out);
+}
+.mc-case.is-open{flex-grow:6;height:auto}
+
+/* TWO PIECES OF ART, ONE PER STATE, AND NEITHER IS DECORATION I ADDED.
+   The supplied files already carry each mark burnt into the photograph: the
+   shut card is the storefront under the brand violet with the logo reading up
+   the spine, and the open one is the same storefront desaturated with the logo
+   set horizontally. Overlaying a separate logo on top of those drew every mark
+   TWICE, and stretching the tall shut art across a wide card magnified the burnt
+   logo to fill it. So each state gets the art that was actually drawn for it.
+
+   The open band is cropped ABOVE the white rule in the source, which is the one
+   place the artwork carries no numbers. The numbers below it are real text. */
+.mc-case__h{margin:0}
+.mc-case__tab{
+  position:relative;display:block;
+  width:100%;height:var(--mc-case-h, 430px);
+  padding:0;border:0;background:none;cursor:pointer;
+  overflow:hidden;
+  transition:height 520ms var(--ds-ease-out);
+}
+.mc-case.is-open .mc-case__tab{height:var(--mc-case-band-h, 176px)}
+.mc-case__tab:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:-4px}
+
+.mc-case__art{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:opacity 380ms var(--ds-ease-out);
+}
+.mc-case__art--open{opacity:0;object-position:left center}
+.mc-case.is-open .mc-case__art--shut{opacity:0}
+.mc-case.is-open .mc-case__art--open{opacity:1}
+
+.mc-case__name{
+  position:absolute;width:1px;height:1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+}
+
+.mc-case__panel{
+  position:relative;
+  padding:var(--ds-space-lg);
+  min-width:var(--mc-case-open-w, 380px);
+  opacity:0;pointer-events:none;
+  transition:opacity 340ms var(--ds-ease-out);
+}
+.mc-case.is-open .mc-case__panel{opacity:1;pointer-events:auto}
+.mc-case__rule{height:1px;background:rgba(255,255,255,.72);margin:0 0 var(--ds-space-md)}
+
+.mc-case__panel .mc-bench__when{
+  font-family:var(--ds-font-display);font-weight:800;
+  font-size:var(--ds-step-sub);color:var(--ds-ink-on-dark);
+  margin:0 0 var(--ds-space-sm);
+}
+.mc-case__panel .mc-bench__row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--ds-space-md);
+  margin:0 0 var(--ds-space-sm);
+  color:var(--ds-ink-on-dark);
+}
+.mc-case__panel .mc-bench__row + .mc-bench__when{margin-top:var(--ds-space-md)}
+.mc-case__panel .mc-bench__v{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+@media (prefers-reduced-motion: reduce){
+  .mc-case, .mc-case__tab, .mc-case__art, .mc-case__panel{transition:none}
+}
+/* stacked: a 152px spine is a sliver on a phone, so the cards become full-width
+   rows and the open one simply grows taller */
+@media (max-width:900px){
+  .mc-cases{flex-direction:column}
+  .mc-case{flex:0 0 auto;width:100%}
+  .mc-case__tab{height:var(--mc-case-band-h, 176px)}
+  .mc-case__art--shut{opacity:0}
+  .mc-case__art--open{opacity:1}
+  .mc-case__panel{min-width:0}
+}
+
 /* -- THE SMOKE BAND ---------------------------------------------------------
    One field spanning Influence Highlights and Our suite, so the smoke drifts
    THROUGH both rather than restarting at the seam between them.
