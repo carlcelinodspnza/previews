@@ -917,6 +917,27 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   aspect-ratio:4 / 3;object-fit:cover;
   will-change:transform;
 }
+
+/* A PLAIN MEDIA FIGURE — and it MUST sit after .mc-media, not before.
+   It was first written 300 lines earlier in this file and did nothing at all:
+   same specificity (one class each), so the LATER .mc-media simply won and the
+   illustration kept its card frame. Placement is the whole fix.
+
+   .mc-media is right for a photograph: a rounded frame, a border, a shadow, and
+   an `aspect-ratio:4/3; object-fit:cover` that fills the box. All four are wrong
+   for a transparent illustration -- the frame draws a box around artwork whose
+   point is that it floats, and `cover` CROPPED this one (it is taller than 4:3,
+   so its bottom layer was cut off). This variant keeps the column sizing and
+   drops the card. */
+.mc-media--plain{
+  border:0;box-shadow:none;background:none;border-radius:0;overflow:visible;
+  display:grid;place-items:center;
+}
+.mc-media--plain img{
+  width:auto;max-width:100%;height:auto;max-height:320px;
+  aspect-ratio:auto;object-fit:contain;
+}
+
 .mc-list{margin:var(--ds-space-md) 0 0;display:grid;gap:var(--ds-space-xs)}
 .mc-list li{
   font-size:var(--ds-step-body);line-height:1.6;color:var(--ds-ink);
