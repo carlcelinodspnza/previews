@@ -615,39 +615,22 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 
 .mc-svc{display:flex;flex-direction:column;min-width:0}
 .mc-svc__media{
-  aspect-ratio:4 / 3;
-  position:relative;                 /* the containing block for the image below */
-  display:grid;place-items:center;
+  /* 16:10, FILLED EDGE TO EDGE. This was built as a 4:3 padded well with the
+     contents centred and `contain`, to suit a square gauge and a portrait
+     illustration -- and that substitution is precisely what stopped it looking
+     like the option the owner picked. Option B's media is a landscape photograph
+     that fills its frame; the frame IS the image. Restored to that. */
+  aspect-ratio:16 / 10;
   border:1px solid var(--ds-line);
   border-radius:var(--ds-r-surface);
   background:var(--ds-bg-warm);
   overflow:hidden;
-  padding:var(--ds-space-md);
 }
-/* <picture> OUT OF LAYOUT — the same trap as before, hit a second time.
-   picture is source selection, not a box: left in the tree it becomes the grid
-   item and the image's width:auto resolves against an indefinite width, i.e.
-   zero. The earlier fix was scoped to .mc-media--plain, and this rebuild dropped
-   that class, so it silently stopped applying and the well rendered EMPTY. */
-.mc-svc__media picture{display:contents}
 .mc-svc__media img{
-  /* ABSOLUTE + width/height 100% + contain. Two intrinsic-sizing attempts failed
-     here for the same underlying reason: the well's height comes from
-     aspect-ratio, which leaves a PERCENTAGE height indefinite -- so max-height:
-     100% resolved to `none` and the portrait artwork rendered 561px tall inside
-     a 378px well, cropped by overflow:hidden. Taking the image out of flow gives
-     it the well as an explicit containing block, and object-fit:contain then
-     guarantees the whole artwork fits with its ratio intact. */
-  position:absolute;
-  inset:var(--ds-space-md);
-  width:calc(100% - var(--ds-space-md) * 2);
-  height:calc(100% - var(--ds-space-md) * 2);
-  object-fit:contain;
+  width:100%;height:100%;
+  object-fit:cover;
   display:block;
 }
-/* the gauge shrinks to the well instead of holding its own max-width */
-.mc-svc__media .mc-gauge{max-width:min(100%, 260px);margin:0}
-.mc-svc__media .mc-gauge__n{font-size:clamp(30px, 3.4vw, 44px)}
 
 .mc-svc h3{margin:var(--ds-space-md) 0 0;font-size:var(--ds-step-sub)}
 .mc-svc .mc-body{margin-top:var(--ds-space-sm)}
