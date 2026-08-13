@@ -1,47 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="1767.388 227.518 1741.009 2149.882">
-  <style><![CDATA[
-    /* THE LAYERS DRIFT.
-       Written INSIDE the asset on purpose: CSS animations run in an SVG loaded
-       through an img element, so the 43KB of geometry stays out of the page and
-       the motion still works -- and prefers-reduced-motion is still honoured,
-       because media queries evaluate in the image document too.
-
-       WRAPPED IN CDATA, and that is not decoration. An SVG with an XML prolog is
-       parsed as strict XML, where a bare "<" inside a style element is a parse
-       error -- the first version of this comment contained the literal tag name
-       in angle brackets and silently broke the ENTIRE file: it stopped parsing,
-       the classes below never existed in the document, and the animation test
-       reported 0.00% pixel change with no error anywhere. CDATA makes the block
-       opaque to the XML parser, so no future edit can do the same.
-
-       Four plates, four mutually prime periods, four phase offsets, so the stack
-       never returns to the same arrangement on a visible cycle -- a slow breath
-       rather than a loop. Amplitude ~1.4% of the viewBox height: enough to
-       separate the plates as they pass, small enough that they never collide
-       (they sit ~380 units apart). Vertical only -- the owner's motion spec
-       forbids rotation, and a tilting plate would break the isometric
-       projection the artwork is drawn in. */
-    .pl { will-change: transform; }
-    .pl1 { animation: pl-a 9.1s ease-in-out infinite; }
-    .pl2 { animation: pl-b 11.3s ease-in-out infinite; animation-delay: -2.4s; }
-    .pl3 { animation: pl-a 13.7s ease-in-out infinite; animation-delay: -5.1s; }
-    .pl4 { animation: pl-b 10.3s ease-in-out infinite; animation-delay: -7.6s; }
-
-    @keyframes pl-a {
-      0%, 100% { transform: translateY(-15px); }
-      50%      { transform: translateY(15px); }
-    }
-    @keyframes pl-b {
-      0%, 100% { transform: translateY(13px); }
-      50%      { transform: translateY(-13px); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .pl { animation: none !important; }
-    }
-  ]]></style>
-<defs>
+  <defs>
     <radialGradient id="dz1" data-name="Áåçûìÿííûé ãðàäèåíò 3" cx="1811.613" cy="6178.42" fx="1811.613" fy="6178.42" r="2223.194" gradientTransform="translate(437.535 6535.579) scale(1.219 -.76)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#280452"/>
       <stop offset=".958" stop-color="#120028"/>
@@ -210,7 +169,7 @@
   <g style="isolation: isolate;">
     
     <g id="object">
-      <g class="pl pl1">
+      <g>
         <g style="mix-blend-mode: color-dodge; opacity: .15;">
           <path d="M3425.529,1819.116c5.811-27.311-9.491-55.591-45.712-76.51l-628.541-362.985c-62.564-36.221-164.06-36.221-226.817,0l-628.347,362.985c-28.279,16.077-43.775,36.996-46.487,58.109v14.527c.194,1.356.387,2.518.581,3.874,4.261-19.757,19.369-38.933,45.906-54.235l628.347-362.985c62.757-36.027,164.254-36.027,226.817,0l628.541,362.985c26.343,15.109,41.644,34.478,45.712,54.235h0Z" style="fill: url(#dz6);"/>
         </g>
@@ -242,7 +201,7 @@
         <path d="M1896.113,1764.881l628.347-362.791c62.757-36.221,164.254-36.221,226.817,0l628.541,362.791c62.563,36.221,62.563,94.717,0,130.938l-628.541,362.791c-62.564,36.221-164.06,36.221-226.817,0l-628.347-362.791c-62.757-36.221-62.757-94.717,0-130.938h0Z" style="fill: url(#dz16); mix-blend-mode: color-dodge; opacity: .1;"/>
         <path d="M3393.962,1864.271c3.32,5.75-137.224,93.108-313.913,195.12-176.689,102.012-322.615,180.047-325.935,174.297-3.32-5.75,137.224-93.108,313.913-195.12,176.689-102.012,322.615-180.047,325.935-174.297Z" style="fill: url(#dz17); mix-blend-mode: color-dodge;"/>
       </g>
-      <g class="pl pl2">
+      <g>
         <g style="mix-blend-mode: color-dodge; opacity: .15;">
           <path d="M3425.529,1470.381c5.811-27.311-9.491-55.591-45.712-76.51l-628.541-362.985c-62.564-36.221-164.06-36.221-226.817,0l-628.347,362.985c-28.279,16.077-43.775,36.996-46.487,58.109v14.527c.194,1.356.387,2.518.581,3.874,4.261-19.757,19.369-38.933,45.906-54.235l628.347-362.984c62.757-36.027,164.254-36.027,226.817,0l628.541,362.984c26.343,15.108,41.644,34.478,45.712,54.235h0Z" style="fill: url(#dz18);"/>
         </g>
@@ -274,7 +233,7 @@
         <path d="M1896.113,1416.146l628.347-362.791c62.757-36.221,164.254-36.221,226.817,0l628.541,362.791c62.563,36.221,62.563,94.717,0,130.938l-628.541,362.791c-62.564,36.221-164.06,36.221-226.817,0l-628.347-362.791c-62.757-36.221-62.757-94.717,0-130.938h0Z" style="fill: url(#dz28); mix-blend-mode: color-dodge; opacity: .1;"/>
         <path d="M3393.962,1515.536c3.32,5.75-137.224,93.108-313.913,195.12-176.689,102.012-322.615,180.047-325.935,174.297-3.32-5.75,137.224-93.108,313.913-195.12,176.689-102.012,322.615-180.047,325.935-174.297Z" style="fill: url(#dz29); mix-blend-mode: color-dodge;"/>
       </g>
-      <g class="pl pl3">
+      <g>
         <g style="mix-blend-mode: color-dodge; opacity: .15;">
           <path d="M3425.529,1121.646c5.811-27.311-9.491-55.591-45.712-76.51l-628.541-362.985c-62.564-36.221-164.06-36.221-226.817,0l-628.347,362.985c-28.279,16.077-43.775,36.996-46.487,58.109v14.527c.194,1.356.387,2.518.581,3.874,4.261-19.757,19.369-38.933,45.906-54.235l628.347-362.984c62.757-36.027,164.254-36.027,226.817,0l628.541,362.984c26.343,15.108,41.644,34.478,45.712,54.235h0Z" style="fill: url(#dz30);"/>
         </g>
@@ -306,7 +265,7 @@
         <path d="M1896.113,1067.412l628.347-362.791c62.757-36.221,164.254-36.221,226.817,0l628.541,362.791c62.563,36.221,62.563,94.717,0,130.938l-628.541,362.791c-62.564,36.221-164.06,36.221-226.817,0l-628.347-362.791c-62.757-36.221-62.757-94.717,0-130.938h0Z" style="fill: url(#dz40); mix-blend-mode: color-dodge; opacity: .1;"/>
         <path d="M3393.962,1166.801c3.32,5.75-137.224,93.108-313.913,195.12-176.689,102.012-322.615,180.047-325.935,174.297-3.32-5.75,137.224-93.108,313.913-195.12,176.689-102.012,322.615-180.047,325.935-174.297Z" style="fill: url(#dz41); mix-blend-mode: color-dodge;"/>
       </g>
-      <g class="pl pl4">
+      <g>
         <g style="mix-blend-mode: color-dodge; opacity: .15;">
           <path d="M3425.529,775.868c5.811-27.311-9.491-55.591-45.712-76.51l-628.541-362.985c-62.564-36.221-164.06-36.221-226.817,0l-628.347,362.985c-28.279,16.077-43.775,36.996-46.487,58.109v14.527c.194,1.356.387,2.518.581,3.874,4.261-19.757,19.369-38.933,45.906-54.235l628.347-362.985c62.757-36.027,164.254-36.027,226.817,0l628.541,362.985c26.343,15.108,41.644,34.478,45.712,54.235h0Z" style="fill: url(#dz42);"/>
         </g>

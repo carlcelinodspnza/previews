@@ -710,9 +710,24 @@
            (72.7% of the canvas was empty once the backdrop went). -->
       <div class="col col--media">
         <figure class="mc-media mc-media--plain" data-media-in data-reveal>
-          <img src="../../../assets/generated/svc-webdesign-layers.svg"
-               alt="Four stacked translucent layers, representing a site built in maintainable tiers."
-               width="1741" height="2150" loading="lazy" decoding="async">
+          <!-- REDUCED MOTION IS DECIDED HERE, IN THE PAGE, NOT IN THE ASSET.
+               The drift lives inside the SVG so its geometry stays out of this
+               file — but an SVG rendered through <img> is an isolated document
+               and does NOT reliably receive the user's motion preference: the
+               @media guard inside it was measured still animating at 12.2%
+               pixel change under prefers-reduced-motion. A <picture> source is
+               evaluated in THIS document, where the preference is known.
+
+               Note the polarity: the STATIC twin is the plain <img> fallback and
+               motion is opted INTO by an explicit no-preference query. Anything
+               that cannot answer the question gets the still image. -->
+          <picture>
+            <source media="(prefers-reduced-motion: no-preference)"
+                    srcset="../../../assets/generated/svc-webdesign-layers.svg">
+            <img src="../../../assets/generated/svc-webdesign-layers-static.svg"
+                 alt="Four stacked translucent layers, representing a site built in maintainable tiers."
+                 width="1741" height="2150" loading="lazy" decoding="async">
+          </picture>
         </figure>
       </div>
     </div>

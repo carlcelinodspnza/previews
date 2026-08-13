@@ -933,6 +933,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   border:0;box-shadow:none;background:none;border-radius:0;overflow:visible;
   display:grid;place-items:center;
 }
+/* <picture> IS SOURCE SELECTION, NOT LAYOUT. Left in the box tree it became the
+   grid item, and with an indefinite width the image's `width:auto` resolved to
+   ZERO -- the figure kept its 392px box while the picture and img both measured
+   0x0. display:contents takes the wrapper out of layout so the img is the grid
+   item again, exactly as it was before the wrapper existed. */
+.mc-media--plain picture{display:contents}
 .mc-media--plain img{
   width:auto;max-width:100%;height:auto;max-height:320px;
   aspect-ratio:auto;object-fit:contain;
