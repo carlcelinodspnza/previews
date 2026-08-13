@@ -591,6 +591,68 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   color:rgba(255,255,255,.86);
 }
 
+/* -- THE SUITE GRID (owner pick: option B, two-up) ---------------------------
+   Media on top, copy beneath, two across. Chosen from a measured comparison of
+   four layouts: at two services it renders 697px against the alternating
+   split's 1,915px, and it is the option that still holds its feature lists --
+   which are the part that sells -- when the section grows to all eight.
+
+   EXPLICIT TWO COLUMNS, not auto-fit. auto-fit with a minmax floor silently
+   re-flows by available width: at eight services in a 1120px container it would
+   have produced THREE columns and left a widowed card on the last row. Two is
+   the design, so two is declared, and eight lands as a clean 2x4.
+
+   The media well is a fixed ratio with centred contents rather than a cropping
+   frame, because the three things that sit in it are different shapes -- a
+   square gauge, a portrait illustration, a landscape photograph -- and only
+   `contain` treats all three honestly. */
+.mc-suite{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:var(--ds-space-xl);
+}
+@media (max-width:860px){ .mc-suite{grid-template-columns:1fr} }
+
+.mc-svc{display:flex;flex-direction:column;min-width:0}
+.mc-svc__media{
+  aspect-ratio:4 / 3;
+  position:relative;                 /* the containing block for the image below */
+  display:grid;place-items:center;
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  background:var(--ds-bg-warm);
+  overflow:hidden;
+  padding:var(--ds-space-md);
+}
+/* <picture> OUT OF LAYOUT — the same trap as before, hit a second time.
+   picture is source selection, not a box: left in the tree it becomes the grid
+   item and the image's width:auto resolves against an indefinite width, i.e.
+   zero. The earlier fix was scoped to .mc-media--plain, and this rebuild dropped
+   that class, so it silently stopped applying and the well rendered EMPTY. */
+.mc-svc__media picture{display:contents}
+.mc-svc__media img{
+  /* ABSOLUTE + width/height 100% + contain. Two intrinsic-sizing attempts failed
+     here for the same underlying reason: the well's height comes from
+     aspect-ratio, which leaves a PERCENTAGE height indefinite -- so max-height:
+     100% resolved to `none` and the portrait artwork rendered 561px tall inside
+     a 378px well, cropped by overflow:hidden. Taking the image out of flow gives
+     it the well as an explicit containing block, and object-fit:contain then
+     guarantees the whole artwork fits with its ratio intact. */
+  position:absolute;
+  inset:var(--ds-space-md);
+  width:calc(100% - var(--ds-space-md) * 2);
+  height:calc(100% - var(--ds-space-md) * 2);
+  object-fit:contain;
+  display:block;
+}
+/* the gauge shrinks to the well instead of holding its own max-width */
+.mc-svc__media .mc-gauge{max-width:min(100%, 260px);margin:0}
+.mc-svc__media .mc-gauge__n{font-size:clamp(30px, 3.4vw, 44px)}
+
+.mc-svc h3{margin:var(--ds-space-md) 0 0;font-size:var(--ds-step-sub)}
+.mc-svc .mc-body{margin-top:var(--ds-space-sm)}
+.mc-svc .mc-list{margin-top:var(--ds-space-md)}
+
 /* -- THE SERVICE GAUGE ------------------------------------------------------
    Owner reference: a dark thermostat card with a thick arc gauge, glowing knob,
    dashed inner tick track and a large centre readout, revving like a tachometer

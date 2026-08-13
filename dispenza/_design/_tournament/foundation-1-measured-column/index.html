@@ -631,108 +631,93 @@
       </div>
     </div>
 
-    <div class="row row--split">
-      <div class="col col--measure">
-        <h3 class="mc-head" data-reveal>Performance marketing</h3>
-        <p class="mc-body" data-reveal>Paid and organic demand for a licensed dispensary.</p>
-        <ul class="mc-list" data-reveal>
-          <li>Localized On-Page SEO</li>
-          <li>100+ Off-Page SEO (Profiles)</li>
-          <li>Google Business Profile Management</li>
-          <li>Monthly and Quarterly Reporting</li>
-        </ul>
-      </div>
-      <!-- The gauge replaces the service image. Its readout is the number of
-           deliverables listed directly below it -- a fact the reader can check
-           against the list on the same screen. It is NOT a performance score:
-           the corpus carries zero numeric atoms on any service page, so any
-           index here would be invented. Swap data-gauge-to when a real figure
-           exists. -->
-      <div class="col col--media">
-        <div class="mc-gauge" data-gauge data-gauge-to="4" data-gauge-max="5" data-reveal>
-          <svg viewBox="0 0 220 220" aria-hidden="true">
-            <defs>
-              <linearGradient id="gArc1" gradientUnits="userSpaceOnUse"
-                              x1="55" y1="165" x2="165" y2="165"
-                              gradientTransform="rotate(-135 110 110)">
-                <stop offset="0%"   stop-color="var(--ds-accent-deep)"/>
-                <stop offset="55%"  stop-color="var(--ds-primary)"/>
-                <stop offset="100%" stop-color="var(--ds-accent-light)"/>
-              </linearGradient>
-              <filter id="gBloom1" x="-60%" y="-60%" width="220%" height="220%">
-                <feGaussianBlur stdDeviation="7" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
-              </filter>
-              <filter id="gKnob1" x="-160%" y="-160%" width="420%" height="420%">
-                <feGaussianBlur stdDeviation="5"/>
-              </filter>
-            </defs>
-            <circle cx="110" cy="110" r="78" fill="none" stroke="var(--ds-bg-warm)"
-                    stroke-width="16" stroke-linecap="round"
-                    stroke-dasharray="367.57 490.09" transform="rotate(135 110 110)"/>
-            <g class="g-ticks"></g>
-            <circle class="g-bloom" cx="110" cy="110" r="78" fill="none"
-                    stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
-                    stroke-dasharray="0 490.09" transform="rotate(135 110 110)"
-                    filter="url(#gBloom1)" opacity="0"/>
-            <circle class="g-arc" cx="110" cy="110" r="78" fill="none"
-                    stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
-                    stroke-dasharray="0 490.09" transform="rotate(135 110 110)"/>
-            <circle class="g-halo" cx="110" cy="110" r="10" fill="var(--ds-accent-light)"
-                    filter="url(#gKnob1)" opacity="0"/>
-            <circle class="g-knob" cx="110" cy="110" r="7" fill="var(--ds-ink-heading)" opacity="0"/>
-          </svg>
-          <div class="mc-gauge__read">
-            <span class="mc-gauge__n">0</span>
-            <span class="mc-gauge__k">Deliverables</span>
+    <!-- OWNER PICK: option B, two-up. Media on top, copy beneath, two across.
+         Measured against three alternatives at 1440: 697px here versus 1,915px
+         for the alternating split it replaces, and it is the layout that still
+         carries the feature lists when this section grows to all eight
+         services. -->
+    <div class="row">
+      <div class="col">
+        <div class="mc-suite">
+
+          <article class="mc-svc" data-reveal>
+            <div class="mc-svc__media">
+          <div class="mc-gauge" data-gauge data-gauge-to="4" data-gauge-max="5" data-reveal>
+            <svg viewBox="0 0 220 220" aria-hidden="true">
+              <defs>
+                <linearGradient id="gArc1" gradientUnits="userSpaceOnUse"
+                                x1="55" y1="165" x2="165" y2="165"
+                                gradientTransform="rotate(-135 110 110)">
+                  <stop offset="0%"   stop-color="var(--ds-accent-deep)"/>
+                  <stop offset="55%"  stop-color="var(--ds-primary)"/>
+                  <stop offset="100%" stop-color="var(--ds-accent-light)"/>
+                </linearGradient>
+                <filter id="gBloom1" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="7" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+                </filter>
+                <filter id="gKnob1" x="-160%" y="-160%" width="420%" height="420%">
+                  <feGaussianBlur stdDeviation="5"/>
+                </filter>
+              </defs>
+              <circle cx="110" cy="110" r="78" fill="none" stroke="var(--ds-bg-warm)"
+                      stroke-width="16" stroke-linecap="round"
+                      stroke-dasharray="367.57 490.09" transform="rotate(135 110 110)"/>
+              <g class="g-ticks"></g>
+              <circle class="g-bloom" cx="110" cy="110" r="78" fill="none"
+                      stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
+                      stroke-dasharray="0 490.09" transform="rotate(135 110 110)"
+                      filter="url(#gBloom1)" opacity="0"/>
+              <circle class="g-arc" cx="110" cy="110" r="78" fill="none"
+                      stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
+                      stroke-dasharray="0 490.09" transform="rotate(135 110 110)"/>
+              <circle class="g-halo" cx="110" cy="110" r="10" fill="var(--ds-accent-light)"
+                      filter="url(#gKnob1)" opacity="0"/>
+              <circle class="g-knob" cx="110" cy="110" r="7" fill="var(--ds-ink-heading)" opacity="0"/>
+            </svg>
+            <div class="mc-gauge__read">
+              <span class="mc-gauge__n">0</span>
+              <span class="mc-gauge__k">Deliverables</span>
+            </div>
           </div>
+            </div>
+            <h3 class="mc-head">Performance marketing</h3>
+            <p class="mc-body">Paid and organic demand for a licensed dispensary.</p>
+            <ul class="mc-list">
+              <li>Localized On-Page SEO</li>
+              <li>100+ Off-Page SEO (Profiles)</li>
+              <li>Google Business Profile Management</li>
+              <li>Monthly and Quarterly Reporting</li>
+            </ul>
+          </article>
+
+          <article class="mc-svc" data-reveal>
+            <div class="mc-svc__media">
+              <!-- reduced motion decided in THIS document: an SVG in an img is an
+                   isolated context and does not reliably receive the preference,
+                   so the static twin is the fallback and motion is opted into. -->
+              <picture>
+                <source media="(prefers-reduced-motion: no-preference)"
+                        srcset="../../../assets/generated/svc-webdesign-layers.svg">
+                <img src="../../../assets/generated/svc-webdesign-layers-static.svg"
+                     alt="Four stacked translucent layers, representing a site built in maintainable tiers."
+                     width="1741" height="2150" decoding="async">
+              </picture>
+            </div>
+            <h3 class="mc-head">Web design and development</h3>
+            <p class="mc-body">Menu-connected sites built to be updated by staff.</p>
+            <ul class="mc-list">
+              <li>Dedicated Project Manager</li>
+              <li>Any Ecomm / Menu Integration</li>
+              <li>30-Day Backup and Restores</li>
+              <li>Web Hosting</li>
+            </ul>
+          </article>
+
         </div>
       </div>
     </div>
-
-    <div class="row row--split row--split-rev">
-      <div class="col col--measure">
-        <h3 class="mc-head" data-reveal>Web design and development</h3>
-        <p class="mc-body" data-reveal>Menu-connected sites built to be updated by staff.</p>
-        <ul class="mc-list" data-reveal>
-          <li>Dedicated Project Manager</li>
-          <li>Any Ecomm / Menu Integration</li>
-          <li>30-Day Backup and Restores</li>
-          <li>Web Hosting</li>
-        </ul>
-      </div>
-      <!-- Web design keeps an ILLUSTRATION rather than a gauge: the owner
-           supplied this stacked-layers artwork for this service specifically.
-           Rebranded from its original blue/cyan by mapping every saturated hue
-           to the brand violet while preserving each colour's own saturation and
-           lightness, so the glass depth and the specular edges survive. Its
-           #background group is removed and the viewBox cropped to the artwork
-           (72.7% of the canvas was empty once the backdrop went). -->
-      <div class="col col--media">
-        <figure class="mc-media mc-media--plain" data-media-in data-reveal>
-          <!-- REDUCED MOTION IS DECIDED HERE, IN THE PAGE, NOT IN THE ASSET.
-               The drift lives inside the SVG so its geometry stays out of this
-               file — but an SVG rendered through <img> is an isolated document
-               and does NOT reliably receive the user's motion preference: the
-               @media guard inside it was measured still animating at 12.2%
-               pixel change under prefers-reduced-motion. A <picture> source is
-               evaluated in THIS document, where the preference is known.
-
-               Note the polarity: the STATIC twin is the plain <img> fallback and
-               motion is opted INTO by an explicit no-preference query. Anything
-               that cannot answer the question gets the still image. -->
-          <picture>
-            <source media="(prefers-reduced-motion: no-preference)"
-                    srcset="../../../assets/generated/svc-webdesign-layers.svg">
-            <img src="../../../assets/generated/svc-webdesign-layers-static.svg"
-                 alt="Four stacked translucent layers, representing a site built in maintainable tiers."
-                 width="1741" height="2150" decoding="async">
-          </picture>
-        </figure>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
 
 <!-- ==========================================================================
