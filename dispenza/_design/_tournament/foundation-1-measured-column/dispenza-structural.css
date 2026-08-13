@@ -332,11 +332,18 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    The box is taller than the line so the glow can bleed above and below it;
    overflow:hidden then clips only the horizontal travel, at the ends of the
    rule, which is what makes the light arrive and leave rather than pop. */
+/* THE RULE OWNS THE SPACING ON BOTH SIDES OF ITSELF. Measured before: 209px of
+   air between the last stat and the rule, then only 34px between the rule and
+   the eyebrow under it, so the divider read as a lid on Our suite rather than as
+   a join between two sections. It sits at the top of #suite, which pays no top
+   rhythm, so the 209 was #influence's bottom rhythm plus this margin. Pulling
+   the top margin negative takes it back without touching the rhythm scale that
+   every other section joint depends on. */
 .mc-divider{
   position:relative;
   height:var(--mc-div-h, 28px);
   overflow:hidden;
-  margin:var(--ds-space-xl) 0 0;
+  margin:calc(-1 * var(--ds-space-lg)) 0 var(--ds-space-lg);
 }
 .mc-divider::before{
   content:"";position:absolute;left:0;right:0;top:50%;

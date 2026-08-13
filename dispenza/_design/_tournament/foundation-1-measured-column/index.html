@@ -509,6 +509,12 @@
 <script src="../../hero/hero-coin3d.js"></script>
 <!-- smoke LAST: it measures the token's placed position, so the coaster must
      have drawn at least once before it looks. -->
+<!-- ONE SMOKE ENGINE, TWO FIELDS. The physics used to be duplicated between the
+     hero plume and the section band; two copies of a tuning table is the
+     non-propagation trap, so the model lives in one module and each field
+     supplies only its emitter. Loaded before both callers, without defer, so it
+     is defined by the time either runs. -->
+<script src="../../smoke-engine.js"></script>
 <script src="../../hero/hero-smoke.js"></script>
 
 
