@@ -753,114 +753,110 @@
   </div>
 
   <div class="container">
-    <!-- The heading is now a full-bleed violet band: the transition between the
-         dark section above and this white one, with the phrase outlined in white
-         and duplicated to run as a marquee. Set A is the real one; set B is a
-         visual duplicate and is hidden from assistive tech so the phrase is
-         announced ONCE. The h2 is kept for the document outline and is visually
-         carried by set A. -->
     <div class="row">
       <div class="col">
-        <div class="mc-results__say">
-          <!-- Owner: these should be H2. Note for the document outline: this
-               section's own heading is the marquee band above, which is also an
-               h2 — so the section now carries three. That is a deliberate,
-               owner-directed choice for visual weight, not an oversight; say the
-               word and the band can drop to a decorative div so these two are
-               the only headings here. -->
-          <h2 class="mc-head mc-results__line" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</h2>
-          <h2 class="mc-head mc-results__line" data-reveal>We only charge for our guaranteed results.</h2>
-          <div class="mc-actions" data-reveal>
-            <a class="btn btn--solid" href="contact.html">Book demo</a>
-          </div>
-        </div>
+        <!-- THE MAP GETS ITS OWN ROW. In the two-up it was capped at 420px and
+             still looked starved, because the map and the third card were
+             drawing from the same pixels: at a card width that does not clip
+             "+51.37%", keeping the map in that row pinned it to 422px. Out of
+             the row it reaches 900px -- its native 949 is the real ceiling. -->
+        <figure class="mc-results__map" data-reveal>
+        <img src="../../../assets/generated/results-map.webp"
+        alt="Map of North America with the states and provinces Dispenza operates in highlighted."
+        width="949" height="636" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE BLEED ROW: claims and CTA left, cards right, running off the frame
+       edge, controls in a bottom bar. It sits OUTSIDE .container on purpose and
+       carries the container's left offset as padding, so the text still lines up
+       with every other section while the cards escape to the viewport edge. -->
+  <div class="mc-results__bleed">
+    <div class="mc-results__say">
+      <h2 class="mc-head mc-results__line" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</h2>
+      <h2 class="mc-head mc-results__line" data-reveal>We only charge for our <span class="mc-results__hl">guaranteed results</span>.</h2>
+      <div class="mc-actions" data-reveal>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <!-- MAP LEFT, CAROUSEL RIGHT.
-             Every one of the eight cities stays in the DOM: the carousel is a
-             scroll container, not a slideshow that swaps content in and out, so
-             nothing is hidden from a reader, from assistive tech, or from the
-             copy-fidelity gate. Each lift and its window remain ONE corpus atom
-             ("+51.37% in the first 3 months") and stay adjacent in the markup. -->
-        <div class="mc-results__split">
-
-          <figure class="mc-results__map" data-reveal>
-            <img src="../../../assets/generated/results-map.webp"
-                 alt="Map of North America with the states and provinces Dispenza operates in highlighted."
-                 width="949" height="636" decoding="async">
-          </figure>
-
-          <div class="mc-deck" data-deck data-reveal>
-            <div class="mc-deck__stage" role="group"
-                 aria-label="Total sale increase by city, eight results">
-              <div class="mc-result">
-                <p class="mc-result__city">Oceanside, CA</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span></p>
-                <p class="mc-result__win">in the first 3 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Mid City, LA, CA</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span></p>
-                <p class="mc-result__win">in the first 3 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Edmond, OK</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span></p>
-                <p class="mc-result__win">in the first 2 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Seaside, CA</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
-                <p class="mc-result__win">in the first 2 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Oakland, CA</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
-                <p class="mc-result__win">in the first 5 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Needles, CA</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span></p>
-                <p class="mc-result__win">in the first 6 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Downtown LA, CA</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span></p>
-                <p class="mc-result__win">in the first 6 months</p>
-              </div>
-              <div class="mc-result">
-                <p class="mc-result__city">Las Vegas, NV</p>
-                <p class="mc-result__label">Total Sale Increase</p>
-                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span></p>
-                <p class="mc-result__win">in the first 30 months</p>
-              </div>
-            </div>
-            <div class="mc-deck__bar">
-              <button class="mc-deck__btn" type="button" data-deck-prev aria-label="Previous result">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
-                        stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <button class="mc-deck__btn" type="button" data-deck-next aria-label="Next result">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
-                        stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <span class="mc-deck__count" data-deck-count aria-live="polite">1 / 8</span>
-            </div>
-          </div>        </div>
-
-        </div>      </div>
+    <!-- Every one of the eight cities stays in the DOM: this is a scroll
+         container, not a slideshow that swaps content in and out, so nothing is
+         hidden from a reader, from assistive tech, or from the copy-fidelity
+         gate. Each lift and its window remain ONE corpus atom
+         ("+51.37% in the first 3 months") and stay adjacent in the markup. -->
+    <div class="mc-deck" data-deck data-reveal>
+      <div class="mc-deck__viewport">
+        <div class="mc-deck__stage" role="group"
+             aria-label="Total sale increase by city, eight results">
+          <div class="mc-result">
+          <p class="mc-result__city">Oceanside, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span></p>
+          <p class="mc-result__win">in the first 3 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Mid City, LA, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span></p>
+          <p class="mc-result__win">in the first 3 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Edmond, OK</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span></p>
+          <p class="mc-result__win">in the first 2 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Seaside, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
+          <p class="mc-result__win">in the first 2 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Oakland, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
+          <p class="mc-result__win">in the first 5 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Needles, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span></p>
+          <p class="mc-result__win">in the first 6 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Downtown LA, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span></p>
+          <p class="mc-result__win">in the first 6 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Las Vegas, NV</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span></p>
+          <p class="mc-result__win">in the first 30 months</p>
+          </div>
+        </div>
+      </div>
+      <div class="mc-deck__bar">
+        <span class="mc-deck__label">Results by city</span>
+        <span class="mc-deck__count" data-deck-count aria-live="polite">01 / 08</span>
+        <div class="mc-deck__btns">
+          <button class="mc-deck__btn" type="button" data-deck-prev aria-label="Previous results">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="mc-deck__btn" type="button" data-deck-next aria-label="More results">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1442,35 +1438,30 @@
   }
 
   /* ---------------------------------------------------------------------------
-     THE DECK. A fan, and manual.
+     THE DECK. A row, and manual.
 
      The owner's motion spec forbids "autoplay carousels": there is no timer in
-     here. It moves on a button, a drag, or an arrow key.
+     here. It moves on a button, a drag, or an arrow key. That rule exists to
+     stop content sliding out from under a reader, and a control that only moves
+     on input is the opposite of that failure.
 
-     Every card is placed from the CENTRE and offset by its distance from the
-     active one, so they overlap and recede in depth the way the reference does —
-     largest and foremost in the middle, falling back symmetrically both ways.
-     The falloff is per-step and multiplicative, which is what makes the far
-     cards drop away sharply rather than fading in a flat gradient:
+     IT WAS A FAN UNTIL THE MAP NEEDED ROOM. The overlapping stack put two of its
+     three cards behind the front one at reduced opacity, spending horizontal
+     space on decoration — and that space was the same space the map was starving
+     for. A row weights all three equally and lets the frame edge imply the rest,
+     which is what the reference does.
 
-        offset o = i - active
-        x       = o * SPREAD                       (SPREAD < card width => overlap)
-        scale   = SCALE^|o|
-        opacity = FADE^|o|
-        blur    = |o| * BLUR                       (depth cue that survives a light ground)
-        z       = 100 - |o|
+     THE STYLESHEET OWNS THE CARD WIDTH, not this script. The width is derived
+     from the track so that three cards plus a peek of the fourth always fit,
+     with a floor at the width the longest figure actually needs. This script
+     only reads the resulting pitch off two real cards and translates by it.
 
-     Blur matters here specifically because the ground is WHITE: on the dark
-     reference a receding card fades toward black and reads as distance, but
-     fading toward white just looks washed out. Defocus reads as depth on any
-     ground.
-
-     ALL EIGHT CARDS STAY IN THE DOM — they are transformed, never removed — so
-     nothing is hidden from assistive tech or from verify-copy-fidelity. Only the
-     foremost card takes pointer events, so a click cannot land on a card the
-     reader cannot read.
+     ALL EIGHT CARDS STAY IN THE DOM and in the accessibility tree — the track is
+     translated, never emptied — so nothing is hidden from a screen reader, from
+     find-in-page, or from verify-copy-fidelity.
      --------------------------------------------------------------------------- */
   [].slice.call(doc.querySelectorAll('[data-deck]')).forEach(function (root) {
+    var vp    = root.querySelector('.mc-deck__viewport');
     var stage = root.querySelector('.mc-deck__stage');
     var cards = [].slice.call(stage.querySelectorAll('.mc-result'));
     var prev  = root.querySelector('[data-deck-prev]');
@@ -1478,99 +1469,71 @@
     var count = root.querySelector('[data-deck-count]');
     if (!cards.length) { return; }
 
-    var SPREAD = 0.56;    /* of card width — under 1 so the cards overlap */
-    var SCALE  = 0.86;
-    var FADE   = 0.38;    /* per step: 1 -> .38 -> .14 — they sit back hard */
-    var BLUR   = 1.6;     /* px per step */
-    var active = 0;
+    var i = 0;
 
-    /* the fan is applied by script, so with JS off the stage stays a plain
-       readable column instead of eight cards piled on one spot */
-    root.classList.add('is-fanned');
+    /* the row is applied by script, so with JS off the stage stays a plain
+       readable column rather than eight cards jammed into one viewport */
+    root.classList.add('is-slider');
 
-    function measure() {
-      /* the stage is absolutely positioned, so it needs an explicit height and
-         card width — both taken from the real rendered card, never assumed */
-      /* A FLOOR AS WELL AS A CEILING. 42% of the column is right on a desktop
-         and far too tight on a phone: at 375 it computed 144px and the figure
-         ("+51.37%") overflowed its own card by 15px. The card has a minimum
-         readable width; the fan can overflow the stage instead, which it is
-         clipped and masked to handle. */
-      var w = Math.max(196, Math.min(248, Math.round(root.clientWidth * 0.42)));
-      stage.style.setProperty('--mc-card-w', w + 'px');
-      cards.forEach(function (c) { c.style.width = w + 'px'; });
-      var tallest = 0;
-      cards.forEach(function (c) { tallest = Math.max(tallest, c.offsetHeight); });
-      stage.style.setProperty('--mc-deck-h', (tallest + 8) + 'px');
-      return w;
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    /* MEASURED, NOT ASSUMED. The pitch is read off two real cards, so it carries
+       whatever the gap token resolves to at this width -- and the card width is
+       set by the stylesheet from the track, not by this script. */
+    function pitch() {
+      if (cards.length < 2) { return cards[0].getBoundingClientRect().width; }
+      return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+    }
+    function visible() {
+      var p = pitch();
+      if (!p) { return 1; }
+      return Math.max(1, Math.floor((vp.clientWidth + 2) / p));
     }
 
     function render() {
-      var w = parseFloat(stage.style.getPropertyValue('--mc-card-w')) || 248;
-      var n = cards.length;
-      cards.forEach(function (c, i) {
-        /* WRAP-AROUND OFFSET, shortest way round. A plain (i - active) puts every
-           other card on one side, so at rest the whole fan ran off to the right
-           with nothing behind the first card -- the reference has cards on BOTH
-           sides at all times. Taking the offset modulo the deck and folding it
-           into [-n/2, n/2] makes the stack symmetric wherever you are in it. */
-        var o = ((i - active + n + n / 2) % n) - n / 2;
-        var a = Math.abs(o);
-        var x = o * (w * SPREAD);
-        var sc = Math.pow(SCALE, a);
-        c.style.transform = 'translateX(calc(-50% + ' + x.toFixed(1) + 'px)) scale(' + sc.toFixed(3) + ')';
-        /* THREE CARDS, NOT EIGHT. The buttons already carry navigation, so the
-           deeper cards were adding blurred clutter rather than information --
-           beyond one step out they are hidden entirely. They stay in the DOM
-           (opacity, not display) so every city verbatim remains readable to
-           assistive tech and to verify-copy-fidelity. */
-        var shown = a <= 1;
-        c.style.opacity   = shown ? Math.pow(FADE, a).toFixed(3) : '0';
-        c.style.filter    = a ? 'blur(' + (a * BLUR).toFixed(1) + 'px)' : 'none';
-        c.style.visibility = shown ? 'visible' : 'hidden';
-        c.style.zIndex    = String(100 - a);
-        c.classList.toggle('is-active', i === active);
-        /* a card the reader cannot see should not be announced as content they
-           can act on, but it stays in the tree and in the text */
-        c.setAttribute('aria-hidden', shown ? 'false' : 'true');
-      });
-      count.textContent = (active + 1) + ' / ' + cards.length;
-      prev.disabled = false;
-      next.disabled = false;
+      var max = Math.max(0, cards.length - visible());
+      if (i > max) { i = max; }
+      if (i < 0)   { i = 0; }
+
+      stage.style.transform = 'translate3d(' + (-i * pitch()) + 'px,0,0)';
+      count.textContent = pad(i + 1) + ' / ' + pad(cards.length);
+      /* THE ROW HAS ENDS, so the buttons tell the truth about them. The fan
+         wrapped and therefore never disabled; a row that silently refuses to
+         move is worse than one that shows it cannot. */
+      prev.disabled = (i <= 0);
+      next.disabled = (i >= max);
     }
 
-    function go(d) {
-      /* the deck wraps, so there is no dead end -- and therefore nothing to
-         disable. The buttons stay live and the counter keeps telling the truth. */
-      active = (active + d + cards.length) % cards.length;
-      render();
-    }
+    function go(d) { i += d; render(); }
     prev.addEventListener('click', function () { go(-1); });
     next.addEventListener('click', function () { go(1); });
 
-    /* keyboard: the bar is focusable through its buttons, and the stage itself
-       answers the arrow keys once anything inside the deck has focus */
+    /* keyboard: the bar is focusable through its buttons, and the deck answers
+       the arrow keys once anything inside it has focus */
     root.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
       if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
     });
 
-    /* drag / swipe — the reference is a thing you push, so it should be */
-    var dx = 0, dragging = false, id = null;
+    /* drag / swipe -- a row is a thing you push, so it should be */
+    var x0 = 0, dragging = false, moved = 0;
     stage.addEventListener('pointerdown', function (e) {
-      dragging = true; id = e.pointerId; dx = e.clientX;
-      try { stage.setPointerCapture(id); } catch (err) {}
+      dragging = true; x0 = e.clientX; moved = 0;
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (!dragging) { return; }
+      moved = e.clientX - x0;
     });
     stage.addEventListener('pointerup', function (e) {
       if (!dragging) { return; }
       dragging = false;
-      var moved = e.clientX - dx;
+      stage.releasePointerCapture(e.pointerId);
       if (Math.abs(moved) > 40) { go(moved < 0 ? 1 : -1); }
-      try { stage.releasePointerCapture(e.pointerId); } catch (err) {}
     });
 
-    measure(); render();
-    window.addEventListener('resize', function () { measure(); render(); });
+    window.addEventListener('resize', render);
+    render();
   });
 
   /* THE ONE GESTURE. Fires once, at 15% viewport entry. */

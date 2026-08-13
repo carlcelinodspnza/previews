@@ -282,7 +282,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    =========================================================================== */
 .mc-marquee{
   position:relative;
-  padding:clamp(38px,4.6vw,62px) 0;
+  /* SLEEKER BY REMOVING AIR, NOT BY SHRINKING MARKS. The band measured 188px:
+     62 above, 62 of logo, 62 below -- two thirds of it empty. Cutting the
+     padding takes it to ~118px without touching the per-mark --h values, which
+     were computed from each artwork's ink bounding box and would put the
+     smallest wordmarks under 30px if scaled. Air was the problem. */
+  padding:clamp(20px,2vw,28px) 0;
   background:var(--ds-bg-warm);
   border-top:1px solid var(--ds-line);
   border-bottom:1px solid var(--ds-line);
@@ -596,49 +601,74 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    empty space. The ch measure sits on the paragraphs (body font) where `ch`
    resolves correctly, not on this wrapper. */
 .mc-results__say{
-  margin:var(--ds-space-xl) auto 0;
-  text-align:center;
+  /* it is a COLUMN now, not a centred banner: it sits beside the deck in the
+     bleed row, so it aligns to the same left edge as every other section's
+     text and finishes level with the cards. */
+  margin:0;
+  text-align:left;
 }
-.mc-results__say .mc-body{max-width:56ch;margin-inline:auto}
+.mc-results__say .mc-body{max-width:48em;margin-inline:0}
 /* the claim lines are headings now, at head scale but with the measure and the
    rhythm of a statement rather than of a section title */
+/* SIZED TO THE CARDS. The claims are a column beside the deck now, not a
+   centred banner above it, so their block should finish level with the cards
+   rather than overshooting them. Measured: at 34px the column ran 391px against
+   a 235px card. The vw term lands at ~22.4px at 1440, which is the size at
+   which the two columns end together. */
 .mc-results__line{
-  /* 24ch broke both lines into three; the display face is wide and these are
-     sentences, not titles */
-  max-width:34ch;margin:0 auto var(--ds-space-md);
-  font-size:clamp(22px, 2.6vw, 34px);
+  max-width:none;
+  margin:0 0 var(--ds-space-sm);
+  font-size:clamp(19px, 1.56vw, 26px);
   line-height:1.25;letter-spacing:-.018em;
 }
+/* the closing phrase in the brand violet. --ds-accent-ink resolves to the
+   frozen violet inside .mc-section--light, which clears AA on white at 5.24:1,
+   so this is an emphasis a reader can actually read. */
+.mc-results__hl{color:var(--ds-accent-ink)}
 .mc-results__line + .mc-results__line{margin-top:var(--ds-space-sm)}
-.mc-results__say .mc-actions{justify-content:center}
+.mc-results__say .mc-actions{justify-content:flex-start}
 .mc-results__say .mc-body{font-size:clamp(17px, 1.5vw, 20px);line-height:1.6}
 .mc-results__say .mc-actions{margin-top:var(--ds-space-lg)}
 
 /* -- THE RESULTS SPLIT: map left, carousel right ---------------------------- */
-.mc-results__split{
+/* -- THE RESULTS BLEED ROW ---------------------------------------------------
+   Claims and CTA left, cards right running off the frame edge, controls in a
+   bottom bar. It sits OUTSIDE .container deliberately and carries the
+   container's own left offset as padding, so the text column still lines up
+   with every other section on the page while the cards escape to the viewport
+   edge. padding-left rather than a negative margin: a negative margin here
+   would be measured against the grid track, not the container, which is the
+   version of this trick that silently breaks. */
+.mc-results__bleed{
   display:grid;
-  /* the fan is three cards wide now, not eight, so the deck needs less room and
-     the map can sit closer to it */
-  grid-template-columns:minmax(0,0.92fr) minmax(0,1.08fr);
-  gap:var(--ds-space-xl);
+  grid-template-columns:minmax(0,var(--mc-say-w, 380px)) minmax(0,1fr);
+  gap:var(--mc-bleed-gap, 64px);
   align-items:center;
-  margin-top:var(--ds-space-xl);
+  margin-top:var(--ds-space-2xl);
+  padding-left:max(24px, calc((100vw - var(--ds-container-max)) / 2));
+  padding-right:0;
 }
-/* minmax(0,1fr), NOT 1fr. A bare 1fr track carries an implicit min-width:auto,
-   so the grid column cannot shrink below its CONTENT -- and the content here is
-   a scroll track holding eight 260px cards. The column blew past the viewport
-   and the whole PAGE scrolled horizontally at every width, not just this one.
-   The desktop rule already used minmax(0,...); this one did not. */
-@media (max-width:900px){ .mc-results__split{grid-template-columns:minmax(0,1fr)} }
-/* THE MAP MOVES TOWARD THE DECK RATHER THAN GROWING INTO ITS COLUMN.
-   Widening its column just made the graphic bigger and left the same 190px of
-   dead air between the two — "closer" is about the GAP, not the track width. So
-   the map takes a cap and is pushed to the end of its column, which closes the
-   distance without shrinking either element. */
-.mc-results__map{
-  margin:0 0 0 auto;
-  max-width:min(100%, 420px);
+/* minmax(0,...), NOT a bare 1fr. A bare 1fr carries an implicit min-width:auto,
+   so the column cannot shrink below its content -- and the content is a track
+   holding eight cards. That made the whole PAGE scroll sideways once before. */
+@media (max-width:900px){
+  .mc-results__bleed{
+    grid-template-columns:minmax(0,1fr);
+    gap:var(--ds-space-xl);
+    padding-right:24px;
+  }
 }
+/* the bar stops at the container's right edge; only the cards run past it */
+.mc-results__bleed .mc-deck__bar{
+  margin-right:max(24px, calc((100vw - var(--ds-container-max)) / 2));
+}
+
+/* THE MAP GETS ITS OWN ROW, AND ITS REAL SIZE. Capped at 420px in the two-up it
+   still read as starved -- because the map and the third card were drawing from
+   the same pixels. At a card width that does not clip "+51.37%", keeping the map
+   in that row pinned it to 422px. Out of the row it takes 900px against a 949px
+   native, so it is at its resolution rather than upscaled. */
+.mc-results__map{margin:0 auto;max-width:min(100%, 900px)}
 .mc-results__map img{width:100%;height:auto;display:block}
 
 /* -- THE DECK, AND WHY IT IS NOT THE THING THE SPEC BANS --------------------
@@ -664,51 +694,50 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    WITHOUT JAVASCRIPT it degrades to a plain readable column (the fan is applied
    by a class the script adds), rather than to eight cards piled on one spot. */
 .mc-deck{position:relative}
+.mc-deck__viewport{overflow:hidden}
 .mc-deck__stage{display:grid;gap:var(--ds-space-md)}      /* no-JS: a plain column */
 
-.mc-deck.is-fanned .mc-deck__stage{
-  display:block;
-  position:relative;
-  height:var(--mc-deck-h, 260px);
-  /* CLIP THE FAN TO ITS COLUMN. Unclipped, the receding cards ran the full width
-     of the section and sat on top of the map in the left column -- the deck was
-     drawing outside the box it was given. The reference clips at the viewport
-     edge; here the column edge is the equivalent. */
-  overflow:hidden;
-  /* the outermost cards should fade INTO the edge rather than stop at a hard
-     cut, which is what makes the stack read as continuing past the frame */
-  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
-  mask-image:linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
-}
-.mc-deck.is-fanned .mc-result{
-  position:absolute;
-  top:0;
-  left:50%;
-  width:var(--mc-card-w, 248px);
-  margin:0;
-  transform-origin:50% 50%;
-  transition:transform 420ms var(--ds-ease-out),
-             opacity   420ms var(--ds-ease-out),
-             filter    420ms var(--ds-ease-out);
-  will-change:transform, opacity;
-}
-/* only the foremost card takes the pointer: a click must land on what is
-   readable, not on a dimmed card behind it */
-.mc-deck.is-fanned .mc-result{pointer-events:none}
-.mc-deck.is-fanned .mc-result.is-active{pointer-events:auto}
+/* A ROW, NOT A FAN. The overlapping stack put two of the three cards behind the
+   front one at reduced opacity, which spent horizontal room on decoration; the
+   reference weights its cards equally and lets the frame edge do the work.
 
+   THREE CARDS IS A RULE, NOT A TUNING. A fixed card width means the number
+   visible is whatever the arithmetic happens to give at that width. The width
+   is therefore DERIVED from the track: three cards, two gaps, and a peek of the
+   fourth, which is what tells a reader there is more.
+
+   THE FLOOR IS MEASURED. A guessed 210px silently CLIPPED the longest figure --
+   "+51.37%" renders 198px wide, and with the card's 24px padding either side
+   that needs 246px. Cards were cutting their own percentages off and the page
+   still looked fine at a glance. 248px is that measurement plus two. */
+.mc-deck.is-slider .mc-deck__stage{
+  grid-auto-flow:column;
+  grid-auto-columns:max(
+    var(--mc-card-min, 248px),
+    calc((100% - 2 * var(--mc-card-gap, 16px) - var(--mc-peek, 34px)) / 3)
+  );
+  gap:var(--mc-card-gap, 16px);
+  transition:transform 520ms var(--ds-ease-out);
+  will-change:transform;
+}
 @media (prefers-reduced-motion: reduce){
-  .mc-deck.is-fanned .mc-result{transition:none}
+  .mc-deck.is-slider .mc-deck__stage{transition:none}
 }
 
 /* THE CONTROLS SIT UNDER THE MAIN CARD. The active card is centred in the
    stage, so centring the bar in the stage puts it directly beneath it rather
    than hanging off the left edge. */
 .mc-deck__bar{
-  display:flex;align-items:center;justify-content:center;
-  gap:var(--ds-space-sm);
-  margin-top:var(--ds-space-md);
+  display:flex;align-items:center;gap:var(--ds-space-md);
+  margin-top:var(--ds-space-lg);
+  padding-top:var(--ds-space-md);
+  border-top:1px solid var(--ds-line);
 }
+.mc-deck__label{
+  font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-ink-soft);
+}
+.mc-deck__btns{display:flex;gap:10px;order:3}
 .mc-deck__btn{
   width:40px;height:40px;border-radius:50%;
   border:1px solid var(--ds-line);
@@ -720,8 +749,9 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 .mc-deck__btn:disabled{opacity:.35;cursor:default}
 .mc-deck__btn svg{width:16px;height:16px;display:block}
 .mc-deck__count{
+  margin-left:auto;
   font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
-  letter-spacing:.14em;color:var(--ds-ink-soft);font-variant-numeric:tabular-nums;
+  letter-spacing:.14em;color:var(--ds-ink);font-variant-numeric:tabular-nums;
 }
 
 /* -- THE RESULT CARDS (eight cities, one card each) --------------------------
@@ -817,9 +847,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   aspect-ratio:16 / 10;
   position:relative;
   display:grid;place-items:center;
-  border:1px solid var(--ds-line);
+  /* NO VISIBLE CONTAINER. The frame still governs ratio and clipping -- it just
+     stops drawing itself. Both the stroke AND the recessed ground go: #1b1d22
+     against the section's #15161a is faint but it is still a rectangle, and a
+     panel edge is the container being visible just as much as a border is. */
   border-radius:var(--ds-r-surface);
-  background:var(--ds-bg-warm);
+  background:transparent;
   overflow:hidden;
 }
 /* <picture> is source selection, not layout — kept out of the box tree so the
