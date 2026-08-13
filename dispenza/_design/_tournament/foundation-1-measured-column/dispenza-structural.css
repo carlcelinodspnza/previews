@@ -591,6 +591,49 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   color:rgba(255,255,255,.86);
 }
 
+/* -- THE SERVICE GAUGE ------------------------------------------------------
+   Owner reference: a dark thermostat card with a thick arc gauge, glowing knob,
+   dashed inner tick track and a large centre readout, revving like a tachometer
+   rather than easing like a dial.
+
+   THE READOUT IS A TRUE COUNT, NOT A SCORE. The reference's number is a
+   temperature; the obvious translation is a "performance index", and there is
+   no such figure anywhere in the corpus -- a check of the content atoms returns
+   ZERO numeric atoms on any service page. Inventing one would put a fabricated
+   business metric on a client site that also carries a results guarantee, which
+   is the exact failure the whole content-fidelity apparatus exists to prevent.
+   So the gauge counts the DELIVERABLES that service actually lists, which is
+   true, checkable against the list directly beneath it, and swappable for a
+   real figure the day the owner supplies one.
+
+   GEOMETRY, declared once so the CSS and the JS cannot disagree:
+     centre (110,110), r 78, sweep 270deg from 135deg.
+     An SVG dash starts at 3 o'clock, so rotate(135) puts the gap at the bottom.
+     circumference 2*pi*78 = 490.09 ; the 270deg arc = 367.57.
+   Colour is the token ramp deep -> primary -> light; no new brand hex. */
+.mc-gauge{
+  display:grid;place-items:center;
+  aspect-ratio:1/1;width:100%;max-width:320px;margin-inline:auto;
+  position:relative;
+}
+.mc-gauge svg{display:block;width:100%;height:auto}
+.mc-gauge__read{
+  position:absolute;inset:0;display:grid;place-content:center;
+  text-align:center;pointer-events:none;
+}
+.mc-gauge__n{
+  font-family:var(--ds-font-display);
+  font-size:clamp(38px,5vw,58px);font-weight:800;line-height:1;
+  letter-spacing:-.03em;color:var(--ds-ink-heading);
+  font-variant-numeric:tabular-nums;
+}
+.mc-gauge__k{
+  margin-top:var(--ds-space-xs);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ds-ink-soft);
+}
+
 /* -- SECTION 4 . THE PROMISE (the guarantee statement) -----------------------
    The claim the client makes, set as the page's plainest possible statement: no
    card, no image, no ornament competing with it. The one typographic move is

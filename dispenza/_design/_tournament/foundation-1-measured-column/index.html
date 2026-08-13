@@ -642,12 +642,51 @@
           <li>Monthly and Quarterly Reporting</li>
         </ul>
       </div>
+      <!-- The gauge replaces the service image. Its readout is the number of
+           deliverables listed directly below it -- a fact the reader can check
+           against the list on the same screen. It is NOT a performance score:
+           the corpus carries zero numeric atoms on any service page, so any
+           index here would be invented. Swap data-gauge-to when a real figure
+           exists. -->
       <div class="col col--media">
-        <figure class="mc-media" data-media-in data-reveal>
-          <img src="../../../assets/generated/svc-performance-marketing.jpg"
-               alt="Editorial image for the Dispenza performance marketing service."
-               width="1200" height="900" loading="lazy" decoding="async">
-        </figure>
+        <div class="mc-gauge" data-gauge data-gauge-to="4" data-gauge-max="5" data-reveal>
+          <svg viewBox="0 0 220 220" aria-hidden="true">
+            <defs>
+              <linearGradient id="gArc1" gradientUnits="userSpaceOnUse"
+                              x1="55" y1="165" x2="165" y2="165"
+                              gradientTransform="rotate(-135 110 110)">
+                <stop offset="0%"   stop-color="var(--ds-accent-deep)"/>
+                <stop offset="55%"  stop-color="var(--ds-primary)"/>
+                <stop offset="100%" stop-color="var(--ds-accent-light)"/>
+              </linearGradient>
+              <filter id="gBloom1" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="7" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+              </filter>
+              <filter id="gKnob1" x="-160%" y="-160%" width="420%" height="420%">
+                <feGaussianBlur stdDeviation="5"/>
+              </filter>
+            </defs>
+            <circle cx="110" cy="110" r="78" fill="none" stroke="var(--ds-bg-warm)"
+                    stroke-width="16" stroke-linecap="round"
+                    stroke-dasharray="367.57 490.09" transform="rotate(135 110 110)"/>
+            <g class="g-ticks"></g>
+            <circle class="g-bloom" cx="110" cy="110" r="78" fill="none"
+                    stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
+                    stroke-dasharray="0 490.09" transform="rotate(135 110 110)"
+                    filter="url(#gBloom1)" opacity="0"/>
+            <circle class="g-arc" cx="110" cy="110" r="78" fill="none"
+                    stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
+                    stroke-dasharray="0 490.09" transform="rotate(135 110 110)"/>
+            <circle class="g-halo" cx="110" cy="110" r="10" fill="var(--ds-accent-light)"
+                    filter="url(#gKnob1)" opacity="0"/>
+            <circle class="g-knob" cx="110" cy="110" r="7" fill="var(--ds-ink-heading)" opacity="0"/>
+          </svg>
+          <div class="mc-gauge__read">
+            <span class="mc-gauge__n">0</span>
+            <span class="mc-gauge__k">Deliverables</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -662,12 +701,51 @@
           <li>Web Hosting</li>
         </ul>
       </div>
+      <!-- The gauge replaces the service image. Its readout is the number of
+           deliverables listed directly below it -- a fact the reader can check
+           against the list on the same screen. It is NOT a performance score:
+           the corpus carries zero numeric atoms on any service page, so any
+           index here would be invented. Swap data-gauge-to when a real figure
+           exists. -->
       <div class="col col--media">
-        <figure class="mc-media" data-media-in data-reveal>
-          <img src="../../../assets/generated/svc-webdesign.jpg"
-               alt="Editorial image for the Dispenza web design and development service."
-               width="1200" height="900" loading="lazy" decoding="async">
-        </figure>
+        <div class="mc-gauge" data-gauge data-gauge-to="4" data-gauge-max="5" data-reveal>
+          <svg viewBox="0 0 220 220" aria-hidden="true">
+            <defs>
+              <linearGradient id="gArc2" gradientUnits="userSpaceOnUse"
+                              x1="55" y1="165" x2="165" y2="165"
+                              gradientTransform="rotate(-135 110 110)">
+                <stop offset="0%"   stop-color="var(--ds-accent-deep)"/>
+                <stop offset="55%"  stop-color="var(--ds-primary)"/>
+                <stop offset="100%" stop-color="var(--ds-accent-light)"/>
+              </linearGradient>
+              <filter id="gBloom2" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="7" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+              </filter>
+              <filter id="gKnob2" x="-160%" y="-160%" width="420%" height="420%">
+                <feGaussianBlur stdDeviation="5"/>
+              </filter>
+            </defs>
+            <circle cx="110" cy="110" r="78" fill="none" stroke="var(--ds-bg-warm)"
+                    stroke-width="16" stroke-linecap="round"
+                    stroke-dasharray="367.57 490.09" transform="rotate(135 110 110)"/>
+            <g class="g-ticks"></g>
+            <circle class="g-bloom" cx="110" cy="110" r="78" fill="none"
+                    stroke="url(#gArc2)" stroke-width="14" stroke-linecap="round"
+                    stroke-dasharray="0 490.09" transform="rotate(135 110 110)"
+                    filter="url(#gBloom2)" opacity="0"/>
+            <circle class="g-arc" cx="110" cy="110" r="78" fill="none"
+                    stroke="url(#gArc2)" stroke-width="14" stroke-linecap="round"
+                    stroke-dasharray="0 490.09" transform="rotate(135 110 110)"/>
+            <circle class="g-halo" cx="110" cy="110" r="10" fill="var(--ds-accent-light)"
+                    filter="url(#gKnob2)" opacity="0"/>
+            <circle class="g-knob" cx="110" cy="110" r="7" fill="var(--ds-ink-heading)" opacity="0"/>
+          </svg>
+          <div class="mc-gauge__read">
+            <span class="mc-gauge__n">0</span>
+            <span class="mc-gauge__k">Deliverables</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1159,6 +1237,18 @@
   var doc = document;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* GAUGE GEOMETRY, DECLARED UP HERE ON PURPOSE.
+     These were originally declared beside initGauge, further down. `var`
+     declarations hoist but their ASSIGNMENTS do not -- and the reduced-motion
+     branch below returns early, calling initGauge before that assignment ever
+     ran. initGauge itself is a hoisted function declaration so the call
+     succeeded; the constants inside it were simply `undefined`, and every tick
+     coordinate came out NaN. The console said "attribute x1: Expected length,
+     NaN" and the arc silently stayed empty for every reduced-motion visitor.
+     Declaring them before the first possible use removes the ordering hazard. */
+  var GA_R = 78, GA_CIRC = 2 * Math.PI * GA_R, GA_ARC = GA_CIRC * 270 / 360;
+  var GA_START = 135, GA_SWEEP = 270;
+
   function show(el) { el.classList.add('is-in'); }
 
   function paintFinalCounts() {
@@ -1179,6 +1269,11 @@
   if (reduce.matches || !('IntersectionObserver' in window)) {
     targets.forEach(show);
     paintFinalCounts();
+    /* THE GAUGES TOO. This branch returns before the observer is built, and the
+       gauges are driven FROM that observer -- so without this a reduced-motion
+       visitor got an empty ring where the arc should be. Measured: dasharray
+       stuck at 0. Reduced motion means no ANIMATION, not no artwork. */
+    [].slice.call(doc.querySelectorAll('[data-gauge]')).forEach(initGauge);
     return;
   }
 
@@ -1212,12 +1307,105 @@
     window.requestAnimationFrame(frame);
   }
 
+  /* ---------------------------------------------------------------------------
+     THE SERVICE GAUGE. Revs like a tachometer, not like a dial.
+
+     A tachometer does not ease to a stop, it overshoots and damps -- that is a
+     second-order response, so it is written as one rather than approximated with
+     keyframes:
+         v(t) = target * (1 - e^(-zwt) * (cos(wd t) + (zw/wd) sin(wd t)))
+     zeta 0.69 and omega 4.82 are solved from the two properties wanted, not
+     dialled in by eye:
+         overshoot = e^(-z*pi/sqrt(1-z^2)) = 5.0%
+         peak time = pi/wd                 = 0.90s
+     After settling, a small irregular flutter holds it at "high RPM": three
+     mutually prime frequencies with a breathing amplitude, so it never reads as
+     a loop. prefers-reduced-motion paints the settled state and starts no loop.
+     --------------------------------------------------------------------------- */
+  /* THE SCALE IS PER GAUGE, and it carries headroom on purpose. With the arc
+     topping out at the target the rev is invisible -- the overshoot clamps and
+     the needle just arrives. A max slightly above the value leaves the arc room
+     to swing past and settle back, which is the whole gesture. */
+
+  function initGauge(host) {
+    if (host.getAttribute('data-gauge-on') === '1') { return; }
+    host.setAttribute('data-gauge-on', '1');
+    var target = parseFloat(host.getAttribute('data-gauge-to')) || 0;
+    var GA_MAX = parseFloat(host.getAttribute('data-gauge-max')) || 10;
+    var arc   = host.querySelector('.g-arc');
+    var bloom = host.querySelector('.g-bloom');
+    var knob  = host.querySelector('.g-knob');
+    var halo  = host.querySelector('.g-halo');
+    var numEl = host.querySelector('.mc-gauge__n');
+    var tickG = host.querySelector('.g-ticks');
+
+    var N = 30, tickEls = [], tickAt = [];
+    for (var i = 0; i < N; i++) {
+      var f = i / (N - 1), a = (GA_START + GA_SWEEP * f) * Math.PI / 180;
+      var ln = doc.createElementNS('http://www.w3.org/2000/svg', 'line');
+      ln.setAttribute('x1', (110 + 60 * Math.cos(a)).toFixed(2));
+      ln.setAttribute('y1', (110 + 60 * Math.sin(a)).toFixed(2));
+      ln.setAttribute('x2', (110 + 66 * Math.cos(a)).toFixed(2));
+      ln.setAttribute('y2', (110 + 66 * Math.sin(a)).toFixed(2));
+      ln.setAttribute('stroke-width', '1.6');
+      ln.setAttribute('stroke-linecap', 'round');
+      ln.setAttribute('stroke', 'var(--ds-line)');
+      tickG.appendChild(ln); tickEls.push(ln); tickAt.push(f * GA_MAX);
+    }
+
+    function paint(v, glow) {
+      var c = Math.max(0, Math.min(GA_MAX, v));
+      var len = GA_ARC * (c / GA_MAX);
+      arc.setAttribute('stroke-dasharray',   len.toFixed(2) + ' ' + GA_CIRC.toFixed(2));
+      bloom.setAttribute('stroke-dasharray', len.toFixed(2) + ' ' + GA_CIRC.toFixed(2));
+      bloom.setAttribute('opacity', glow.toFixed(3));
+      var a = (GA_START + GA_SWEEP * (c / GA_MAX)) * Math.PI / 180;
+      var kx = 110 + GA_R * Math.cos(a), ky = 110 + GA_R * Math.sin(a);
+      knob.setAttribute('cx', kx.toFixed(2)); knob.setAttribute('cy', ky.toFixed(2));
+      halo.setAttribute('cx', kx.toFixed(2)); halo.setAttribute('cy', ky.toFixed(2));
+      knob.setAttribute('opacity', '1');
+      halo.setAttribute('opacity', (0.5 + glow * 0.45).toFixed(3));
+      numEl.textContent = String(Math.round(c));
+      for (var i = 0; i < tickEls.length; i++) {
+        tickEls[i].setAttribute('stroke',
+          tickAt[i] <= c + 0.08 ? 'var(--ds-accent-light)' : 'var(--ds-line)');
+      }
+    }
+
+    if (reduce.matches) { paint(target, 0.5); return; }
+
+    var Z = 0.69, W = 4.82, WD = W * Math.sqrt(1 - Z * Z);
+    var t0 = null, seated = false;
+    function step(now) {
+      if (t0 === null) { t0 = now; }
+      var t = (now - t0) / 1000, v, glow;
+      if (!seated) {
+        var e = Math.exp(-Z * W * t);
+        var s1 = 1 - e * (Math.cos(WD * t) + (Z * W / WD) * Math.sin(WD * t));
+        var eP = Math.exp(-Z * W * Math.max(0, t - 1/60));
+        var s0 = 1 - eP * (Math.cos(WD * Math.max(0,t-1/60)) + (Z*W/WD) * Math.sin(WD * Math.max(0,t-1/60)));
+        v = target * s1;
+        glow = Math.min(1, Math.abs(target * (s1 - s0)) * 3.4 + 0.28);
+        if (t >= 1.45) { seated = true; }
+      } else {
+        var fl = (Math.sin(t*17.3)*0.62 + Math.sin(t*26.9)*0.38 + Math.sin(t*41.7)*0.22)
+               * (0.72 + 0.28*Math.sin(t*3.1)) * 1.5;      /* degrees */
+        v = target + fl / GA_SWEEP * GA_MAX;
+        glow = 0.40 + Math.abs(fl) * 0.5;
+      }
+      paint(v, glow);
+      window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+
   /* THE ONE GESTURE. Fires once, at 15% viewport entry. */
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
       show(entry.target);
       obs.unobserve(entry.target);
+      if (entry.target.hasAttribute('data-gauge')) { initGauge(entry.target); }
       var n = entry.target.querySelector('[data-count-to]');
       if (n) countUp(n);
     });
