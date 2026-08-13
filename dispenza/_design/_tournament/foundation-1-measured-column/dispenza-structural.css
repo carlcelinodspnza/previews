@@ -533,6 +533,80 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
     0 calc(-1 * var(--mc-ring)) 0 var(--ds-accent);
 }
 
+/* -- THE RESULTS SPLIT: map left, carousel right ---------------------------- */
+.mc-results__split{
+  display:grid;
+  grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);
+  gap:var(--ds-space-xl);
+  align-items:center;
+  margin-top:var(--ds-space-xl);
+}
+/* minmax(0,1fr), NOT 1fr. A bare 1fr track carries an implicit min-width:auto,
+   so the grid column cannot shrink below its CONTENT -- and the content here is
+   a scroll track holding eight 260px cards. The column blew past the viewport
+   and the whole PAGE scrolled horizontally at every width, not just this one.
+   The desktop rule already used minmax(0,...); this one did not. */
+@media (max-width:900px){ .mc-results__split{grid-template-columns:minmax(0,1fr)} }
+.mc-results__map{margin:0}
+.mc-results__map img{width:100%;height:auto;display:block}
+
+/* -- THE CAROUSEL, AND WHY IT IS NOT THE THING THE SPEC BANS -----------------
+   The owner's binding motion spec forbids "autoplay carousels". This one does
+   not autoplay: there is no timer anywhere in it. It moves only when a person
+   moves it -- button, swipe, trackpad, or arrow key -- which is the opposite of
+   the failure that rule exists to prevent (content sliding out from under a
+   reader who is still on it).
+
+   Built on native scroll-snap rather than transforms, which buys the whole
+   accessibility story for free: every one of the eight cards is in the DOM and
+   in the accessibility tree at all times, the track is keyboard-scrollable
+   without any script, touch and trackpad gestures work natively, and if the
+   JavaScript never runs the section degrades to a scrollable row rather than to
+   a single visible card. The buttons are an affordance on top, not the
+   mechanism. */
+.mc-carousel{
+  position:relative;
+  /* belt and braces against the same class of overflow: a scroll container
+     inside a flex/grid item must be allowed to shrink */
+  min-width:0;
+}
+.mc-carousel__track{
+  display:flex;gap:var(--ds-space-md);
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding-bottom:var(--ds-space-xs);
+  /* the scrollbar is hidden but the element is still a scroll container --
+     keyboard and assistive scrolling are unaffected */
+  scrollbar-width:none;
+}
+.mc-carousel__track::-webkit-scrollbar{display:none}
+.mc-carousel__track > *{
+  scroll-snap-align:start;
+  flex:0 0 min(78%, 260px);
+}
+@media (prefers-reduced-motion: reduce){
+  .mc-carousel__track{scroll-behavior:auto}
+}
+.mc-carousel__bar{
+  display:flex;align-items:center;gap:var(--ds-space-sm);
+  margin-top:var(--ds-space-md);
+}
+.mc-carousel__btn{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--ds-line);
+  background:transparent;color:var(--ds-ink);
+  display:grid;place-items:center;cursor:pointer;
+  transition:border-color var(--ds-dur) var(--ds-ease), color var(--ds-dur) var(--ds-ease);
+}
+.mc-carousel__btn:hover:not(:disabled){border-color:var(--ds-accent);color:var(--ds-accent)}
+.mc-carousel__btn:disabled{opacity:.35;cursor:default}
+.mc-carousel__btn svg{width:16px;height:16px;display:block}
+.mc-carousel__count{
+  font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
+  letter-spacing:.14em;color:var(--ds-ink-soft);font-variant-numeric:tabular-nums;
+}
+
 /* -- THE RESULT CARDS (eight cities, one card each) --------------------------
    The brief calls for EIGHT named cities, "one card each, every lift carrying
    its own window". The source shows five at a time inside a carousel; a

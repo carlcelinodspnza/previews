@@ -733,60 +733,88 @@
     </div>
     <div class="row">
       <div class="col">
-        <!-- Eight cities, all present. Each lift and its window are ONE corpus
-             atom ("+51.37% in the first 3 months"), so the figure and the window
-             stay adjacent in the DOM and the verbatim survives a tag-strip. -->
-        <div class="mc-results">
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Oceanside, CA</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span></p>
-          <p class="mc-result__win">in the first 3 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Mid City, LA, CA</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span></p>
-          <p class="mc-result__win">in the first 3 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Edmond, OK</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span></p>
-          <p class="mc-result__win">in the first 2 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Seaside, CA</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
-          <p class="mc-result__win">in the first 2 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Oakland, CA</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
-          <p class="mc-result__win">in the first 5 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Needles, CA</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span></p>
-          <p class="mc-result__win">in the first 6 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Downtown LA, CA</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span></p>
-          <p class="mc-result__win">in the first 6 months</p>
-        </div>
-        <div class="mc-result" data-reveal>
-          <p class="mc-result__city">Las Vegas, NV</p>
-          <p class="mc-result__label">Total Sale Increase</p>
-          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span></p>
-          <p class="mc-result__win">in the first 30 months</p>
-        </div>
-        </div>
-      </div>
+        <!-- MAP LEFT, CAROUSEL RIGHT.
+             Every one of the eight cities stays in the DOM: the carousel is a
+             scroll container, not a slideshow that swaps content in and out, so
+             nothing is hidden from a reader, from assistive tech, or from the
+             copy-fidelity gate. Each lift and its window remain ONE corpus atom
+             ("+51.37% in the first 3 months") and stay adjacent in the markup. -->
+        <div class="mc-results__split">
+
+          <figure class="mc-results__map" data-reveal>
+            <img src="../../../assets/generated/results-map.webp"
+                 alt="Map of North America with the states and provinces Dispenza operates in highlighted."
+                 width="949" height="636" decoding="async">
+          </figure>
+
+          <div class="mc-carousel" data-carousel data-reveal>
+            <div class="mc-carousel__track" tabindex="0" role="group"
+                 aria-label="Total sale increase by city, eight results">
+              <div class="mc-result">
+                <p class="mc-result__city">Oceanside, CA</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span></p>
+                <p class="mc-result__win">in the first 3 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Mid City, LA, CA</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span></p>
+                <p class="mc-result__win">in the first 3 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Edmond, OK</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span></p>
+                <p class="mc-result__win">in the first 2 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Seaside, CA</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
+                <p class="mc-result__win">in the first 2 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Oakland, CA</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
+                <p class="mc-result__win">in the first 5 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Needles, CA</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span></p>
+                <p class="mc-result__win">in the first 6 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Downtown LA, CA</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span></p>
+                <p class="mc-result__win">in the first 6 months</p>
+              </div>
+              <div class="mc-result">
+                <p class="mc-result__city">Las Vegas, NV</p>
+                <p class="mc-result__label">Total Sale Increase</p>
+                <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span></p>
+                <p class="mc-result__win">in the first 30 months</p>
+              </div>
+            </div>
+            <div class="mc-carousel__bar">
+              <button class="mc-carousel__btn" type="button" data-car-prev aria-label="Previous result">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="mc-carousel__btn" type="button" data-car-next aria-label="Next result">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <span class="mc-carousel__count" data-car-count aria-live="polite">1 / 8</span>
+            </div>
+          </div>
+
+        </div>      </div>
     </div>
   </div>
 </section>
@@ -1366,6 +1394,60 @@
     }
     window.requestAnimationFrame(step);
   }
+
+  /* ---------------------------------------------------------------------------
+     THE CAROUSEL. Manual, and deliberately so.
+
+     The owner's motion spec forbids "autoplay carousels". There is no timer in
+     here: it advances only when a person advances it. The mechanism is the
+     track's own scroll position -- these buttons just call scrollBy -- so swipe,
+     trackpad, shift+wheel and arrow keys all work without this script, and if it
+     never runs the section degrades to a scrollable row rather than to one
+     visible card.
+
+     The count is announced through aria-live, so a screen-reader user is told
+     where they are rather than being silently moved.
+     --------------------------------------------------------------------------- */
+  [].slice.call(doc.querySelectorAll('[data-carousel]')).forEach(function (root) {
+    var track = root.querySelector('.mc-carousel__track');
+    var prev  = root.querySelector('[data-car-prev]');
+    var next  = root.querySelector('[data-car-next]');
+    var count = root.querySelector('[data-car-count]');
+    var cards = [].slice.call(track.children);
+    if (!track || !cards.length) { return; }
+
+    function step() {
+      /* measure the real step from the first two cards rather than assuming a
+         width: the flex basis is a clamp, so it changes with the viewport */
+      if (cards.length < 2) { return cards[0].getBoundingClientRect().width; }
+      return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+    }
+    function index() {
+      var s = step();
+      return s ? Math.round(track.scrollLeft / s) : 0;
+    }
+    function sync() {
+      var atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      /* AT THE END, THE LAST CARD IS THE CURRENT ONE. index() reports whichever
+         card sits at the LEFT edge, and at maximum scroll that is card 7 while
+         card 8 is plainly on screen with nowhere further to go -- the counter
+         read "7 / 8" at the end of the track. Clamp to what the reader sees. */
+      var i = atEnd ? cards.length - 1
+                    : Math.min(cards.length - 1, Math.max(0, index()));
+      count.textContent = (i + 1) + ' / ' + cards.length;
+      /* disabled at the ends, so the control tells the truth about what it does */
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = atEnd;
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', function () {
+      window.clearTimeout(root.__t);
+      root.__t = window.setTimeout(sync, 90);
+    }, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
 
   /* THE ONE GESTURE. Fires once, at 15% viewport entry. */
   var obs = new IntersectionObserver(function (entries) {
