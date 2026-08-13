@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dispenza — Our suite: layout options</title>
+<link rel="stylesheet" href="../dispenza-tokens.css">
+<link rel="stylesheet" href="../dispenza-fonts.css">
+<link rel="stylesheet" href="../_tournament/foundation-1-measured-column/dispenza-structural.css">
+<style>
+  /* OPTION-LOCAL CSS ONLY. Everything structural comes from the real foundation
+     sheet above, so these are honest comparisons and not mockups — each option
+     is built from the tokens and type ladder the section would actually ship
+     with. Nothing here is intended to survive; whichever option wins gets its
+     rules folded into the foundation properly. */
+  /* the page's own chrome needs the brand face too: the structural sheet sets
+     font-family on its type ATOMS, not on body, so anything I write here (these
+     notes) falls back to the browser serif — which it did, and it looked like a
+     different document. */
+  body{
+    background:var(--ds-bg-surface);color:var(--ds-ink);
+    font-family:var(--ds-font-body);
+  }
+  .opt{border-top:1px solid var(--ds-line);padding:var(--ds-space-xl) 0}
+  .opt__bar{
+    display:flex;flex-wrap:wrap;gap:var(--ds-space-md);align-items:baseline;
+    padding:0 0 var(--ds-space-lg);
+  }
+  .opt__tag{
+    font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+  }
+  .opt__name{font-family:var(--ds-font-display);font-size:22px;font-weight:700;margin:0}
+  .opt__note{font-size:14px;line-height:1.6;color:var(--ds-ink-soft);max-width:70ch;margin:6px 0 0}
+  .opt__scale{
+    font-size:12px;color:var(--ds-ink-soft);border:1px solid var(--ds-line);
+    border-radius:999px;padding:4px 10px;white-space:nowrap;
+  }
+
+  /* ---- B. two-up ---- */
+  .b-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--ds-space-xl)}
+  .b-card__media{
+    border-radius:var(--ds-r-surface);overflow:hidden;border:1px solid var(--ds-line);
+    aspect-ratio:16/10;display:grid;place-items:center;background:var(--ds-bg-warm);
+  }
+  .b-card__media img{width:100%;height:100%;object-fit:cover;display:block}
+  .b-card h3{font-size:var(--ds-step-sub);margin:var(--ds-space-md) 0 0}
+
+  /* ---- C. index rows ---- */
+  .c-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:var(--ds-space-md);
+    align-items:baseline;padding:var(--ds-space-md) 0;
+    border-bottom:1px solid var(--ds-line);
+  }
+  .c-row:first-child{border-top:1px solid var(--ds-line)}
+  .c-num{
+    font-family:var(--ds-font-display);font-size:var(--ds-step-micro);font-weight:700;
+    letter-spacing:.14em;color:var(--ds-accent-ink);min-width:2.5em;
+  }
+  .c-title{font-family:var(--ds-font-display);font-size:clamp(20px,2vw,26px);font-weight:700;margin:0}
+  .c-go{font-size:var(--ds-step-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--ds-ink-soft)}
+  .c-row:hover .c-go{color:var(--ds-accent-ink)}
+
+  /* ---- D. featured + index ---- */
+  .d-rest{margin-top:var(--ds-space-xl)}
+  .d-chip{
+    display:inline-flex;align-items:center;gap:8px;padding:10px 14px;
+    border:1px solid var(--ds-line);border-radius:999px;
+    font-size:14px;color:var(--ds-ink);text-decoration:none;
+  }
+  .d-chips{display:flex;flex-wrap:wrap;gap:10px}
+  .d-chip span{color:var(--ds-accent-ink);font-size:11px;letter-spacing:.12em;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="container" style="padding-top:48px;padding-bottom:24px">
+  <p class="mc-eyebrow">Our suite — layout options</p>
+  <h1 class="mc-head" style="margin-top:8px">Four ways to build this section</h1>
+  <p class="mc-body" style="max-width:70ch">
+    Every option below is built from the real tokens, type ladder and structural sheet, so what
+    you are comparing is the layout and nothing else. The section currently shows
+    <strong>two of eight</strong> services — so each option is judged twice: how it reads now,
+    and how it reads when all eight are in it, which is where this is heading.
+  </p>
+</div>
+
+<!-- ====================== A ====================== -->
+<section class="opt">
+  <div class="container">
+    <div class="opt__bar">
+      <span class="opt__tag">Option A</span>
+      <h2 class="opt__name">Alternating split — what is built today</h2>
+      <span class="opt__scale">measured: 1,915px for 2 &rarr; ~7,660px for 8</span>
+    </div>
+    <p class="opt__note">
+      Each service gets a full-width row, text and media swapping sides. The most generous and the
+      most editorial — every service reads like its own page. The cost is height: measured at 1440 it runs 1,915px for <em>two</em> services, so eight
+      would come to roughly 7,700px — about eight screens of scrolling.
+      Best if the suite stays a <em>teaser</em> of two or three with a link to the full page.
+    </p>
+
+    <div class="row row--split">
+      <div class="col col--measure">
+        <h3 class="mc-head" style="font-size:var(--ds-step-sub)">Performance marketing</h3>
+        <p class="mc-body">Paid and organic demand for a licensed dispensary.</p>
+        <ul class="mc-list">
+          <li>Localized On-Page SEO</li><li>100+ Off-Page SEO (Profiles)</li>
+          <li>Google Business Profile Management</li><li>Monthly and Quarterly Reporting</li>
+        </ul>
+      </div>
+      <div class="col col--media">
+        <figure class="mc-media mc-media--plain">
+          <img src="../../assets/generated/svc-webdesign-layers-static.svg" alt="" width="1741" height="2150">
+        </figure>
+      </div>
+    </div>
+    <div class="row row--split row--split-rev">
+      <div class="col col--measure">
+        <h3 class="mc-head" style="font-size:var(--ds-step-sub)">Web design and development</h3>
+        <p class="mc-body">Menu-connected sites built to be updated by staff.</p>
+        <ul class="mc-list">
+          <li>Dedicated Project Manager</li><li>Any Ecomm / Menu Integration</li>
+          <li>30-Day Backup and Restores</li><li>Web Hosting</li>
+        </ul>
+      </div>
+      <div class="col col--media">
+        <figure class="mc-media">
+          <img src="../../assets/generated/svc-performance-marketing.jpg" alt="" width="1200" height="900">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== B ====================== -->
+<section class="opt">
+  <div class="container">
+    <div class="opt__bar">
+      <span class="opt__tag">Option B</span>
+      <h2 class="opt__name">Two-up cards</h2>
+      <span class="opt__scale">measured: 697px for 2 &rarr; ~1,394px for 8</span>
+    </div>
+    <p class="opt__note">
+      Media on top, copy beneath, two across. Measured 697px against A&rsquo;s 1,915px for the same
+      two services — roughly a third of the height — and it keeps the feature lists, which are
+      the part that actually sells. It scales to eight as a plain 2×4
+      grid with no new rules. The trade is that the media gets small, so it has to carry meaning
+      at a glance — the gauge does, a photograph mostly does not.
+    </p>
+    <div class="b-grid">
+      <article class="b-card">
+        <div class="b-card__media"><img src="../../assets/generated/svc-performance-marketing.jpg" alt="" width="1200" height="900"></div>
+        <h3 class="mc-head">Performance marketing</h3>
+        <p class="mc-body">Paid and organic demand for a licensed dispensary.</p>
+        <ul class="mc-list">
+          <li>Localized On-Page SEO</li><li>100+ Off-Page SEO (Profiles)</li>
+          <li>Google Business Profile Management</li><li>Monthly and Quarterly Reporting</li>
+        </ul>
+      </article>
+      <article class="b-card">
+        <div class="b-card__media"><img src="../../assets/generated/svc-webdesign.jpg" alt="" width="1200" height="900"></div>
+        <h3 class="mc-head">Web design and development</h3>
+        <p class="mc-body">Menu-connected sites built to be updated by staff.</p>
+        <ul class="mc-list">
+          <li>Dedicated Project Manager</li><li>Any Ecomm / Menu Integration</li>
+          <li>30-Day Backup and Restores</li><li>Web Hosting</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== C ====================== -->
+<section class="opt">
+  <div class="container">
+    <div class="opt__bar">
+      <span class="opt__tag">Option C</span>
+      <h2 class="opt__name">Index rows — all eight, one screen</h2>
+      <span class="opt__scale">measured: 649px &mdash; already all 8</span>
+    </div>
+    <p class="opt__note">
+      The whole suite as a numbered index. This is the only option where "eight services" is
+      itself the message — the reader sees the full range in one glance instead of being told
+      there are six more elsewhere. It drops the media and the feature lists, so it trades
+      persuasion for scope; it works best if each row links to a service page that does the
+      selling. Note the eyebrow can then read <em>eight of eight</em>.
+    </p>
+    <div>
+      <div class="c-row"><span class="c-num">01</span><h3 class="c-title">Performance marketing</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">02</span><h3 class="c-title">Web design and development</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">03</span><h3 class="c-title">Conversion rate optimization</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">04</span><h3 class="c-title">Brand and package design</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">05</span><h3 class="c-title">Advertisement design</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">06</span><h3 class="c-title">Integrations</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">07</span><h3 class="c-title">Consulting</h3><span class="c-go">View</span></div>
+      <div class="c-row"><span class="c-num">08</span><h3 class="c-title">Reports</h3><span class="c-go">View</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== D ====================== -->
+<section class="opt">
+  <div class="container">
+    <div class="opt__bar">
+      <span class="opt__tag">Option D</span>
+      <h2 class="opt__name">One featured, seven listed</h2>
+      <span class="opt__scale">measured: 684px &mdash; already 1 + 7</span>
+    </div>
+    <p class="opt__note">
+      One service gets the full split treatment — media, lede, feature list — and the other seven
+      sit beneath it as chips. Keeps a single strong visual moment without paying for it eight
+      times, and still shows the full range. The open question is which service earns the feature
+      slot, and whether that changes per page or stays fixed.
+    </p>
+    <div class="row row--split">
+      <div class="col col--measure">
+        <h3 class="mc-head" style="font-size:var(--ds-step-sub)">Performance marketing</h3>
+        <p class="mc-body">Paid and organic demand for a licensed dispensary.</p>
+        <ul class="mc-list">
+          <li>Localized On-Page SEO</li><li>100+ Off-Page SEO (Profiles)</li>
+          <li>Google Business Profile Management</li><li>Monthly and Quarterly Reporting</li>
+        </ul>
+      </div>
+      <div class="col col--media">
+        <figure class="mc-media mc-media--plain">
+          <img src="../../assets/generated/svc-webdesign-layers-static.svg" alt="" width="1741" height="2150">
+        </figure>
+      </div>
+    </div>
+    <div class="d-rest">
+      <div class="d-chips">
+        <a class="d-chip" href="#"><span>02</span> Web design and development</a>
+        <a class="d-chip" href="#"><span>03</span> Conversion rate optimization</a>
+        <a class="d-chip" href="#"><span>04</span> Brand and package design</a>
+        <a class="d-chip" href="#"><span>05</span> Advertisement design</a>
+        <a class="d-chip" href="#"><span>06</span> Integrations</a>
+        <a class="d-chip" href="#"><span>07</span> Consulting</a>
+        <a class="d-chip" href="#"><span>08</span> Reports</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container" style="padding:48px 0 96px">
+  <p class="mc-body" style="max-width:70ch;color:var(--ds-ink-soft)">
+    Heights are MEASURED from these rendered options at 1440px, excluding this explanatory text; the eight-service figures for A and B are those measurements scaled by row count, and are marked as projections. C and D already show their full set, so their numbers are exact.
+    All eight service titles are the real ones from the closed page list. Feature lists exist in
+    the corpus for the two services shown; the other six have none yet, which is why options C and
+    D show titles rather than inventing bullet points.
+  </p>
+</div>
+
+</body>
+</html>
