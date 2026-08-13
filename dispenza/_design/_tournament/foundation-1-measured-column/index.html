@@ -573,6 +573,13 @@
   }, { threshold: 0 }).observe(mq);
 })();
 </script>
+<!-- THE SMOKE BAND. One field spanning Influence Highlights and Our suite, so
+     the smoke drifts THROUGH both rather than restarting at the seam between
+     them. The canvas is a sibling of the sections, behind them, and the sections
+     are raised above it, so nothing here can sit on top of type. -->
+<div class="mc-smokefield" data-smokefield>
+  <canvas class="mc-smoke mc-smoke--field" aria-hidden="true"></canvas>
+
 <!-- ==========================================================================
      SECTION 2 . INFLUENCE HIGHLIGHTS . KIND: SPEC
      ========================================================================== -->
@@ -624,6 +631,53 @@
 <!-- pick: SECTION-COMPONENTS.md #11 Service pillars 2-col with image | considered: #9,#12,#13 | why: the owner adopted "feature blocks that alternate image-left, image-right" by name, and #11 is the catalog's only entry whose row IS that alternation, one image plus headline plus body plus link per row with the media side flipping; it is also the pattern that lets this concept prove its hardest claim, which is that the text column does NOT change width when a picture arrives beside it, because the measure keeps its exact px and the media simply takes whatever is left. The media plus cards law does not bite here: this is the alternating single-row arm, not one capped image beside a card stack, and the media column is set to stretch so the two columns end level. #9 services 3-col would flatten eight services into three equal cards and give the two real service editorials nowhere to live at size. #12 feature row with screenshot assumes a product screenshot is the subject, but the assets here are atmospheric editorials, not UI. #13 bento is refused for the same reason as in section 2: an asymmetric tile grid is a varying rhythm, and this page's argument is that the rhythm does not vary. -->
 <section class="mc-section mc-section--tight" id="suite">
   <div class="container">
+    <!-- THE TRAVELLING RULE. The same light the hero runs through its field, on a
+         hairline: a bright segment revealed as the divider crosses the viewport.
+         It is decorative and carries no text, so it is hidden from assistive tech
+         rather than announced as an empty landmark. -->
+    <div class="row">
+      <div class="col">
+        <div class="mc-divider" data-divider aria-hidden="true">
+          <span class="mc-divider__light"></span>
+        </div>
+      </div>
+    </div>
+    <!-- The rule carries its own behaviour, INSIDE <main>, for the same reason the
+         marquee and the hero do: G-CHROME-CARRIER-REDIRECT treats every byte
+         outside <main> as the locked chrome frame. Keeping the driver with the
+         component also makes the divider liftable into another page without
+         remembering to bring a line of global script with it. -->
+    <script>
+    (function () {
+      /* THE HERO'S LIGHT, ON A HAIRLINE, and it has NO TIMELINE, which is what
+         keeps it off the forbidden list. The spec bans animated gradients and
+         anything looping in the viewport; nothing here repeats. The bright
+         segment's position is a pure function of how far the rule has crossed the
+         viewport, the same drive hero-field.js uses: alive while the visitor
+         scrolls, perfectly still the moment they stop. */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      [].slice.call(document.querySelectorAll('[data-divider]')).forEach(function (el) {
+        var light = el.querySelector('.mc-divider__light');
+        if (!light) { return; }
+
+        function place() {
+          var box = el.getBoundingClientRect();
+          var p = 1 - (box.top + box.height) / (window.innerHeight + box.height);
+          if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
+          light.style.transform = 'translate3d(' + (p * el.clientWidth).toFixed(1) + 'px,0,0)';
+        }
+
+        if (reduce.matches) {
+          /* frozen, but placed mid-rule so the resting divider is LIT, not dark */
+          light.style.transform = 'translate3d(' + (el.clientWidth * 0.5).toFixed(1) + 'px,0,0)';
+        } else {
+          place();
+          window.addEventListener('scroll', place, { passive: true });
+          window.addEventListener('resize', place);
+        }
+      });
+    }());
+    </script>
     <div class="row">
       <div class="col col--measure">
         <p class="mc-eyebrow" data-reveal>Two of eight</p>
@@ -718,6 +772,11 @@
       </div>
     </div>
   </section>
+</div><!-- /.mc-smokefield -->
+
+<!-- The band carries its own behaviour, INSIDE <main>, for the same reason the
+     marquee and the divider do: every byte outside <main> is the locked chrome. -->
+<script src="../../section-smoke.js" defer></script>
 
 
 <!-- ==========================================================================
@@ -763,7 +822,7 @@
         <figure class="mc-results__map" data-reveal>
         <img src="../../../assets/generated/results-map.webp"
         alt="Map of North America with the states and provinces Dispenza operates in highlighted."
-        width="949" height="636" decoding="async">
+        width="896" height="598" decoding="async">
         </figure>
       </div>
     </div>

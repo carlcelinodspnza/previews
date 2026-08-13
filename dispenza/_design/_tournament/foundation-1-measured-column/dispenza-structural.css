@@ -280,6 +280,87 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    as a collage. They lift on hover, which is also how a visitor learns the row
    is interactive rather than decorative.
    =========================================================================== */
+/* -- THE SMOKE BAND ---------------------------------------------------------
+   One field spanning Influence Highlights and Our suite, so the smoke drifts
+   THROUGH both rather than restarting at the seam between them.
+
+   The canvas keeps the hero's .mc-smoke rule (absolute, full-bleed, never eats a
+   click) and only its stacking is restated here. The hero paints its smoke at
+   --ds-z-below because it sits behind the token; in this band the canvas is a
+   SIBLING of the sections rather than a child, so a negative z-index would put
+   it behind the wrapper's own ground and it would never be seen. Ground level
+   for the canvas, one step up for the sections: type is always above smoke. */
+.mc-smokefield{position:relative;isolation:isolate;background:var(--ds-bg-surface)}
+/* SMOKE ON THE SIDES ONLY (owner). Masked rather than re-tuned: the particles
+   still spawn and drift across the whole band, so the motion keeps the hero's
+   character instead of becoming two separate plumes with a dead corridor between
+   them. The mask simply stops showing it where the type lives. Percentages, not
+   pixels, so the clear corridor tracks the column at every width. The mask paint
+   is a token for the same reason the marquee's is: a mask still carries a colour
+   value, and the sheet stays hex-free. */
+.mc-smokefield > .mc-smoke--field{
+  z-index:0;
+  -webkit-mask-image:linear-gradient(90deg,
+    var(--ds-ink-on-dark) 0%, var(--ds-ink-on-dark) 14%,
+    transparent 33%, transparent 67%,
+    var(--ds-ink-on-dark) 86%, var(--ds-ink-on-dark) 100%);
+          mask-image:linear-gradient(90deg,
+    var(--ds-ink-on-dark) 0%, var(--ds-ink-on-dark) 14%,
+    transparent 33%, transparent 67%,
+    var(--ds-ink-on-dark) 86%, var(--ds-ink-on-dark) 100%);
+}
+/* THE GROUND MOVES UP TO THE WRAPPER. .mc-section paints --ds-bg-surface itself,
+   so a canvas between the sections and the page was drawing perfectly and being
+   covered by the very sections it was meant to sit behind: measured, the field
+   was lit and nothing was visible. The band now owns the ground, the sections go
+   transparent over it, and the smoke has somewhere to be, above the ground and
+   below every piece of type. */
+.mc-smokefield > section{position:relative;z-index:1;background:transparent}
+
+/* -- THE TRAVELLING RULE ----------------------------------------------------
+   A hairline with one bright segment on it, echoing the light the hero runs
+   through its field.
+
+   IT HAS NO TIMELINE, which is what keeps it off the forbidden list. The spec
+   bans animated gradients and anything looping in the viewport; the gradient
+   here never animates and nothing repeats. The segment's position is a pure
+   function of how far the divider has crossed the viewport -- alive while the
+   visitor scrolls, completely still the moment they stop -- exactly the drive
+   hero-field.js uses. Under reduced motion the listener is never attached and
+   the segment rests mid-rule, so the divider is still LIT rather than dark.
+
+   The box is taller than the line so the glow can bleed above and below it;
+   overflow:hidden then clips only the horizontal travel, at the ends of the
+   rule, which is what makes the light arrive and leave rather than pop. */
+.mc-divider{
+  position:relative;
+  height:var(--mc-div-h, 28px);
+  overflow:hidden;
+  margin:var(--ds-space-xl) 0 0;
+}
+.mc-divider::before{
+  content:"";position:absolute;left:0;right:0;top:50%;
+  height:1px;margin-top:-.5px;
+  background:var(--ds-line);
+}
+.mc-divider__light{
+  position:absolute;top:50%;left:0;
+  width:var(--mc-div-lw, 300px);height:2px;
+  margin-top:-1px;
+  margin-left:calc(var(--mc-div-lw, 300px) * -.5);   /* travel is measured to the segment's CENTRE */
+  border-radius:2px;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--ds-accent-light) 55%, transparent) 35%,
+    var(--ds-accent-light) 50%,
+    color-mix(in srgb, var(--ds-accent-light) 55%, transparent) 65%,
+    transparent 100%);
+  filter:
+    drop-shadow(0 0 6px var(--ds-accent))
+    drop-shadow(0 0 16px var(--ds-accent));
+  will-change:transform;
+}
+
 .mc-marquee{
   position:relative;
   /* SLEEKER BY REMOVING AIR, NOT BY SHRINKING MARKS. The band measured 188px:
@@ -644,7 +725,9 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   grid-template-columns:minmax(0,var(--mc-say-w, 380px)) minmax(0,1fr);
   gap:var(--mc-bleed-gap, 64px);
   align-items:center;
-  margin-top:var(--ds-space-2xl);
+  /* the map carried 38px of empty pixels below its artwork until it was cropped
+     to its ink box; with those gone a full 2xl on top of them read as a hole */
+  margin-top:var(--ds-space-lg);
   padding-left:max(24px, calc((100vw - var(--ds-container-max)) / 2));
   padding-right:0;
 }
@@ -668,7 +751,12 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    the same pixels. At a card width that does not clip "+51.37%", keeping the map
    in that row pinned it to 422px. Out of the row it takes 900px against a 949px
    native, so it is at its resolution rather than upscaled. */
-.mc-results__map{margin:0 auto;max-width:min(100%, 900px)}
+/* AIR ABOVE THE MAP. Cropping the image to its ink box removed the empty pixels
+   that used to hold the map off the band, so the artwork now starts at the very
+   top edge of its own file and 20px of CSS was all that separated it from the
+   marquee. The space has to be paid explicitly now that the image no longer
+   carries it, and it is paid to roughly match the space below. */
+.mc-results__map{margin:var(--ds-space-2xl) auto 0;max-width:min(100%, 900px)}
 .mc-results__map img{width:100%;height:auto;display:block}
 
 /* -- THE DECK, AND WHY IT IS NOT THE THING THE SPEC BANS --------------------
