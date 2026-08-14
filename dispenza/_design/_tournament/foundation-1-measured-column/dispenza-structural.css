@@ -1495,8 +1495,20 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    the moment the rail is the sole occupant of a row that ALREADY paid. So the
    component stops paying in exactly that arrangement and keeps its margin
    everywhere else. 104 -> 40. Selector is (0,4,3) against .mc-cases' (0,1,0),
-   so it wins on weight and needs no !important. */
-.mc-section .container > .row + .row > .col > .mc-cases{margin-top:0}
+   so it wins on weight and needs no !important.
+
+   THE SAME DEFECT, FOUND AGAIN IN #pricing (owner, second pass). The lede sat
+   128px clear of the first plan, and it decomposes the same way:
+       64px  .mc-section .container > .row + .row  (the row interval, full rhythm
+             here rather than --tight's 40)
+     + 64px  .hz-plans{margin-top:var(--ds-space-xl)}
+   Identical arrangement -- a component that is the sole occupant of a row that
+   already paid -- so it takes the identical remedy rather than a second bespoke
+   rule. 128 -> 64. Listing both selectors here keeps the pattern in ONE place;
+   the next component that grows a margin-top and gets dropped into a row on its
+   own belongs on this line too, not in a new block further down the sheet. */
+.mc-section .container > .row + .row > .col > .mc-cases,
+.mc-section .container > .row + .row > .col > .hz-plans{margin-top:0}
 
 /* -- THE OUTLINED STATEMENT HEADING ---------------------------------------
    Owner: "I like the ALL-CAPS Text outline from the original source for this
@@ -2462,6 +2474,32 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 
 #case-studies{position:relative}
 #case-studies > .container{position:relative;z-index:1}
+
+/* -- THE LAST SECTION DOES NOT PAY A BOTTOM INTERVAL (owner: "reduce the gap
+   between footer and case studies") -----------------------------------------
+   Measured: 247px at 1440 between the fan and the footer card, 160px at 390.
+   The third time this session that a gap turned out to be paid TWICE, and the
+   same shape as the other two:
+       151.2px  #case-studies padding-bottom (.mc-section pays --ds-rhythm both
+                ends; the clamp lands at 151.2 at 1440, 64 at 390)
+     +  96px    .site-footer padding-top (--ds-space-2xl, in dispenza-chrome.css)
+   The page's own rhythm system already knows this pattern -- the collapse rule
+   near the top of this sheet zeroes a section's TOP padding where it meets a
+   section of the same ground. This is that rule at the other end of the page:
+   #case-studies and the footer sit on the same ground and are exactly adjacent,
+   so the footer's top padding IS the interval and the section paying a second
+   full rhythm on top of it is redundant. 247 -> 96 at 1440, 160 -> 96 at 390.
+
+   The FOOTER is not touched. Its padding is locked chrome (dispenza-chrome.css,
+   stamped into all 27 pages); changing it would move the footer on every page to
+   fix a seam that only exists on this one. The section gives way instead.
+
+   NOTE FOR WHOEVER EDITS THIS NEXT: this also shrinks the hex plane's union,
+   because the field is the union of #case-studies' box and the footer's. The
+   camera re-solves from the new height on its own, but the seam, the edge fade
+   and the reading-clearing contrast all have to be re-measured after any change
+   to this value -- they were, for this one. */
+#case-studies{padding-bottom:0}
 
 .site-footer{position:relative}
 .site-footer > .footer-card{position:relative;z-index:1}
