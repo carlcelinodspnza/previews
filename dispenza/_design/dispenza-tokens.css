@@ -132,6 +132,54 @@
   --ds-font-body:      'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ds-font-mono:      ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
 
+  /* ── TYPE SCALE ────────────────────────────────────────────────────────────
+     MOVED HERE from the foundation concept's structural sheet (2026-08-14). The
+     scale is an IDENTITY token family — the ① BRAND-CARD emits palette / TYPE /
+     signature — and it was the one identity family living outside this sheet.
+     Two things followed from that: the TOKEN-LOCK CARD reads this sheet, so it
+     rendered "Type — specimens at scale · 0 steps" and the owner would have
+     signed off a token API with no type scale in it; and every downstream
+     per-TYPE template and bulk page styles FROM this locked sheet, so the steps
+     have to be here to be inheritable rather than private to one concept.
+     Values are unchanged — this is a relocation, not a retune.
+
+     display : the hero line, once per page.
+     head    : every section head and the pull-quote. One size for all of them,
+               which is what makes the page feel metered rather than ranked.
+     sub     : one rung BELOW the section head, for sub-titles that are not the
+               section's own heading. The service titles were set at full head
+               scale, which is why each service row stood 277-330px tall and why
+               "Web design and development" wrapped to two lines in the measure.
+     figure  : metric numerals only. Display face, tabular, and floored at 38px
+               so a stat never shrinks to body size on a phone.
+     metric  : THE METRIC BAND HAS ITS OWN STEP. --ds-step-figure is shared with
+               .mc-table__price and .mc-plan__price, so sizing the numbers off it
+               would have inflated the pricing tables too. Sized so the WIDEST
+               figure fills its column: "500+" measures 2.4355x its font-size,
+               the column is 268px with 24px padding either side, so
+               220 * 0.88 / 2.4355 = 79px.
+     ---- the void: nothing renders between 34px and 17px ----
+     body    : one body size for the whole page, lead paragraphs included.
+     micro   : eyebrows, spec keys, table headers, labels. */
+  --ds-step-display:   clamp(46px, 6.6vw, 86px);
+  /* RAISED 2026-08-14 (owner: "these are section titles, can we make them look
+     more like actual titles?"). Measured at 1440 the section heads rendered 48px
+     against a 12px eyebrow — a 4.0x ratio — while the hero display sat at 86px
+     (7.2x) and the outlined statement head at 82px (6.8x). At 4.0x a head reads
+     as large body copy rather than as the title of the section under it. 64px
+     puts it at 5.3x: unmistakably a title, still clearly subordinate to the
+     display so the page keeps ONE hero voice. The ladder's "one size for every
+     section head" principle is preserved — the step moves, not one section. */
+  /* -2px on the owner's call (2026-08-14), taken off BOTH ends of the clamp so the whole ramp moves
+     rather than only the desktop cap: 40->38 floor, 64->62 cap. Section heads now land at 62px
+     against the 12px eyebrow (5.17x), still clearly under the 86px hero display. */
+  --ds-step-head:      clamp(38px, 4.5vw, 62px);
+  --ds-step-sub:       clamp(24px, 2.5vw, 34px);
+  --ds-step-figure:    clamp(38px, 4.4vw, 56px);
+  --ds-step-metric:    clamp(38px, 5.5vw, 80px);
+  --ds-step-body:      17px;
+  --ds-step-micro:     12px;
+
   /* ── RADIUS (3 role tokens - never chip/sm/md/lg/xl) ──────────────────── */
   --ds-r-control:      7px;    /* buttons, inputs, badges, tags, chips */
   --ds-r-surface:      14px;   /* cards, panels, media frames */

@@ -49,30 +49,14 @@
      concept. Emphasis inside the body is carried by colour and weight, never
      by a size that would fill the void back in.
 
-     display : the hero line, once per page.
-     head    : every section head and the pull-quote. One size for all of them,
-               which is what makes the page feel metered rather than ranked.
-     figure  : metric numerals only. Display face, tabular, and floored at 38px
-               so a stat never shrinks to body size on a phone.
-     ---- the void: nothing renders between 34px and 17px ----
-     body    : one body size for the whole page, lead paragraphs included.
-     micro   : eyebrows, spec keys, table headers, labels. */
-  --ds-step-display: clamp(46px, 6.6vw, 86px);
-  --ds-step-head:    clamp(34px, 3.8vw, 48px);
-  /* one rung BELOW the section head, for sub-titles that are not the section's
-     own heading. The service titles were set at full head scale, which is why
-     each service row stood 277-330px tall and why "Web design and development"
-     wrapped to two lines inside the measure. */
-  --ds-step-sub:     clamp(24px, 2.5vw, 34px);
-  --ds-step-figure:  clamp(38px, 4.4vw, 56px);
-  /* THE METRIC BAND HAS ITS OWN STEP. --ds-step-figure is shared with
-     .mc-table__price and .mc-plan__price, so sizing the numbers off it would
-     have inflated the pricing tables too. Sized so the WIDEST figure fills its
-     column: "500+" measures 2.4355x its font-size, the column is 268px with
-     24px of padding either side, so 220 * 0.88 / 2.4355 = 79px. */
-  --ds-step-metric:  clamp(38px, 5.5vw, 80px);
-  --ds-step-body:    17px;
-  --ds-step-micro:   12px;
+     THE STEPS THEMSELVES NOW LIVE IN `_design/dispenza-tokens.css` (moved
+     2026-08-14), with their full per-step rationale. They are IDENTITY tokens —
+     the ① BRAND-CARD emits palette / TYPE / signature — and defining them here
+     kept them out of the locked sheet, so the TOKEN-LOCK CARD (which reads only
+     that sheet) reported "Type — specimens at scale · 0 steps" and every
+     downstream per-TYPE template and bulk page would have inherited an
+     undefined ladder. This sheet CONSUMES --ds-step-* and no longer defines it,
+     so there is exactly one source of truth for the scale. */
 
   /* -- THE MEASURE --------------------------------------------------------
      68ch of DM Sans at 17px lands at roughly 68 characters, inside the 65 to
@@ -163,12 +147,76 @@
   color:transparent;
   display:block;
 }
+/* A SECTION TITLE CARRIES THE SECTION'S WEIGHT, NOT THE BODY'S. 700 at 48px read
+   as emphatic paragraph text; 800 matches the display face's own weight so the
+   section head belongs to the same voice as the hero, one rung down. The tighter
+   tracking comes with the larger size — at 64px the old -.022em left the caps
+   looking loose. */
 .mc-head{
   font-family:var(--ds-font-display);
-  font-size:var(--ds-step-head);font-weight:700;
-  line-height:1.1;letter-spacing:-.022em;
+  font-size:var(--ds-step-head);font-weight:800;
+  line-height:1.06;letter-spacing:-.028em;
   color:var(--ds-ink-heading);
   margin:var(--ds-space-sm) 0 0;
+  /* A TITLE MAY WRAP; IT MAY NOT ORPHAN. At 62px "Day 0 against the month"
+     overruns its 640px column, so the default greedy break dropped "month" alone
+     onto line two, and #close broke into four ragged lines. text-wrap:balance
+     evens the lines instead of filling the first one, which is what stops a
+     section title reading as a sentence that ran out of room. Degrades silently
+     where unsupported — nothing depends on it, so there is no fallback. */
+  text-wrap:balance;
+  /* ALL CAPS, on the owner's call. Set at the .mc-head level so every section
+     title inherits it; the ONE exception is #results, whose two lines are full
+     sentences and are opted out below. The tracking opens slightly because caps
+     at -.028em set too tight to read. */
+  text-transform:uppercase;
+  letter-spacing:-.012em;
+  /* THE HEAD ITSELF IS WHITE. The violet lands on its LAST PHRASE only — see
+     .mc-head__turn below. Colouring the whole title violet flattened it into one
+     note; the hero has always worked by turning white into brand light partway
+     through the line, and a section head reads best doing the same thing one rung
+     down. */
+}
+/* THE TURN — the hero's move, applied to section titles. Identical recipe to
+   .mc-display__turn in hero-section.css (the brand gradient clipped to the glyphs
+   plus the same two-stop bloom), lifted rather than re-invented so the two cannot
+   drift apart. The white lead-in carries NO glow: the halo is what marks the turn,
+   and putting it on both halves would erase the distinction.
+   CONTRAST: the gradient's DARK stop (#8d3fe8) measures 3.45:1 on --ds-bg-surface
+   and 3.22:1 on --ds-bg-warm. The large-text floor is 3.0:1 and these heads are
+   62px, so this passes — but the margin is thin. If a head is ever set below 24px
+   the gradient stops complying and must go back to solid ink. */
+.mc-head__turn{
+  background:var(--ds-grad-text);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  filter:
+    drop-shadow(0 0 14px color-mix(in srgb, var(--ds-accent-light) 55%, transparent))
+    drop-shadow(0 0 46px color-mix(in srgb, var(--ds-primary) 42%, transparent));
+}
+/* NO BLOOM ON A LIGHT GROUND. The turn's glow is two violet drop-shadows sized to read as emitted
+   light against a dark ground. On white there is nothing for light to emit INTO — the same shadows
+   render as a grey-violet smear around the glyphs, which reads as a printing fault rather than a
+   glow. The gradient FILL stays (its dark stop is 5.21:1 on white, clear of the 3:1 large-text
+   floor); only the bloom is dropped. */
+.mc-section--light .mc-head__turn{ filter:none; }
+
+/* TWO HEADS CARRY NO TURN AT ALL, both for cause.
+   #results — its two lines sit on the page's ONE white section, where a violet
+   gradient would both fight the ground and, worse, kill the single violet
+   emphasis that section already owns ("guaranteed results"). Two violets
+   competing means neither is the point.
+   --statement — the outlined INFLUENCE HIGHLIGHTS head is drawn as a dark fill
+   plus an eight-direction text-shadow ring. background-clip:text would erase the
+   fill the ring is drawn against and the outline would collapse.
+   Neither carries a .mc-head__turn span, so this is belt-and-braces: it keeps
+   them solid even if a turn is ever added to their markup by mistake. */
+.mc-results__line .mc-head__turn,
+.mc-head--statement .mc-head__turn{
+  background:none;
+  -webkit-background-clip:border-box;background-clip:border-box;
+  color:inherit;
+  filter:none;
 }
 .mc-body{
   font-size:var(--ds-step-body);line-height:1.72;
@@ -231,6 +279,18 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 .mc-section--band + .mc-section:not(.mc-section--warm):not(.mc-section--band){
   padding-top:var(--ds-rhythm);
 }
+/* A --light section ARRIVING also keeps its opening rhythm — it changes the ground, so its padding
+   holds content off a visible edge. Written as a LATER rule of EQUAL specificity (0,4,0) rather than
+   by adding :not(--light) to the collapse above: that would have RAISED the collapse to 0,5,0 and
+   silently beaten the exemption rules on the line above, which is exactly what happened on the first
+   attempt — #benchmarks and #case-studies both fell back to 0px. Order wins here, weight does not.
+   --banded is excluded because a band must touch the section above it.
+   THE SECOND :not() IS LOAD-BEARING, not decoration. The collapse rule above carries FOUR class
+   selectors (0,4,0); this rule with one :not() carries three (0,3,0) and loses on weight no matter
+   where it sits in the file — measured, #pricing computed 0px with the rule sitting later. The
+   :not(--band) is always true for a light section and exists solely to bring this to (0,4,0), where
+   source order decides. Do not "tidy" it away. */
+.mc-section + .mc-section--light:not(.mc-section--banded):not(.mc-section--band){padding-top:var(--ds-rhythm)}
 
 /* The one alternate ground. Used twice on the page (the spec module and the
    closing ask) so the page has real figure/ground without a stripe pattern. */
@@ -316,6 +376,25 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   gap:var(--ds-space-md);
   align-items:flex-start;
   margin-top:var(--ds-space-xl);
+
+  /* These were previously only var() FALLBACKS scattered across five rules, so the
+     numbers that govern the component were invisible. Declared here once. */
+  --mc-case-w:      152px;   /* a shut spine */
+  --mc-case-open-w: 380px;   /* the open panel's min-width */
+  --mc-case-pad:     26px;
+  /* THE OPEN BAND'S ASPECT, NOT A FIXED HEIGHT. The open art is 722x205; a fixed
+     124px band made the box 4.39:1 against the artwork's 3.52:1, so object-fit:cover
+     scaled to width and cropped 15px off the TOP and 15px off the BOTTOM — eating the
+     artwork's own padding and slicing the logo (Root'd lost "IN THE 510"; Kanna's
+     badge ran into the panel edge). Driving the band by the artwork's ratio shows it
+     WHOLE at every width, and because the card animates flex-grow the band's height
+     now follows that animation instead of tweening independently. */
+  --mc-case-art-ar: 722 / 205;
+  /* CARD HEIGHT: band + panel, with the panel never clipping. Measured at the open
+     width of 544px the band is 154px, leaving 276px against a panel that needs
+     253-273px — only 3px of headroom at >=1600. 450px restores it to 23px. All four
+     cards still share ONE height, which is the invariant this component is built on. */
+  --mc-case-h:      450px;
 }
 .mc-case{
   position:relative;
@@ -358,7 +437,9 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   overflow:hidden;
   transition:height 520ms var(--ds-ease-out);
 }
-.mc-case.is-open .mc-case__tab{height:var(--mc-case-band-h, 124px)}
+/* the band is sized by the ARTWORK'S ratio so the logo is never cropped — see
+   --mc-case-art-ar on .mc-cases for the measurement this replaced. */
+.mc-case.is-open .mc-case__tab{height:auto;aspect-ratio:var(--mc-case-art-ar, 722 / 205)}
 .mc-case__tab:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:-4px}
 
 .mc-case__art{
@@ -455,6 +536,123 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    transparent over it, and the smoke has somewhere to be, above the ground and
    below every piece of type. */
 .mc-smokefield > section{position:relative;z-index:1;background:transparent}
+
+/* -- THE SMOKE THAT CLINGS -------------------------------------------------
+   Performance benchmarks carries the same violet smoke as the influence/suite
+   band, but rising out of the bottom of the section and GATHERING under its top
+   edge rather than passing out through it. Owner: "as if they defy gravity".
+
+   NO WRAPPER SECTION, UNLIKE THE BAND. .mc-smokefield exists because that field
+   spans TWO sections: it needed a shared positioned ancestor, and -- because its
+   canvas is a SIBLING of the sections rather than a child -- a ground of its
+   own, which is why that block also has to hand the sections z-index:1 and
+   background:transparent. None of that applies here. #benchmarks is ONE section
+   and .mc-section already paints --ds-bg-surface on it, so the smoke goes INSIDE
+   the element that owns the ground and the hero's own arrangement works
+   unchanged: the section's background paints first, the smoke paints next at
+   --ds-z-below, and every in-flow descendant paints above both -- with no
+   z-index or background override on a single piece of content.
+
+   isolation:isolate is what makes that safe rather than lucky: it pins the
+   stacking context to this section, so the negative z-index cannot escape behind
+   the page's own ground and disappear the way the band's would have.
+
+   ---------------------------------------------------------------------------
+   WHY THERE ARE TWO MASKS, ON TWO ELEMENTS.
+
+   This field concentrates its parcels at the TOP of the section, and the top of
+   the section is where the eyebrow and the statement heading live. That is not a
+   theoretical risk -- it was MEASURED, and the first build of it failed:
+   sampling the real rendered pixels behind the type across 14 moments of the
+   live field, the worst frame put the eyebrow at 2.86:1 against a 4.5 floor and
+   the heading's gradient turn at 1.65:1 against 3.0. (A single-frame check had
+   read 4.38 and 5.57 and would have passed this straight into the build -- the
+   field MOVES, so one frame proves nothing about it.)
+
+   Dimming the smoke cannot fix that. Getting the turn back to 3.0:1 needs the
+   background luminance cut about fivefold, which is not a tuning change, it is
+   deleting the effect.
+
+   A horizontal mask cannot fix it either, and this is the part worth recording:
+   measured across 12 widths, the type block's left edge sits at 2.2% of the
+   section at 1100px and 22.1% at 1920px. There is no side corridor that clears
+   the type at every width -- at 375-600px the type spans 94% of the section and
+   there are no sides at all.
+
+   So the clearance has to be VERTICAL, and it is the vertical mask that makes
+   the contrast a guarantee rather than a probability: the band containing the
+   type is fully transparent, so the ground behind every glyph is exactly
+   --ds-bg-surface at every width and every frame, and the smoke is incapable of
+   touching it.
+
+   The two masks multiply by NESTING rather than by mask-composite:intersect,
+   which is one less thing to be wrong about in a browser: the lid carries the
+   vertical clearance, the canvas inside it carries the owner's side corridor,
+   and a child is naturally clipped by its parent's mask.
+
+   The mask paint is a token for the same reason the marquee's is: a mask still
+   carries a colour value, and the sheet stays hex-free.
+   --------------------------------------------------------------------------- */
+.mc-smokerise{position:relative;isolation:isolate}
+
+/* THE LID: the vertical clearance, expressed against the RHYTHM TOKEN rather
+   than in magic numbers. Measured across 17 widths with the reveals settled,
+   the first line of type in this section begins at EXACTLY var(--ds-rhythm) --
+   that is the section's own top padding and nothing else sits above it -- while
+   the type block itself is never taller than 162px. So the clear band is
+   "the rhythm, minus a guard, through the rhythm plus the tallest the type can
+   be", and it re-solves itself for free at every width and for any future change
+   to the token. Hardcoded stops would have had to be a two-breakpoint table that
+   silently goes wrong the day --ds-rhythm is retuned.
+
+   (The 17-width sweep is also why these numbers are not the ones this file was
+   first written with. The first sweep measured BEFORE the data-reveal transforms
+   had fired, so every type offset came back ~20px low and the resulting mask
+   cleared the wrong band -- it passed at 1440 and failed at 390. Reveals have to
+   be settled before a layout measurement is worth anything.)
+
+   Percentages could not do this job: the section is 820-1036px tall on desktop
+   and 2215-2242px on a phone, so the same percentage lands in completely
+   different places relative to the type. */
+.mc-smokerise__lid{
+  position:absolute;inset:0;
+  z-index:var(--ds-z-below);
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,
+    var(--ds-ink-on-dark) 0,
+    var(--ds-ink-on-dark) calc(var(--ds-rhythm) - 42px),
+    transparent            calc(var(--ds-rhythm) - 16px),
+    transparent            calc(var(--ds-rhythm) + 190px),
+    var(--ds-ink-on-dark) calc(var(--ds-rhythm) + 240px),
+    var(--ds-ink-on-dark) 100%);
+          mask-image:linear-gradient(180deg,
+    var(--ds-ink-on-dark) 0,
+    var(--ds-ink-on-dark) calc(var(--ds-rhythm) - 42px),
+    transparent            calc(var(--ds-rhythm) - 16px),
+    transparent            calc(var(--ds-rhythm) + 190px),
+    var(--ds-ink-on-dark) calc(var(--ds-rhythm) + 240px),
+    var(--ds-ink-on-dark) 100%);
+}
+
+/* THE CANVAS: the owner's standing SMOKE ON THE SIDES ONLY corridor, same stops
+   as the influence/suite band so the page's two fields read as one system. It is
+   character here rather than protection -- the lid above already guarantees the
+   type -- which is exactly why it can keep the band's numbers unchanged instead
+   of being bent into a shape that tries to do both jobs.
+   z-index is neutralised because .mc-smoke sets --ds-z-below for the hero, where
+   the canvas is the direct child; here the LID carries that depth and the canvas
+   simply fills it. */
+.mc-smokerise__lid > .mc-smoke--rise{
+  z-index:auto;
+  -webkit-mask-image:linear-gradient(90deg,
+    var(--ds-ink-on-dark) 0%, var(--ds-ink-on-dark) 14%,
+    transparent 33%, transparent 67%,
+    var(--ds-ink-on-dark) 86%, var(--ds-ink-on-dark) 100%);
+          mask-image:linear-gradient(90deg,
+    var(--ds-ink-on-dark) 0%, var(--ds-ink-on-dark) 14%,
+    transparent 33%, transparent 67%,
+    var(--ds-ink-on-dark) 86%, var(--ds-ink-on-dark) 100%);
+}
 
 /* -- THE TRAVELLING RULE ----------------------------------------------------
    A hairline with one bright segment on it, echoing the light the hero runs
@@ -842,12 +1040,24 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
    rather than overshooting them. Measured: at 34px the column ran 391px against
    a 235px card. The vw term lands at ~22.4px at 1440, which is the size at
    which the two columns end together. */
+/* THE ONE SECTION THAT IS NOT ALL CAPS. Every other section title is a LABEL — two or three words
+   naming what follows — and caps suit a label. These two are full SENTENCES making a claim, and a
+   sentence in caps reads as shouting rather than as speech, so #results opts out and keeps sentence
+   case + its own tracking. */
 .mc-results__line{
   max-width:none;
   margin:0 0 var(--ds-space-sm);
   font-size:clamp(19px, 1.56vw, 26px);
   line-height:1.25;letter-spacing:-.018em;
+  text-transform:none;
 }
+/* TWO CLAIMS, ONE EMPHASIS (owner). Both lines were set at the same weight, so they competed and the
+   guarantee — the actual differentiator, and the only line carrying the brand violet — read as the
+   second half of a paragraph rather than as the point. The first line steps back to medium; the
+   second keeps the full display weight. The hierarchy is now WEIGHT, not size: both stay the same
+   size so the pair still reads as one statement. */
+.mc-results__line:first-of-type{ font-weight:500 }
+.mc-results__line:last-of-type { font-weight:800 }
 /* the closing phrase in the brand violet. --ds-accent-ink resolves to the
    frozen violet inside .mc-section--light, which clears AA on white at 5.24:1,
    so this is an emphasis a reader can actually read. */
@@ -1274,6 +1484,20 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 /* the lede under a sub-title does not need the full head interval either */
 .mc-section--tight .row--split .mc-body{margin-top:var(--ds-space-sm)}
 
+/* -- THE INTERVAL WAS BEING PAID TWICE (owner: "reduce the gap here") ---------
+   Under #benchmarks the head sat 104px clear of the card rail -- in the one
+   section whose whole modifier is --tight. Measured at 1440 AND 390: 104px on
+   the nose, and it decomposes exactly:
+       40px  .mc-section--tight .container > .row + .row  (the row interval)
+     + 64px  .mc-cases{margin-top:var(--ds-space-xl)}     (the component's own)
+   Two rules were each paying the same gap in full, unaware of the other. The
+   component margin is correct when .mc-cases stands on its own; it is redundant
+   the moment the rail is the sole occupant of a row that ALREADY paid. So the
+   component stops paying in exactly that arrangement and keeps its margin
+   everywhere else. 104 -> 40. Selector is (0,4,3) against .mc-cases' (0,1,0),
+   so it wins on weight and needs no !important. */
+.mc-section .container > .row + .row > .col > .mc-cases{margin-top:0}
+
 /* -- THE OUTLINED STATEMENT HEADING ---------------------------------------
    Owner: "I like the ALL-CAPS Text outline from the original source for this
    section ... minus the marquee effect."
@@ -1392,6 +1616,175 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
 }
 
 /* -- the two bundled plans, as a two-row spec pair -------------------------- */
+/* -- THE TWO PACKAGES (horizontal) ------------------------------------------
+   Owner rejected the glass + ambient field ("I do not like the background here")
+   and asked for the SOURCE'S OWN card construction, horizontally: a solid violet
+   shell, a dark inner panel holding the identity and the ticked modules, and the
+   "+" extras sitting on the violet foot below the panel. No glass, no backdrop
+   blur, no dotted or ambient ground — the cards ARE the treatment.
+
+   HORIZONTAL means the panel splits: identity (name / subtitle / price / add-on)
+   holds a fixed left column, and the modules flow in TWO columns to its right,
+   so the width does the work the old portrait card did with height. Each plan is
+   its own full-width row, so the equal-height problem cannot exist.
+
+   ONE DEVIATION, FLAGGED: the reference sets the subtitle in GOLD. The tokens
+   sheet records that colour (--ds-warning) as a framework default, NOT brand, per
+   C6 section 2 — the brand card deliberately excluded it. The subtitle is
+   therefore set in the brand's own light violet. Switching it to gold is one
+   declaration, but it is an owner call against a locked brand decision.
+
+   NOTE TO FUTURE EDITORS: do NOT paste a comment-delimiter pair into this block.
+   CSS comments do not nest; an inner close-delimiter ends the comment early and
+   the parser then swallows the NEXT RULE while recovering. That is exactly what
+   happened here: .hz-plans was silently dropped, computed display:block instead
+   of grid, and the gap between the two cards rendered as 0px. */
+.hz-plans{
+  display:grid;
+  /* the cards are two separate PRODUCTS, not two rows of one table — they need a
+     real interval between them, not a hairline. One full rhythm step apart. */
+  gap:var(--ds-space-xl);
+  margin-top:var(--ds-space-xl);
+}
+
+/* THE SHELL: DARKER, AND MADE OF GLASS (owner, two asks).
+   Darker — the shell moves off the full-strength --ds-accent onto a mix weighted
+   toward --ds-accent-deep, so it reads as a deep royal purple rather than the
+   bright brand violet. The mix is used instead of --ds-accent-deep flat because
+   flat #420f7b under a translucent layer goes almost black against this ground.
+   Glass — the shell is translucent with a real backdrop blur, the same treatment
+   the chrome rail uses, plus a light top edge so the pane has a lit lip. The
+   INNER PANEL stays opaque: it carries all the small text, and frosting the
+   surface under body copy is where glass designs lose their legibility.
+   The solid declaration comes first and is the fallback wherever
+   backdrop-filter is unsupported. */
+.hz-plan{
+  /* ONE KNOB FOR THE SHADE. The mix lives in a local custom property so the solid
+     rule, the glass rule and the per-plan variant all read the SAME value — the
+     shade was previously written out in two places and a variant would have made
+     it four, which is how a card ends up glass-tinted one colour and solid-tinted
+     another on the browsers that fall back. --hz-deep is the only number to move. */
+  --hz-deep: 78%;
+  --hz-shell: color-mix(in srgb, var(--ds-accent-deep) var(--hz-deep), var(--ds-accent));
+  border-radius:var(--ds-r-surface);
+  background:var(--hz-shell);
+  padding:var(--ds-space-sm);
+  box-shadow:var(--ds-shadow-card);
+  border:1px solid transparent;
+}
+/* ENTERPRISE TAKES ITS OWN SHADE (owner). It is the top tier, so it goes DEEPER
+   rather than brighter — a richer, more recessive purple that reads as the
+   premium tier without competing with the "Most Popular!" card for attention.
+   Only the mix ratio changes; every other shell property is inherited, so the two
+   cards stay the same material and differ only in tone. */
+.hz-plan--full{ --hz-deep: 94%; }
+
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .hz-plan{
+    background:color-mix(in srgb, var(--hz-shell) 76%, transparent);
+    -webkit-backdrop-filter:var(--ds-glass-blur);
+    backdrop-filter:var(--ds-glass-blur);
+    border-color:color-mix(in srgb, var(--ds-accent-light) 34%, transparent);
+  }
+}
+/* BOTH SHELLS ARE THE SAME VIOLET (owner). ENTERPRISE previously took the deeper
+   violet so "Most Popular!" would lead, but the owner wants the two plans to read
+   as equals — the badge does that work on its own. Kept as an explicit rule rather
+   than deleting the modifier, so the markup hook survives if the two are ever
+   differentiated again. */
+/* (the .hz-plan--full shade override lives with the shell rules above, not here) */
+
+/* THE SECTION'S OWN ASK. Centred under the two plans, and deliberately a FULL
+   rhythm step clear of the last card (--ds-space-2xl, 96px at 1440) — the owner
+   asked for it "not too close to the last card", and at anything less it reads as
+   part of the ENTERPRISE shell rather than as the section's conclusion.
+   It uses the page's existing .btn/.btn--solid, so it inherits the same focus
+   ring, hover and tap target as every other primary button; nothing new is
+   invented for a one-off. href matches the index brief's cta_primary (/contact). */
+.hz-cta{
+  display:flex;justify-content:center;
+  margin-top:var(--ds-space-2xl);
+}
+
+.hz-badge{
+  margin:0 0 var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;text-align:center;color:var(--ds-ink-on-dark);
+}
+
+/* the dark inner panel — the card within the card */
+.hz-panel{
+  display:grid;
+  grid-template-columns:minmax(240px,300px) 1fr;
+  gap:var(--ds-space-lg);
+  padding:var(--ds-space-lg);
+  border-radius:var(--ds-r-surface);
+  background:var(--ds-bg-surface);
+}
+
+.hz-name{
+  margin:0;font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);font-weight:800;letter-spacing:-.01em;line-height:1.05;
+  text-transform:uppercase;color:var(--ds-ink-heading);
+}
+.hz-name em{font-style:italic;font-weight:800;text-transform:none}
+/* the reference's gold lives here; see the note at the head of this block */
+.hz-sub{
+  margin:var(--ds-space-2xs) 0 0;
+  font-size:var(--ds-step-micro);font-weight:700;color:var(--ds-accent-ink);
+}
+.hz-price{
+  margin:var(--ds-space-md) 0 0;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);font-weight:700;line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ds-ink-heading);
+}
+.hz-unit{ font-family:var(--ds-font-mono);font-size:var(--ds-step-micro);font-weight:400;
+  letter-spacing:.06em;color:var(--ds-ink-soft);margin-left:.28em; }
+.hz-add{ margin:var(--ds-space-2xs) 0 0;font-size:var(--ds-step-micro);color:var(--ds-ink-soft); }
+
+/* the modules flow in two columns — this is what the horizontal form buys */
+.hz-list{
+  list-style:none;margin:0;padding:0 0 0 var(--ds-space-lg);
+  border-left:1px solid var(--ds-hairline);
+  columns:2; column-gap:var(--ds-space-lg);
+}
+.hz-li{
+  display:flex;gap:var(--ds-space-xs);align-items:flex-start;
+  break-inside:avoid; -webkit-column-break-inside:avoid;
+  margin:0 0 var(--ds-space-sm);
+  font-size:var(--ds-step-micro);line-height:1.5;color:var(--ds-ink);
+}
+.hz-tick{
+  flex:0 0 auto;width:.62em;height:.32em;margin-top:.42em;
+  border-left:2px solid var(--ds-accent-light);
+  border-bottom:2px solid var(--ds-accent-light);
+  transform:rotate(-45deg);
+}
+.hz-mod{ font-style:italic;font-weight:700;color:var(--ds-ink-heading) }
+
+/* the "+" extras sit on the VIOLET FOOT, outside the dark panel — they are
+   additions TO the package, which is exactly what the source's layout says */
+.hz-extras{
+  list-style:none;margin:0;padding:var(--ds-space-sm) var(--ds-space-md) var(--ds-space-2xs);
+  display:flex;flex-wrap:wrap;gap:var(--ds-space-sm) var(--ds-space-xl);
+}
+.hz-plusli{
+  display:flex;gap:var(--ds-space-xs);align-items:center;
+  font-size:var(--ds-step-micro);font-weight:700;color:var(--ds-ink-on-dark);
+}
+.hz-plus{ position:relative;flex:0 0 auto;width:.72em;height:.72em }
+.hz-plus::before,.hz-plus::after{ content:"";position:absolute;background:var(--ds-ink-on-dark) }
+.hz-plus::before{ left:0;right:0;top:calc(50% - 1px);height:2px }
+.hz-plus::after{ top:0;bottom:0;left:calc(50% - 1px);width:2px }
+
+@media (max-width:900px){
+  .hz-panel{ grid-template-columns:1fr; gap:var(--ds-space-md); }
+  .hz-list{ columns:1; padding-left:0; border-left:0;
+            border-top:1px solid var(--ds-hairline); padding-top:var(--ds-space-md); }
+}
+
 .mc-plans{margin-top:var(--ds-space-xl);display:grid;gap:var(--ds-space-md)}
 .mc-plan{
   display:flex;flex-wrap:wrap;align-items:baseline;
@@ -1602,7 +1995,14 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   .mc-table__wrap{border:0;background:none;box-shadow:none;overflow-x:visible;
     border-radius:0}
   .mc-table{min-width:0;display:block}
-  .mc-table caption{padding:0}
+  /* The caption has to be released from table layout for the SAME reason the rows and
+     cells below are. Once .mc-table is display:block the caption's display:table-caption
+     has no table formatting context left to size against, so it shrink-wraps to its own
+     min-content: measured at 390 it rendered 77px wide inside a 342px table -- 23% of the
+     width, wrapping one short phrase down 15 lines and 413px of column. Desktop and tablet
+     are unaffected (both 100%); this is a mobile-only collapse, and releasing padding
+     alone was never going to fix it. */
+  .mc-table caption{padding:0;display:block;width:100%}
   .mc-table thead{position:absolute;width:1px;height:1px;overflow:hidden;
     clip:rect(0 0 0 0);white-space:nowrap}
   .mc-table tbody,.mc-table tr,.mc-table th,.mc-table td{display:block;width:100%}
@@ -1666,3 +2066,410 @@ section[id], #main{scroll-margin-top:calc(var(--ds-space-xl) + var(--ds-space-md
   .js .mc-band__media img,
   .mc-band__media img{height:100%}
 }
+
+
+/* ===========================================================================
+   CASE STUDIES — the fanned stack (owner pick "D", 2026-08-14). Built as a
+   standalone option and integrated here; its own page padding and ground were
+   removed on integration because .mc-section owns the rhythm on this page.
+   =========================================================================== */
+/* D · FANNED STACK — WHERE I LANDED: the fan IS the content, not a picture of it. The reference
+   arrangement is real (dark card front-and-near-centre, accent-tinted cards fanning behind it,
+   rotated outward, bottoms pivoting like a hand) but the overlap eats only each card's own gutter,
+   so all four studies read un-occluded at every width and nothing is reachable by interaction alone.
+   GIVES UP: the reference's deep overlap and its one big hero card — readability costs card width.
+   WRONG the moment a fifth study lands: a five-card hand either overflows or hides a figure. */
+
+/* ── stage ─────────────────────────────────────────────────────────────────── */
+.cs-fan{
+  /* tier 1 geometry (>1080px). Sized so 4 seats PLUS the slop a rotated box adds
+     still fit the narrowest stage the harness might give me:
+     4w − 3·lap + 2·(h·sin θ) = 948 + 85 ≈ 1033px, inside 1072px (a 1120 container
+     less its 48px of padding) at 1440. If the stage gets its full 1288px instead,
+     the hand simply sits in more air. */
+  --cs-fan-w:    clamp(212px, 17.6vw, 252px);
+  --cs-fan-lap:  26px;   /* how far each seat slides under its neighbour */
+  --cs-fan-out:  7deg;   /* the two outer cards */
+  --cs-fan-in:   2.4deg; /* the two inner cards */
+  --cs-fan-drop: 22px;   /* arc: outer cards ride lower */
+  --cs-fan-plate:118px;   /* logo plate height — the logo cap is derived from it, see below */
+  box-sizing:border-box;
+  position:relative;
+  isolation:isolate;
+  /* THE CLIP MUST NOT EAT THE GLOW. overflow-x:clip is the guarantee against horizontal overflow and
+     it stays — but measured, the two OUTER cards carry a 44px shadow reach with only 39px of room, so
+     the clip was shaving 5px off each outer glow. overflow-clip-margin lets PAINT escape the clip box
+     by a set distance while the clip still stops runaway LAYOUT, which is the actual requirement.
+     72px is the 44px reach plus headroom for the lift shadow on hover (76px reach on the front card). */
+  overflow-x:clip;
+  overflow-clip-margin:88px;
+  font-family:var(--ds-font-body);
+}
+/* the bloom the hand is held up against — static, no animation */
+.cs-fan::before{
+  content:"";
+  position:absolute;
+  inset:auto 0 var(--ds-space-2xl) 0;
+  height:62%;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(60% 70% at 50% 62%,
+    color-mix(in srgb, var(--ds-primary) 26%, transparent) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 16%, transparent) 46%,
+    transparent 100%);
+}
+
+.cs-fan__inner{
+  box-sizing:border-box;
+  max-width:var(--ds-container-max);
+  margin-inline:auto;
+  padding-inline:var(--ds-space-md);
+}
+/* the hand is allowed to run wider than the reading column — a fan wants air */
+.cs-fan__stage{
+  box-sizing:border-box;
+  max-width:1288px;
+  margin-inline:auto;
+  padding-inline:var(--ds-space-md);
+}
+
+/* ── head ──────────────────────────────────────────────────────────────────── */
+.cs-fan__head{text-align:center}
+.cs-fan__standfirst{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:700;line-height:1.22;letter-spacing:-.02em;
+  color:var(--ds-ink);
+  /* 17.65em, not 26ch. The two are equivalent HERE — measured on the rendered element, 26ch computed
+     to 600px against a 34px Montserrat at 1440 and 452px at 1024; 17.65em gives 600px and 452px. The
+     em form is used because it drops the dependency on the font's character metrics (a ch measure
+     shifts if the display face is ever swapped or while a webfont is still loading) and because the
+     G8 A3 check cannot verify ch ownership on this build: A3 looks for a token literally named
+     --font and selectors prefixed .h-, whereas this build uses --ds-font-display and .mc-/.cs-, so it
+     flagged this rule despite the display face being set on the line above. The rule was correct;
+     em removes the ambiguity rather than suppressing the check.
+     WIDTH: 19.8em, set to land this on TWO lines (owner). Probed on the rendered element — two lines
+     need 660px at 1440 (19.41em) and 500px at 1024 (19.53em); 19.8em clears both with headroom. */
+  max-width:19.8em;
+  margin:var(--ds-space-md) auto 0;
+  text-wrap:balance;
+}
+.cs-fan__lede{
+  font-size:var(--ds-step-body);
+  line-height:1.72;
+  color:var(--ds-ink-soft);
+  /* 740px, NOT --ds-measure. The owner asked for this lede on two lines; probed on the rendered
+     element it needs 720px, so 740px is the measured requirement plus headroom.
+     ⚠ THIS DELIBERATELY EXCEEDS THE READING MEASURE. --ds-measure is min(68ch, 640px), documented in
+     the tokens sheet as "roughly 68 characters, inside the 65 to 72 window the owner set". At 740px
+     this line runs ~76 characters — outside that window. There is no way to satisfy both: the copy
+     is a corpus verbatim (~150 chars) so it cannot be shortened, and 68ch forces a third line.
+     Reducing the font-size does not help — the measure is expressed in ch, so it narrows with the
+     type and the character count per line is unchanged. Recorded here so the departure is visible
+     rather than silent; reverting to var(--ds-measure) restores three lines. */
+  max-width:740px;
+  margin:var(--ds-space-md) auto 0;
+  text-wrap:balance;
+}
+
+/* ── the hand ──────────────────────────────────────────────────────────────── */
+.cs-fan__hand{
+  box-sizing:border-box;
+  list-style:none;
+  margin:var(--ds-space-xl) 0 0;
+  padding:var(--ds-space-md) 0 var(--ds-space-lg);
+  display:flex;
+  justify-content:center;
+  align-items:stretch;          /* equal-height cards — what makes a fan read as a fan */
+}
+.cs-fan__seat{
+  box-sizing:border-box;
+  position:relative;
+  flex:0 0 auto;
+  width:var(--cs-fan-w);
+  transform-origin:50% 100%;    /* pivot at the bottom, like cards held in a hand */
+  transform:translateY(var(--cs-seat-drop)) rotate(var(--cs-seat-rot));
+  display:flex;
+}
+.cs-fan__seat + .cs-fan__seat{margin-left:calc(var(--cs-fan-lap) * -1)}
+
+/* depth: the apex sits at seat 2 — front, near-centre, and it is the DARK card.
+   Seats 1/3/4 recede outward from it in the brand accent at three different depths. */
+.cs-fan__seat--1{--cs-seat-rot:calc(var(--cs-fan-out) * -1);--cs-seat-drop:var(--cs-fan-drop);z-index:1}
+.cs-fan__seat--2{--cs-seat-rot:calc(var(--cs-fan-in)  * -1);--cs-seat-drop:0px;z-index:4}
+.cs-fan__seat--3{--cs-seat-rot:var(--cs-fan-in);            --cs-seat-drop:calc(var(--cs-fan-drop) * .25);z-index:3}
+.cs-fan__seat--4{--cs-seat-rot:var(--cs-fan-out);           --cs-seat-drop:calc(var(--cs-fan-drop) * 1.1);z-index:2}
+
+.cs-fan__seat:hover,
+.cs-fan__seat:focus-within{z-index:5}
+
+/* ── the card ──────────────────────────────────────────────────────────────── */
+.cs-fan__card{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  /* heavily rounded, per the reference */
+  border-radius:calc(var(--ds-r-surface) * 2);
+  border:1px solid var(--ds-glass-border);
+  padding:var(--ds-space-md) calc(var(--ds-space-md) + var(--ds-space-2xs));
+  box-shadow:var(--ds-shadow-card);
+  transition:
+    transform var(--ds-dur-fast) var(--ds-ease-out),
+    box-shadow var(--ds-dur-fast) var(--ds-ease-out),
+    border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.cs-fan__card:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:3px;
+}
+/* bring-to-front: straighten out of the fan and lift. Reveals NOTHING — every
+   figure is already fully readable in the resting arrangement. */
+.cs-fan__seat:hover  .cs-fan__card,
+.cs-fan__seat:focus-within .cs-fan__card{
+  transform:rotate(calc(var(--cs-seat-rot) * -1)) translateY(-12px);
+  /* THE OUTLINE GLOWS (owner's preference over a lighter fill). Three layers, in order: a 1px lit
+     ring hugging the border radius, an outward bloom, and the existing lift shadow underneath. The
+     ring is drawn with box-shadow rather than a thicker border so the card's geometry — and so the
+     fan's measured width — does not change on hover; a border-width change would nudge every
+     neighbour. The bloom needs the stage's overflow-clip-margin to paint: without it the clip would
+     shave it, which is exactly the failure I mis-diagnosed on the resting cards earlier. */
+  border-color:var(--ds-accent-light);
+  box-shadow:
+    0 0 0 1px var(--ds-accent-light),
+    0 0 28px -2px color-mix(in srgb, var(--ds-accent) 72%, transparent),
+    var(--ds-shadow-lift);
+  /* and a touch lighter, so the lit card reads as active on its own, not only by its ring */
+  background-image:linear-gradient(158deg,
+    color-mix(in srgb, var(--ds-accent) 46%, var(--ds-accent-deep)) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 72%, var(--ds-bg-surface)) 100%);
+}
+
+/* ONE SHADE, FOUR CARDS (owner: "having different shades of purple makes it all weird").
+   The four cards previously carried four different mixes — one near-black, one at 92% accent-deep,
+   two mid — which read as four different products rather than four results from one agency. They now
+   share a single ground. The gradient is kept (rather than a flat fill) because a flat panel behind
+   a rotated stack loses its edge definition where cards overlap; the gradient is IDENTICAL on all
+   four, so they are the same shade, lit the same way.
+   The front card is now distinguished by position and z-order alone, which is what the fan is for. */
+.cs-fan__card--v1,
+.cs-fan__card--dark,
+.cs-fan__card--v2,
+.cs-fan__card--v3{
+  background:linear-gradient(158deg,
+    color-mix(in srgb, var(--ds-accent-deep) 84%, var(--ds-primary)) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 58%, var(--ds-bg-surface)) 100%);
+}
+
+/* ── card parts ────────────────────────────────────────────────────────────── */
+.cs-fan__idx{
+  align-self:flex-start;
+  margin:0 0 var(--ds-space-sm);
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border:1px solid var(--ds-hairline);
+  border-radius:var(--ds-r-pill);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.16em;
+  color:color-mix(in srgb, var(--ds-ink-on-dark) 84%, transparent);
+}
+/* NO PLATE. The plate box survives only as a fixed-height slot that reserves the
+   mark's space and caps its size; it paints nothing, so each mark sits directly on
+   the card ground. Evidence for dropping the fill is on the rule below. */
+.cs-fan__plate{
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:var(--cs-fan-plate);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-surface);
+  background:none;
+  box-shadow:none;
+}
+/* max-height:100% does NOT bind here — measured: the two 200x200 marks rendered
+   185px tall inside a 76px slot and covered the figures below, because the grid
+   area's height is indefinite so the percentage resolves to none. The cap is
+   therefore taken from the slot token in absolute units, which does bind. */
+/* WHY NO FILL BEHIND THE MARKS. Measured, per mark, the mean of its OPAQUE pixels
+   and that mean's contrast against the card ground it actually sits on:
+   seat 1 = 3.9:1 · seat 3 = 8.5:1 · seat 4 = 12.5:1 — all clear the 3:1 floor for a
+   non-text graphic unaided. Seat 2's mark is the only genuinely dark one (1.8:1), so
+   it alone is lifted, below. Targeted, rather than a pale slab behind all four.
+   Addressed by SEAT, not by filename: the selector must make no client claim. */
+.cs-fan__seat--2 .cs-fan__logo{ filter:brightness(1.9) contrast(1.06); }
+.cs-fan__logo{
+  display:block;
+  width:auto;height:auto;
+  max-width:100%;
+  max-height:calc(var(--cs-fan-plate) - var(--ds-space-xs) * 2);
+  object-fit:contain;
+}
+
+.cs-fan__figs{
+  list-style:none;
+  margin:var(--ds-space-md) 0 0;
+  padding:var(--ds-space-md) 0 0;
+  border-top:1px solid var(--ds-hairline);
+}
+.cs-fan__fig{overflow-wrap:break-word}
+.cs-fan__fig--lead{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.024em;
+  color:var(--ds-ink-heading);
+  text-wrap:balance;
+}
+.cs-fan__fig--sub{
+  position:relative;
+  margin-top:var(--ds-space-sm);
+  padding-left:var(--ds-space-md);
+  font-size:var(--ds-step-body);
+  line-height:1.4;
+  font-weight:500;
+  color:color-mix(in srgb, var(--ds-ink) 88%, var(--ds-primary));
+}
+.cs-fan__fig--sub::before{
+  content:"";
+  position:absolute;
+  left:0;top:.62em;
+  width:var(--ds-space-sm);height:2px;
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-accent-light);
+}
+
+
+/* ── tier 2: 1001–1080px. Shallower fan, narrower seats — the rotated bounding
+      box has to keep fitting as the stage gets tighter. ─────────────────────── */
+@media (max-width:1080px){
+  .cs-fan{
+    --cs-fan-w:clamp(212px, 20vw, 240px);
+    --cs-fan-lap:16px;
+    --cs-fan-out:5deg;
+    --cs-fan-in:1.8deg;
+    --cs-fan-drop:16px;
+    --cs-fan-plate:72px;
+  }
+}
+
+/* ── tier 3: ≤1000px. The hand cannot hold four across without either
+      overflowing or occluding, so it becomes two rows of two, near-flat. ────── */
+@media (max-width:1000px){
+  .cs-fan__hand{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:var(--ds-space-lg) var(--ds-space-md);
+    padding-block:var(--ds-space-sm) var(--ds-space-md);
+  }
+  .cs-fan__seat{width:auto;transform:rotate(var(--cs-seat-rot))}
+  .cs-fan__seat + .cs-fan__seat{margin-left:0}
+  .cs-fan__seat--1{--cs-seat-rot:-1.5deg}
+  .cs-fan__seat--2{--cs-seat-rot:1.2deg}
+  .cs-fan__seat--3{--cs-seat-rot:1.5deg}
+  .cs-fan__seat--4{--cs-seat-rot:-1.2deg}
+  .cs-fan__seat--1,
+  .cs-fan__seat--2,
+  .cs-fan__seat--3,
+  .cs-fan__seat--4{z-index:auto}
+}
+
+/* ── tier 4: ≤560px. Rotated cards do not work at phone width — flatten to a
+      plain stack, no tilt, no lift. ─────────────────────────────────────────── */
+@media (max-width:560px){
+  .cs-fan{padding-block:var(--ds-space-xl);--cs-fan-plate:80px}
+  .cs-fan__hand{
+    grid-template-columns:minmax(0, 1fr);
+    gap:var(--ds-space-md);
+    margin-top:var(--ds-space-lg);
+  }
+  .cs-fan__seat--1,
+  .cs-fan__seat--2,
+  .cs-fan__seat--3,
+  .cs-fan__seat--4{--cs-seat-rot:0deg;--cs-seat-drop:0px}
+  .cs-fan__seat{transform:none}
+  .cs-fan__seat:hover .cs-fan__card,
+  .cs-fan__seat:focus-within .cs-fan__card{transform:none}
+  .cs-fan__standfirst{max-width:none}
+}
+
+/* ── no movement when movement is not wanted ───────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .cs-fan__card{transition:none}
+  .cs-fan__seat:hover .cs-fan__card,
+  .cs-fan__seat:focus-within .cs-fan__card{transform:none}
+}
+
+
+/* ===========================================================================
+   THE HEXAGON GROUND  ..  one plane under the case studies AND the footer.
+
+   Paste into dispenza-structural.css. Token-pure: no colour literal of any kind
+   appears below -- every colour in this effect is mixed at runtime by
+   _design/hex-field.js from --ds-bg-surface / --ds-primary / --ds-accent-deep /
+   --ds-accent-light and written onto the generated polygons as attributes.
+
+   WHY THIS SHEET STYLES ALMOST NOTHING.
+   The field is built as ONE hidden render plate plus one <use> per region, and a
+   document stylesheet is not guaranteed to reach inside a <use> shadow tree. So
+   every rule the picture depends on -- paint, blur, the pointer layer's fade --
+   is written by the script as an attribute or an inline style, from the tokens.
+   What is left here is only the LAYER: where the host sits, what it clips, and
+   that it can never take a click.
+
+   WHY THE HOSTS ARE SEPARATE ELEMENTS AND THE FIELD IS NOT.
+   The case studies live inside <main>; the footer lives after </main>. No single
+   wrapper can contain both without either pulling the footer into <main> (which
+   destroys the contentinfo landmark) or nesting invalidly across the tag. So each
+   region gets its own aria-hidden, click-through host, and hex-field.js treats the
+   UNION of those hosts as one field: one camera, one geometry, one sweep group,
+   one pointer circle, and a window per host offset to its own position in that
+   plane. The joint is not matched -- both windows are the same nodes seen through
+   two apertures, so there is no per-region value left that could open a seam.
+   =========================================================================== */
+
+/* The host. Absolute so it adds no layout, inset so it fills its region, and
+   pointer-events:none so it can never take a click off a card or a footer link.
+   overflow:hidden is the aperture: the shared plane is larger than any one host
+   and each host shows only its slice of it. */
+.mc-hexfield{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* The window. Sized and offset by the script in field coordinates; the position
+   is declared here so the layer is never a static box that pushes layout for one
+   frame before the first measure lands. */
+.mc-hexfield__svg{position:absolute;left:0;top:0;display:block;pointer-events:none}
+
+/* The render plate: the single hidden copy of the geometry both windows point at.
+   It carries nothing but <defs>, so it paints nothing; the 0x0 box and the
+   absolute position keep it out of layout even if that ever changes. */
+.mc-hexfield__plate{position:absolute;left:0;top:0;width:0;height:0;overflow:hidden;pointer-events:none}
+
+/* THE TWO GROUNDS. A host needs a positioned parent, and the content of that
+   parent has to sit above it. Nothing else about either region changes: no
+   background is touched, no box moves, no measured height shifts.
+   .mc-hexfield-ground is the reusable hook; the two rules beside it are the two
+   places this page uses it, written out so the markup change stays to a single
+   inserted <div> per region. */
+.mc-hexfield-ground{position:relative}
+
+#case-studies{position:relative}
+#case-studies > .container{position:relative;z-index:1}
+
+.site-footer{position:relative}
+.site-footer > .footer-card{position:relative;z-index:1}
+
+/* REDUCED MOTION is handled in the script, not here, and deliberately: it has to
+   remove the pointer layer from the DOM rather than hide it, because that layer
+   only exists to be moved. Under `reduce` hex-field.js attaches no listeners,
+   runs no requestAnimationFrame, drops the blur filter, does not emit the pointer
+   layer at all, and renders one static frame with the travelling light parked
+   mid-pass. A rule here could only hide something the script has already not
+   built. */
