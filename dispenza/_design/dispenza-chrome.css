@@ -180,6 +180,15 @@ a:focus-visible,button:focus-visible{
   letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
 }
 .panel__note{font-size:13px;color:var(--ds-ink-soft)}
+/* the note's inline route to the T-PRICING page — accent-inked so it reads as a link, underlined so
+   it does not rely on colour alone (the note sits in muted grey copy). */
+.panel__note-link{
+  color:var(--ds-accent-ink);text-decoration:underline;
+  text-underline-offset:2px;text-decoration-thickness:1px;
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.panel__note-link:hover{color:var(--ds-accent-light)}
+.panel__note-link:focus-visible{outline:2px solid var(--ds-accent-ink);outline-offset:2px}
 
 .panel__grid{display:grid;gap:var(--ds-space-2xs)}
 .panel__grid--services{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-lg)}
