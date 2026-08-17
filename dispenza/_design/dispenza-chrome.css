@@ -183,6 +183,63 @@ a:focus-visible,button:focus-visible{
 
 .panel__grid{display:grid;gap:var(--ds-space-2xs)}
 .panel__grid--services{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-lg)}
+
+/* ── SERVICES panel: preview slab + the full eight (owner-approved 2026-08-17) ──────────────────
+   Preview LEFT, a two-column ROW-FLOW index RIGHT. Row flow is load-bearing: it is what puts
+   01/03/05/07 in column one and 02/04/06/08 — Reports last — in column two. */
+.svc-body{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:var(--ds-space-md)}
+
+/* The preview is DECORATIVE: aria-hidden and unfocusable in the carrier, because every string it
+   shows is already visible and linked in the list beside it. It must never be the only copy. */
+.svc-preview{
+  display:flex;flex-direction:column;
+  background:var(--ds-accent-deep);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  padding:var(--ds-space-md);
+  min-height:240px;
+}
+.svc-preview__num{
+  font-family:var(--ds-font-display);font-size:13px;font-weight:700;
+  letter-spacing:.18em;color:var(--ds-accent-on-deep);
+}
+.svc-preview__title{
+  display:block;margin-top:var(--ds-space-sm);
+  font-family:var(--ds-font-display);font-size:26px;line-height:1.15;font-weight:700;
+  color:var(--ds-ink-heading);letter-spacing:-.005em;
+}
+.svc-preview__desc{
+  display:block;margin-top:var(--ds-space-xs);
+  font-size:15px;line-height:1.5;color:var(--ds-accent-on-deep);
+}
+/* reserved media slot, deliberately EMPTY — no stock image stands in for real work */
+.svc-preview__slot{
+  margin-top:auto;padding-top:var(--ds-space-md);
+  border-top:1px solid var(--ds-line);
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ds-accent-on-deep);
+}
+
+.svc-list{grid-auto-flow:row;gap:0;column-gap:0}
+.svc-row{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  column-gap:var(--ds-space-sm);align-items:start;
+  border-radius:0;border:0;border-top:1px solid var(--ds-hairline);
+}
+.svc-row:nth-child(-n+2){border-top:0}
+/* the rail's lift-on-hover would bounce an index; keep the row flat and use the warm ground instead */
+.svc-row:hover{transform:none;background:var(--ds-bg-warm);border-color:var(--ds-hairline)}
+.svc-row:focus-visible{outline:2px solid var(--ds-accent-ink);outline-offset:-2px}
+.svc-row__num{
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.14em;
+  color:var(--ds-ink-soft);padding-top:2px;
+}
+.svc-row:hover .svc-row__num,.svc-row:focus-visible .svc-row__num{color:var(--ds-accent-ink)}
+
+@media (max-width:1023px){
+  /* the list carries everything; the preview is additive only */
+  .svc-body{grid-template-columns:minmax(0,1fr)}
+  .svc-preview{display:none}
+}
 .panel__grid--team{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-md)}
 
 .panel__item{

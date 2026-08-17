@@ -212,7 +212,6 @@
       <nav class="rail__nav" aria-label="Primary">
         <ul class="rail__list">
           <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
-          <li><a class="rail__link" href="how-it-works.html">Pricing</a></li>
           <li class="rail__group">
             <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
               Services
@@ -220,12 +219,6 @@
             </button>
           </li>
           <li><a class="rail__link" href="case-studies.html">Results</a></li>
-          <li class="rail__group">
-            <button class="rail__link rail__trigger" type="button" data-panel="panel-team" aria-expanded="false" aria-controls="panel-team">
-              Team
-              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-          </li>
           <li><a class="rail__link" href="contact.html">Contact</a></li>
           <li>
             <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
@@ -246,79 +239,99 @@
       </button>
     </div>
 
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
     <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
       <div class="panel__head">
         <span class="panel__eyebrow">Our suite</span>
         <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
       </div>
-      <div class="panel__grid panel__grid--services">
-        <a class="panel__item" href="performance-marketing.html">
-          <span class="panel__title">Performance marketing</span>
-          <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
-        </a>
-        <a class="panel__item" href="branding-graphic-design.html">
-          <span class="panel__title">Brand and package design</span>
-          <span class="panel__desc">Identity, packaging and in-store collateral.</span>
-        </a>
-        <a class="panel__item" href="webdesign-development.html">
-          <span class="panel__title">Web design and development</span>
-          <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
-        </a>
-        <a class="panel__item" href="ads-design.html">
-          <span class="panel__title">Advertisement design</span>
-          <span class="panel__desc">Creative sized for every placement you actually run.</span>
-        </a>
-        <a class="panel__item" href="conversion-rate-optimization.html">
-          <span class="panel__title">Conversion rate optimization</span>
-          <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
-        </a>
-        <a class="panel__item" href="integrations.html">
-          <span class="panel__title">Integrations</span>
-          <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
-        </a>
-        <a class="panel__item" href="consulting.html">
-          <span class="panel__title">Consulting</span>
-          <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
-        </a>
-        <a class="panel__item" href="reports.html">
-          <span class="panel__title">Reports</span>
-          <span class="panel__desc">What ran, what it cost, what it returned.</span>
-        </a>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
       </div>
     </div>
 
-    <div class="rail-panel rail-panel--team" id="panel-team" role="region" aria-label="Team">
-      <div class="panel__head">
-        <span class="panel__eyebrow">The people</span>
-        <span class="panel__note">Six named pages.</span>
-      </div>
-      <div class="panel__grid panel__grid--team">
-        <a class="panel__item panel__person" href="frances.html">
-          <span class="panel__mono" aria-hidden="true">FH</span>
-          <span><span class="panel__title">Frances Hutzel</span><span class="panel__desc">Accounts</span></span>
-        </a>
-        <a class="panel__item panel__person" href="sergio.html">
-          <span class="panel__mono" aria-hidden="true">SR</span>
-          <span><span class="panel__title">Sergio Ruiz</span><span class="panel__desc">Design</span></span>
-        </a>
-        <a class="panel__item panel__person" href="james.html">
-          <span class="panel__mono" aria-hidden="true">JC</span>
-          <span><span class="panel__title">James Compton</span><span class="panel__desc">Client strategy</span></span>
-        </a>
-        <a class="panel__item panel__person" href="shay.html">
-          <span class="panel__mono" aria-hidden="true">SS</span>
-          <span><span class="panel__title">Shay Spatz</span><span class="panel__desc">Content</span></span>
-        </a>
-        <a class="panel__item panel__person" href="nick.html">
-          <span class="panel__mono" aria-hidden="true">NM</span>
-          <span><span class="panel__title">Nick Marx</span><span class="panel__desc">Media buying</span></span>
-        </a>
-        <a class="panel__item panel__person" href="thomas.html">
-          <span class="panel__mono" aria-hidden="true">TR</span>
-          <span><span class="panel__title">Thomas B. Robinson</span><span class="panel__desc">Development</span></span>
-        </a>
-      </div>
-    </div>
 
   </div>
 </header>
@@ -336,7 +349,6 @@
   <nav class="drawer-nav" aria-label="Mobile">
     <ul>
       <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
-      <li><a class="drawer-link" href="how-it-works.html">Pricing</a></li>
       <li>
         <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
           Services
@@ -356,22 +368,6 @@
         </div>
       </li>
       <li><a class="drawer-link" href="case-studies.html">Results</a></li>
-      <li>
-        <button class="acc-trigger" type="button" data-acc="acc-team" aria-expanded="false" aria-controls="acc-team">
-          Team
-          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="acc-sub" id="acc-team">
-          <ul>
-            <li><a href="frances.html">Frances Hutzel</a></li>
-            <li><a href="james.html">James Compton</a></li>
-            <li><a href="nick.html">Nick Marx</a></li>
-            <li><a href="sergio.html">Sergio Ruiz</a></li>
-            <li><a href="shay.html">Shay Spatz</a></li>
-            <li><a href="thomas.html">Thomas B. Robinson</a></li>
-          </ul>
-        </div>
-      </li>
       <li><a class="drawer-link" href="contact.html">Contact</a></li>
       <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
     </ul>
@@ -1515,6 +1511,29 @@
       });
     }, { rootMargin: '0px 0px -8% 0px' });
     io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
   }
 })();
 
