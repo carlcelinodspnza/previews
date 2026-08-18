@@ -6233,6 +6233,21 @@ a.hw-cell__value:focus-visible{
   hyphens:auto;
   overflow-wrap:break-word;
 }
+
+/* THE MEASURED COLUMN CAPS THE DISPLAY STEP. I added hyphens:auto + overflow-wrap:break-word here
+   earlier today to kill a real horizontal scroll on ads-design, and it did - 0 overflow everywhere.
+   But hyphens:auto NEVER FIRES on these words (the browser found no syllable break), so
+   overflow-wrap did all the work and chopped mid-word with NO hyphen glyph, at EVERY breakpoint
+   including 1440: "ADVERTISEME/NT DESIGN", "INTEGRATION/S", "DEVELOPMEN/T". Two of those were
+   already live and owner-approved. I traded a scrollbar for five broken headlines.
+   MEASURED: .tc-head__copy is 640px and --ds-step-display maxes at 86px, where the longest words
+   run 647-749px. CONSULTING (568px) fits, OPTIMIZATION (647px) does not.
+   The fix is NOT to widen the column - "one strict text measure that never widens" is the whole
+   foundation concept - and NOT to drop the fallback, which is the only thing standing between a long
+   title and a page-level scroll. It is to cap the step so the worst real title fits:
+   86 x 640/749 = 73.5px, so 72px with letter-spacing headroom. Scoped to the measured column, so
+   how-it-works (a 1072px .col) keeps the full 86px. */
+.tc-head__copy .tc-head__title{ font-size:clamp(38px, 5.2vw, 72px) }
 .mc-eyebrow + .tc-head__title{margin-top:var(--ds-space-md)}
 /* THE LEDE. Body face at the body step — the ladder's void between 34px and 17px
    is honoured, so there is no invented 20px standfirst. It is distinguished from
