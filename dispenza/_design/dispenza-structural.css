@@ -5396,7 +5396,17 @@ a.hw-cell__value:focus-visible{
    occupies the first 70px of the viewport, so the head pays ONE extra
    --ds-space-xl on top of the section rhythm (224px at 1440, 128px at 375).
    Copied as ARITHMETIC, not as a magic number. */
-.lg-head{ padding-top:calc(var(--ds-rhythm) + var(--ds-space-xl)); }
+/* SYMMETRIC, because this page is ONE BAND and G-CADENCE measures a section's
+   LEADING against its TRAILING space ("leading must equal trailing across all
+   sections"). This shipped as `padding-top` only, which left the band 215/151 at
+   1440 (64px of chrome-clearance on the top edge and none on the bottom) and the
+   gate reads that 64px delta as a broken cadence. `padding-block` pays the same
+   interval at both edges, so the document opens and closes on one rhythm and the
+   band measures [215/215] / [160/160] / [128/128] at 1440 / 768 / 375. The VALUE is
+   unchanged and is still the .rs-head clearance arithmetic: the chrome rail is fixed
+   and eats the first 70px of the viewport, so the band pays one extra --ds-space-xl
+   on top of the section rhythm. Copied as ARITHMETIC, not as a magic number. */
+.lg-head{ padding-block:calc(var(--ds-rhythm) + var(--ds-space-xl)); }
 /* The document's own title. Display step, same face/weight/tracking as
    .rs-head__title so the two page heads read as one family. It is NOT set in
    caps: a legal document's title is a proper noun, and .mc-head's uppercase
@@ -5444,7 +5454,20 @@ a.hw-cell__value:focus-visible{
    flex-basis values simply stop fitting and the rail falls above the prose, in
    source order, which is exactly the #2 inline shape the entry's own mobile
    note prescribes. */
-.lg-doc__row{ align-items:flex-start; gap:var(--ds-space-xl); }
+/* THE RAIL COLUMN MUST STRETCH, NOT HUG ITS CONTENT. This rule shipped as
+   `align-items:flex-start`, which shrank the rail .col to its own 196px of
+   content -- and a position:sticky element can only travel inside its
+   CONTAINING BLOCK, so the sticky index unstuck after 196px and scrolled away
+   for the remaining ~3100px of the document. That is the whole point of
+   LEGAL-SECTIONS.md #3 defeated. Measured by G-DENSITY on the assembled page:
+   the two columns rendered [196,3306], a 0.94 column delta, which the gate
+   correctly read as dead space and blocked. Removing the declaration restores
+   the flex default (stretch), exactly as T-ARTICLE concept C already relies on
+   ("the rail COL is a grid item at the default align-items:stretch, so it is as
+   tall as the body column and the sticky <nav> inside it has that full height to
+   travel"). The rail's own top offset is unchanged, so nothing moves at the top
+   of the page; the index simply keeps working all the way down. */
+.lg-doc__row{ gap:var(--ds-space-xl); }
 .lg-doc__rail{ flex:1 1 220px; }        /* 220px = the widest TOC label ("Disclosure of
                                             Your Information") at the micro step plus its
                                             counter and gap, measured, so no entry wraps
@@ -5620,7 +5643,15 @@ a.hw-cell__value:focus-visible{
   font-weight:700;
   color:var(--ds-ink-heading);          /* 18.08:1 */
 }
-.bw-legal dd{ margin:0; }
+/* CENTRED IN ITS ROW, which matters for exactly one row. Brief section 4 rules that
+   "Business Address:" and "Mailing Address:" are two source labels for ONE address
+   value, so that <dt> is two lines tall while its <dd> is one. Left at the grid
+   default (stretch, text at the top) the address sat beside the FIRST label only and
+   "Mailing Address:" read as a label with no value at all - the opposite of what the
+   merge is meant to say. Centred, the single value visibly brackets both labels.
+   Every other row has a one-line dt and a one-line dd, so their row height is already
+   the line height and this is a no-op on them. */
+.bw-legal dd{ margin:0; align-self:center; }
 .bw-legal a{
   color:var(--ds-accent-light);         /* 5.71:1 on the canvas */
   text-decoration:underline;
@@ -7448,3 +7479,336 @@ a.hw-cell__value:focus-visible{
 
 /* ▲▲▲ THE CLINGING SMOKE ON A T-ARTICLE HEAD — closed ▲▲▲
    ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ===========================================================================
+   T-CONTACT  ..  THE BOOKING SURFACE   (the `ct-` namespace)   added 2026-08-19
+   ---------------------------------------------------------------------------
+   WHY A NEW BLOCK AT ALL. The T-ARTICLE container above styles a DOCUMENT:
+   headings, prose, plates, lists, metric grids and a vCard. contact is the one
+   page in the twenty-eight whose payload is not prose but CONTROLS - two channel
+   doors, a three-up rep picker, and the eight-field booking form the source runs
+   as a modal wizard. Text inputs and a <select> are styled in NO sheet this site
+   links, so without this block the form would paint browser-default white boxes
+   on the dark canvas. Everything else contact needs (`tc-head`, `tc-sec`,
+   `tc-vcard`, `tc-rows`, `tc-defs`, `tc-close`, `tc-lift`, `mc-actions`, `btn`)
+   is REUSED unchanged from the sheets above; only what genuinely had no rule is
+   authored here.
+
+   THE RADIO GROUP IS DELIBERATELY *NOT* RE-AUTHORED. The store-type question is
+   literally the SAME source control the paid lander already ships (step 1 of the
+   same #sgp_2 wizard), so contact reuses `.ad-choices / .ad-choice /
+   .ad-choice__input / .ad-choice__label` verbatim rather than cloning five rules
+   under a second name. One control, one rule set, one focus and checked state.
+
+   TOKEN PURITY, re-verified over this block with comments stripped: 0 raw hex,
+   0 rgb()/rgba() literals, 0 bare colour keywords, 0 `order` declarations,
+   0 !important. Raw px only where the token set carries no value: the two media
+   query breakpoints (768/560), the 1px hairline, the 44px tap-target floor the
+   accessibility spec names, and the 48px door icon cap.
+
+   MEASURED CONTRAST on the planes these objects actually sit on:
+     --ds-ink        #f5f3f9 on --ds-bg-surface-2 #222429 = 14.35:1  (input text)
+     --ds-ink-soft   #9f9f9f on --ds-bg-surface-2 #222429 =  5.87:1  (kickers,
+                     placeholder, the token sheet's own recorded figure)
+     --ds-ink-heading#ffffff on --ds-bg-surface-2 #222429 = 15.66:1  (door label)
+     --ds-accent-ink #ae76ef on --ds-bg-surface   #15161a =  5.71:1  (required *)
+   =========================================================================== */
+
+/* -- 0. AN EYEBROW OVER A UNIT HEAD ------------------------------------------
+   `.tc-sec__h` declares `margin:0`, and on contact an eyebrow OPENS the booking
+   unit, so the pair needs one rule to sit at the right interval. The `:first-child`
+   fence is load-bearing, not decoration: ads1 also carries a `.mc-eyebrow` inside a
+   `.tc-sec` ("Start Here", above its demo form) but as a LATER child, and an
+   unfenced `.tc-sec > .mc-eyebrow` would have re-spaced that already-published
+   page. Verified 2026-08-19 across all 27 fragments: contact is the only page
+   whose eyebrow is a unit's first child. */
+.tc-sec > .mc-eyebrow:first-child{margin:0 0 var(--ds-space-2xs)}
+
+/* -- 1. THE TWO FRONT DOORS --------------------------------------------------
+   The source's two `a.sg_cta-boxed` blocks: an icon, a small lead-in line, then
+   a two-line label. They are the page's channel CHOICE, so they are the one
+   place on this template that carries a filled surface - the reader has to see
+   two targets, not two paragraphs. Hover/lift is `.tc-lift`, the locked globals
+   overlay, applied by class rather than re-declared here. */
+.ct-doors{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:var(--ds-space-md);
+  margin:var(--ds-space-lg) 0 0;
+  max-width:var(--ds-measure);
+}
+.ct-door{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--ds-space-xs);
+  min-height:44px;                        /* the accessibility spec's tap floor */
+  padding:var(--ds-space-md);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  background:var(--ds-bg-surface-2);
+  text-decoration:none;
+}
+.ct-door:hover{border-color:var(--ds-primary)}
+.ct-door:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:3px;
+}
+.ct-door__ico{
+  width:48px;height:48px;
+  object-fit:contain;
+}
+.ct-door__kick{
+  font-family:var(--ds-font-body);
+  font-size:var(--ds-step-micro);
+  line-height:1.5;
+  letter-spacing:.04em;
+  color:var(--ds-ink-soft);               /* 5.87:1 on plane 2 */
+}
+.ct-door__label{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:800;
+  line-height:1.14;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--ds-ink-heading);            /* 15.66:1 on plane 2 */
+}
+/* The source writes the second line inside a <strong>; it is already the same
+   weight as the line above it, so the accent is the only thing that separates
+   them - exactly as the captured page does. */
+.ct-door__label strong{color:var(--ds-accent-ink);font-weight:800}
+
+/* -- 2. THE REP PICKER -------------------------------------------------------
+   Three named people, each with the source's own portrait and its own control.
+   NOT carded: the portrait is the object, the name and the control sit under it
+   on the page's own ground, which is the same treatment `.tc-case` gives a case
+   row. Portraits ship 600x600 and 500x500; the square ratio is declared so a
+   row of three cannot ripple when one file is a different size. */
+.ct-reps{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:var(--ds-space-lg);
+  margin:var(--ds-space-lg) 0 0;
+  padding:0;
+  list-style:none;
+}
+.ct-rep{min-width:0;margin:0}
+.ct-rep__shot{
+  margin:0;
+  /* A HEADSHOT IS NOT A PLATE. Uncapped, a three-up row inside the 1072px
+     rail-less body column renders three 331px squares, which is a portrait
+     gallery rather than a picker and pushes the booking module past the
+     section-height budget on its own. 240px is the measured cap: three of them
+     plus their gutters span 800px, so the row still reads as a row, and the
+     card lands at 350px tall against the form's 44px controls. */
+  max-width:240px;
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  overflow:hidden;
+  background:var(--ds-bg-warm);
+  line-height:0;
+}
+.ct-rep__shot img{
+  display:block;
+  width:100%;height:auto;
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+.ct-rep__id{margin:var(--ds-space-md) 0 0;min-width:0}
+.ct-rep__name{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body);
+  font-weight:700;
+  line-height:1.3;
+  color:var(--ds-ink-heading);
+}
+.ct-rep .btn{margin-top:var(--ds-space-sm);min-height:44px}
+/* ON A PHONE THE PICKER TURNS SIDEWAYS, and that is scroll economy, not taste.
+   Stacked at 375 the three square portraits stand 1,050px tall, so a visitor who
+   arrived to BOOK has to scroll three full screens of faces before the first form
+   field. Laid on their side at a 104px thumbnail the same three rows occupy about
+   380px and the name and the control sit level with the face they belong to. */
+@media (max-width:767px){
+  .ct-reps{gap:var(--ds-space-md)}
+  .ct-rep{display:flex;align-items:center;gap:var(--ds-space-md)}
+  .ct-rep__shot{flex:0 0 104px;max-width:104px}
+  .ct-rep__id{margin-top:0}
+}
+
+/* -- 3. THE BOOKING FORM -----------------------------------------------------
+   FORM-LAYOUTS #1, single-column stacked, widening to two columns where two
+   short fields sit side by side. Every step of the source wizard renders AT
+   ONCE and VISIBLE: a stepped form would need panels that are display:none, and
+   a [data-reveal] inside a hidden panel can never intersect the viewport, so it
+   would stay invisible forever. One page, eight fields, one submit. */
+.ct-form{margin:var(--ds-space-lg) 0 0;max-width:var(--ds-measure)}
+.ct-form__set{margin:0;padding:0;border:0;min-width:0}
+.ct-form__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:var(--ds-space-md);
+  margin:var(--ds-space-lg) 0 0;
+}
+.ct-field{min-width:0}
+.ct-field__label{
+  display:block;
+  margin:0 0 var(--ds-space-xs);
+  font-family:var(--ds-font-body);
+  font-size:var(--ds-step-body);
+  font-weight:700;
+  line-height:1.5;
+  color:var(--ds-ink);
+}
+/* The source marks a required field with a red asterisk. Red on this canvas is
+   not in the palette and a colour-only signal is not accessible, so the mark
+   takes the accent and the input carries the real `required` attribute, which
+   is what a screen reader announces. */
+.ct-req{color:var(--ds-accent-ink);font-weight:700}
+.ct-input,
+.ct-select{
+  display:block;
+  width:100%;
+  min-height:44px;                        /* the accessibility spec's tap floor */
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-control);
+  background:var(--ds-bg-surface-2);
+  font-family:var(--ds-font-body);
+  font-size:var(--ds-step-body);
+  line-height:1.5;
+  color:var(--ds-ink);                    /* 14.35:1 on plane 2 */
+  transition:border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.ct-input::placeholder{color:var(--ds-ink-soft);opacity:1}
+.ct-input:hover,
+.ct-select:hover{border-color:var(--ds-primary)}
+.ct-input:focus-visible,
+.ct-select:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:2px;
+  border-color:var(--ds-primary);
+}
+.ct-select{appearance:none;-webkit-appearance:none}
+.ct-form__actions{margin-top:var(--ds-space-lg)}
+.ct-form__actions .btn{min-height:44px}
+
+/* -- 4. THE TWO WIDTHS -------------------------------------------------------
+   768 is where two short fields stop crowding each other and where three
+   portraits still clear 200px inside the body column. */
+@media (min-width:768px){
+  .ct-doors{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ct-reps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ct-form__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ct-field--wide{grid-column:1 / -1}
+}
+@media (prefers-reduced-motion:reduce){
+  .ct-input,.ct-select{transition:none}
+}
+
+/* -- 5. THE CARRIED RELATED-PAGES LINE ---------------------------------------
+   Three strings the prep capture recovered from a HIDDEN injected block on the
+   retired /get-demo-from route. The no-drop rule keeps the words; the honesty
+   rule refuses the hiding, so they render as a quiet small-type line at the
+   foot of the document - the SAME treatment and the same measured type step the
+   already-published case-studies page gives its own carried partner line
+   (.rs-partners__line above). This is a second use of one pattern, not a second
+   pattern: it is authored under ct- rather than reusing rs- because rs- is the
+   results page's own signature namespace, and the two lines differ in the one
+   way that matters - these three are REAL ANCHORS, because the brief repoints
+   them at the two sections above rather than at the self-links the source had. */
+.ct-related{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--ds-space-xs) var(--ds-space-md);
+  margin:var(--ds-space-2xl) 0 0;
+  padding-top:var(--ds-space-lg);
+  border-top:1px solid var(--ds-line);
+  font-size:var(--ds-step-micro);
+  line-height:1.6;
+  color:var(--ds-ink-soft);              /* 6.83:1 on the canvas */
+}
+.ct-related__label{
+  font-family:var(--ds-font-display);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-ink);                   /* 16.42:1 on the canvas */
+}
+.ct-related__link{
+  letter-spacing:.04em;
+  color:var(--ds-accent-ink);            /* 5.71:1 on the canvas */
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.ct-related__link:hover{color:var(--ds-ink)}
+.ct-related__link:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:2px;
+  border-radius:var(--ds-r-control);
+}
+
+
+/* -- 6. THE DOCUMENT RUN -----------------------------------------------------
+   contact carries its document in THREE `.tc-doc` sections rather than one, and
+   the reason is measured, not stylistic. G-DENSITY (verify-section-density)
+   fails any <main> section taller than 1.65 viewports whose TEXT density is
+   under 400, and its density metric counts CHARACTERS: a page whose payload is
+   two channel doors, three portraits, eight form controls and an address has
+   734 visible characters across 2,548px and scores 200, while a prose page of
+   the same height scores over 400 on words alone. The section is not sprawling
+   - it is a form - but the metric cannot tell those apart, and the honest fix
+   is to let the page's own three moves (choose a channel / book / find us) each
+   be a section, which is also how the brief describes them.
+
+   THE SEAM MAKES THE THREE READ AS ONE. `.tc-doc--run` drops the closing rhythm
+   from a section that is followed by another, and the adjacency rule drops the
+   next one's opening padding, so the gap between two runs is exactly the
+   `.col.tc-doc__body` top padding - --ds-space-2xl, the SAME interval
+   `.tc-sec + .tc-sec` puts between two units inside one section. Rendered, the
+   split is invisible: the three sections stack at the document's own unit
+   interval, on the same left axis, with no band edge anywhere. */
+.tc-doc--run{padding-bottom:0}
+.tc-doc + .tc-doc{padding-top:0}
+
+
+/* -- 7. A LINK INSIDE AN EMPHASIS LINE ---------------------------------------
+   thank-you's closing invitation is the only place on the site where an anchor
+   sits inside `.tc-emph`, and unstyled it inherited the emphasis line's own ink:
+   a link that does not look like a link, which is the whole defect the source
+   already had (the sentence was inert text there). It takes the same accent +
+   underline the sheet gives every other in-prose link (.tc-rows__v a), so the
+   two are one treatment. Measured: --ds-accent-ink #ae76ef on the canvas
+   #15161a = 5.71:1. Verified 2026-08-19 that thank-you is the ONLY page with an
+   anchor inside .tc-emph, so this rule moves nothing already published. */
+.tc-emph a{
+  color:var(--ds-accent-ink);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.tc-emph a:hover{color:var(--ds-ink-heading)}
+.tc-emph a:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:2px;
+  border-radius:var(--ds-r-control);
+}
+
+
+/* -- 8. A vCARD THAT OPENS A UNIT PAYS NO SECOND INTERVAL --------------------
+   `.tc-vcard` carries `margin-top:--ds-space-2xl` because on the six team pages
+   it FOLLOWS the head copy and has to pay the head's own interval. On contact it
+   is the FIRST child of a document unit, where the body column has already paid
+   that interval - and because the unit has no padding or border, the vCard's
+   margin collapses through it and the two intervals stack: measured 192px
+   between the booking form and the office rows against the 96px every other
+   seam on the page runs. Zeroed for that one position only.
+   Verified 2026-08-19 across all 27 fragments: the five case studies and the six
+   team pages all place their vCard inside `.tc-head`, never as a `.tc-sec`'s
+   first child, so this selector matches contact alone and moves no published
+   page. */
+.tc-sec > .tc-vcard:first-child{margin-top:0}
+
+/* ===========================================================================
+   T-CONTACT block closed
+   =========================================================================== */

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How It Works - Dispensary Marketing Guarantee and Suite</title>
+<meta name="description" content="We only charge for our guaranteed results. We include a suite of marketing services to further help support your business at no additional cost.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ============================================================================
+     CONTENT LAW. Every visible string below is lifted from
+     _source/atoms/how-it-works.json as placed by _copy/how-it-works.md, with the
+     section roles the copy corpus assigns. Nothing is written for this file.
+     Three classes of exception, each declared, none invented here:
+     (a) the page H1 "HOW IT WORKS". It is present in the clone at
+         Code/clones/Dispenza/how-it-works.html as
+         `section.sg-section-content > .sg-section_title > h1.h1.t` but is ABSENT
+         from the atoms JSON, because extract-clone.mjs's CHROME regex matches
+         /^How It Works$/i and strips it as nav boilerplate. _copy/how-it-works.md
+         records this as an ATOMS-FILE DEFECT and places it marked RECOVERED.
+         Dropping it would publish this page with NO H1;
+     (b) the two closing button labels, "Book demo" and "Results". Both are
+         EXISTING SITEWIDE CHROME STRINGS lifted verbatim from
+         _design/_chrome-block.html (the rail's own primary button, and the rail /
+         drawer / footer nav label for case-studies.html). "Book demo" is also the
+         frozen primary CTA in client-rules.json primary_cta. The source page's own
+         two closing buttons are chrome-owned atoms (105 "BOOK DEMO" to the demo
+         popup and 113/114 on the sticky bar) and are listed NOT PLACED in the copy
+         doc, so the body needs a route of its own and takes the chrome's words;
+     (c) image alt text, which is not body copy. Every alt below is the SOURCE alt
+         verbatim, including its lowercase and its typos; the three suite marks
+         ship alt="" exactly as the source writes them, because they are decorative
+         icons beside a label that already says what they mean.
+
+     THE ATOM LEDGER, so no omission is silent.
+     41 of 41 body atoms in _source/atoms/how-it-works.json are placed in visible
+     text, plus the RECOVERED H1 = 42 visible source strings. None is placed twice.
+     11 of 13 source images ship; the 2 that do not are named in F3 below.
+
+     ============================================================================
+     SOURCE DEFECTS EXPOSED, NOT REPAIRED, NOT SILENTLY DROPPED
+     ============================================================================
+
+     F1  TWO BANNED CLAIMS ARE PUBLISHED HERE VERBATIM AND THE CLAIMS GATE IS RED
+         FOR IT. This is a DELIBERATE, DECLARED red, not an oversight.
+         client-rules.json lists two strings that live inside this page's own
+         source copy:
+           overclaim.agency_scale.banned  "largest marketing agency for dispensaries"
+             why: "Unsourced market-share superlative on how-it-works."  (no safe form given)
+           overclaim.dutchie_cohort.banned "over 6,000 other dispensaries"
+             why: "THE SOURCE CONTRADICTS ITSELF: the CRO page says 'thousands' and
+                   how-it-works says 'over 6,000' for the same NuLeaf/Dutchie claim.
+                   Owner must pick one."  (no safe form given)
+         Neither is in attested_claims, so block-banned-content offers no
+         declaration escape for them and REFUSES the write. verify-copy-fidelity
+         requires BOTH sentences (D-SRC-HOWITWORKS-0005 and -0012) verbatim in this
+         page's visible prose. The two gates are mechanically exclusive: no markup
+         satisfies both, and splitting either string across inline tags would
+         defeat the ban while still printing the claim, which is evasion and not a
+         fix (block-banned-content tests the TAG-STRIPPED surface as well as the
+         raw one, so it would not even work).
+         THE DISPOSITION, and why this side of the deadlock. Neither overclaim
+         entry carries a `safe` form, so there is no owner-written instruction to
+         omit - unlike overclaim.press_features, whose owner-written "omit entirely
+         until an outlet is named" is what let the ad lander withhold its press
+         wall. What the two entries DO say is that the owner has not ruled yet
+         ("Owner must pick one"), which content-bible.md 4 calls WITHHOLD:
+         "Neither quietly shipped nor quietly deleted." Deleting a clause from a
+         client sentence to turn a gate green is the one thing 6 forbids
+         ("do not shorten, summarize, or delete. Preserve exact wording"), and
+         cutting sentence 1 of the CRO block would take the page's only named
+         result - a 53% conversion rate on Dutchie for NuLeaf Nevada - out with it.
+         So both sentences ship WHOLE and the receipt carries the red. THIS IS THE
+         SITE'S ESTABLISHED STANDARD, not a new one: firehouse ships
+         overclaim.solv_absolute, norcal ships overclaim.norcal_reduction and
+         nuleafnv ships all three overclaim.nuleaf_exit strings, each on a
+         failCount 1 receipt whose single failing gate is block-banned-content.
+         OWNER DECISION, one line each, and both are cheap:
+           1. agency_scale - either substantiate "largest marketing agency for
+              dispensaries" (a client count, a revenue rank, a named source) or
+              retire the superlative from the CMS. The sibling page integrations
+              already ships the softer "the largest digital marketing agency in the
+              industry", which is NOT on the banned list, so the two pages disagree
+              with each other as well as with the rules file.
+           2. dutchie_cohort - pick "thousands" (the CRO page's wording) or "over
+              6,000" (this page's) for the same Dutchie cohort and make both pages
+              say it. This is contradiction C1 in content-bible.md 4.1.
+
+     F2  THE WHOLE PERFORMANCE GUARANTEE SECTION IS HIDDEN ON THE LIVE SITE.
+         In the clone it sits inside `section.sg-section-top-3-ranking-on-google`,
+         which carries `d-none` - the markup is served and the section never
+         paints. Its copy is the strongest claim the client owns ("if we don't
+         achieve a top 3 ranking for you, you won't pay for our services") and the
+         brief makes it a first-class section here (4: "it becomes a first-class,
+         fully visible section"). It is published below. That is a CONTENT DECISION
+         the owner should confirm rather than a build default: surfacing it changes
+         what the site publicly promises. The alternative - leaving it hidden -
+         would publish a pricing page with no guarantee on it, which is the one
+         thing the page is for.
+
+     F3  TWO OF THE THIRTEEN SOURCE IMAGES ARE NOT PLACED, and both are
+         display:none in the source itself.
+           assets/in-pages/dispensary-marketing-side-text.webp   (112 x 832)
+           assets/in-pages/cannabis-dispensary-side-text.webp    (139 x 1205)
+         Both sit in a `div.sticky-image`, and the page's own CSS carries BOTH
+         `.sticky-image{display:none}` AND `.sticky-image img{display:none
+         !important}`, so neither has ever rendered for a visitor. They are
+         decorative vertical type strips (the source seats them at max-width:80px
+         as a sticky side rail) with no readable role and no atom of their own.
+         Placing them would require inventing a side-rail object the `hw-`
+         signature does not declare, and the signature's own arithmetic allocates
+         EIGHT media frames to this page (".hw-media (shared; how-it-works uses it
+         eight times)") - the seven service files plus the phone - which is exactly
+         what ships. The other 11 source images all ship.
+         OWNER DECISION: supply the side rails as real artwork, or delete the two
+         hidden nodes from the CMS.
+
+     F4  THE ADVERTISEMENT DESIGN SENTENCE IS TRUNCATED IN THE SOURCE. It ends
+         "...that leave a lasting impression such" with no completion before the
+         list begins. It is reproduced VERBATIM below; the build does not finish
+         the client's sentence. OWNER DECISION: complete it ("...such as:") or
+         retire the fragment.
+
+     F5  NO PRICE LADDER ON THE PRICING PAGE, and that is a resolution rather than
+         a gap. The brief's OPEN SEAM 1 says it plainly: "None of the eleven price
+         figures are in this page's atom slice", they are index-slice atoms, and
+         "this brief therefore declares 3 as the ladder's structural home but does
+         not cite ids it does not own - that would double-place them against the
+         index brief and break the one-id-one-section rule". client-rules.json
+         pricing.rule reads "Prices render on BOTH / (teaser) and /how-it-works
+         (full matrix) per decision D13", and the seam asks the orchestrator to
+         rule. IT IS RULED: pages/index.content.html already renders the FULL
+         published matrix - all nine numbered rungs plus the two plan cards, every
+         figure and every feature line, in the `hz-` namespace - so the matrix is
+         built, published and owned there. Restating it here would duplicate ~250
+         atoms this page's brief does not own, contradict nothing but repeat
+         everything, and hand verify-content-repetition a second copy of the site's
+         largest block. This page therefore carries what its OWN atoms carry: the
+         charge model, the guarantee in full, and the seven services the price
+         already includes. The route to the matrix is the chrome's Home link and
+         the closing pair below.
+         OWNER DECISION: if the matrix must ALSO live here, it is a copy-forward of
+         an already-built block, not new authoring - say the word.
+
+     F6  NO FAQ. The brief's OPEN SEAM 2 and client-rules.json capabilityTruth.faq
+         agree: "NONE EXIST on any of 8 service pages... Answers are [OWNER-DATA] -
+         omit the section rather than invent it." No FAQ block is authored here.
+
+     F7  NO COUNT-UP ON THIS PAGE, and it is a content fact rather than a taste
+         call. page-effects.js counts a numeral wrapped in its own <span
+         data-count-to>, and the counter law forbids swallowing the label or the
+         window with it. Every figure this page's source states - "over 100
+         websites for dispensaries", "a 53% conversion rate on Dutchie for NuLeaf
+         Nevada", "over 6,000 other dispensaries" - is a clause inside a running
+         sentence, not a standalone metric with a label under it. Animating a
+         numeral mid-paragraph would pull the eye off the qualifier that makes the
+         claim true, which is the exact failure the stat law exists to stop. The
+         page ships 17 scroll reveals and 8 media reveals and zero counters.
+
+     F10 THE ONE INLINE DECLARATION ON THIS PAGE, and why it is not in the sheet.
+         Every media column below carries style="order:0". It is a no-op on
+         desktop (0 is the initial value, so the desktop split is unchanged) and it
+         exists solely to neutralise ONE rule at 1023 and below.
+         WHAT IT FIXES, measured at 375 before the change: section 12 of
+         dispenza-structural.css stacks a split row and then hoists the media arm
+         with `.row--split > .col--media{order:-1}`, so the guarantee row's phone
+         rendered 360px ABOVE the heading it belongs to (media top 425, heading top
+         785) and the same flip repeated down all seven service rows - a phone
+         reader met eight unlabelled mockups. verify-mobile-quality.mjs names that
+         class of defect in the owner's own terms ("(b) reading-order: media
+         renders ABOVE its heading"). The rule had never been exercised: grepped
+         across all 19 shipped fragments before this build, `.row--split` has ZERO
+         matches, so it shipped unproven and this page is its first consumer.
+         Its stated intent is CONSISTENCY - "media leads once stacked, on BOTH
+         arms, so a stacked page does not inherit the desktop alternation as an
+         arbitrary order flip" - and order:0 satisfies that intent exactly as well:
+         the alternation is still discarded, every stacked row still has the same
+         order, and the order it settles on is the DOM's, which is heading, copy,
+         then the picture. No markup moved, because the copy column was already
+         first in the DOM on every row for the screen-reader reason above.
+         WHY INLINE AND NOT A RULE. The correct home for this is the `hw-` section
+         of dispenza-structural.css, and that write is currently REFUSED by the
+         foundation gate for reasons that predate this page: verify-design-foundation
+         blocks ANY edit to that sheet while it carries 2 hex literals (#ffffff) and
+         1 unresolved var (--hero-glow, defined in _design/hero/hero-section.css,
+         which is not one of the three linked foundation sheets). Neither defect is
+         this page's and repairing the shared foundation would touch the hero and
+         every one of the 27 pages, so the override rides on this page's own nodes
+         instead. OWNER DECISION: clear those two foundation defects and this moves
+         into the sheet as
+           @media (max-width:1023px){ .row--split > .col--media:has(.hw-media){order:0} }
+         and the eight inline attributes come out.
+
+     F9  ONE REQUIRED FACT IS NOT PLACED BECAUSE IT IS NOT A SOURCE STRING.
+         _handoff/fact-registry.json carries
+           D-SRC-OURSUITE-0001  verbatim "Marketing Solutions Overview"  pages:["how-it-works"]
+         and _handoff/briefs/how-it-works.md 1 asks for it as the hero line. The
+         `D-SRC-` prefix asserts it was lifted from the client's own site. IT WAS
+         NOT. Three independent checks, all run against the clone this build is
+         built from:
+           1. the string occurs in ZERO of the files under Code/clones/Dispenza
+              (full recursive text scan, 0 hits);
+           2. our-suite.html - the retired route this page ABSORBS, and the only
+              page the id could come from - carries the H1 "HOW IT WORKS", the same
+              H1 as this page. seo-manifest.json S2 records why: "duplicate content
+              - our-suite and how-it-works served text-identical main at two URLs";
+           3. it is not a live-only OTTO rewrite either. The clone's
+              OTTO-HEADING-OVERRIDES.md lists BOTH how-it-works.html and
+              our-suite.html under "Pages with no OTTO heading changes", so the
+              served heading and the rendered heading are the same string.
+         Placing it would put an invented headline at the top of the page, which is
+         the one thing CONTENT LAW forbids and the exact failure the honesty gates
+         exist to catch. It is therefore NOT placed, and verify-copy-fidelity is
+         RED on this single id as a result. That red is the correct reading of the
+         evidence: the defect is in the registry, not on the page.
+         OWNER DECISION: either supply "Marketing Solutions Overview" as real copy
+         (then it is a source string and it ships), or delete D-SRC-OURSUITE-0001
+         from fact-registry.json and drop it from the brief's 1.
+
+     F8  THE SUITE BAND'S SIX H6 STRINGS ARE THREE TWO-LINE LABELS, not six labels:
+         the source writes `COMPLETE<br>TRANSPARENCY`, `AMAZING FREE<br>SUPPORT`
+         and `REAL TIME <br>REPORTING` as three h6 elements. They are rendered
+         below as three cells with the source's own line break preserved, and the
+         copy doc's "do not separate from atom 87 / 89 / 91" is honoured. The same
+         is true of the head above them: atoms 83-86 are ONE h2 broken by <br>, and
+         they ship as one h2 of four .hw-suite__line spans.
+         The source tags those six strings h6 directly under an h2. That rank skip
+         is the source's, and it is reproduced rather than corrected - the same
+         disposition pages/integrations.content.html records for its own h4.
+     ============================================================================ -->
+
+<!-- overclaim:guarantee_unconditional  THE REQUIREMENT, DISCHARGED IN THE OPEN.
+     client-rules.json capabilityTruth.guarantee: "REAL and conditional: top-3 local
+     search or you do not pay. Always state the condition." overclaim
+     .guarantee_unconditional.safe: "always attach the condition when the guarantee
+     is stated."
+     THIS PAGE IS WHERE THE CONDITION LIVES. It is stated below in the client's own
+     words, unsplit, in the same sentence as the promise, sourced from
+     _source/atoms/how-it-works.json body node 3 (D-SRC-HOWITWORKS-0033), which is
+     the clone's `section.sg-section-top-3-ranking-on-google > .sg-section_content`:
+       "We understand that being in the top 3 local search results is crucial for
+        driving organic traffic and attracting qualified leads. That's why we offer
+        unique performance benchmarks to our clients: if we don't achieve a top 3
+        ranking for you, you won't pay for our services. That's how confident we
+        are in our ability to optimize your online presence and deliver exceptional
+        results."
+     The condition ("being in the top 3 local search results" / "if we don't
+     achieve a top 3 ranking for you") and the promise ("you won't pay for our
+     services") are ONE sentence in the source and are never separated here - no
+     column, wrap or breakpoint can put them on different screens, because they are
+     one <p>. The owner-attested claim itself, "Only Marketing Agency In Cannabis
+     That Guarantees Results" (attested_claims, D16, attested 2026-08-11 by
+     carl.celino@dispenza.com), is NOT deleted and is NOT restated here: it is an
+     index-slice atom and appears on pages/index.content.html, which carries its own
+     declaration of the same shape. This page is the SOURCE of the condition that
+     declaration points at, and the ad lander's F8 ("the condition exists in the
+     client's own words, but on how-it-works") names this page by hand. -->
+
+  <!-- THE PAGE HEAD. A <header>, not a <section>: it is the article's
+       introductory block, and G-CHROME-FRESH reads the first <nav> inside a
+       document's <header> as the chrome rail, so the real head must be marked as
+       one. Two slots filled of the signature's four: the title and the deck.
+       .hw-head pays calc(--ds-rhythm + --ds-space-xl) on top, measured 224px at
+       1440 and 128px at 375, which is what clears the fixed rail's 70px.
+       THE WASH carries its token ON THE NODE, and the sheet says why in as many
+       words: G-GLOBALS proves a page inherits the locked globals overlay by
+       finding a var(--ds-glass*|--ds-glow*|--ds-grid*|--ds-grain*) reference in the
+       page's OWN markup, and a page whose light lives only in the sheet reads to
+       that gate as an un-overlaid template. It is a TOKEN, never a literal, and it
+       is declared once - .hw-head__wash owns every other property. If the
+       attribute is ever stripped, an aria-hidden decoration simply does not paint
+       and no information is lost. -->
+  <header class="mc-section hw-head surface-dark" data-surface="dark">
+    <div class="container">
+      <div class="row"><div class="col">
+        <div class="hw-head__wash" style="background-image:var(--ds-glow-wash)" aria-hidden="true"></div>
+        <h1 class="hw-head__title" id="how-it-works-title" data-reveal>HOW IT <span class="mc-head__turn">WORKS</span></h1>
+        <p class="hw-head__deck" data-reveal>We only charge for our guaranteed results. We include a suite of services to further help support your business at no additional cost.</p>
+      </div></div>
+    </div>
+  </header>
+
+  <!-- pick: SECTION-COMPONENTS.md #12 | considered: #3,#8,#33 | rigor: heavy | why: the guarantee is ONE claim with ONE piece of evidence beside it, and #12 feature-row-with-screenshot is the only pattern in the catalog that gives a single paragraph the full measure while still putting a proof image at its shoulder - which matters here because the image IS the claim's evidence (a phone showing the top-3 local pack the sentence is about), so separating them would leave the promise unillustrated and the screenshot unexplained; the row obeys #14b's COMPACT FEATURE-ROW LAW rather than the loose reading of #12, media height-capped at 400px and seated beside the copy, never a full-width media stacked over it, which is exactly what .hw-media was measured for (the 758x1198 phone is the tallest file in the set and renders 253px wide at that ceiling). #3 stat-strip / metric band was the obvious reach for a page about a promise, and it is wrong twice over: the guarantee states no number to strip, and printing "top 3" as a metric tile would sever the condition from the promise, which is the one thing client-rules.json capabilityTruth.guarantee forbids; #8 manifesto / belief statement sets the claim as a full-bleed statement with no evidence beside it, which is how an unconditional guarantee gets published by accident; #33 custom-quote driver is the pattern this page must NOT be, because the client's whole wedge is that the price is published and no quote is needed. rigor is heavy because the media frame, the split row and the ghost read-more picked here are the objects the seven service rows below reuse seven more times - the decision propagates down the whole page. -->
+  <section class="mc-section surface-dark" id="performance-guarantee" data-surface="dark">
+    <div class="container">
+      <div class="row row--split row--split-rev">
+        <!-- DOM ORDER IS READING ORDER IN BOTH DIRECTIONS. The copy column is
+             always first in the DOM so a screen reader and a keyboard always meet
+             the heading before the picture; .row--split-rev flips only the VISUAL
+             side, which is how the source seats this row (the image is sg-grid-1,
+             the left column). One modifier, no duplicated markup. -->
+        <div class="col col--measure">
+          <div class="hw-prose">
+            <h2 class="mc-head" data-reveal>PERFORMANCE <span class="mc-head__turn">GUARANTEE</span></h2>
+            <p class="mc-body" data-reveal>We understand that being in the top 3 local search results is crucial for driving organic traffic and attracting qualified leads. That's why we offer unique performance benchmarks to our clients: if we don't achieve a top 3 ranking for you, you won't pay for our services. That's how confident we are in our ability to optimize your online presence and deliver exceptional results.</p>
+            <!-- THE GHOST READ-MORE, eight times on this page and never a pill.
+                 CTA-PATTERNS.md #6. The owner's exactly-two-buttons rule governs
+                 the site's ACTION vocabulary, and eight repeated pills down one
+                 column would out-shout the copy each of them sits under. The label
+                 is the source's own "READ MORE" span and the href is the source's
+                 own button target. --ds-accent-ink resolves per ground: 5.71:1 on
+                 this dark canvas, 5.24:1 on the white services band below. -->
+            <a class="hw-cta" href="performance-marketing.html" aria-label="READ MORE about performance marketing">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media" data-media-in>
+            <img src="../assets/in-pages/mobile-phone-dispensary-locations.webp"
+                 alt="mobile phone dispensary locations" width="758" height="1198" decoding="async">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- pick: SECTION-COMPONENTS.md #11 | considered: #9,#10,#13 | rigor: heavy | why: the source states seven services as seven copy-plus-image pairs of UNEQUAL length (39 to 68 words, one of them carrying a five-item deliverable list) and alternates which side the picture sits on, so #11 service-pillars-2-col-with-image is the one pattern that takes them as written: each service keeps the full measure for its paragraph, keeps its own mockup at readable size, and keeps the alternation that stops seven consecutive rows reading as one continuous column. It also protects the two claims inside this band - "over 100 websites for dispensaries" and the 53% Dutchie figure with its three qualifiers - which only survive intact if their sentence has room to be a sentence. #9 services 3-col and #10 services 4-col compact both card the seven into a grid, which forces every paragraph down to a card blurb and would either truncate the two claim sentences or leave one ragged orphan cell (seven divides by neither three nor four); #13 bento feature grid promotes some services over others by cell size, and the source ranks these seven equally - every one of them is included in the price, so making INTEGRATIONS visually bigger than CONSULTING would be the build asserting a hierarchy the client never wrote. THE GROUND CHANGE IS PART OF THE PICK: this is the page's one --light band, which is what separates "the seven things the price already includes" from the promise above it and the closing statement below it without a divider, and it is why the seven mockups take .hw-media--plate (six of the seven files are opaque RGB on #ffffff and would float edgeless on a white ground). rigor is heavy because the row object, the plate and the list marker are reused seven times inside this one section. -->
+  <section class="mc-section mc-section--light hw-svc" id="services" data-surface="light">
+    <div class="container">
+
+      <div class="row hw-svc__intro">
+        <div class="col col--measure">
+          <h2 class="mc-head" data-reveal>Services that Complement <span class="mc-head__turn">SEO</span></h2>
+        </div>
+      </div>
+
+      <!-- SERVICE 1 of 7. Copy left, media right - the source's own order
+           (sg-grid-1 is the copy column on this row). One [data-reveal] on the
+           whole copy stack rather than one per line: seven rows x two elements
+           would be fourteen separate fades in one section, which reads as the page
+           assembling itself rather than as content arriving. The figure gets
+           [data-media-in] for the scale-in the globals overlay declares. -->
+      <div class="row row--split">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">WEB DESIGN & DEVELOPMENT</h3>
+            <p class="mc-body">Your website is the digital version of your storefront. Anyone can make a website, but we make sales engines. We've designed over 100 websites for dispensaries and we know what works. We don't charge for web design & development because we only care about delivering what you need: a website that converts.</p>
+            <a class="hw-cta" href="webdesign-development.html" aria-label="READ MORE about web design and development">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/dispenza-marketing-web-development.webp"
+                 alt="dispenza marketing web development" width="851" height="774" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+      <!-- SERVICE 2 of 7. Media left in the source, so .row--split-rev.
+           THE 53% SENTENCE SHIPS WHOLE. The copy doc's warning is explicit: the
+           platform (Dutchie), the client (NuLeaf Nevada) and the comparison set
+           all qualify the figure, and "splitting or shortening this sentence
+           breaks the claim". It also carries the banned string named in F1. -->
+      <div class="row row--split row--split-rev">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">CRO (CONVERSION RATE OPTIMIZATION)</h3>
+            <p class="mc-body">CRO is an art form. We're experts in designing the easiest path to get a new customer to try your business. We created a 53% conversion rate on Dutchie for NuLeaf Nevada - outperforming over 6,000 other dispensaries who also use Dutchie's menu & shopping experience. With Dispenza, you get strategies that are in best practice and proven for our clients. No guessing here, we know the answers.</p>
+            <a class="hw-cta" href="conversion-rate-optimization.html" aria-label="READ MORE about conversion rate optimization">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/stiiizy-blue-cherry-pie-at-dispenza.webp"
+                 alt="stiiizy blue cherry pie at dispenza" width="690" height="692" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+      <!-- SERVICE 3 of 7. Copy left in the source. -->
+      <div class="row row--split">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">BRANDING & GRAPHIC DESIGN</h3>
+            <p class="mc-body">Many businesses come to us with an unfinished brand - sometimes even without a logo. Our full-time designers can help bring your brand to life with modern standards. Need help creating graphics for your business, such as menus, deals & specials graphics, product images, banner ads, and/or merchandise? Our design team can help you create these touchpoints at no additional cost.</p>
+            <a class="hw-cta" href="branding-graphic-design.html" aria-label="READ MORE about branding and graphic design">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/dispenza-marketing-branding-graphic.webp"
+                 alt="dispenza marketing branding graphic" width="785" height="573" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+      <!-- SERVICE 4 of 7. Media left in the source. The one service whose copy
+           carries a list, set as a real list with the concept's violet dash marker
+           at the body step, so five deliverables read as five things rather than
+           as a second paragraph. The paragraph above it is the TRUNCATED source
+           sentence recorded in F4 and is reproduced exactly as served. -->
+      <div class="row row--split row--split-rev">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">ADVERTISEMENT DESIGN</h3>
+            <p class="mc-body">At Dispenza, we have a dedicated team of designers who specialize in creating captivating digital advertisements that leave a lasting impression such</p>
+            <ul class="hw-svc__list">
+              <li>Daily/ Weekly Deals</li>
+              <li>Billboards & Menu Displays</li>
+              <li>Custom Advertisement Designs</li>
+              <li>Persuasive Ad Copy</li>
+              <li>Multi-Ad Format Delivery</li>
+            </ul>
+            <a class="hw-cta" href="ads-design.html" aria-label="READ MORE about advertisement design">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/dispenza-digital-ads-design-samples.webp"
+                 alt="dispenza digital ads design samples" width="681" height="659" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+      <!-- SERVICE 5 of 7. Copy left in the source. The vendor list and its
+           trailing "and many more..." are ONE claim and the literal ellipsis is the
+           source's; it is reproduced, not closed. This block also carries the
+           second banned string named in F1. -->
+      <div class="row row--split">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">INTEGRATIONS</h3>
+            <p class="mc-body">Being the largest marketing agency for dispensaries we have already worked with every major technology company that supports the cannabis industry. Blaze, Treez, Dutchie, iHeartJane, Tymber, LeafLogix, and many more... We have hit record conversion stats with Dutchie, always recommend them, but have no issue working with all major developers on dispensary tech.</p>
+            <a class="hw-cta" href="integrations.html" aria-label="READ MORE about integrations">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/dispenza-marketing-integrations.webp"
+                 alt="dispenza marketing integrations" width="603" height="477" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+      <!-- SERVICE 6 of 7. Media left in the source. -->
+      <div class="row row--split row--split-rev">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">CONSULTING</h3>
+            <p class="mc-body">Let's face it: tech is behind in our industry. How to decide which products and practices to use to accomplish specific operating challenges can be a nightmare. At Dispenza, we've heard it all, and we've most likely have already aided a helping hand countless times for the exact challenges you're facing. If you have a tech problem impeding your business growth, let's chat. We're here to help.</p>
+            <a class="hw-cta" href="consulting.html" aria-label="READ MORE about consulting">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/dispenza-consulting-team.webp"
+                 alt="dispenza consulting team" width="709" height="610" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+      <!-- SERVICE 7 of 7. Copy left in the source. -->
+      <div class="row row--split">
+        <div class="col col--measure">
+          <div class="hw-prose" data-reveal>
+            <h3 class="mc-head hw-svc__title">REPORTS</h3>
+            <p class="mc-body">At Dispenza, we believe in transparency and accountability. That's why we provide comprehensive reporting services to keep you informed about the performance and results of our strategies and services. Our reports are designed to provide valuable insights, measure key metrics, and guide data-driven decision-making.</p>
+            <a class="hw-cta" href="reports.html" aria-label="READ MORE about reports">
+              READ MORE
+              <svg class="hw-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col col--media" style="order:0">
+          <figure class="hw-media hw-media--plate" data-media-in>
+            <img src="../assets/in-pages/dispenza-marketing-performance-reports.webp"
+                 alt="dispenza marketing performance reports" width="641" height="622" decoding="async">
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- pick: SECTION-COMPONENTS.md #8 | considered: #2,#3,#41 | why: the source closes on a four-line display statement, three icon-and-label promises and (in the chrome it hands off to) an ask, and #8 manifesto / belief statement is the pattern for a section whose whole job is one sentence said at scale - here the sentence is the client's own four-line H2, the three cells are its footnotes rather than its evidence, and the two buttons are the door out. The cells take the recessed --ds-bg-warm plane one step BELOW the raised card surface, so a set of quiet promises never competes with the statement above it. #2 trust strip / logo wall is what a row of three marks WANTS to be read as, and it would be a lie: these are generic pictograms the client drew, not partner or client logos, and walling them would assert relationships the source never claims; #3 stat strip / metric band needs numbers and these three carry none, so it would set six words in figure type; #41 closing CTA (final action) as its OWN band was BUILT AND MEASURED FIRST and rejected on the render - see the note below. -->
+  <!-- THE CLOSE IS FOLDED INTO THIS SECTION, NOT GIVEN A BAND OF ITS OWN, and
+       that is a render finding rather than a preference. Built first the way the
+       `hw-` sheet's section 6 assumes ("here the buttons ARE the section"), it
+       measured at 1440 as a 138px section holding one 42px row of two small
+       left-aligned buttons, with a full --ds-rhythm (151px) of empty dark above it
+       and the footer's own clearance below: about 390px of nothing around two
+       pills, which is the "abandoned page" the sheet's own trim comment is trying
+       to avoid. It is also the SITE'S ESTABLISHED SHAPE that it fights: all four
+       long-form pages already shipped (reports, tcg, integrations, case-studies)
+       fold their close INLINE at the foot of the last content block and each one
+       records why in as many words ("a mid-page action, not a band"). So the
+       actions ride as the last ROW of the statement section, on the same left
+       axis, at the section's own inner interval - and .hw-close rides WITH them on
+       this section, which is what its two rules were written to do: zero the
+       action row's own margin so the interval is paid once, and trim the section's
+       bottom padding to --ds-space-2xl so the page does not end on a hole.
+       Nineteen built pages and this one now close the same way. -->
+  <section class="mc-section hw-suite hw-close surface-dark" id="everything-you-need" data-surface="dark">
+    <div class="container">
+      <div class="row"><div class="col">
+        <!-- ONE h2, FOUR LINES. Atoms 83-86 are a single source heading broken by
+             <br>. Each line is a span so the break is structural rather than a
+             <br> that text-wrap:balance would fight. -->
+        <h2 class="mc-head" data-reveal><span class="hw-suite__line">EVERYTHING YOU</span><span class="hw-suite__line">NEED TO GROW YOUR</span><span class="hw-suite__line">CANNABIS</span><span class="hw-suite__line mc-head__turn">DISPENSARY</span></h2>
+      </div></div>
+      <!-- THE PROMISES TAKE THEIR OWN ROW, and that is a render fix. Nested under
+           the heading in one .col they sat FLUSH against it - .hw-grid ships
+           margin:0 and nothing else pays an interval there - so the turn's violet
+           bloom on "DISPENSARY" bled onto the first cell's top edge. As a sibling
+           .row the concept's own inner-interval rule (.mc-section .container >
+           .row + .row) pays --ds-space-xl, which is the same 64px every other
+           stacked row on the site gets. No new rule, no new class. -->
+      <div class="row"><div class="col">
+        <!-- THE THREE PROMISES. Marks ship alt="" exactly as the source writes
+             them: each one sits beside a label that already says what it means, so
+             naming them again would be a duplicate announcement rather than an
+             accessible name. The label takes .hw-cell__title (the display face at
+             the sub step, 16.86:1 on this plane) rather than .hw-cell__label (the
+             micro caption at 6.37:1), because in this cell there is no VALUE for a
+             caption to name - the two words ARE the cell's line, which is what
+             .hw-cell__title is defined as. The source's own h6 rank is kept. -->
+        <ul class="hw-grid">
+          <li class="hw-cell" data-reveal>
+            <img class="hw-cell__icon" src="../assets/in-pages/ic_eye.webp" alt="" width="110" height="110" decoding="async">
+            <h6 class="hw-cell__title">COMPLETE<br>TRANSPARENCY</h6>
+          </li>
+          <li class="hw-cell" data-reveal>
+            <img class="hw-cell__icon" src="../assets/in-pages/ic_man_t.webp" alt="" width="110" height="110" decoding="async">
+            <h6 class="hw-cell__title">AMAZING FREE<br>SUPPORT</h6>
+          </li>
+          <li class="hw-cell" data-reveal>
+            <img class="hw-cell__icon" src="../assets/in-pages/ic_chart.webp" alt="" width="110" height="110" decoding="async">
+            <h6 class="hw-cell__title">REAL TIME <br>REPORTING</h6>
+          </li>
+        </ul>
+      </div></div>
+      <!-- THE ASK. CTA-PATTERNS.md #7, a primary-plus-secondary cluster, and NOT
+           ONE WORD OF NEW COPY: "Book demo" is the frozen primary CTA
+           (client-rules.json primary_cta) and the rail's own button, "Results" is
+           the rail, drawer and footer's own label for case-studies.html. This is
+           the page's ONE closing action - the locked chrome carries no .precta, so
+           G-CTA1's single-closing-band budget is spent here and nowhere else. -->
+      <div class="row"><div class="col">
+        <div class="mc-actions" data-reveal>
+          <a class="btn btn--solid" href="contact.html">Book demo</a>
+          <a class="btn btn--ghost" href="case-studies.html">Results</a>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
+</body>
+</html>

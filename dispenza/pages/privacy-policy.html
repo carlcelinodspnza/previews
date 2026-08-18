@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy - Dispenza</title>
+<meta name="description" content="View our website's Privacy Policy.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ==========================================================================
+     SOURCE DEFECTS + DECLARED OMISSIONS  (privacy-policy)
+     Source: Code/clones/Dispenza/privacy-policy.html
+     Atoms:  _source/atoms/privacy-policy.json  (61 body nodes, 0 images)
+     Brief:  _handoff/briefs/privacy-policy.md
+     ==========================================================================
+
+     D1. THE EXTRACTOR FLATTENED THE WHOLE DOCUMENT TO <span>. All 61 atoms come
+         back as `{"tag":"span","cls":""}`, so the atoms file carries NO heading
+         structure, NO list structure and NO paragraph boundaries at all. The
+         document tree below (1 h1, 5 clause h2, 2 sub-clause h3, two lists, one
+         definition list) was recovered by re-parsing the raw clone, which has the
+         real h1/h3/h4/p/ul/li/br tree. Every STRING is still the atom string; only
+         the CONTAINERS come from the clone's own DOM.
+
+     D2. TWO REAL IN-DOCUMENT STRINGS ARE ABSENT FROM THE ATOMS FILE. extract-clone
+         filters a fixed chrome vocabulary by exact text, and on THIS page two of
+         those words are also real content, so the filter ate them:
+           - "Privacy Policy"  - the page's own H1
+             (the clone renders it as an h1 carrying that page's text-light and
+             text-center utility classes, neither of which exists in this build)
+           - "Contact Us"      - the h3 above "If you have questions or comments..."
+         Both are verbatim clone strings; neither is counted in the 61.
+         "Privacy Policy" IS RENDERED as the h1 - without it the page would publish
+         with no H1 at all, and the brief's `h1_source` line records that the layout
+         owns and renders it.
+         "Contact Us" IS OMITTED - see D3: its section no longer exists as a separate
+         block, and a heading with no content under it would be furniture.
+
+     D3. THE SOURCE PRINTS ITS CONTACT DETAILS TWICE; THIS PAGE PRINTS THEM ONCE.
+         The clone has an "Ownership & Contact Information" block near the top
+         (Legal Entity Name / Business Address / Email / Phone) and a "Contact Us"
+         block at the foot (SEOG LLC / Email / Website / Phone / Mailing Address).
+         Six atoms are BYTE-IDENTICAL between the two clusters: atoms 52, 53, 54,
+         57, 58 and 60 repeat atoms 13, 16, 17, 18, 19 and 15. Brief section 4 rules
+         the two clusters MERGED "so the same details do not print twice", and
+         further that atoms 14 ("Business Address:") and 59 ("Mailing Address:") are
+         two labels for ONE address value and must both be rendered against the
+         single value. Both instructions are followed exactly. CONSEQUENCE, DECLARED:
+         the merged block sits where the source's SECOND cluster sat (at the foot of
+         the document) rather than where its FIRST sat, so "Ownership & Contact
+         Information" is the last clause heading here and is the first of six in the
+         clone. Every distinct source string still appears; none is dropped.
+
+     D4. SIX EN DASHES (U+2013) ARE RENDERED AS HYPHEN-MINUS. Atoms 38, 40, 42, 44,
+         46 and 48 each open with U+2013. verify-no-dashes (G-NODASH) bans U+2013 and
+         U+2014 in every content phase of this build, byte-level, with no allowlist -
+         it is a standing OWNER instruction ("how are M DASHES making it through this
+         far on pages now") and it refuses the write outright. verify-copy-fidelity
+         (G5) ASCII-normalizes BOTH sides (the whole hyphen/dash family folds to "-")
+         for exactly this reason and says so in its own failure text ("dashes may be
+         hyphens; quotes may be straight"), so all six facts still verify against the
+         registry verbatim - confirmed by running it. ONLY the glyph changes; not one
+         word does. The eight pairs of curly quotes and the one curly apostrophe are
+         NOT touched: they are not banned, and they are source.
+
+     D7. TWO NON-VISIBLE HREFS ARE NORMALISED TO THE SITE'S OWN CONVENTIONS. No
+         visible string changes; CONTENT LAW governs the words a visitor reads, and
+         an href is not one of them.
+           - The source marks up "www.Dispenza.com" with `http://www.dispenza.com`.
+             Every other external link in this build is https (firehouse365.com,
+             flwrco.shop, norcalholistics.org, nuleafnv.com, thecannabisguys.ca) and
+             the chrome's own login link is https, so these three were the only
+             http:// refs in the whole build. Upgraded; the link TEXT is untouched and
+             still renders the source's own casing at each position ("www.Dispenza.com"
+             in the preamble, "www.dispenza.com" on the Website row).
+           - The phone row's href was `tel:7024207272`. Every other tel: in the build,
+             chrome included, is E.164 (`tel:+17024207272`), so this was the only
+             non-E.164 one. Normalised. The DIALLED DIGITS are identical, so this is
+             not a resolution of the D6 NAP conflict: the visible string is still the
+             policy's own "702-420-7272" and the chrome still shows its own
+             "+1 (702) 420-7272".
+
+     D5. THE 12 OTTO BLOCKS ARE OUT OF SLICE AND ARE NOT RENDERED. The live page
+         carries 347 words of SearchAtlas-injected clauses ("Understanding Your
+         Privacy Rights", "Cookies and Tracking Technologies", "Third-Party Services
+         and Data Sharing", "Updates to Our Privacy Policy"). The brief's
+         `otto_status` line rules them third-party output the client does not own,
+         absent from the atom slice by design, and forbids both rendering them and
+         writing replacements. So this document ships with NO cookie clause and NO
+         policy-updates clause until the owner rules on them.
+
+     D6. NAP CONFLICT LEFT UNRESOLVED, ON PURPOSE - AND IT IS THE PAGE'S ONE RED.
+         This document's contact rows and the sitewide footer chrome disagree on all
+         three NAP values (policy: "#105" / "702-420-7272" / "contact@dispenza.com";
+         chrome: "Suite 110 B" / "+1 (702) 420-7272" / "hello@dispenza.com"). The
+         brief marks this OWNER-FLAG, do NOT resolve in the build. Both sets are real
+         published source and both ship verbatim. CONSEQUENCE, DECLARED:
+         verify-copy-fidelity requires D-SRC-CHROME-0001 ("+1 (702) 420-7272") on
+         this page, and that string is CHROME-owned. It cannot appear in the body
+         without either importing chrome into the document (verify-shell-purity
+         forbids it) or printing two contradictory phone numbers inside one legal
+         contact block. So it is LEFT FAILING on the fragment, which is the honest
+         result. It RESOLVES on the assembled page, where the chrome footer supplies
+         the string - verified by running the gate against pages/privacy-policy.html.
+     ========================================================================== -->
+
+  <!-- pick: LEGAL-SECTIONS.md #3 | considered: #1,#2 | rigor: heavy | why: this is a
+       nine-screen policy with six clause headings and two sub-clauses, which is the
+       "long document where the reader loses their place" case entry #3 is written for,
+       and its rail is the only structure in the catalog that keeps the clause list in
+       view while a compliance officer reads a 90-word paragraph - the reader this page
+       actually has. #1 bare prose is the safe default and was rejected on LENGTH: with
+       six clauses and no index the reader must scroll the whole document to discover
+       whether it contains a security clause at all, which is the exact question a
+       regulator opens it with; its masthead slot is still used here, because #1 is the
+       entry that names "a title + effective-date line at the top" and #3 composes on
+       top of #1's measure rather than replacing it. #2 inline TOC answers that question
+       once, at the top, and then scrolls away - it indexes the document without helping
+       anyone hold it, and on a page this long the index is off-screen for most of the
+       read. #3 degrades INTO #2 below 1024 (the rail unsticks and collapses above the
+       prose in source order), so the phone gets the inline-index shape and nothing has
+       to move in the DOM to get it. rigor is heavy because this is the build's only
+       T-LEGAL page and the pick sets the document composition for any terms or cookie
+       page added later. -->
+  <section class="mc-section lg-head lg-doc surface-dark" id="privacy-doc" data-surface="dark">
+    <div class="container">
+
+      <!-- THE MASTHEAD ROW. Two slots only - the title and the effective stamp -
+           because the source gives it two and this page may not compose a lede it was
+           never written. It is a .row of its own rather than the first child of the
+           prose column so the sticky rail begins level with the first line of the
+           POLICY rather than level with its title: the rail indexes clauses, and the
+           title is not a clause. -->
+      <div class="row"><div class="col">
+        <h1 class="lg-head__title" id="privacy-title" data-reveal>Privacy Policy</h1>
+        <!-- The document's own title line + its effective date: ONE source <p> split by
+             a single <br>, so they are two spans on one flex line here and wrap
+             independently on a phone. -->
+        <p class="bw-legal__effective" data-reveal><span>Privacy Policy for Dispenza.com</span><span>Effective Date: 1/1/2025</span></p>
+      </div></div>
+
+      <div class="row lg-doc__row">
+
+        <!-- THE RAIL. Five entries, each the verbatim clause heading it points at, each
+             a real href to a real id in the prose column. NO [data-reveal] on the rail
+             or any of its children: it is sticky, it is the wayfinding for the whole
+             document, and an index that fades in is an index that is missing when the
+             reader looks for it. The landmark is named with aria-labelledby pointing at
+             the document's OWN h1, so even the accessible name is a source string - the
+             skin deliberately ships no .bw-toc__title because the source supplies no
+             such words. -->
+        <div class="col lg-doc__rail">
+          <nav class="bw-toc bw-toc--rail" aria-labelledby="privacy-title">
+            <ul class="bw-toc__list">
+              <li class="bw-toc__item"><a class="bw-toc__link" href="#privacy-collection">Collection of Your Information</a></li>
+              <li class="bw-toc__item"><a class="bw-toc__link" href="#privacy-use">Use of Your Information</a></li>
+              <li class="bw-toc__item"><a class="bw-toc__link" href="#privacy-disclosure">Disclosure of Your Information</a></li>
+              <li class="bw-toc__item"><a class="bw-toc__link" href="#privacy-security">Security of Your Information</a></li>
+              <li class="bw-toc__item"><a class="bw-toc__link" href="#privacy-ownership">Ownership & Contact Information</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- THE PROSE MEASURE. .bw-legal styles RAW flowing children, so the policy is
+             authored as plain p / h2 / h3 / ul / dl and inherits the document rhythm.
+             Every h2 carries its own scroll-margin-top, so a rail jump lands clear of
+             the fixed chrome without a line of JavaScript. -->
+        <div class="col lg-doc__prose">
+          <div class="bw-legal">
+
+            <!-- THE PREAMBLE. ONE source <p>. Atoms 2-7 are fragments split only by the
+                 two links to www.dispenza.com and the span that bolds the entity name;
+                 they are joined inline exactly as the source joins them, and must never
+                 be emitted as separate blocks. -->
+            <p data-reveal><a href="https://www.dispenza.com">www.Dispenza.com</a> (“we,” “us,” or “our”) is a brand owned and operated by <strong>SEOG LLC</strong>, a Nevada limited liability company. We respect the privacy of our users (“user” or “you”). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit <a href="https://www.dispenza.com">www.Dispenza.com</a> (including any other media form, media channel, mobile website, or mobile application related or connected thereto) (collectively, the “Site”). Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access the Site.</p>
+
+            <h2 id="privacy-collection" data-reveal>Collection of Your Information</h2>
+            <p>We may collect information about you in a variety of ways. The information we may collect via the Site includes:</p>
+
+            <h3 data-reveal>Personal Data</h3>
+            <p>We collect but never share or sell your personally identifiable information, such as your name, shipping address, email address, and telephone number, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site, such as scheduling an appointment to meet with Dispenza/SEOG LLC. You are under no obligation to provide us with personal information of any kind; however, your refusal to do so may prevent you from using certain features of the Site.</p>
+
+            <h3 data-reveal>SMS & Phone Number Collection</h3>
+            <p>We may collect phone numbers through our online forms to send SMS updates, reminders, or confirmations. By submitting your phone number, you agree to receive text messages from us. Message and data rates may apply. Frequency of messages may vary. You may opt out at any time by replying “STOP.” For help, reply “HELP” or contact us at contact@dispenza.com.</p>
+
+            <h2 id="privacy-use" data-reveal>Use of Your Information</h2>
+            <p>Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p>
+            <ul>
+                <li>Create and manage your account</li>
+                <li>Compile anonymous statistical data and analysis for internal use or with third parties</li>
+                <li>Deliver targeted advertising, coupons, newsletters, and other promotional content</li>
+                <li>Increase the efficiency and operation of the Site</li>
+                <li>Monitor and analyze usage and trends to improve user experience</li>
+                <li>Offer new products, services, and/or recommendations</li>
+                <li>Perform other business activities as needed</li>
+            </ul>
+
+            <h2 id="privacy-disclosure" data-reveal>Disclosure of Your Information</h2>
+            <p>We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p>
+            <!-- THE SIX DISCLOSURE ROWS. Each is ONE bullet: the bolded term and the
+                 clause that scopes it, joined as the source joins them. Splitting a pair
+                 would publish a bare term with no definition. The leading dash is the
+                 source's own clause break, rendered hyphen-minus - see D4. -->
+            <ul>
+                <li><strong>By Law or to Protect Rights</strong> - If we believe disclosure is necessary to comply with applicable law or legal process</li>
+                <li><strong>Third-Party Service Providers</strong> - For services such as payment processing, data analysis, and hosting</li>
+                <li><strong>Marketing Communications</strong> - With your consent, we may share your info with third parties for marketing purposes</li>
+                <li><strong>Interactions with Other Users</strong> - If you interact with other users on the Site</li>
+                <li><strong>Online Postings</strong> - If you post comments or content publicly</li>
+                <li><strong>Other Third Parties</strong> - To analyze trends and deliver targeted ads</li>
+            </ul>
+
+            <h2 id="privacy-security" data-reveal>Security of Your Information</h2>
+            <p>We use administrative, technical, and physical security measures to protect your personal information. While we’ve taken reasonable steps to secure the information you provide, no security system is 100% foolproof. We cannot guarantee complete protection against unauthorized access, hacking, or data breaches.</p>
+
+            <!-- THE ACCOUNTABILITY BLOCK. Brief section 4: the source's two contact
+                 clusters MERGED, ordered ownership sentence -> questions line ->
+                 labelled rows. See D3. -->
+            <h2 id="privacy-ownership" data-reveal>Ownership & Contact Information</h2>
+            <p>Dispenza is a registered brand of <strong>SEOG LLC</strong>.</p>
+            <p>If you have questions or comments about this Privacy Policy, please contact us at:</p>
+            <!-- A definition list, because every row is a label and its value, and the
+                 source marks the labels bold. "Business Address:" and "Mailing Address:"
+                 are two source labels for ONE address value, so they share a single
+                 <dt> and the value prints once. -->
+            <dl data-reveal>
+              <dt>Legal Entity Name:</dt>
+              <dd>SEOG LLC</dd>
+              <dt>Business Address:<br>Mailing Address:</dt>
+              <dd>6905 W Charleston Blvd #105, Las Vegas, NV 89117</dd>
+              <dt>Email:</dt>
+              <dd><a href="mailto:contact@dispenza.com">contact@dispenza.com</a></dd>
+              <dt>Phone:</dt>
+              <dd><a href="tel:+17024207272">702-420-7272</a></dd>
+              <dt>Website:</dt>
+              <dd><a href="https://www.dispenza.com">www.dispenza.com</a></dd>
+            </dl>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
+</body>
+</html>

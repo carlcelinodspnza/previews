@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us | Trusted Cannabis Marketing Experts</title>
+<meta name="description" content="Book a demo, call us, or come by the Las Vegas office. Every route to a real person in one place.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ===================================================================
+       CONTENT LAW. Every visible string below is lifted from the clone at
+       Code/clones/Dispenza, placed as _copy/contact.md and
+       _handoff/briefs/contact.md assign it. THREE clone files feed this page,
+       because three routes 301 here (seo-enrichment.md section 3):
+         contact.html            11 body atoms + the recovered H1 + 2 icons
+         get-demo-from.html      6 placed strings + 3 portraits
+         conversation-form.html  2 strings
+       Nothing is written for this page. Five declared classes of exception,
+       none of them invented copy:
+         (a) image alt text, which is not body copy (the same exception the
+             five case-study pages and the six team pages declare);
+         (b) two IA page names used as link labels in the close, HOW IT WORKS
+             and CASE STUDIES, required by the brief's links_to. Both are the
+             chrome's own route labels, already shipped on every page;
+         (c) the META pair, which comes from the clone <title> (verbatim) and
+             _handoff/seo-enrichment.md section 1 (the /contact meta), not from
+             the clone's own description - see F7;
+         (d) the form's FIELD NAMES and the option `value=` strings, which are
+             machine attributes, never rendered text. Every VISIBLE label,
+             option and button string in the form is the source's own;
+         (e) the two `href` destinations rewritten from dead popup anchors to
+             real controls - see F2 and F3. No label changes with them.
+
+       THE RAIL LAW, applied to contact. The page title is the H1 "CONTACT US"
+       (R2, the head, never an entry). The shallowest source rank BELOW it is
+       the section rank, and after the three-slice merge this page carries
+       exactly TWO section-rank strings: "LET'S TALK" (contact.html h2) and
+       "BOOK YOUR DEMO" (get-demo-from.html h1, which cannot stay an h1 here -
+       client-rules mechanical_build_gates pins a single h1 per page - so it
+       demotes one rank and takes "SELECT A REP", the h2 under it, down with
+       it to h3; the source's own two-level relationship is preserved, not
+       flattened). Two entries is below the three-entry floor, so R5 fires: NO
+       rail element at all, no nav, no spine, no ticks, .tc-doc--norail, and
+       the document takes the page's left axis alone. Same result as
+       ads-design (1), integrations (2) and ads1 (2).
+
+       THE STAT LAW. Not engaged: this page carries NO figure, percentage,
+       count or window of any kind, so it carries NO [data-count-to] hook.
+       There is nothing here that could be rounded into a fabricated statistic.
+
+       PROOF STATUS. NONE PRESENT AND NONE INTRODUCED. No testimonial, no logo
+       wall, no client count, no response-time commitment. The brief is
+       explicit that no response time exists anywhere in the 32-page capture
+       and that a flagged placeholder is the only honest answer; this build
+       ships NEITHER an invented commitment NOR a visible placeholder string
+       (client-rules mechanical_build_gates bans a visible warning triangle or
+       "OWNER PLACEHOLDER" outright), so the gap is recorded in F6 below and
+       nowhere on the page.
+
+       ===================================================================
+       SOURCE DEFECTS EXPOSED, NOT REPAIRED, NOT SILENTLY DROPPED
+       ===================================================================
+       F1  THE PAGE H1 IS MISSING FROM THE ATOMS FILE AND IS RECOVERED FROM
+           THE CLONE. `_source/atoms/contact.json` carries 11 body nodes and
+           NO heading at all, so the page would publish with no H1 at all.
+           `Code/clones/Dispenza/contact.html` line 5563 serves
+           an h1.text-light reading CONTACT US, inside
+           `section.sg-section-page-banner`. `_copy/contact.md` records the
+           cause: extract-clone.mjs's CHROME regex matches /^CONTACT US$/i and
+           strips the string as nav boilerplate. The H1 below is that clone
+           line, verbatim, and is marked RECOVERED in the copy doc.
+
+       F2  "SEND A MESSAGE" POINTED AT AN EMPTY POPUP. The source anchor is
+           href="#sgp_1", and #sgp_1 in the served HTML is
+           a div carrying id=sgp_1 and data-is_ajax_content=1, holding an h4
+           "Contact Us" over an EMPTY div.sgpopup-content - a title and an EMPTY
+           content div, filled by an AJAX call that the clone did not capture.
+           There is therefore NO message form in the source: no field, no
+           label, no submit. Authoring one would be inventing a form the
+           client never wrote. The door keeps its two source strings and is
+           routed to mailto:hello@dispenza.com, the sitewide email atom the
+           client publishes in its own footer on all 32 pages. OWNER'S CALL:
+           supply the real message-form fields, or accept the mail client.
+
+       F3  "REQUEST A DEMO" POINTED AT A MODAL THIS SITE DOES NOT HAVE. The
+           source anchor is href="#sgp_2", the eight-step booking wizard. The
+           brief's Form binding note says that modal is "layout-owned and NOT
+           re-declared here" - but the LOCKED chrome (_design/_chrome-block.html
+           and _build/_template.html) contains ZERO <form> elements, verified
+           by grep. So on this build the modal does not exist anywhere, and if
+           this page did not carry the form the SITE would have no conversion
+           surface at all. The form is therefore authored ONCE, here, on the
+           terminal conversion page, from THIS page's own source strings; the
+           door is routed to it as an in-page jump. It is not a second,
+           different form - it is the same eight fields, in the same order,
+           with the same labels and the same options as #sgp_2.
+
+       F4  THE FORM IS FLATTENED FROM AN EIGHT-STEP WIZARD TO ONE PAGE, AND
+           THAT IS A MOTION-SPEC REQUIREMENT, NOT A PREFERENCE. The source
+           hides steps 2-8 behind the classes fg-step plus d-none, and advances them
+           with "Next" / "Prev" buttons. A display:none panel cannot intersect
+           the viewport, so any reveal hook inside it would stay invisible
+           forever; and the source's own step titles ("Step 1" ... "Step 8")
+           are wizard furniture that means nothing once the steps are gone.
+           So the eight step titles and the seven Prev/Next pairs are OMITTED
+           (they are controls for a mechanism that no longer exists), and all
+           eight questions render at once, in source order, every label
+           verbatim. NOTHING a visitor was asked on the live site is dropped.
+
+       F5  THE SUBMIT GOES TO thank-you.html, NOT TO THE CLIENT'S ENDPOINT.
+           The source posts to https://dispenza.com/do_actions/do_form_submit
+           with a server-minted `_nonce` and a `form_ts` timestamp, neither of
+           which a static preview can produce; posting to it from here would
+           be rejected and would silently lose the lead. The form is wired to
+           the site's OWN post-conversion page instead - which is the source's
+           own destination for a completed booking, and the page whose copy
+           says "Thank you for booking!". OWNER ACTION: repoint `action` at
+           the live endpoint (or a CRM) before launch, and switch the method with
+           it: the interim wiring is method="get", so a submitted answer set rides
+           in the URL where a real endpoint would take it in a POST body. That is
+           acceptable for a preview and is NOT acceptable for live lead capture.
+           The source's honeypot
+           pair (`hp` / `hpc`) and its hidden `form_id` / `_nonce` / `form_ts`
+           inputs are omitted with it: they are server-side plumbing for an
+           endpoint this build does not call.
+
+       F6  THE SEO META PROMISED SOMETHING THE PAGE CANNOT SAY, AND SO DOES THE
+           BRIEF'S OWN RESPONSE LINE. The brief's section 5 asks for a
+           "response/trust line" and immediately records that NO response-time
+           commitment exists anywhere in the capture. None is written. The
+           /contact meta shipped above ("Book a demo, call us, or come by the
+           Las Vegas office. Every route to a real person in one place.") is
+           the P5 string and every clause of it is substantiated by something
+           actually on this page. OWNER-DATA: a real response time, and the
+           office hours, are both absent from all 32 captured pages.
+
+       F7  THE CLONE'S OWN META DESCRIPTION CANNOT SHIP. It reads "Have
+           questions or ready to grow your cannabis brand? Contact Dispenza
+           U+2014 the most trusted cannabis marketing agency since 2012. We're
+           here to help!" Three separate blocks: verify-no-dashes bans the
+           U+2014; "the most trusted ... agency" is an unsourced superlative of
+           the same family client-rules overclaim.agency_scale bans; and the
+           voice rule allows ONE exclamation mark site-wide, already spent on
+           "Most Popular!". The clone <title> "Contact Us | Trusted Cannabis
+           Marketing Experts" ships VERBATIM; only the description is replaced,
+           by the handoff's own P5 string.
+
+       F8  THE ADDRESS DISAGREES WITH THE FOOTER, AND BOTH SHIP. This page's
+           in-main string is "6905 W Charleston Blvd, Suite 110, Las Vegas, NV
+           89117". The sitewide chrome footer says "6905 W Charleston Blvd
+           Suite 110 B, Las Vegas, NV 89117, United States" - "Suite 110" vs
+           "Suite 110 B". The brief is explicit: render both exactly as
+           captured and ask the owner which is correct; do NOT reconcile them
+           in the build. Neither string is touched.
+
+       F9  THE PORTRAIT ALT TEXT NAMES TWO PEOPLE DIFFERENTLY FROM THEIR OWN
+           CARDS. get-demo-from.html serves alt="Thomas Benjamin Dispenza Team"
+           over a card whose visible name is "Thomas Robinson", and
+           alt="Our Team at Dispenza, Adam Brener" over a card whose visible
+           name is "Adam Brenzi" (the file is also named ...adam-brener.webp).
+           The alt strings here are the VISIBLE names, which is what the two
+           already-published sibling pages sergio.content.html and
+           thomas.content.html do with the same two files. OWNER-DATA: confirm
+           the correct spelling of both names; the build does not guess which
+           half of each pair is the typo.
+
+       F10 ADAM BRENZI'S CARD POINTED AT A ROUTE THAT DOES NOT EXIST. The
+           source href is "index.htmladam" (the clone's rendering of the live
+           site's /adam), and /adam is NOT in the closed 28-page inventory. His
+           card keeps its name and its "Select Rep" control verbatim and is
+           routed to the booking form on this page rather than to a dead URL,
+           exactly as the brief instructs. OWNER-DATA: confirm whether Adam is
+           still a rep and whether a bio page should exist.
+
+       F11 "Conversion Page" IS A CMS DEFAULT TITLE, SHIPPED BECAUSE THE BRIEF
+           FORBIDS DELETING IT. It is the h1 of the retired /conversation-form
+           route, which 301s here. The brief: "Render it as the module's small
+           provenance/eyebrow label; recommend the owner rename or retire it.
+           Do not promote it to a headline and do not silently delete it." It
+           renders as the eyebrow over the booking module and nowhere else.
+           OWNER'S CALL: rename it or retire it.
+
+       F12 THREE PLACED STRINGS ARE NOT IN THE SERVED CLONE, AND THAT IS
+           DECLARED RATHER THAN HIDDEN. D-SRC-GETDEMOFROM-0007/0008/0009 -
+           "Related Pages:", "Request a Demo Consultation", "Contact Dispenza
+           for Marketing Solutions" - came, per the brief, from "a hidden
+           injected block on the retired route". A recursive grep for each of
+           the three literals across the ENTIRE clone tree returns ZERO hits:
+           they were captured from the LIVE page, where they are injected after
+           load, and they survive only in _handoff/fact-registry.json. They
+           ship for two reasons and both are precedent, not preference. First,
+           this build already retains one live-only string on this very page
+           (the OTTO twin under LET'S TALK, which is likewise absent from the
+           served HTML and documented only in a capture artifact). Second, the
+           already-published pages/case-studies.content.html ships the IDENTICAL
+           class of atom - "Partners Links: / JTek Resources / Outsourced
+           Marketing Inc.", also from a hidden injected block, also absent from
+           the served clone - as a quiet small-type foot line, on its brief's
+           rule that "the no-drop rule keeps the words; the honesty rule refuses
+           the hiding". contact follows the site. Where it goes FURTHER than
+           case-studies did: the brief requires these two be repointed as
+           in-page jumps (on the source both pointed at THIS page, which would
+           render as a visible self-link loop), so they ship as real anchors
+           onto the booking module and the two doors. OWNER-DATA: confirm the
+           injected block is the client's own copy; if it is third-party
+           SearchAtlas output it falls under decision D5 and should be cut, and
+           the same call then applies to the case-studies partner line.
+
+       F13 "Select Location" (atom 85) IS NOT PLACED. The copy doc lists it
+           among the #sgp_2 popup's fields, but the popup markup actually
+           served on contact.html contains no location field - the wizard's
+           step 1 is "Select Store Type". Placing a control the served form
+           does not have would be inventing a field. OWNER-DATA: confirm
+           whether a location question belongs in the booking form.
+       =================================================================== -->
+
+<!-- THE PAGE HEAD. A <header>, not a <section>: an article's introductory block.
+       Six independently optional slots; contact fills exactly ONE of them, and
+       still closes on the same rule at the same interval - the reports rule, which
+       is the only thing that makes an H1-alone opening read as a decision rather
+       than as a page that lost its intro. The office block is NOT lifted into the
+       head as a vCard the way the six team pages do it: the brief orders the page
+       hero -> doors -> rep picker -> office -> close, and the office block is a
+       ROUTING block for a reader who has already declined the two doors and the
+       form, not an identity card for a person. -->
+  <header class="mc-section tc-head surface-dark" data-surface="dark">
+    <div class="container">
+      <div class="row"><div class="col">
+        <div class="tc-head__grid">
+          <div class="tc-head__copy">
+            <!-- src: recovered from Code/clones/Dispenza/contact.html, see F1 -->
+            <h1 class="tc-head__title" id="contact-title" data-reveal>CONTACT US</h1>
+          </div>
+        </div>
+        <hr class="tc-head__seal" data-reveal>
+      </div></div>
+    </div>
+  </header>
+
+  <!-- pick: SECTION-COMPONENTS.md #36 | considered: #41,#33,#13 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and contact is the one page in the twenty-eight whose payload is CONTROLS rather than prose - two channel doors, three named people, eight questions and an address - which is exactly the case #36's document column is built for, because a document column can absorb objects of four different shapes on ONE left axis without any of them becoming a band that competes with the chrome's single closing conversion band; this page renders the container's OWN R5 FALLBACK rather than a different pattern, since the three-slice merge yields exactly two section-rank strings and the rail law refuses a rail of two; #41 closing CTA (final action) is the pattern a contact page most invites and is the one it must NOT be composed as, because G-CTA1 counts the chrome .precta as the site's one closing band and a page-length conversion band under it is the exact double-CTA failure that gate exists to stop; #33 custom-quote driver asks the visitor to request a price, which retracts the whole positioning wedge - every figure is already published on how-it-works, so this page asks for a booking, never for permission to quote; #13 split contact panel (form left, details right) is the conventional answer and is rejected on measurement, because this page's form is eight fields deep and the details block is two rows, so a 50/50 split leaves one arm 4x the height of the other and the office block floats in dead space at every width above 768. rigor is heavy because this pick propagates: it is the T-ARTICLE container for 17 pages, not a one-off slot. -->
+  <!-- .mc-hexfield-ground: the sheet's own existing marker for "this region hosts a
+       hex field". It raises the section's own .container to z-index 1 so the plane
+       painted behind it can never sit over the reading column or the controls. -->
+  <section class="mc-section tc-doc tc-doc--norail tc-doc--run surface-dark" id="contact-doc" data-surface="dark">
+    <div class="container">
+      <div class="row tc-doc__grid">
+
+        <!-- THE BODY COLUMN, RAIL-LESS. R5: two section-rank entries is below the
+             three-entry floor, so there is no rail element at all - the body col
+             drops the spine border and the gutter and no heading generates a tick. -->
+        <div class="col tc-doc__body">
+
+          <!-- UNIT 1. THE INVITATION AND THE TWO FRONT DOORS.
+               The source runs the two doors as a stacked pair inside a half-width
+               column; here they are a two-up grid on the page's own left axis, which
+               is the same choice at the width the document column actually has. -->
+          <article class="tc-sec" id="contact-talk">
+            <h2 class="tc-sec__h" data-reveal>LET'S TALK</h2>
+            <!-- THE SUPERSEDED TWIN, RETAINED - the same treatment integrations
+                 gives its own OTTO rewrite. The live site runs SearchAtlas OTTO,
+                 which rewrites the heading directly above this line in the browser
+                 AFTER load; OTTO-HEADING-OVERRIDES.md records the pair exactly:
+                 server sends "LET'S TALK", OTTO shows "Let's Talk About Your
+                 Dispensary Marketing Needs". content-bible section 6 records that
+                 status as SUPERSEDED with BOTH strings retained, so the rewrite
+                 rides adjacent to the heading it supersedes rather than replacing
+                 the client's CMS heading. -->
+            <p class="tc-emph" data-reveal>Let's Talk About Your Dispensary Marketing Needs</p>
+
+            <!-- THE TWO DOORS. Both were `a.sg_cta-boxed` on the source and both
+                 must stay WORKING CONTROLS, not decorative headings (brief section
+                 2). Door 1 jumps to the booking form on this page (F3); door 2 goes
+                 to the client's own published address (F2). The lead-in line is ONE
+                 atom placed twice, exactly as the source template reuses it - it is
+                 not two different sentences. The icons are decorative: each sits
+                 inside a link whose own text already names the destination, so an
+                 alt would be read twice by a screen reader. -->
+            <div class="ct-doors" data-reveal>
+              <a class="ct-door tc-lift" href="#contact-book">
+                <img class="ct-door__ico" src="../assets/in-pages/calendar_ico_w.webp"
+                     alt="" width="135" height="135" loading="lazy" decoding="async">
+                <span class="ct-door__kick">Click here to</span>
+                <span class="ct-door__label">REQUEST<br><strong>A DEMO</strong></span>
+              </a>
+              <a class="ct-door tc-lift" href="mailto:hello@dispenza.com">
+                <img class="ct-door__ico" src="../assets/in-pages/message_ico_w.webp"
+                     alt="" width="135" height="135" loading="lazy" decoding="async">
+                <span class="ct-door__kick">Click here to</span>
+                <span class="ct-door__label">SEND A<br>MESSAGE</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUN 2 of 3. Same document, same left axis, same unit interval - see the
+       THE DOCUMENT RUN note in dispenza-structural.css for why the page's three
+       moves are three sections rather than one. -->
+  <section class="mc-section tc-doc tc-doc--norail tc-doc--run surface-dark" id="contact-book-doc" data-surface="dark">
+    <div class="container">
+      <div class="row tc-doc__grid">
+        <div class="col tc-doc__body">
+
+          <!-- UNIT 2. THE BOOKING MODULE - the whole of the two retired routes,
+               landed. get-demo-from gives the heading, the rep label, three names
+               and the repeated control; conversation-form gives the eyebrow and the
+               control that reaches the form. The eight-field form is the #sgp_2
+               wizard, flattened (F4). -->
+          <article class="tc-sec" id="contact-book">
+            <!-- src: conversation-form.html h1. Kept per the brief, flagged in F11. -->
+            <p class="mc-eyebrow" data-reveal>Conversion Page</p>
+            <h2 class="tc-sec__h" id="contact-book-h" data-reveal>BOOK YOUR DEMO</h2>
+
+            <!-- src: conversation-form.html, its only control. On the source it
+                 opened the booking modal; here it reaches the booking form, which is
+                 the same destination now that the modal's contents render on the
+                 page. It rides at the TOP of the module because the module is
+                 2,272px tall on a phone: a reader who already knows who they want
+                 to talk to should not have to scroll the whole rep picker to reach
+                 a field. Ghost, never solid - the one solid button in this module is
+                 the submit, and the frozen two-button model allows no third. -->
+            <div class="mc-actions" data-reveal>
+              <a class="btn btn--ghost" href="#contact-form">BOOK NOW</a>
+            </div>
+
+            <!-- The source's h2 under an h1; here an h3 under the h2, because the
+                 page already spends its one h1 on CONTACT US. Rank relationship
+                 preserved, string untouched. -->
+            <div class="tc-defs" data-reveal><h3 class="tc-defs__t">SELECT A REP</h3></div>
+
+            <ul class="ct-reps" data-reveal>
+              <li class="ct-rep">
+                <figure class="ct-rep__shot tc-lift" data-media-in>
+                  <img src="../assets/in-pages/sergio-ruiz-dispenza-team.webp"
+                       alt="Sergio Ruiz" width="600" height="600" loading="lazy" decoding="async">
+                </figure>
+                <div class="ct-rep__id">
+                  <h4 class="ct-rep__name">Sergio Ruiz</h4>
+                  <a class="btn btn--ghost" href="sergio.html">Select Rep</a>
+                </div>
+              </li>
+              <li class="ct-rep">
+                <figure class="ct-rep__shot tc-lift" data-media-in>
+                  <img src="../assets/in-pages/thomas-benjamin-dispenza-team.webp"
+                       alt="Thomas Robinson" width="500" height="500" loading="lazy" decoding="async">
+                </figure>
+                <div class="ct-rep__id">
+                  <h4 class="ct-rep__name">Thomas Robinson</h4>
+                  <a class="btn btn--ghost" href="thomas.html">Select Rep</a>
+                </div>
+              </li>
+              <li class="ct-rep">
+                <!-- F10: the source routes this card to a page that does not exist.
+                     Name and control verbatim; destination is the form below. -->
+                <figure class="ct-rep__shot tc-lift" data-media-in>
+                  <img src="../assets/in-pages/our-team-at-dispenza-adam-brener.webp"
+                       alt="Adam Brenzi" width="500" height="500" loading="lazy" decoding="async">
+                </figure>
+                <div class="ct-rep__id">
+                  <h4 class="ct-rep__name">Adam Brenzi</h4>
+                  <a class="btn btn--ghost" href="#contact-form">Select Rep</a>
+                </div>
+              </li>
+            </ul>
+
+            <!-- THE BOOKING FORM. A REAL, WORKING CONTROL, NOT A MOCKUP: real
+                 <input>/<select> elements with real names, real types, the source's
+                 own `required` flags, and a real action that navigates on submit
+                 (F5). Every visible label, option and button string is the source's
+                 own, in the source's own order; only the step titles and the seven
+                 Prev/Next pairs are omitted, because the mechanism they drove is
+                 gone (F4).
+                 THE STORE-TYPE FIELD IS NAMED FOR ITS SIBLING. The paid lander
+                 pages/dispensary-marketing-and-advertising.content.html already
+                 ships step 1 of this same wizard and submits it here as
+                 `store-type`, so this field carries the same name and the value
+                 arrives in the query string. It cannot pre-select the matching
+                 radio without JavaScript, and no page-local script is allowed here,
+                 so the visitor confirms the choice. OWNER ACTION: the CRM wiring
+                 that reads the query string lands with the endpoint in F5.
+                 THE RADIO GROUP REUSES the .ad-choice family the lander already
+                 defines - it is literally the same control from the same wizard, so
+                 it is one rule set used twice, not two. -->
+            <form class="ct-form" id="contact-form" action="thank-you.html" method="get"
+                  aria-labelledby="contact-book-h" data-reveal>
+              <fieldset class="ct-form__set">
+                <p class="ct-field__label" id="contact-storetype">Select Store Type</p>
+                <ul class="ad-choices" role="radiogroup" aria-labelledby="contact-storetype">
+                  <li class="ad-choice">
+                    <input class="ad-choice__input" type="radio" name="store-type" id="ct-store-retail" value="Retail Only">
+                    <label class="ad-choice__label" for="ct-store-retail">Retail Only</label>
+                  </li>
+                  <li class="ad-choice">
+                    <input class="ad-choice__input" type="radio" name="store-type" id="ct-store-delivery" value="Delivery Only">
+                    <label class="ad-choice__label" for="ct-store-delivery">Delivery Only</label>
+                  </li>
+                  <li class="ad-choice">
+                    <input class="ad-choice__input" type="radio" name="store-type" id="ct-store-both" value="Retail &amp; Delivery">
+                    <label class="ad-choice__label" for="ct-store-both">Retail &amp; Delivery</label>
+                  </li>
+                </ul>
+
+                <div class="ct-form__grid">
+                  <div class="ct-field">
+                    <label class="ct-field__label" for="ct-first-name">First Name <span class="ct-req">*</span></label>
+                    <input class="ct-input" type="text" id="ct-first-name" name="first_name" autocomplete="given-name" required>
+                  </div>
+                  <div class="ct-field">
+                    <label class="ct-field__label" for="ct-last-name">Last Name</label>
+                    <input class="ct-input" type="text" id="ct-last-name" name="last_name" autocomplete="family-name">
+                  </div>
+                  <div class="ct-field ct-field--wide">
+                    <label class="ct-field__label" for="ct-dispensary">Dispensary Name <span class="ct-req">*</span></label>
+                    <input class="ct-input" type="text" id="ct-dispensary" name="dispensary_name" autocomplete="organization" required>
+                  </div>
+                  <div class="ct-field">
+                    <label class="ct-field__label" for="ct-email">What is your email? <span class="ct-req">*</span></label>
+                    <input class="ct-input" type="email" id="ct-email" name="email" autocomplete="email" required>
+                  </div>
+                  <div class="ct-field">
+                    <!-- the placeholder is the source's own, verbatim -->
+                    <label class="ct-field__label" for="ct-phone">What is your phone number? <span class="ct-req">*</span></label>
+                    <input class="ct-input" type="tel" id="ct-phone" name="phone_number" autocomplete="tel"
+                           inputmode="tel" placeholder="+1 (555) 555-5555" required>
+                  </div>
+                  <div class="ct-field ct-field--wide">
+                    <!-- the "www." prefill is the source's own `value="www."` -->
+                    <label class="ct-field__label" for="ct-website">What is your website URL "www." <span class="ct-req">*</span></label>
+                    <input class="ct-input" type="text" id="ct-website" name="website" autocomplete="url" value="www." required>
+                  </div>
+                  <div class="ct-field ct-field--wide">
+                    <label class="ct-field__label" for="ct-when">When would you like to talk? <span class="ct-req">*</span></label>
+                    <select class="ct-select" id="ct-when" name="time_to_talk" required>
+                      <option value="">Select an option...</option>
+                      <option value="As soon as possible">As soon as possible</option>
+                      <option value="Choose Date &amp; Time">Choose Date &amp; Time</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- "SUBMIT" is the #sgp_2 form's own submit label, on the submit
+                     button, and it is the only control in this row: the module's
+                     second source control, BOOK NOW, sits at the TOP of the module
+                     where it is an entry rather than a rival to the submit. -->
+                <div class="ct-form__actions mc-actions">
+                  <button class="btn btn--solid" type="submit">SUBMIT</button>
+                </div>
+              </fieldset>
+            </form>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUN 3 of 3, and the one the hex plane hosts on: it is the section that is
+       CONTIGUOUS with the footer, so one plane crosses the joint with no dead
+       strip between them. -->
+  <section class="mc-section tc-doc tc-doc--norail mc-hexfield-ground surface-dark" id="contact-close-doc" data-surface="dark">
+    <div class="container">
+      <div class="row tc-doc__grid">
+        <div class="col tc-doc__body">
+
+          <!-- UNIT 3. THE OFFICE ROUTING BLOCK. NO SOURCE HEADING EXISTS OVER IT, so
+               none is written - the two labels ARE the source's headings for their
+               own values, and the vCard object is what carries them. The source
+               prints the value above its label in two `.sg_contact-card` boxes; a
+               <dl> puts the label first, which is the only ordering a definition
+               list has and the same one the six team pages already ship. Both
+               strings are untouched. -->
+          <article class="tc-sec" id="contact-office">
+            <div class="tc-vcard" data-reveal>
+              <dl class="tc-rows">
+                <div class="tc-rows__row">
+                  <dt class="tc-rows__k">Office Address</dt>
+                  <!-- F8: "Suite 110" here, "Suite 110 B" in the chrome footer. Both ship. -->
+                  <dd class="tc-rows__v">6905 W Charleston Blvd, Suite 110, Las Vegas, NV 89117</dd>
+                </div>
+                <div class="tc-rows__row">
+                  <dt class="tc-rows__k">Office Phone</dt>
+                  <!-- The source href is tel:+1 (702) 420-7272 - spaces and brackets
+                       inside a tel: URI. The VISIBLE string is untouched; the href is
+                       normalised to the digits, which is what the six team pages
+                       already ship and what a dialler can actually parse. -->
+                  <dd class="tc-rows__v"><a href="tel:+17024207272">+1 (702) 420-7272</a></dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <!-- THE CLOSE, FOLDED INLINE - NOT A SECOND CLOSING BAND. The chrome
+               .precta IS the site-wide closing conversion band, and a second
+               dedicated band is exactly what G-CTA1 blocks. This page is the
+               conversion sink, so its close carries NO conversion CTA at all - it
+               would be asking a reader who is already standing at the form to go
+               somewhere and come back. What it carries instead is the brief's one
+               honest outbound: the reader who is not ready to talk goes to the
+               published price ladder or to the named results. NEITHER LABEL IS
+               INVENTED FOR THIS PAGE: both are the chrome's own route labels,
+               already shipped on all 27 pages. -->
+          <!-- THE CARRIED RELATED-PAGES LINE (F12). Three strings the source hid
+               and the build shows. Both anchors pointed at THIS page on the source
+               - /request-a-demo and /contact, i.e. a visible self-link loop - so
+               the brief repoints them at the two sections that actually answer
+               them: the demo request lands on the booking module, the contact ask
+               lands on the two doors. The wording is untouched. -->
+          <p class="ct-related" data-reveal>
+            <span class="ct-related__label">Related Pages:</span>
+            <a class="ct-related__link" href="#contact-book">Request a Demo Consultation</a>
+            <a class="ct-related__link" href="#contact-talk">Contact Dispenza for Marketing Solutions</a>
+          </p>
+
+          <div class="mc-actions tc-close" data-reveal>
+            <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
+            <a class="btn btn--ghost" href="case-studies.html">Results</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- ==========================================================================
+     THE LOWER-GROUND HEX PLANE, as this page runs out into the footer.
+     ==========================================================================
+     THE ASK, ported from the home page's isometric prism field and already
+     shipped on the six team pages and the five case studies. hex-field.js renders
+     ONE plate for the UNION of both host boxes and gives each host an aperture
+     onto it, so the document carries a single sweep group and a single pointer
+     circle. Both hosts carry the same data-hexfield value; that string is the
+     whole seam contract.
+
+     WINDOW 1 borrows the DOCUMENT section's box; --tailfade holds the plane fully
+     OFF the reading column and fades it in only as the page descends into the
+     footer. data-hex-clear anchors the soft elliptical clearing on .tc-doc__body,
+     the column that has to stay legible - which on THIS page includes eight form
+     labels and a <select>, so the clearing is doing more work here than on a prose
+     page, not less.
+
+     WINDOW 2 borrows .site-footer's box and sits HERE, inside <main>: everything
+     outside <main> is the LOCKED CHROME BLOCK stamped into all 27 pages, so a host
+     placed in the footer there would hand a plane to every page on the site. This
+     is a per-page treatment and must not propagate. The footer element is never
+     touched.
+
+     WHAT THIS PAGE DOES NOT GET: RISE SMOKE ON THE HEAD. The head here is a single
+     H1 and its closing rule, and .mc-smokerise__lid clears only the band a title
+     occupies - there is nothing else in this head for the column to rise behind,
+     so the treatment would be motion with no subject. smoke-engine.js is therefore
+     NOT linked, and that is deliberate rather than an omission: it is the shared
+     particle model, this page runs no smoke field, and the 23KB would buy nothing.
+     ========================================================================== -->
+<div class="mc-hexfield mc-hexfield--tailfade" data-hexfield="lower-ground"
+     data-hexfield-cover="#contact-close-doc" data-hex-clear=".tc-doc__body" aria-hidden="true"></div>
+<div class="mc-hexfield" data-hexfield="lower-ground"
+     data-hexfield-cover=".site-footer" aria-hidden="true"></div>
+
+<!-- The plane carries its own behaviour, inside <main>, and is linked PER PAGE
+     rather than from the chrome: hex-field.js is 48KB and a plain text page has no
+     reason to fetch it. It takes no defer and no DOMContentLoaded wrapper, because
+     it measures after window LOAD: the field's height is the sum of two real page
+     regions and is not final until webfonts and the footer imagery have settled.
+     It honours prefers-reduced-motion by rendering one static frame and attaching
+     no listener at all. -->
+<script src="../_design/hex-field.js"></script>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
+</body>
+</html>
