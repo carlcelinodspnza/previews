@@ -227,10 +227,10 @@
       <div class="row"><div class="col">
         <div class="tc-head__grid">
           <div class="tc-head__copy">
-            <h1 class="tc-head__title" id="reports-title">REPORTS</h1>
+            <h1 class="tc-head__title" id="reports-title" data-reveal>REPORTS</h1>
           </div>
         </div>
-        <hr class="tc-head__seal">
+        <hr class="tc-head__seal" data-reveal>
       </div></div>
     </div>
   </header>
@@ -261,44 +261,44 @@
         <div class="col tc-doc__body">
 
           <article class="tc-sec" id="reports-s1">
-            <h2 class="tc-sec__h">Performance Marketing Reports</h2>
+            <h2 class="tc-sec__h" data-reveal>Performance Marketing Reports</h2>
             <div class="tc-copy">
-              <p class="mc-body">Our performance marketing reports focus on the key metrics that reflect the effectiveness of your marketing campaigns. We provide detailed data on various performance indicators such as website actions, including actions taken on your website such as form submissions, clicks, and purchases. We also track website visits, direction requests, and appearances on the Google top 3 map pack. These reports help you understand the impact of our strategies on driving engagement and attracting customers to your dispensary.</p>
+              <p class="mc-body" data-reveal>Our performance marketing reports focus on the key metrics that reflect the effectiveness of your marketing campaigns. We provide detailed data on various performance indicators such as website actions, including actions taken on your website such as form submissions, clicks, and purchases. We also track website visits, direction requests, and appearances on the Google top 3 map pack. These reports help you understand the impact of our strategies on driving engagement and attracting customers to your dispensary.</p>
             </div>
-            <figure class="tc-plate tc-lift">
+            <figure class="tc-plate tc-lift" data-media-in>
               <img src="../assets/in-pages/dispenza-result-report-mobile-phone-view.webp"
                    alt="dispenza result report mobile phone view" width="714" height="672" loading="lazy" decoding="async">
             </figure>
           </article>
 
           <article class="tc-sec" id="reports-s2">
-            <h2 class="tc-sec__h">Search Performance Reports</h2>
+            <h2 class="tc-sec__h" data-reveal>Search Performance Reports</h2>
             <div class="tc-copy">
-              <p class="mc-body">We provide reports that measure the visibility and reach of your dispensary in search engine results. These reports include search impressions, which indicate how many times your dispensary appeared in search results. We also provide top 3 ranking reports, which show the keywords and phrases for which your dispensary ranks in the top 3 positions on search engines. These reports give you valuable insights into your dispensary's organic search performance and visibility..</p>
+              <p class="mc-body" data-reveal>We provide reports that measure the visibility and reach of your dispensary in search engine results. These reports include search impressions, which indicate how many times your dispensary appeared in search results. We also provide top 3 ranking reports, which show the keywords and phrases for which your dispensary ranks in the top 3 positions on search engines. These reports give you valuable insights into your dispensary's organic search performance and visibility..</p>
             </div>
-            <figure class="tc-plate tc-lift">
+            <figure class="tc-plate tc-lift" data-media-in>
               <img src="../assets/in-pages/dispenza-marketing-search-performance-result.webp"
                    alt="dispenza marketing search performance result" width="646" height="488" loading="lazy" decoding="async">
             </figure>
           </article>
 
           <article class="tc-sec" id="reports-s3">
-            <h2 class="tc-sec__h">Backlink Analysis Reports</h2>
+            <h2 class="tc-sec__h" data-reveal>Backlink Analysis Reports</h2>
             <div class="tc-copy">
-              <p class="mc-body">Backlinks play a crucial role in improving your dispensary's online presence and search engine rankings. Our reports include an analysis of the backlinks pointing to your website. We track the number of backlinks, their quality, and their impact on your domain authority. These reports help you understand the effectiveness of our link building strategies and the overall authority of your website.</p>
+              <p class="mc-body" data-reveal>Backlinks play a crucial role in improving your dispensary's online presence and search engine rankings. Our reports include an analysis of the backlinks pointing to your website. We track the number of backlinks, their quality, and their impact on your domain authority. These reports help you understand the effectiveness of our link building strategies and the overall authority of your website.</p>
             </div>
-            <figure class="tc-plate tc-lift">
+            <figure class="tc-plate tc-lift" data-media-in>
               <img src="../assets/in-pages/dispenza-backlink-performance-result.webp"
                    alt="dispenza backlink performance result" width="765" height="494" loading="lazy" decoding="async">
             </figure>
           </article>
 
           <article class="tc-sec" id="reports-s4">
-            <h2 class="tc-sec__h">Website Traffic Reports</h2>
+            <h2 class="tc-sec__h" data-reveal>Website Traffic Reports</h2>
             <div class="tc-copy">
-              <p class="mc-body">Our website traffic reports provide valuable insights into the number of visitors your website receives, the sources of traffic, and the behavior of your visitors. We track metrics such as total website visits, unique visitors, page views, and average session duration. These reports help you understand the effectiveness of your website in attracting and engaging visitors, allowing you to optimize your website's performance.</p>
+              <p class="mc-body" data-reveal>Our website traffic reports provide valuable insights into the number of visitors your website receives, the sources of traffic, and the behavior of your visitors. We track metrics such as total website visits, unique visitors, page views, and average session duration. These reports help you understand the effectiveness of your website in attracting and engaging visitors, allowing you to optimize your website's performance.</p>
             </div>
-            <figure class="tc-plate tc-lift">
+            <figure class="tc-plate tc-lift" data-media-in>
               <img src="../assets/in-pages/dispensary-marketing-website-traffic.webp"
                    alt="dispensary marketing website traffic" width="698" height="555" loading="lazy" decoding="async">
             </figure>
@@ -317,7 +317,7 @@
                pages/case-studies.content.html, so the site stays one site.
                NEITHER LABEL IS INVENTED FOR THIS PAGE: "Book demo" is the client's
                frozen primary CTA and "How It Works" is an IA page name. -->
-          <div class="mc-actions tc-close">
+          <div class="mc-actions tc-close" data-reveal>
             <a class="btn btn--solid" href="contact.html">Book demo</a>
             <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
           </div>
@@ -509,5 +509,18 @@
   }
 })();
 </script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
 </body>
 </html>

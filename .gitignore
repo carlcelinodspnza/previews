@@ -1,2 +1,10 @@
 .DS_Store
 Thumbs.db
+
+# Build scratch that keeps getting synced into the publish tree by mistake.
+# The previews repo is the PUBLISHED SITE - it should carry pages, sheets, scripts and assets,
+# not the build's tournament carriers or retired working copies.
+dispenza/_design/_tournament/templates/
+dispenza/_design/hero/_prev-column/
+dispenza/_design/hero/_retired/
+*/pages/*.content.html

@@ -447,17 +447,17 @@
         <div class="tc-head__grid">
           <div class="tc-head__copy">
             <!-- src: D-SRC-ADS1-0010 -->
-            <h1 class="tc-head__title" id="ads1-title">Cannabis Dispensary</h1>
-            <h2 class="tc-head__title">Marketing</h2>
+            <h1 class="tc-head__title" id="ads1-title" data-reveal>Cannabis Dispensary</h1>
+            <h2 class="tc-head__title" data-reveal>Marketing</h2>
             <!-- src: D-SRC-ADS1-0016 | D-POSITION-WEDGE-GUARANTEE.
                  The widest of the two wordings the client runs, placed
                  verbatim and NOT reconciled against the sibling lander's
                  "Only Dispensary Marketing Agency that Guarantees Results"
                  (source contradiction C5, owner-held under D11). -->
-            <h3 class="ad-head__claim">Only Marketing Agency In Cannabis That Guarantees Results</h3>
+            <h3 class="ad-head__claim" data-reveal>Only Marketing Agency In Cannabis That Guarantees Results</h3>
             <!-- F7: the client's own star mark, no score, no count, no
                  platform. The alt describes the graphic and claims no rating. -->
-            <figure class="ad-stars">
+            <figure class="ad-stars" data-reveal>
               <img src="../assets/in-pages/ae707132fc8f6c0f9b272630f5014d04eaf67a82.webp"
                    alt="Five gold stars." width="1140" height="243" decoding="async">
             </figure>
@@ -465,7 +465,7 @@
                  LEARN HOW outlined, BOOK DEMO solid. LEARN HOW carries the
                  guarantee's condition by route (F9); BOOK DEMO is the single
                  sitewide conversion action and the frozen label, in caps. -->
-            <div class="mc-actions">
+            <div class="mc-actions" data-reveal>
               <a class="btn btn--ghost" href="how-it-works.html">LEARN HOW</a>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
@@ -477,7 +477,18 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #2,#9,#27 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER itself and ads1 is the page that proves the container survives a page that is not prose - a dated figure band, a conversion trigger, a client mark wall, eight quotes and eight result plates, five unlike payloads that still have to read as ONE document on ONE left axis, which is exactly what #36's single-axis document does and what the four other candidates cannot do without cutting the page into unrelated bands; this page renders the container's OWN R5 FALLBACK rather than its rail, because the source carries exactly two headings at the rank below the h1 and the rail law refuses a rail of two, so there is no nav, no spine and no ticks and the body column takes the page's left axis alone; #2 trust strip / logo wall is the pattern this page most invites and is the one it must NOT be composed as, because composing the whole page around a mark wall would put the unverified press marks at the top of the argument and the client's own measured results at the bottom, inverting the only proof this lander actually owns; #9 services 3-col cards four peers into a grid and there are no four peers here - the five payloads are deliberately unlike, and carding them would make the eight-quote wall a peer of the four-figure band and flatten the difference between a claim and its evidence; #27 numbered process steps asserts a SEQUENCE the source does not have, and numbering a lander's proof would be template-authored meaning the client never wrote. rigor is heavy because this pick is the T-ARTICLE container for 17 pages, not a one-off slot. -->
-  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="ads1-doc" data-surface="dark">
+  <!-- .mc-hexfield-ground: the sheet's existing marker for "this region hosts a
+       hex field". The tail-plane rule keys the content raise off it
+       (.tc-doc.mc-hexfield-ground > .container{position:relative;z-index:1}), so
+       the document sits ON the plane rather than under it. NO NEW CLASS AND NO
+       NEW RULE: .mc-hexfield is an absolutely positioned z-index:0 layer and
+       therefore paints above in-flow inline text, and this marker plus that
+       existing rule is how every other hex host on this build already answers it.
+       The raise is NOT optional and NOT covered by the reveals: page-effects.js
+       drops its reveal transform under prefers-reduced-motion, so without the
+       raise the plane would paint over the whole document for a reduced-motion
+       reader (measured, both ways, with the layer forced opaque). -->
+  <section class="mc-section tc-doc tc-doc--norail mc-hexfield-ground surface-dark" id="ads1-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
 
@@ -495,23 +506,23 @@
                the second word. -->
           <article class="tc-sec" id="ads1-influence">
             <!-- src: D-SRC-ADS1-0017 | D-POSITION-WEDGE-SPECIFICITY -->
-            <h2 class="tc-sec__h">Our 2024 Influence</h2>
+            <h2 class="tc-sec__h" data-reveal>Our 2024 Influence</h2>
             <ul class="tc-metrics">
-              <li class="tc-metric">
+              <li class="tc-metric" data-reveal>
                 <span class="tc-metric__label">Sales <b>Influence</b></span>
-                <span class="tc-metric__figure">1.2 BLN</span>
+                <span class="tc-metric__figure"><span data-count-to="1.2" data-count-dec="1">1.2</span> BLN</span>
               </li>
-              <li class="tc-metric">
+              <li class="tc-metric" data-reveal>
                 <span class="tc-metric__label">Website Visits</span>
-                <span class="tc-metric__figure">2.1 BLN</span>
+                <span class="tc-metric__figure"><span data-count-to="2.1" data-count-dec="1">2.1</span> BLN</span>
               </li>
-              <li class="tc-metric">
+              <li class="tc-metric" data-reveal>
                 <span class="tc-metric__label">GOOGLE IMPRESSIONS</span>
-                <span class="tc-metric__figure">3.8 BLN</span>
+                <span class="tc-metric__figure"><span data-count-to="3.8" data-count-dec="1">3.8</span> BLN</span>
               </li>
-              <li class="tc-metric">
+              <li class="tc-metric" data-reveal>
                 <span class="tc-metric__label">Location Helped</span>
-                <span class="tc-metric__figure">500+</span>
+                <span class="tc-metric__figure"><span data-count-to="500" data-count-dec="0" data-count-suffix="+">500+</span></span>
               </li>
             </ul>
           </article>
@@ -524,11 +535,11 @@
                source's own step-one heading and labels the step-one action.
                The eight form steps themselves are the shared component (F10). -->
           <article class="tc-sec" id="getintouch">
-            <h2 class="tc-sec__h">Book your FREE demo now</h2>
+            <h2 class="tc-sec__h" data-reveal>Book your FREE demo now</h2>
             <div class="tc-copy">
-              <p class="mc-body">On the NEXT PAGE. Just answer a few simple questions</p>
+              <p class="mc-body" data-reveal>On the NEXT PAGE. Just answer a few simple questions</p>
             </div>
-            <p class="mc-eyebrow">Start Here</p>
+            <p class="mc-eyebrow" data-reveal>Start Here</p>
             <!-- OMITTED: the "GET QUOTE" button that stood here.
                  CONTENT LAW breach, removed 2026-08-18. The string is NOT in
                  _source/atoms/ads1.json at all; _copy/ads1.md files it under
@@ -554,8 +565,8 @@
                  "Our Happy Customers" and "See what our clients say about us"
                  on the sibling lander, so this page renders them from their
                  owner and claims no id of its own for them. -->
-            <h2 class="tc-sec__h">Trusted by</h2>
-            <div class="ad-wall">
+            <h2 class="tc-sec__h" data-reveal>Trusted by</h2>
+            <div class="ad-wall" data-reveal>
               <ul class="ad-wall__grid">
                 <li class="ad-mark">
                   <img src="../assets/in-pages/cookies_sunland_white_4.webp"
@@ -593,9 +604,9 @@
                hyphen-minus where the source has an em dash (F14). -->
           <article class="tc-sec" id="ads1-quotes">
             <!-- atoms 110 and 111, homed on the sibling lander (see unit 3). -->
-            <h2 class="tc-sec__h">Our Happy Customers</h2>
-            <p class="tc-emph">See what our clients say about us</p>
-            <ul class="ad-quotes">
+            <h2 class="tc-sec__h" data-reveal>Our Happy Customers</h2>
+            <p class="tc-emph" data-reveal>See what our clients say about us</p>
+            <ul class="ad-quotes" data-reveal>
               <li class="ad-quote ad-lift">
                 <!-- src: D-SRC-ADS1-0001 -->
                 <blockquote class="ad-quote__text">"Dispenza helped us increase sales by over 50% in just the first three months. The speed of their setup and the depth of their tracking blew us away."</blockquote>
@@ -655,7 +666,7 @@
                  kind of drift re-typing hides. Every string baked into a plate
                  is carried in its alt, so figure, label and window reach a
                  screen reader as one unit. -->
-            <div class="ad-seam">
+            <div class="ad-seam" data-reveal>
               <ul class="ad-tiles">
                 <li>
                   <img src="../assets/in-pages/New_Project_8_.webp"
@@ -710,7 +721,7 @@
                here; every page atom is already placed above.
                src: D-IA-FLOWS | D-IA-GROUPS | D-POSITION-WEDGE-PRICE -->
           <div class="tc-close">
-            <div class="mc-actions">
+            <div class="mc-actions" data-reveal>
               <a class="btn btn--ghost" href="case-studies.html">CASE STUDIES</a>
             </div>
           </div>
@@ -719,6 +730,73 @@
       </div>
     </div>
   </section>
+
+<!-- ==========================================================================
+     THE LOWER-GROUND HEX PLANE, as this lander runs out into the footer.
+     ==========================================================================
+     The home page's isometric prism field, continued here. NOT a second copy of a
+     field the footer also has: hex-field.js renders ONE plate for the union of
+     both host boxes and gives each host an aperture onto it, so there is a single
+     sweep group and a single pointer circle in the document. Both hosts carry the
+     SAME data-hexfield value; that string is the whole seam contract.
+
+     WHY THIS PAGE GETS THE PLANE AND NOT SMOKE. ads1 ends on a CARD DECK -- the
+     eight per-city result plates, then one ghost route to case-studies -- and a
+     deck running down into the footer is exactly the shape the home page seats
+     its plane under. It is also the quietest of the three fields: a static ground
+     with one slow sweep, no particle loop, no motion under the reader's eye. On a
+     paid lander that matters, because the atmosphere has to support the proof
+     band without ever competing with the conversion route.
+
+     WINDOW 1 borrows the DOCUMENT section's box. Measured at 1440: #ads1-doc runs
+     867 to 3907 and .site-footer begins at 3907, so the section is the only
+     full-bleed box on this template that is CONTIGUOUS with the footer -- one
+     plane across the joint, no seam. --tailfade is what makes a document-tall
+     window a TAIL rather than wallpaper: the plane is held fully OFF the reading
+     column and fades in only as the page descends, so it first appears behind the
+     quote wall's last rows and is at full strength under the plate deck.
+     data-hex-clear anchors the soft clearing on the reading column itself, the
+     thing that must stay legible.
+
+     WINDOW 2 borrows .site-footer's box, and it sits HERE, inside <main>, as a
+     correction rather than a convenience: everything outside <main> is the LOCKED
+     CHROME BLOCK stamped into all 27 pages, so a host placed in the footer there
+     would hand a hex plane to every page on the site. This is a per-page
+     treatment and must not propagate. The footer element itself is never touched,
+     and its card stays opaque and floats ON the plane.
+
+     THE --cover MODIFIER CLASS IS DELIBERATELY NOT USED. It has zero rules in any
+     linked sheet, so adding it would trip G-ORPHAN, and inventing CSS for it to
+     make it legal would be the orphan gate satisfied by a lie. hex-field.js keys
+     cover behaviour entirely off the data-hexfield-cover ATTRIBUTE (verified:
+     the string "mc-hexfield--cover" appears nowhere in the module). The home page
+     dropped that class on 2026-08-18 for exactly this reason.
+
+     Both windows are decorative end to end: aria-hidden, position:absolute,
+     pointer-events:none, so neither can take a click off the CASE STUDIES route
+     or a footer link. hex-field.js honours prefers-reduced-motion by rendering
+     one static frame and attaching no listener at all. -->
+<div class="mc-hexfield mc-hexfield--tailfade" data-hexfield="lower-ground"
+     data-hexfield-cover="#ads1-doc" data-hex-clear=".tc-doc__body" aria-hidden="true"></div>
+<div class="mc-hexfield" data-hexfield="lower-ground"
+     data-hexfield-cover=".site-footer" aria-hidden="true"></div>
+
+<!-- THE PLANE CARRIES ITS OWN BEHAVIOUR, INSIDE <main>, and is linked PER PAGE
+     rather than from the chrome. Every byte outside <main> is the locked chrome
+     block: hex-field.js is 48KB and the pages that mount no plane have no reason
+     to fetch it. The chrome already links page-effects.js for the reveals and
+     counters, which every page does use; the atmospherics are opt-in per page.
+
+     smoke-engine.js IS NOT LINKED HERE, and that is deliberate rather than an
+     omission. It is 23KB and hex-field.js does not use it -- the module carries
+     no reference to DispenzaSmoke anywhere (verified by search) and builds its
+     own geometry. This page mounts no smoke field, so the engine would be 23KB of
+     dead weight on a paid-traffic lander.
+
+     No defer and no DOMContentLoaded wrapper: the module measures after window
+     LOAD, because the field's height is the sum of two real page regions and is
+     not final until webfonts and the footer imagery have settled. -->
+<script src="../_design/hex-field.js"></script>
 
 </main>
 
@@ -902,5 +980,18 @@
   }
 })();
 </script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
 </body>
 </html>

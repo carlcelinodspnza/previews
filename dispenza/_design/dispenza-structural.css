@@ -6193,6 +6193,14 @@ a.hw-cell__value:focus-visible{
   text-transform:uppercase;
   color:var(--ds-ink-heading);
   text-wrap:balance;
+  /* A ONE-WORD TITLE MUST NEVER SCROLL THE PAGE. --ds-step-display is fluid but floors at 46px,
+     and at a 375px viewport this column is 327px wide: 'ADVERTISEMENT' (13 chars) renders 401px
+     and pushed the whole document to 425px - ads-design was the one page in nineteen with a
+     horizontal scroll. Measured: 12 chars ('INTEGRATIONS') still fits, 13 does not.
+     hyphens breaks at a syllable (the document is lang=en); overflow-wrap is the fallback for a
+     token hyphenation cannot split, so no future long title can reintroduce a page-level scroll. */
+  hyphens:auto;
+  overflow-wrap:break-word;
 }
 .mc-eyebrow + .tc-head__title{margin-top:var(--ds-space-md)}
 /* THE LEDE. Body face at the body step — the ladder's void between 34px and 17px
@@ -7330,4 +7338,113 @@ a.hw-cell__value:focus-visible{
 #case-studies > .container.container--plane{position:static;z-index:auto}
 
 /* ▲▲▲ .container--plane — closed ▲▲▲
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ▼▼▼ THE TAIL PLANE — T-ARTICLE case studies (5 pages) — added 2026-08-18 ▼▼▼
+
+   THE ASK. Port the home page's isometric hex plane onto the deep case studies,
+   "where the page runs down into the footer".
+
+   WHY A COVER HOST AND NOT A HOST INSIDE THE TAIL. Measured on firehouse at 1440:
+   the last unit (#<slug>-more, the sibling-case deck) is 759px wide and its box
+   ends 151px above the footer, because .tc-doc pays --ds-rhythm of bottom padding
+   after it. A window on THAT box gives a column-width rectangle with a 151px dead
+   strip under it -- prototyped, and it reads as two disconnected panels rather
+   than one plane. The SECTION's box ends exactly where the footer begins (doc
+   1451+4688 = 6139 = footer top, measured), so a window on the section is the only
+   full-bleed box on this template that is CONTIGUOUS with the footer. One plate,
+   two apertures, no seam -- the home page's arrangement, unchanged.
+
+   SO THE WINDOW IS THE WHOLE DOCUMENT, AND THE MASK IS WHAT MAKES IT A TAIL.
+   Hexagons behind 4,700px of reading column is not the ask and is not restraint;
+   the mask holds the plane fully OFF the document and fades it in as the page
+   runs out. Percentages, not pixels, deliberately: these five pages are the same
+   template at five different lengths (doc height 4688-5342px across the set at
+   the two widths measured), and a percentage puts the turn at the same point in
+   the page's own descent on every one of them, where a pixel table would have to
+   be re-derived per page and would silently go wrong on the next copy change.
+
+   The mask paint is a token for the same reason the smoke masks' is: a mask still
+   carries a colour value, and the sheet stays hex-free.
+   ─────────────────────────────────────────────────────────────────────────── */
+.mc-hexfield--tailfade{
+  -webkit-mask-image:linear-gradient(180deg,
+    transparent 0%, transparent 55%,
+    var(--ds-ink-on-dark) 80%, var(--ds-ink-on-dark) 100%);
+          mask-image:linear-gradient(180deg,
+    transparent 0%, transparent 55%,
+    var(--ds-ink-on-dark) 80%, var(--ds-ink-on-dark) 100%);
+}
+
+/* THE CONTENT SITS ON THE PLANE, not under it. .mc-hexfield is positioned at
+   z-index:0, which paints it ABOVE the in-flow text of the root stacking context
+   -- the same reason the home page carries `#case-studies > .container{z-index:1}`.
+   NO NEW CLASS IS INVENTED for the hook: .mc-hexfield-ground is the sheet's own
+   existing "this region hosts a hex field" marker, and .tc-doc scopes the raise to
+   the one template that asked for it, so the other twelve T-ARTICLE pages keep
+   their stacking untouched. */
+.tc-doc.mc-hexfield-ground > .container{position:relative;z-index:1}
+
+/* ▲▲▲ THE TAIL PLANE — closed ▲▲▲
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ▼▼▼ THE CLINGING SMOKE ON A T-ARTICLE HEAD — added 2026-08-18 ▼▼▼
+
+   THE BASE LID IS TUNED TO #benchmarks AND CANNOT BE REUSED HERE UNCHANGED. Its
+   stops are written against --ds-rhythm because that is where that section's first
+   line of type begins. .tc-head's first line begins one interval lower --
+   calc(--ds-rhythm + --ds-space-xl), the fixed chrome's clearance formula, measured
+   215.2px at 1440 and 128px at 390 on all five pages -- so the base clear band lands
+   in the wrong place on this host. The stops below are the SAME formula the host's
+   own padding uses, so they re-solve for free at every width and survive a retune of
+   either token.
+
+   AND THE LID NOW HAS A FLOOR, which the base does not. MEASURED, not anticipated:
+   with the base mask the client-file link on flwrco read 4.17:1 at 1440 (--ds-accent-ink
+   is 5.71:1 on the canvas, so it has only ~0.015 of backdrop luminance to give before
+   it drops under 4.5). The rising parcels reach the client file at the foot of the
+   head. .tc-vcard begins between 65.4% and 77.9% of the head's height across the five
+   pages at 1440 and 390 (measured, all ten combinations), so the field is faded out by
+   60% -- above every one of them, on every page, with margin. The cap, which is the
+   whole point of the effect, is untouched: it lives in the clearance band at the top.
+
+   Percentages for the floor and the host's own token formula for the head: the floor
+   has to track a box whose height runs 1280-1944px across the set, and a pixel stop
+   would be a five-page table that goes wrong on the next copy change.
+   ─────────────────────────────────────────────────────────────────────────── */
+/* OPT-IN, NOT AMBIENT. The selector carries a modifier rather than keying off
+   .tc-head alone, and that is a correction rather than a style preference: at the
+   time this block was written, pages/dispensary-marketing-and-advertising.content.html
+   (promoted 22:08, this rule 22:25) already mounted a smokerise lid on ITS .tc-head
+   and had recorded, in its own markup, that the BASE mask lands correctly there --
+   its head is a short wordmark lockup that falls entirely inside the base cleared
+   band, so it needs neither the re-anchored stops nor the floor. A bare `.tc-head
+   .mc-smokerise__lid` would have retuned a finished page nobody asked to change.
+   The modifier keeps this retune to the five case studies whose heads actually run
+   long enough to need it, and leaves every other head on the base lid. */
+.tc-head .mc-smokerise__lid--casehead{
+  --tc-headpad:calc(var(--ds-rhythm) + var(--ds-space-xl));
+  -webkit-mask-image:linear-gradient(180deg,
+    var(--ds-ink-on-dark) 0,
+    var(--ds-ink-on-dark) calc(var(--tc-headpad) - 40px),
+    transparent           calc(var(--tc-headpad) - 12px),
+    transparent           calc(var(--tc-headpad) + var(--ds-space-2xl) * 3),
+    var(--ds-ink-on-dark) calc(var(--tc-headpad) + var(--ds-space-2xl) * 3 + 60px),
+    var(--ds-ink-on-dark) 45%,
+    transparent           60%,
+    transparent           100%);
+          mask-image:linear-gradient(180deg,
+    var(--ds-ink-on-dark) 0,
+    var(--ds-ink-on-dark) calc(var(--tc-headpad) - 40px),
+    transparent           calc(var(--tc-headpad) - 12px),
+    transparent           calc(var(--tc-headpad) + var(--ds-space-2xl) * 3),
+    var(--ds-ink-on-dark) calc(var(--tc-headpad) + var(--ds-space-2xl) * 3 + 60px),
+    var(--ds-ink-on-dark) 45%,
+    transparent           60%,
+    transparent           100%);
+}
+
+/* ▲▲▲ THE CLINGING SMOKE ON A T-ARTICLE HEAD — closed ▲▲▲
    ═══════════════════════════════════════════════════════════════════════════ */

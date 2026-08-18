@@ -247,7 +247,60 @@
        h1 per page in logical heading order, so the guarantee line - which is what
        the page is actually about - takes the h1. Not one word changes. The
        wordmark stays a <p>, which is what the source marks it as. -->
-  <header class="mc-section tc-head surface-dark" data-surface="dark">
+  <header class="mc-section tc-head surface-dark mc-smokerise" data-surface="dark" data-smokerise>
+    <!-- THE SMOKE THAT CLINGS, ported from the home page's #benchmarks band. Same
+         engine, same tuning table, same pointer wake: _design/smoke-engine.js
+         holds the model and section-smoke-rise.js supplies only the 'ceiling'
+         emitter. Writing a second particle file would put a second copy of the
+         wind constants on the site, which is the non-propagation trap the build
+         rules name, so nothing new is authored here.
+
+         WHY THE HEAD, ON THIS LANDER ONLY, AND WHY THE SIBLING LANDER GETS A
+         DIFFERENT FIELD. The comment above records the source fact that decides
+         it: THERE IS NO ACTION IN THIS HEAD. ads1's head carries the frozen
+         LEARN HOW + BOOK DEMO pair, so on that page the atmosphere is kept away
+         from the head entirely and seated at the tail instead. Here the head is a
+         wordmark, a claim and a rating mark with no control in it, and its right
+         half is empty dark at every width, so a field can open the page without
+         ever sitting near a conversion route. This page's conversion move is the
+         demo step below, and that step stays on plain ground.
+
+         The doc section was the obvious alternative and is refused on a measured
+         ground: .tc-head + .tc-doc collapses the doc's top padding to 0, so its
+         first type -- the rail's own links, the smallest type on the page -- sits
+         at the very top of the box, which is exactly where a 'ceiling' emitter
+         pools its cap. The lid's mask clears a band measured from --ds-rhythm and
+         would land in the wrong place there. On THIS host it lands right: .tc-head
+         pays --ds-rhythm plus one --ds-space-xl of rail clearance (measured
+         215.2px at 1440, 128px at 390), so the whole wordmark lockup falls inside
+         the cleared band and no mask is re-tuned.
+
+         A CHILD OF THE HEAD, NOT A WRAPPER: .mc-section already paints
+         --ds-bg-surface on this element, so the canvas goes INSIDE the box that
+         owns the ground -- background first, smoke next at --ds-z-below, every
+         in-flow descendant above both. .mc-smokerise's isolation:isolate is what
+         makes that safe rather than lucky: it pins the stacking context here so
+         the negative z-index cannot escape behind the page's own ground. No
+         wrapper means the .tc-head + .tc-doc adjacency that pays the document its
+         seam is untouched (verified: page height and every box identical at 1440
+         and 390).
+
+         Decorative end to end: aria-hidden on both nodes, the lid is
+         pointer-events:none and .mc-smoke makes the canvas pointer-events:none,
+         so neither can ever eat a click. G-DOM: the lid is a decorative PLANE and
+         a plane still has to sit in the grammar, so it takes .container--plane --
+         .container--full plus the one guarantee that it never enters the
+         positioning chain, which keeps the lid's inset:0 resolving against the
+         HEAD instead of against a zero-height wrapper. -->
+    <div class="container container--full container--plane">
+      <div class="row">
+        <div class="col">
+          <div class="mc-smokerise__lid" aria-hidden="true">
+            <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="row"><div class="col">
 
@@ -256,15 +309,15 @@
             <!-- ONE wordmark, set on two lines in the source: a single
                  span carrying DISPENSARY, a <br>, and a nested span carrying
                  MARKETING. It ships as ONE lockup, never as two headings. -->
-            <p class="ad-head__mark mc-display">DISPENSARY <span class="mc-display__turn">MARKETING</span></p>
+            <p class="ad-head__mark mc-display" data-reveal>DISPENSARY <span class="mc-display__turn">MARKETING</span></p>
 
-            <h1 class="ad-head__claim" id="dispensary-marketing-and-advertising-title">Only Dispensary Marketing Agency that Guarantees Results</h1>
+            <h1 class="ad-head__claim" id="dispensary-marketing-and-advertising-title" data-reveal>Only Dispensary Marketing Agency that Guarantees Results</h1>
 
             <!-- THE RATING MARK. A five-star graphic and nothing else: the source
                  attaches no score, no review count and no platform to it, so none
                  is composed. The alt says what the artwork IS and claims nothing
                  the file does not draw. -->
-            <div class="ad-stars">
+            <div class="ad-stars" data-reveal>
               <img src="../assets/in-pages/ae707132fc8f6c0f9b272630f5014d04eaf67a82.webp"
                    alt="Five gold stars" width="1140" height="243" loading="lazy" decoding="async">
             </div>
@@ -353,23 +406,23 @@
                PRECISION AND CASING ARE VERBATIM, including the trailing semicolon
                on the heading (see F3) and this page's own "Bln" casing (see F4). -->
           <article class="tc-sec" id="dispensary-marketing-and-advertising-s1">
-            <h2 class="tc-sec__h">Our 2024 Influence;</h2>
+            <h2 class="tc-sec__h" data-reveal>Our 2024 Influence;</h2>
             <ul class="ad-stats">
-              <li class="ad-stat">
+              <li class="ad-stat" data-reveal>
                 <p class="ad-stat__label">Sales <b>Influence</b></p>
-                <p class="ad-stat__figure">1.2 Bln</p>
+                <p class="ad-stat__figure"><span data-count-to="1.2" data-count-dec="1">1.2</span> Bln</p>
               </li>
-              <li class="ad-stat">
+              <li class="ad-stat" data-reveal>
                 <p class="ad-stat__label">Website <b>Visits</b></p>
-                <p class="ad-stat__figure">2.1 Bln</p>
+                <p class="ad-stat__figure"><span data-count-to="2.1" data-count-dec="1">2.1</span> Bln</p>
               </li>
-              <li class="ad-stat">
+              <li class="ad-stat" data-reveal>
                 <p class="ad-stat__label">Google <b>Influence</b></p>
-                <p class="ad-stat__figure">3.8 Bln</p>
+                <p class="ad-stat__figure"><span data-count-to="3.8" data-count-dec="1">3.8</span> Bln</p>
               </li>
-              <li class="ad-stat">
+              <li class="ad-stat" data-reveal>
                 <p class="ad-stat__label">Location <b>Helped</b></p>
-                <p class="ad-stat__figure">500+</p>
+                <p class="ad-stat__figure"><span data-count-to="500" data-count-dec="0" data-count-suffix="+">500+</span></p>
               </li>
             </ul>
           </article>
@@ -387,9 +440,9 @@
                is what qualifies where the demo is actually booked, so it sits
                directly under the heading it qualifies and nowhere else. -->
           <article class="tc-sec" id="dispensary-marketing-and-advertising-s2">
-            <h2 class="tc-sec__h">Book your FREE demo now</h2>
-            <p class="ad-lede">On the NEXT PAGE. Just answer a few simple questions</p>
-            <form class="ad-form" action="contact.html" method="get">
+            <h2 class="tc-sec__h" data-reveal>Book your FREE demo now</h2>
+            <p class="ad-lede" data-reveal>On the NEXT PAGE. Just answer a few simple questions</p>
+            <form class="ad-form" action="contact.html" method="get" data-reveal>
               <fieldset class="ad-form__set">
                 <legend class="ad-form__legend">Start Here</legend>
                 <p class="ad-form__label" id="dispensary-marketing-and-advertising-storetype">Select Store Type</p>
@@ -428,8 +481,8 @@
                and the capture's second copy of the set is owl's loop clone. All
                five marks paint on load, once, nothing rotates, nothing hides. -->
           <article class="tc-sec" id="dispensary-marketing-and-advertising-s3">
-            <h2 class="tc-sec__h">Trusted by</h2>
-            <div class="ad-wall">
+            <h2 class="tc-sec__h" data-reveal>Trusted by</h2>
+            <div class="ad-wall" data-reveal>
               <!-- CLIENT MARKS ship with alt="" per client-rules.json accessibility.known_gap:
                    "the 25 client marks ship WITHOUT a name claim until the owner confirms
                    each name and right-to-display [OWNER-DATA] O4". The five files in this
@@ -494,9 +547,9 @@
                measured over - is carried in that plate's alt text, so the stat law
                holds for a screen reader exactly as it holds on screen. -->
           <article class="tc-sec" id="dispensary-marketing-and-advertising-s4">
-            <h2 class="tc-sec__h">Our Happy Customers</h2>
-            <p class="ad-lede">See what our clients say about us</p>
-            <ul class="ad-quotes">
+            <h2 class="tc-sec__h" data-reveal>Our Happy Customers</h2>
+            <p class="ad-lede" data-reveal>See what our clients say about us</p>
+            <ul class="ad-quotes" data-reveal>
               <li class="ad-quote ad-lift">
                 <p class="ad-quote__text">"Dispenza helped us increase sales by over 50% in just the first three months. The speed of their setup and the depth of their tracking blew us away."</p>
                 <p class="ad-quote__name">John</p>
@@ -531,7 +584,7 @@
               </li>
             </ul>
 
-            <div class="ad-seam">
+            <div class="ad-seam" data-reveal>
               <ul class="ad-tiles">
                 <li>
                   <img src="../assets/in-pages/Group_925_1_.webp"
@@ -577,7 +630,7 @@
                  casing, and it is also this page's OWN source string - the captured
                  page prints it three times (atoms 143, 152 and the sticky mobile
                  bar's 191). -->
-            <div class="mc-actions tc-close">
+            <div class="mc-actions tc-close" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
           </article>
@@ -754,6 +807,24 @@
       </div>
     </div>
   </section>
+
+<!-- THE FIELD CARRIES ITS OWN BEHAVIOUR, INSIDE <main>, and is linked PER PAGE
+     rather than from the chrome. Every byte outside <main> is the LOCKED CHROME
+     BLOCK stamped into all 27 pages: smoke-engine.js is 23KB and hex-field.js is
+     48KB, and a page that runs no field has no reason to fetch either. The chrome
+     already links page-effects.js for the reveals and counters, which every page
+     does use; the atmospherics are opt-in per page and this is the opt-in.
+
+     ONE SMOKE ENGINE. The model, the tuning table, the curl field and the
+     pointer-wake all live in smoke-engine.js; section-smoke-rise.js supplies the
+     'ceiling' emitter and nothing else. Loaded FIRST and WITHOUT defer so
+     window.DispenzaSmoke is defined by the time the emitter module runs.
+     smoke-engine.js honours prefers-reduced-motion.
+
+     hex-field.js is NOT linked here: this page mounts no hex plane, and the
+     module is 48KB. -->
+<script src="../_design/smoke-engine.js"></script>
+<script src="../_design/section-smoke-rise.js" defer></script>
 
 </main>
 
@@ -937,5 +1008,18 @@
   }
 })();
 </script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
 </body>
 </html>

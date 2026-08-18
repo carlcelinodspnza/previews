@@ -256,9 +256,34 @@
      are the first entries in. The per-mark plate polarity in section 3 is
      specified there in full, with the measurements behind it.
 
-     NO CAROUSEL, NO AUTOPLAY, NO SCROLL-REVEAL. Every figure and every card is
-     painted on load. The shell adds no .js class and mounts no reveal observer,
-     so [data-reveal] is deliberately absent rather than left inert.
+     NO CAROUSEL, NO AUTOPLAY. Nothing on this page loops, plays itself or moves
+     while the reader is still.
+
+     SCROLL REVEALS, ADDED. This paragraph previously read "NO SCROLL-REVEAL ...
+     [data-reveal] is deliberately absent rather than left inert", and that was
+     TRUE of the shell as it then stood: the locked chrome linked no scripts, so a
+     hook here would have been dead markup. The chrome now links the shared engine
+     _design/page-effects.js, the owner approved the foundation home page's motion
+     and asked for it on every inner page, so the hooks are live rather than inert
+     and the paragraph is corrected instead of left standing as a false statement.
+
+     WHAT IS HOOKED, AND WHAT IS NOT. 22 [data-reveal] across the five sections
+     (section heads, the two head lines, the coverage map, the eight financial
+     tiles, the five journey cells, the folded band as one group, the closing
+     actions, the partner line) and 8 [data-count-to] on the eight financial
+     figures, encoded decimal-for-decimal against the source. The decorative
+     lattice, the rail-free prose and every teaser figure that is welded to its
+     label in one string are NOT hooked.
+
+     WHY THE CELL AND NOT THE CARD. Every journey hook sits on the
+     <li class="rs-jrn__cell">, never on the .rs-jrn__card inside it: the card
+     carries .rs-lift, whose hover state is a transform, and `.js [data-reveal].is-in`
+     is a transform at higher specificity (0,3,0 against 0,2,0). Hooking the card
+     would have silently killed the hover lift on all five.
+
+     IT STILL FAILS OPEN. The hide rule is `.js [data-reveal]{opacity:0}` and the
+     `.js` flag is set by page-effects.js itself, after its observer is installed.
+     No script, or a 404 on the engine, means no `.js`, means nothing is hidden.
      ========================================================================== -->
 
 
@@ -304,8 +329,8 @@
           <rect width="1440" height="560" fill="url(#rsGrid)" mask="url(#rsGridMask)"/>
         </svg>
 
-        <h1 class="rs-head__title">OUR <span class="mc-head__turn">RESULTS</span></h1>
-        <p class="rs-head__deck">BUILDING LONG-TERM RELATIONSHIPS BASED ON TRUST, TRANSPARENCY AND RESULTS SINCE 2012.</p>
+        <h1 class="rs-head__title" data-reveal>OUR <span class="mc-head__turn">RESULTS</span></h1>
+        <p class="rs-head__deck" data-reveal>BUILDING LONG-TERM RELATIONSHIPS BASED ON TRUST, TRANSPARENCY AND RESULTS SINCE 2012.</p>
 
       </div>
     </div>
@@ -353,10 +378,10 @@
 
     <div class="row rs-fin__intro">
       <div class="col rs-fin__introText">
-        <h2 class="mc-head">FINANCIAL <span class="mc-head__turn">CASE STUDIES</span></h2>
+        <h2 class="mc-head" data-reveal>FINANCIAL <span class="mc-head__turn">CASE STUDIES</span></h2>
       </div>
       <div class="col rs-fin__introMap">
-        <figure class="rs-fin__map">
+        <figure class="rs-fin__map" data-reveal>
           <img src="../assets/generated/results-map.webp"
                alt="Map of North America with the states and provinces Dispenza operates in highlighted."
                width="940" height="628" loading="lazy" decoding="async">
@@ -372,44 +397,60 @@
              result. A div wrapping each dt/dd pair is valid inside a dl. -->
         <dl class="rs-fin__grid">
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Oceanside, CA</dt>
-            <dd class="rs-fin__figure">+51.37%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span></dd>
+          <dd class="rs-fin__window">in the first 3 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Mid City, LA, CA</dt>
-            <dd class="rs-fin__figure">+50.1%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span></dd>
+          <dd class="rs-fin__window">in the first 3 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Edmond, OK</dt>
-            <dd class="rs-fin__figure">+196%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span></dd>
+          <dd class="rs-fin__window">in the first 2 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Seaside, CA</dt>
-            <dd class="rs-fin__figure">+94.5%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></dd>
+          <dd class="rs-fin__window">in the first 2 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Oakland, CA</dt>
-            <dd class="rs-fin__figure">+94.5%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></dd>
+          <dd class="rs-fin__window">in the first 5 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Needles, CA</dt>
-            <dd class="rs-fin__figure">+198%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span></dd>
+          <dd class="rs-fin__window">in the first 6 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Downtown LA, CA</dt>
-            <dd class="rs-fin__figure">+55.2%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span></dd>
+          <dd class="rs-fin__window">in the first 6 months</dd>
           </div>
 
-          <div class="rs-fin__tile">
+          <div class="rs-fin__tile" data-reveal>
             <dt class="rs-fin__city">Las Vegas, NV</dt>
-            <dd class="rs-fin__figure">+733%</dd>
+            <dd class="rs-fin__label">Total Sale Increase</dd>
+          <dd class="rs-fin__figure"><span data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span></dd>
+          <dd class="rs-fin__window">in the first 30 months</dd>
           </div>
 
         </dl>
@@ -484,14 +525,70 @@
      is deliberately unlike the cards above so it never reads as duplicated ones.
      ========================================================================== -->
 <!-- pick: PROOF-SECTIONS.md #5 | considered: #4,#3,#1 | why: every card the source supplies is a portfolio shot married to a measured result, which is literally an image plus result split, and promoting the fifth card to a full-measure feature absorbs the awkward remainder instead of leaving a hole in a three-across; #4 metric-led card alone would throw away all five portfolio images, #3 carousel is on the owner's forbidden-motion list and would hide how long the client roster is, and #1 wants testimonial quotes that do not exist for these clients. -->
-<section class="mc-section rs-jrn surface-dark" id="customer-journeys" data-surface="dark">
+<section class="mc-section rs-jrn surface-dark mc-smokerise" id="customer-journeys" data-surface="dark" data-smokerise>
+  <!-- THE SMOKE THAT CLINGS, ported from the home page's #benchmarks band. Same
+       engine, same tuning table, same pointer wake: _design/smoke-engine.js holds
+       the model and section-smoke-rise.js supplies only the 'ceiling' emitter.
+       Writing a second particle file would put a second copy of the wind
+       constants on the site, which is the non-propagation trap the build rules
+       name, so nothing new is authored here -- this section adopts the existing
+       field wholesale.
+
+       WHY THIS SECTION AND NOT ANOTHER ON THIS PAGE. It is the page's proof band
+       and its centre of gravity: five client journeys plus the folded four-client
+       metric row, 2824px at 1440 and 3797px at 390, and the only long dark run on
+       a page that otherwise goes dark / light / dark. #financial-case-studies is
+       the ONE inversion and is white, where a violet plume would read as dirt on
+       the page's brightest moment; #results-head, #closing-ask and #partner-links
+       are all under 550px and none of them is a proof band.
+
+       A CHILD OF THE SECTION, NOT A WRAPPER, and that is the same reasoning the
+       home page records for #benchmarks: .mc-smokefield exists only because that
+       field spans TWO sections and therefore needs a shared positioned ancestor
+       plus a ground of its own. Neither applies here. #customer-journeys is one
+       section and .mc-section already paints --ds-bg-surface on it, so the canvas
+       goes INSIDE the element that owns the ground: background first, smoke next
+       at --ds-z-below, every in-flow descendant above both -- with no z-index or
+       background override on a single piece of content, and no wrapper to break
+       the .mc-section--light + .mc-section adjacency that pays this section its
+       opening rhythm.
+
+       THE LID'S MASK IS USED IN EXACTLY THE GEOMETRY IT WAS MEASURED FOR. It
+       clears a band from --ds-rhythm minus a guard through --ds-rhythm plus the
+       tallest the type can be, which is only correct on a section whose first
+       line of type begins at exactly --ds-rhythm. Measured here: padding-top is
+       151.2px at 1440 and 64px at 390, both exactly --ds-rhythm -- the collapse
+       rule .mc-section + .mc-section{padding-top:0} does not apply because the
+       section above is --light, which the sheet exempts. So the head keeps its
+       clearance for free and no mask is re-tuned.
+
+       Decorative end to end: aria-hidden on both nodes, the lid is
+       pointer-events:none and .mc-smoke makes the canvas pointer-events:none, so
+       neither can ever eat a click on a card or its VIEW CASE STUDY link. The
+       pointer wake still works -- the engine listens on the SECTION, which
+       receives pointermove by bubbling from whatever is on top.
+
+       G-DOM: the lid is a decorative PLANE and a plane still has to sit in the
+       grammar, so it takes .container--plane -- .container--full plus the one
+       guarantee that it never enters the positioning or stacking chain, which is
+       what keeps the lid's inset:0 resolving against the SECTION instead of
+       against a zero-height wrapper. -->
+  <div class="container container--full container--plane">
+    <div class="row">
+      <div class="col">
+        <div class="mc-smokerise__lid" aria-hidden="true">
+          <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
 
     <div class="row">
       <div class="col">
         <div class="rs-jrn__head">
-          <h2 class="mc-head">CUSTOMER <span class="mc-head__turn">JOURNEYS</span></h2>
-          <p class="rs-jrn__standfirst">Navigating Customer Journeys: Success Stories in Cannabis Marketing</p>
+          <h2 class="mc-head" data-reveal>CUSTOMER <span class="mc-head__turn">JOURNEYS</span></h2>
+          <p class="rs-jrn__standfirst" data-reveal>Navigating Customer Journeys: Success Stories in Cannabis Marketing</p>
         </div>
       </div>
     </div>
@@ -500,7 +597,7 @@
       <div class="col">
         <ul class="rs-jrn__grid" role="list">
 
-          <li class="rs-jrn__cell">
+          <li class="rs-jrn__cell" data-reveal>
             <article class="rs-jrn__card rs-lift">
               <div class="rs-jrn__shot">
                 <img src="../assets/in-pages/dispensary-marketing-portfolio-by-dispenza.webp"
@@ -522,7 +619,7 @@
             </article>
           </li>
 
-          <li class="rs-jrn__cell">
+          <li class="rs-jrn__cell" data-reveal>
             <article class="rs-jrn__card rs-lift">
               <div class="rs-jrn__shot">
                 <img src="../assets/in-pages/marketing-portfolio-cannabis-menu-mobile-view.webp"
@@ -544,7 +641,7 @@
             </article>
           </li>
 
-          <li class="rs-jrn__cell">
+          <li class="rs-jrn__cell" data-reveal>
             <article class="rs-jrn__card rs-lift">
               <div class="rs-jrn__shot">
                 <img src="../assets/in-pages/dispenary-marketing-portfolio-by-dispenza2.webp"
@@ -567,7 +664,7 @@
             </article>
           </li>
 
-          <li class="rs-jrn__cell">
+          <li class="rs-jrn__cell" data-reveal>
             <article class="rs-jrn__card rs-lift">
               <div class="rs-jrn__shot">
                 <img src="../assets/in-pages/dispenza-portfolio-flwr-co.webp"
@@ -592,7 +689,7 @@
 
           <!-- THE CLOSING FEATURE. Last in source order and largest in figure,
                so it takes the full measure instead of a quarter of it. -->
-          <li class="rs-jrn__cell rs-jrn__cell--feature">
+          <li class="rs-jrn__cell rs-jrn__cell--feature" data-reveal>
             <article class="rs-jrn__card rs-lift">
               <div class="rs-jrn__shot">
                 <img src="../assets/in-pages/dispenza-portfolio-firehouse-dispensary.webp"
@@ -624,7 +721,7 @@
          and is covered by that heading. -->
     <div class="row">
       <div class="col">
-        <ul class="rs-more" role="list">
+        <ul class="rs-more" role="list" data-reveal>
 
           <li class="rs-more__cell">
             <span class="rs-plate rs-plate--light rs-plate--sm">
@@ -689,7 +786,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="mc-actions">
+        <div class="mc-actions" data-reveal>
           <a class="btn btn--solid" href="contact.html">Book demo</a>
           <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
         </div>
@@ -721,7 +818,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <p class="rs-partners__line">
+        <p class="rs-partners__line" data-reveal>
           <span class="rs-partners__label">Partners Links:</span>
           <span class="rs-partners__name">JTek Resources</span>
           <span class="rs-partners__name">Outsourced Marketing Inc.</span>
@@ -730,6 +827,23 @@
     </div>
   </div>
 </section>
+
+<!-- THE FIELD CARRIES ITS OWN BEHAVIOUR, INSIDE <main>, and is linked PER PAGE
+     rather than from the chrome. Every byte outside <main> is the LOCKED CHROME
+     BLOCK, stamped into all 27 pages: smoke-engine.js is 23KB and hex-field.js is
+     48KB, and a page that runs no field has no reason to fetch either. The chrome
+     already links page-effects.js for the reveals and counters, which every page
+     does use; the atmospherics are opt-in per page and this is the opt-in.
+
+     ONE SMOKE ENGINE. The model, the tuning table, the curl field and the
+     pointer-wake all live in smoke-engine.js; section-smoke-rise.js supplies the
+     'ceiling' emitter and nothing else. Loaded FIRST and WITHOUT defer so
+     window.DispenzaSmoke is defined by the time the emitter module runs.
+
+     hex-field.js is NOT linked here and that is deliberate: this page mounts no
+     hex plane, and the module is 48KB. -->
+<script src="../_design/smoke-engine.js"></script>
+<script src="../_design/section-smoke-rise.js" defer></script>
 
 </main>
 
@@ -913,5 +1027,18 @@
   }
 })();
 </script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
 </body>
 </html>

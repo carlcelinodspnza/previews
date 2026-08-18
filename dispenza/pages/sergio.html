@@ -324,9 +324,9 @@
 
         <div class="tc-head__grid tc-head__grid--media">
           <div class="tc-head__copy">
-            <p class="mc-eyebrow">HEY! MY NAME IS</p>
-            <h1 class="tc-head__title" id="sergio-title">SERGIO RUIZ</h1>
-            <p class="tc-head__lede">We help dispensaries outrank competitors and get new customers everyday.</p>
+            <p class="mc-eyebrow" data-reveal>HEY! MY NAME IS</p>
+            <h1 class="tc-head__title" id="sergio-title" data-reveal>SERGIO RUIZ</h1>
+            <p class="tc-head__lede" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</p>
             <!-- BOTH hero controls are source atoms, and this is the ONE team page
                  that carries the first of them: atom 055 BOOK A DEMO is live here
                  and commented out on frances/james/nick/shay. Its source href is
@@ -335,12 +335,12 @@
                  directive is BUILD-CRITICAL, so the modal's contents are rendered
                  as plain, visible, always-on page text below and the label keeps
                  its job (take me to the details) without hiding anything. -->
-            <div class="mc-actions">
+            <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="#sergio-s1">BOOK A DEMO</a>
               <a class="btn btn--ghost" href="#sergio-contact">CONTACT ME</a>
             </div>
           </div>
-          <div class="tc-head__media">
+          <div class="tc-head__media" data-reveal>
             <img src="../assets/in-pages/sergio-ruiz-dispenza-team.webp"
                  alt="Sergio Ruiz" width="600" height="600" loading="lazy" decoding="async">
           </div>
@@ -352,7 +352,7 @@
              actions are the real actions the labels name. See F3 on ADD TO
              CONTACTS. These are the rep's OWN two lines, not the switchboard: the
              site-wide number and hello@dispenza.com stay in the footer chrome. -->
-        <div class="tc-vcard" id="sergio-contact">
+        <div class="tc-vcard" id="sergio-contact" data-reveal>
           <h2 class="tc-vcard__h">SERGIO RUIZ</h2>
           <dl class="tc-rows">
             <div class="tc-rows__row">
@@ -378,7 +378,12 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #16,#21,#3 | rigor: heavy | why: this is the account executive a dispensary owner would actually be talking to, and the brief forbids a bio, a tenure and any personal result until the owner attests one, so once his email and phone number are on screen the remaining 51 source nodes stop being a profile and become a results document: eight financial figures and four client rows hung under three peer h2s with no hierarchy between them, and #36 is the only pattern in the catalog whose left topic column warns a visitor who came for one phone number that proof is sitting below it, which is what decides whether they keep scrolling; #16 founder bio split is the obvious people-page pick and is refused on the brief's own evidence, which drops the 339 words of OTTO-injected biography per D5 and records that not one owner-written sentence describes this person anywhere in the 32-page capture, so its second arm could only be filled with a sentence nobody at the client wrote; #21 case studies 3-col cards the four client rows and at a third of the column drops the 181x103 brand marks below identification size while truncating the two-line figure pair that is the only evidence those rows carry; #3 stat strip suits the eight figures but cannot hold the label and the WINDOW inside one tile, and this is the page that proves the cost of that - Seaside and Oakland are both "+94.5%" and only their windows tell them apart. This is the SAME pick, for the same reasons, as the other five team pages: the decision being defended is the shared T-ARTICLE container, so rigor is heavy and it is argued once rather than re-invented per sibling. -->
-  <section class="mc-section tc-doc surface-dark" id="sergio-doc" data-surface="dark">
+  <!-- .mc-hexfield-ground: the sheet's own existing marker for "this region hosts a hex
+       field". The tail-plane rule keys the content raise off it
+       (`.tc-doc.mc-hexfield-ground > .container{position:relative;z-index:1}`), so the
+       document sits ON the plane instead of under it. No new class is invented, and the
+       raise is scoped to .tc-doc so the T-ARTICLE pages that carry no field are untouched. -->
+  <section class="mc-section tc-doc mc-hexfield-ground surface-dark" id="sergio-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
 
@@ -407,8 +412,8 @@
                destination. Two destinations, no new labels; see F6 on why neither
                of them is a calendar widget. -->
           <article class="tc-sec" id="sergio-s1">
-            <h2 class="tc-sec__h">BOOK A DEMO</h2>
-            <div class="mc-actions">
+            <h2 class="tc-sec__h" data-reveal>BOOK A DEMO</h2>
+            <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
               <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
             </div>
@@ -419,54 +424,54 @@
                including the source's own inconsistency: 51.37, 50.1 and 94.5 keep
                their decimals; 196, 198 and 733 have none. -->
           <article class="tc-sec" id="sergio-s2">
-            <h2 class="tc-sec__h">FINANCIAL CASE STUDIES</h2>
-            <ul class="tc-metrics">
+            <h2 class="tc-sec__h" data-reveal>FINANCIAL CASE STUDIES</h2>
+            <ul class="tc-metrics" data-reveal>
               <li class="tc-metric">
                 <span class="tc-metric__city">Oceanside, CA</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+51.37%</span>
+                <span class="tc-metric__figure" data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span>
                 <span class="tc-metric__window">in the first 3 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Mid City, LA, CA</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+50.1%</span>
+                <span class="tc-metric__figure" data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span>
                 <span class="tc-metric__window">in the first 3 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Edmond, OK</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+196%</span>
+                <span class="tc-metric__figure" data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span>
                 <span class="tc-metric__window">in the first 2 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Seaside, CA</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+94.5%</span>
+                <span class="tc-metric__figure" data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span>
                 <span class="tc-metric__window">in the first 2 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Oakland, CA</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+94.5%</span>
+                <span class="tc-metric__figure" data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span>
                 <span class="tc-metric__window">in the first 5 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Needles, CA</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+198%</span>
+                <span class="tc-metric__figure" data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span>
                 <span class="tc-metric__window">in the first 6 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Downtown LA, CA</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+55.2%</span>
+                <span class="tc-metric__figure" data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span>
                 <span class="tc-metric__window">in the first 6 months</span>
               </li>
               <li class="tc-metric">
                 <span class="tc-metric__city">Las Vegas, NV</span>
                 <span class="tc-metric__label">Total Sale Increase</span>
-                <span class="tc-metric__figure">+733%</span>
+                <span class="tc-metric__figure" data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span>
                 <span class="tc-metric__window">in the first 30 months</span>
               </li>
             </ul>
@@ -478,14 +483,14 @@
                string, so the stat law is satisfied by the source itself here.
                See F1 - rows 3 and 4 carry IDENTICAL figures in the source. -->
           <article class="tc-sec" id="sergio-s3">
-            <h2 class="tc-sec__h">CASE STUDIES</h2>
-            <p class="tc-emph">LONG-TERM RELATIONSHIPS BUILT ON TRUST, TRANSPARENCY, &amp; RESULTS SINCE 2012</p>
-            <div class="tc-copy">
+            <h2 class="tc-sec__h" data-reveal>CASE STUDIES</h2>
+            <p class="tc-emph" data-reveal>LONG-TERM RELATIONSHIPS BUILT ON TRUST, TRANSPARENCY, &amp; RESULTS SINCE 2012</p>
+            <div class="tc-copy" data-reveal>
               <p class="mc-body">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
             </div>
             <ul class="tc-cases">
 
-              <li class="tc-case tc-lift">
+              <li class="tc-case tc-lift" data-reveal>
                 <div class="tc-case__copy">
                   <p class="tc-case__loc">350% Direction Request Increase</p>
                   <h3 class="tc-case__h">700% Sales Increase</h3>
@@ -504,7 +509,7 @@
                 </div>
               </li>
 
-              <li class="tc-case tc-lift">
+              <li class="tc-case tc-lift" data-reveal>
                 <div class="tc-case__copy">
                   <p class="tc-case__loc">300% Phone Call Increase</p>
                   <h3 class="tc-case__h">Sales Records Just 4 Months In</h3>
@@ -523,7 +528,7 @@
                 </div>
               </li>
 
-              <li class="tc-case tc-lift">
+              <li class="tc-case tc-lift" data-reveal>
                 <div class="tc-case__copy">
                   <p class="tc-case__loc">480% Direction Request Increase</p>
                   <h3 class="tc-case__h">110% Sales Increase</h3>
@@ -542,7 +547,7 @@
                 </div>
               </li>
 
-              <li class="tc-case tc-lift">
+              <li class="tc-case tc-lift" data-reveal>
                 <div class="tc-case__copy">
                   <p class="tc-case__loc">480% Direction Request Increase</p>
                   <h3 class="tc-case__h">110% Sales Increase</h3>
@@ -568,6 +573,75 @@
       </div>
     </div>
   </section>
+
+
+<!-- ==========================================================================
+     THE LOWER-GROUND HEX PLANE, as this team page runs out into the footer.
+     ==========================================================================
+     THE ASK, ported: the home page's isometric prism field, continued here. Not a
+     second field -- hex-field.js renders ONE plate for the UNION of both host boxes
+     and gives each host an aperture onto it, so the document carries a single sweep
+     group and a single pointer circle. Both hosts carry the same data-hexfield
+     value; that string is the whole seam contract.
+
+     WINDOW 1 borrows the DOCUMENT section's box. MEASURED on this page, not assumed:
+     at 1440 the section runs 1058..4269 and the footer begins at 4269, and at 390 the
+     two meet with the same zero gap -- so the section is the only full-bleed box on
+     this template that is CONTIGUOUS with the footer. One plane across the joint, no
+     dead strip. The obvious alternative, a window on the closing CASE STUDIES unit,
+     was prototyped and rejected twice over: it is 759px wide inside an 824px body
+     column, so it reads as a floating panel 65px off the spine, and it stops 151px
+     short of the footer, which reads as two disconnected planes.
+
+     --tailfade IS WHAT MAKES A DOCUMENT-TALL WINDOW A TAIL. Hexagons behind 3,211px
+     of reading column is not the ask and is not restraint: the mask holds the plane
+     fully OFF the document and fades it in only as the page descends into the footer.
+     data-hex-clear anchors the soft elliptical clearing on .tc-doc__body, the reading
+     column itself -- the thing that has to stay legible.
+
+     WINDOW 2 borrows .site-footer's box. It sits HERE, inside <main>, and that is a
+     correction rather than a convenience: everything outside <main> is the LOCKED
+     CHROME BLOCK, stamped into all 27 pages, so a host placed in the footer there
+     would hand a plane to every page on the site. This is a per-page treatment and
+     must not propagate. The footer element itself is never touched.
+
+     The --cover MODIFIER CLASS IS DELIBERATELY NOT USED. It is defined in no sheet
+     and read by no script: hex-field.js keys the cover behaviour entirely off the
+     data-hexfield-cover ATTRIBUTE, and the string "mc-hexfield--cover" appears
+     nowhere in it. The home page dropped that class on 2026-08-18 for exactly this
+     reason, and inventing CSS for it here to make it legal would be the orphan gate
+     satisfied by a lie.
+
+     WHAT THIS PAGE DOES NOT GET, and why, both measured rather than argued:
+       RISE SMOKE ON THE HEAD, the treatment its T-ARTICLE case-study siblings carry.
+       Their heads are a title and a portrait; a TEAM head is 1058px tall and closes
+       on the vCard, whose four ghost controls are --ds-accent-ink at 5.71:1 -- 1.21
+       of headroom over the 4.5 floor -- sitting at 863..955px. .mc-smokerise__lid
+       clears only calc(--ds-rhythm - 42) to calc(--ds-rhythm + 240), i.e. 109..391px
+       at 1440, so the vCard is 470px below the clearance and stands in the rising
+       column. Sampled glyph-accurate across 40 moments of the live field, ADD TO
+       CONTACTS fell to 4.38:1. Under the floor, so it is not shipped.
+       BAND SMOKE across the document. .mc-smoke--field's corridor is opaque 0-14%
+       and 86-100% and clear 33-67%, which is measured for a CENTRED measure column.
+       This template's type is a rail at 12.8-30% and a body column at 30-87.2% of the
+       viewport at 1440, and spans 6.2-93.8% at 390: the opaque bands land on the rail
+       links and the right of the case rows while the clear corridor sits over gutter.
+     ========================================================================== -->
+<div class="mc-hexfield mc-hexfield--tailfade" data-hexfield="lower-ground"
+     data-hexfield-cover="#sergio-doc" data-hex-clear=".tc-doc__body" aria-hidden="true"></div>
+<div class="mc-hexfield" data-hexfield="lower-ground"
+     data-hexfield-cover=".site-footer" aria-hidden="true"></div>
+
+<!-- THE PLANE CARRIES ITS OWN BEHAVIOUR, INSIDE <main>, and is linked PER PAGE rather
+     than from the chrome: hex-field.js is 48KB, and a plain text page has no reason to
+     fetch it. smoke-engine.js is NOT linked here, and that is deliberate rather than an
+     omission -- it is the shared particle model, and this page runs no smoke field, so
+     the 23KB would buy nothing. hex-field.js takes no defer and no DOMContentLoaded
+     wrapper: it measures after window LOAD, because the field's height is the sum of
+     two real page regions and is not final until webfonts and the footer imagery have
+     settled. It honours prefers-reduced-motion by rendering one static frame and
+     attaching no listener at all. -->
+<script src="../_design/hex-field.js"></script>
 
 </main>
 
@@ -751,5 +825,18 @@
   }
 })();
 </script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
 </body>
 </html>

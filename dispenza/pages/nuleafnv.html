@@ -259,23 +259,63 @@
        .tc-metric. No column count, wrap or breakpoint can separate a number from
        the qualifier the source attaches to it. -->
 
-  <header class="mc-section tc-head surface-dark" data-surface="dark">
+  <!-- THE SMOKE THAT CLINGS, on the page-opening band. Same engine, same pointer
+       wake and same two-mask arrangement as the home page's #benchmarks: only the
+       HOST differs, and the host was chosen by measurement rather than by analogy.
+
+       WHY THE HEAD AND NOT THE KPI BAND. The obvious mount was this page's metrics
+       unit. Measured at 1440: .tc-sec carries no padding and .tc-sec__h no margin,
+       so the KPI article's heading begins at offset 0 of a 383px box that is type
+       from edge to edge -- a cap that "clings at the top" has nowhere to gather.
+       Prototyped anyway, and it reads as a rectangular stain with the canvas box
+       edge visible as a hard seam under the last figure. .tc-head is the one box on
+       this template with real headroom above its first type: its padding-top is
+       calc(--ds-rhythm + --ds-space-xl), measured 215.2px at 1440 and 128px at 390,
+       and that band is the fixed chrome's clearance, so it is genuinely empty. The
+       pool sits in it, and the section keeps the role the home page gives this
+       effect -- the page's opening band.
+
+       TWO ELEMENTS, TWO MASKS, MULTIPLIED: the lid carries the vertical clearance
+       that holds the pooled cap off the title, the canvas inside carries the
+       owner's sides-only corridor. Both aria-hidden, the lid pointer-events:none
+       and .mc-smoke making the canvas the same, so neither can eat a click; the
+       pointer wake still works because the engine listens on the HOST, which gets
+       pointermove by bubbling from whatever is on top.
+
+       .container--plane is the decorative-plane grammar wrapper: .container--full
+       plus the guarantee that it never enters the positioning or stacking chain, so
+       the lid's inset:0 still resolves against the HEADER. It contributes no
+       height, because its only descendant is absolute.
+
+       MEASURED, NOT ASSERTED: with this layer on, the largest rise in the backdrop
+       luminance behind any glyph on the page is +0.0091 L (the client-file values),
+       and zero text falls under 4.5:1 body / 3.0:1 large at 1440 or 390. -->
+  <header class="mc-section tc-head surface-dark mc-smokerise" data-surface="dark" data-smokerise>
+    <div class="container container--full container--plane">
+      <div class="row">
+        <div class="col">
+          <div class="mc-smokerise__lid mc-smokerise__lid--casehead" aria-hidden="true">
+            <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="row"><div class="col">
         <div class="tc-head__grid tc-head__grid--media">
           <div class="tc-head__copy">
-            <p class="mc-eyebrow">CASE STUDY</p>
-            <h1 class="tc-head__title" id="nuleafnv-title">NuLeaf NV</h1>
-            <p class="mc-head">NULEAF GROWS BY 700% IN LESS THAN 3 YEARS AND SELLS FOR $50MIL</p>
-            <p class="tc-head__lede mc-body--lead">The Success Story of NuLeaf NV: A Case Study in Cannabis Marketing</p>
-            <p class="tc-head__lede">NuLeaf was able to scale by over 700% in revenue in less than 3 years. From $300k to 2.5 million PER MONTH, and that's just out of one of their locations. This year getting acquired by Hello/Beyond one of the largest cannabis public acquisitions companies in the world.</p>
+            <p class="mc-eyebrow" data-reveal>CASE STUDY</p>
+            <h1 class="tc-head__title" id="nuleafnv-title" data-reveal>NuLeaf NV</h1>
+            <p class="mc-head" data-reveal>NULEAF GROWS BY 700% IN LESS THAN 3 YEARS AND SELLS FOR $50MIL</p>
+            <p class="tc-head__lede mc-body--lead" data-reveal>The Success Story of NuLeaf NV: A Case Study in Cannabis Marketing</p>
+            <p class="tc-head__lede" data-reveal>NuLeaf was able to scale by over 700% in revenue in less than 3 years. From $300k to 2.5 million PER MONTH, and that's just out of one of their locations. This year getting acquired by Hello/Beyond one of the largest cannabis public acquisitions companies in the world.</p>
           </div>
-          <div class="tc-head__media">
+          <div class="tc-head__media" data-media-in>
             <img src="../assets/in-pages/nuLeaf_multi.webp" alt="The NuLeaf NV website shown on a monitor, laptop, tablet and phone." width="1500" height="1000" decoding="async">
           </div>
         </div>
 
-        <div class="tc-vcard">
+        <div class="tc-vcard" data-reveal>
           <dl class="tc-rows">
             <div class="tc-rows__row"><dt class="tc-rows__k">Client Name</dt><dd class="tc-rows__v">Nuleaf NV</dd></div>
             <div class="tc-rows__row"><dt class="tc-rows__k">Client Since</dt><dd class="tc-rows__v">2018</dd></div>
@@ -291,7 +331,10 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #23,#21,#3 | why: nuleafnv is the highest-stakes page in the set: it makes a growth claim, an exit-price claim and an acquirer claim, and the source states two of the three in more than one way. #36 is picked because a rail forces every one of those claims to sit at a NAMED stop the reader can return to, which is what a disputed figure needs - the $53M tile and the $50MIL line in the head are one jump apart, not thirty seconds of scrolling apart, so the discrepancy is visible rather than buried. The rail also stops the acquisition from swallowing the page: SHARE OF LOCAL VOICE and CUSTOMER ACTIONS are listed as peers of the money band, so the marketing result is not reduced to a footnote under the exit. #23 long form gives the exit the whole page; #21 3-col cards claims that need room to be qualified; #3 stat-strip is precisely the treatment that would print $53M with nothing attached to it. -->
-  <section class="mc-section tc-doc surface-dark" id="nuleafnv-doc" data-surface="dark">
+  <!-- .mc-hexfield-ground: the sheet's existing marker for "this region hosts a hex
+       field". It is what the tail-plane rule keys the content raise off, so the
+       document sits ON the plane rather than under it. No new class is invented. -->
+  <section class="mc-section tc-doc mc-hexfield-ground surface-dark" id="nuleafnv-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
 
@@ -309,17 +352,24 @@
         <div class="col tc-doc__body">
 
         <article class="tc-sec" id="nuleafnv-kpi">
-          <h2 class="tc-sec__h">KPI HIGHLIGHTS</h2>
+          <h2 class="tc-sec__h" data-reveal>KPI HIGHLIGHTS</h2>
           <div class="tc-metrics">
-          <div class="tc-metric">
+          <div class="tc-metric" data-reveal>
+            <!-- NOT COUNTED. "12,000+" carries a thousands separator and the counter
+                 prints toFixed(), which would land on "12000+" - a DIFFERENT string
+                 from the client's. Static, so the source figure is what renders. -->
             <span class="tc-metric__figure">12,000+</span>
             <span class="tc-metric__label">WEBSITE VISITS MONTHLY</span>
           </div>
-          <div class="tc-metric">
-            <span class="tc-metric__figure">700%</span>
+          <div class="tc-metric" data-reveal>
+            <span class="tc-metric__figure"><span data-count-to="700" data-count-dec="0" data-count-suffix="%">700%</span></span>
             <span class="tc-metric__label">INCREASE IN SALES</span>
           </div>
-          <div class="tc-metric">
+          <div class="tc-metric" data-reveal>
+            <!-- NOT COUNTED, TWICE OVER: it is not a plain number ($ .. M), and it is
+                 one of the three strings block-banned-content holds on this page
+                 pending an owner ruling. A disputed money claim does not get an
+                 animation drawing the eye to it. Static. -->
             <span class="tc-metric__figure">$53M</span>
             <span class="tc-metric__label">ACQUIRED BY JUSHI</span>
           </div>
@@ -327,49 +377,49 @@
         </article>
 
         <article class="tc-sec" id="nuleafnv-solv">
-          <h2 class="tc-sec__h">SHARE OF LOCAL VOICE (SOLV)</h2>
-          <h3 class="tc-emph">KEYPHRASE: "DISPENSARY NEAR ME"</h3>
+          <h2 class="tc-sec__h" data-reveal>SHARE OF LOCAL VOICE (SOLV)</h2>
+          <h3 class="tc-emph" data-reveal>KEYPHRASE: "DISPENSARY NEAR ME"</h3>
           <div class="tc-metrics">
-          <div class="tc-metric">
-            <span class="tc-metric__figure">+45.59%</span>
+          <div class="tc-metric" data-reveal>
+            <span class="tc-metric__figure"><span data-count-to="45.59" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+45.59%</span></span>
             <span class="tc-metric__window">6mo</span>
             <span class="tc-metric__label">INCREASE IN SOLV FOR "DISPENSARY NEAR ME"</span>
           </div>
           </div>
-        <figure class="tc-plate tc-lift">
+        <figure class="tc-plate tc-lift" data-media-in>
           <img src="../assets/in-pages/nuleaf_solv.webp" alt="Local search rank grid, before and after: red rank 20 plus pins on the left, green rank 1 pins on the right." width="1133" height="454" loading="lazy" decoding="async">
         </figure>
         </article>
 
         <article class="tc-sec" id="nuleafnv-actions">
-          <h2 class="tc-sec__h">CUSTOMER ACTIONS</h2>
-          <h3 class="tc-emph">MASSIVE BOOSTS IN TRAFFIC</h3>
+          <h2 class="tc-sec__h" data-reveal>CUSTOMER ACTIONS</h2>
+          <h3 class="tc-emph" data-reveal>MASSIVE BOOSTS IN TRAFFIC</h3>
           <div class="tc-metrics">
-          <div class="tc-metric">
-            <span class="tc-metric__figure">+517%</span>
+          <div class="tc-metric" data-reveal>
+            <span class="tc-metric__figure"><span data-count-to="517" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+517%</span></span>
             <span class="tc-metric__label">INCREASE IN WEBSITE VISITS</span>
           </div>
-          <div class="tc-metric">
-            <span class="tc-metric__figure">+193%</span>
+          <div class="tc-metric" data-reveal>
+            <span class="tc-metric__figure"><span data-count-to="193" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+193%</span></span>
             <span class="tc-metric__label">INCREASE IN PHONE CALLS</span>
           </div>
-          <div class="tc-metric">
-            <span class="tc-metric__figure">+241%</span>
+          <div class="tc-metric" data-reveal>
+            <span class="tc-metric__figure"><span data-count-to="241" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+241%</span></span>
             <span class="tc-metric__label">INCREASE IN DIRECTION REQUESTS</span>
           </div>
           </div>
-        <figure class="tc-plate tc-lift">
+        <figure class="tc-plate tc-lift" data-media-in>
           <img src="../assets/in-pages/nuleaf_data_1.webp" alt="Google Business Profile customer actions chart over one quarter." width="633" height="499" loading="lazy" decoding="async">
         </figure>
-        <figure class="tc-plate tc-lift">
+        <figure class="tc-plate tc-lift" data-media-in>
           <img src="../assets/in-pages/nuleaf_data_2.webp" alt="Google Business Profile &quot;where customers view your business&quot; chart over one quarter." width="633" height="499" loading="lazy" decoding="async">
         </figure>
         </article>
 
         <article class="tc-sec" id="nuleafnv-more">
-          <h2 class="tc-sec__h">MORE CASE STUDIES</h2>
+          <h2 class="tc-sec__h" data-reveal>MORE CASE STUDIES</h2>
           <ul class="tc-cases">
-            <li class="tc-case">
+            <li class="tc-case" data-reveal>
               <div class="tc-case__copy">
                 <p class="tc-case__loc">300% Phone Call Increase</p>
                 <h3 class="tc-case__h">Sales Records Just 4 Months In</h3>
@@ -382,7 +432,7 @@
                 </figure>
               </div>
             </li>
-            <li class="tc-case">
+            <li class="tc-case" data-reveal>
               <div class="tc-case__copy">
                 <p class="tc-case__loc">480% Direction Request Increase</p>
                 <h3 class="tc-case__h">110% Sales Increase</h3>
@@ -395,7 +445,7 @@
                 </figure>
               </div>
             </li>
-            <li class="tc-case">
+            <li class="tc-case" data-reveal>
               <div class="tc-case__copy">
                 <p class="tc-case__loc">+5.3% Search Requests</p>
                 <h3 class="tc-case__h">+11x Direction Requests</h3>
@@ -408,7 +458,7 @@
                 </figure>
               </div>
             </li>
-            <li class="tc-case">
+            <li class="tc-case" data-reveal>
               <div class="tc-case__copy">
                 <p class="tc-case__loc">+1504% Increase In Discovery Traffic</p>
                 <h3 class="tc-case__h">180% Website Visits</h3>
@@ -423,7 +473,7 @@
             </li>
           </ul>
 
-          <div class="mc-actions tc-close">
+          <div class="mc-actions tc-close" data-reveal>
             <a class="btn btn--solid" href="contact.html">Book demo</a>
             <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
           </div>
@@ -433,6 +483,57 @@
       </div>
     </div>
   </section>
+
+<!-- ==========================================================================
+     THE LOWER-GROUND HEX PLANE, as this page runs out into the footer.
+     ==========================================================================
+     The home page's isometric prism field, continued here. Not a copy of a field
+     the footer also has: hex-field.js renders ONE plate for the union of both host
+     boxes and gives each host an aperture onto it, so there is a single sweep group
+     and a single pointer circle in the document. Both hosts carry the SAME
+     data-hexfield value; that string is the whole seam contract.
+
+     WINDOW 1 borrows the DOCUMENT section's box. Measured at 1440: the section ends
+     at 6139 and the footer begins at 6139, so it is the only full-bleed box on this
+     template that is contiguous with the footer -- one plane across the joint, no
+     seam. The alternative, a window on the last unit (#nuleafnv-more), was
+     prototyped and rejected: it is 759px wide and stops 151px short of the footer,
+     which reads as two disconnected panels. --tailfade is what makes a document-tall
+     window a TAIL: the plane is held fully off the reading column and fades in as
+     the page descends. data-hex-clear anchors the soft clearing on the reading
+     column itself, the thing that must stay legible.
+
+     WINDOW 2 borrows .site-footer's box. It sits HERE, inside <main>, and that is a
+     correction rather than a convenience: everything outside <main> is the LOCKED
+     CHROME BLOCK, stamped into all 27 pages, so a host placed in the footer there
+     would hand a hex plane to every page on the site. This is a per-page treatment
+     and must not propagate. The footer element itself is never touched.
+
+     The --cover MODIFIER CLASS IS DELIBERATELY NOT USED. It is defined in no sheet
+     and read by no script -- hex-field.js keys the cover behaviour entirely off the
+     data-hexfield-cover ATTRIBUTE (verified: hex-field.js:634 reads the attribute,
+     and the string "mc-hexfield--cover" appears nowhere in it). The home page
+     dropped that class on 2026-08-18 for exactly this reason, and inventing CSS for
+     it here to make it legal would be the orphan gate satisfied by a lie. Both
+     windows are decorative end to end: aria-hidden, absolute, pointer-events:none. -->
+<div class="mc-hexfield mc-hexfield--tailfade" data-hexfield="lower-ground"
+     data-hexfield-cover="#nuleafnv-doc" data-hex-clear=".tc-doc__body" aria-hidden="true"></div>
+<div class="mc-hexfield" data-hexfield="lower-ground"
+     data-hexfield-cover=".site-footer" aria-hidden="true"></div>
+
+<!-- THE ATMOSPHERICS CARRY THEIR OWN BEHAVIOUR, INSIDE <main>, and are linked PER
+     PAGE rather than from the chrome: smoke-engine.js is 23KB and hex-field.js is
+     48KB, and the 22 pages that use neither have no reason to fetch 71KB. ONE SMOKE
+     ENGINE: the model, the tuning table and the pointer-wake live in smoke-engine.js
+     and each field supplies only its emitter -- a second particle file would put a
+     second copy of the wind constants on the page, which is the non-propagation
+     trap. Loaded first and without defer, so it is defined by the time the rise
+     field runs. hex-field.js takes no defer and no DOMContentLoaded wrapper either:
+     it measures after window LOAD, because the field's height is the sum of two real
+     page regions and is not final until webfonts and the footer imagery settle. -->
+<script src="../_design/smoke-engine.js"></script>
+<script src="../_design/section-smoke-rise.js" defer></script>
+<script src="../_design/hex-field.js"></script>
 
 </main>
 
@@ -616,5 +717,18 @@
   }
 })();
 </script>
+
+<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
+     decks, parallax, accordions, dividers, case tabs, marquee idling).
+     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
+     it: the locked template linked NO scripts and every built page was inert. Measured on
+     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
+     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
+     showed its final value statically.
+     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
+     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
+     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
+     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
+<script src="../_design/page-effects.js" defer></script>
 </body>
 </html>
