@@ -6523,6 +6523,41 @@ a.hw-cell__value:focus-visible{
    and weight only — the ladder's void again, there is no size between 34px and
    17px to promote a term into. */
 .tc-defs{margin:var(--ds-space-lg) 0 0;max-width:var(--ds-measure)}
+
+/* TWO-UP DEFINITION LIST ON A WIDE CANVAS.
+   MEASURED PROBLEM: a page whose body is only definition pairs used 44% of the 1440 canvas and ran
+   1876px tall with the right 45% empty. performance-marketing was the clearest case - 19 atoms and
+   ONE distinct photo, so unlike its siblings nothing in its body ever reached full width. Every
+   other page measured 74%.
+   FIRST ATTEMPT, WRONG LEVER, RECORDED SO IT IS NOT RETRIED: I put `columns:2` on .tc-defs. The rule
+   applied (computed columnCount 2, box widened 640 -> 1072) and still produced ONE column on five of
+   the eight pages, because those pages emit ONE .tc-defs PER PAIR - performance-marketing 5 blocks/5
+   terms, consulting 9/9 - so each container holds a single pair and has nothing to flow. Only
+   ads-design (3 blocks/6 terms) and branding-graphic-design (2/4) ever split.
+   THE RIGHT LEVER is the SECTION that holds the sibling blocks. Any .tc-sec containing two or more CONSECUTIVE
+   .tc-defs becomes a two-column grid; its heading and any other child span both columns; each
+   .tc-defs takes one cell and drops its 640px cap. A section with a single .tc-defs (contact) is
+   untouched, and below 1024px everything returns to the single measured column. */
+@media (min-width: 1024px) {
+  /* ADJACENT, NOT MERELY LATER. `~` matched any two .tc-defs siblings even when other full-width
+     elements sat between them, which is the shape integrations and ads-design use: heading, defs,
+     heading, defs. Those pages got the grid but every defs still started its own row, so the copy
+     went from a 640px measure to a 488px cell with 584px of dead space beside it - strictly worse
+     than before. `+` requires the blocks to actually be consecutive, which is the only case where
+     two-up pairing is possible. */
+  /* RAIL-LESS BODIES ONLY. A railed .tc-doc gives its body 759px, not 1072, and two columns of that
+     is 332px per cell - too narrow for body copy, and consulting (9 blocks) proved it. A railed page
+     is already using its horizontal space for the rail, so it keeps the single measured column. */
+  .tc-doc--norail .tc-sec:has(> .tc-defs + .tc-defs){
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    column-gap:var(--ds-space-2xl, 56px);
+    align-items:start;
+  }
+  .tc-doc--norail .tc-sec:has(> .tc-defs + .tc-defs) > :not(.tc-defs){ grid-column:1 / -1 }
+  .tc-doc--norail .tc-sec:has(> .tc-defs + .tc-defs) > .tc-defs{ max-width:none }
+}
+
 .tc-defs__t{
   margin:0;
   font-size:var(--ds-step-body);line-height:1.72;font-weight:700;
