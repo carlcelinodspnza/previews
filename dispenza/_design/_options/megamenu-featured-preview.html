@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dispenza — Services mega menu: Featured + List, owner revision</title>
+
+<!-- OWNER REVISION of Option 4 (Featured + List), 2026-08-17.
+     Two owner instructions applied:
+       1. Performance marketing (01) now sits IN the list as the first row, so the list carries all
+          EIGHT services. Because the list is a 2-column ROW-FLOW grid, adding 01 shifts the parity:
+          column one becomes 01/03/05/07 and Reports (08) moves into the second column — which is
+          exactly what the owner asked for.
+       2. The left slab is now ONLY A PREVIEW. It is no longer a nav link and no longer promotes a
+          "lead service": it mirrors whichever list row is hovered or focused, and rests on
+          Performance marketing.
+     WHY THIS IS SAFE (the flaw that got the master-detail option rejected): every one of the eight
+     titles AND descriptions is permanently visible in the list. The preview repeats information, it
+     never holds the only copy of it, so nothing is hover-gated for touch or keyboard users.
+     COPY HONESTY: the "LEAD SERVICE" flag, the "Paid"/"Organic" chips and "Open the service page"
+     are REMOVED — all four were strings that exist nowhere in the source, and "lead service" became
+     an untrue claim the moment 01 stopped being promoted above the other seven.
+     Staged at the REAL dock width: --ds-container-max 1120px (dispenza-tokens.css:204). -->
+<link rel="stylesheet" href="../dispenza-tokens.css">
+<link rel="stylesheet" href="../dispenza-fonts.css">
+<link rel="stylesheet" href="../_tournament/foundation-1-measured-column/dispenza-structural.css">
+<link rel="stylesheet" href="../dispenza-chrome.css">
+
+<style>
+  body{
+    margin:0; background:var(--ds-bg); color:var(--ds-ink-on-dark);
+    font-family:var(--ds-font-body); padding:var(--ds-space-lg) var(--ds-space-md) 96px;
+  }
+  .wrap{max-width:1280px;margin:0 auto}
+  .pg-eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink)}
+  .pg-h1{font-family:var(--ds-font-display);font-size:clamp(26px,3vw,38px);margin:8px 0 14px}
+  .pg-lede{max-width:78ch;color:var(--ds-ink-soft);line-height:1.6}
+  .stage{margin-top:40px;background:rgba(255,255,255,.02);
+         border:1px dashed var(--ds-hairline);border-radius:12px;padding:20px;overflow-x:auto}
+  .stage__dock{max-width:var(--ds-container-max);margin:0 auto;position:relative}
+  .pg-note{margin-top:28px;color:var(--ds-ink-soft);font-size:14px;line-height:1.6;max-width:80ch}
+  .pg-note strong{color:var(--ds-ink-on-dark)}
+
+/* ==========================================================================
+   FEATURED-PREVIEW + FULL LIST   (root: .opt-fpl)
+   Every colour, space, radius and duration is a --ds-* token.
+   ========================================================================== */
+.rail-panel.opt-fpl{
+  display:block; position:relative; inset:auto; width:100%;
+  opacity:1; visibility:visible; transform:none;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift);
+  padding:var(--ds-space-md);
+  font-family:var(--ds-font-body);
+}
+
+/* head — unchanged from the shipping panel */
+.opt-fpl .panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-xs);margin-bottom:var(--ds-space-sm);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-fpl .panel__eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);white-space:nowrap;
+}
+.opt-fpl .panel__note{font-size:12.5px;line-height:1.4;color:var(--ds-ink-soft);text-align:right}
+
+/* body: preview slab left, the full eight right */
+.opt-fpl__body{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:var(--ds-space-md)}
+
+/* ---- PREVIEW SLAB (not a link, not focusable, aria-hidden) ---------------- */
+.fpl__preview{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--ds-accent-deep);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  padding:var(--ds-space-md);
+  min-height:260px;
+}
+.fpl__pv-num{
+  font-family:var(--ds-font-display);font-size:13px;font-weight:700;letter-spacing:.18em;
+  color:var(--ds-accent-on-deep);
+}
+.fpl__pv-title{
+  display:block;margin-top:var(--ds-space-sm);
+  font-family:var(--ds-font-display);font-size:clamp(22px,2.2vw,30px);line-height:1.15;
+  font-weight:700;color:var(--ds-ink-on-dark);
+}
+.fpl__pv-desc{
+  display:block;margin-top:var(--ds-space-xs);
+  font-size:15px;line-height:1.5;color:var(--ds-accent-on-deep);
+}
+/* media slot: reserved, deliberately EMPTY. No stock image stands in for real work. */
+.fpl__pv-slot{
+  margin-top:auto;padding-top:var(--ds-space-md);
+  border-top:1px solid rgba(255,255,255,.14);
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ds-accent-on-deep);
+}
+
+/* ---- THE LIST — all eight, 2 columns, ROW flow ---------------------------- */
+.opt-fpl .fpl__list{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-flow:row;
+  gap:0;
+}
+.opt-fpl .fpl__row{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  column-gap:var(--ds-space-sm);align-items:start;
+  padding:var(--ds-space-sm);
+  border:0;border-top:1px solid var(--ds-hairline);
+  border-radius:0;background:transparent;text-decoration:none;transform:none;
+  transition:background var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-fpl .fpl__row:nth-child(-n+2){border-top:0}
+.opt-fpl .fpl__row:hover,
+.opt-fpl .fpl__row:focus-visible{background:var(--ds-accent-soft);transform:none}
+.opt-fpl .fpl__row:focus-visible{outline:2px solid var(--ds-accent-ink);outline-offset:-2px}
+.fpl__num{
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.14em;
+  color:var(--ds-ink-soft);padding-top:3px;
+}
+.opt-fpl .fpl__row:hover .fpl__num,
+.opt-fpl .fpl__row:focus-visible .fpl__num{color:var(--ds-accent-ink)}
+.opt-fpl .fpl__row .panel__title{display:block;font-size:17px;line-height:1.25;font-weight:600;color:var(--ds-ink-on-dark)}
+.opt-fpl .fpl__row .panel__desc{display:block;margin-top:4px;font-size:13.5px;line-height:1.45;color:var(--ds-ink-soft)}
+
+@media (max-width:900px){
+  .opt-fpl__body{grid-template-columns:minmax(0,1fr)}
+  .fpl__preview{display:none}
+  .opt-fpl .fpl__list{grid-template-columns:minmax(0,1fr)}
+  .opt-fpl .fpl__row:nth-child(-n+2){border-top:1px solid var(--ds-hairline)}
+  .opt-fpl .fpl__row:first-child{border-top:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="pg-eyebrow">Services mega menu — owner revision</p>
+  <h1 class="pg-h1">Featured preview + all eight</h1>
+  <p class="pg-lede">
+    Performance marketing now sits in the list as <strong>01</strong>, so the list carries all eight
+    services and <strong>Reports moves into the second column</strong>. The left slab is no longer a
+    promoted item or a link — it is a preview that mirrors whichever row you hover or focus, and rests
+    on Performance marketing.
+  </p>
+
+  <div class="stage">
+    <div class="stage__dock">
+
+      <div class="rail-panel rail-panel--services opt-fpl" id="panel-services" role="region" aria-label="Services">
+
+        <div class="panel__head">
+          <span class="panel__eyebrow">Our suite</span>
+          <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+        </div>
+
+        <div class="opt-fpl__body">
+
+          <div class="fpl__preview" id="fpl-preview" aria-hidden="true">
+            <span class="fpl__pv-num" id="fpl-pv-num">01</span>
+            <span class="fpl__pv-title" id="fpl-pv-title">Performance marketing</span>
+            <span class="fpl__pv-desc" id="fpl-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+            <span class="fpl__pv-slot">Preview</span>
+          </div>
+
+          <div class="panel__grid fpl__list">
+
+            <a class="panel__item fpl__row" href="performance-marketing.html"
+               data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+              <span class="fpl__num" aria-hidden="true">01</span>
+              <span>
+                <span class="panel__title">Performance marketing</span>
+                <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="branding-graphic-design.html"
+               data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+              <span class="fpl__num" aria-hidden="true">02</span>
+              <span>
+                <span class="panel__title">Brand and package design</span>
+                <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="webdesign-development.html"
+               data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+              <span class="fpl__num" aria-hidden="true">03</span>
+              <span>
+                <span class="panel__title">Web design and development</span>
+                <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="ads-design.html"
+               data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+              <span class="fpl__num" aria-hidden="true">04</span>
+              <span>
+                <span class="panel__title">Advertisement design</span>
+                <span class="panel__desc">Creative sized for every placement you actually run.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="conversion-rate-optimization.html"
+               data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+              <span class="fpl__num" aria-hidden="true">05</span>
+              <span>
+                <span class="panel__title">Conversion rate optimization</span>
+                <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="integrations.html"
+               data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+              <span class="fpl__num" aria-hidden="true">06</span>
+              <span>
+                <span class="panel__title">Integrations</span>
+                <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="consulting.html"
+               data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+              <span class="fpl__num" aria-hidden="true">07</span>
+              <span>
+                <span class="panel__title">Consulting</span>
+                <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+              </span>
+            </a>
+
+            <a class="panel__item fpl__row" href="reports.html"
+               data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+              <span class="fpl__num" aria-hidden="true">08</span>
+              <span>
+                <span class="panel__title">Reports</span>
+                <span class="panel__desc">What ran, what it cost, what it returned.</span>
+              </span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="pg-note">
+    <strong>Column parity, as asked:</strong> the list is a two-column row-flow grid, so with eight rows
+    column one reads 01 / 03 / 05 / 07 and column two reads 02 / 04 / 06 / <strong>08 Reports</strong>.
+    <br><br>
+    <strong>Four strings were cut</strong> — the "LEAD SERVICE" flag, the "Paid" and "Organic" chips and
+    "Open the service page". None exist in the source copy, and "lead service" stopped being true once
+    Performance marketing was no longer promoted above the other seven.
+    <br><br>
+    <strong>The preview holds no unique information.</strong> Every title and description is permanently
+    visible in the list, so nothing is hidden behind hover — this is what separates it from the
+    master-detail option that was rejected. Below 900px the preview is dropped entirely and the list
+    goes to one column.
+  </p>
+
+</div>
+
+<script>
+// Preview mirrors the hovered/focused row. Purely additive: if this script never runs, the preview
+// simply stays on Performance marketing and all eight links keep working.
+(function () {
+  var pv = { n: document.getElementById('fpl-pv-num'), t: document.getElementById('fpl-pv-title'), d: document.getElementById('fpl-pv-desc') };
+  var REST = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+  function show(o) { pv.n.textContent = o.n; pv.t.textContent = o.t; pv.d.textContent = o.d; }
+  document.querySelectorAll('.fpl__row').forEach(function (row) {
+    var o = { n: row.dataset.n, t: row.dataset.title, d: row.dataset.desc };
+    row.addEventListener('mouseenter', function () { show(o); });
+    row.addEventListener('focus', function () { show(o); });
+  });
+  var list = document.querySelector('.fpl__list');
+  if (list) { list.addEventListener('mouseleave', function () { show(REST); }); }
+})();
+</script>
+</body>
+</html>

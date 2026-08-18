@@ -42,7 +42,7 @@
     customElements.whenDefined('model-viewer').then(function () {
       var C = customElements.get('model-viewer');
       if (C && 'dracoDecoderLocation' in C) {
-        C.dracoDecoderLocation = '../../vendor/draco/';
+        C.dracoDecoderLocation = vendorURL('draco/');
       }
     });
   }
@@ -217,10 +217,29 @@
     }
   }());
 
+  // ONE script-relative base for every vendored asset this file points at. Captured at PARSE time
+  // because document.currentScript is null inside any later callback/promise. Every path below was
+  // originally document-relative ('../../vendor/...'), which only held at the depth the foundation
+  // SPECIMEN sits at; from pages/ it escaped the site root and 404'd, silently downgrading the home
+  // page's 3D hero to its static poster.
+  var HERE = (document.currentScript && document.currentScript.src) || '';
+  var vendorURL = function (rel) {
+    return HERE ? new URL('../vendor/' + rel, HERE).href : '../_design/vendor/' + rel;
+  };
+
   (function loadRuntime() {
+    // RESOLVE THE RUNTIME RELATIVE TO THIS SCRIPT, NOT TO THE DOCUMENT.
+    // This was hardcoded '../../vendor/model-viewer-3.5.0.min.js', which is document-relative and was
+    // therefore only correct at the depth the foundation SPECIMEN sits at
+    // (_design/_tournament/<concept>/index.html -> ../../vendor/ = _design/vendor/ OK).
+    // A real built page emits from pages/, where ../../vendor/ escapes the site root entirely and the
+    // runtime 404s -- the 3D coin silently falls back to the static poster on the HOME PAGE. Same class
+    // of defect as the chrome logo that was pinned at ../../../assets/.
+    // This script always lives in _design/hero/ and the runtime always in _design/vendor/, so deriving
+    // from the script's own URL is correct at EVERY depth and cannot rot again.
     var sc = document.createElement('script');
     sc.type = 'module';
-    sc.src = '../../vendor/model-viewer-3.5.0.min.js';
+    sc.src = vendorURL('model-viewer-3.5.0.min.js');
     document.head.appendChild(sc);
   }());
 

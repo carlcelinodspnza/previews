@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispensary marketing and advertising</title>
+<meta name="description" content="Marketing and advertising built for licensed dispensaries. Book a demo to see the suite and the pricing.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ==========================================================================
+       SEO META, AND WHY IT IS NEITHER THE CLONE'S TITLE NOR THE CONCEPT'S.
+       The clone ships <title>Ads - Dispenza</title>, which is byte-identical to
+       ads1.html's title and does not name this page, and its meta description is
+       present but EMPTY. The concept preview's own META belongs to `reports`.
+       Neither is right here. The pair above is the PRESCRIBED row for this slug
+       from _handoff/seo-enrichment.md 1 (decision ids D-SEO-TITLES /
+       D-SEO-METAS), verbatim:
+         title | Dispensary marketing and advertising
+         meta  | Marketing and advertising built for licensed dispensaries.
+                 Book a demo to see the suite and the pricing.
+       ========================================================================== -->
+
+  <!-- THE PAGE HEAD. A <header>, not a <section>: an article's introductory
+       block. Of the container's six independently optional slots this lander
+       fills three - the wordmark lockup, the title, and the media - and it closes
+       on the same rule at the same interval as every other T-ARTICLE head.
+
+       THERE IS NO ACTION IN THIS HEAD, and that is a source fact rather than a
+       layout choice: the lander's own hero carries a wordmark, a claim and a
+       rating mark, and every BOOK DEMO / LEARN HOW button on the captured page
+       belongs to the chrome (footer card, footer bar, sticky mobile bar). The
+       page's own conversion move is the demo step below, in source order.
+
+       THE H1 IS A HEADING-LEVEL FIX, NOT A COPY EDIT. The source has NO <h1>
+       anywhere inside <main>: the largest thing on the page is a bare two-span
+       wordmark and the next is an <h4>. mechanical_build_gates requires a single
+       h1 per page in logical heading order, so the guarantee line - which is what
+       the page is actually about - takes the h1. Not one word changes. The
+       wordmark stays a <p>, which is what the source marks it as. -->
+  <header class="mc-section tc-head surface-dark" data-surface="dark">
+    <div class="container">
+      <div class="row"><div class="col">
+
+        <div class="tc-head__grid">
+          <div class="tc-head__copy">
+            <!-- ONE wordmark, set on two lines in the source: a single
+                 span carrying DISPENSARY, a <br>, and a nested span carrying
+                 MARKETING. It ships as ONE lockup, never as two headings. -->
+            <p class="ad-head__mark mc-display">DISPENSARY <span class="mc-display__turn">MARKETING</span></p>
+
+            <h1 class="ad-head__claim" id="dispensary-marketing-and-advertising-title">Only Dispensary Marketing Agency that Guarantees Results</h1>
+
+            <!-- THE RATING MARK. A five-star graphic and nothing else: the source
+                 attaches no score, no review count and no platform to it, so none
+                 is composed. The alt says what the artwork IS and claims nothing
+                 the file does not draw. -->
+            <div class="ad-stars">
+              <img src="../assets/in-pages/ae707132fc8f6c0f9b272630f5014d04eaf67a82.webp"
+                   alt="Five gold stars" width="1140" height="243" loading="lazy" decoding="async">
+            </div>
+          </div>
+        </div>
+
+        <hr class="tc-head__seal">
+      </div></div>
+    </div>
+  </header>
+
+  <!-- pick: SECTION-COMPONENTS.md #36 | considered: #3,#1,#21 | rigor: heavy | why: this lander is four peer proof-and-conversion units - four dated totals, the demo step, a mark wall and eight quotes with eight result plates folded under them - that the source hangs off headings at THREE different ranks with no hierarchy between them, and #36's left topic column is the only pattern in the catalog that tells an ad click how long the page is and what is on it before it commits to scrolling, which on a paid lander is the difference between a bounce and a store-type selection; #3 stat strip is the obvious pick for the four totals and is refused on the STAT LAW - the strip has no room for a two-word label, a figure and the dated window in one tile, and "Our 2024 Influence;" is the ONLY thing in the whole corpus that dates 1.2 Bln / 2.1 Bln / 3.8 Bln / 500+, so a pattern that pushes the window out of the unit publishes four undated billions; #1 hero-with-form would pull the store-type question up beside the claim and force the guarantee, the rating mark and step one of an eight-step wizard into one viewport, which is the cramped opener the conservation contract's "give it more room" clause exists to prevent; #21 case-studies 3-col cards the eight quotes at a third of the column each and truncates the four longest at 190+ characters, which strips the very percentages and windows that make them proof. rigor is heavy because this pick propagates: it is the T-ARTICLE container for 17 pages and the shared shape of both delegated ad landers, not a one-off slot. -->
+  <section class="mc-section tc-doc surface-dark" id="dispensary-marketing-and-advertising-doc" data-surface="dark">
+    <div class="container">
+      <div class="row tc-doc__grid">
+
+        <!-- THE RAIL COLUMN. Four entries, each a source heading string unchanged,
+             each a real <a href="#id"> pointing at a real id on the unit it names.
+             The landmark is named with aria-labelledby pointing at the page's OWN
+             title element, so even the accessible name is a source string.
+
+             THE RAIL LAW ON THIS PAGE, AND THE TWO JUDGMENTS IT NEEDED.
+
+             R2 gives the title to the h1 - the guarantee claim - so it is the page
+             head and never an entry. R3 then wants every heading at the shallowest
+             rank BELOW the title. The source cannot answer that question honestly
+             on its own, because its ranks run h4 -> h5/h3 -> h4 -> h2 -> h3 in DOM
+             order: the ranks are not a hierarchy, they are CMS residue, and
+             mechanical_build_gates requires logical heading order. So the four real
+             document sections are re-ranked to one peer level, h2, and the rail is
+             those four. That is a heading-LEVEL normalisation of the same class as
+             the h1 fix above; not one word changes and no string is added.
+
+             JUDGMENT 1 - THE FOUR STAT NUMERALS ARE NOT RAIL ENTRIES, AND THE RULE
+             APPLIED IS THE STAT LAW, NOT TASTE. F4 of the concept ledger records
+             that this page marks "1.2 Bln", "2.1 Bln", "3.8 Bln" and "500+" as h3,
+             so a mechanical read of R3 turns those four numerals into rail entries
+             (that read is where the sheet's recorded count of 7 for this page comes
+             from). It is refused. A rail entry is a STANDALONE STRING IN A SEPARATE
+             VISUAL UNIT - the nav column - and a bare "1.2 Bln" sitting there
+             carries neither its label ("Sales Influence") nor its window ("Our 2024
+             Influence;"). That is exactly the separation the stat law forbids, and
+             the stat law outranks R3. The four numerals therefore render as figures
+             inside their own stat items, next to their own labels, under their own
+             dated heading - and they are not headings at all in the rebuild.
+             7 recorded entries - 4 numerals - 1 withheld press heading (see F1)
+             + 2 re-ranked section heads = the 4 below.
+
+             JUDGMENT 2 - "Start Here" IS NOT A SECTION HEADING. The source tags it
+             as an uppercased h2, the shallowest rank on the page, but it is
+             the LEGEND OF FIELDSET ONE of the eight-step demo wizard, not a
+             document section, and the locked sheet already rules on it: it renders
+             as .ad-form__legend, "a position marker rather than a second heading
+             competing with the section head". A <legend> is not a heading, so R6
+             holds - nothing is docked to the spine that the rail does not list. -->
+        <div class="col tc-doc__rail">
+          <nav class="tc-rail" aria-labelledby="dispensary-marketing-and-advertising-title">
+            <ul class="tc-rail__list">
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#dispensary-marketing-and-advertising-s1">Our 2024 Influence;</a></li>
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#dispensary-marketing-and-advertising-s2">Book your FREE demo now</a></li>
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#dispensary-marketing-and-advertising-s3">Trusted by</a></li>
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#dispensary-marketing-and-advertising-s4">Our Happy Customers</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- THE BODY COLUMN. Its left border IS the spine. Each unit's heading
+             reaches back to that spine with a tick. -->
+        <div class="col tc-doc__body">
+
+          <!-- UNIT 1. THE STAT LAW AS DOM STRUCTURE, IN THE ONE SHAPE THIS PAGE
+               ALLOWS. Unlike the eight per-city figures, these four totals share a
+               SINGLE window - "Our 2024 Influence;" - which the source writes ONCE,
+               as the heading over all four. So the window is rendered where the
+               source puts it and where it governs: as this unit's heading, the
+               unit's FIRST child, with the four figures as the unit's ONLY other
+               content. There is no column count, wrap or breakpoint that can
+               separate a figure from that heading, because no figure exists outside
+               the article the heading opens. Repeating the window four times inside
+               the tiles was considered and refused: the source states it once, and
+               stamping it under every figure would be the build re-writing the
+               client's own qualifier into a chorus.
+               THE LABELS ARE PAIRS, NOT LOOSE WORDS. The source marks the second
+               word of each label with <b> ("Sales <b>Influence</b>"), so the pair
+               ships as one label with the emphasis intact - never as eight words.
+               PRECISION AND CASING ARE VERBATIM, including the trailing semicolon
+               on the heading (see F3) and this page's own "Bln" casing (see F4). -->
+          <article class="tc-sec" id="dispensary-marketing-and-advertising-s1">
+            <h2 class="tc-sec__h">Our 2024 Influence;</h2>
+            <ul class="ad-stats">
+              <li class="ad-stat">
+                <p class="ad-stat__label">Sales <b>Influence</b></p>
+                <p class="ad-stat__figure">1.2 Bln</p>
+              </li>
+              <li class="ad-stat">
+                <p class="ad-stat__label">Website <b>Visits</b></p>
+                <p class="ad-stat__figure">2.1 Bln</p>
+              </li>
+              <li class="ad-stat">
+                <p class="ad-stat__label">Google <b>Influence</b></p>
+                <p class="ad-stat__figure">3.8 Bln</p>
+              </li>
+              <li class="ad-stat">
+                <p class="ad-stat__label">Location <b>Helped</b></p>
+                <p class="ad-stat__figure">500+</p>
+              </li>
+            </ul>
+          </article>
+
+          <!-- UNIT 2. THE DEMO STEP, AND IT IS A REAL CONTROL. The source runs an
+               eight-step wizard inline in <main>; this page OWNS only step one, the
+               store-type question, and every field after it is the sitewide shared
+               form component that the contact page carries in full. So step one
+               renders here, as a real <form> with real radios and a real submit,
+               and the source's own advance control - "Next" with its guillemet,
+               atom 013 - carries the chosen store type onward to the page that owns
+               the rest of the wizard. No JavaScript, no invented label, no invented
+               field.
+               THE REASSURANCE LINE STAYS WELDED TO ITS HEADING: "On the NEXT PAGE"
+               is what qualifies where the demo is actually booked, so it sits
+               directly under the heading it qualifies and nowhere else. -->
+          <article class="tc-sec" id="dispensary-marketing-and-advertising-s2">
+            <h2 class="tc-sec__h">Book your FREE demo now</h2>
+            <p class="ad-lede">On the NEXT PAGE. Just answer a few simple questions</p>
+            <form class="ad-form" action="contact.html" method="get">
+              <fieldset class="ad-form__set">
+                <legend class="ad-form__legend">Start Here</legend>
+                <p class="ad-form__label" id="dispensary-marketing-and-advertising-storetype">Select Store Type</p>
+                <ul class="ad-choices" role="radiogroup" aria-labelledby="dispensary-marketing-and-advertising-storetype">
+                  <li class="ad-choice">
+                    <input class="ad-choice__input" type="radio" name="store-type" id="dma-store-retail" value="Retail Only">
+                    <label class="ad-choice__label" for="dma-store-retail">Retail Only</label>
+                  </li>
+                  <li class="ad-choice">
+                    <input class="ad-choice__input" type="radio" name="store-type" id="dma-store-delivery" value="Delivery Only">
+                    <label class="ad-choice__label" for="dma-store-delivery">Delivery Only</label>
+                  </li>
+                  <li class="ad-choice">
+                    <input class="ad-choice__input" type="radio" name="store-type" id="dma-store-both" value="Retail & Delivery">
+                    <label class="ad-choice__label" for="dma-store-both">Retail & Delivery</label>
+                  </li>
+                </ul>
+                <div class="ad-form__actions mc-actions">
+                  <button class="btn btn--solid" type="submit">Next ›</button>
+                </div>
+              </fieldset>
+            </form>
+          </article>
+
+          <!-- UNIT 3. ONE MARK WALL, NOT TWO - AND THE MISSING ONE IS A DECLARED
+               WITHHOLDING, NOT A SILENT DROP. See F1 in the register at the foot of
+               this document for the full reason, the five files involved and the
+               one owner action that returns them.
+               THE SUB-LINE IS THE SOURCE'S OWN COPY-PASTE. "Places we've been
+               featured" is written TWICE on the captured page, once under each
+               wall heading, and it is reproduced here exactly once because exactly
+               one wall ships. It is not re-written to suit the heading it now sits
+               under - that would be the build editing the client's copy (see F2).
+               THE MARKS ARE A STATIC WALL. The source runs this as an owl carousel
+               at autoplay:true / loop:true, which motion.forbidden bans outright,
+               and the capture's second copy of the set is owl's loop clone. All
+               five marks paint on load, once, nothing rotates, nothing hides. -->
+          <article class="tc-sec" id="dispensary-marketing-and-advertising-s3">
+            <h2 class="tc-sec__h">Trusted by</h2>
+            <div class="ad-wall">
+              <!-- CLIENT MARKS ship with alt="" per client-rules.json accessibility.known_gap:
+                   "the 25 client marks ship WITHOUT a name claim until the owner confirms
+                   each name and right-to-display [OWNER-DATA] O4". The five files in this
+                   wall are, for the owner's confirmation pass and NOT as an accessible
+                   name claim: cookies-sunland-park, rootd-in-the-510, nuleaf, greenbean,
+                   sundial-collective. The source atoms carry alt="" on all five; naming
+                   them here asserted five unconfirmed client relationships. Corrected
+                   2026-08-18 to match the sibling lander ads1. -->
+              <!-- OMITTED: the sub-line "Places we've been featured".
+                   client-rules.json overclaim.press_features.banned lists that exact
+                   string; safe = "omit entirely until an outlet is named", and NO outlet
+                   is named anywhere across the 32 source pages. It survived
+                   block-banned-content only because the flat bannedVocab array does not
+                   carry the phrase and the source writes a U+2019 curly apostrophe against
+                   the rule's straight one. Under the "Trusted by" heading it also asserted
+                   the five marks were outlets that featured Dispenza while the heading
+                   calls them clients. The sibling lander ads1, built from the identical
+                   source pair, already omits it. Removed 2026-08-18. -->
+              <ul class="ad-wall__grid">
+                <li class="ad-mark">
+                  <img src="../assets/in-pages/cookies_sunland_white_4.webp"
+                       alt="" width="300" height="160" loading="lazy" decoding="async">
+                </li>
+                <li class="ad-mark">
+                  <img src="../assets/in-pages/1196038a88ff2b0f861376ca3384b62b85e2b3382.webp"
+                       alt="" width="300" height="174" loading="lazy" decoding="async">
+                </li>
+                <li class="ad-mark">
+                  <img src="../assets/in-pages/518ee2439231c4c5b4e74dfdc5bed9a35ce22c922.webp"
+                       alt="" width="300" height="136" loading="lazy" decoding="async">
+                </li>
+                <li class="ad-mark">
+                  <img src="../assets/in-pages/648a1315d26fb04b53edf44f324ff7c35a49dd5c2.webp"
+                       alt="" width="300" height="170" loading="lazy" decoding="async">
+                </li>
+                <li class="ad-mark">
+                  <img src="../assets/in-pages/9339a2792cdc9aacb75bc02070882cba1e5f2cbd2.webp"
+                       alt="" width="300" height="134" loading="lazy" decoding="async">
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- UNIT 4. EIGHT QUOTES AND EIGHT RESULT PLATES, IN ONE UNIT.
+               THE SPEAKER IS A FIRST NAME AND NOTHING ELSE, because that is all the
+               source carries. No surname, no company, no city, no headshot, no star
+               rating, no review count and no date is composed to fill a card out.
+               EVERY PERCENTAGE STAYS INSIDE ITS SENTENCE. Each quote carries its own
+               window in its own words ("in just the first three months", "within
+               months", "in six months", "in just 90 days"), so no figure is ever
+               lifted out into a tile - doing that would strip the window and the
+               attribution in one move.
+               STATIC WALL, EACH QUOTE ONCE. Same carousel ban as unit 3; the second
+               copy of all eight quotes in the capture is owl's loop clone.
+               DOM ORDER IS THE ATOMS' ORDER: John, Kareen, Mitch, Tommy, Sean, Omar,
+               Alex, Michael. See F6 - the brief lists a different order.
+               THE EIGHT PLATES ARE FOLDED IN, NOT GIVEN A HEADING. They carry no
+               heading of their own anywhere in the source and inventing one is
+               forbidden, so they join the unit above them on a hairline at one
+               rhythm step - the sheet's own .ad-seam device. Every string baked into
+               each plate - the city, the KPI label, the figure AND the window it was
+               measured over - is carried in that plate's alt text, so the stat law
+               holds for a screen reader exactly as it holds on screen. -->
+          <article class="tc-sec" id="dispensary-marketing-and-advertising-s4">
+            <h2 class="tc-sec__h">Our Happy Customers</h2>
+            <p class="ad-lede">See what our clients say about us</p>
+            <ul class="ad-quotes">
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"Dispenza helped us increase sales by over 50% in just the first three months. The speed of their setup and the depth of their tracking blew us away."</p>
+                <p class="ad-quote__name">John</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"Our dispensary saw nearly 200% growth within months. Their integrations with all the major e-com providers made reporting seamless and trustworthy."</p>
+                <p class="ad-quote__name">Kareen</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"The ROI has been unmatched. We went from flat growth to a 94% sales increase in record time-every number they showed us was backed with real data."</p>
+                <p class="ad-quote__name">Mitch</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"The level of tracking and analytics is next-level. We knew exactly where every customer came from, and it translated to over 55% more revenue in six months."</p>
+                <p class="ad-quote__name">Tommy</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"Fast, transparent, and powerful. Dispenza drove a 733% increase for our Las Vegas location-something we never thought possible."</p>
+                <p class="ad-quote__name">Sean</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"Within the first 2 months we were already up 196%. The combination of their speed, data precision, and relationships in the industry makes all the difference."</p>
+                <p class="ad-quote__name">Omar</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"The team plugged directly into our systems with zero hassle. With their integrations we saw a 198% jump in sales and finally had visibility into every ad dollar."</p>
+                <p class="ad-quote__name">Alex</p>
+              </li>
+              <li class="ad-quote ad-lift">
+                <p class="ad-quote__text">"Every promise was backed with measurable results. In Oceanside, we grew over 51% in just 90 days-faster than any other agency we’ve worked with."</p>
+                <p class="ad-quote__name">Michael</p>
+              </li>
+            </ul>
+
+            <div class="ad-seam">
+              <ul class="ad-tiles">
+                <li>
+                  <img src="../assets/in-pages/Group_925_1_.webp"
+                       alt="Oceanside, CA. Total Sale Increase 51.37% in the first 3 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_925_2__1_.webp"
+                       alt="Mid City, LA, CA. Total Sale Increase 50.1% in the first 3 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_926_1_.webp"
+                       alt="Edmond, OK. Total Sale Increase 196% in the first 2 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_927_1_1.webp"
+                       alt="Seaside, CA. Total Sale Increase 94.5% in the first 2 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_928_1_.webp"
+                       alt="Oakland, CA. Total Sale Increase 94.5% in the first 5 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_929_1_.webp"
+                       alt="Needles, CA. Total Sale Increase 198% in the first 6 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_930_1_.webp"
+                       alt="Downtown LA, CA. Total Sale Increase 55.2% in the first 6 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+                <li>
+                  <img src="../assets/in-pages/Group_931_1_.webp"
+                       alt="Las Vegas, NV. Total Sale Increase 733% in the first 20 months." width="696" height="674" loading="lazy" decoding="async">
+                </li>
+              </ul>
+            </div>
+
+            <!-- THE CLOSE, FOLDED INLINE - NOT A SECOND CLOSING BAND. The chrome
+                 .precta IS the site's single closing conversion band and G-CTA1
+                 blocks a second one, so the one action rides at the foot of the
+                 document column, on the same left axis and at the same interval as
+                 a content unit. THE LABEL IS NOT INVENTED FOR THIS PAGE: "BOOK
+                 DEMO" is client-rules.json's frozen primary_cta.label in its frozen
+                 casing, and it is also this page's OWN source string - the captured
+                 page prints it three times (atoms 143, 152 and the sticky mobile
+                 bar's 191). -->
+            <div class="mc-actions tc-close">
+              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+            </div>
+          </article>
+
+          <!-- ####################################################################
+               SOURCE DEFECTS REGISTER - dispensary-marketing-and-advertising
+               Every omission on this page is declared here with its reason. Nothing
+               is dropped silently. F1 is an OPEN OWNER BLOCKER; the rest are
+               source facts this build exposes rather than causes.
+               ####################################################################
+
+               F1  OPEN OWNER BLOCKER - THE PRESS-FEATURE WALL IS WITHHELD, AND THIS
+                   PAGE CANNOT PASS BOTH GATES UNTIL THE OWNER RULES.
+                   The captured page opens its proof run with a SECOND mark wall
+                   whose heading is corpus atom
+                   D-SRC-DISPENSARYMARKETINGANDADVERTISING-0002. That exact string
+                   is BOTH (a) a required verbatim for this page - it is in the
+                   fact registry with pages[] naming this slug, so
+                   verify-copy-fidelity demands it in visible prose - AND (b) a
+                   literal entry in client-rules.json bannedVocab, which
+                   block-banned-content matches case-insensitively against the RAW
+                   file and refuses the write on. Verified by running both gates on
+                   a probe fragment: with the string present, block-banned-content
+                   exits 2; with it absent, verify-copy-fidelity exits 2 naming
+                   0002. The two are mechanically exclusive and no markup can
+                   satisfy both - splitting the string across inline tags or line
+                   breaks would defeat the ban while still printing the claim,
+                   which is evasion, not a fix.
+                   THE DISPOSITION APPLIED, and why this side of the deadlock:
+                   content-bible.md 2 H11 and client-rules.json
+                   overclaim.press_features BOTH give the same safe form in the
+                   owner's own words - "omit entirely until an outlet is named".
+                   That is the only owner-written instruction that speaks to this
+                   exact string, so the wall is withheld whole rather than stripped
+                   to its logos: keeping five publication marks under no heading
+                   would still make the press claim in pictures, and moving them
+                   under "Trusted by" would assert that five magazines are clients,
+                   which is a NEW claim the source never makes.
+                   WHAT IS WITHHELD: atom 0002 (the heading), the SECOND instance
+                   of atom 0019 (the sub-line, which the source prints under both
+                   walls and which therefore still ships once, under "Trusted by"),
+                   and five mark files -
+                     4a974a6275f1e8069189a3c47c8943ec174c6c4b2.webp
+                     71443659557856c2b6aaef593beb995558855ffb2.webp
+                     b3fe39bd306c485f0bb49e8cdd10d4e12cf764772.webp
+                     eccbcb18fbb172077584f44db55d53054f6cb8432.webp
+                     d2e12e217b681881e226f7869f82588a418d7b732.webp
+                   THE ONE-STEP UNBLOCK, and it is closer than the spec thinks. The
+                   ban's stated premise is that "NO outlet is named anywhere across
+                   32 pages". That is true of the TEXT and false of the ARTWORK:
+                   read at full size, those five files are the marks of HIGH TIMES,
+                   DOPE MAGAZINE, CANNABIS CULTURE, CANNABIS MAGAZINE and SENSI. The
+                   build may not assert those names itself, because
+                   accessibility.known_gap / owner item O4 holds every mark to "no
+                   name claim until the owner confirms each name and right to
+                   display". So ONE owner action - confirming those five names and
+                   the right to display them - satisfies H11's condition, closes O4
+                   for this wall, and lets the heading and all five marks ship. Until
+                   then the atom's status is WITHHELD-PENDING-SUBSTANTIATION and it
+                   needs a decisions-ledger.md id (content-bible 4); RETIRE is the
+                   alternative, and either way it is the owner's call, not the
+                   build's.
+
+               F2  The sub-line under BOTH walls is the identical sentence: the
+                   source copy-pastes atom 0019 under two different headings, so
+                   the second wall's sub-line says "featured" while its heading says
+                   "Trusted by". Reproduced as written, not silently re-worded.
+
+               F3  Atom 0017 ends in a SEMICOLON - "Our 2024 Influence;". Its twin
+                   on the sibling lander carries none. Rendered exactly as written;
+                   they are two different atoms, not a normalisation error. A
+                   copy-edit here is the owner's call.
+
+               F4  CROSS-PAGE STAT LABEL CONFLICT on the same four figures. This
+                   page publishes them as "Sales Influence / Website Visits /
+                   Google Influence / Location Helped" at "1.2 Bln" casing; the
+                   sibling lander and the homepage publish the SAME numbers as
+                   "SALES INFLUENCED / WEBSITE VISITS / GOOGLE IMPRESSIONS /
+                   LOCATION HELPED" at "1.2 BLN". "Google Influence" and "GOOGLE
+                   IMPRESSIONS" are two different claims about one number. Each
+                   page's figures are taken from its OWN atoms, as the copy doc
+                   instructs; the owner still has to say which label and which
+                   casing ships. Also verbatim: atom 0010+0006 read "Location
+                   Helped", singular, against the value "500+".
+
+               F5  THE LAS VEGAS WINDOW CONTRADICTS ITSELF ACROSS THE SITE, and
+                   this is a stat-law finding, not a typo. The result plate on THIS
+                   page (Group_931_1_.webp) is artwork that reads "733% ... in the
+                   first 20 months". The SAME result is written as text on eight
+                   other captured pages - index, case-studies and all six team
+                   pages - as "in the first 30 months", and the already-built team
+                   pages ship 30. The alt text above carries what THIS page's
+                   artwork actually says, because transcribing the picture as
+                   anything else would be the build editing a client claim. The
+                   owner must reconcile 20 against 30; one of them is wrong and a
+                   figure whose window is uncertain is a figure whose window cannot
+                   be trusted.
+
+               F6  QUOTE ORDER: the brief lists the eight quotes as Sean, Omar,
+                   Alex, Michael, John, Kareen, Mitch, Tommy. The atoms file - which
+                   is the content law's named source - has them in DOM order as
+                   John, Kareen, Mitch, Tommy, Sean, Omar, Alex, Michael, and the
+                   clone confirms it. Source order wins; the owner can re-order.
+
+               F7  THREE QUOTES CARRY A U+2014 EM DASH in the source - "90
+                   days-faster", "record time-every", "location-something". The
+                   build's dash ban is byte-level over pages/*.html with no
+                   source-verbatim exemption, while the copy-fidelity normaliser
+                   collapses the whole dash family to a hyphen on both sides. Those
+                   three em dashes therefore ship as a hyphen-minus. That IS a
+                   character-level edit to the client's copy, made once, deliberately
+                   and only here. No other punctuation is touched: the curly
+                   apostrophes in "Places we've been featured" and "we've worked
+                   with" ship exactly as typed.
+
+               F8  THE GUARANTEE SHIPS WITHOUT ITS CONDITION ON THIS PAGE, and that
+                   is a declared gap rather than an oversight.
+                   client-rules.json overclaim.guarantee_unconditional asks that the
+                   condition travel with the guarantee wherever it is stated. The
+                   condition exists in the client's own words, but on how-it-works,
+                   NOT in this page's atoms: "if we don't achieve a top 3 ranking
+                   for you, you won't pay for our services". The content law for
+                   this build is that page copy comes from this slug's atoms file,
+                   all of it and only it, so the build does not lift a sentence
+                   across from a sibling page on its own authority. The owner can
+                   close this in one edit by approving that clause as a QUALIFY
+                   line under the h1; it is existing client copy, so approving it
+                   invents nothing.
+
+               F9  15 REAL IN-MAIN STRINGS ARE MISSING FROM THE ATOMS FILE, dropped
+                   by the extractor's chrome filter: the "Step 1".."Step 7" visible
+                   fieldset headings and the "Step 1".."Step 8" progress titles of
+                   the eight-step wizard. They are not counted in this page's atom
+                   totals and none is invented here. The source's own off-by-one -
+                   fieldset 2 carries progress "Step 2" over visible heading
+                   "Step 1", and so on to fieldset 8 - is recorded, not reproduced,
+                   because this page renders step one only and hands the remaining
+                   seven steps to the page that owns the shared form.
+
+               F10 SPEC CONTRADICTION, RESOLVED IN FAVOUR OF THE PAGE.
+                   client-rules.json capabilityTruth.testimonials reads "NONE EXIST.
+                   The build must not author one" and the ledger's O5 reads "Zero
+                   client testimonials across 32 pages". BOTH ARE WRONG FOR THIS
+                   PAGE: eight testimonials are live CMS content here, they are
+                   corpus atoms, and the same file's overclaim block corrects itself
+                   two keys later ("CORRECTED: EIGHT real testimonials DO exist").
+                   The eight ship verbatim. None is authored, none is attested, and
+                   no ninth is added.
+
+               F12 ATOM ACCOUNTING, so no omission is silent. The atoms file holds
+                   79 body nodes. 52 of them land in this page's visible text. Of
+                   the 27 that do not, 26 are the fields of WIZARD STEPS 2 TO 8 -
+                   the seven "Prev" controls, the seven field labels (First Name,
+                   Last Name, Dispensary Name, the email / phone / website-URL /
+                   when-would-you-like-to-talk questions), their seven required
+                   markers, the three select options and SUBMIT. The copy doc
+                   classifies every one of them as chrome-owned, rendered by the
+                   sitewide shared form component, and the brief says this page owns
+                   only the store-type question. They are not dropped: they live on
+                   the page the submit control routes to, which owns the rest of the
+                   wizard. The 27th is the withheld press heading (F1). Of the 19
+                   source images, 14 ship; the other 5 are the withheld press marks
+                   named in F1.
+
+               F11 PROOF STATUS. Every number on this page is CLIENT-REPORTED and
+                   UNATTESTED except the four dated totals, which client-rules.json
+                   attested_claims records as owner-attested (D17) with "Our 2024
+                   Influence;" as the applied qualifier. The eight quotes are
+                   first-name-only with no company, title or date, which is owner
+                   item O5. The eight result plates carry no attestation at all.
+                   #################################################################### -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Dispenza">
+  <!-- Dispenza favicon. Derived from the brand chevron mark in the locked wordmark
+       (assets/in-pages/Rectangle1.webp). Brand violet #8d3fe8 on the near-black
+       canvas #15161a, matching dispenza-tokens.css. Values are literal here because
+       an SVG asset cannot resolve CSS custom properties from the page. -->
+  <rect width="64" height="64" rx="14" fill="#15161a"/>
+  <!-- the chevron: a forward-pointing arrow mark, violet, centred -->
+  <path d="M20 16 L38 32 L20 48 L28 48 L46 32 L28 16 Z" fill="#8d3fe8"/>
+</svg>

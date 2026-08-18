@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispensary Website Integrations and POS Menus</title>
+<meta name="description" content="Point of sale, marketing technologies and menu platforms integrated for your dispensary.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- THE PAGE HEAD. A <header>, not a <section>: an article's introductory block.
+       integrations fills four of the six optional slots (title, two ledes, media).
+       There is NO action in this head: the source supplies no button atom anywhere
+       on this page, so none is written here. -->
+  <header class="mc-section tc-head surface-dark" data-surface="dark">
+    <div class="container">
+      <div class="row"><div class="col">
+        <div class="tc-head__grid tc-head__grid--media">
+          <div class="tc-head__copy">
+            <h1 class="tc-head__title" id="integrations-title">INTEGRATIONS</h1>
+            <p class="tc-head__lede">At Dispenza, we understand the importance of seamless integration between different platforms and technologies for the success of your dispensary.</p>
+            <p class="tc-head__lede">We work with a wide range of industry-leading POS systems, marketing technologies, and menu platforms to help you streamline operations, maximize efficiencies, and achieve your business goals. Our expertise in integrations ensures that you can make the most out of your existing tools and platforms while leveraging our digital marketing strategies to drive sales and growth.</p>
+          </div>
+          <div class="tc-head__media">
+            <img src="../assets/in-pages/dispenza-marketing-pos.webp"
+                 alt="dispenza marketing pos" width="587" height="506" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <hr class="tc-head__seal">
+      </div></div>
+    </div>
+  </header>
+
+  <!-- pick: SECTION-COMPONENTS.md #36 | considered: #2,#15,#50 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and integrations is the compliance-heavy long-form page #36 exists for - four platform CATEGORIES the operator scans to find their own stack, then the migration story, then five things the engagement covers. This page renders the container's OWN R5 FALLBACK rather than a different pattern: R4 joins "Here are some of the" + "platforms and technologies" + "we work with:" into ONE section-rank title and the closing "Partner with Dispenza..." + "by integrating the right platforms and technologies." into a second, which leaves exactly two entries, and the rail law refuses a rail of two because two jump links are furniture - so no nav, no spine, no ticks, and the document takes the page's left axis alone; #2 trust-strip / logo wall is the pattern this page most invites and is the one it must NOT be COMPOSED as, because the source TEXT names PLATFORM CATEGORIES and never a single vendor, so building a wall would mean the build itself asserting partnerships the client never wrote (the only vendor marks anywhere on this page are the ones already inside the client's own screenshots, flagged in the body below); #15 comparison table needs two named things to compare and this page compares nothing, it enumerates; #50 topic columns would set the four categories side by side as peers, which would bury that "Menu and POS" is written at a DIFFERENT rank than the three categories around it - the source's own grouping, which a three-up rail would silently flatten. rigor is heavy because this pick is the T-ARTICLE container for 17 pages, not a one-off slot. -->
+  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="integrations-doc" data-surface="dark">
+    <div class="container">
+      <div class="row tc-doc__grid">
+
+        <!-- THE BODY COLUMN, RAIL-LESS. R5: two section-rank entries is below the
+             three-entry floor, so there is no rail element at all - the body col
+             drops the spine border and the gutter and no heading generates a tick. -->
+        <div class="col tc-doc__body">
+
+          <article class="tc-sec">
+            <!-- ONE broken source line, reassembled: "Here are some of the" +
+                 "platforms and technologies" + "we work with:" are three separate
+                 source strings and all three survive intact, in order, as one
+                 continuous visible heading. -->
+            <h2 class="tc-sec__h">Here are some of the platforms and technologies we work with:</h2>
+
+            <!-- ####################################################################
+                 FLAGGED TO THE OWNER - RENDER-ONLY FINDING, NO GATE SEES IT.
+                 The brief's vendor_naming rule says the build must NOT add vendor
+                 names, logos or logo walls (it names Dutchie, Treez, Blaze, Weedmaps,
+                 Leafly) and that "categories render as categories until the owner
+                 supplies a sourced vendor list". NO VENDOR IS NAMED IN ANY TEXT ON
+                 THIS PAGE - but the SOURCE IMAGES ARE THEMSELVES LOGO WALLS. Rendered
+                 headless at 1440 they read: LeafLogix, flowhub, TREEZ, COVA, greenbits
+                 (the head plate); Meadow, BLAZE, SWEED (Point of Sale); Alpine IQ,
+                 StrainBrain, springbig, Happy Cabbage (Marketing Technologies);
+                 Weedmaps (Menu and POS). So the page ships the logo wall the brief
+                 bars, out of the CLIENT'S OWN assets from the client's own live page.
+                 It is kept on the same principle content-bible §2 applies to the
+                 vocab HOLDS: the rule governs what the BUILD may ADD, not what the
+                 client already publishes, and the conservation contract requires all
+                 6 source images. OWNER'S CALL: either sign off on the partner logos
+                 or supply replacement art; a build-side decision to drop them would
+                 be a silent content deletion.
+                 #################################################################### -->
+            <!-- CATEGORIES ONLY IN THE TEXT. The source names three platform
+                 CATEGORIES and one group label and never a vendor, and this build
+                 writes no vendor name of its own (the imagery is the flag above).
+                 The four headings ship at the SOURCE'S OWN RANKS: three
+                 h3 categories and the h4 "Menu and POS" that the source writes one
+                 rank below them, in the source's own DOM order. FLAGGED: the brief
+                 reads that h4 as a group label sitting OVER the POS and menu pair,
+                 which would move it above "Point of Sale (POS)"; the served HTML puts
+                 it third. Source order wins; the owner can re-order it. -->
+            <div class="tc-defs"><h3 class="tc-defs__t">Point of Sale (POS)</h3></div>
+            <figure class="tc-plate tc-lift">
+              <img src="../assets/in-pages/dispensary-menu-pos.webp"
+                   alt="dispensary menu pos" width="585" height="346" loading="lazy" decoding="async">
+            </figure>
+
+            <div class="tc-defs"><h3 class="tc-defs__t">Marketing Technologies</h3></div>
+            <figure class="tc-plate tc-lift">
+              <img src="../assets/in-pages/dispenza-dispensaries-marketing.webp"
+                   alt="dispenza dispensaries marketing" width="592" height="350" loading="lazy" decoding="async">
+            </figure>
+
+            <div class="tc-defs"><h4 class="tc-defs__t">Menu and POS</h4></div>
+            <figure class="tc-plate tc-lift">
+              <img src="../assets/in-pages/dispenza-menu-platform.webp"
+                   alt="dispenza menu platform" width="750" height="506" loading="lazy" decoding="async">
+            </figure>
+
+            <div class="tc-defs"><h3 class="tc-defs__t">Menu Platforms</h3></div>
+            <figure class="tc-plate tc-lift">
+              <img src="../assets/in-pages/dispensary-menu-platform.webp"
+                   alt="dispensary menu platform" width="605" height="622" loading="lazy" decoding="async">
+            </figure>
+          </article>
+
+          <article class="tc-sec">
+            <!-- No heading atom exists over this block in the source, so none is
+                 written. OWNER CLAIM, RENDERED AS A STATED CLAIM: "the largest
+                 digital marketing agency in the industry" is the client's own
+                 sentence, not a verified ranking; no market share, client count or
+                 ranking figure is attached to it. -->
+            <p class="tc-emph">As the largest digital marketing agency in the industry, we specialize in helping dispensaries optimize their operations and marketing efforts by integrating these platforms seamlessly.</p>
+            <div class="tc-copy">
+              <p class="mc-body">Our team is experienced in working with these systems and can provide guidance and support to ensure a smooth transition and maximize the benefits of each integration.</p>
+            </div>
+            <p class="tc-emph">With our expertise in platform migrations and integrations, we can assist you in moving from one platform to another, enabling you to leverage the latest technologies and functionalities that align with your business objectives.</p>
+            <div class="tc-copy">
+              <p class="mc-body">Our goal is to help you achieve streamlined sales processes, enhanced customer experiences, and improved overall efficiencies.</p>
+            </div>
+          </article>
+
+          <article class="tc-sec">
+            <!-- Two source strings, one sentence: a span and the h2 that completes
+                 it, joined in source order. -->
+            <h2 class="tc-sec__h">Partner with Dispenza to unlock the full potential of your dispensary by integrating the right platforms and technologies.</h2>
+            <!-- THE SUPERSEDED TWIN, RETAINED. The live site runs SearchAtlas OTTO,
+                 which rewrites the heading directly above this line in the browser
+                 AFTER load; the clone carries the SERVER-rendered text. content-bible
+                 §6 records that status as SUPERSEDED with BOTH strings retained, so
+                 the rewrite rides adjacent to the heading it supersedes rather than
+                 replacing the client's CMS heading. -->
+            <p class="tc-emph">Unlock Your Dispensary's Potential with Dispenza</p>
+            <div class="tc-copy">
+              <p class="mc-body">We'll work closely with you to understand your unique requirements and provide customized solutions that drive growth and success in the competitive cannabis industry.</p>
+            </div>
+          </article>
+
+          <article class="tc-sec">
+            <!-- Again two source strings joined into the one sentence they were
+                 broken out of. The source tags the completion h3, one rank below the
+                 section rank, and that rank ships as written. -->
+            <h3 class="tc-sec__h">Unlock the power of integration with Dispenza and take your dispensary to new heights of success in the digital landscape.</h3>
+            <!-- FIVE LABEL AND VALUE PAIRS, EACH WELDED INTO ONE LINE. The source
+                 breaks every one of these across an h4 fragment and a bolded
+                 completion ("Maximizing" / "operational efficiencies and sales
+                 streamlining"); rendered apart they are five headings that are not
+                 sentences. Both halves survive intact, in source order, in one line.
+                 FLAGGED: this demotes the source's h4 tag on each lead fragment to
+                 list-item text. It changes no rail entry - the section rank on this
+                 page is h2, so those h4s were never entries. -->
+            <ul class="tc-list">
+              <li class="tc-list__item">Seamless integration of <b>POS systems, marketing technologies, and menu platforms</b></li>
+              <li class="tc-list__item">Expertise in working with <b>industry-leading platforms and technologies</b></li>
+              <li class="tc-list__item">Assistance with platform <b>migrations and transitions</b></li>
+              <li class="tc-list__item">Maximizing <b>operational efficiencies and sales streamlining</b></li>
+              <li class="tc-list__item">Customized solutions to meet your <b>unique business needs</b></li>
+            </ul>
+            <figure class="tc-plate tc-lift">
+              <img src="../assets/in-pages/dispenza-marketing-performance-result.webp"
+                   alt="dispenza marketing performance result" width="565" height="545" loading="lazy" decoding="async">
+            </figure>
+
+            <!-- THE CLOSE, FOLDED INLINE - NOT A SECOND CLOSING BAND. This page's
+                 source carries NO button atom, but the brief pins cta_primary
+                 /contact and client-rules.json pins the frozen primary CTA (label
+                 "BOOK DEMO", route /contact) the client's own site already carries on
+                 its sibling suite pages. So the one action rides at the foot of the
+                 document column, at the unit interval, on the same left axis - a
+                 mid-page action, not a band; the chrome .precta remains the site's
+                 single closing conversion band. THE LABEL IS NOT INVENTED FOR THIS
+                 PAGE: it is the frozen CTA verbatim, and the same string the
+                 ads-design and branding sources print three times each. -->
+            <div class="mc-actions tc-close">
+              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+</body>
+</html>

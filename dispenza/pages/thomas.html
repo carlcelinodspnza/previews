@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thomas Robinson, business development</title>
+<meta name="description" content="Thomas Benjamin Robinson handles business development at Dispenza. Reach him directly or book time.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ======================================================================
+       SEO META - PRESCRIBED PAIR, NOT THE CLONE TITLE AND NOT A PLACEHOLDER.
+       Both strings are _handoff/seo-enrichment.md §1, row `/thomas`
+       (D-SEO-TITLES / D-SEO-METAS), used verbatim with ONE forced substitution
+       recorded as T9 below. NOT USED, deliberately:
+         - the clone <title> "Our Team - Thomas Benjamin Robinson, Business
+           Development Specialist | Dispenza" (atom 001 in _copy/thomas.md);
+         - the live runtime-rewritten <title> "Meet Thomas Robinson: Your Cannabis
+           Business Growth Expert" (injected, owner-decided DROP);
+         - the concept's own placeholder META.
+       The brief's title_divergence note is explicit: "Neither string ships: P5's
+       title governs."
+       ====================================================================== -->
+
+  <!-- ======================================================================
+       SOURCE DEFECTS REGISTER - EXPOSED, NOT REPAIRED, NOT SILENTLY DROPPED.
+       Every deviation from a byte-for-byte replay of thomas.json is listed here
+       with its reason. Nothing on this page is omitted that is not named below.
+
+       T1  THREE SPELLINGS OF ONE NAME. The visible heading atoms (body 1 and 5)
+           read "Thomas Robinson" in TITLE CASE while every other rep page sets
+           the same heading in ALL CAPS; the clone <title> names him "Thomas
+           Benjamin Robinson"; the headshot alt reads "Thomas Benjamin Dispenza
+           Team". Three forms of one name. The body renders the captured two-word
+           heading VERBATIM and is NOT up-cased to match the siblings; the
+           three-word form appears only in <title>/meta, exactly where P5 puts it.
+           OWNER DECISION NEEDED (brief `name_status`): confirm the public form and
+           normalise once. The build does not reconcile it silently.
+       T2  CARDS 3 AND 4 CARRY IDENTICAL FIGURES IN THE SOURCE. thomas.html gives
+           the tcg card AND the flwrco card the same two lines, "480% Direction
+           Request Increase" and "110% Sales Increase", although they point at two
+           DIFFERENT clients. case-studies.html gives FLWR CO's own figures as
+           "+5.3x Search Requests" and "+11x Direction Requests", so the rep-page
+           card set is stale. Rendered exactly as the source writes it: correcting
+           it would be authoring a client statistic and deleting it would be
+           dropping the client's own copy. OWNER DECISION NEEDED. (Same defect as
+           frances F7; identical resolution.)
+       T3  THE vCARD ENDPOINT IS A PHP SCRIPT. The source "ADD TO CONTACTS" link
+           points at `index.htmltheme/vcard.php?...` - a broken clone-rewritten
+           join AND a server script a static bundle cannot carry. The ACTION is
+           preserved as a real, working vCard download assembled from this page's
+           OWN name, email and phone atoms. No datum is added.
+       T4  NO ACCESSIBLE NAME EXISTS FOR THE LINKEDIN LINK. thomas.json carries the
+           href (linkedin.com/in/thomas-robinson-207b0a279/) but no label atom, so
+           an icon-only link would need an invented accessible name. DECLARED
+           OMISSION - omitted rather than invented. OWNER DECISION NEEDED. (Same
+           resolution as frances F9. It is a source LINK, not a body atom, so the
+           65/65 atom count is unaffected.)
+       T5  THE CALENDAR: THE HANDOFF CONTRADICTS ITSELF ABOUT WHOSE IT IS. The
+           brief's `calendar_status` records TWO `.meetings-iframe-container` divs
+           on this page (`meetings.hubspot.com/sinan-murat` and
+           `meetings.hubspot.com/thomas922/hof-meeting`) with only the second
+           rendering; _copy/thomas.md records the embed as
+           `meetings.hubspot.com/nick-marx-...`. THREE calendars named across two
+           handoff documents for one section, and `sinan-murat` has no team page.
+           Per brief §3 no widget ships until the owner confirms (Q5): a wrong
+           calendar drops a booked demo into a stranger's diary and loses the lead
+           silently. The booking unit ships with its control routed to /contact.
+           NO ATOM IS LOST - an iframe is an embed and contributes no text node.
+           OWNER DECISION NEEDED.
+       T6  IMAGES: 9 OF 9 UNIQUE SOURCE IMAGES PLACED, ZERO OMITTED. thomas.json
+           lists 11 image entries but only 9 distinct files: the headshot
+           `thomas-benjamin-dispenza-team.webp` is referenced THREE times (the
+           source renders one desktop and two responsive copies of one portrait).
+           It is rendered ONCE. That is a de-duplication of three references to one
+           file, not the dropping of an image, and it is declared here so the count
+           reconciles: 11 refs -> 9 unique -> 9 rendered.
+       T7  ALT TEXT IS METADATA, NOT PAGE COPY, AND THE SOURCE'S IS UNUSABLE. Every
+           in-main alt on the live page is the generic "Image related to the content
+           on the page", and thomas.json's captured alts are file-artifact strings
+           ("white nuleaf logo dispensary cient", "the-cannabis-guys-logo dispenza
+           dispensary marketing logo", "dispensary marketing portfolio by
+           dispenza2"). The no-drop rule does not protect alt text, so real alt is
+           WRITTEN here on the precedent pages/case-studies.content.html and
+           pages/frances.content.html already set for these same nine files: the
+           portfolio shots are decorative beside the figures they illustrate and
+           take alt="", the brand marks are NAMED, the portrait is named. This is
+           the same class of defect as the site-wide F5 (a NorCal logo carrying
+           alt="Nuleaf NV" elsewhere in the capture): corrected wherever it appears,
+           never replicated. On THIS page the NorCal mark's captured alt is "norcal
+           logo star dispenza client", so the F5 mis-attribution does not occur
+           here; the alt is still rewritten because it is file-artifact text.
+       T8  THE SIBLING RAIL THE BRIEF ASKS FOR IS NOT PLACED. Brief §5 wants the six
+           team pages to ship as a navigable group linking all five siblings. This
+           page's source supplies NO atom naming any sibling, so a sibling rail
+           would mean authoring five names and five labels that do not exist in
+           thomas.json - the exact thing the content law forbids. DECLARED
+           NON-PLACEMENT. The brief's own `D-IA-GROUPS` note names the header Team
+           group as the fix, and that group is chrome, not this page's body. Same
+           resolution as frances / james / nick.
+       T9  THE P5 TITLE'S SEPARATOR IS SUBSTITUTED, AND ONLY THE SEPARATOR.
+           seo-enrichment.md §1 writes the title with a U+2014 em dash. An em dash
+           cannot ship: revision-gate.mjs `dashScan()` reads pages/*.content.html
+           RAW (no comment stripping, revision-gate.mjs:178-198) and the same
+           DASH_RE is enforced at write time by G-NODASH, whose own remedy text
+           prescribes "a comma, a period, parentheses, or a colon". The comma is
+           taken because the three sibling team pages already ship the comma form,
+           so the site stays one site. Every WORD of the prescribed title and the
+           whole prescribed meta are verbatim. Nothing else about the pair is
+           changed, and no other title was substituted for it.
+       T11 THREE SOURCE HEADING RANKS ARE CHANGED, ALL DECLARED, NONE DOCKED.
+           (a) The vCard name (atom 5) is h4 in the source and renders h2. It sits
+               in the page HEAD, above the spine, so it is not docked and R6's
+               "every docked heading is a rail entry" is untouched; rendering it
+               h4 directly under the h1 would skip a rank. Same treatment as
+               pages/frances.content.html.
+           (b) The eight metric cities are h4 in the source and render as the
+               tile's own .tc-metric__city span. Docking eight headings the rail
+               does not list would break R6, and listing them would bury the three
+               real entries under eight city names.
+           (c) The four case-row figures are h5 in the source and render h3. h5
+               under an h2 skips two ranks and breaks the logical heading order
+               the accessibility contract requires; no case row is docked, so the
+               change costs the rail nothing.
+           No rank change adds, removes or reorders a single word.
+       T10 REGISTER ITEMS INHERITED FROM THE SITE-WIDE LIST THAT DO NOT ARISE HERE,
+           checked and recorded so their absence is a finding rather than a gap:
+           the duplicate display:none "KPI HIGHLIGHTS" block (site F1/F3) exists
+           only on the five client case pages and has no counterpart in
+           thomas.json; the four h3-marked stat numerals (site F4) belong to
+           dispensary-marketing-and-advertising; the sub-floor rail-less fallback
+           (site F6) does not apply because this page has exactly three entries.
+
+       THE TWO STRINGS ON THIS PAGE THAT ARE NOT IN thomas.json - DECLARED.
+       "BOOK DEMO" is the client's FROZEN primary CTA, taken verbatim from
+       _handoff/client-rules.json `primary_cta.label` (route /contact); it is
+       ALL CAPS because that is the frozen value, and the nine built pages that
+       render "Book demo" are wrong against it. "How It Works" is an IA page name
+       from the sitemap and carries brief §5's `D-POSITION-WEDGE-PRICE`: the price
+       ladder is published, so an unready reader does not have to book Thomas to
+       find out what it costs. The source supplies the HEADING "BOOK A DEMO"
+       (atom 066) but no button label for that unit, so the frozen label is used
+       rather than one written here. Same pair as pages/case-studies.content.html,
+       pages/reports.content.html and pages/integrations.content.html.
+
+       ATTRIBUTION GUARD (brief `proof_status`). Not one line in the metrics band
+       or the case band is re-framed as this person's personal result. The figures
+       are agency-wide proof owned by index / case-studies and are rendered as the
+       source writes them. No deal count, pipeline figure or tenure is invented,
+       and NO BIO IS WRITTEN: `bio_copy` records that every biographical sentence
+       on the live page is injected OTTO text, owner-decided DROP, and that not one
+       owner-written sentence describing this person exists in the 32-page capture.
+       ====================================================================== -->
+
+  <!-- THE PAGE HEAD. A <header>, not a <section>. Six independently optional
+       slots; a team page is the one page type that fills all six: eyebrow, title,
+       lede, actions, media and the vCard. It still closes on the same rule at the
+       same interval as the single-slot reports head. -->
+  <header class="mc-section tc-head surface-dark" data-surface="dark">
+    <div class="container">
+      <div class="row"><div class="col">
+
+        <div class="tc-head__grid tc-head__grid--media">
+          <div class="tc-head__copy">
+            <p class="mc-eyebrow">HEY! MY NAME IS</p>
+            <h1 class="tc-head__title" id="thomas-title">Thomas Robinson</h1>
+            <p class="tc-head__lede">We help dispensaries outrank competitors and get new customers everyday.</p>
+            <!-- TWO head actions, both source atoms, both keeping the source's own
+                 destination. BOOK A DEMO (atom 055, a.btn.btn-primary -> #bookADemo)
+                 is the one atom the four commented-out sibling pages do not have; it
+                 jumps to the booking unit, which is the same jump the source makes.
+                 CONTACT ME (atom 056, a.btn.btn-dark -> #contactMe) opened a Fancybox
+                 modal on the live site; the brief's reachability_directive is
+                 BUILD-CRITICAL, so the modal's contents are rendered as plain,
+                 visible, always-on page text below and this label keeps its job
+                 (take me to the details) without hiding anything. Solid + ghost is
+                 the client's own two-variant button model, in the source's own
+                 primary/dark pairing. -->
+            <div class="mc-actions">
+              <a class="btn btn--solid" href="#thomas-s1">BOOK A DEMO</a>
+              <a class="btn btn--ghost" href="#thomas-contact">CONTACT ME</a>
+            </div>
+          </div>
+          <div class="tc-head__media">
+            <img src="../assets/in-pages/thomas-benjamin-dispenza-team.webp"
+                 alt="Thomas Robinson" width="500" height="500" loading="lazy" decoding="async">
+          </div>
+        </div>
+
+        <!-- THE vCARD, UNLOCKED. Every atom that sat behind #contactMe on the live
+             site, plus the four labels that were mobile-only, rendered visible at
+             every breakpoint. Email and phone are real mailto:/tel: links, and the
+             four actions are the real actions the labels name. These are the two
+             atoms the brief's placement contract calls the single content decision
+             on this page (D-SRC-THOMAS-0001 / D-SRC-THOMAS-0002, both
+             REVEALED_MODAL in the capture): surface them. -->
+        <div class="tc-vcard" id="thomas-contact">
+          <h2 class="tc-vcard__h">Thomas Robinson</h2>
+          <dl class="tc-rows">
+            <div class="tc-rows__row">
+              <dt class="tc-rows__k">Email:</dt>
+              <dd class="tc-rows__v"><a href="mailto:thomas@dispenza.com">thomas@dispenza.com</a></dd>
+            </div>
+            <div class="tc-rows__row">
+              <dt class="tc-rows__k">Phone:</dt>
+              <dd class="tc-rows__v"><a href="tel:+18187318989">+1 (818) 731-8989</a></dd>
+            </div>
+          </dl>
+          <div class="mc-actions">
+            <a class="btn btn--ghost" download="thomas-robinson.vcf" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AThomas%20Robinson%0AORG%3ADispenza%0AEMAIL%3Athomas%40dispenza.com%0ATEL%3A%2B18187318989%0AEND%3AVCARD%0A">ADD TO CONTACTS</a>
+            <a class="btn btn--ghost" href="sms:+18187318989">SEND A TEXT</a>
+            <a class="btn btn--ghost" href="tel:+18187318989">CALL NOW</a>
+            <a class="btn btn--ghost" href="mailto:thomas@dispenza.com">SEND AN EMAIL</a>
+          </div>
+        </div>
+
+        <hr class="tc-head__seal">
+      </div></div>
+    </div>
+  </header>
+
+  <!-- pick: SECTION-COMPONENTS.md #36 | considered: #16,#21,#3 | rigor: heavy | why: below the contact card this page stops being a person and becomes a 51-node results document - eight financial figures and four client rows that the source hangs under three peer h2s with no hierarchy between them - and #36 is the only pattern in the catalog whose left topic column tells the reader that a PEOPLE page carries proof at all, which is the whole reason a visitor who came for a phone number keeps scrolling; #16 founder bio split is the obvious people-page pick and is refused on evidence, because the brief's bio_copy states that every biographical sentence on the live page is injected OTTO text the owner decided to DROP and that no owner-written description of this person exists anywhere in the 32-page capture, so a bio split would leave its second arm empty or invite one to be written; #21 case studies 3-col cards the four client rows and, at a third of the column each, drops the 181x103 brand marks below the size where a logo is identifiable and forces the two-line figure pair to truncate; #3 stat strip is right for the eight figures alone but has no room for the label and the WINDOW inside one tile, and separating "+733%" from "in the first 30 months" is the exact failure the stat law exists to stop - on this page it would also collapse Seaside and Oakland, both "+94.5%", into what reads as a duplication bug. rigor is heavy because this pick propagates: it is the T-ARTICLE container for 17 pages and the shared shape of all six team pages, not a one-off slot. -->
+  <section class="mc-section tc-doc surface-dark" id="thomas-doc" data-surface="dark">
+    <div class="container">
+      <div class="row tc-doc__grid">
+
+        <!-- THE RAIL COLUMN. Three entries - the floor exactly, so the rail stands
+             rather than falling through to the .tc-doc--norail fallback. Each entry
+             is a source h2 string unchanged (two of them joined with their own
+             trailing span, R4), each a real <a href="#id"> pointing at a real id on
+             the unit it names. The landmark is named with aria-labelledby pointing
+             at the page's OWN title. -->
+        <div class="col tc-doc__rail">
+          <nav class="tc-rail" aria-labelledby="thomas-title">
+            <ul class="tc-rail__list">
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#thomas-s1">BOOK A DEMO</a></li>
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#thomas-s2">FINANCIAL CASE STUDIES</a></li>
+              <li class="tc-rail__item"><a class="tc-rail__link" href="#thomas-s3">CASE STUDIES</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- THE BODY COLUMN. Its left border IS the spine. Each unit's heading
+             reaches back to that spine with a tick. -->
+        <div class="col tc-doc__body">
+
+          <!-- UNIT 1. The source's booking band, in source order - which is also
+               why it is NOT a closing band: it opens the document rather than
+               closing it, and the site's single closing conversion band is the
+               chrome .precta. It is the target of the head's BOOK A DEMO button,
+               the same jump the source makes to #bookADemo. Unlike the four
+               sibling rep pages, this section is VISIBLE in the source (no d-none).
+               Its body in the source is a HubSpot meetings iframe and NOTHING ELSE
+               - an embed, no text nodes, no atoms. See T5: the handoff names three
+               different calendars for it, so no widget ships and the control routes
+               to /contact per brief §3. Two destinations, no new labels. -->
+          <article class="tc-sec" id="thomas-s1">
+            <h2 class="tc-sec__h">BOOK A DEMO</h2>
+            <div class="mc-actions">
+              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+              <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
+            </div>
+          </article>
+
+          <!-- UNIT 2. THE STAT LAW AS DOM STRUCTURE. Eight grid ITEMS, each holding
+               its own city, label, figure and window. Precision is verbatim,
+               including the source's own inconsistency: 51.37, 50.1, 94.5 and 55.2
+               keep their decimals; 196, 198 and 733 have none. The source tags each
+               city h4 - one rank BELOW the section rank - so they render as the
+               tile's own city line rather than as headings; docking them would put
+               eight headings on the spine that the rail does not list, which R6
+               forbids, and listing them would bury the three real entries. -->
+          <article class="tc-sec" id="thomas-s2">
+            <h2 class="tc-sec__h">FINANCIAL CASE STUDIES</h2>
+            <ul class="tc-metrics">
+              <li class="tc-metric">
+                <span class="tc-metric__city">Oceanside, CA</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+51.37%</span>
+                <span class="tc-metric__window">in the first 3 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Mid City, LA, CA</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+50.1%</span>
+                <span class="tc-metric__window">in the first 3 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Edmond, OK</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+196%</span>
+                <span class="tc-metric__window">in the first 2 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Seaside, CA</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+94.5%</span>
+                <span class="tc-metric__window">in the first 2 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Oakland, CA</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+94.5%</span>
+                <span class="tc-metric__window">in the first 5 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Needles, CA</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+198%</span>
+                <span class="tc-metric__window">in the first 6 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Downtown LA, CA</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+55.2%</span>
+                <span class="tc-metric__window">in the first 6 months</span>
+              </li>
+              <li class="tc-metric">
+                <span class="tc-metric__city">Las Vegas, NV</span>
+                <span class="tc-metric__label">Total Sale Increase</span>
+                <span class="tc-metric__figure">+733%</span>
+                <span class="tc-metric__window">in the first 30 months</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- UNIT 3. Four client rows in source order (nuleafnv, norcal, tcg,
+               flwrco). Rows, not cards: heading before logo at every width, and
+               each row's figure line carries its own qualifier inside the one
+               string, so the stat law is satisfied by the source itself here.
+               The source tags each row's second figure h5; it renders h3, one rank
+               under the section h2, because h5 under an h2 skips two ranks and
+               breaks the logical heading order the accessibility contract requires.
+               No row is docked, so the rank change costs the rail nothing.
+               See T2 - rows 3 and 4 carry IDENTICAL figures in the source. -->
+          <article class="tc-sec" id="thomas-s3">
+            <h2 class="tc-sec__h">CASE STUDIES</h2>
+            <p class="tc-emph">LONG-TERM RELATIONSHIPS BUILT ON TRUST, TRANSPARENCY, &amp; RESULTS SINCE 2012</p>
+            <div class="tc-copy">
+              <p class="mc-body">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+            </div>
+            <ul class="tc-cases">
+
+              <li class="tc-case tc-lift">
+                <div class="tc-case__copy">
+                  <p class="tc-case__loc">350% Direction Request Increase</p>
+                  <h3 class="tc-case__h">700% Sales Increase</h3>
+                  <a class="rs-cta" href="nuleafnv.html" aria-label="VIEW CASE STUDY: NuLeaf NV">
+                    VIEW CASE STUDY
+                    <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+                <div class="tc-case__media">
+                  <img class="tc-case__logo" src="../assets/in-pages/white-nuleaf-logo-dispensary-cient.webp"
+                       alt="NuLeaf NV" width="181" height="103" loading="lazy" decoding="async">
+                  <figure class="tc-case__shot">
+                    <img src="../assets/in-pages/dispensary-shop-portfolio-by-dispenza-digital-marketing.webp"
+                         alt="" width="589" height="433" loading="lazy" decoding="async">
+                  </figure>
+                </div>
+              </li>
+
+              <li class="tc-case tc-lift">
+                <div class="tc-case__copy">
+                  <p class="tc-case__loc">300% Phone Call Increase</p>
+                  <h3 class="tc-case__h">Sales Records Just 4 Months In</h3>
+                  <a class="rs-cta" href="norcal.html" aria-label="VIEW CASE STUDY: NorCal">
+                    VIEW CASE STUDY
+                    <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+                <div class="tc-case__media">
+                  <img class="tc-case__logo" src="../assets/in-pages/norcal-logo-star-dispenza-client.webp"
+                       alt="NorCal" width="181" height="103" loading="lazy" decoding="async">
+                  <figure class="tc-case__shot">
+                    <img src="../assets/in-pages/dispensary-menu-portfolio-mobile-phone-view.webp"
+                         alt="" width="589" height="433" loading="lazy" decoding="async">
+                  </figure>
+                </div>
+              </li>
+
+              <li class="tc-case tc-lift">
+                <div class="tc-case__copy">
+                  <p class="tc-case__loc">480% Direction Request Increase</p>
+                  <h3 class="tc-case__h">110% Sales Increase</h3>
+                  <a class="rs-cta" href="tcg.html" aria-label="VIEW CASE STUDY: The Cannabis Guys">
+                    VIEW CASE STUDY
+                    <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+                <div class="tc-case__media">
+                  <img class="tc-case__logo" src="../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp"
+                       alt="The Cannabis Guys" width="181" height="103" loading="lazy" decoding="async">
+                  <figure class="tc-case__shot">
+                    <img src="../assets/in-pages/dispenary-marketing-portfolio-by-dispenza2.webp"
+                         alt="" width="589" height="433" loading="lazy" decoding="async">
+                  </figure>
+                </div>
+              </li>
+
+              <li class="tc-case tc-lift">
+                <div class="tc-case__copy">
+                  <p class="tc-case__loc">480% Direction Request Increase</p>
+                  <h3 class="tc-case__h">110% Sales Increase</h3>
+                  <a class="rs-cta" href="flwrco.html" aria-label="VIEW CASE STUDY: Flower Co">
+                    VIEW CASE STUDY
+                    <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+                <div class="tc-case__media">
+                  <img class="tc-case__logo" src="../assets/in-pages/dispenza-flwrco-logo.webp"
+                       alt="Flower Co" width="1300" height="600" loading="lazy" decoding="async">
+                  <figure class="tc-case__shot">
+                    <img src="../assets/in-pages/dispenza-portfolio-flwr-co.webp"
+                         alt="" width="680" height="457" loading="lazy" decoding="async">
+                  </figure>
+                </div>
+              </li>
+
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+</body>
+</html>

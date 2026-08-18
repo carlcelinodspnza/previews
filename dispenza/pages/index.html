@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cannabis dispensary marketing agency | Dispenza</title>
+<meta name="description" content="Published pricing, a performance guarantee, and per-city results. See every tier and what we promise before you book a demo.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ============================================================ PAGE META
+     Hoisted to the top of the promoted fragment by promote-concept.mjs (it
+     prefers a META block found INSIDE <main>, which is why this sits here and
+     not in the document head above -- that head belongs to the specimen preview,
+     the fragment is what ships.
+
+     ⚠ A TRAP WORTH LEAVING A SIGN ON. Two gates decide whether this payload is a
+     FULL HTML DOCUMENT or a body FRAGMENT by sniffing the raw bytes for the three
+     document-shell opening tags -- doctype, root element, document head -- and the
+     sniff does NOT skip comments. Writing any of those three tag names in prose
+     anywhere in this file silently reclassifies the fragment:
+       verify-stylesheet-linked then demands the two foundation <link>s a fragment
+         must never carry (build.mjs supplies them through the template) -> FAILS;
+       verify-dom-structure then looks for a main element, finds none in a
+         fragment, and FAIL-OPENS -> the grammar stops being checked at all.
+     Both were observed here, in that order, from a single tag name typed into this
+     very comment. The second is the dangerous one: it turns the gate GREEN while
+     switching it off. Describe those tags; never spell them.)
+
+     PROVENANCE. Both strings are the /index row of _handoff/seo-enrichment.md
+     section 1 (the master table), row "/  [U]".
+
+     ONE CHARACTER IS CHANGED, and only one. The prescribed title reads
+     "Cannabis dispensary marketing agency (em dash) Dispenza". G-NODASH
+     (verify-no-dashes.mjs) bans U+2014/U+2013 and their entities across every
+     content-phase path, so the enrichment's own separator cannot ship. It is
+     replaced with a pipe, which is the separator build.mjs's own fallback title
+     uses. Nothing else is touched: the primary_keyword "Cannabis dispensary
+     marketing" is still a literal substring inside the first 30 characters, the
+     brand token is still present, and the meta is byte-for-byte the row's.
+     47 chars / 124 chars -- inside title-quality's 8-70 and the enrichment's
+     own <=60 and <=160.
+     ====================================================================== -->
+
+
+<!-- ==========================================================================
+     SECTION 1 . HERO . KIND: BAND + MEASURE
+     ========================================================================== -->
+<!-- pick: HERO-COMPOSITIONS.md #5 Full-bleed image + overlay text | considered: #10,#9,#22 | why: this concept's whole claim is that a strict measured column sits in generous dark space, so the hero has to be the moment where that column is FIRST established against something, and a full bleed media layer is the only opener that sets the column's left axis while the picture runs past its right edge, which is exactly the "full-bleed imagery alternating with tightly measured text" the owner adopted; the swappable hero contract in visual-direction.md section 6 also wants the media as a separate layer, and #5 is the pattern whose media layer is already isolated from the content layer. That isolation was then CASHED IN rather than left theoretical: on 2026-08-12 the owner replaced the raster with a generated isometric hex-prism field, and because #5 keeps the media absolutely positioned and contributing no height, the swap changed the picture and moved nothing else on the page. The argument for #5 is now stronger than when it was made, because the media is generated rather than photographic, so it is resolution independent, it carries the brand violet in its own geometry instead of borrowing it from a scrim, and its light can be driven by scroll position without a single layout-affecting property being animated. #10 centred headline only was the closest rival and is rejected because a centred hero would establish a CENTRE axis and then every section below would have to break it, killing the one-axis discipline before the page starts, and because it would waste the real hero asset that exists. #9 cinematic letterbox caps the hero near 50vh, which makes the opener a band rather than a room and leaves no space for the promise plus two actions at this type scale. #22 statistics-heavy hero would put the four influence totals above the claim, which both buries the positioning line and spends the page's one stat moment in the first viewport, leaving section 2 with nothing. -->
+<!-- HeroSection, inlined verbatim from _design/hero/hero-section.html (the SSOT).
+     Its SCRIPTS still ride with the component (below the section). Its STYLESHEET
+     no longer does, and that is the one deliberate divergence from the specimen.
+
+     WHY. The specimen carries <link rel="stylesheet" href="../_design/_tournament/templates/hero/hero-section.css">
+     right here -- heroContract.style_isolation, keeping hero CSS off the 26 pages
+     that have no hero, and rel="stylesheet" is body-ok in the HTML Living Standard.
+     But a PROMOTED page links only the three core sheets, so verify-no-orphan-classes
+     resolves this fragment's classes against tokens/chrome/structural ONLY and read
+     nine hero classes (ch, mc-coin, mc-hero__content/__field/__pin/__scrim/__stage,
+     mc-lead-wrap, mc-type) as defined nowhere. The sheet is therefore migrated
+     VERBATIM into _design/dispenza-structural.css, at the END of the file, inside
+     the fenced "G-ORPHAN MIGRATION FENCE - T-INDEX" block -- end-of-structural is
+     the same cascade position this body <link> held, so nothing wins or loses a tie
+     that did not before.
+
+     WHAT IT COSTS, recorded rather than discovered later: style_isolation is spent.
+     The 26 pages with no hero now parse ~25kb of hero CSS they will never match.
+     No page renders differently -- none of them carries a .mc-hero* element -- but
+     the contract in client-rules.heroContract is no longer literally true, and the
+     honest place to note that is here, next to the reason. -->
+<section class="mc-hero surface-dark" id="hero">
+  <!-- The PIN. It carries .container--full so the DOM grammar stays legal
+       (section > .container > .row > .col > object); a bare sticky wrapper
+       between the section and the container would break G-DOM. -->
+  <div class="container container--full mc-hero__pin">
+    <div class="row">
+      <div class="col">
+
+        <div class="mc-hero__stage" data-media-in>
+          <!-- ANIMATED HERO SLOT — replace media layer only -->
+          <!-- Two generated layers occupy the slot: the receding hex field
+               (hero-field.js) and the scroll-scrubbed hex platform
+               (hero-coin-pose.js, which owns the float, the drag-spin
+               hexagonal-metal-coaster.obj). Both are aria-hidden decorative
+               texture -- they state nothing the claim does not already say, so
+               announcing them would only add noise to a screen reader. -->
+          <svg class="mc-hero__field" viewBox="0 0 1400 760"
+               preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"></svg>
+          <!-- END ANIMATED HERO SLOT -->
+        </div>
+
+        <div class="mc-hero__scrim" aria-hidden="true"></div>
+
+        <!-- The smoke. A canvas rather than SVG because this is a few hundred
+             particles integrated every frame; SVG nodes would not hold 60fps.
+             It sits BEHIND the token so the token reads as a solid in it. -->
+        <canvas class="mc-smoke" aria-hidden="true"></canvas>
+
+        <!-- ============================================================
+             THE COIN. The owner's tripo3d GLB replaces the SVG solid.
+
+             SUPPLIED AT 29.94 MB / 1,001,316 triangles, which is 10-30x a
+             sane hero budget against this brief's own LCP < 2.5s. Optimised
+             rather than refused: welded, simplified to 100,128 triangles at
+             a 0.0004 error, texture to WebP 1024, geometry Draco-compressed
+             -> 1.3 MB. A first pass at gltf-transform's default aggression
+             produced 6,700 triangles (99.3% gone) and lost the milling and
+             the knurled chevron entirely, which is why the budget is set
+             explicitly here rather than left to a preset.
+
+             The runtime and the Draco decoder are BOTH vendored into
+             _design/vendor/. model-viewer otherwise fetches its decoder from
+             gstatic at run time, and this build already refuses CDN
+             dependencies -- that rule was written when the live site's fonts
+             were found loading from Google.
+             ============================================================ -->
+        <!-- shadow-intensity is 0 on purpose: the coin must read as FLOATING,
+             and a contact shadow implies a surface underneath it. -->
+        <model-viewer class="mc-coin" src="../assets/3d/dispenza-coin.glb"
+                      alt="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."
+                      camera-orbit="90deg 90deg 2.75m" field-of-view="22deg"
+                      poster="../assets/3d/coin-poster.webp"
+                      environment-image="../assets/3d/studio-lensshine.hdr"
+                      exposure="1.15" tone-mapping="neutral"
+                      shadow-intensity="0"
+                      disable-zoom disable-pan disable-tap
+                      interaction-prompt="none" camera-controls="false"
+                      loading="eager"></model-viewer>
+
+        <!-- No SVG fallback coin any more. A hand-drawn parametric coin used to
+             sit behind the model for the no-WebGL path; the owner retired that
+             object outright ("this version of the coin should no longer exist"),
+             so the fallback is now a POSTER -- a still frame of this very model,
+             rendered offline. Nobody is shown a different coin: the fallback is
+             the same object, it simply does not move. model-viewer swaps the
+             poster out for the live scene once the GLB is ready, and keeps it if
+             WebGL is unavailable. -->
+
+        <div class="mc-hero__content mc-type">
+          <p class="mc-eyebrow" data-reveal>Since 2012</p>
+          <!-- Every character is authored HERE, in its own span. The reveal
+               animates OPACITY only; no script writes text into the DOM.
+               That is the only implementation that ships: verify-copy-fidelity
+               reads the authored FILE, so a headline assembled at runtime from a
+               JS string would leave this page with no headline as far as the gate
+               is concerned. Text content is byte-identical to the corpus:
+               "#1 MARKETING" + "AGENCY IN CANNABIS", with no space between
+               MARKETING and AGENCY because the turn line is display:block. -->
+          <h1 class="mc-display" data-reveal><span class="ch">#</span><span class="ch">1</span><span class="ch sp"> </span><span class="ch">M</span><span class="ch">A</span><span class="ch">R</span><span class="ch">K</span><span class="ch">E</span><span class="ch">T</span><span class="ch">I</span><span class="ch">N</span><span class="ch">G</span><span class="mc-display__turn"><span class="ch">A</span><span class="ch">G</span><span class="ch">E</span><span class="ch">N</span><span class="ch">C</span><span class="ch">Y</span><span class="ch sp"> </span><span class="ch">I</span><span class="ch">N</span><span class="ch sp"> </span><span class="ch">C</span><span class="ch">A</span><span class="ch">N</span><span class="ch">N</span><span class="ch">A</span><span class="ch">B</span><span class="ch">I</span><span class="ch">S</span></span></h1>
+          <!-- The lead is D-SRC-INDEX-0043, verbatim and whole. The caret is an
+               empty span that adds no text, and it lives INSIDE the paragraph so
+               the element stays a real <p> and keeps .mc-body's top margin, which
+               an inline wrapper would silently drop. aria-hidden because it is a
+               light, not a cursor: there is no editable field here. -->
+          <p class="mc-body mc-body--lead mc-lead-wrap" data-reveal><span class="ch">D</span><span class="ch">i</span><span class="ch">s</span><span class="ch">p</span><span class="ch">e</span><span class="ch">n</span><span class="ch">z</span><span class="ch">a</span><span class="ch sp"> </span><span class="ch">i</span><span class="ch">s</span><span class="ch sp"> </span><span class="ch">t</span><span class="ch">h</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">u</span><span class="ch">l</span><span class="ch">t</span><span class="ch">i</span><span class="ch">m</span><span class="ch">a</span><span class="ch">t</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">d</span><span class="ch">i</span><span class="ch">g</span><span class="ch">i</span><span class="ch">t</span><span class="ch">a</span><span class="ch">l</span><span class="ch sp"> </span><span class="ch">p</span><span class="ch">a</span><span class="ch">r</span><span class="ch">t</span><span class="ch">n</span><span class="ch">e</span><span class="ch">r</span><span class="ch">.</span><span class="ch sp"> </span><span class="ch">W</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">h</span><span class="ch">a</span><span class="ch">n</span><span class="ch">d</span><span class="ch">l</span><span class="ch">e</span><span class="ch sp"> </span><span class="ch">e</span><span class="ch">v</span><span class="ch">e</span><span class="ch">r</span><span class="ch">y</span><span class="ch">t</span><span class="ch">h</span><span class="ch">i</span><span class="ch">n</span><span class="ch">g</span><span class="ch sp"> </span><span class="ch">o</span><span class="ch">n</span><span class="ch">l</span><span class="ch">i</span><span class="ch">n</span><span class="ch">e</span><span class="ch">,</span><span class="ch sp"> </span><br class="mc-lede-break" aria-hidden="true"><span class="ch">s</span><span class="ch">o</span><span class="ch sp"> </span><span class="ch">y</span><span class="ch">o</span><span class="ch">u</span><span class="ch sp"> </span><span class="ch">c</span><span class="ch">a</span><span class="ch">n</span><span class="ch sp"> </span><span class="ch">f</span><span class="ch">o</span><span class="ch">c</span><span class="ch">u</span><span class="ch">s</span><span class="ch sp"> </span><span class="ch">o</span><span class="ch">n</span><span class="ch sp"> </span><span class="ch">g</span><span class="ch">r</span><span class="ch">o</span><span class="ch">w</span><span class="ch">t</span><span class="ch">h</span><span class="ch">.</span></p>
+          <div class="mc-actions" data-reveal>
+            <a class="btn btn--solid" href="contact.html">Book demo</a>
+            <a class="btn btn--ghost" href="how-it-works.html">Learn how</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Loaded AFTER the section so the svg elements they fill already exist in the
+     DOM; no DOMContentLoaded wrapper is needed and none is used. -->
+<script src="../_design/hero/hero-field.js"></script>
+<script src="../_design/hero/hero-coin-pose.js"></script>
+<!-- Loaded IMMEDIATELY (owner). The earlier deferral was a workaround for a
+     typing stall whose real cause turned out to be elsewhere: the pose engine was
+     writing the pose as CSS custom properties on .mc-hero every frame, which
+     invalidated the whole hero subtree -- including two background-clip:text
+     elements -- 60 times a second. With the pose moved to a plain JS property
+     the type pass is back to 3.2s WITH the model loading from the start, so the
+     deferral bought nothing and cost the coin its entrance. Vendored, not CDN.
+     hero-coin3d.js injects the runtime immediately, but only after confirming
+     WebGL exists: without that guard model-viewer throws an uncaught TypeError
+     on a machine with 3D disabled, which is a real user path and the whole
+     reason the SVG coin is still here. -->
+<script src="../_design/hero/hero-coin3d.js"></script>
+<!-- smoke LAST: it measures the token's placed position, so the coaster must
+     have drawn at least once before it looks. -->
+<!-- ONE SMOKE ENGINE, TWO FIELDS. The physics used to be duplicated between the
+     hero plume and the section band; two copies of a tuning table is the
+     non-propagation trap, so the model lives in one module and each field
+     supplies only its emitter. Loaded before both callers, without defer, so it
+     is defined by the time either runs. -->
+<script src="../_design/smoke-engine.js"></script>
+<script src="../_design/hero/hero-smoke.js"></script>
+
+
+<!-- ==========================================================================
+     SECTION 1b . CLIENT ROSTER . KIND: MARQUEE
+     ========================================================================== -->
+<!-- pick: TRUST-STATS-SECTIONS.md #2 Trust bar - logo marquee | considered: #1,#3,#4 | why: the owner asked for the client roster that already runs on their live site, and #2 is the DS pattern that specifies exactly that mechanic - edge-masked viewport, width:max-content track carrying set A plus a duplicate set B, translateX(0 to -50%) seamless wrap, pause-on-hover, and a built-in reduced-motion gate that drops the duplicate so nothing is announced twice; it is also documented as belonging directly under a dark hero, which is precisely where this sits. #1 mono logo row was the closest rival and is rejected because a static row has to either show twelve marks at once, shrinking each below the size at which a wordmark like Root'd in the 510 is readable, or cut the roster - and the roster length IS the proof here. #3 count-up 3-up and #4 big-number band are both rejected because the numbers moment is already spent: Influence Highlights sits immediately below with the four whole-business totals, and two quantified proofs back to back would make the second one noise. -->
+<section class="mc-marquee" id="clients" aria-label="Dispenza client roster">
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+        <div class="mc-marquee__viewport">
+          <div class="mc-marquee__track">
+          <div class="mc-marquee__group">
+            <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.png" alt="High Level Health, a Dispenza client" width="297" height="176" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.png" alt="NuLeaf, a Dispenza client" width="196" height="48" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.png" alt="Tree of Life, a Dispenza client" width="292" height="293" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.png" alt="Sundial Collective, a Dispenza client" width="294" height="76" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.png" alt="Root'd in the 510, a Dispenza client" width="295" height="127" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.png" alt="MaryJane's, a Dispenza client" width="911" height="190" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.png" alt="Royal Weed, a Dispenza client" width="299" height="101" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.png" alt="The Cannabis Guys, a Dispenza client" width="186" height="152" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.png" alt="LA Cannabis Co, a Dispenza client" width="298" height="77" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.png" alt="Perfect Union, a Dispenza client" width="299" height="116" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.png" alt="Coachella Canna Club, a Dispenza client" width="293" height="212" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.png" alt="Firehouse 365, a Dispenza client" width="194" height="160" decoding="async"></div>
+          </div>
+          <div class="mc-marquee__group" data-dup="1" aria-hidden="true">
+            <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.png" alt="" width="297" height="176" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.png" alt="" width="196" height="48" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.png" alt="" width="292" height="293" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.png" alt="" width="294" height="76" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.png" alt="" width="295" height="127" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.png" alt="" width="911" height="190" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.png" alt="" width="299" height="101" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.png" alt="" width="186" height="152" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.png" alt="" width="298" height="77" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.png" alt="" width="299" height="116" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.png" alt="" width="293" height="212" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.png" alt="" width="194" height="160" decoding="async"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- The marquee carries its own behaviour, inside <main>, for the same reason the
+     hero does: G-CHROME-CARRIER-REDIRECT treats every byte outside <main> as the
+     locked chrome frame, and the carrier it redirects to holds no script at all.
+     Keeping the observer with the component also makes the section liftable into
+     another page without remembering to bring a line of global script with it. -->
+<script>
+(function () {
+  /* An infinite loop needs three brakes and the DS pattern supplies two
+     (pause-on-hover, reduced-motion). This is the third: stop when nobody is
+     looking. A marquee is on the owner's forbidden list because autoplay motion
+     steals attention -- and motion nobody can see steals CPU for nothing. */
+  var mq = document.querySelector('.mc-marquee');
+  if (!mq || !('IntersectionObserver' in window)) { return; }
+  new IntersectionObserver(function (es) {
+    es.forEach(function (en) { mq.classList.toggle('is-offscreen', !en.isIntersecting); });
+  }, { threshold: 0 }).observe(mq);
+})();
+</script>
+<!-- THE SMOKE BAND. One field spanning Influence Highlights and Our suite, so
+     the smoke drifts THROUGH both rather than restarting at the seam between
+     them. The canvas is a sibling of the sections, behind them, and the sections
+     are raised above it, so nothing here can sit on top of type. -->
+<div class="mc-smokefield" data-smokefield>
+  <canvas class="mc-smoke mc-smoke--field" aria-hidden="true"></canvas>
+
+<!-- ==========================================================================
+     SECTION 2 . INFLUENCE HIGHLIGHTS . KIND: SPEC
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #3 Stat strip / metric band | considered: #2,#13,#7 | why: the four totals are the client's only whole-business numbers and they arrive immediately after the claim, which is where the composition library puts quantified credibility, but the reason this concept wants a stat STRIP specifically is that four figures divided by hairlines sit in open space with nothing carded, which is the first proof that a section can carry structured data without the measured column widening or a box appearing; the oversized numerals also demonstrate the top of the type ladder in a non-heading role. #2 trust strip or logo wall was the obvious alternative and is rejected here because the twenty five client marks all carry empty alt text and no confirmed right to display, so a logo wall would be a claim the build cannot yet stand behind. #13 bento feature grid would introduce an asymmetric tile grid, which is precisely the varying rhythm this concept exists to refuse, and it would need eight to twelve pitches that do not exist at this point in the page. #7 problem framing would put a paragraph of pain here, delaying the first number to the fourth section and wasting the fact that this client's numbers are its strongest asset. -->
+<section class="mc-section surface-dark" id="influence">
+  <div class="container">
+    <div class="row">
+      <!-- full-width col, not col--measure: the statement heading is meant to
+           span the container, and the measure column was capping it at the
+           reading width. -->
+      <div class="col">
+        <p class="mc-eyebrow" data-reveal>The numbers</p>
+        <h2 class="mc-head mc-head--statement" data-reveal>Influence Highlights</h2>
+      </div>
+    </div>
+    <div class="row row--figures">
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="1.2" data-count-dec="1">1.2</span> <span class="mc-figure__u">BLN</span></p>
+          <p class="mc-figure__k">SALES INFLUENCED</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="2.1" data-count-dec="1">2.1</span> <span class="mc-figure__u">BLN</span></p>
+          <p class="mc-figure__k">WEBSITE VISITS</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="3.8" data-count-dec="1">3.8</span> <span class="mc-figure__u">BLN</span></p>
+          <p class="mc-figure__k">GOOGLE IMPRESSIONS</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mc-figure" data-reveal>
+          <p class="mc-figure__n"><span data-count-to="500" data-count-dec="0" data-count-suffix="+">500+</span></p>
+          <p class="mc-figure__k">LOCATION HELPED</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 3 . OUR SUITE, TWO ALTERNATING FEATURE ROWS . KIND: MEASURE + MEDIA
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #11 Service pillars 2-col with image | considered: #9,#12,#13 | why: the owner adopted "feature blocks that alternate image-left, image-right" by name, and #11 is the catalog's only entry whose row IS that alternation, one image plus headline plus body plus link per row with the media side flipping; it is also the pattern that lets this concept prove its hardest claim, which is that the text column does NOT change width when a picture arrives beside it, because the measure keeps its exact px and the media simply takes whatever is left. The media plus cards law does not bite here: this is the alternating single-row arm, not one capped image beside a card stack, and the media column is set to stretch so the two columns end level. #9 services 3-col would flatten eight services into three equal cards and give the two real service editorials nowhere to live at size. #12 feature row with screenshot assumes a product screenshot is the subject, but the assets here are atmospheric editorials, not UI. #13 bento is refused for the same reason as in section 2: an asymmetric tile grid is a varying rhythm, and this page's argument is that the rhythm does not vary. -->
+<section class="mc-section mc-section--tight surface-dark" id="suite">
+  <div class="container">
+    <!-- THE TRAVELLING RULE. The same light the hero runs through its field, on a
+         hairline: a bright segment revealed as the divider crosses the viewport.
+         It is decorative and carries no text, so it is hidden from assistive tech
+         rather than announced as an empty landmark. -->
+    <div class="row">
+      <div class="col">
+        <div class="mc-divider" data-divider aria-hidden="true">
+          <span class="mc-divider__light"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>Two of eight</p>
+        <h2 class="mc-head" data-reveal>Our <span class="mc-head__turn">suite</span></h2>
+      </div>
+    </div>
+
+    <!-- OWNER PICK: option B, two-up. Media on top, copy beneath, two across.
+         Measured against three alternatives at 1440: 697px here versus 1,915px
+         for the alternating split it replaces, and it is the layout that still
+         carries the feature lists when this section grows to all eight
+         services. -->
+    <div class="row">
+      <div class="col">
+        <div class="mc-suite">
+
+          <article class="mc-svc" data-reveal>
+            <div class="mc-svc__media">
+              <div class="mc-gauge" data-gauge data-gauge-to="4" data-gauge-max="5" data-reveal>
+                <svg viewBox="0 0 220 220" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="gArc1" gradientUnits="userSpaceOnUse"
+                                    x1="55" y1="165" x2="165" y2="165"
+                                    gradientTransform="rotate(-135 110 110)">
+                      <stop offset="0%"   stop-color="var(--ds-accent-deep)"/>
+                      <stop offset="55%"  stop-color="var(--ds-primary)"/>
+                      <stop offset="100%" stop-color="var(--ds-accent-light)"/>
+                    </linearGradient>
+                    <filter id="gBloom1" x="-60%" y="-60%" width="220%" height="220%">
+                      <feGaussianBlur stdDeviation="7" result="b"/>
+                      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+                    </filter>
+                    <filter id="gKnob1" x="-160%" y="-160%" width="420%" height="420%">
+                      <feGaussianBlur stdDeviation="5"/>
+                    </filter>
+                  </defs>
+                  <circle cx="110" cy="110" r="78" fill="none" stroke="var(--ds-bg-surface)"
+                          stroke-width="16" stroke-linecap="round"
+                          stroke-dasharray="367.57 490.09" transform="rotate(135 110 110)"/>
+                  <g class="g-ticks"></g>
+                  <circle class="g-bloom" cx="110" cy="110" r="78" fill="none"
+                          stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
+                          stroke-dasharray="0 490.09" transform="rotate(135 110 110)"
+                          filter="url(#gBloom1)" opacity="0"/>
+                  <circle class="g-arc" cx="110" cy="110" r="78" fill="none"
+                          stroke="url(#gArc1)" stroke-width="14" stroke-linecap="round"
+                          stroke-dasharray="0 490.09" transform="rotate(135 110 110)"/>
+                  <circle class="g-halo" cx="110" cy="110" r="10" fill="var(--ds-accent-light)"
+                          filter="url(#gKnob1)" opacity="0"/>
+                  <circle class="g-knob" cx="110" cy="110" r="7" fill="var(--ds-ink-heading)" opacity="0"/>
+                </svg>
+                <div class="mc-gauge__read">
+                  <span class="mc-gauge__n">0</span>
+                  <span class="mc-gauge__k">Deliverables</span>
+                </div>
+              </div>
+            </div>
+            <h3 class="mc-head">Performance marketing</h3>
+            <p class="mc-body">Paid and organic demand for a licensed dispensary.</p>
+            <ul class="mc-list">
+              <li>Localized On-Page SEO</li>
+              <li>100+ Off-Page SEO (Profiles)</li>
+              <li>Google Business Profile Management</li>
+              <li>Monthly and Quarterly Reporting</li>
+            </ul>
+          </article>
+
+          <article class="mc-svc" data-reveal>
+            <div class="mc-svc__media">
+              <!-- reduced motion decided in THIS document: an SVG in an img is an
+                   isolated context and does not reliably receive the preference,
+                   so the static twin is the fallback and motion is opted into. -->
+              <picture>
+                <source media="(prefers-reduced-motion: no-preference)"
+                        srcset="../assets/generated/svc-webdesign-layers.svg">
+                <img src="../assets/generated/svc-webdesign-layers-static.svg"
+                     alt="Four stacked translucent layers, representing a site built in maintainable tiers."
+                     width="1741" height="2150" decoding="async">
+              </picture>
+            </div>
+            <h3 class="mc-head">Web design and development</h3>
+            <p class="mc-body">Menu-connected sites built to be updated by staff.</p>
+            <ul class="mc-list">
+              <li>Dedicated Project Manager</li>
+              <li>Any Ecomm / Menu Integration</li>
+              <li>30-Day Backup and Restores</li>
+              <li>Web Hosting</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- G-DOM 2026-08-18: this driver USED TO SIT INSIDE the section (see the note it
+     carries). verify-dom-structure allows no exception for a <script>: any non-.container
+     child of a section element, and any non-.row child of a .container, is R4
+     orphan-content. The section tag is NOT spelled out in this comment on purpose:
+     three gates count top-level sections with a bare regex that does not skip
+     comments, so one unmatched opening tag typed in prose swallows every following
+     close and collapsed nine sections into four here. Observed, then fixed.
+     It is moved OUT to sit beside the section instead of being wrapped in an empty
+     .container > .row > .col, because a wrapper would add a real (if zero-height) box to
+     an approved layout to hold something that renders nothing. The component still
+     travels with its behaviour -- the script is still adjacent to it, still inside
+     <main>, and still runs after its own markup has parsed, which is the only ordering
+     it depends on. -->
+<!-- The rule carries its own behaviour, INSIDE <main>, for the same reason the
+     marquee and the hero do: G-CHROME-CARRIER-REDIRECT treats every byte
+     outside <main> as the locked chrome frame. Keeping the driver with the
+     component also makes the divider liftable into another page without
+     remembering to bring a line of global script with it. -->
+<script>
+(function () {
+  /* THE HERO'S LIGHT, ON A HAIRLINE, and it has NO TIMELINE, which is what
+     keeps it off the forbidden list. The spec bans animated gradients and
+     anything looping in the viewport; nothing here repeats. The bright
+     segment's position is a pure function of how far the rule has crossed the
+     viewport, the same drive hero-field.js uses: alive while the visitor
+     scrolls, perfectly still the moment they stop. */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  [].slice.call(document.querySelectorAll('[data-divider]')).forEach(function (el) {
+    var light = el.querySelector('.mc-divider__light');
+    if (!light) { return; }
+
+    function place() {
+      var box = el.getBoundingClientRect();
+      var p = 1 - (box.top + box.height) / (window.innerHeight + box.height);
+      if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
+      light.style.transform = 'translate3d(' + (p * el.clientWidth).toFixed(1) + 'px,0,0)';
+    }
+
+    if (reduce.matches) {
+      /* frozen, but placed mid-rule so the resting divider is LIT, not dark */
+      light.style.transform = 'translate3d(' + (el.clientWidth * 0.5).toFixed(1) + 'px,0,0)';
+    } else {
+      place();
+      window.addEventListener('scroll', place, { passive: true });
+      window.addEventListener('resize', place);
+    }
+  });
+}());
+</script>
+</div><!-- /.mc-smokefield -->
+
+<!-- The band carries its own behaviour, INSIDE <main>, for the same reason the
+     marquee and the divider do: every byte outside <main> is the locked chrome. -->
+<script src="../_design/section-smoke.js" defer></script>
+
+
+<!-- ==========================================================================
+     SECTION 4 . INCREASE SALES . KIND: BAND (full bleed event)
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #3 stat grid on an inverted ground | considered: #58,#21,#22 | why: the owner asked for this section against WHITE, matching the treatment their own live site gives it, and the eight city results are the page's strongest asset so each one gets its own card rather than two being shown and six deferred to another page. The light ground is the page's ONE inversion, which is what makes it read as the proof moment rather than as another dark panel. #58 image divider full-bleed is what this replaced and is rejected now because a photographic band cannot carry eight discrete figures without becoming a list on top of a picture. #21 case studies 3-col and #22 featured-plus-two both card the results at a size that forces either a subset or a carousel, and a carousel is on the owner's forbidden-motion list AND hides the roster length that is doing the persuading. -->
+<section class="mc-section mc-section--light mc-section--tight mc-section--banded" id="results" data-surface="light">
+  <!-- FULL-BLEED BAND. It is the transition between the dark section above and
+       this white one, so it has to run edge to edge -- constrained to the
+       container it read as a block sitting IN the section rather than as the
+       seam between two. Hence container--full, outside the measured column. -->
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+        <div class="mc-salesband">
+        <div class="mc-salesband__track">
+          <h2 class="mc-salesband__set mc-head--band">
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+          </h2>
+          <div class="mc-salesband__set" aria-hidden="true">
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+        <span class="mc-salesband__word">Increase Sales</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <!-- THE MAP GETS ITS OWN ROW. In the two-up it was capped at 420px and
+             still looked starved, because the map and the third card were
+             drawing from the same pixels: at a card width that does not clip
+             "+51.37%", keeping the map in that row pinned it to 422px. Out of
+             the row it reaches 900px -- its native 949 is the real ceiling. -->
+        <figure class="mc-results__map" data-reveal>
+        <img src="../assets/generated/results-map.webp"
+        alt="Map of North America with the states and provinces Dispenza operates in highlighted."
+        width="940" height="628" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE BLEED ROW: claims and CTA left, cards right, running off the frame
+       edge, controls in a bottom bar. It sits OUTSIDE .container on purpose and
+       carries the container's left offset as padding, so the text still lines up
+       with every other section while the cards escape to the viewport edge. -->
+  <!-- G-DOM 2026-08-18: the bleed row now sits in the grammar. It is wrapped in
+       .container--full (max-width:none; padding:0) > .row > .col, which is the SAME
+       wrapper the "Increase Sales" band twelve lines up already uses, so the box the
+       browser lays out is unchanged: the row is a flex parent with one 100%-basis
+       child. The comment above still holds -- the bleed keeps computing its own
+       container offset in padding-left, and nothing above it constrains its width. -->
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+  <div class="mc-results__bleed">
+    <div class="mc-results__say">
+      <h2 class="mc-head mc-results__line" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</h2>
+      <h2 class="mc-head mc-results__line" data-reveal>We only charge for our <span class="mc-results__hl">guaranteed results</span>.</h2>
+      <div class="mc-actions" data-reveal>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+    </div>
+
+    <!-- Every one of the eight cities stays in the DOM: this is a scroll
+         container, not a slideshow that swaps content in and out, so nothing is
+         hidden from a reader, from assistive tech, or from the copy-fidelity
+         gate. Each lift and its window remain ONE corpus atom
+         ("+51.37% in the first 3 months") and stay adjacent in the markup. -->
+    <div class="mc-deck" data-deck data-reveal>
+      <div class="mc-deck__viewport">
+        <div class="mc-deck__stage" role="group"
+             aria-label="Total sale increase by city, eight results">
+          <div class="mc-result">
+          <p class="mc-result__city">Oceanside, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="51.37" data-count-dec="2" data-count-prefix="+" data-count-suffix="%">+51.37%</span></p>
+          <p class="mc-result__win">in the first 3 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Mid City, LA, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="50.1" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+50.1%</span></p>
+          <p class="mc-result__win">in the first 3 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Edmond, OK</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="196" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+196%</span></p>
+          <p class="mc-result__win">in the first 2 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Seaside, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
+          <p class="mc-result__win">in the first 2 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Oakland, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="94.5" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+94.5%</span></p>
+          <p class="mc-result__win">in the first 5 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Needles, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="198" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+198%</span></p>
+          <p class="mc-result__win">in the first 6 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Downtown LA, CA</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="55.2" data-count-dec="1" data-count-prefix="+" data-count-suffix="%">+55.2%</span></p>
+          <p class="mc-result__win">in the first 6 months</p>
+          </div>
+          <div class="mc-result">
+          <p class="mc-result__city">Las Vegas, NV</p>
+          <p class="mc-result__label">Total Sale Increase</p>
+          <p class="mc-result__lift"><span class="mc-result__arrow" aria-hidden="true">&#8593;</span> <span data-count-to="733" data-count-dec="0" data-count-prefix="+" data-count-suffix="%">+733%</span></p>
+          <p class="mc-result__win">in the first 30 months</p>
+          </div>
+        </div>
+      </div>
+      <div class="mc-deck__bar">
+        <span class="mc-deck__label">Results by city</span>
+        <span class="mc-deck__count" data-deck-count aria-live="polite">01 / 08</span>
+        <div class="mc-deck__btns">
+          <button class="mc-deck__btn" type="button" data-deck-prev aria-label="Previous results">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="mc-deck__btn" type="button" data-deck-next aria-label="More results">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 . THE PROMISE was here and was REMOVED at the owner's direction
+     (asked twice, 2026-08-13).
+
+     WHAT IT COST, recorded rather than left to be discovered: the claim itself
+     survives. "Only Marketing Agency In Cannabis That Guarantees Results" is
+     still on the page, carried by #close, so the sentence has not left the
+     build. One atom DID leave with the section: the eyebrow "only with
+     dispenza", which appeared nowhere else. #close already carries its own
+     eyebrow ("PERFORMANCE GUARANTEE"), so there was no honest place to re-home
+     it, and it is retired by owner decision rather than dropped silently.
+
+     STILL OWED: the formal RETIRED-BY-OWNER entry in the prep decisions ledger,
+     which needs a re-seam of the handoff. Flagged to the owner, not skipped. -->
+
+
+
+<!-- ==========================================================================
+     SECTION 5 . PERFORMANCE BENCHMARKS . KIND: COMPARISON
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #31 comparison/spec module | considered: #3,#21,#13 | why: the brief asks for "the four day-0-against-the-month tables reproduced whole, with room, instead of stacked into one dense block", and #31 is the entry whose job is exactly that - paired label/value rows at two points in time, aligned across a set so the reader compares ACROSS the cards rather than reading each one alone. The fourth card takes the brand ground because that is the distinction the source draws between the benchmark set and Dispenza's own client. #3 stat strip is already spent twice on this page and would flatten four tables into four headline numbers, losing the day-0 baseline that makes them credible. #21 case studies would need narrative copy that does not exist for these four. #13 bento grid would impose an asymmetric rhythm on four items that are deliberately identical in shape. -->
+<section class="mc-section mc-section--tight mc-smokerise surface-dark" id="benchmarks" data-smokerise>
+  <!-- THE SMOKE THAT CLINGS. Same engine and same pointer wake as the
+       influence/suite band; the emitter differs and nothing else. It rises out
+       of the bottom of the section and gathers under the top edge instead of
+       passing through it.
+
+       A CHILD of the section, not a sibling, because .mc-section paints the
+       ground itself -- so the smoke keeps the hero's --ds-z-below and sits above
+       that ground and below every piece of type, with no z-index override needed
+       on any content.
+
+       TWO ELEMENTS, because there are two masks and they have to MULTIPLY: the
+       lid carries the vertical clearance that keeps the pooled cap off the
+       eyebrow and the heading (measured; without it the eyebrow fell to 2.86:1),
+       and the canvas inside carries the owner's sides-only corridor. Nesting
+       composites them with no reliance on mask-composite.
+
+       Decorative end to end: aria-hidden on both, the lid is pointer-events:none
+       and .mc-smoke makes the canvas pointer-events:none, so neither can ever
+       eat a click. The POINTER WAKE still works -- the engine listens on the
+       SECTION, which receives pointermove by bubbling from whatever is on top. -->
+  <!-- G-DOM 2026-08-18: the lid is a decorative PLANE, and a plane still has to sit in
+       the grammar. .container--plane is .container--full plus one guarantee: it never
+       enters the positioning or stacking chain, so the lid's inset:0 still resolves
+       against the SECTION (measured: offsetParent stays #benchmarks) and its
+       z-index:--ds-z-below still resolves inside .mc-smokerise's own isolate context.
+       The wrapper contributes no height, because its only descendant is absolute. -->
+  <div class="container container--full container--plane">
+    <div class="row">
+      <div class="col">
+        <div class="mc-smokerise__lid" aria-hidden="true">
+          <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>Performance benchmarks</p>
+        <h2 class="mc-head" data-reveal>Day 0 against <span class="mc-head__turn">the month</span></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <!-- AN ACCORDION OF CLIENT CARDS. Shut, a card is its storefront under the
+             brand violet with the mark reading up the spine; open, the photograph
+             desaturates and the numbers appear beside it. The photography and the
+             marks are the client's own, supplied by the owner, who confirmed the
+             rights to display them.
+
+             EVERY FIGURE IS REAL TEXT. The supplied artwork has the numbers baked
+             into the image. Shipping that would put corpus data somewhere a
+             screen reader, find-in-page and verify-copy-fidelity cannot reach, so
+             only the PHOTOGRAPH and the LOGO come from the artwork. Every label
+             and value below is this section's existing markup, lifted across
+             unchanged rather than retyped.
+
+             ALL FOUR PANELS STAY IN THE DOM whether open or shut. They are
+             clipped by the card, never removed, so no client's numbers depend on
+             a click in order to exist. -->
+        <div class="mc-cases" data-cases>
+      <article class="mc-case is-open" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="true" aria-controls="case-lowkey">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../assets/brand/cases/lowkey-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../assets/brand/cases/lowkey-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Low Key</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-lowkey">
+          <div class="mc-case__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">Day 0</p>
+          <p class="mc-bench__row"><span>SoLV Weed Dispensary</span><span class="mc-bench__v">0.00</span></p>
+          <p class="mc-bench__row"><span>Direction Requests</span><span class="mc-bench__v">291</span></p>
+          <div class="mc-bench__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">1 Month</p>
+          <p class="mc-bench__row"><span>SoLV Increase- Weed Dispensary</span><span class="mc-bench__v">100.00</span></p>
+          <p class="mc-bench__row"><span>Direction Requests Increase</span><span class="mc-bench__v">+100%</span></p>
+        </div>
+      </article>
+      <article class="mc-case" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="false" aria-controls="case-rootd">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../assets/brand/cases/rootd-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../assets/brand/cases/rootd-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Root'd in the 510</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-rootd">
+          <div class="mc-case__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">Day 0</p>
+          <p class="mc-bench__row"><span>SoLV Weed</span><span class="mc-bench__v">0.00</span></p>
+          <p class="mc-bench__row"><span>Direction Requests</span><span class="mc-bench__v">709</span></p>
+          <div class="mc-bench__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">12 Month</p>
+          <p class="mc-bench__row"><span>SoLV Increase- Weed</span><span class="mc-bench__v">59.62</span></p>
+          <p class="mc-bench__row"><span>Direction Requests Increase</span><span class="mc-bench__v">+49.08%</span></p>
+        </div>
+      </article>
+      <article class="mc-case" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="false" aria-controls="case-kanna">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../assets/brand/cases/kanna-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../assets/brand/cases/kanna-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Kanna</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-kanna">
+          <div class="mc-case__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">Day 0</p>
+          <p class="mc-bench__row"><span>SoLV Weed Dispensary</span><span class="mc-bench__v">0.00</span></p>
+          <p class="mc-bench__row"><span>Direction Requests</span><span class="mc-bench__v">181</span></p>
+          <div class="mc-bench__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">3 Month</p>
+          <p class="mc-bench__row"><span>SoLV Increase- Weed Dispensary</span><span class="mc-bench__v">93.37%</span></p>
+          <p class="mc-bench__row"><span>Direction Requests Increase</span><span class="mc-bench__v">+32.51%</span></p>
+        </div>
+      </article>
+      <article class="mc-case" data-case>
+        <h3 class="mc-case__h">
+          <button class="mc-case__tab" type="button" data-case-tab
+                  aria-expanded="false" aria-controls="case-cookies">
+            <img class="mc-case__art mc-case__art--shut"
+                 src="../assets/brand/cases/cookies-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
+            <img class="mc-case__art mc-case__art--open"
+                 src="../assets/brand/cases/cookies-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
+            <span class="mc-case__name">Cookies Sunland Park</span>
+          </button>
+        </h3>
+        <div class="mc-case__panel" id="case-cookies">
+          <div class="mc-case__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">Day 0</p>
+          <p class="mc-bench__row"><span>SoLV Weed Dispensary</span><span class="mc-bench__v">0.00</span></p>
+          <p class="mc-bench__row"><span>Website Visits</span><span class="mc-bench__v">291</span></p>
+          <div class="mc-bench__rule" aria-hidden="true"></div>
+          <p class="mc-bench__when">1 Month</p>
+          <p class="mc-bench__row"><span>SoLV Increase- Weed Dispensary</span><span class="mc-bench__v">99.17</span></p>
+          <p class="mc-bench__row"><span>Website Visits Increase</span><span class="mc-bench__v">+100%</span></p>
+        </div>
+      </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- G-DOM 2026-08-18: this driver USED TO SIT INSIDE the section (see the note it
+     carries). verify-dom-structure allows no exception for a <script>: any non-.container
+     child of a section element, and any non-.row child of a .container, is R4
+     orphan-content. The section tag is NOT spelled out in this comment on purpose:
+     three gates count top-level sections with a bare regex that does not skip
+     comments, so one unmatched opening tag typed in prose swallows every following
+     close and collapsed nine sections into four here. Observed, then fixed.
+     It is moved OUT to sit beside the section instead of being wrapped in an empty
+     .container > .row > .col, because a wrapper would add a real (if zero-height) box to
+     an approved layout to hold something that renders nothing. The component still
+     travels with its behaviour -- the script is still adjacent to it, still inside
+     <main>, and still runs after its own markup has parsed, which is the only ordering
+     it depends on. -->
+<!-- The accordion carries its own behaviour, INSIDE <main>, for the same reason
+     the marquee and the divider do: every byte outside <main> is locked chrome. -->
+<script>
+(function () {
+  /* NO TIMELINE, so it is not the autoplay carousel the motion spec bans: it
+     moves on a click or a key and never on its own. One panel open at a time.
+     The panels are only ever CLIPPED by their card, never removed, so all four
+     clients' numbers stay in the DOM and in the accessibility tree whatever is
+     open. aria-expanded is what tells assistive tech which one is showing. */
+  var wrap = document.querySelector('[data-cases]');
+  if (!wrap) { return; }
+  var cases = [].slice.call(wrap.querySelectorAll('[data-case]'));
+
+  function open(card) {
+    cases.forEach(function (c) {
+      var on = (c === card);
+      c.classList.toggle('is-open', on);
+      var t = c.querySelector('[data-case-tab]');
+      if (t) { t.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+    });
+  }
+
+  cases.forEach(function (c, i) {
+    var tab = c.querySelector('[data-case-tab]');
+    if (!tab) { return; }
+    tab.addEventListener('click', function () { open(c); });
+    tab.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { n = cases[(i + 1) % cases.length]; }
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { n = cases[(i - 1 + cases.length) % cases.length]; }
+      if (!n) { return; }
+      e.preventDefault();
+      open(n);
+      n.querySelector('[data-case-tab]').focus();
+    });
+  });
+}());
+</script>
+
+<!-- The section carries its own behaviour, INSIDE <main>, for the same reason
+     the band and the divider do. -->
+<script src="../_design/section-smoke-rise.js" defer></script>
+
+
+<!-- ==========================================================================
+     SECTION 5 . THE LADDER . KIND: SPEC
+     ========================================================================== -->
+<!-- pick: PRICING-SECTIONS.md #2 Comparison table to cards on mobile | considered: #1,#3,#5 | why: the client's positioning wedge is that nine tiers and both plans are published while eighteen crawled competitor pages publish nothing, and the recorded live defect is that the feature lists are hidden behind click to expand panels, so the pricing treatment has to be the one that shows everything at once without an interaction; #2 is the only entry built as a real semantic table with a scrollable wrapper and a per-row card reflow, which means every price, every per location add-on and every included line is readable on a phone with its column header printed beside it. It is also the right register for this concept: a table is structured information, so it is the one object allowed to set the measure aside without the page looking like it changed its mind about column width. #1 three-tier cards, middle featured is rejected because carding forces one tier to be visually promoted and this ladder has nine rungs plus two plans, so three cards would either hide six tiers or shrink to unreadable. #3 monthly and annual toggle needs a second cadence to toggle to, and none is published. #5 plain-deal honesty stance is a creed band with no figures at all, which is the opposite of a wedge whose entire content is the printed number. -->
+<section class="mc-section mc-section--light mc-section--banded" id="pricing" data-surface="light">
+
+  <!-- ══ THE SUITE BAND ══ ADDED 2026-08-18, completing the approved composition.
+       D-SRC-INDEX-0071 "OUR SUITE OUR SUITE OUR SUITE" is a REPEATED-PHRASE MARQUEE in
+       the source, and in the source it runs immediately above the nine A-La-Carte rungs
+       -- it is the ladder's own header. The page already owns that object: .mc-salesband
+       is the "Increase Sales" band that opens #results, so this is the SAME component
+       with the SAME grammar wrapper (.container--full > .row > .col), not a new pattern.
+       .mc-section--banded is added for the same reason #results carries it: a section
+       that OPENS with a full-bleed band pays no top rhythm, so the band touches the dark
+       section above it and reads as the seam between the two rather than as a slab
+       floating inside a white panel.
+       The h2 carries set A and the duplicate is aria-hidden, so the phrase is announced
+       once. Reduced motion stops the run dead (@keyframes gate already in structural). -->
+  <div class="container container--full">
+    <div class="row">
+      <div class="col">
+        <div class="mc-salesband">
+          <div class="mc-salesband__track">
+            <h2 class="mc-salesband__set mc-head--band">
+              <span class="mc-salesband__word">OUR SUITE OUR SUITE OUR SUITE</span>
+              <span class="mc-salesband__word">OUR SUITE OUR SUITE OUR SUITE</span>
+            </h2>
+            <div class="mc-salesband__set" aria-hidden="true">
+              <span class="mc-salesband__word">OUR SUITE OUR SUITE OUR SUITE</span>
+              <span class="mc-salesband__word">OUR SUITE OUR SUITE OUR SUITE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>The plans</p>
+        <h2 class="mc-head" data-reveal>Published <span class="mc-head__turn">prices</span></h2>
+        <p class="mc-body" data-reveal>Both plans carry their monthly figure, their per-location add-on and every module they fold in. Nothing is behind a click.</p>
+      </div>
+    </div>
+    <!-- ══ THE NINE RUNGS ══ ADDED 2026-08-18, completing the approved pick.
+         WHAT WAS MISSING. The pick above commits, in as many words, to "nine tiers and
+         both plans ... a real semantic table with a scrollable wrapper and a per-row card
+         reflow ... every price, every per location add-on and every included line". The
+         specimen shipped only the two PLAN cards; the nine A-La-Carte rungs the argument
+         is actually about were never built, and with them went 68 of the page's required
+         index atoms. This is the table the pick names, so it completes the approved
+         decision rather than reinterpreting it. The two plan cards below are untouched.
+
+         CONTENT. Every module name, figure, per-location line and feature line is lifted
+         VERBATIM from _source/atoms/index.json (atoms 98-236); each <li> carries its atom
+         index in a src comment. Where the source wrapped ONE list item across two atoms
+         ("Full Service" / "Web Management"), the item is rejoined as the source renders
+         it, not split into two claims. Rung 09 has no per-location line in the source, so
+         its cell is EMPTY -- nothing is invented to fill it.
+
+         THE FOUR COLUMN HEADERS are neutral structural labels, in the same register this
+         concept already uses for its section eyebrows ("The numbers", "Two of eight",
+         "The plans"). They are the mechanism PRICING-SECTIONS #2 requires: on a phone the
+         table reflows to per-rung cards and each cell prints its own header beside it,
+         via content:attr(data-k). No header states a claim.
+
+         AMPERSANDS ARE LITERAL, not &amp;. verify-copy-fidelity tag-strips but does NOT
+         decode entities, so "Apple Maps Set-Up &amp; Monitoring" reads as a MISS against
+         the registry verbatim "Apple Maps Set-Up & Monitoring". A bare "&" followed by a
+         space is a valid HTML5 ampersand. The three pre-existing &amp; occurrences on this
+         page (the two plan cards' reporting/technology lines and the case-studies
+         standfirst) were converted for the same reason and the same three atoms. -->
+    <div class="row">
+      <div class="col">
+        <div class="hz-ladder" data-reveal>
+          <table class="hz-table">
+            <thead>
+              <tr>
+                <th scope="col">Module</th>
+                <th scope="col">Monthly</th>
+                <th scope="col">Per additional location</th>
+                <th scope="col">Included</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">01</span><span class="hz-name">Ecomm Plus</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$399<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">+$99.99/Additional Location</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>E-Commerce Integration</span></li><!-- src: atom 105 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>SEO AI</span></li><!-- src: atom 106 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Works with ANY Website</span></li><!-- src: atom 107+108 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Full Service Installation</span></li><!-- src: atom 109 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Enhanced Security Features</span></li><!-- src: atom 110 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Unlimited SKUs</span></li><!-- src: atom 111 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dutchie + Solution</span></li><!-- src: atom 112 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">02</span><span class="hz-name">WEB Plus</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$1,200<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">+$200/Additional Location</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Ecomm Plus INCLUDED</span></li><!-- src: atom 120+121 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Project Manager</span></li><!-- src: atom 122 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Enhanced Security Features</span></li><!-- src: atom 123 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Web Hosting</span></li><!-- src: atom 124 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Domain Management</span></li><!-- src: atom 125 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>30-Day Backup and Restores</span></li><!-- src: atom 126 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Any Ecomm / Menu Integration</span></li><!-- src: atom 127 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">03</span><span class="hz-name">WEB Pro</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$2000<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">+$400/Additional Location</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>All WEB PLUS features INCLUDED</span></li><!-- src: atom 136+137+138 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Custom Web Widgets</span></li><!-- src: atom 139 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Full Service Web Management</span></li><!-- src: atom 140+141 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Unlimited Page Development</span></li><!-- src: atom 142+143 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Custom Web Graphics</span></li><!-- src: atom 144 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Custom Brand Elements</span></li><!-- src: atom 145+146 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">04</span><span class="hz-name">SEO Plus</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$2,000<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">+$1,400/Additional Location</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Localized On-Page SEO</span></li><!-- src: atom 154 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>100+ Off-Page SEO (Profiles)</span></li><!-- src: atom 155 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Apple Maps Set-Up & Monitoring</span></li><!-- src: atom 156 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Global Authority Campaign</span></li><!-- src: atom 157 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Citation Distribution and Management</span></li><!-- src: atom 158 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly and Quarterly Reporting</span></li><!-- src: atom 159 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Strategist</span></li><!-- src: atom 160 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Google Business Profile Management</span></li><!-- src: atom 161 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">05</span><span class="hz-name">SEO Pro</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$3,000<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">+$2,000/Additional Location</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Localized On-Page SEO</span></li><!-- src: atom 169 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>300+ Off-Page SEO (Profiles)</span></li><!-- src: atom 170 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Apple Maps Set-Up & Monitoring</span></li><!-- src: atom 171 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Optimized PR Strategy</span></li><!-- src: atom 172 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Global Authority Campaign</span></li><!-- src: atom 173 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Citation Distribution and Management</span></li><!-- src: atom 174 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li><!-- src: atom 175 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly and Quarterly Reporting</span></li><!-- src: atom 176 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Local Keyword Ranking Commit</span></li><!-- src: atom 177 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Strategist</span></li><!-- src: atom 178 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Google Business Profile Management</span></li><!-- src: atom 179 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">06</span><span class="hz-name">CREATIVE Plus</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$800<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">Per Brand</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Project Manager</span></li><!-- src: atom 187 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Limited Graphics and Design</span></li><!-- src: atom 188 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Web Content Creation</span></li><!-- src: atom 189 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Onboarding Consultation</span></li><!-- src: atom 190 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Package Design & Development</span></li><!-- src: atom 191 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Ad & Billboard Design</span></li><!-- src: atom 192 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Email Templates</span></li><!-- src: atom 193 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Direct Mailer Design</span></li><!-- src: atom 194 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">07</span><span class="hz-name">CREATIVE Pro</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$2,000<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">Up to 3 locations</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Unlimited Graphics and Design</span></li><!-- src: atom 202 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Brand Development</span></li><!-- src: atom 203 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Daily Deal Creation & Management</span></li><!-- src: atom 204 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>ALL CREATIVE Plus features</span></li><!-- src: atom 205 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Ongoing Consultation</span></li><!-- src: atom 206 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Weekly Creative Direction Meetings</span></li><!-- src: atom 207 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">08</span><span class="hz-name">OUTREACH SMS</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$800<span class="hz-unit">/Mo</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"><span class="hz-add">+ $0.08/SMS</span></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li><!-- src: atom 215 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>SMS Campaign Management</span></li><!-- src: atom 216 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>SMS Campaign Consult</span></li><!-- src: atom 217 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Implementations</span></li><!-- src: atom 218 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Campaign Creative // Design & Development</span></li><!-- src: atom 219 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Weekly Strategy Session</span></li><!-- src: atom 220 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Review Channel Management</span></li><!-- src: atom 221 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Fully Managed Service</span></li><!-- src: atom 222 -->
+                </ul>
+              </td>
+            </tr>
+            <tr class="hz-rung">
+              <th class="hz-rung__id" scope="row"><span class="hz-rung__n" aria-hidden="true">09</span><span class="hz-name">OUTREACH Email</span></th>
+              <td class="hz-rung__price" data-k="Monthly"><span class="hz-price">$1,200<span class="hz-unit">/Per Campaign</span></span></td>
+              <td class="hz-rung__add" data-k="Per additional location"></td>
+              <td class="hz-rung__feat" data-k="Included">
+                <ul class="hz-list hz-list--rung">
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li><!-- src: atom 229 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Email Campaign Management</span></li><!-- src: atom 230 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Email Campaign Consult</span></li><!-- src: atom 231 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Implementations</span></li><!-- src: atom 232 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Campaign Creative // Design & Development</span></li><!-- src: atom 233 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Weekly Strategy Session</span></li><!-- src: atom 234 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Review Channel Management</span></li><!-- src: atom 235 -->
+                  <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Fully Managed Service</span></li><!-- src: atom 236 -->
+                </ul>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="hz-plans">
+        <article class="hz-plan" data-reveal>
+          <p class="hz-badge">Most Popular!</p>
+          <div class="hz-panel">
+            <div class="hz-id">
+              <h3 class="hz-name">MARKETING <em>Pro</em></h3>
+              <p class="hz-sub">Guaranteed results</p>
+              <p class="hz-price">$4,200<span class="hz-unit">/Mo</span></p>
+              <p class="hz-add">+$3,000/Additional Location</p>
+            </div>
+            <ul class="hz-list">
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">SEO Pro</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">WEB Plus</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">Web Graphics</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting & Attribution</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology & Integrations Support</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+            </ul>
+          </div>
+          <ul class="hz-extras" aria-label="Added to the package">
+          <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          </ul>
+        </article>
+        <article class="hz-plan hz-plan--full" data-reveal>
+          <p class="hz-badge">Full Suite</p>
+          <div class="hz-panel">
+            <div class="hz-id">
+              <h3 class="hz-name">ENTERPRISE</h3>
+              <p class="hz-sub">Guaranteed Results + Boost your retention</p>
+              <p class="hz-price">$6,500<span class="hz-unit">/Mo</span></p>
+              <p class="hz-add">+$3,000/Additional Location</p>
+            </div>
+            <ul class="hz-list">
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">SEO Pro</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">WEB Pro</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">CREATIVE Pro</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">OUTREACH Email</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">OUTREACH SMS</em> INCLUDED</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Review Management</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting & Attribution</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology & Integrations Support</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+            </ul>
+          </div>
+          <ul class="hz-extras" aria-label="Added to the package">
+          <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+          </ul>
+        </article>
+        </div>
+        <div class="hz-cta">
+          <a class="btn btn--solid" href="contact.html">Book A Demo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===========================================================================
+     SECTION 5b . CASE STUDIES . KIND: FANNED CARD STACK
+     Placed between the plans and the breath because that is where the SOURCE runs
+     it. Owner picked this layout ("D") from four built alternatives at
+     _design/_options/case-studies-layouts.html.
+     ⚠ O4 IS STILL OPEN: the four marks carry alt="" and NO client is named anywhere
+     in this markup, because the per-client NAME claims are unconfirmed owner-data.
+     The right to DISPLAY was confirmed 2026-08-12; the right to NAME was not.
+     Do not add client names here without an owner sign-off and a ledger entry.
+     ========================================================================== -->
+<!-- pick: PROOF-SECTIONS.md #4 Case-study - metric-led card | considered: #5,#1,#3 | why: this section has exactly four proofs and each one is nothing but a pair of measured lifts against an unnamed client mark, which is #4's whole definition - the card leads with the metric and the narrative is the metric; the fan only changes how the four are SEATED, it does not change what a card is. #4 is also the only entry that survives the open O4 restriction: the right to DISPLAY the marks was confirmed 2026-08-12 but the right to NAME the clients was not, so the card cannot carry a client name and a metric-led card is the one shape that does not need one. #5 showcase image plus result split was the closest rival and is rejected because it wants a photograph per case and there is none - only a logo plate - so the image half would be an empty frame or a repeat of the mark. #1 testimonials cards grid is refused outright: it asks for attributed quotes, and the fabricated-testimonial rule on this build permits only the eight real quotes that live on the two ad landers, none of which belongs to these four. #3 testimonials carousel is on the owner's forbidden-motion list and would additionally hide three of the four proofs behind an interaction, which is the exact defect the pricing pick was written to avoid. -->
+<section class="mc-section surface-dark" id="case-studies">
+  <!-- THE LOWER-GROUND HEX PLANE, window 1 of 2. The hero's isometric prism
+       field, continued under this section AND the footer. This is not a copy of
+       a field the footer also has: hex-field.js renders ONE plate for the union
+       of both host boxes and gives each host an aperture onto it, so there is a
+       single sweep group and a single pointer circle in the document. The seam
+       is structural -- there is no per-window value a later edit could set
+       differently. Both hosts must keep the SAME data-hexfield value; that
+       string is the whole seam contract.
+
+       data-hex-clear is NOT decoration: it anchors a soft elliptical clearing
+       under the head. Without it the gradient turn measures 2.73:1 at 1440,
+       under the 3.0 large-text floor. With it, 3.18:1. -->
+  <!-- G-DOM 2026-08-18: same treatment as the benchmarks lid, and here the
+       container--plane guarantee is LOAD BEARING rather than tidy. #case-studies carries
+       its own rule `#case-studies > .container{position:relative;z-index:1}`, so a plain
+       .container wrapper would become this window's offsetParent -- and the wrapper is
+       zero-height (its only child is absolute), which would collapse the plane to nothing.
+       .container--plane out-specifies that rule back to position:static/z-index:auto, so
+       the window keeps measuring itself against the section exactly as before
+       (measured: offsetParent stays #case-studies, rect unchanged at 1440 and 390). -->
+  <div class="container container--full container--plane">
+    <div class="row">
+      <div class="col">
+        <div class="mc-hexfield" data-hexfield="lower-ground" data-hex-clear=".cs-fan__head" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <!-- G-DOM 2026-08-18: the fan is an OBJECT, so it belongs in a .col, not directly
+         under the .container. .col carries min-width:0 so the fan's overflow-x:clip
+         box measures the same width it did as a direct child. -->
+    <div class="row">
+      <div class="col">
+    <div class="cs-fan">
+        <div class="cs-fan__inner">
+          <div class="cs-fan__head">
+            <h2 class="mc-head">Case <span class="mc-head__turn">studies</span></h2>
+            <p class="cs-fan__standfirst">Long-term relationships built on trust, transparency, & results since 2012</p>
+            <p class="cs-fan__lede">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+          </div>
+        </div>
+
+        <div class="cs-fan__stage">
+          <ol class="cs-fan__hand" role="list">
+
+            <li class="cs-fan__seat cs-fan__seat--1">
+              <article class="cs-fan__card cs-fan__card--v1" tabindex="0" aria-label="Case study 1 of 4">
+                <p class="cs-fan__idx" aria-hidden="true">01</p>
+                <span class="cs-fan__plate">
+                  <img class="cs-fan__logo" src="../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+                </span>
+                <ul class="cs-fan__figs" role="list">
+                  <li class="cs-fan__fig cs-fan__fig--lead">350% Direction Request Increase</li>
+                  <li class="cs-fan__fig cs-fan__fig--sub">700% Sales Increase</li>
+                </ul>
+              </article>
+            </li>
+
+            <li class="cs-fan__seat cs-fan__seat--2">
+              <article class="cs-fan__card cs-fan__card--dark" tabindex="0" aria-label="Case study 2 of 4">
+                <p class="cs-fan__idx" aria-hidden="true">02</p>
+                <span class="cs-fan__plate">
+                  <img class="cs-fan__logo" src="../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+                </span>
+                <ul class="cs-fan__figs" role="list">
+                  <li class="cs-fan__fig cs-fan__fig--lead">300% Phone Call Increase</li>
+                  <li class="cs-fan__fig cs-fan__fig--sub">2x New Customers Daily</li>
+                </ul>
+              </article>
+            </li>
+
+            <li class="cs-fan__seat cs-fan__seat--3">
+              <article class="cs-fan__card cs-fan__card--v2" tabindex="0" aria-label="Case study 3 of 4">
+                <p class="cs-fan__idx" aria-hidden="true">03</p>
+                <span class="cs-fan__plate">
+                  <img class="cs-fan__logo" src="../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+                </span>
+                <ul class="cs-fan__figs" role="list">
+                  <li class="cs-fan__fig cs-fan__fig--lead">480% Direction Request Increase</li>
+                  <li class="cs-fan__fig cs-fan__fig--sub">110% Sales Increase</li>
+                </ul>
+              </article>
+            </li>
+
+            <li class="cs-fan__seat cs-fan__seat--4">
+              <article class="cs-fan__card cs-fan__card--v3" tabindex="0" aria-label="Case study 4 of 4">
+                <p class="cs-fan__idx" aria-hidden="true">04</p>
+                <span class="cs-fan__plate">
+                  <img class="cs-fan__logo" src="../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+                </span>
+                <ul class="cs-fan__figs" role="list">
+                  <li class="cs-fan__fig cs-fan__fig--lead">180% Website Visits Increase</li>
+                  <li class="cs-fan__fig cs-fan__fig--sub">161% Direction Request Increase</li>
+                </ul>
+              </article>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE LOWER-GROUND HEX PLANE, window 2 of 2 -- the footer's aperture.
+
+     It sits HERE, inside <main>, rather than inside <footer>, and that is a
+     deliberate correction rather than a convenience. Everything outside <main> is
+     the LOCKED CHROME BLOCK: it is carried by _design/_chrome-block.html and
+     stamped into all 27 pages. A host placed in the footer there would hand a hex
+     plane to every page on the site, including the 26 with no case-studies
+     section, where it would mount as a lone window for no reason. This plane is a
+     HOME-PAGE treatment, so it belongs to the home page's markup and must not
+     propagate.
+
+     data-hexfield-cover makes this window borrow .site-footer's box on every
+     measure, so the field's union still spans case-studies + footer exactly as if
+     the host were inside the footer -- one plate, one sweep, one pointer circle,
+     the same continuous plane across the joint. The footer element itself is
+     never touched. Absolutely positioned, so it costs no layout.
+
+     The footer CARD stays opaque and floats ON the plane (owner: "can we have the
+     footer card sit over them?"), so the hexagons read in the footer's top band
+     and side gutters and the card's own copy keeps its full contrast. -->
+<!-- The --cover MODIFIER CLASS WAS DROPPED (2026-08-18, G-ORPHAN). It was defined in
+     no sheet and read by no script: hex-field.js keys the cover behaviour entirely off
+     the data-hexfield-cover ATTRIBUTE below, which is unchanged. A class that promises
+     styling nothing supplies is exactly what the orphan gate exists to catch, so it was
+     removed rather than given invented CSS. -->
+<div class="mc-hexfield" data-hexfield="lower-ground"
+     data-hexfield-cover=".site-footer" aria-hidden="true"></div>
+
+<!-- The plane carries its own behaviour, INSIDE <main>, for the same reason the
+     marquee and the divider do: every byte outside <main> is the locked chrome.
+     No defer and no DOMContentLoaded wrapper -- the module measures after window
+     LOAD, because the field's height is the sum of two real page regions and is
+     not final until webfonts and the footer imagery have settled. -->
+<script src="../_design/hex-field.js"></script>
+
+<!-- ==========================================================================
+     SECTION 6 . THE BREATH . KIND: BAND (full bleed event)
+     STAYS EMPTY, and that is now a decision rather than an omission. The body's
+     entire full-bleed-band budget is spent: "Increase Sales" opens #results and
+     "OUR SUITE OUR SUITE OUR SUITE" opens #pricing. Both are real corpus atoms
+     (18/19 and 71). There is no third repeated-phrase atom on index, and a band
+     with invented copy in it would break content law to fill a slot nobody asked
+     for. The slot is left standing because the composition reserved it, not
+     because something is still owed.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     SECTION 7 . THE CLOSING ASK . KIND: MEASURE
+     BUILT 2026-08-18. This slot was reserved by the approved composition and left
+     empty, and its emptiness is what made the page's hardest content problem
+     invisible: the SECTION 4 note above says the PROMISE band was removed at the
+     owner's direction on the understanding that "the claim itself survives ...
+     carried by #close". #close did not exist. So the attested claim was not on the
+     page at all, and three required atoms went with it (0052 / 0069 / 0070).
+
+     WHAT THIS IS AND IS NOT. It is NOT the removed PROMISE band coming back: that
+     was a mid-page full-bleed band between #results and #benchmarks, and it stays
+     gone. This is the closing ask the composition always reserved, carrying the
+     claim the removal note said #close would carry.
+
+     THE RE-HOMED EYEBROW. The SECTION 4 note recorded "only with dispenza"
+     (D-SRC-INDEX-0070, atom 52) as retired-by-owner because "#close already
+     carries its own eyebrow (PERFORMANCE GUARANTEE), so there was no honest place
+     to re-home it". That reasoning was about a #close that did not exist. The one
+     being built here has no eyebrow yet, and atom 52 is the source's OWN eyebrow
+     for exactly this claim -- it sits directly above atoms 53/54 in index.html. So
+     it is re-homed rather than retired, which also settles the ledger entry the
+     SECTION 4 note listed as still owed: nothing was retired, so nothing needs a
+     RETIRED-BY-OWNER row.
+
+     THE CONDITION IS CROSS-PAGE, AND DECLARED AS SUCH.
+     client-rules.capabilityTruth.guarantee: "REAL and conditional: top-3 local
+     search or you do not pay. Always state the condition." index's own 295 atoms
+     carry the guarantee but NOT the condition (verified: no "top 3" / "do not pay"
+     / "won't be charged" anywhere in _source/atoms/index.json). The condition
+     below is therefore quoted VERBATIM from a sibling page in the same clone:
+       _source/atoms/performance-marketing.json, body atom 10
+       (clone source: Code/clones/Dispenza/performance-marketing.html)
+     Not one character is paraphrased, and nothing is invented to bridge it. The
+     same sentence in a longer form also exists at how-it-works.json atom 4; the
+     performance-marketing wording was chosen because it is the two-sentence form,
+     which states the promise and its condition without a third clause of
+     self-description.
+
+     HOW block-banned-content IS SATISFIED. overclaim.guarantee_unconditional.banned
+     lists the literal string "Guarantees Results", and this section states it. The
+     gate does not try to decide by substring whether the condition is present -- the
+     rule's wording ("top-3 local search or you do not pay") and the clone's wording
+     are not the same sentence, and a fuzzy match there would be a gate that guesses.
+     It requires the requirement to be DISCHARGED EXPLICITLY instead, by an
+     `overclaim:<topic>` declaration comment on the page. That declaration is the next
+     comment below, and it names the condition verbatim and where it came from.
+
+     (Recorded because it changed under this work: earlier in the same session the
+     gate blocked this section 3/3 WITH the condition already present, because it
+     tested only for the phrase and had no discharge path. The hook was revised at
+     17:23 to add the declaration escape. The note that used to sit here said the red
+     was unavoidable; it was true when written and is not true now, so it is replaced
+     rather than left standing.)
+     ========================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #41 Closing CTA (final action) | considered: #40,#8,#33 | why: the page's last move has to be the single claim the owner personally attested plus the condition that makes it credible plus one way to act on it, and #41 is the entry defined as exactly that - a final action with nothing after it but the frame - which is also the only shape that lets the guarantee be the last thing read rather than one item in a band of several. #40 pre-footer CTA band was the closest rival and is rejected because a band wants to sit tight against the footer, and the footer here is a floating card over a hex plane, so a band would either fight that card's shadow or force the plane to end early. #8 manifesto belief statement is the right REGISTER for a guarantee but it is a creed with no action, and this is the page's conversion moment, not its philosophy. #33 custom-quote driver actively contradicts the wedge this page is built on - every figure is already printed nine rungs and two plans up the page, so asking the visitor to request a quote would retract the one thing the site does that eighteen crawled competitors do not. -->
+<section class="mc-section surface-dark" id="close">
+<!-- overclaim:guarantee_unconditional  THE REQUIREMENT, DISCHARGED IN THE OPEN.
+     client-rules.capabilityTruth.guarantee: "REAL and conditional: top-3 local search
+     or you do not pay. Always state the condition." The condition is stated on this page,
+     verbatim, in the paragraph directly under the claim:
+       "We are dedicated to helping your dispensary secure a top 3 ranking in local search
+        results on Google.com. If we don't deliver on this promise, you won't be charged
+        for our services."
+     SOURCED FROM: _source/atoms/performance-marketing.json, body atom 10
+     (clone file Code/clones/Dispenza/performance-marketing.html). CROSS-PAGE, and declared
+     as such: index's own 295 atoms carry the guarantee but not the condition -- grepped, no
+     "top 3" / "do not pay" / "won't be charged" anywhere in _source/atoms/index.json -- so
+     the wording is quoted from a sibling page of the SAME clone rather than written here.
+     Not one word is paraphrased and nothing is invented to bridge the two sentences.
+     The claim itself is owner-attested: overclaim.guarantee_unconditional `why` records the
+     P6 resolution, and attested_claims carries "Only Marketing Agency In Cannabis That
+     Guarantees Results", D16, attested_by carl.celino@dispenza.com 2026-08-11. -->
+  <div class="container">
+    <div class="row">
+      <div class="col col--measure">
+        <p class="mc-eyebrow" data-reveal>only with dispenza</p><!-- src: D-SRC-INDEX-0070 / index atom 52 -->
+        <h2 class="mc-head" data-reveal>Only Marketing Agency In Cannabis That <span class="mc-head__turn">Guarantees Results</span></h2><!-- src: D-SRC-INDEX-0069 + D-SRC-INDEX-0052 / index atoms 53, 54 -->
+        <p class="mc-body" data-reveal>We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services.</p><!-- src: performance-marketing atom 10 (CROSS-PAGE, verbatim) -->
+        <div class="mc-actions" data-reveal>
+          <a class="btn btn--solid" href="contact.html">Book demo</a><!-- src: index atom 283 "BOOK DEMO" -->
+          <a class="btn btn--ghost" href="how-it-works.html">Learn How</a><!-- src: D-SRC-INDEX / index atom 55 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+</body>
+</html>

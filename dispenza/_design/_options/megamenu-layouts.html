@@ -1,0 +1,2099 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dispenza — Services mega menu: layout options</title>
+
+<!-- HONEST COMPARISON, NOT A MOCKUP.
+     Every option below links the REAL locked token sheet and the REAL chrome sheet, and is staged at
+     the REAL dock width (--ds-container-max: 1120px, dispenza-tokens.css:204 / dispenza-chrome.css:65).
+     An earlier brief mis-stated the panel as ~1830px wide; two options were argued at that width and
+     their width-dependent claims are flagged in the scoring below. Nothing here is meant to survive —
+     whichever option wins gets rebuilt into the locked chrome sheet properly. -->
+<link rel="stylesheet" href="../dispenza-tokens.css">
+<link rel="stylesheet" href="../dispenza-fonts.css">
+<link rel="stylesheet" href="../_tournament/foundation-1-measured-column/dispenza-structural.css">
+<link rel="stylesheet" href="../dispenza-chrome.css">
+
+<style>
+  body{
+    margin:0; background:var(--ds-bg,#0e0e11); color:var(--ds-ink-on-dark,#fff);
+    font-family:var(--ds-font-body,system-ui,sans-serif);
+    padding:var(--ds-space-lg,48px) var(--ds-space-md,32px) 96px;
+  }
+  .wrap{max-width:1280px;margin:0 auto}
+  .lede{max-width:70ch}
+  .lede h1{font-family:var(--ds-font-display,inherit);font-size:clamp(28px,3vw,40px);margin:8px 0 16px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink,#ae76ef)}
+  .lede p{color:var(--ds-ink-soft,#a8a8b3);line-height:1.6}
+  .opt{margin:72px 0 0;padding-top:32px;border-top:1px solid var(--ds-hairline,rgba(255,255,255,.12))}
+  .opt__head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .opt__n{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ds-accent-ink,#ae76ef)}
+  .opt__name{font-family:var(--ds-font-display,inherit);font-size:clamp(20px,2vw,27px);margin:0}
+  .opt__why{color:var(--ds-ink-soft,#a8a8b3);max-width:80ch;line-height:1.6;margin:10px 0 22px}
+  /* the stage reproduces the real dock: same max-width the shipping rail uses */
+  .opt__stage{background:rgba(255,255,255,.02);border:1px dashed var(--ds-hairline,rgba(255,255,255,.12));
+              border-radius:12px;padding:20px;overflow-x:auto}
+  .stage__dock{max-width:var(--ds-container-max,1120px);margin:0 auto;position:relative}
+  .opt__meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:20px}
+  .opt__meta h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ds-accent-ink,#ae76ef);margin:0 0 6px}
+  .opt__meta p{margin:0;color:var(--ds-ink-soft,#a8a8b3);line-height:1.55;font-size:14px}
+  .verdict{margin:80px 0 0;padding:28px;border:1px solid var(--ds-accent,#8d3fe8);border-radius:14px;background:rgba(141,63,232,.06)}
+  .verdict p{color:var(--ds-ink-soft,#c9c9d3);line-height:1.6;max-width:90ch}
+  .verdict code{background:rgba(255,255,255,.07);padding:1px 5px;border-radius:4px;font-size:.9em}
+  table.score{border-collapse:collapse;margin:18px 0;width:100%;font-size:14px}
+  table.score th,table.score td{border:1px solid var(--ds-hairline,rgba(255,255,255,.12));padding:8px 10px;text-align:left}
+  table.score th{color:var(--ds-accent-ink,#ae76ef);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 0}
+  .toc a{color:var(--ds-accent-ink,#ae76ef);text-decoration:none;border:1px solid var(--ds-hairline,rgba(255,255,255,.14));
+         border-radius:999px;padding:6px 14px;font-size:13px}
+  .toc a:hover,.toc a:focus-visible{border-color:var(--ds-accent,#8d3fe8);outline:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="lede">
+    <p class="eyebrow">Services mega menu — layout options</p>
+    <h1>Six ways to lay out the suite</h1>
+    <p>
+      Every option is built from the real tokens and the real chrome sheet and staged at the
+      <strong>real dock width of 1120px</strong> — so what you see is what would ship, not a picture of it.
+      The current panel is a two-column list of four; the complaint is that it reads as mostly empty space.
+      Each option keeps the same eight services and the same words, and changes only the arrangement.
+    </p>
+    <nav class="toc" aria-label="Options">
+      <a href="#opt-1">1. Four-Column Index</a>
+      <a href="#opt-2">2. Semantic clusters — three labelled columns</a>
+      <a href="#opt-3">3. List + standing panel</a>
+      <a href="#opt-4">4. Featured + List</a>
+      <a href="#opt-5">5. Numbered index 01–08</a>
+      <a href="#opt-6">6. Master + Detail Rail</a>
+      <a href="#verdict">Scoring</a>
+    </nav>
+  </header>
+
+
+<section class="opt" id="opt-1">
+  <div class="opt__head">
+    <span class="opt__n">Option 1</span>
+    <h2 class="opt__name">Four-Column Index</h2>
+  </div>
+  <p class="opt__why">The control spends 465px of height on eight items and still leaves each 520px column half empty, so the eye has to travel down four times to see the suite. This is the same eight items as a ruled 4x2 index — 257px tall at the real 1120px dock width, 221px at 1830px — one horizontal sweep, then one more. Hairline column rules (the same --ds-hairline as the head divider) replace the empty gutters with structure, and a 16px numeral gutter gives the scan an anchor per cell; descriptions stay fully visible at every width, only dropped a step to 12.5px so the titles carry the read.</p>
+  <div class="opt__stage" role="group" aria-label="Four-Column Index preview">
+    <div class="stage__dock">
+<div class="rail-panel rail-panel--services opt-four-col-index" id="panel-services-four-col-index" role="region" aria-label="Services">
+
+  <div class="panel__head">
+    <span class="panel__eyebrow">Our suite</span>
+    <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+  </div>
+
+  <div class="panel__grid fci__grid">
+
+    <a class="panel__item" href="performance-marketing.html">
+      <span class="fci__num" aria-hidden="true">01</span>
+      <span class="panel__title">Performance marketing</span>
+      <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+    </a>
+
+    <a class="panel__item" href="branding-graphic-design.html">
+      <span class="fci__num" aria-hidden="true">02</span>
+      <span class="panel__title">Brand and package design</span>
+      <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+    </a>
+
+    <a class="panel__item" href="webdesign-development.html">
+      <span class="fci__num" aria-hidden="true">03</span>
+      <span class="panel__title">Web design and development</span>
+      <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+    </a>
+
+    <a class="panel__item" href="ads-design.html">
+      <span class="fci__num" aria-hidden="true">04</span>
+      <span class="panel__title">Advertisement design</span>
+      <span class="panel__desc">Creative sized for every placement you actually run.</span>
+    </a>
+
+    <a class="panel__item" href="conversion-rate-optimization.html">
+      <span class="fci__num" aria-hidden="true">05</span>
+      <span class="panel__title">Conversion rate optimization</span>
+      <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+    </a>
+
+    <a class="panel__item" href="integrations.html">
+      <span class="fci__num" aria-hidden="true">06</span>
+      <span class="panel__title">Integrations</span>
+      <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+    </a>
+
+    <a class="panel__item" href="consulting.html">
+      <span class="fci__num" aria-hidden="true">07</span>
+      <span class="panel__title">Consulting</span>
+      <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+    </a>
+
+    <a class="panel__item" href="reports.html">
+      <span class="fci__num" aria-hidden="true">08</span>
+      <span class="panel__title">Reports</span>
+      <span class="panel__desc">What ran, what it cost, what it returned.</span>
+    </a>
+
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="opt__meta">
+    <div><h3>Trade-offs</h3><p>Honest list, all of it measured at the REAL panel width (--ds-container-max is 1120px in dispenza-tokens.css — nothing in the build overrides it to 1830, so the brief's "~1830px" only happens on an ultra-wide dock):
+
+1. The descriptions get smaller. 13px to 12.5px, and at 1120px they wrap to two lines in a 219px column. They pass contrast and nothing is hidden, but if the owner wants those lines to sell, four columns is the wrong direction — this option treats them as confirmation, not copy.
+2. One title fits by 3px. "Web design and development" measures 216px in a 219px column at 1120px with Montserrat loaded. Any copy edit, weight bump or font substitution tips it to two lines. Subgrid keeps the whole row's descriptions on one baseline when that happens, so it degrades tidily, but the row grows ~17px.
+3. It is denser on purpose: 465px tall to 257px at 1120px (-45%). Less air is the point, but it is less air — the control breathes more and a reader who wants to linger will prefer it.
+4. Inverted at 1830px: at that width nothing wraps (221px tall, every item one line) and each column's text fills only about half its column, so the right side of every column is empty. The rules give that space structure; they do not fill it.
+5. The 01-08 numerals imply a sequence or a ranking that does not exist. They are an index device. If the owner reads "01" as the flagship service, the option invited that misread and should lose the numerals.
+6. Weaker click affordance than the control. I removed the -2px lift deliberately — a bouncing cell inside a ruled grid breaks the rules' alignment — so hover is a quiet violet wash plus a hairline ring instead of a card that comes forward.
+7. Growth is capped. Four columns at 1120px is the ceiling; a ninth service means three rows or smaller type. The control's 2x4 has more slack.
+8. Two modern CSS features carry the polish: subgrid (cross-cell baseline alignment) and container queries (the column ladder follows the panel, not the viewport). Both verified working in the render; both have declared fallbacks (auto rows; viewport media queries under @supports not), so an old engine gets a working but slightly ragged index rather than a broken one.
+9. Integration note: the root id is panel-services-four-col-index so six options can share one comparison page. On adoption it must be renamed back to panel-services to match the rail trigger's data-panel/aria-controls. The .rail-dock rules already restore the flyout positioning, hidden/is-open states and the &lt;=1023px hide, so no other change is needed.
+
+Verified this turn, headless Chrome with the real dispenza-tokens.css / dispenza-fonts.css / dispenza-chrome.css loaded: 1120x257 and 1830x221 (control 1120x465); 4/3/2/1 column ladder at panel widths 1830/1120/976/720/327 in a single 1920 viewport with the rule pattern correct at each; descriptions share one baseline per row at every width; 8 tabbable &lt;a&gt; in source order 1-8; no document horizontal overflow at 1920/1440/1180/1024/860/768/560/375; min cell height 68px; panel radius resolves to 14px and the hover/focus fill to 7px. Working files: /private/tmp/claude-501/-Users-carlcelino-OSOFT/a00f897b-242b-4317-b0eb-3262b6af7f29/scratchpad/fci/option.html and /option.css, proof renders shot-v2-1440.png, shot-1830.png, shot-cq.png.</p></div>
+    <div><h3>Contrast</h3><p>Ground is var(--ds-bg-surface-2) #222429, the same plane the current panel uses. Measured in-browser with getComputedStyle + WCAG relative luminance, not estimated. Resting state: title var(--ds-ink-heading) on ground = 15.53:1; description var(--ds-ink-soft) on ground = 5.87:1 (the token's own documented plane-2 figure); head note, same pair, 5.87:1; eyebrow and the 01-08 numerals var(--ds-accent-ink) on ground = 4.91:1. Hover/focus fill is var(--ds-accent-soft) rgba(141,63,232,.10), which composites over the ground to rgb(45,39,60): title 14.31:1, description 5.41:1 — both still clear 4.5:1, which is why the fill is a 10% wash and not a solid violet. The numeral flips to var(--ds-ink-heading) on hover/focus (14.31:1) rather than staying at accent-ink's 4.53:1 on that lighter ground. Focus ring is 2px var(--ds-accent-ink) at 4.91:1 against the ground, well over the 3:1 non-text floor. No colour in the option is a literal — grep for hex/rgb()/hsl() across the CSS returns nothing.</p></div>
+  </div>
+  <style>
+/* =========================================================================
+   OPTION — FOUR-COLUMN INDEX  (root class: .opt-four-col-index)
+   Four columns x two rows. Ruled like a printed index so the eye crosses
+   once and has all eight. Every colour, space, radius and duration is a
+   --ds-* token. Nothing is hidden behind hover.
+   ========================================================================= */
+
+/* Root. Declared at .rail-panel.opt-four-col-index (0,2,0) so it wins over
+   the carrier's .rail-panel rules — including the <=1023px display:none —
+   and still renders correctly on a page that never loads dispenza-chrome.css. */
+.rail-panel.opt-four-col-index{
+  display:block;
+  position:relative; inset:auto;
+  width:100%;
+  opacity:1; visibility:visible; transform:none;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-md);
+  font-family:var(--ds-font-body);
+  container-type:inline-size;
+  container-name:fci;
+}
+
+/* Drop-in behaviour. Inside the real rail dock the option goes back to being a
+   floating flyout on the carrier's own timing; on a flat comparison page the
+   rule above keeps it visible in the flow. Nothing else changes. */
+.rail-dock .rail-panel.opt-four-col-index{
+  position:absolute; top:calc(100% + var(--ds-space-xs)); left:0; right:0; width:auto;
+  opacity:0; visibility:hidden; transform:translateY(-6px);
+  transition:opacity var(--ds-dur) var(--ds-ease),
+             transform var(--ds-dur) var(--ds-ease),
+             visibility var(--ds-dur) var(--ds-ease);
+}
+.rail-dock .rail-panel.opt-four-col-index.is-open{opacity:1;visibility:visible;transform:translateY(0)}
+@media (max-width:1023px){
+  .rail-dock .rail-panel.opt-four-col-index{display:none}
+}
+
+/* HEAD — one compact line. Half the vertical spend of the control's head. */
+.opt-four-col-index .panel__head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-xs);
+  margin-bottom:var(--ds-space-xs);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-four-col-index .panel__eyebrow{
+  font-family:var(--ds-font-display); font-size:11px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ds-accent-ink); white-space:nowrap;
+}
+.opt-four-col-index .panel__note{
+  font-size:12.5px; line-height:1.4; color:var(--ds-ink-soft); text-align:right;
+}
+
+/* GRID — 4 x 2, zero gap. The rules ARE the gap. */
+.opt-four-col-index .fci__grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+}
+
+/* CELL. No radius here: the radius lives on the hover/focus fill so the
+   column rules stay dead straight.
+   Each cell spans two shared rows and subgrids them, so every title in a row
+   sits on one baseline and every description starts on one baseline — even
+   when a title wraps to two lines. Browsers without subgrid fall back to the
+   cell's own auto rows: slightly ragged, never broken. */
+.opt-four-col-index .panel__item{
+  position:relative;
+  display:grid;
+  grid-template-columns:calc(var(--ds-space-xs) * 2) minmax(0,1fr);
+  grid-row:span 2;
+  grid-template-rows:subgrid;
+  column-gap:var(--ds-space-2xs);
+  align-items:start;
+  padding:var(--ds-space-sm);
+  border:0;
+  border-right:1px solid var(--ds-hairline);
+  border-radius:0;
+  background:transparent;
+  text-decoration:none;
+  transform:none;
+  transition:none;
+}
+.opt-four-col-index .panel__item:nth-child(4n){border-right:0}
+.opt-four-col-index .panel__item:nth-child(n+5){border-top:1px solid var(--ds-hairline)}
+/* Neutralises the carrier's lift-on-hover at a specificity that wins whatever
+   order the two stylesheets load in. The index must not bounce. */
+.opt-four-col-index .panel__item:hover{
+  transform:none; background:transparent; border-color:var(--ds-hairline);
+}
+
+/* The fill. Inset by 2px so it never paints over a rule. */
+.opt-four-col-index .panel__item::before{
+  content:""; position:absolute; inset:2px; z-index:0;
+  border-radius:var(--ds-r-control);
+  background:transparent;
+  box-shadow:none;
+  transition:background-color var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-four-col-index .panel__item:hover::before{
+  background:var(--ds-accent-soft);
+  box-shadow:inset 0 0 0 1px var(--ds-line);
+}
+/* Visible keyboard ring, same corner language, drawn on the same fill.
+   The transparent outline is the forced-colors fallback. */
+.opt-four-col-index .panel__item:focus-visible{outline:2px solid transparent; outline-offset:2px}
+.opt-four-col-index .panel__item:focus-visible::before{
+  background:var(--ds-accent-soft);
+  box-shadow:0 0 0 2px var(--ds-accent-ink);
+}
+
+/* Index numeral. Decorative ordering only — aria-hidden in the markup. */
+.opt-four-col-index .fci__num{
+  position:relative; z-index:1;
+  grid-column:1; grid-row:1;
+  font-family:var(--ds-font-display); font-size:10px; font-weight:700;
+  letter-spacing:.08em; line-height:1.6;
+  color:var(--ds-accent-ink);
+  font-variant-numeric:tabular-nums;
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-four-col-index .panel__item:hover .fci__num,
+.opt-four-col-index .panel__item:focus-visible .fci__num{color:var(--ds-ink-heading)}
+
+/* TITLE + DESC. The desc keeps every word — it is only dropped a step in
+   size and weight so the title carries the scan. */
+.opt-four-col-index .panel__title{
+  position:relative; z-index:1;
+  grid-column:2; grid-row:1;
+  display:block; margin:0;
+  font-family:var(--ds-font-display); font-size:14px; font-weight:600;
+  line-height:1.25; letter-spacing:-.005em;
+  color:var(--ds-ink-heading);
+  text-wrap:balance;
+}
+.opt-four-col-index .panel__desc{
+  position:relative; z-index:1;
+  grid-column:2; grid-row:2;
+  display:block; margin-top:var(--ds-space-2xs);
+  font-size:12.5px; line-height:1.45;
+  color:var(--ds-ink-soft);
+}
+
+/* RESPONSIVE. Driven by the PANEL's own width, not the viewport, so the option
+   is correct wherever it is dropped — full-width flyout or a narrow comparison
+   column. The rule pattern is re-stated per column count; the :nth-child(n)
+   reset carries the same specificity as the rules it clears, so source order
+   decides and the result is deterministic. */
+@container fci (max-width:999px){
+  .opt-four-col-index .fci__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .opt-four-col-index .panel__item:nth-child(n){
+    border-right:1px solid var(--ds-hairline); border-top:0;
+  }
+  .opt-four-col-index .panel__item:nth-child(3n){border-right:0}
+  .opt-four-col-index .panel__item:nth-child(n+4){border-top:1px solid var(--ds-hairline)}
+}
+@container fci (max-width:759px){
+  .opt-four-col-index .fci__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .opt-four-col-index .panel__item:nth-child(n){
+    border-right:1px solid var(--ds-hairline); border-top:0;
+  }
+  .opt-four-col-index .panel__item:nth-child(2n){border-right:0}
+  .opt-four-col-index .panel__item:nth-child(n+3){border-top:1px solid var(--ds-hairline)}
+  .opt-four-col-index .panel__head{flex-direction:column; align-items:flex-start; gap:var(--ds-space-2xs)}
+  .opt-four-col-index .panel__note{text-align:left}
+}
+@container fci (max-width:459px){
+  .opt-four-col-index .fci__grid{grid-template-columns:minmax(0,1fr)}
+  .opt-four-col-index .panel__item:nth-child(n){border-right:0; border-top:0}
+  .opt-four-col-index .panel__item:nth-child(n+2){border-top:1px solid var(--ds-hairline)}
+}
+/* Fallback for engines without container queries: the same ladder off the
+   viewport, which in the real rail tracks the panel width anyway. */
+@supports not (container-type:inline-size){
+  @media (max-width:1180px){
+    .opt-four-col-index .fci__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .opt-four-col-index .panel__item:nth-child(n){
+      border-right:1px solid var(--ds-hairline); border-top:0;
+    }
+    .opt-four-col-index .panel__item:nth-child(3n){border-right:0}
+    .opt-four-col-index .panel__item:nth-child(n+4){border-top:1px solid var(--ds-hairline)}
+  }
+  @media (max-width:860px){
+    .opt-four-col-index .fci__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .opt-four-col-index .panel__item:nth-child(n){
+      border-right:1px solid var(--ds-hairline); border-top:0;
+    }
+    .opt-four-col-index .panel__item:nth-child(2n){border-right:0}
+    .opt-four-col-index .panel__item:nth-child(n+3){border-top:1px solid var(--ds-hairline)}
+    .opt-four-col-index .panel__head{flex-direction:column; align-items:flex-start; gap:var(--ds-space-2xs)}
+    .opt-four-col-index .panel__note{text-align:left}
+  }
+  @media (max-width:560px){
+    .opt-four-col-index .fci__grid{grid-template-columns:minmax(0,1fr)}
+    .opt-four-col-index .panel__item:nth-child(n){border-right:0; border-top:0}
+    .opt-four-col-index .panel__item:nth-child(n+2){border-top:1px solid var(--ds-hairline)}
+  }
+}
+
+/* Touch and coarse pointers get the same fill on press — nothing is
+   hover-only, because nothing is hidden. */
+@media (hover:none){
+  .opt-four-col-index .panel__item:active::before{background:var(--ds-accent-soft)}
+}
+@media (prefers-reduced-motion:reduce){
+  .opt-four-col-index .panel__item::before,
+  .opt-four-col-index .fci__num{transition:none}
+}
+  </style>
+</section>
+
+<section class="opt" id="opt-2">
+  <div class="opt__head">
+    <span class="opt__n">Option 2</span>
+    <h2 class="opt__name">Semantic clusters — three labelled columns</h2>
+  </div>
+  <p class="opt__why">The flat 2x4 makes the buyer read all eight titles to find the one that matches their problem; this splits them into three labelled clusters drawn from the copy itself — "Bring in demand" (Performance marketing "paid and organic demand", Advertisement design "creative sized for every placement you actually run", CRO "turning the traffic you already pay for into orders" — all three act on the traffic flow), "Build what you own" (Brand and package design "identity, packaging and in-store collateral", Web design "menu-connected sites", Integrations "menu, POS and loyalty systems" — all three are durable owned assets), and "Know what worked" (Reports "what ran, what it cost, what it returned", Consulting "operator-level advice when you run the marketing yourself" — evidence and judgement, not execution). Measured against the control at 1830px: panel height drops 465px → 373px and each item narrows 854px → 575px, so the third column also pulls the horizontal axis harder and cuts the cavernous line lengths. The existing right-hand note moves to the foot of the third cluster, where the pricing sentence semantically belongs and where it anchors the shorter column.</p>
+  <div class="opt__stage" role="group" aria-label="Semantic clusters — three labelled columns preview">
+    <div class="stage__dock">
+<div class="rail-panel rail-panel--services opt-grouped-clusters" id="panel-services" role="region" aria-label="Services">
+  <div class="panel__head">
+    <span class="panel__eyebrow">Our suite</span>
+  </div>
+
+  <div class="oc__columns">
+
+    <div class="oc__col">
+      <h3 class="oc__label" id="oc-lbl-demand"><span class="oc__tick" aria-hidden="true"></span>Bring in demand</h3>
+      <ul class="oc__list" aria-labelledby="oc-lbl-demand">
+        <li>
+          <a class="panel__item" href="performance-marketing.html">
+            <span class="panel__title">Performance marketing</span>
+            <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+          </a>
+        </li>
+        <li>
+          <a class="panel__item" href="ads-design.html">
+            <span class="panel__title">Advertisement design</span>
+            <span class="panel__desc">Creative sized for every placement you actually run.</span>
+          </a>
+        </li>
+        <li>
+          <a class="panel__item" href="conversion-rate-optimization.html">
+            <span class="panel__title">Conversion rate optimization</span>
+            <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="oc__col">
+      <h3 class="oc__label" id="oc-lbl-own"><span class="oc__tick" aria-hidden="true"></span>Build what you own</h3>
+      <ul class="oc__list" aria-labelledby="oc-lbl-own">
+        <li>
+          <a class="panel__item" href="branding-graphic-design.html">
+            <span class="panel__title">Brand and package design</span>
+            <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+          </a>
+        </li>
+        <li>
+          <a class="panel__item" href="webdesign-development.html">
+            <span class="panel__title">Web design and development</span>
+            <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+          </a>
+        </li>
+        <li>
+          <a class="panel__item" href="integrations.html">
+            <span class="panel__title">Integrations</span>
+            <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="oc__col">
+      <h3 class="oc__label" id="oc-lbl-know"><span class="oc__tick" aria-hidden="true"></span>Know what worked</h3>
+      <ul class="oc__list" aria-labelledby="oc-lbl-know">
+        <li>
+          <a class="panel__item" href="reports.html">
+            <span class="panel__title">Reports</span>
+            <span class="panel__desc">What ran, what it cost, what it returned.</span>
+          </a>
+        </li>
+        <li>
+          <a class="panel__item" href="consulting.html">
+            <span class="panel__title">Consulting</span>
+            <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+          </a>
+        </li>
+      </ul>
+      <p class="panel__note oc__foot">Eight service pages. Pricing for all of them sits on one page.</p>
+    </div>
+
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="opt__meta">
+    <div><h3>Trade-offs</h3><p>Honest weaknesses versus the current 2x4:
+
+1. The taxonomy is an editorial claim, and a wrong claim is worse than no claim. A flat list asserts nothing; labelled columns assert that CRO belongs to demand rather than to the site you own — defensible from its copy ("traffic you already pay for") but genuinely arguable. If the owner reads CRO as a site discipline, the menu now actively misfiles it, and Consulting sitting under "Know what worked" is the second soft spot (it is advice, not measurement).
+
+2. The clusters are 3/3/2, so the third column is short. I anchored it with the existing pricing sentence rather than leave a hole. If the owner wants that sentence back in the head where it is today, the third column ends in visible dead space and this option looks weaker than the screenshot.
+
+3. Moving that sentence leaves the head carrying only "OUR SUITE" — roughly 1750px of empty header width above the hairline. It is calm, but it is empty; a header-note or a right-aligned element option would fill it better.
+
+4. Column labels are overhead for a repeat visitor. Someone who already knows the site and wants "Reports" now scans past three uppercase labels to get there. The flat 2x4 is faster for that user; clusters only pay off for a first-time buyer who knows their problem but not the service names.
+
+5. Three columns cut item width from 854px to 575px, which reduces the airiness but does not remove it — descriptions cap at 46ch, so there is still whitespace to the right of each line. An option that uses cards, icons, or a 4-up split will fill the 1830px more aggressively than this one does.
+
+6. It is brittle to growth. A ninth service means re-deciding the taxonomy, not just adding a row.
+
+7. Scope note: below 1023px the locked chrome sets .rail-panel{display:none} and the mobile drawer takes over, so these cluster labels do not reach mobile unless the drawer's accordion is updated to match — a follow-on edit outside this component. The ≤1160px and ≤760px rules here only take effect on the comparison page (verified: 8/8 items visible and no horizontal overflow at 1900/1280/1160/1024/768/760/375).
+
+Verification run: rendered headless in Chromium with the real dispenza-tokens.css, dispenza-fonts.css and dispenza-chrome.css. 8/8 links present with correct hrefs and verbatim copy, all visible simultaneously, tab order Performance marketing → Advertisement design → CRO → Brand and package design → Web design → Integrations → Reports → Consulting, focus ring computed as 2px solid rgb(174,118,239), zero console/page errors, no horizontal overflow at any width. The doubled root class was tested adversarially with the option sheet loaded BEFORE dispenza-chrome.css and still rendered visible/opacity 1.</p></div>
+    <div><h3>Contrast</h3><p>Panel ground is --ds-bg-surface-2 (#222429, the frozen elevated plane); hover ground is --ds-bg-warm (#1b1d22). Measured from the rendered page: item title --ds-ink-heading (#ffffff) = 15.53:1 on the panel, 16.86:1 on the hover ground. Item description --ds-ink-soft (#9f9f9f) = 5.87:1 / 6.37:1 — same token the control already uses, so no regression. Cluster labels reuse --ds-ink-soft = 5.87:1 (they are text, so they had to clear 4.5 even though they are subordinate). Eyebrow --ds-accent-ink (#ae76ef) = 4.91:1, and the focus ring uses the same token so it is a visible 4.91:1 outline. The accent tick and the hover bar use --ds-accent (#8d3fe8, 2.96:1) — deliberately decorative only: they never carry text and never encode information on their own, since the label text beside the tick already says it.</p></div>
+  </div>
+  <style>
+/* ============================================================================
+   OPTION: opt-grouped-clusters — "Semantic clusters" services mega menu
+   Every rule is scoped under .opt-grouped-clusters so options can coexist.
+   Every colour / space / radius / duration comes from a --ds-* token.
+   ========================================================================== */
+
+/* Root. Doubled class so it beats .rail-panel's hidden base state regardless of
+   sheet order, and so the panel renders standalone on the comparison page. */
+.opt-grouped-clusters.opt-grouped-clusters{
+  position:relative;top:auto;left:auto;right:auto;
+  opacity:1;visibility:visible;transform:none;
+  width:100%;
+  box-sizing:border-box;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-md) var(--ds-space-lg) var(--ds-space-lg);
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink);
+}
+.opt-grouped-clusters *,
+.opt-grouped-clusters *::before,
+.opt-grouped-clusters *::after{box-sizing:border-box}
+.opt-grouped-clusters h3,
+.opt-grouped-clusters p,
+.opt-grouped-clusters ul{margin:0;padding:0}
+.opt-grouped-clusters ul{list-style:none}
+.opt-grouped-clusters a{text-decoration:none;color:inherit}
+
+/* ---- head: eyebrow + hairline. The right-hand note moves down into the
+        "Know what worked" column, where the pricing sentence belongs. ---- */
+.opt-grouped-clusters .panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-sm);
+  margin-bottom:var(--ds-space-md);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-grouped-clusters .panel__eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.opt-grouped-clusters .panel__note{
+  font-size:13px;line-height:1.5;color:var(--ds-ink-soft);
+}
+
+/* ---- the three clusters ---- */
+.opt-grouped-clusters .oc__columns{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.9fr);
+  column-gap:var(--ds-space-lg);
+}
+.opt-grouped-clusters .oc__col{
+  display:flex;flex-direction:column;min-width:0;
+}
+.opt-grouped-clusters .oc__col + .oc__col{
+  border-left:1px solid var(--ds-hairline);
+  padding-left:var(--ds-space-lg);
+}
+
+/* Column header. Deliberately subordinate: 11px, uppercase, muted grey,
+   against 16px near-white item titles. The 2px accent tick is the same
+   language as the rail's active-link underline — no new glow. */
+.opt-grouped-clusters .oc__label{
+  position:relative;
+  font-family:var(--ds-font-display);
+  font-size:11px;font-weight:700;line-height:1;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ds-ink-soft);
+  /* padding-left matches the item padding, so the label text sits on the same
+     vertical as the item titles and the tick hangs in the gutter */
+  padding:0 var(--ds-space-md) var(--ds-space-sm);
+}
+.opt-grouped-clusters .oc__tick{
+  position:absolute;left:0;top:3px;
+  width:16px;height:2px;border-radius:var(--ds-r-pill);
+  background:var(--ds-accent);
+}
+
+.opt-grouped-clusters .oc__list{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:var(--ds-space-2xs);
+}
+
+/* ---- items: the existing vocabulary, re-tuned for a 3-up column ---- */
+.opt-grouped-clusters .panel__item{
+  position:relative;display:block;
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border:1px solid transparent;border-radius:var(--ds-r-control);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             background-color var(--ds-dur-fast) var(--ds-ease-out),
+             border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+/* hover marker reuses the rail's 2px pill underline, run vertically */
+.opt-grouped-clusters .panel__item::before{
+  content:"";position:absolute;
+  left:calc(-1px + var(--ds-space-2xs));top:50%;
+  width:2px;height:0;transform:translateY(-50%);
+  border-radius:var(--ds-r-pill);background:var(--ds-accent);
+  transition:height var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-grouped-clusters .panel__item:hover,
+.opt-grouped-clusters .panel__item:focus-visible{
+  transform:translateY(-2px);
+  background:var(--ds-bg-warm);
+  border-color:var(--ds-line);
+}
+.opt-grouped-clusters .panel__item:hover::before,
+.opt-grouped-clusters .panel__item:focus-visible::before{height:56%}
+.opt-grouped-clusters .panel__item:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:2px;
+}
+.opt-grouped-clusters .panel__title{
+  display:block;font-family:var(--ds-font-display);
+  font-size:16px;font-weight:600;line-height:1.25;
+  letter-spacing:-.005em;color:var(--ds-ink-heading);
+}
+.opt-grouped-clusters .panel__desc{
+  display:block;margin-top:var(--ds-space-2xs);
+  max-width:46ch;
+  font-size:13px;line-height:1.5;color:var(--ds-ink-soft);
+}
+
+/* ---- the pricing sentence, sitting at the foot of the last cluster ---- */
+.opt-grouped-clusters .oc__foot{
+  margin-top:auto;
+  /* left padding matches the items, so the sentence sits on the title vertical
+     and its hairline starts on the column edge with the tick */
+  padding:var(--ds-space-md) var(--ds-space-md) 0;
+  border-top:1px solid var(--ds-hairline);
+}
+
+/* ---- narrower: two clusters up, the third across the foot ---- */
+@media (max-width:1160px){
+  .opt-grouped-clusters .oc__columns{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    row-gap:var(--ds-space-md);
+  }
+  .opt-grouped-clusters .oc__col + .oc__col{border-left:0;padding-left:0}
+  .opt-grouped-clusters .oc__col:nth-child(2){
+    border-left:1px solid var(--ds-hairline);
+    padding-left:var(--ds-space-md);
+  }
+  .opt-grouped-clusters .oc__col:nth-child(3){
+    grid-column:1 / -1;
+    border-top:1px solid var(--ds-hairline);
+    padding-top:var(--ds-space-md);
+  }
+  .opt-grouped-clusters .oc__col:nth-child(3) .oc__list{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:var(--ds-space-md);
+  }
+  .opt-grouped-clusters .oc__foot{
+    margin-top:var(--ds-space-md);
+    padding-top:var(--ds-space-sm);
+  }
+}
+
+/* ---- one column ---- */
+@media (max-width:760px){
+  .opt-grouped-clusters.opt-grouped-clusters{padding:var(--ds-space-md)}
+  .opt-grouped-clusters .panel__head{flex-direction:column;gap:var(--ds-space-2xs)}
+  .opt-grouped-clusters .oc__columns{grid-template-columns:minmax(0,1fr)}
+  .opt-grouped-clusters .oc__col:nth-child(2){
+    border-left:0;padding-left:0;
+    border-top:1px solid var(--ds-hairline);padding-top:var(--ds-space-md);
+  }
+  .opt-grouped-clusters .oc__col:nth-child(3) .oc__list{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .opt-grouped-clusters .panel__desc{max-width:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .opt-grouped-clusters .panel__item,
+  .opt-grouped-clusters .panel__item::before{transition:none}
+  .opt-grouped-clusters .panel__item:hover,
+  .opt-grouped-clusters .panel__item:focus-visible{transform:none}
+}
+  </style>
+</section>
+
+<section class="opt" id="opt-3">
+  <div class="opt__head">
+    <span class="opt__n">Option 3</span>
+    <h2 class="opt__name">List + standing panel</h2>
+  </div>
+  <p class="opt__why">The control spends 1038px of content width on two ~499px columns whose text only ever fills about 340px, so roughly the right 45% of the panel is empty and the eight items have no scan structure. This reclaims that width for a persistent 300px standing panel (positioning line, Book demo, real phone digits) and spends the recovered tightness on turning the list into a numbered index with an accent rail to run the eye down. The two columns share explicit grid row tracks, so a description that wraps to two lines keeps both columns locked to one rhythm instead of drifting — measured, the whole thing lands 14px shorter than the control while doing a second job.</p>
+  <div class="opt__stage" role="group" aria-label="List + standing panel preview">
+    <div class="stage__dock">
+<div class="rail-panel opt-list-plus-cta" role="region" aria-label="Services">
+  <div class="lpc__body">
+
+    <div class="lpc__main">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+      </div>
+
+      <div class="panel__grid lpc__grid">
+        <a class="panel__item" href="performance-marketing.html">
+          <span class="lpc__index" aria-hidden="true">01</span>
+          <span>
+            <span class="panel__title">Performance marketing</span>
+            <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="branding-graphic-design.html">
+          <span class="lpc__index" aria-hidden="true">02</span>
+          <span>
+            <span class="panel__title">Brand and package design</span>
+            <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="webdesign-development.html">
+          <span class="lpc__index" aria-hidden="true">03</span>
+          <span>
+            <span class="panel__title">Web design and development</span>
+            <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="ads-design.html">
+          <span class="lpc__index" aria-hidden="true">04</span>
+          <span>
+            <span class="panel__title">Advertisement design</span>
+            <span class="panel__desc">Creative sized for every placement you actually run.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="conversion-rate-optimization.html">
+          <span class="lpc__index" aria-hidden="true">05</span>
+          <span>
+            <span class="panel__title">Conversion rate optimization</span>
+            <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="integrations.html">
+          <span class="lpc__index" aria-hidden="true">06</span>
+          <span>
+            <span class="panel__title">Integrations</span>
+            <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="consulting.html">
+          <span class="lpc__index" aria-hidden="true">07</span>
+          <span>
+            <span class="panel__title">Consulting</span>
+            <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+          </span>
+        </a>
+        <a class="panel__item" href="reports.html">
+          <span class="lpc__index" aria-hidden="true">08</span>
+          <span>
+            <span class="panel__title">Reports</span>
+            <span class="panel__desc">What ran, what it cost, what it returned.</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="lpc__aside">
+      <p class="lpc__pitch">One published price ladder, one performance guarantee, one point of contact.</p>
+      <div class="lpc__actions">
+        <span class="lpc__label">Contact</span>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+        <a class="lpc__tel" href="tel:+17024207272">+1 (702) 420-7272</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="opt__meta">
+    <div><h3>Trade-offs</h3><p>1. THE CTA IS MOSTLY A DUPLICATE. The rail sitting ~60px above this panel already contains "Book demo" (solid) and "Call us" (ghost). The standing panel repeats Book demo verbatim. Only the phone digits are genuinely additive — the rail says "Call us", never the number. So the honest value added is one readable phone number plus one positioning line; the rest is a second instance of a button the user can already see. This is inherent to the direction, not fixable inside it.
+
+2. IT COSTS THE LIST HORIZONTAL ROOM. The aside takes 300px + a 40px gap out of a 1038px content box, leaving ~698px for two columns (~337px each, vs ~499px in the control). Five of the eight descriptions now wrap to two lines where the control fit every one on a single line. At 1024-1120px two titles also wrap ("Conversion rate optimization", "Web design and development"). If the owner's priority is one-line-per-service crispness, the control wins on that axis.
+
+3. THE ASIDE STILL HAS SLACK. ~14 words, a button and a phone number in a 300px x ~370px plate leaves real leftover space. I centred the group so it reads as symmetrical padding rather than a hole, but it is emptier than the list beside it. Filling it properly would need more copy, and more copy is exactly what would out-shout the links — that is the bind this direction sits in.
+
+4. THE TWO PIECES OF COPY OVERLAP. The head note ("Pricing for all of them sits on one page") and the aside pitch ("One published price ladder...") say a similar thing 300px apart. Both are real locked copy — the pitch is verbatim from the shipping footer — so neither is invented, but a reader may notice the echo. Cutting the head note would fix it and buy back width.
+
+5. THE NUMERALS IMPLY A RANKING THAT DOES NOT EXIST. 01-08 reads as a sequence, so "Performance marketing" looks like the flagship purely for being first. The order is inherited from the locked chrome, but the control's plain items left it ambiguous whereas numbering makes it explicit. If the eight are meant to be peers, this is a real cost of the scan rail.
+
+6. SHARED ROW TRACKS TRADE SLACK FOR ALIGNMENT. Because the two columns share row heights, a one-line description sitting opposite a two-line one leaves trailing whitespace in its half (visible at "Brand and package design" opposite "Integrations"). I judged locked alignment worth it, but it is a deliberate purchase of small internal gaps.
+
+7. UNVERIFIED: I could not test this inside the live rail with hover/click open-close, only as a static specimen at the real 1120px dock width with the real chrome.css loaded. The panel-open transition and the dock's mouseleave behaviour are untouched by this option but were not exercised.</p></div>
+    <div><h3>Contrast</h3><p>All ratios below were computed in-browser from the ACTUAL composited ground (walking ancestors and alpha-compositing), not assumed from the token comments — though they agree with them.
+
+On the panel ground --ds-bg-surface-2 (#222429, plane 2):
+- .panel__title --ds-ink-heading (#ffffff) = 15.53:1
+- .panel__desc --ds-ink-soft (#9f9f9f) = 5.87:1
+- .panel__note --ds-ink-soft = 5.87:1
+- .lpc__index and .panel__eyebrow --ds-accent-ink (#ae76ef) = 4.91:1
+--ds-accent-ink is the correct choice here and --ds-primary (#8d3fe8) is not: the token sheet records the raw brand violet at only 2.96:1 on this plane, below the small-text floor. That is why the numerals, the eyebrow and the label all use accent-ink, and why the hover rule uses accent-ink rather than the brand violet.
+
+On the recessed aside ground --ds-bg-warm (#1b1d22, plane 1):
+- .lpc__pitch --ds-ink (#f5f3f9) = 15.31:1
+- .lpc__tel --ds-ink-heading (#ffffff) = 16.86:1
+- .lpc__label --ds-accent-ink = 5.33:1 (better than on plane 2, since the ground is darker)
+
+On the button fill --ds-primary (#8d3fe8):
+- .btn--solid --ds-ink-on-dark (#ffffff) = 5.24:1
+
+HOVER / FOCUS state — this is the case that needed checking, because the wash changes the ground. --ds-accent-soft (rgba(141,63,232,.10)) over #222429 composites to rgb(45,39,60):
+- title (white) = 14.36:1
+- desc (--ds-ink-soft) = 5.43:1
+- numeral: --ds-accent-ink would fall to 4.54:1 there — passing, but with almost no margin. I switched the hover numeral to --ds-accent-on-deep (#be91f2) = 5.83:1, so contrast RISES on hover instead of eroding toward the floor. That token is nominally "accent on the deep-violet ground", so this is a slight semantic stretch, but the value is a brand-sheet violet and it is the right one for the job.
+
+Every text pair clears 4.5:1 in both rest and hover states. The focus ring is --ds-accent-ink at 2px, confirmed rendering via real Tab keypresses on all 10 stops.</p></div>
+  </div>
+  <style>
+/* =============================================================================
+   OPTION — LIST + STANDING PANEL          root class: .opt-list-plus-cta
+   Two columns of four as a numbered index, plus a persistent standing panel on
+   the right carrying the positioning line, the Book-demo CTA and the real phone
+   digits. Every value resolves from dispenza-tokens.css. Zero raw hex.
+   ============================================================================= */
+
+/* ── THE PANEL SURFACE ─────────────────────────────────────────────────────
+   Restated in full so the option renders with or without dispenza-chrome.css on
+   the page, and pinned visible + static because on a comparison sheet this is a
+   specimen, not a live flyout. `.rail-panel.opt-list-plus-cta` is (0,2,0) so it
+   outranks chrome.css's `.rail-panel` rules, including its max-width:1023px
+   display:none, without any !important. */
+.rail-panel.opt-list-plus-cta,
+.opt-list-plus-cta{
+  position:static;
+  display:block;
+  opacity:1;
+  visibility:visible;
+  transform:none;
+  padding:var(--ds-space-lg);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink-soft);
+}
+
+/* ── BODY SPLIT. The list takes the fluid track, the standing panel a fixed
+   300px. `stretch` is what makes the aside a full-height standing object rather
+   than a floating block in a corner. ── */
+.opt-list-plus-cta .lpc__body{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  gap:var(--ds-space-lg);
+  align-items:stretch;
+}
+.opt-list-plus-cta .lpc__main{min-width:0}
+
+/* ── HEAD. Scoped to the LIST column only, so the note never floats above the
+   standing panel and the two halves read as separate jobs. ── */
+.opt-list-plus-cta .panel__head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-sm);
+  margin-bottom:var(--ds-space-sm);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-list-plus-cta .panel__eyebrow{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+  white-space:nowrap;
+}
+.opt-list-plus-cta .panel__note{
+  font-size:13px;
+  line-height:1.5;
+  color:var(--ds-ink-soft);
+  text-align:right;
+}
+
+/* ── THE INDEX. Four explicit rows + column flow means items 1-4 run down the
+   first column and 5-8 down the second, matching DOM and tab order. Because the
+   two columns share row TRACKS, a description that wraps to two lines keeps both
+   columns locked to the same rhythm instead of drifting apart. ── */
+.opt-list-plus-cta .lpc__grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(4,auto);
+  grid-auto-flow:column;
+  column-gap:var(--ds-space-md);
+  row-gap:var(--ds-space-2xs);
+}
+
+.opt-list-plus-cta .panel__item{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:var(--ds-space-sm);
+  align-items:baseline;            /* numeral sits on the title's baseline */
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border:0;
+  border-radius:var(--ds-r-control);
+  background:transparent;
+  text-decoration:none;
+  box-shadow:inset 0 0 0 0 var(--ds-accent-ink);
+  transition:
+    background-color var(--ds-dur-fast) var(--ds-ease-out),
+    box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+/* No translate on hover: the rows are rules in an index, and a row that lifts
+   out of line breaks the shared-track alignment the layout is built on. */
+.opt-list-plus-cta .panel__item:hover,
+.opt-list-plus-cta .panel__item:focus-visible{
+  transform:none;
+  background:var(--ds-accent-soft);
+  box-shadow:inset 2px 0 0 0 var(--ds-accent-ink);
+}
+.opt-list-plus-cta .panel__item:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:-2px;             /* inset so the ring never collides with the
+                                      4px row gap or the neighbouring column */
+}
+
+.opt-list-plus-cta .lpc__index{
+  min-width:2.2em;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+  color:var(--ds-accent-ink);
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+/* Contrast RISES on hover: accent-ink is 4.91:1 on the panel ground but 4.54:1
+   once the accent-soft wash is composited under it. accent-on-deep is 5.83:1 on
+   that washed ground, so the hover state is the safer of the two. */
+.opt-list-plus-cta .panel__item:hover .lpc__index,
+.opt-list-plus-cta .panel__item:focus-visible .lpc__index{
+  color:var(--ds-accent-on-deep);
+}
+
+.opt-list-plus-cta .panel__title{
+  display:block;
+  font-family:var(--ds-font-display);
+  font-size:15px;
+  font-weight:600;
+  line-height:1.3;
+  letter-spacing:-.005em;
+  color:var(--ds-ink-heading);
+}
+.opt-list-plus-cta .panel__desc{
+  display:block;
+  margin-top:var(--ds-space-2xs);
+  font-size:13px;
+  line-height:1.45;
+  color:var(--ds-ink-soft);
+}
+
+/* ── THE STANDING PANEL. Recessed to plane 1 (--ds-bg-warm) rather than raised:
+   it sits BEHIND the links in the depth ladder, which is how it fills the dead
+   space without competing with them.
+   The two blocks are centred as ONE group rather than pinned to the top and
+   bottom edges. Pinning them (margin-top:auto on the actions) opened a ~180px
+   hole in the middle of the panel — the exact dead space this option exists to
+   remove, just moved. Centring spends the slack as symmetrical padding. ── */
+.opt-list-plus-cta .lpc__aside{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:var(--ds-space-md);
+  padding:var(--ds-space-md);
+  background:var(--ds-bg-warm);
+  border:1px solid var(--ds-hairline);
+  border-radius:var(--ds-r-surface);
+}
+/* 17px display over the 15px service titles, but set in --ds-ink rather than
+   --ds-ink-heading: fractionally larger, measurably quieter, so it reads as an
+   aside statement and does not compete with the eight white titles. */
+.opt-list-plus-cta .lpc__pitch{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:17px;
+  font-weight:600;
+  line-height:1.5;
+  letter-spacing:-.005em;
+  color:var(--ds-ink);
+}
+.opt-list-plus-cta .lpc__actions{
+  padding-top:var(--ds-space-md);
+  border-top:1px solid var(--ds-hairline);
+  display:grid;
+  gap:var(--ds-space-sm);
+  justify-items:start;
+}
+.opt-list-plus-cta .lpc__label{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+
+/* Buttons restated from the locked chrome so the pill is the real one, not a
+   lookalike — same two variants, no third invented here. */
+.opt-list-plus-cta .btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:var(--ds-space-2xs);
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border:1px solid transparent;
+  border-radius:var(--ds-r-pill);
+  font-family:var(--ds-font-display);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  line-height:1;
+  white-space:nowrap;
+  text-decoration:none;
+  transition:
+    transform var(--ds-dur-fast) var(--ds-ease-out),
+    box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-list-plus-cta .btn--solid{
+  background:var(--ds-primary);
+  color:var(--ds-ink-on-dark);
+  box-shadow:var(--ds-shadow-rest);
+}
+.opt-list-plus-cta .btn--solid:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--ds-shadow-card);
+}
+.opt-list-plus-cta .btn:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:3px;
+}
+
+/* The digits, not a "Call us" label. This is the one thing in the standing panel
+   the rail above it does not already say. */
+.opt-list-plus-cta .lpc__tel{
+  font-family:var(--ds-font-display);
+  font-size:17px;
+  font-weight:600;
+  line-height:1.2;
+  letter-spacing:-.01em;
+  color:var(--ds-ink-heading);
+  text-decoration:none;
+  border-radius:var(--ds-r-control);
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-list-plus-cta .lpc__tel:hover{color:var(--ds-accent-ink)}
+.opt-list-plus-cta .lpc__tel:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:3px;
+}
+
+/* ── RESPONSIVE. The real flyout is desktop-only (chrome.css hides .rail-panel
+   under 1024 and hands over to the drawer), but the comparison sheet gets
+   resized, so the option degrades instead of breaking. ── */
+@media (max-width:1023px){
+  .rail-panel.opt-list-plus-cta,
+  .opt-list-plus-cta{display:block;padding:var(--ds-space-md)}
+  .opt-list-plus-cta .lpc__body{
+    grid-template-columns:minmax(0,1fr);
+    gap:var(--ds-space-md);
+  }
+  .opt-list-plus-cta .lpc__grid{
+    grid-template-rows:none;
+    grid-auto-flow:row;
+  }
+  /* The CTA stays start-aligned and intrinsically sized here too. Stretching it
+     full-bleed turned the button into a slab that out-shouted the eight links,
+     which is the one thing this standing panel must not do. */
+  .opt-list-plus-cta .lpc__aside{gap:var(--ds-space-sm)}
+}
+@media (max-width:640px){
+  .opt-list-plus-cta .lpc__grid{grid-template-columns:minmax(0,1fr)}
+  .opt-list-plus-cta .panel__head{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:var(--ds-space-2xs);
+  }
+  .opt-list-plus-cta .panel__note{text-align:left}
+}
+
+/* ── REDUCED MOTION. Nothing here animates on load; these are hover/focus
+   transitions only, and they collapse to instant. No state is lost. ── */
+@media (prefers-reduced-motion: reduce){
+  .opt-list-plus-cta .panel__item,
+  .opt-list-plus-cta .lpc__index,
+  .opt-list-plus-cta .btn,
+  .opt-list-plus-cta .lpc__tel{transition-duration:1ms}
+  .opt-list-plus-cta .btn--solid:hover{transform:none}
+}
+  </style>
+</section>
+
+<section class="opt" id="opt-4">
+  <div class="opt__head">
+    <span class="opt__n">Option 4</span>
+    <h2 class="opt__name">Featured + List</h2>
+  </div>
+  <p class="opt__why">The control spends 1830px of panel on eight equal boxes, so nothing is promoted and the width reads as emptiness. This gives the width a job: Performance marketing becomes a stretched accent-deep slab on the left carrying an index, a flag, a 22px title, its verbatim line, two facet chips and an explicit call, while the other seven become ruled rows in a three-column list — hairline over each row, tabular index numeral, title and one-line description. The list drops from four rows to three and gains a rule-and-numeral rhythm, so the panel gets shorter and faster to scan while the lead offer finally has somewhere to sit.</p>
+  <div class="opt__stage" role="group" aria-label="Featured + List preview">
+    <div class="stage__dock">
+<div class="rail-panel rail-panel--services is-open opt-featured-plus-list"
+     id="panel-services-featured-plus-list" role="region" aria-label="Services">
+  <!-- NOTE: the id is suffixed so six options can share one comparison page.
+       On integration rename it back to "panel-services" to match data-panel. -->
+
+  <div class="panel__head">
+    <span class="panel__eyebrow">Our suite</span>
+    <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+  </div>
+
+  <div class="ofpl__body">
+
+    <!-- FEATURED: the lead offer, stretched to the list's height. -->
+    <a class="panel__item ofpl__feature" href="performance-marketing.html">
+      <span class="ofpl__feature-top">
+        <span class="ofpl__index ofpl__index--lead" aria-hidden="true">01</span>
+        <span class="ofpl__flag">Lead service</span>
+      </span>
+      <span class="panel__title ofpl__feature-title">Performance marketing</span>
+      <span class="panel__desc ofpl__feature-desc">Paid and organic demand for a licensed dispensary.</span>
+      <span class="ofpl__tags" aria-hidden="true">
+        <span class="ofpl__tag">Paid</span>
+        <span class="ofpl__tag">Organic</span>
+      </span>
+      <span class="ofpl__cta">
+        Open the service page
+        <svg class="ofpl__arrow" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2.5 7h8M7.5 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </a>
+
+    <!-- THE OTHER SEVEN: one ruled, numbered row each. -->
+    <div class="panel__grid ofpl__list">
+
+      <a class="panel__item ofpl__row" href="branding-graphic-design.html">
+        <span class="ofpl__index" aria-hidden="true">02</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Brand and package design</span>
+          <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+        </span>
+      </a>
+
+      <a class="panel__item ofpl__row" href="webdesign-development.html">
+        <span class="ofpl__index" aria-hidden="true">03</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Web design and development</span>
+          <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+        </span>
+      </a>
+
+      <a class="panel__item ofpl__row" href="ads-design.html">
+        <span class="ofpl__index" aria-hidden="true">04</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Advertisement design</span>
+          <span class="panel__desc">Creative sized for every placement you actually run.</span>
+        </span>
+      </a>
+
+      <a class="panel__item ofpl__row" href="conversion-rate-optimization.html">
+        <span class="ofpl__index" aria-hidden="true">05</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Conversion rate optimization</span>
+          <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+        </span>
+      </a>
+
+      <a class="panel__item ofpl__row" href="integrations.html">
+        <span class="ofpl__index" aria-hidden="true">06</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Integrations</span>
+          <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+        </span>
+      </a>
+
+      <a class="panel__item ofpl__row" href="consulting.html">
+        <span class="ofpl__index" aria-hidden="true">07</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Consulting</span>
+          <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+        </span>
+      </a>
+
+      <a class="panel__item ofpl__row" href="reports.html">
+        <span class="ofpl__index" aria-hidden="true">08</span>
+        <span class="ofpl__row-text">
+          <span class="panel__title">Reports</span>
+          <span class="panel__desc">What ran, what it cost, what it returned.</span>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="opt__meta">
+    <div><h3>Trade-offs</h3><p>Honest list, worst first. (1) The promotion is hard-coded — Performance marketing is a different element with different markup from the other seven, so if the lead offer changes the owner is editing structure, not swapping a line. The 2x4 has no such coupling. (2) Seven items in three columns leaves a ragged tail: the last row holds one row and two empty cells at the widest breakpoint. It reads acceptably because the rules sit per-row rather than spanning the grid, but it is not a resolved shape. (3) The featured slab and the list will rarely be exactly the same height, so one side carries trailing space at some widths; I pinned the CTA to the card floor so the slab absorbs the difference, but this is a mitigation, not a fix. (4) Numbering 01-08 buys scannability and reuses the site's existing .svc-index idiom, but it implies a ranking the eight services do not actually have — a visitor may read 08 Reports as least important. (5) Four strings are not from the source: the "Lead service" flag, the "Paid" and "Organic" chips, and "Open the service page". The flag is an editorial claim the owner has to be willing to make in the nav; the chips are a literal decomposition of "Paid and organic" and therefore restate the sentence directly above them, which is mild redundancy. Cut all four and the card loses roughly a third of its substance. (6) For a repeat visitor who already knows which service they want, an even 2x4 is marginally faster to target than an asymmetric split, because item one lives somewhere structurally different from items two through eight. This option optimises for the first-time scanner. (7) Layout responds via container queries; on a browser without support it degrades to one stacked column — all eight links still visible and operable, but tall. (8) The accent-deep slab is the first large saturated surface in the chrome; it is token-sanctioned (the token file names #420f7b as a card ground) and adds no glow, but it does make the Services panel louder than the rest of the rail, which the other five options will not be.</p></div>
+    <div><h3>Contrast</h3><p>All ratios computed by hand from the real token hexes (WCAG relative-luminance formula), not assumed. On the panel ground --ds-bg-surface-2 (#222429, L=0.0176): --ds-ink-heading #ffffff titles = 15.53:1; --ds-ink-soft #9f9f9f descriptions and index numerals = 5.87:1 (matches the 5.87 the token file itself documents for plane 2, so my math is calibrated against the source); --ds-accent-ink #ae76ef for the eyebrow, the hovered numeral, the hover edge and the focus ring = 4.91:1. On the hover state (--ds-accent-soft rgba(141,63,232,.10) composited over #222429 = #2D273C) titles = 14.4:1 and descriptions = 5.5:1, so the hovered row still clears AA. On the featured slab --ds-accent-deep (#420f7b, L=0.0293): white title = 13.24:1 (the exact figure the token file records); --ds-ink-soft description = 5.00:1; --ds-accent-on-deep #be91f2 for the flag, the lead numeral and the CTA = 5.37:1; tag text is white on accent-soft-over-accent-deep = 12.1:1. Two deliberate exclusions: --ds-accent #8d3fe8 computes to only 2.96:1 on the panel and is therefore used nowhere as text (no fills of it are used at all); and --ds-accent-ink on --ds-accent-deep is only 4.19:1, which is why every accent string inside the featured card uses --ds-accent-on-deep instead — that pairing would have failed silently if I had reused the panel's accent token on the card.</p></div>
+  </div>
+  <style>
+/* ===========================================================================
+   OPTION - FEATURED + LIST          root scope: .opt-featured-plus-list
+   One promoted service on an accent-deep slab, seven ruled rows beside it.
+   Every colour, space, radius, duration and easing is a --ds-* token.
+   No carousel, no autoplay, no new glow. All eight links are always visible.
+   =========================================================================== */
+
+/* --- COMPARISON-PAGE STAGING ----------------------------------------------
+   .rail-panel is normally an absolutely-positioned flyout that is invisible
+   until .is-open. These lines park it in normal flow so the option renders on
+   a static comparison page. DELETE this one rule on integration - nothing
+   below it depends on these values.                                        */
+.rail-panel.opt-featured-plus-list{
+  position:relative;top:auto;left:auto;right:auto;
+  opacity:1;visibility:visible;transform:none;
+}
+/* --- end staging ---------------------------------------------------------- */
+
+/* The panel shell, restated so the option renders with or without
+   dispenza-chrome.css present. Doubled selector = it always outranks the
+   unscoped .rail-panel rules regardless of stylesheet order. */
+.rail-panel.opt-featured-plus-list{
+  container-type:inline-size;
+  container-name:ofpl;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-lg);
+  font-family:var(--ds-font-body);
+}
+.opt-featured-plus-list a{text-decoration:none;color:inherit}
+.opt-featured-plus-list :focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:2px;
+}
+
+/* --- HEAD ----------------------------------------------------------------- */
+.opt-featured-plus-list .panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-sm);
+  margin-bottom:var(--ds-space-md);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-featured-plus-list .panel__eyebrow{
+  font-family:var(--ds-font-display);
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+.opt-featured-plus-list .panel__note{
+  font-size:13px;line-height:1.5;color:var(--ds-ink-soft);text-align:right;
+}
+
+/* --- BODY: featured column + list column ---------------------------------- */
+.opt-featured-plus-list .ofpl__body{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:var(--ds-space-md);
+  align-items:stretch;
+}
+@container ofpl (min-width:680px){
+  .opt-featured-plus-list .ofpl__body{
+    grid-template-columns:minmax(260px,300px) minmax(0,1fr);
+    column-gap:var(--ds-space-lg);
+  }
+}
+@container ofpl (min-width:1180px){
+  .opt-featured-plus-list .ofpl__body{
+    grid-template-columns:minmax(320px,380px) minmax(0,1fr);
+  }
+}
+
+/* --- FEATURED CARD -------------------------------------------------------- */
+.opt-featured-plus-list .ofpl__feature{
+  position:relative;
+  display:flex;flex-direction:column;
+  height:100%;
+  padding:var(--ds-space-md);
+  background:var(--ds-accent-deep);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  transition:border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-featured-plus-list .ofpl__feature:hover,
+.opt-featured-plus-list .ofpl__feature:focus-visible{
+  transform:none;                       /* cancels the inherited card lift */
+  background:var(--ds-accent-deep);
+  border-color:var(--ds-accent-on-deep);
+}
+.opt-featured-plus-list .ofpl__feature:focus-visible{
+  outline:2px solid var(--ds-accent-on-deep);
+  outline-offset:2px;
+}
+
+.opt-featured-plus-list .ofpl__feature-top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--ds-space-sm);
+  margin-bottom:var(--ds-space-sm);
+}
+.opt-featured-plus-list .ofpl__index--lead{
+  font-family:var(--ds-font-display);
+  font-size:26px;font-weight:700;line-height:1;letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+  color:var(--ds-accent-on-deep);
+}
+.opt-featured-plus-list .ofpl__flag{
+  font-family:var(--ds-font-display);
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ds-accent-on-deep);
+  padding:var(--ds-space-2xs) var(--ds-space-xs);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-pill);
+}
+.opt-featured-plus-list .ofpl__feature-title{
+  display:block;
+  font-family:var(--ds-font-display);
+  font-size:22px;font-weight:700;line-height:1.15;letter-spacing:-.015em;
+  color:var(--ds-ink-heading);
+}
+.opt-featured-plus-list .ofpl__feature-desc{
+  display:block;
+  margin-top:var(--ds-space-xs);
+  font-size:14px;line-height:1.55;
+  color:var(--ds-ink-soft);
+}
+.opt-featured-plus-list .ofpl__tags{
+  display:flex;flex-wrap:wrap;gap:var(--ds-space-2xs);
+  margin-top:var(--ds-space-sm);
+}
+.opt-featured-plus-list .ofpl__tag{
+  font-family:var(--ds-font-display);
+  font-size:11px;font-weight:600;letter-spacing:.06em;
+  color:var(--ds-ink-heading);
+  padding:var(--ds-space-2xs) var(--ds-space-xs);
+  background:var(--ds-accent-soft);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-control);
+}
+.opt-featured-plus-list .ofpl__cta{
+  display:inline-flex;align-items:center;gap:var(--ds-space-2xs);
+  margin-top:auto;                      /* pins the call to the card floor */
+  padding-top:var(--ds-space-md);
+  font-family:var(--ds-font-display);
+  font-size:13px;font-weight:600;letter-spacing:.01em;
+  color:var(--ds-accent-on-deep);
+}
+.opt-featured-plus-list .ofpl__arrow{
+  width:14px;height:14px;flex:0 0 auto;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-featured-plus-list .ofpl__feature:hover .ofpl__arrow,
+.opt-featured-plus-list .ofpl__feature:focus-visible .ofpl__arrow{
+  transform:translateX(3px);
+}
+
+/* --- THE SEVEN: ruled, numbered rows -------------------------------------- */
+.opt-featured-plus-list .ofpl__list{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  column-gap:var(--ds-space-lg);
+  row-gap:0;
+  align-content:start;
+}
+@container ofpl (min-width:680px){
+  .opt-featured-plus-list .ofpl__list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container ofpl (min-width:1180px){
+  .opt-featured-plus-list .ofpl__list{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+.opt-featured-plus-list .ofpl__row{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:start;
+  column-gap:var(--ds-space-sm);
+  padding:var(--ds-space-sm);
+  border:0;
+  border-radius:var(--ds-r-control);
+  background-color:transparent;
+  transition:background-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+/* the hairline rule over every row */
+.opt-featured-plus-list .ofpl__row::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:var(--ds-hairline);
+}
+/* the accent edge that marks the hovered / focused row */
+.opt-featured-plus-list .ofpl__row::after{
+  content:"";position:absolute;left:0;
+  top:var(--ds-space-xs);bottom:var(--ds-space-xs);
+  width:2px;border-radius:var(--ds-r-pill);
+  background:var(--ds-accent-ink);
+  opacity:0;
+  transition:opacity var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-featured-plus-list .ofpl__row:hover,
+.opt-featured-plus-list .ofpl__row:focus-visible{
+  transform:none;                       /* cancels the inherited item lift */
+  background-color:var(--ds-accent-soft);
+}
+.opt-featured-plus-list .ofpl__row:hover::after,
+.opt-featured-plus-list .ofpl__row:focus-visible::after{opacity:1}
+.opt-featured-plus-list .ofpl__row:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:-2px;                  /* inset, so tight rows never clash */
+}
+
+.opt-featured-plus-list .ofpl__index{
+  font-family:var(--ds-font-display);
+  font-size:11px;font-weight:700;letter-spacing:.14em;line-height:1.9;
+  font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-soft);
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-featured-plus-list .ofpl__row:hover .ofpl__index,
+.opt-featured-plus-list .ofpl__row:focus-visible .ofpl__index{
+  color:var(--ds-accent-ink);
+}
+.opt-featured-plus-list .ofpl__row-text{display:block;min-width:0}
+.opt-featured-plus-list .ofpl__row .panel__title{
+  display:block;
+  font-family:var(--ds-font-display);
+  font-size:15px;font-weight:600;line-height:1.35;letter-spacing:-.005em;
+  color:var(--ds-ink-heading);
+}
+.opt-featured-plus-list .ofpl__row .panel__desc{
+  display:block;
+  margin-top:var(--ds-space-2xs);
+  font-size:13px;line-height:1.5;
+  color:var(--ds-ink-soft);
+}
+
+/* --- NARROW: the head note stops fighting the eyebrow --------------------- */
+@container ofpl (max-width:679px){
+  .opt-featured-plus-list .panel__head{
+    flex-direction:column;align-items:flex-start;gap:var(--ds-space-xs);
+  }
+  .opt-featured-plus-list .panel__note{text-align:left}
+}
+
+/* --- MOTION: hover-only, and it yields ------------------------------------ */
+@media (prefers-reduced-motion:reduce){
+  .opt-featured-plus-list *,
+  .opt-featured-plus-list *::before,
+  .opt-featured-plus-list *::after{
+    transition-duration:1ms !important;
+    animation-duration:1ms !important;
+  }
+  .opt-featured-plus-list .ofpl__feature:hover .ofpl__arrow,
+  .opt-featured-plus-list .ofpl__feature:focus-visible .ofpl__arrow{transform:none}
+}
+  </style>
+</section>
+
+<section class="opt" id="opt-5">
+  <div class="opt__head">
+    <span class="opt__n">Option 5</span>
+    <h2 class="opt__name">Numbered index 01–08</h2>
+  </div>
+  <p class="opt__why">The control's 2×4 grid gives no signal that the suite is a closed set of eight — you count cards to find out. This turns the panel into an editorial index: a single accent number rail running 01 through 08 down the left, so the count is readable before a single title is. Dotted leaders carry each title across to its description, which is set flush right against a shared edge, so the eight rows terminate on one line instead of ending ragged — the panel's width now reads as a deliberate measure rather than as leftover space.</p>
+  <div class="opt__stage" role="group" aria-label="Numbered index 01–08 preview">
+    <div class="stage__dock">
+<div class="rail-panel rail-panel--services opt-numbered-rows" id="panel-services-numbered-rows" role="region" aria-label="Services">
+  <div class="panel__head">
+    <span class="panel__eyebrow">Our suite <span class="onr__range" aria-hidden="true">01&thinsp;&ndash;&thinsp;08</span></span>
+    <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+  </div>
+
+  <ol class="onr__list">
+    <li class="onr__li"><a class="panel__item onr__row" href="performance-marketing.html">
+      <span class="onr__num" aria-hidden="true">01</span>
+      <span class="panel__title">Performance marketing</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="branding-graphic-design.html">
+      <span class="onr__num" aria-hidden="true">02</span>
+      <span class="panel__title">Brand and package design</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="webdesign-development.html">
+      <span class="onr__num" aria-hidden="true">03</span>
+      <span class="panel__title">Web design and development</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="ads-design.html">
+      <span class="onr__num" aria-hidden="true">04</span>
+      <span class="panel__title">Advertisement design</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Creative sized for every placement you actually run.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="conversion-rate-optimization.html">
+      <span class="onr__num" aria-hidden="true">05</span>
+      <span class="panel__title">Conversion rate optimization</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="integrations.html">
+      <span class="onr__num" aria-hidden="true">06</span>
+      <span class="panel__title">Integrations</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="consulting.html">
+      <span class="onr__num" aria-hidden="true">07</span>
+      <span class="panel__title">Consulting</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+    <li class="onr__li"><a class="panel__item onr__row" href="reports.html">
+      <span class="onr__num" aria-hidden="true">08</span>
+      <span class="panel__title">Reports</span>
+      <span class="onr__lead" aria-hidden="true"></span>
+      <span class="panel__desc">What ran, what it cost, what it returned.</span>
+      <svg class="onr__go" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 5 3 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a></li>
+  </ol>
+</div>
+    </div>
+  </div>
+  <div class="opt__meta">
+    <div><h3>Trade-offs</h3><p>Measured, not estimated — rendered headless at 1920/1440/1180/1024/768/375 against the real token sheet.
+
+1. HORIZONTAL TRAVEL IS THE COST. At the live 1830px panel the eye crosses ~1200px of leader from "Reports" to its description. The dotted rule mitigates that; it does not remove it. The control's 2×4 grid keeps each title/description pair inside one saccade and this does not. If the owner's complaint is literally "too much empty space", this organizes the space rather than filling it.
+
+2. IT DOES NOT MAKE THE PANEL SMALLER. Measured side by side at 1830px: control 465.2px tall, this option 484.5px — it is 19px TALLER. The row band is denser but the panel is not shorter, so anyone expecting the flyout to shrink will be disappointed.
+
+3. RIGHT-SET DESCRIPTIONS ARE A TABLE-OF-CONTENTS CONVENTION, NOT A NAV ONE. Eight ragged-left lines are slower to read individually than left-aligned copy. This option wins at scanning the title column and the count; it loses at reading any one description.
+
+4. THE NUMBERS IMPLY A RANKING. 01–08 makes the DOM order look like a priority order — "Performance marketing" reads as the flagship and "Reports" as the afterthought. That may be exactly right or exactly wrong; it is a positioning decision the layout makes on the owner's behalf. If the eight are meant to be peers, the numbers are the wrong device and this option should lose.
+
+5. THE DISTINCTIVE LOOK IS DESKTOP-ONLY. Below 1180px the leader is dropped and it degrades to a stacked list that is close to today's layout minus a column. The live panel is display:none under 1024px anyway, so this only bites in the 1024–1180 band — but between those widths the option has no advantage left over the control.
+
+6. THE NUMBERS CARRY NO DATA. They are aria-hidden and the real count is carried by the &lt;ol&gt;. They buy "this set is legibly finite" and nothing more, which is a modest return for eight new glyphs.
+
+7. ONE ELEMENT ADDED BEYOND THE CONTROL: the "01–08" marker beside the eyebrow, which mildly duplicates the note's "Eight service pages." Cut that span if it reads redundant — the layout is unaffected.
+
+Also worth flagging: the first line of the CSS (position/opacity/visibility/transform) is a comparison-page shim to defeat the base .rail-panel hidden state. It must be deleted when the winner is merged, or the flyout will render permanently open.</p></div>
+    <div><h3>Contrast</h3><p>All ratios below are computed from the rendered page's own computed styles in headless Chromium, not from the token comments.
+
+REST — ground is --ds-bg-surface-2, measured rgb(34,36,41):
+  .panel__title  --ds-ink-heading  = 15.53:1
+  .panel__desc   --ds-ink-soft     =  5.87:1
+  .panel__note   --ds-ink-soft     =  5.87:1
+  .onr__num      --ds-accent-ink   =  4.91:1
+  .onr__go       --ds-ink-soft     =  5.87:1 (decorative, but clears text AA anyway)
+
+HOVER / FOCUS — ground is --ds-bg-warm, measured rgb(27,29,34):
+  title 16.86:1 · desc 6.37:1 (it is lifted to --ds-ink, higher still) · number 5.33:1
+
+The key choice: the hover ground RECESSES to plane 1 instead of lightening. That was deliberate. I tested --ds-accent-soft as the hover ground first — composited at 10% over plane 2 it resolves to roughly rgb(45,39,60), which puts --ds-accent-ink at ~4.52:1, sitting on the 4.5 floor with no headroom against a rounding error. --ds-bg-warm moves every ratio in the safe direction, so no state on this component is ever closer to the floor than its rest state.
+
+The tightest pair in the whole option is therefore the number at rest, --ds-accent-ink on --ds-bg-surface-2 at 4.91:1. It clears AA for small text with real margin, and it is the only accent-on-dark pairing used — --ds-accent (#8d3fe8) is never used as text anywhere here, only --ds-accent-ink and, on hover, the brighter --ds-accent-on-deep.
+
+Non-text: the 2px left index bar is --ds-accent-ink on --ds-bg-warm = 5.26:1, well over the 3:1 non-text floor. The hairlines (--ds-hairline, --ds-line) are decorative structure and are intentionally sub-3:1, matching the existing rail's hairline language exactly.</p></div>
+  </div>
+  <style>
+/* ===== OPTION: NUMBERED INDEX ROWS =====
+   Scoped entirely under .opt-numbered-rows. Requires dispenza-tokens.css.
+   Reuses .panel__head / .panel__eyebrow / .panel__note / .panel__item /
+   .panel__title / .panel__desc; new classes are prefixed .onr__ . */
+
+.opt-numbered-rows{
+  /* Comparison-page display shim: the live .rail-panel is absolute + hidden
+     until .is-open. Delete this one line when the winner is merged back into
+     the real flyout. Everything below it is the option itself. */
+  position:static;opacity:1;visibility:visible;transform:none;
+
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-lg);
+}
+
+/* --- Head. The right padding equals arrow + gap + row padding, so the note's
+   right edge lands on exactly the same rule as every description's. --- */
+.opt-numbered-rows .panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--ds-space-md);
+  margin-inline:calc(-1 * var(--ds-space-sm));
+  padding:0 calc(var(--ds-space-sm) + var(--ds-space-md) + var(--ds-space-sm)) var(--ds-space-sm) var(--ds-space-sm);
+  margin-bottom:0;
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-numbered-rows .panel__eyebrow{
+  display:inline-flex;align-items:baseline;gap:var(--ds-space-xs);
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.opt-numbered-rows .onr__range{
+  font-variant-numeric:tabular-nums;letter-spacing:.1em;
+  color:var(--ds-ink-soft);
+}
+.opt-numbered-rows .panel__note{
+  font-family:var(--ds-font-body);font-size:13px;line-height:1.5;
+  color:var(--ds-ink-soft);text-align:right;
+}
+
+/* --- The index. Bled 14px either side so every rule (head, separators, close)
+   is one length, and the hover ground aligns with them exactly. --- */
+.opt-numbered-rows .onr__list{
+  list-style:none;margin:0;padding:0;
+  margin-inline:calc(-1 * var(--ds-space-sm));
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-numbered-rows .onr__li + .onr__li{border-top:1px solid var(--ds-hairline)}
+
+.opt-numbered-rows .panel__item{
+  position:relative;isolation:isolate;
+  display:grid;align-items:baseline;
+  grid-template-columns:auto minmax(0,max-content) minmax(var(--ds-space-lg),1fr) minmax(0,max-content) auto;
+  column-gap:var(--ds-space-md);
+  padding:calc(var(--ds-space-xs) + var(--ds-space-2xs)) var(--ds-space-sm);
+  border:0;border-radius:0;
+  text-decoration:none;
+  transition:none;
+}
+/* Whole-row ground. Recesses to plane 1 rather than lighting up, so every
+   contrast ratio on the row RISES on hover. No glow. */
+.opt-numbered-rows .panel__item::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  border-radius:var(--ds-r-control);
+  background:var(--ds-bg-warm);
+  opacity:0;
+  transition:opacity var(--ds-dur-fast) var(--ds-ease-out);
+}
+/* Left index bar. 2px, the rail's pill corner, no shadow. */
+.opt-numbered-rows .panel__item::before{
+  content:"";position:absolute;z-index:-1;
+  left:0;top:var(--ds-space-2xs);bottom:var(--ds-space-2xs);
+  width:2px;border-radius:var(--ds-r-pill);
+  background:var(--ds-accent-ink);
+  transform:scaleY(0);transform-origin:50% 50%;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-numbered-rows .panel__item:hover::after,
+.opt-numbered-rows .panel__item:focus-visible::after{opacity:1}
+.opt-numbered-rows .panel__item:hover::before,
+.opt-numbered-rows .panel__item:focus-visible::before{transform:scaleY(1)}
+.opt-numbered-rows .panel__item:hover,
+.opt-numbered-rows .panel__item:focus-visible{transform:none;background:transparent;border-color:transparent}
+/* Inset ring: a full-bleed row would clip an outward-offset outline. */
+.opt-numbered-rows .panel__item:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:calc(-1 * var(--ds-space-2xs) / 2);
+  border-radius:var(--ds-r-control);
+}
+
+.opt-numbered-rows .onr__num{
+  grid-column:1;grid-row:1;
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;line-height:1.6;
+  letter-spacing:.1em;font-variant-numeric:tabular-nums;
+  color:var(--ds-accent-ink);
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-numbered-rows .panel__title{
+  display:block;grid-column:2;grid-row:1;
+  font-family:var(--ds-font-display);font-size:16px;font-weight:600;line-height:1.25;
+  letter-spacing:-.005em;color:var(--ds-ink-heading);
+  margin:0;
+}
+/* Dotted, so it never reads as another row separator. */
+.opt-numbered-rows .onr__lead{
+  grid-column:3;grid-row:1;
+  align-self:center;height:0;min-width:var(--ds-space-lg);
+  border-top:1px dotted var(--ds-line);
+  transition:border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-numbered-rows .panel__desc{
+  display:block;margin:0;grid-column:4;grid-row:1;
+  font-family:var(--ds-font-body);font-size:14px;line-height:1.5;
+  color:var(--ds-ink-soft);text-align:right;
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-numbered-rows .onr__go{
+  grid-column:5;grid-row:1;
+  align-self:center;
+  width:var(--ds-space-sm);height:var(--ds-space-sm);flex:0 0 auto;
+  color:var(--ds-ink-soft);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-numbered-rows .panel__item:hover .onr__num,
+.opt-numbered-rows .panel__item:focus-visible .onr__num{color:var(--ds-accent-on-deep)}
+.opt-numbered-rows .panel__item:hover .onr__lead,
+.opt-numbered-rows .panel__item:focus-visible .onr__lead{border-color:var(--ds-ink-soft)}
+.opt-numbered-rows .panel__item:hover .panel__desc,
+.opt-numbered-rows .panel__item:focus-visible .panel__desc{color:var(--ds-ink)}
+.opt-numbered-rows .panel__item:hover .onr__go,
+.opt-numbered-rows .panel__item:focus-visible .onr__go{color:var(--ds-accent-ink);transform:translateX(3px)}
+
+/* Below ~1180 the leader has no room to earn its keep: drop it and stack the
+   description under the title. Number rail and arrow hold their positions. */
+@media (max-width:1180px){
+  .opt-numbered-rows .panel__head{
+    padding-right:calc(var(--ds-space-sm) + var(--ds-space-sm) + var(--ds-space-sm));
+  }
+  .opt-numbered-rows .panel__item{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    row-gap:var(--ds-space-2xs);
+    column-gap:var(--ds-space-sm);
+  }
+  .opt-numbered-rows .onr__lead{display:none}
+  .opt-numbered-rows .panel__desc{grid-column:2;grid-row:2;text-align:left}
+  .opt-numbered-rows .onr__go{grid-column:3;grid-row:1 / 3;align-self:center}
+}
+@media (max-width:640px){
+  .opt-numbered-rows{padding:var(--ds-space-md)}
+  .opt-numbered-rows .panel__head{flex-direction:column;align-items:flex-start;gap:var(--ds-space-2xs)}
+  .opt-numbered-rows .panel__note{text-align:left}
+}
+/* No information is lost: the index bar is shown/hidden by opacity instead of
+   scale, and the arrow stops travelling. */
+@media (prefers-reduced-motion:reduce){
+  .opt-numbered-rows .panel__item::before{transform:scaleY(1);opacity:0}
+  .opt-numbered-rows .panel__item:hover::before,
+  .opt-numbered-rows .panel__item:focus-visible::before{opacity:1;transform:scaleY(1)}
+  .opt-numbered-rows .onr__go{transition:color 1ms}
+  .opt-numbered-rows .panel__item:hover .onr__go,
+  .opt-numbered-rows .panel__item:focus-visible .onr__go{transform:none}
+}
+  </style>
+</section>
+
+<section class="opt" id="opt-6">
+  <div class="opt__head">
+    <span class="opt__n">Option 6</span>
+    <h2 class="opt__name">Master + Detail Rail</h2>
+  </div>
+  <p class="opt__why">The current 2x4 spends its whole width on eight equal-weight text blocks, so nothing leads and the eye has to read all sixteen lines to find one page. This puts the eight titles in one tight scannable column on the left (a nav index you read in one pass) and gives the right two-thirds to a single detail pane that fills with the pointed-at service — turning the dead width into one focal surface with a real slot for a future service thumbnail. The resting pane carries the suite framing so the panel is never an empty void, and on touch or any no-hover pointer the whole thing collapses back to a two-column list with every description printed inline, so nothing is ever hidden behind an interaction.</p>
+  <div class="opt__stage" role="group" aria-label="Master + Detail Rail preview">
+    <div class="stage__dock">
+<div class="rail-panel rail-panel--services opt-master-detail" role="region" aria-label="Services">
+
+  <div class="panel__head">
+    <span class="panel__eyebrow">Our suite</span>
+    <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+  </div>
+
+  <div class="omd">
+
+    <a class="panel__item omd__item" data-md="1" href="performance-marketing.html">
+      <span class="omd__idx" aria-hidden="true">01</span>
+      <span>
+        <span class="panel__title">Performance marketing</span>
+        <span class="panel__desc omd__inline">Paid and organic demand for a licensed dispensary.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="2" href="branding-graphic-design.html">
+      <span class="omd__idx" aria-hidden="true">02</span>
+      <span>
+        <span class="panel__title">Brand and package design</span>
+        <span class="panel__desc omd__inline">Identity, packaging and in-store collateral.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="3" href="webdesign-development.html">
+      <span class="omd__idx" aria-hidden="true">03</span>
+      <span>
+        <span class="panel__title">Web design and development</span>
+        <span class="panel__desc omd__inline">Menu-connected sites built to be updated by staff.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="4" href="ads-design.html">
+      <span class="omd__idx" aria-hidden="true">04</span>
+      <span>
+        <span class="panel__title">Advertisement design</span>
+        <span class="panel__desc omd__inline">Creative sized for every placement you actually run.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="5" href="conversion-rate-optimization.html">
+      <span class="omd__idx" aria-hidden="true">05</span>
+      <span>
+        <span class="panel__title">Conversion rate optimization</span>
+        <span class="panel__desc omd__inline">Turning the traffic you already pay for into orders.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="6" href="integrations.html">
+      <span class="omd__idx" aria-hidden="true">06</span>
+      <span>
+        <span class="panel__title">Integrations</span>
+        <span class="panel__desc omd__inline">Menu, POS and loyalty systems talking to each other.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="7" href="consulting.html">
+      <span class="omd__idx" aria-hidden="true">07</span>
+      <span>
+        <span class="panel__title">Consulting</span>
+        <span class="panel__desc omd__inline">Operator-level advice when you run the marketing yourself.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="panel__item omd__item" data-md="8" href="reports.html">
+      <span class="omd__idx" aria-hidden="true">08</span>
+      <span>
+        <span class="panel__title">Reports</span>
+        <span class="panel__desc omd__inline">What ran, what it cost, what it returned.</span>
+      </span>
+      <svg class="omd__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 8l4-3-4-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <div class="omd__pane omd__pane--rest" aria-hidden="true">
+      <div class="omd__thumb"></div>
+      <span class="omd__kicker">Eight services</span>
+      <p class="omd__paneTitle">The whole suite, one ladder</p>
+      <p class="omd__paneDesc">Point at a service to read what it covers. Pricing for all eight sits on one page.</p>
+    </div>
+
+    <div class="omd__pane" data-md="1" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">01</span></div>
+      <span class="omd__kicker">01 / 08</span>
+      <p class="omd__paneTitle">Performance marketing</p>
+      <p class="omd__paneDesc">Paid and organic demand for a licensed dispensary.</p>
+    </div>
+
+    <div class="omd__pane" data-md="2" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">02</span></div>
+      <span class="omd__kicker">02 / 08</span>
+      <p class="omd__paneTitle">Brand and package design</p>
+      <p class="omd__paneDesc">Identity, packaging and in-store collateral.</p>
+    </div>
+
+    <div class="omd__pane" data-md="3" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">03</span></div>
+      <span class="omd__kicker">03 / 08</span>
+      <p class="omd__paneTitle">Web design and development</p>
+      <p class="omd__paneDesc">Menu-connected sites built to be updated by staff.</p>
+    </div>
+
+    <div class="omd__pane" data-md="4" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">04</span></div>
+      <span class="omd__kicker">04 / 08</span>
+      <p class="omd__paneTitle">Advertisement design</p>
+      <p class="omd__paneDesc">Creative sized for every placement you actually run.</p>
+    </div>
+
+    <div class="omd__pane" data-md="5" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">05</span></div>
+      <span class="omd__kicker">05 / 08</span>
+      <p class="omd__paneTitle">Conversion rate optimization</p>
+      <p class="omd__paneDesc">Turning the traffic you already pay for into orders.</p>
+    </div>
+
+    <div class="omd__pane" data-md="6" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">06</span></div>
+      <span class="omd__kicker">06 / 08</span>
+      <p class="omd__paneTitle">Integrations</p>
+      <p class="omd__paneDesc">Menu, POS and loyalty systems talking to each other.</p>
+    </div>
+
+    <div class="omd__pane" data-md="7" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">07</span></div>
+      <span class="omd__kicker">07 / 08</span>
+      <p class="omd__paneTitle">Consulting</p>
+      <p class="omd__paneDesc">Operator-level advice when you run the marketing yourself.</p>
+    </div>
+
+    <div class="omd__pane" data-md="8" aria-hidden="true">
+      <div class="omd__thumb"><span class="omd__ghost">08</span></div>
+      <span class="omd__kicker">08 / 08</span>
+      <p class="omd__paneTitle">Reports</p>
+      <p class="omd__paneDesc">What ran, what it cost, what it returned.</p>
+    </div>
+
+  </div>
+</div>
+    </div>
+  </div>
+  <div class="opt__meta">
+    <div><h3>Trade-offs</h3><p>1. On touch and on any no-hover pointer this degrades to essentially the layout being replaced — a two-column list with all eight descriptions inline. The new idea only exists for mouse and trackpad users; a touch-laptop visitor sees the control. 2. The detail pane's biggest element is a PLACEHOLDER plate. Until someone actually produces eight service thumbnails, this option may read as MORE empty than the current 2x4, not less — it is only fully worth choosing if the thumbnails get made. 3. Real information-density loss: on desktop you can now read exactly one description at a time. The current 2x4 lets an operator compare all eight jobs in a single glance, which is arguably what a nav flyout is for. 4. No sticky selection. Because it is CSS-only (the chrome carrier is locked and I added no JS), sweeping the pointer off the list snaps back to the resting pane, so a diagonal mouse path toward the stage makes the pane flip back. A click-to-pin would fix it but means adding behaviour to the locked chrome script. 5. It is taller than the control at desktop (measured 487px at 1440 and 1920) because the pane, not the list, sets the height. 6. The 01-08 ordinals add scanning rhythm and tie the row to its pane, but they imply an order that is not a ranking — if that reads as "performance marketing is our #1", cut them. 7. The panes are aria-hidden decoration: screen readers get title + description from the link itself, so nine pane blocks carry zero unique content — correct for accessibility, but it is duplicated markup. 8. Sixteen index-paired selectors mean a ninth service needs a CSS edit, not just a markup edit.</p></div>
+    <div><h3>Contrast</h3><p>Measured against the rendered computed colours, not assumed. Panel ground is --ds-bg-surface-2 (#222429); the detail pane and the active row both sit on --ds-bg-warm (#1b1d22), which is what visually links a row to its pane. Ratios: row title --ds-ink-heading on panel ground 15.53:1 and on the active row 16.86:1; --ds-panel__desc / pane description --ds-ink-soft 5.87:1 on the panel ground (the state where it is visible, i.e. touch/narrow) and 6.37:1 on the pane ground; row ordinal --ds-ink-soft 5.87:1, and 5.33:1 when it turns --ds-accent-ink on the active row; head eyebrow --ds-accent-ink on panel ground 4.91:1; pane kicker --ds-accent-ink on pane ground 5.33:1. All body text therefore clears 4.5:1 with margin. Two deliberate non-body-text uses: (1) raw --ds-accent (#8d3fe8) is only 2.96:1 on this ground so it is never used as text — it is only the 2px selected-row marker bar and that is a non-text indicator; (2) the focus ring is --ds-accent-ink at 4.91:1 against the panel ground, well over the 3:1 non-text floor. One honest exception: the placeholder numeral inside the thumbnail plate is --ds-accent-ink at --ds-opacity-muted over --ds-bg-surface, computing to roughly 3.4:1 — that clears the 3:1 large-text floor at 40px but not 4.5:1. It is decorative, aria-hidden, duplicated at full contrast by the pane kicker, and it disappears the moment a real thumbnail replaces it.</p></div>
+  </div>
+  <style>
+/* ============================================================================
+   OPTION: MASTER + DETAIL  (root scope: .opt-master-detail)
+   Every rule is scoped to .opt-master-detail. Every colour, space, radius and
+   duration is a var(--ds-*). No JS: the pane switch is a sibling selector, so
+   it works with the LOCKED chrome script untouched.
+   ========================================================================== */
+
+/* --- root -------------------------------------------------------------- */
+.rail-panel.opt-master-detail{
+  position:relative; left:auto; right:auto; top:auto;
+  display:block;                 /* comparison-page only: defeats the <1024px .rail-panel hide */
+  opacity:1; visibility:visible; transform:none;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-lg);
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink);
+}
+.opt-master-detail a{text-decoration:none;color:inherit}
+.opt-master-detail *{box-sizing:border-box}
+
+/* --- head (unchanged from the control, so options compare like-for-like) -- */
+.opt-master-detail .panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-sm);margin-bottom:var(--ds-space-md);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.opt-master-detail .panel__eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.opt-master-detail .panel__note{font-size:13px;color:var(--ds-ink-soft)}
+
+/* --- BODY: default (touch / narrow / no-hover) = two columns of four,
+       every description printed inline. This is the degraded state and it
+       loses nothing: 8 titles + 8 descriptions, all visible, no stage. ----- */
+.opt-master-detail .omd{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:var(--ds-space-lg);
+  row-gap:var(--ds-space-2xs);
+}
+.opt-master-detail .omd__pane{display:none}
+
+.opt-master-detail .omd__item{
+  position:relative;
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:start;gap:var(--ds-space-sm);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border:1px solid transparent;border-radius:var(--ds-r-control);
+  transition:background-color var(--ds-dur-fast) var(--ds-ease-out),
+             border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-master-detail .omd__item:hover{background:var(--ds-bg-warm);border-color:var(--ds-line);transform:none}
+.opt-master-detail .omd__item:focus-visible{
+  outline:2px solid var(--ds-accent-ink);outline-offset:2px;
+  background:var(--ds-bg-warm);border-color:var(--ds-line);
+}
+.opt-master-detail .omd__item::before{
+  content:"";position:absolute;left:0;top:var(--ds-space-xs);bottom:var(--ds-space-xs);
+  width:2px;border-radius:var(--ds-r-pill);background:var(--ds-accent);
+  opacity:0;transition:opacity var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-master-detail .omd__item:hover::before,
+.opt-master-detail .omd__item:focus-visible::before{opacity:1}
+
+.opt-master-detail .omd__idx{
+  min-width:22px;
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.12em;line-height:1.7;color:var(--ds-ink-soft);
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-master-detail .omd__item:hover .omd__idx,
+.opt-master-detail .omd__item:focus-visible .omd__idx{color:var(--ds-accent-ink)}
+
+.opt-master-detail .panel__title{
+  display:block;font-family:var(--ds-font-display);font-size:16px;font-weight:600;
+  line-height:1.35;letter-spacing:-.005em;color:var(--ds-ink-heading);
+}
+.opt-master-detail .panel__desc{
+  display:block;margin-top:var(--ds-space-2xs);
+  font-size:13px;line-height:1.5;color:var(--ds-ink-soft);
+}
+.opt-master-detail .omd__arrow{
+  width:10px;height:10px;flex:0 0 auto;margin-top:6px;color:var(--ds-accent-ink);
+  opacity:0;transition:opacity var(--ds-dur-fast) var(--ds-ease-out);
+}
+.opt-master-detail .omd__item:hover .omd__arrow,
+.opt-master-detail .omd__item:focus-visible .omd__arrow{opacity:1}
+
+/* --- ENHANCED: pointer devices that can actually hover, wide enough for the
+       flyout. Master column on the left, one detail pane on the right. ----- */
+@media (min-width:1024px) and (hover:hover) and (pointer:fine){
+  .opt-master-detail .omd{
+    grid-template-columns:minmax(300px,420px) minmax(0,1fr);
+    grid-template-rows:repeat(8,auto);
+    column-gap:var(--ds-space-lg);
+  }
+  .opt-master-detail .omd__item{grid-column:1;align-items:center}
+
+  /* the description stays in the DOM inside its own link - it is only made
+     visually silent here, so screen readers still get title + description. */
+  .opt-master-detail .omd__inline{
+    position:absolute;width:1px;height:1px;padding:0;margin:0;
+    overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+  }
+
+  /* every pane occupies the same cell. They are opaque and z-ordered, so a
+     keyboard focus parked on one row and a pointer resting on another can
+     never paint two panes on top of each other: hover (2) beats focus (1)
+     beats the resting pane (0). */
+  .opt-master-detail .omd__pane{
+    display:flex;flex-direction:column;grid-column:2;grid-row:1/-1;
+    position:relative;z-index:0;
+    padding:var(--ds-space-md);
+    background:var(--ds-bg-warm);
+    border:1px solid var(--ds-hairline);
+    border-radius:var(--ds-r-surface);
+    opacity:0;visibility:hidden;
+    transition:opacity var(--ds-dur-fast) var(--ds-ease-out),
+               visibility var(--ds-dur-fast) var(--ds-ease-out);
+  }
+  /* resting state - never an empty void */
+  .opt-master-detail .omd__pane--rest{opacity:1;visibility:visible}
+
+  .opt-master-detail .omd__item[data-md="1"]:focus-visible ~ .omd__pane[data-md="1"],
+  .opt-master-detail .omd__item[data-md="2"]:focus-visible ~ .omd__pane[data-md="2"],
+  .opt-master-detail .omd__item[data-md="3"]:focus-visible ~ .omd__pane[data-md="3"],
+  .opt-master-detail .omd__item[data-md="4"]:focus-visible ~ .omd__pane[data-md="4"],
+  .opt-master-detail .omd__item[data-md="5"]:focus-visible ~ .omd__pane[data-md="5"],
+  .opt-master-detail .omd__item[data-md="6"]:focus-visible ~ .omd__pane[data-md="6"],
+  .opt-master-detail .omd__item[data-md="7"]:focus-visible ~ .omd__pane[data-md="7"],
+  .opt-master-detail .omd__item[data-md="8"]:focus-visible ~ .omd__pane[data-md="8"]{opacity:1;visibility:visible;z-index:1}
+  .opt-master-detail .omd__item:focus-visible ~ .omd__pane--rest{opacity:0;visibility:hidden}
+
+  .opt-master-detail .omd__item[data-md="1"]:hover ~ .omd__pane[data-md="1"],
+  .opt-master-detail .omd__item[data-md="2"]:hover ~ .omd__pane[data-md="2"],
+  .opt-master-detail .omd__item[data-md="3"]:hover ~ .omd__pane[data-md="3"],
+  .opt-master-detail .omd__item[data-md="4"]:hover ~ .omd__pane[data-md="4"],
+  .opt-master-detail .omd__item[data-md="5"]:hover ~ .omd__pane[data-md="5"],
+  .opt-master-detail .omd__item[data-md="6"]:hover ~ .omd__pane[data-md="6"],
+  .opt-master-detail .omd__item[data-md="7"]:hover ~ .omd__pane[data-md="7"],
+  .opt-master-detail .omd__item[data-md="8"]:hover ~ .omd__pane[data-md="8"]{opacity:1;visibility:visible;z-index:2}
+  .opt-master-detail .omd__item:hover ~ .omd__pane--rest{opacity:0;visibility:hidden}
+}
+
+/* --- detail pane internals. .omd__thumb is the slot a real service thumbnail
+       drops into later; today it is a hairline-framed plate carrying the
+       brand's own grid texture. -------------------------------------------- */
+.opt-master-detail .omd__thumb{
+  width:100%;flex:1 1 auto;min-height:clamp(112px,9vw,168px);
+  display:grid;place-items:center;overflow:hidden;
+  border:1px solid var(--ds-hairline);border-radius:var(--ds-r-control);
+  background-color:var(--ds-bg-surface);
+  background-image:var(--ds-grid);background-size:var(--ds-grid-size);
+}
+.opt-master-detail .omd__ghost{
+  font-family:var(--ds-font-display);font-size:40px;font-weight:700;letter-spacing:.06em;
+  color:var(--ds-accent-ink);opacity:var(--ds-opacity-muted);
+}
+.opt-master-detail .omd__kicker{
+  display:block;margin-top:var(--ds-space-md);
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.opt-master-detail .omd__paneTitle{
+  margin:var(--ds-space-xs) 0 0;
+  font-family:var(--ds-font-display);font-size:20px;font-weight:600;
+  line-height:1.25;letter-spacing:-.01em;color:var(--ds-ink-heading);
+}
+.opt-master-detail .omd__paneDesc{
+  margin:var(--ds-space-xs) 0 0;max-width:56ch;
+  font-size:15px;line-height:1.6;color:var(--ds-ink-soft);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .opt-master-detail .omd__item,
+  .opt-master-detail .omd__item::before,
+  .opt-master-detail .omd__arrow,
+  .opt-master-detail .omd__idx,
+  .opt-master-detail .omd__pane{transition:none}
+}
+  </style>
+</section>
+
+  <section class="verdict" id="verdict">
+    <p class="eyebrow">Independent scoring</p>
+    <table class="score"><tr><th>#</th><th>Option</th><th>Scan</th><th>Brand fit</th><th>Space use</th><th>Robustness</th><th>Build cost</th><th>Total /25</th></tr><tr><td><strong>1</strong></td><td><strong>Four-Column Index</strong></td><td><strong>5</strong></td><td>4</td><td><strong>4</strong></td><td><strong>5</strong></td><td>4</td><td><strong>22</strong></td></tr><tr><td>2</td><td>Semantic clusters</td><td>4</td><td><strong>5</strong></td><td>3</td><td><strong>5</strong></td><td>4</td><td>21</td></tr><tr><td>5</td><td>List + standing panel</td><td>3</td><td>4</td><td>3</td><td>4</td><td>3</td><td>17</td></tr><tr><td>3</td><td>Featured + List</td><td>3</td><td>3</td><td>4</td><td>4</td><td>2</td><td>16</td></tr><tr><td>4</td><td>Numbered index 01–08</td><td>2</td><td>3</td><td>2</td><td>4</td><td>3</td><td>14</td></tr><tr><td>6</td><td>Master + Detail Rail</td><td>2</td><td>3</td><td>2</td><td>2</td><td>1</td><td>10</td></tr></table>
+    <p><strong>Verified this turn</strong> (real source, not the briefs): <code>dispenza-tokens.css:204 --ds-container-max:1120px</code> · <code>dispenza-chrome.css:65 .rail-dock{max-width:var(--ds-container-max)}</code> · <code>:170 .rail-panel--services{left:0;right:0}</code> · <code>:430 @media(max-width:1023px){.rail-panel{display:none}}</code>. <strong>The panel is ~1120px wide, never 1830px.</strong> Option 1 and Option 5 sized their case at the real width; Options 2 and 3 argued theirs at 1830px, so their "fills the width / cuts line length" numbers are unverified at the width that actually ships.</p>
+
+
+
+
+
+
+
+
+
+
+<p><strong>Constraint flags.</strong> Option 6 fails "every one of the eight must be visible at once" in spirit and in effect: on desktop seven of eight descriptions are hover-gated, so the panel shows one description at a time, and its largest element is a thumbnail plate that does not exist yet — it is a hover-flyout nested inside a hover-flyout that snaps back on a diagonal mouse path. Reject it. Option 4 self-reports as *taller* than the control (484px vs 465px) — it reorganises emptiness instead of removing it, and dotted leaders are a table-of-contents device, not dark-glass-rail language. Option 3 introduces four strings that exist nowhere in the source ("Lead service", "Paid", "Organic", "Open the service page") and hard-codes a flagship claim into nav structure; no stated rule is broken, but it is the only option that puts unbriefed marketing copy and the chrome's first large saturated surface into a nav flyout. Option 5's CTA duplicates the Book demo button sitting ~60px above it. No option uses a carousel or autoplay; all six keep real <code><a></code> elements and focus rings.</p>
+
+<p><strong>Recommendation: Option 1, Four-Column Index.</strong> It is the only option that answers the actual complaint with a measured result at the real 1120px width — 465px → 257px, one horizontal sweep for all eight, structure supplied by the same <code>--ds-hairline</code> the head divider already uses, and no new copy, no new claim, no hover dependency.</p>
+
+<p><strong>Runner-up: Option 2, Semantic clusters</strong> — it is the only option that adds genuine wayfinding rather than rearranging boxes. <strong>Graft from it:</strong> its labelled-cluster idea, used to kill Option 1's 01–08 numerals. Four of the six options number the services and every one of them admits the numerals imply a ranking that does not exist; replacing them with a small uppercase label per column (e.g. Demand: Performance marketing + Advertisement design · Convert: CRO + Brand and package design · Build: Web design + Integrations · Know: Reports + Consulting) keeps the four-column scan, removes the false hierarchy, and gives the index the meaning the flat 2×4 lacks. That pairing is an editorial claim and needs the owner's sign-off before it ships. Two Option-1 risks to close first: "Web design and development" clears its column by 3px at 1120px (any copy or font change wraps it), and the 12.5px description size is at the floor for a nav.</p>
+  </section>
+
+</div>
+</body>
+</html>

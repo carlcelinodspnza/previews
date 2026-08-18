@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dispenza — case studies layout options</title>
+<link rel="stylesheet" href="../dispenza-fonts.css">
+<link rel="stylesheet" href="../dispenza-tokens.css">
+<link rel="stylesheet" href="../_tournament/foundation-1-measured-column/dispenza-structural.css">
+<style>
+  body{background:var(--ds-bg-surface);color:var(--ds-ink);font-family:var(--ds-font-body);margin:0}
+  .wrap{max-width:var(--ds-container-max);margin:0 auto;padding:var(--ds-space-2xl) var(--ds-space-md)}
+  .lede{border-bottom:1px solid var(--ds-line);padding-bottom:var(--ds-space-lg);margin-bottom:var(--ds-space-2xl)}
+  .lede h1{font-family:var(--ds-font-display);font-size:var(--ds-step-head);font-weight:800;
+    letter-spacing:-.028em;margin:0 0 var(--ds-space-sm);color:var(--ds-ink-heading);text-transform:uppercase}
+  .lede p{margin:0 0 var(--ds-space-sm);color:var(--ds-ink-soft);font-size:var(--ds-step-body);line-height:1.7;max-width:var(--ds-measure)}
+  .lede code{font-family:var(--ds-font-mono);font-size:var(--ds-step-micro);color:var(--ds-accent-ink)}
+  .opt{padding:var(--ds-space-2xl) 0;border-top:1px solid var(--ds-hairline)}
+  .opt:first-of-type{border-top:0}
+  .opt__title{font-family:var(--ds-font-mono);font-size:var(--ds-step-micro);font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ds-accent-ink);margin:0 0 var(--ds-space-xl)}
+  .opt__missing{color:var(--ds-ink-soft);font-family:var(--ds-font-mono)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="lede">
+    <h1>Case studies — layout options</h1>
+    <p>Four layouts for the section the source runs after pricing, built for real against the locked
+    tokens. All eight figures were read from the source capture and each one confirmed present in
+    <code>_handoff/fact-registry.json</code>.</p>
+    <p><strong>Note on attribution:</strong> the decisions-ledger records <code>O4</code> as an open
+    owner-data gap — the client logos carry <code>alt=""</code> and the per-client NAME claims are
+    still unconfirmed. So no client is NAMED in any of these layouts; the logo is the only reference,
+    and it is marked decorative. Confirming those names is an owner sign-off before publish.</p>
+  </div>
+<style>
+/* A · SOURCE-FAITHFUL — violet stat cap over a dark logo well.
+   OPTIMISES FOR recognition: this is the source's own two-tone device (its Group_1.webp is
+   literally a violet block sitting on a dark block in the elevated-surface tone), rebuilt in
+   the locked tokens, so the owner reads it as "our site" before reading it as a layout.
+   Four peers, no ranking, no scrolling.
+   GIVES UP narrative and figure scale — at 4-across each card is ~214px of usable width, which
+   caps the figures at body size, so the numbers inform rather than shout.
+   WRONG CHOICE when the section must carry the argument on its own: it presents eight numbers
+   with no context, no client named, and nothing to click, so it cannot convert a cold reader. */
+
+/* BORDER-BOX, SCOPED TO THIS OPTION ONLY. The comparison harness ships no global reset,
+   so these elements inherit content-box and every min-height below would silently mean
+   "content height" — measured, the cap rendered 220px against a declared 172px, its own
+   padding added on top. Stating it here makes the numbers mean what they say AND stops the
+   geometry shifting if a border-box reset is ever added upstream. The universal selector is
+   scoped under .cs-band, so it cannot reach a sibling option. */
+.cs-band, .cs-band *{ box-sizing:border-box; }
+
+.cs-band__inner{ max-width:var(--ds-container-max); margin-inline:auto; }
+
+/* ── section head ─────────────────────────────────────────────────────────────
+   .mc-head / .mc-head__turn are the page's existing pattern — used, never restyled. */
+.cs-band__standfirst{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:700;
+  line-height:1.22;
+  letter-spacing:-.018em;
+  color:var(--ds-ink);
+  margin:var(--ds-space-md) 0 0;
+  max-width:var(--ds-measure);
+  text-wrap:balance;
+}
+.cs-band__lede{
+  font-family:var(--ds-font-body);
+  font-size:var(--ds-step-body);
+  line-height:1.72;
+  color:var(--ds-ink-soft);        /* measured 6.83:1 on the page ground */
+  margin:var(--ds-space-sm) 0 0;
+  max-width:var(--ds-measure);
+}
+
+/* ── the row ──────────────────────────────────────────────────────────────────
+   Four across at 1440 (1120 container → 262px per card), two-up at 1024, one at 390.
+   min-width:0 on the items is what stops a long unbroken figure forcing h-overflow. */
+.cs-band__list{
+  list-style:none;
+  margin:var(--ds-space-xl) 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--ds-space-md);
+}
+.cs-band__item{ min-width:0; display:flex; }
+
+/* ── the card: ONE radius, ONE shadow, the split clipped by overflow ─────────── */
+.cs-band__card{
+  flex:1 1 auto;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  border-radius:var(--ds-r-surface);
+  overflow:hidden;                 /* clips both halves to the card's corners */
+  box-shadow:var(--ds-shadow-card);
+  border:1px solid var(--ds-line);
+  background:var(--ds-bg-surface-2);
+  transition:box-shadow var(--ds-dur-slow) var(--ds-ease-out),
+             transform  var(--ds-dur-slow) var(--ds-ease-out);
+}
+.cs-band__card:hover{
+  box-shadow:var(--ds-shadow-lift);
+  transform:translateY(-2px);
+}
+
+/* ── the VIOLET CAP ───────────────────────────────────────────────────────────
+   Not the flat bright accent: the same deep-violet shell mix the pricing cards above
+   this section use (--ds-accent-deep 78% / --ds-accent), so the two blocks read as one
+   material. Measured off the PAINTED pixels: --ds-ink-on-dark on this mix is 10.89:1.
+   SOLID, not glass, unlike the pricing shell: the sheet's own note is that frosting the
+   surface under body copy is where glass loses legibility, and this cap is nothing but
+   small text. --ds-inset-hi gives the pane its lit top lip. */
+.cs-band__cap{
+  --cs-band-shell:color-mix(in srgb, var(--ds-accent-deep) 78%, var(--ds-accent));
+  background:var(--cs-band-shell);
+  box-shadow:var(--ds-inset-hi);
+  padding:var(--ds-space-md) var(--ds-space-sm);
+  /* A BINDING common height, not a hopeful one. The figure strings wrap to different line
+     counts (measured 1-2 lines each at 262px, so the block runs 75-120px), which would leave
+     every card's logo on a different centre line. 196px clears the TALLEST measured block
+     (120 + 48 padding = 168), so the floor binds on all four and the alignment is guaranteed
+     by construction rather than by the strings happening to match. */
+  min-height:196px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cs-band__figs{
+  list-style:none;
+  margin:0;
+  padding:0;
+  width:100%;
+}
+/* THE TWO FIGURES ARE PEERS, and that is a deliberate departure from the source.
+   The source sets the first figure at 13px and the second at 24px, which makes the
+   numerically SMALLER figure the hero in two of the four cards (110% over 480%,
+   161% over 180%). Ranking them would be inventing an emphasis the data does not
+   support, so both lines carry equal weight and a hairline marks the pair. */
+.cs-band__fig{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body);
+  font-weight:700;
+  line-height:1.34;
+  letter-spacing:-.012em;
+  color:var(--ds-ink-on-dark);
+  text-align:center;
+  text-wrap:balance;
+  margin:0;
+}
+.cs-band__fig + .cs-band__fig{
+  margin-top:var(--ds-space-sm);
+  padding-top:var(--ds-space-sm);
+  border-top:1px solid color-mix(in srgb, var(--ds-accent-light) 38%, transparent);
+}
+
+/* ── the DARK LOGO WELL ───────────────────────────────────────────────────────
+   --ds-bg-surface-2 resolves to exactly the tone the source's own device uses for this half —
+   verified by reading the painted background off both and comparing. */
+.cs-band__well{
+  flex:1 1 auto;
+  background:var(--ds-bg-surface-2);
+  border-top:1px solid var(--ds-hairline);
+  padding:var(--ds-space-md) var(--ds-space-sm);
+  /* keeps the split near the source's 50/50 — the well's own content only needs 153px,
+     which against a 196px cap would read as a lid on a tray rather than as two halves */
+  min-height:168px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+/* ONE BOX FOR EVERY MARK so the four logos sit on a common centre line. The box is
+   shorter than the tallest rendered mark on purpose — an oversized child in a centred
+   flex box overflows symmetrically into the well's own padding without moving anything,
+   and the card's overflow:hidden is the backstop. */
+.cs-band__logo{
+  width:100%;
+  height:104px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cs-band__mark{
+  display:block;
+  width:auto;
+  max-width:100%;
+  /* per-mark height, set below. Every mark ends up DOWNscaled from its source pixels. */
+}
+
+/* PER-MARK SIZING, keyed by POSITION only (no client is identified anywhere).
+   These four files are PADDED canvases, not cropped marks, so one shared height sizes the
+   padding instead of the artwork — measured, the ink fills 24% / 100% / 96% / 80% of each
+   canvas's height, so a single height renders one mark 4x the size of another.
+   Normalised on INK AREA (the page's logo marquee normalises the same way), not on height:
+   a first pass balanced ink HEIGHT and rendered correctly but still LOOKED wrong, because
+   the wordmark carried 2.3x the optical mass of the badges at the same cap height. These
+   heights land the four at 1700 / 1212 / 1985 / 1324 ink pixels — a 1.6x spread — with the
+   wordmark wide and short (125x31) and the badges taller and narrower, which is what a
+   logo row is supposed to do. Every mark is DOWNscaled from its source pixels, so none softens. */
+.cs-band__item:nth-child(1) .cs-band__mark{ height:128px; }  /* ink 24% of canvas — wide, short wordmark */
+.cs-band__item:nth-child(2) .cs-band__mark{ height:66px;  }  /* ink 100% of canvas — upright badge */
+.cs-band__item:nth-child(3) .cs-band__mark{ height:54px;  }  /* ink 96% of canvas  */
+.cs-band__item:nth-child(4) .cs-band__mark{ height:80px;  }  /* ink 80% of canvas  */
+
+/* ── responsive ───────────────────────────────────────────────────────────────
+   Two-up from 1100 down (covers 1024), one-up from 620 down (covers 390). */
+@media (max-width:1100px){
+  /* two-up: the card roughly doubles to ~476px, so every figure fits on one or two lines
+     and the block drops to 75px — the cap floor comes down with it. */
+  .cs-band__list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .cs-band__cap{ min-height:160px; }
+  .cs-band__well{ min-height:160px; }
+}
+@media (max-width:620px){
+  /* one-up: nothing has to align across cards any more, so both halves go natural —
+     holding a desktop floor here would only add dead space to a stack four cards tall. */
+  .cs-band__list{ grid-template-columns:minmax(0,1fr); gap:var(--ds-space-sm); }
+  .cs-band__cap{ min-height:0; padding:var(--ds-space-md); }
+  .cs-band__well{ min-height:0; padding:var(--ds-space-md); }
+  /* the whole set scaled to ~0.84 so the ink-area balance above is preserved on a phone */
+  .cs-band__logo{ height:88px; }
+  .cs-band__item:nth-child(1) .cs-band__mark{ height:108px; }
+  .cs-band__item:nth-child(2) .cs-band__mark{ height:56px;  }
+  .cs-band__item:nth-child(3) .cs-band__mark{ height:46px;  }
+  .cs-band__item:nth-child(4) .cs-band__mark{ height:68px;  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cs-band__card{ transition:none; }
+  .cs-band__card:hover{ transform:none; }
+}
+</style>
+
+<section class="opt" id="opt-cs-band">
+  <h2 class="opt__title">A · Source-faithful — violet stat cap over a dark logo well</h2>
+
+  <div class="cs-band">
+    <div class="cs-band__inner">
+
+      <h2 class="mc-head">Case <span class="mc-head__turn">studies</span></h2>
+      <p class="cs-band__standfirst">Long-term relationships built on trust, transparency, &amp; results since 2012</p>
+      <p class="cs-band__lede">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+
+      <ul class="cs-band__list">
+
+        <li class="cs-band__item">
+          <article class="cs-band__card" aria-label="Case study 1 of 4">
+            <div class="cs-band__cap">
+              <ul class="cs-band__figs">
+                <li class="cs-band__fig">350% Direction Request Increase</li>
+                <li class="cs-band__fig">700% Sales Increase</li>
+              </ul>
+            </div>
+            <div class="cs-band__well">
+              <div class="cs-band__logo">
+                <img class="cs-band__mark" src="../../../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="cs-band__item">
+          <article class="cs-band__card" aria-label="Case study 2 of 4">
+            <div class="cs-band__cap">
+              <ul class="cs-band__figs">
+                <li class="cs-band__fig">300% Phone Call Increase</li>
+                <li class="cs-band__fig">2x New Customers Daily</li>
+              </ul>
+            </div>
+            <div class="cs-band__well">
+              <div class="cs-band__logo">
+                <img class="cs-band__mark" src="../../../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="cs-band__item">
+          <article class="cs-band__card" aria-label="Case study 3 of 4">
+            <div class="cs-band__cap">
+              <ul class="cs-band__figs">
+                <li class="cs-band__fig">480% Direction Request Increase</li>
+                <li class="cs-band__fig">110% Sales Increase</li>
+              </ul>
+            </div>
+            <div class="cs-band__well">
+              <div class="cs-band__logo">
+                <img class="cs-band__mark" src="../../../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li class="cs-band__item">
+          <article class="cs-band__card" aria-label="Case study 4 of 4">
+            <div class="cs-band__cap">
+              <ul class="cs-band__figs">
+                <li class="cs-band__fig">180% Website Visits Increase</li>
+                <li class="cs-band__fig">161% Direction Request Increase</li>
+              </ul>
+            </div>
+            <div class="cs-band__well">
+              <div class="cs-band__logo">
+                <img class="cs-band__mark" src="../../../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<style>
+/* B · THE LEDGER — four hairline rows: mark small at left, both figures large in a right-hand data
+   column at --ds-step-metric (the biggest type in the section, above the section head).
+   OPTIMISES FOR scan speed + density: one shared axis per figure, so 350/300/480/180 compare straight
+   down with no card frame to re-enter — measured, 596px of ledger at 1440 across 4 identical rows.
+   GIVES UP narrative room: no quote, photo, tag or per-study link fits, and the marks alone say which
+   client is which — so it is the WRONG pick the day a row needs a sentence or a link. Card grid then. */
+
+.cs-ledger{
+  /* Local geometry only — every colour on this sheet is a token. k scales the mark
+     block down at narrow widths without re-declaring four per-mark heights. */
+  --cs-ledger-k: 1;
+  --cs-ledger-mark-w: 150px;
+  --cs-ledger-mark-h: 60px;
+  font-family: var(--ds-font-body);
+  color: var(--ds-ink);
+}
+
+/* ── INTRO ──────────────────────────────────────────────────────────────────
+   Head + standfirst left, lede right, so the section's own copy costs two
+   text blocks of height instead of four stacked ones. .mc-head is used as-is
+   and never restyled — its own margin is the only spacing it gets. */
+.cs-ledger__intro{
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  column-gap: var(--ds-space-xl);
+  row-gap: var(--ds-space-md);
+  align-items: end;
+  padding-bottom: var(--ds-space-xl);
+}
+.cs-ledger__headwrap{ min-width: 0 }
+.cs-ledger__standfirst{
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-step-sub);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  color: var(--ds-ink-heading);
+  margin: var(--ds-space-md) 0 0;
+  max-width: var(--ds-measure);
+  text-wrap: balance;
+}
+.cs-ledger__lede{
+  font-size: var(--ds-step-body);
+  line-height: 1.72;
+  color: var(--ds-ink-soft);          /* 6.83:1 on the canvas */
+  margin: 0;
+  max-width: var(--ds-measure);
+  min-width: 0;
+}
+
+/* ── THE LEDGER ─────────────────────────────────────────────────────────────
+   A rule above the first row and below the last, hairlines between. The
+   closing rule is the heavier of the two, the way a statement closes a column. */
+.cs-ledger__rows{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ds-line);
+}
+.cs-ledger__row{
+  border-bottom: 1px solid var(--ds-hairline);
+  transition: background-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.cs-ledger__row:last-child{ border-bottom-color: var(--ds-line) }
+.cs-ledger__row:hover{ background-color: var(--ds-accent-soft) }
+
+.cs-ledger__entry{
+  display: grid;
+  grid-template-areas: "idx mark figs";
+  grid-template-columns: auto var(--cs-ledger-mark-w) minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--ds-space-lg);
+  padding: var(--ds-space-md) var(--ds-space-xs);
+}
+
+/* Row number. Decoration + rhythm only; the row's real accessible name is the
+   neutral aria-label on the entry, so this is hidden from the tree. */
+.cs-ledger__idx{
+  grid-area: idx;
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-step-micro);
+  letter-spacing: .18em;
+  color: var(--ds-ink-soft);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.cs-ledger__row:hover .cs-ledger__idx{ color: var(--ds-accent-light) }
+
+/* ── THE MARK ───────────────────────────────────────────────────────────────
+   A fixed cell, marks centred in it, cropped by the cell rather than shrunk to
+   fit. MEASURED from the four files rather than eyeballed: their ink occupies
+   24% / 100% / 96% / 81% of each file's height (the rest is transparent
+   padding), so a shared CSS height would have sized the PADDED BOX and left one
+   mark a quarter the size of the others. Each row therefore carries its own
+   --cs-ledger-imgh, computed to land every mark's INK at 28-50px tall.
+   One ink for all four, matching how the client marquee on this page already
+   treats the same marks; the brightness lift is measured too — one mark's ink
+   averages 69/255 luminance and would otherwise sink into the dark ground. */
+.cs-ledger__mark{
+  grid-area: mark;
+  position: relative;                  /* NOT a grid+place-items cell: an item TALLER than a
+                                          fixed-height grid row is laid out from the row's top
+                                          edge, not centred, so mark 01 rendered sliced in half.
+                                          Absolute centring is the only reliable crop-from-both-
+                                          ends behaviour here. Measured, not assumed. */
+  width: var(--cs-ledger-mark-w);
+  height: var(--cs-ledger-mark-h);
+  overflow: hidden;
+}
+.cs-ledger__logo{
+  display: block;
+  position: absolute;
+  top: 50%; left: 50%;
+  height: calc(var(--cs-ledger-imgh) * var(--cs-ledger-k));
+  width: auto;
+  max-width: none;
+  opacity: .85;
+  filter: grayscale(1) brightness(1.72);
+  transform: translate(-50%, calc(-50% + var(--cs-ledger-nudge, 0px) * var(--cs-ledger-k)));
+  transition: opacity var(--ds-dur-fast) var(--ds-ease-out),
+              filter  var(--ds-dur-fast) var(--ds-ease-out);
+}
+.cs-ledger__row:hover .cs-ledger__logo{ opacity: 1; filter: grayscale(1) brightness(2.05) }
+
+/* Per-mark sizing — letters, not names (see the honesty note in the markup).
+   imgh = target ink height / that file's ink fraction. Targets are a blend, not
+   one number: the wide wordmark is held to 28px of ink height and the three
+   compact marks to ~50px, because equal HEIGHT would have given the wordmark
+   four times the optical mass of the others. nudge re-centres a mark whose ink
+   is not centred in its own canvas (only the wordmark: ink centre 45.5%). */
+.cs-ledger__row--a{ --cs-ledger-imgh: 117px; --cs-ledger-nudge: 5px }
+.cs-ledger__row--b{ --cs-ledger-imgh: 50px }
+.cs-ledger__row--c{ --cs-ledger-imgh: 52px }
+.cs-ledger__row--d{ --cs-ledger-imgh: 62px }
+
+/* ── THE FIGURES ────────────────────────────────────────────────────────────
+   Two equal columns, capped and pushed to the RIGHT edge of the row. Capping is
+   what puts figure one of every row on one axis and figure two of every row on
+   another; anchoring right is what makes the block read as a statement's figure
+   column instead of text that happens to sit after a logo. The empty span
+   between the mark and the numbers is the layout, not a gap to be filled. */
+.cs-ledger__pair{
+  grid-area: figs;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--ds-space-lg);
+  row-gap: var(--ds-space-md);
+  width: min(100%, 640px);
+  justify-self: end;
+  min-width: 0;
+}
+.cs-ledger__fig{ min-width: 0 }
+.cs-ledger__num{
+  display: block;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-step-metric);
+  font-weight: 800;
+  line-height: .94;
+  letter-spacing: -.035em;
+  color: var(--ds-ink-heading);       /* 18.08:1 on the canvas */
+  font-variant-numeric: tabular-nums;
+}
+/* The unit glyph carries the brand light so the numeral stays pure white and
+   the eye still gets a violet beat per figure. --ds-accent-light is the
+   dark-ground accent ink (5.71:1); this is display-sized regardless. */
+.cs-ledger__unit{
+  font-size: .68em;
+  letter-spacing: 0;
+  color: var(--ds-accent-light);
+}
+.cs-ledger__label{
+  display: block;
+  font-size: var(--ds-step-micro);
+  line-height: 1.45;
+  letter-spacing: .06em;
+  color: var(--ds-ink-soft);          /* 6.83:1 on the canvas */
+  margin-top: var(--ds-space-xs);
+  max-width: 24ch;
+  overflow-wrap: break-word;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 1100px){
+  .cs-ledger__intro{ column-gap: var(--ds-space-lg) }
+  .cs-ledger__entry{ column-gap: var(--ds-space-md) }
+  .cs-ledger__pair{ column-gap: var(--ds-space-md) }
+  .cs-ledger{ --cs-ledger-mark-w: 124px }
+}
+@media (max-width: 860px){
+  .cs-ledger__intro{
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+}
+@media (max-width: 700px){
+  /* The mark moves onto its own line with the row number; the metric pair keeps
+     its two columns, because side-by-side is what makes the pair a PAIR. */
+  .cs-ledger{ --cs-ledger-k: .78; --cs-ledger-mark-w: 118px; --cs-ledger-mark-h: 44px }
+  .cs-ledger__entry{
+    grid-template-areas:
+      "idx mark"
+      "figs figs";
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    row-gap: var(--ds-space-sm);
+    column-gap: var(--ds-space-sm);
+    padding: var(--ds-space-md) 0;
+  }
+  .cs-ledger__mark{ justify-self: start }
+  .cs-ledger__pair{ column-gap: var(--ds-space-sm); width: 100%; justify-self: stretch }
+  .cs-ledger__label{ letter-spacing: .04em }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cs-ledger__row,
+  .cs-ledger__idx,
+  .cs-ledger__logo{ transition: none }
+}
+</style>
+
+<section class="opt" id="opt-cs-ledger">
+  <h2 class="opt__title">B · The ledger — one row per client, figures as a data column</h2>
+
+  <!-- HONESTY NOTE (decisions-ledger O4): the right to DISPLAY these marks was confirmed by the
+       owner 2026-08-12; the per-client NAME claims are still OPEN. So every mark is decorative
+       (alt=""), no client name appears anywhere in this markup, and each row's accessible name is
+       neutral. Row modifier classes are letters for the same reason. -->
+  <section class="cs-ledger" aria-labelledby="cs-ledger-heading">
+    <div class="cs-ledger__intro">
+      <div class="cs-ledger__headwrap">
+        <h2 class="mc-head" id="cs-ledger-heading">Case <span class="mc-head__turn">studies</span></h2>
+        <p class="cs-ledger__standfirst">Long-term relationships built on trust, transparency, &amp; results since 2012</p>
+      </div>
+      <p class="cs-ledger__lede">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+    </div>
+
+    <ol class="cs-ledger__rows">
+
+      <li class="cs-ledger__row cs-ledger__row--a">
+        <article class="cs-ledger__entry" aria-label="Case study 1 of 4">
+          <span class="cs-ledger__idx" aria-hidden="true">01</span>
+          <span class="cs-ledger__mark">
+            <img class="cs-ledger__logo" src="../../../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+          </span>
+          <ul class="cs-ledger__pair">
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">350<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Direction Request Increase</span></li>
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">700<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Sales Increase</span></li>
+          </ul>
+        </article>
+      </li>
+
+      <li class="cs-ledger__row cs-ledger__row--b">
+        <article class="cs-ledger__entry" aria-label="Case study 2 of 4">
+          <span class="cs-ledger__idx" aria-hidden="true">02</span>
+          <span class="cs-ledger__mark">
+            <img class="cs-ledger__logo" src="../../../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+          </span>
+          <ul class="cs-ledger__pair">
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">300<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Phone Call Increase</span></li>
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">2<span class="cs-ledger__unit">x</span></span> <span class="cs-ledger__label">New Customers Daily</span></li>
+          </ul>
+        </article>
+      </li>
+
+      <li class="cs-ledger__row cs-ledger__row--c">
+        <article class="cs-ledger__entry" aria-label="Case study 3 of 4">
+          <span class="cs-ledger__idx" aria-hidden="true">03</span>
+          <span class="cs-ledger__mark">
+            <img class="cs-ledger__logo" src="../../../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+          </span>
+          <ul class="cs-ledger__pair">
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">480<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Direction Request Increase</span></li>
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">110<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Sales Increase</span></li>
+          </ul>
+        </article>
+      </li>
+
+      <li class="cs-ledger__row cs-ledger__row--d">
+        <article class="cs-ledger__entry" aria-label="Case study 4 of 4">
+          <span class="cs-ledger__idx" aria-hidden="true">04</span>
+          <span class="cs-ledger__mark">
+            <img class="cs-ledger__logo" src="../../../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+          </span>
+          <ul class="cs-ledger__pair">
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">180<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Website Visits Increase</span></li>
+            <li class="cs-ledger__fig"><span class="cs-ledger__num">161<span class="cs-ledger__unit">%</span></span> <span class="cs-ledger__label">Direction Request Increase</span></li>
+          </ul>
+        </article>
+      </li>
+
+    </ol>
+  </section>
+</section>
+
+
+<style>
+/* OPTION C — one hero study, three supporting.
+   OPTIMISES FOR: a single focal point — study 1 takes ~half the section at metric scale,
+   so its numbers land instead of averaging out across four equal tiles.
+   GIVES UP: comparability and equal billing; studies 2-4 drop to a scanning column at
+   roughly half the type size, and the eye may never reach study 4.
+   WRONG WHEN: the four carry equal sales weight — it asserts a rank the flat grid won't. */
+
+.csf,
+.csf *,
+.csf *::before,
+.csf *::after { box-sizing: border-box; }
+
+.csf {
+  /* The logo plate. Measured, not guessed: three of the four supplied marks are pale
+     (mean luminance 226 / 181 / 129) and one is dense (65), and the SOURCE capture sat
+     these same marks on a dark panel. A lightened plate washed the pale three out when
+     rendered, so the plate is the DARKEST plane — an inset well, one step down from
+     whatever panel holds it. The artwork is never filtered, inverted or recoloured. */
+  --csf-plate: var(--ds-bg-surface);
+
+  background: var(--ds-bg-surface);
+  color: var(--ds-ink);
+  font-family: var(--ds-font-body);
+  padding-block: var(--ds-space-2xl);
+  padding-inline: var(--ds-space-md);
+}
+
+.csf__inner {
+  max-width: var(--ds-container-max, 1120px);
+  margin-inline: auto;
+}
+
+/* ── SECTION HEAD ─────────────────────────────────────────────────────────── */
+
+.csf__head {
+  max-width: var(--ds-measure, 640px);
+  margin-block-end: var(--ds-space-xl);
+}
+
+.csf__standfirst {
+  margin: var(--ds-space-md) 0 0;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-step-sub);
+  font-weight: 600;
+  line-height: 1.26;
+  letter-spacing: -.012em;
+  color: var(--ds-ink-heading);
+  text-wrap: balance;
+}
+
+.csf__lede {
+  margin: var(--ds-space-sm) 0 0;
+  font-size: var(--ds-step-body);
+  line-height: 1.72;
+  color: var(--ds-ink-soft);
+}
+
+/* ── THE SPLIT: feature ~half the section, supporting column beside it ────── */
+
+.csf__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--ds-space-md);
+  align-items: stretch;
+}
+
+/* ── FEATURE PANEL (study 1 — first in source order, not re-ranked) ───────── */
+
+.csf__feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--ds-space-lg);
+  border-radius: var(--ds-r-surface);
+  /* The elevated plane + an accent edge: echoes the pricing block above and the
+     source card's own accent-shell / dark-inner construction. */
+  background: var(--ds-bg-surface-2);
+  border: 1px solid color-mix(in srgb, var(--ds-accent) 46%, var(--ds-bg-surface-2));
+  box-shadow: var(--ds-shadow-lift), var(--ds-inset-hi);
+  overflow: hidden;
+}
+
+.csf__feature::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(100deg, var(--ds-accent-deep), var(--ds-accent) 55%, var(--ds-accent-light));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Corner bloom. Resolves to the panel's own ground at its edge, so it needs no
+   alpha keyword at all — every stop is a sanctioned token. */
+.csf__feature::after {
+  content: "";
+  position: absolute;
+  inset-block-start: -32%;
+  inset-inline-end: -18%;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: var(--ds-r-pill);
+  background: radial-gradient(closest-side,
+              color-mix(in srgb, var(--ds-accent) 26%, var(--ds-bg-surface-2)),
+              var(--ds-bg-surface-2));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SUPPORTING COLUMN ────────────────────────────────────────────────────── */
+
+.csf__support {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(min-content, 1fr));
+  gap: var(--ds-space-md);
+}
+
+.csf__support-item { display: grid; min-width: 0; }
+
+.csf__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--ds-space-md);
+  min-width: 0;
+  height: 100%;
+  padding: var(--ds-space-md);
+  border-radius: var(--ds-r-surface);
+  background: var(--ds-bg-warm);
+  border: 1px solid var(--ds-line);
+  box-shadow: var(--ds-shadow-rest);
+}
+
+/* ── SHARED CARD FURNITURE ────────────────────────────────────────────────── */
+
+.csf__idx {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 var(--ds-space-sm);
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-step-micro);
+  letter-spacing: .08em;
+  color: var(--ds-accent-light);
+}
+
+.csf__card .csf__idx { margin-block-end: 0; }
+
+/* The logo lockup. The plate is lighter than its panel so densely outlined marks
+   keep their edge; the mark itself is never recoloured, inverted or tinted. */
+.csf__mark {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  border-radius: var(--ds-r-control);
+  background: var(--csf-plate);
+  border: 1px solid var(--ds-hairline);
+  box-shadow: var(--ds-inset-hi);
+}
+
+.csf__logo {
+  display: block;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.csf__mark--lg { min-height: 150px; }
+.csf__mark--lg .csf__logo { max-height: 96px; max-width: 100%; }
+
+.csf__mark--sm { min-height: 66px; }
+.csf__mark--sm .csf__logo { max-height: 38px; max-width: 100%; }
+
+/* ── FIGURES ──────────────────────────────────────────────────────────────── */
+
+.csf__figs {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.csf__fig { min-width: 0; }
+
+.csf__fig-v {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  line-height: .94;
+  letter-spacing: -.03em;
+  color: var(--ds-ink-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.csf__fig-l {
+  display: block;
+  margin-block-start: var(--ds-space-2xs);
+  color: var(--ds-ink-soft);
+  overflow-wrap: anywhere;
+}
+
+/* The feature panel is height-matched to the supporting column, which leaves it with
+   slack. Pinning the figures to the bottom banked ALL of that slack into one dead gap
+   under the logo; centring the mark+figures group splits it top and bottom so the
+   panel reads as a deliberately generous poster instead of a half-empty box. */
+.csf__feature-body {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-lg);
+  min-height: 0;
+}
+
+/* Feature figures: stacked full-width so they can run at metric scale. */
+.csf__figs--stack {
+  display: grid;
+  gap: var(--ds-space-md);
+}
+
+.csf__figs--stack .csf__fig + .csf__fig {
+  padding-block-start: var(--ds-space-md);
+  border-block-start: 1px solid var(--ds-hairline);
+}
+
+.csf__figs--stack .csf__fig-v { font-size: var(--ds-step-metric); }
+.csf__figs--stack .csf__fig-l { font-size: var(--ds-step-body); line-height: 1.4; }
+
+/* Supporting figures: paired, at roughly half the feature's weight. */
+.csf__figs--pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-sm);
+}
+
+.csf__figs--pair .csf__fig-v { font-size: var(--ds-step-figure); }
+.csf__figs--pair .csf__fig-l { font-size: var(--ds-step-micro); line-height: 1.32; }
+
+/* ── 1024 → tighter gutters, split held ───────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .csf__feature { padding: var(--ds-space-md); }
+}
+
+/* ── Below 860 → single column. The feature loses its width advantage but
+      keeps a larger type size, stepping UP to display scale now that it has
+      the full measure to run in. ─────────────────────────────────────────── */
+
+@media (max-width: 860px) {
+  .csf { padding-block: var(--ds-space-xl); }
+  .csf__head { margin-block-end: var(--ds-space-lg); }
+
+  .csf__layout { grid-template-columns: minmax(0, 1fr); }
+  .csf__support { grid-template-rows: none; grid-auto-rows: minmax(min-content, auto); }
+
+  .csf__figs--stack { padding-block-start: var(--ds-space-md); }
+  .csf__figs--stack .csf__fig-v { font-size: var(--ds-step-display); }
+}
+
+@media (max-width: 560px) {
+  .csf { padding-inline: var(--ds-space-sm); }
+  .csf__mark { padding: var(--ds-space-sm); }
+  .csf__mark--lg { min-height: 104px; }
+  .csf__mark--lg .csf__logo { max-height: 68px; }
+  .csf__feature-body { gap: var(--ds-space-md); }
+}
+
+/* ── MOTION ───────────────────────────────────────────────────────────────── */
+/* This option adds no transition or animation of its own — the cards are not
+   interactive, so no hover affordance is implied. Declared as a safety net. */
+@media (prefers-reduced-motion: reduce) {
+  .csf,
+  .csf *,
+  .csf *::before,
+  .csf *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+
+<section class="opt" id="opt-cs-feature">
+  <h2 class="opt__title">C · One hero study, three supporting</h2>
+
+  <div class="csf">
+    <div class="csf__inner">
+
+      <header class="csf__head">
+        <h2 class="mc-head">Case <span class="mc-head__turn">studies</span></h2>
+        <p class="csf__standfirst">Long-term relationships built on trust, transparency, &amp; results since 2012</p>
+        <p class="csf__lede">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+      </header>
+
+      <div class="csf__layout">
+
+        <article class="csf__feature" aria-label="Case study 1 of 4">
+          <p class="csf__idx" aria-hidden="true">01</p>
+          <div class="csf__feature-body">
+            <div class="csf__mark csf__mark--lg">
+              <img class="csf__logo" src="../../../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+            </div>
+            <ul class="csf__figs csf__figs--stack" role="list">
+              <li class="csf__fig"><span class="csf__fig-v">350%</span> <span class="csf__fig-l">Direction Request Increase</span></li>
+              <li class="csf__fig"><span class="csf__fig-v">700%</span> <span class="csf__fig-l">Sales Increase</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <ul class="csf__support" role="list">
+
+          <li class="csf__support-item">
+            <article class="csf__card" aria-label="Case study 2 of 4">
+              <p class="csf__idx" aria-hidden="true">02</p>
+              <div class="csf__mark csf__mark--sm">
+                <img class="csf__logo" src="../../../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+              </div>
+              <ul class="csf__figs csf__figs--pair" role="list">
+                <li class="csf__fig"><span class="csf__fig-v">300%</span> <span class="csf__fig-l">Phone Call Increase</span></li>
+                <li class="csf__fig"><span class="csf__fig-v">2x</span> <span class="csf__fig-l">New Customers Daily</span></li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="csf__support-item">
+            <article class="csf__card" aria-label="Case study 3 of 4">
+              <p class="csf__idx" aria-hidden="true">03</p>
+              <div class="csf__mark csf__mark--sm">
+                <img class="csf__logo" src="../../../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+              </div>
+              <ul class="csf__figs csf__figs--pair" role="list">
+                <li class="csf__fig"><span class="csf__fig-v">480%</span> <span class="csf__fig-l">Direction Request Increase</span></li>
+                <li class="csf__fig"><span class="csf__fig-v">110%</span> <span class="csf__fig-l">Sales Increase</span></li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="csf__support-item">
+            <article class="csf__card" aria-label="Case study 4 of 4">
+              <p class="csf__idx" aria-hidden="true">04</p>
+              <div class="csf__mark csf__mark--sm">
+                <img class="csf__logo" src="../../../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+              </div>
+              <ul class="csf__figs csf__figs--pair" role="list">
+                <li class="csf__fig"><span class="csf__fig-v">180%</span> <span class="csf__fig-l">Website Visits Increase</span></li>
+                <li class="csf__fig"><span class="csf__fig-v">161%</span> <span class="csf__fig-l">Direction Request Increase</span></li>
+              </ul>
+            </article>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+/* D · FANNED STACK — WHERE I LANDED: the fan IS the content, not a picture of it. The reference
+   arrangement is real (dark card front-and-near-centre, accent-tinted cards fanning behind it,
+   rotated outward, bottoms pivoting like a hand) but the overlap eats only each card's own gutter,
+   so all four studies read un-occluded at every width and nothing is reachable by interaction alone.
+   GIVES UP: the reference's deep overlap and its one big hero card — readability costs card width.
+   WRONG the moment a fifth study lands: a five-card hand either overflows or hides a figure. */
+
+/* ── stage ─────────────────────────────────────────────────────────────────── */
+.cs-fan{
+  /* tier 1 geometry (>1080px). Sized so 4 seats PLUS the slop a rotated box adds
+     still fit the narrowest stage the harness might give me:
+     4w − 3·lap + 2·(h·sin θ) = 948 + 85 ≈ 1033px, inside 1072px (a 1120 container
+     less its 48px of padding) at 1440. If the stage gets its full 1288px instead,
+     the hand simply sits in more air. */
+  --cs-fan-w:    clamp(212px, 17.6vw, 252px);
+  --cs-fan-lap:  26px;   /* how far each seat slides under its neighbour */
+  --cs-fan-out:  7deg;   /* the two outer cards */
+  --cs-fan-in:   2.4deg; /* the two inner cards */
+  --cs-fan-drop: 22px;   /* arc: outer cards ride lower */
+  --cs-fan-plate:118px;   /* logo plate height — the logo cap is derived from it, see below */
+  box-sizing:border-box;
+  position:relative;
+  isolation:isolate;
+  /* THE CLIP MUST NOT EAT THE GLOW. overflow-x:clip is the guarantee against horizontal overflow and
+     it stays — but measured, the two OUTER cards carry a 44px shadow reach with only 39px of room, so
+     the clip was shaving 5px off each outer glow. overflow-clip-margin lets PAINT escape the clip box
+     by a set distance while the clip still stops runaway LAYOUT, which is the actual requirement.
+     72px is the 44px reach plus headroom for the lift shadow on hover (76px reach on the front card). */
+  overflow-x:clip;
+  overflow-clip-margin:88px;
+  padding-block:var(--ds-space-2xl);
+  background:var(--ds-bg-surface);
+  color:var(--ds-ink);
+  font-family:var(--ds-font-body);
+}
+/* the bloom the hand is held up against — static, no animation */
+.cs-fan::before{
+  content:"";
+  position:absolute;
+  inset:auto 0 var(--ds-space-2xl) 0;
+  height:62%;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(60% 70% at 50% 62%,
+    color-mix(in srgb, var(--ds-primary) 26%, transparent) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 16%, transparent) 46%,
+    transparent 100%);
+}
+
+.cs-fan__inner{
+  box-sizing:border-box;
+  max-width:var(--ds-container-max);
+  margin-inline:auto;
+  padding-inline:var(--ds-space-md);
+}
+/* the hand is allowed to run wider than the reading column — a fan wants air */
+.cs-fan__stage{
+  box-sizing:border-box;
+  max-width:1288px;
+  margin-inline:auto;
+  padding-inline:var(--ds-space-md);
+}
+
+/* ── head ──────────────────────────────────────────────────────────────────── */
+.cs-fan__head{text-align:center}
+.cs-fan__standfirst{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:700;line-height:1.22;letter-spacing:-.02em;
+  color:var(--ds-ink);
+  max-width:26ch;
+  margin:var(--ds-space-md) auto 0;
+  text-wrap:balance;
+}
+.cs-fan__lede{
+  font-size:var(--ds-step-body);
+  line-height:1.72;
+  color:var(--ds-ink-soft);
+  max-width:var(--ds-measure, 640px);
+  margin:var(--ds-space-md) auto 0;
+}
+
+/* ── the hand ──────────────────────────────────────────────────────────────── */
+.cs-fan__hand{
+  box-sizing:border-box;
+  list-style:none;
+  margin:var(--ds-space-xl) 0 0;
+  padding:var(--ds-space-md) 0 var(--ds-space-lg);
+  display:flex;
+  justify-content:center;
+  align-items:stretch;          /* equal-height cards — what makes a fan read as a fan */
+}
+.cs-fan__seat{
+  box-sizing:border-box;
+  position:relative;
+  flex:0 0 auto;
+  width:var(--cs-fan-w);
+  transform-origin:50% 100%;    /* pivot at the bottom, like cards held in a hand */
+  transform:translateY(var(--cs-seat-drop)) rotate(var(--cs-seat-rot));
+  display:flex;
+}
+.cs-fan__seat + .cs-fan__seat{margin-left:calc(var(--cs-fan-lap) * -1)}
+
+/* depth: the apex sits at seat 2 — front, near-centre, and it is the DARK card.
+   Seats 1/3/4 recede outward from it in the brand accent at three different depths. */
+.cs-fan__seat--1{--cs-seat-rot:calc(var(--cs-fan-out) * -1);--cs-seat-drop:var(--cs-fan-drop);z-index:1}
+.cs-fan__seat--2{--cs-seat-rot:calc(var(--cs-fan-in)  * -1);--cs-seat-drop:0px;z-index:4}
+.cs-fan__seat--3{--cs-seat-rot:var(--cs-fan-in);            --cs-seat-drop:calc(var(--cs-fan-drop) * .25);z-index:3}
+.cs-fan__seat--4{--cs-seat-rot:var(--cs-fan-out);           --cs-seat-drop:calc(var(--cs-fan-drop) * 1.1);z-index:2}
+
+.cs-fan__seat:hover,
+.cs-fan__seat:focus-within{z-index:5}
+
+/* ── the card ──────────────────────────────────────────────────────────────── */
+.cs-fan__card{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  /* heavily rounded, per the reference */
+  border-radius:calc(var(--ds-r-surface) * 2);
+  border:1px solid var(--ds-glass-border);
+  padding:var(--ds-space-md) calc(var(--ds-space-md) + var(--ds-space-2xs));
+  box-shadow:var(--ds-shadow-card);
+  transition:
+    transform var(--ds-dur-fast) var(--ds-ease-out),
+    box-shadow var(--ds-dur-fast) var(--ds-ease-out),
+    border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.cs-fan__card:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:3px;
+}
+/* bring-to-front: straighten out of the fan and lift. Reveals NOTHING — every
+   figure is already fully readable in the resting arrangement. */
+.cs-fan__seat:hover  .cs-fan__card,
+.cs-fan__seat:focus-within .cs-fan__card{
+  transform:rotate(calc(var(--cs-seat-rot) * -1)) translateY(-12px);
+  box-shadow:var(--ds-shadow-lift);
+  border-color:color-mix(in srgb, var(--ds-accent-light) 55%, transparent);
+}
+
+/* the three accent depths + the dark front card */
+.cs-fan__card--v1{
+  background:linear-gradient(158deg,
+    color-mix(in srgb, var(--ds-accent-deep) 55%, var(--ds-bg-surface)) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 32%, var(--ds-bg-surface)) 100%);
+}
+.cs-fan__card--dark{
+  background:linear-gradient(158deg,
+    color-mix(in srgb, var(--ds-bg-surface-2) 86%, var(--ds-primary)) 0%,
+    var(--ds-bg-surface) 100%);
+  border-color:color-mix(in srgb, var(--ds-accent-light) 34%, transparent);
+  box-shadow:var(--ds-shadow-lift), var(--ds-inset-hi);
+}
+.cs-fan__card--v2{
+  background:linear-gradient(158deg,
+    color-mix(in srgb, var(--ds-accent-deep) 92%, var(--ds-primary)) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 68%, var(--ds-bg-surface)) 100%);
+}
+.cs-fan__card--v3{
+  background:linear-gradient(158deg,
+    color-mix(in srgb, var(--ds-accent-deep) 64%, var(--ds-bg-surface)) 0%,
+    color-mix(in srgb, var(--ds-accent-deep) 38%, var(--ds-bg-surface)) 100%);
+}
+
+/* ── card parts ────────────────────────────────────────────────────────────── */
+.cs-fan__idx{
+  align-self:flex-start;
+  margin:0 0 var(--ds-space-sm);
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border:1px solid var(--ds-hairline);
+  border-radius:var(--ds-r-pill);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.16em;
+  color:color-mix(in srgb, var(--ds-ink-on-dark) 84%, transparent);
+}
+/* NO PLATE. The plate box survives only as a fixed-height slot that reserves the
+   mark's space and caps its size; it paints nothing, so each mark sits directly on
+   the card ground. Evidence for dropping the fill is on the rule below. */
+.cs-fan__plate{
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:var(--cs-fan-plate);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-surface);
+  background:none;
+  box-shadow:none;
+}
+/* max-height:100% does NOT bind here — measured: the two 200x200 marks rendered
+   185px tall inside a 76px slot and covered the figures below, because the grid
+   area's height is indefinite so the percentage resolves to none. The cap is
+   therefore taken from the slot token in absolute units, which does bind. */
+/* WHY NO FILL BEHIND THE MARKS. Measured, per mark, the mean of its OPAQUE pixels
+   and that mean's contrast against the card ground it actually sits on:
+   seat 1 = 3.9:1 · seat 3 = 8.5:1 · seat 4 = 12.5:1 — all clear the 3:1 floor for a
+   non-text graphic unaided. Seat 2's mark is the only genuinely dark one (1.8:1), so
+   it alone is lifted, below. Targeted, rather than a pale slab behind all four.
+   Addressed by SEAT, not by filename: the selector must make no client claim. */
+.cs-fan__seat--2 .cs-fan__logo{ filter:brightness(1.9) contrast(1.06); }
+.cs-fan__logo{
+  display:block;
+  width:auto;height:auto;
+  max-width:100%;
+  max-height:calc(var(--cs-fan-plate) - var(--ds-space-xs) * 2);
+  object-fit:contain;
+}
+
+.cs-fan__figs{
+  list-style:none;
+  margin:var(--ds-space-md) 0 0;
+  padding:var(--ds-space-md) 0 0;
+  border-top:1px solid var(--ds-hairline);
+}
+.cs-fan__fig{overflow-wrap:break-word}
+.cs-fan__fig--lead{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.024em;
+  color:var(--ds-ink-heading);
+  text-wrap:balance;
+}
+.cs-fan__fig--sub{
+  position:relative;
+  margin-top:var(--ds-space-sm);
+  padding-left:var(--ds-space-md);
+  font-size:var(--ds-step-body);
+  line-height:1.4;
+  font-weight:500;
+  color:color-mix(in srgb, var(--ds-ink) 88%, var(--ds-primary));
+}
+.cs-fan__fig--sub::before{
+  content:"";
+  position:absolute;
+  left:0;top:.62em;
+  width:var(--ds-space-sm);height:2px;
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-accent-light);
+}
+
+.cs-fan__hint{
+  margin:var(--ds-space-md) auto 0;
+  max-width:var(--ds-measure, 640px);
+  text-align:center;
+  font-size:var(--ds-step-micro);
+  letter-spacing:.06em;
+  line-height:1.6;
+  color:var(--ds-ink-soft);
+}
+
+/* ── tier 2: 1001–1080px. Shallower fan, narrower seats — the rotated bounding
+      box has to keep fitting as the stage gets tighter. ─────────────────────── */
+@media (max-width:1080px){
+  .cs-fan{
+    --cs-fan-w:clamp(212px, 20vw, 240px);
+    --cs-fan-lap:16px;
+    --cs-fan-out:5deg;
+    --cs-fan-in:1.8deg;
+    --cs-fan-drop:16px;
+    --cs-fan-plate:72px;
+  }
+}
+
+/* ── tier 3: ≤1000px. The hand cannot hold four across without either
+      overflowing or occluding, so it becomes two rows of two, near-flat. ────── */
+@media (max-width:1000px){
+  .cs-fan__hand{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:var(--ds-space-lg) var(--ds-space-md);
+    padding-block:var(--ds-space-sm) var(--ds-space-md);
+  }
+  .cs-fan__seat{width:auto;transform:rotate(var(--cs-seat-rot))}
+  .cs-fan__seat + .cs-fan__seat{margin-left:0}
+  .cs-fan__seat--1{--cs-seat-rot:-1.5deg}
+  .cs-fan__seat--2{--cs-seat-rot:1.2deg}
+  .cs-fan__seat--3{--cs-seat-rot:1.5deg}
+  .cs-fan__seat--4{--cs-seat-rot:-1.2deg}
+  .cs-fan__seat--1,
+  .cs-fan__seat--2,
+  .cs-fan__seat--3,
+  .cs-fan__seat--4{z-index:auto}
+}
+
+/* ── tier 4: ≤560px. Rotated cards do not work at phone width — flatten to a
+      plain stack, no tilt, no lift. ─────────────────────────────────────────── */
+@media (max-width:560px){
+  .cs-fan{padding-block:var(--ds-space-xl);--cs-fan-plate:80px}
+  .cs-fan__hand{
+    grid-template-columns:minmax(0, 1fr);
+    gap:var(--ds-space-md);
+    margin-top:var(--ds-space-lg);
+  }
+  .cs-fan__seat--1,
+  .cs-fan__seat--2,
+  .cs-fan__seat--3,
+  .cs-fan__seat--4{--cs-seat-rot:0deg;--cs-seat-drop:0px}
+  .cs-fan__seat{transform:none}
+  .cs-fan__seat:hover .cs-fan__card,
+  .cs-fan__seat:focus-within .cs-fan__card{transform:none}
+  .cs-fan__standfirst{max-width:none}
+  /* the affordance the hint describes does not exist at this width, so the hint
+     would be a lie. It carries no data — only the instruction — so it goes. */
+  .cs-fan__hint{display:none}
+}
+
+/* ── no movement when movement is not wanted ───────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .cs-fan__card{transition:none}
+  .cs-fan__seat:hover .cs-fan__card,
+  .cs-fan__seat:focus-within .cs-fan__card{transform:none}
+}
+</style>
+
+<section class="opt" id="opt-cs-fan">
+  <h2 class="opt__title">D &middot; Fanned stack &mdash; overlapping cards, dark card in front</h2>
+
+  <div class="cs-fan">
+    <div class="cs-fan__inner">
+      <div class="cs-fan__head">
+        <h2 class="mc-head">Case <span class="mc-head__turn">studies</span></h2>
+        <p class="cs-fan__standfirst">Long-term relationships built on trust, transparency, &amp; results since 2012</p>
+        <p class="cs-fan__lede">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
+      </div>
+    </div>
+
+    <div class="cs-fan__stage">
+      <ol class="cs-fan__hand" role="list">
+
+        <li class="cs-fan__seat cs-fan__seat--1">
+          <article class="cs-fan__card cs-fan__card--v1" tabindex="0" aria-label="Case study 1 of 4">
+            <p class="cs-fan__idx" aria-hidden="true">01</p>
+            <span class="cs-fan__plate">
+              <img class="cs-fan__logo" src="../../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+            </span>
+            <ul class="cs-fan__figs" role="list">
+              <li class="cs-fan__fig cs-fan__fig--lead">350% Direction Request Increase</li>
+              <li class="cs-fan__fig cs-fan__fig--sub">700% Sales Increase</li>
+            </ul>
+          </article>
+        </li>
+
+        <li class="cs-fan__seat cs-fan__seat--2">
+          <article class="cs-fan__card cs-fan__card--dark" tabindex="0" aria-label="Case study 2 of 4">
+            <p class="cs-fan__idx" aria-hidden="true">02</p>
+            <span class="cs-fan__plate">
+              <img class="cs-fan__logo" src="../../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+            </span>
+            <ul class="cs-fan__figs" role="list">
+              <li class="cs-fan__fig cs-fan__fig--lead">300% Phone Call Increase</li>
+              <li class="cs-fan__fig cs-fan__fig--sub">2x New Customers Daily</li>
+            </ul>
+          </article>
+        </li>
+
+        <li class="cs-fan__seat cs-fan__seat--3">
+          <article class="cs-fan__card cs-fan__card--v2" tabindex="0" aria-label="Case study 3 of 4">
+            <p class="cs-fan__idx" aria-hidden="true">03</p>
+            <span class="cs-fan__plate">
+              <img class="cs-fan__logo" src="../../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+            </span>
+            <ul class="cs-fan__figs" role="list">
+              <li class="cs-fan__fig cs-fan__fig--lead">480% Direction Request Increase</li>
+              <li class="cs-fan__fig cs-fan__fig--sub">110% Sales Increase</li>
+            </ul>
+          </article>
+        </li>
+
+        <li class="cs-fan__seat cs-fan__seat--4">
+          <article class="cs-fan__card cs-fan__card--v3" tabindex="0" aria-label="Case study 4 of 4">
+            <p class="cs-fan__idx" aria-hidden="true">04</p>
+            <span class="cs-fan__plate">
+              <img class="cs-fan__logo" src="../../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+            </span>
+            <ul class="cs-fan__figs" role="list">
+              <li class="cs-fan__fig cs-fan__fig--lead">180% Website Visits Increase</li>
+              <li class="cs-fan__fig cs-fan__fig--sub">161% Direction Request Increase</li>
+            </ul>
+          </article>
+        </li>
+
+      </ol>
+    </div>
+
+    <div class="cs-fan__inner">
+      <p class="cs-fan__hint">Hover, tap or tab to a card to pull it flat and forward. Nothing is hidden either way &mdash; all four sets of figures are readable in the resting fan.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+</body></html>

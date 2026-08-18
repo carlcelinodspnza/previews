@@ -1,0 +1,2178 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dispenza — pricing layout options</title>
+<link rel="stylesheet" href="../dispenza-fonts.css">
+<link rel="stylesheet" href="../dispenza-tokens.css">
+<link rel="stylesheet" href="../_tournament/foundation-1-measured-column/dispenza-structural.css">
+<style>
+  /* harness chrome only — every option styles ITSELF */
+  body{background:var(--ds-bg-surface);color:var(--ds-ink);font-family:var(--ds-font-body);margin:0}
+  .wrap{max-width:var(--ds-container-max);margin:0 auto;padding:var(--ds-space-2xl) var(--ds-space-md)}
+  .lede{border-bottom:1px solid var(--ds-line);padding-bottom:var(--ds-space-lg);margin-bottom:var(--ds-space-2xl)}
+  .lede h1{font-family:var(--ds-font-display);font-size:var(--ds-step-head);font-weight:800;
+    letter-spacing:-.028em;margin:0 0 var(--ds-space-sm);color:var(--ds-ink-heading)}
+  .lede p{margin:0;color:var(--ds-ink-soft);font-size:var(--ds-step-body);line-height:1.7;max-width:var(--ds-measure)}
+  .lede code{font-family:var(--ds-font-mono);font-size:var(--ds-step-micro);color:var(--ds-accent-ink)}
+  .opt{padding:var(--ds-space-2xl) 0;border-top:1px solid var(--ds-hairline)}
+  .opt:first-of-type{border-top:0}
+  .opt__title{font-family:var(--ds-font-mono);font-size:var(--ds-step-micro);font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--ds-accent-ink);
+    margin:0 0 var(--ds-space-xl)}
+  .opt__missing{color:var(--ds-ink-soft);font-family:var(--ds-font-mono)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="lede">
+    <h1>Pricing layout options</h1>
+    <p>Four alternatives to the pricing block, built for real against the locked tokens — what you see
+    is what would ship. The control at the top is the section as it stands today. Measured faults it
+    has: a <code>159px</code> dead gap inside the MARKETING Pro card (the cost of forcing both cards to
+    one height when Pro has two fewer lines), a <code>943px</code> total height, and <code>20</code>
+    rendered feature lines carrying only <code>14</code> unique facts — six are duplicated verbatim
+    across the two plans.</p>
+  </div>
+<style>
+/* F · GLASS, COMPACT — E's structure, slimmed and rendered in the brand's OWN glass.
+   Optimises for: the reference's product feel at a sane height. E's ENTERPRISE card ran 1073px, and
+   ~290px of that was spacing, not content: 40px CTA margins top AND bottom, 40px body padding top
+   AND bottom, a 40px price margin, a 40px extras margin, 64px of field padding, and a 75px two-line
+   reserve holding one line of text. Every one of those is cut below, none of the CONTENT is.
+   Glass is not invented for this: --ds-glass-bg/-blur/-border already exist and are what the chrome
+   rail is made of, so the cards now speak the same material as the nav above them.
+   Gives up: the deduplication (still 20 lines / 14 facts) and the at-a-glance delta — same as E.
+   WRONG choice when: the section must work with backdrop-filter unavailable AND nothing behind the
+   cards — the glass then flattens to a plain translucent panel. Handled with a solid fallback below. */
+
+.gl-wrap{
+  position:relative;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--ds-space-md);                 /* was 64px */
+  align-items:start;
+  padding:var(--ds-space-md);             /* was 64px */
+  border-radius:var(--ds-r-surface);
+  overflow:hidden;
+  background-color:var(--ds-bg-surface);
+  background-image:radial-gradient(var(--ds-glass-border) 1px, transparent 1px);
+  background-size:16px 16px;
+}
+/* GLASS NEEDS SOMETHING TO REFRACT. A blur over a flat ground reads as a grey panel, not as glass,
+   so two soft brand blooms sit BEHIND the cards; the backdrop-filter then has real colour to bend.
+   Decorative only — no text sits on them. */
+.gl-wrap::before,.gl-wrap::after{
+  content:"";position:absolute;pointer-events:none;
+  width:46%;aspect-ratio:1;border-radius:var(--ds-r-pill);
+  filter:blur(70px);opacity:var(--ds-opacity-texture,.5);
+}
+.gl-wrap::before{ background:var(--ds-accent);      top:-12%;  left:-6%;  }
+.gl-wrap::after { background:var(--ds-accent-deep); bottom:-18%; right:-8%; }
+
+.gl-card{
+  position:relative;z-index:var(--ds-z-raised);
+  display:flex;flex-direction:column;
+  border-radius:var(--ds-r-surface);
+  /* solid first = the fallback when backdrop-filter is unsupported; the glass layers over it */
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-card);
+  overflow:hidden;
+}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .gl-card{
+    background:var(--ds-glass-bg);
+    -webkit-backdrop-filter:var(--ds-glass-blur);
+    backdrop-filter:var(--ds-glass-blur);
+  }
+}
+/* the lead card keeps a lit edge so "Most Popular!" is carried by the MATERIAL, not the badge alone */
+.gl-card--lead{
+  border-color:var(--ds-accent);
+  box-shadow:var(--ds-shadow-card),0 0 0 1px var(--ds-accent-deep),0 20px 50px -30px var(--ds-accent);
+}
+
+.gl-head{ padding:var(--ds-space-md) var(--ds-space-md) 0; }   /* was 40px */
+.gl-top{ display:flex;align-items:center;justify-content:space-between;gap:var(--ds-space-sm); }
+/* NAME ON ONE LINE. E reserved 75px for two lines so the pair's rows could align; dropping the size
+   one rung lets "MARKETING Pro" and "ENTERPRISE" both sit on a single line, so the reserve is not
+   needed at all and the alignment falls out for free. */
+.gl-name{
+  margin:0;font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body);font-weight:800;letter-spacing:.06em;line-height:1.2;
+  text-transform:uppercase;color:var(--ds-ink-heading);white-space:nowrap;
+}
+.gl-name em{font-style:italic;font-weight:800;text-transform:none}
+.gl-badge{
+  flex:0 0 auto;margin:0;
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-accent);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;letter-spacing:.06em;
+  color:var(--ds-ink-on-dark);white-space:nowrap;
+}
+.gl-card:not(.gl-card--lead) .gl-badge{
+  background:transparent;border:1px solid var(--ds-glass-border);color:var(--ds-ink-soft);
+}
+.gl-desc{
+  margin:var(--ds-space-xs) 0 0;
+  font-size:var(--ds-step-micro);line-height:1.45;color:var(--ds-ink-soft);
+  min-height:2.9em;                      /* 2 lines — ENTERPRISE's subtitle wraps, Pro's does not */
+}
+
+.gl-priceRow{ display:flex;align-items:baseline;gap:var(--ds-space-xs);flex-wrap:wrap;margin:var(--ds-space-sm) 0 0; }
+.gl-price{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);font-weight:700;line-height:1;   /* was --ds-step-figure (56px) */
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ds-ink-heading);
+}
+/* "/Mo", NOT "per month". The reference says "per month"; Dispenza's own site says "/Mo", and it is
+   a LOCKED corpus verbatim (D-SRC-INDEX-0098, homed on index). Rendering the reference's wording
+   deleted that fact — verify-copy-fidelity exits 2 on it at pages/ scope, which is where this section
+   ultimately lives. The reference governs the FORM; the client's corpus governs the WORDS. */
+.gl-per{ font-family:var(--ds-font-mono);font-size:var(--ds-step-micro);letter-spacing:.04em;color:var(--ds-ink-soft); }
+.gl-fine{ margin:var(--ds-space-2xs) 0 0;font-size:var(--ds-step-micro);color:var(--ds-ink-soft); }
+
+.gl-cta{
+  display:block;margin:var(--ds-space-md) 0;                    /* was 40px top AND bottom */
+  padding:var(--ds-space-xs) var(--ds-space-md);
+  border-radius:var(--ds-r-control);
+  background-color:var(--ds-accent);
+  border:1px solid var(--ds-accent-light);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ds-ink-on-dark);text-align:center;text-decoration:none;
+  min-height:44px;display:flex;align-items:center;justify-content:center;  /* tap target */
+  transition:filter var(--ds-dur-fast) var(--ds-ease-out);
+}
+.gl-cta:hover{ filter:brightness(1.14) }
+.gl-cta:focus-visible{ outline:2px solid var(--ds-accent-light);outline-offset:3px }
+.gl-card:not(.gl-card--lead) .gl-cta{
+  background-color:transparent;border-color:var(--ds-glass-border);color:var(--ds-ink-heading);
+}
+
+.gl-body{
+  padding:var(--ds-space-md);                                   /* was 40px top AND bottom */
+  border-top:1px solid var(--ds-glass-border);
+}
+.gl-list{ list-style:none;margin:0;padding:0;display:grid;gap:var(--ds-space-xs); }  /* was 14px */
+.gl-li{
+  display:flex;gap:var(--ds-space-xs);align-items:flex-start;
+  font-size:var(--ds-step-micro);line-height:1.5;color:var(--ds-ink);
+}
+.gl-tick{
+  flex:0 0 auto;width:.62em;height:.32em;margin-top:.42em;
+  border-left:2px solid var(--ds-accent-light);
+  border-bottom:2px solid var(--ds-accent-light);
+  transform:rotate(-45deg);
+}
+.gl-mod{ font-style:italic;font-weight:700;color:var(--ds-ink-heading) }
+.gl-extras{
+  list-style:none;margin:var(--ds-space-sm) 0 0;padding:var(--ds-space-sm) 0 0;   /* was 40 + 24 */
+  border-top:1px solid var(--ds-glass-border);
+  display:grid;gap:var(--ds-space-xs);
+}
+.gl-plusli{
+  display:flex;gap:var(--ds-space-xs);align-items:flex-start;
+  font-size:var(--ds-step-micro);line-height:1.5;font-weight:700;color:var(--ds-ink-heading);
+}
+.gl-plus{ position:relative;flex:0 0 auto;width:.7em;height:.7em;margin-top:.4em }
+.gl-plus::before,.gl-plus::after{ content:"";position:absolute;background:var(--ds-accent-light) }
+.gl-plus::before{ left:0;right:0;top:calc(50% - 1px);height:2px }
+.gl-plus::after{ top:0;bottom:0;left:calc(50% - 1px);width:2px }
+
+@media (max-width:900px){
+  .gl-wrap{grid-template-columns:1fr}
+  .gl-name{white-space:normal}
+}
+@media (prefers-reduced-motion:reduce){ .gl-cta{transition:none} }
+</style>
+
+<section class="opt" id="opt-glass">
+  <h2 class="opt__title">F · Glass, compact — E slimmed, in the chrome's own material</h2>
+
+  <div class="gl-wrap">
+
+    <article class="gl-card gl-card--lead">
+      <div class="gl-head">
+        <div class="gl-top">
+          <h3 class="gl-name">MARKETING <em>Pro</em></h3>
+          <p class="gl-badge">Most Popular!</p>
+        </div>
+        <p class="gl-desc">Guaranteed results</p>
+        <p class="gl-priceRow"><span class="gl-price">$4,200</span><span class="gl-per">/Mo</span></p>
+        <p class="gl-fine">+$3,000/Additional Location</p>
+        <a class="gl-cta" href="#close">Book demo</a>
+      </div>
+      <div class="gl-body">
+        <ul class="gl-list">
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">SEO Pro</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">WEB Plus</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">Web Graphics</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+        </ul>
+        <ul class="gl-extras" aria-label="Added to the package">
+          <li class="gl-plusli"><span class="gl-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="gl-card">
+      <div class="gl-head">
+        <div class="gl-top">
+          <h3 class="gl-name">ENTERPRISE</h3>
+          <p class="gl-badge">Full Suite</p>
+        </div>
+        <p class="gl-desc">Guaranteed Results + Boost your retention</p>
+        <p class="gl-priceRow"><span class="gl-price">$6,500</span><span class="gl-per">/Mo</span></p>
+        <p class="gl-fine">+$3,000/Additional Location</p>
+        <a class="gl-cta" href="#close">Book demo</a>
+      </div>
+      <div class="gl-body">
+        <ul class="gl-list">
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">SEO Pro</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">WEB Pro</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">CREATIVE Pro</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">OUTREACH Email</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span><em class="gl-mod">OUTREACH SMS</em> INCLUDED</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Review Management</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+          <li class="gl-li"><span class="gl-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+        </ul>
+        <ul class="gl-extras" aria-label="Added to the package">
+          <li class="gl-plusli"><span class="gl-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          <li class="gl-plusli"><span class="gl-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<style>
+/* E · REFERENCE-LED — the owner's reference card, built with Dispenza's facts.
+   Optimises for: PRODUCT feel over spec-sheet feel. The reference's order is
+   name -> description -> price -> CTA -> divider -> ticked list, and the CTA sits
+   ABOVE the features, which is the real change: the reader can act before reading
+   the list instead of scrolling past it.
+   Gives up: the at-a-glance delta between plans (two independent cards cannot show
+   it) and it does not dedupe the 6 shared lines.
+   WRONG choice when: the job is "help me choose between these two" — that is A's job.
+   Every colour is a token; the reference's warm badge is rendered in brand violet
+   because an orange gradient exists nowhere in this brand. */
+
+.rf-wrap{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--ds-space-xl);align-items:start;
+  /* the reference sits its cards on a dotted field; this is that field, drawn from
+     tokens as a radial dot grid rather than an image request */
+  padding:var(--ds-space-xl);
+  border-radius:var(--ds-r-surface);
+  background-color:var(--ds-bg-surface);
+  background-image:radial-gradient(var(--ds-glass-border) 1px, transparent 1px);
+  background-size:14px 14px;
+  background-position:center;
+}
+
+/* THE CARD. The reference's edge is a lit hairline, brightest at the top — a
+   gradient BORDER, not a glow behind the box. padding-box/border-box clipping is
+   what keeps the ground opaque while the border stays a gradient. */
+.rf-card{
+  position:relative;
+  display:flex;flex-direction:column;
+  border-radius:var(--ds-r-surface);
+  border:1px solid transparent;
+  background:
+    linear-gradient(var(--ds-bg-surface-2),var(--ds-bg-surface-2)) padding-box,
+    linear-gradient(160deg,
+      var(--ds-accent-light) 0%,
+      var(--ds-accent) 26%,
+      var(--ds-line) 62%,
+      var(--ds-line) 100%) border-box;
+  box-shadow:var(--ds-shadow-card);
+  overflow:hidden;
+}
+.rf-card--lead{ box-shadow:var(--ds-shadow-card),0 0 0 1px var(--ds-accent-deep),0 24px 60px -28px var(--ds-accent); }
+
+.rf-head{ padding:var(--ds-space-lg) var(--ds-space-lg) 0; }
+/* THE TWO HEADERS MUST AGREE. "MARKETING Pro" wraps to two lines where "ENTERPRISE"
+   does not, so left to itself the pair's prices and CTAs sat at different heights —
+   fatal for a side-by-side comparison, and the exact fault this layout's whole job
+   is to avoid. Each band is given the height of its TALLEST instance (2 lines of
+   name, 2 of description) so every row below it starts on the same y in both cards.
+   min-height, not a fixed height: longer copy grows the band in BOTH cards. */
+.rf-top{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:var(--ds-space-md);
+  min-height:calc(2 * 1.1em * 1);
+}
+.rf-name{
+  margin:0;font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);font-weight:800;letter-spacing:-.02em;line-height:1.1;
+  color:var(--ds-ink-heading);
+  min-height:2.2em;                 /* two lines of the name at line-height 1.1 */
+}
+.rf-name em{font-style:italic;font-weight:800}
+/* badge top-RIGHT, pill, as in the reference */
+.rf-badge{
+  flex:0 0 auto;margin:0;
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  background:linear-gradient(100deg,var(--ds-accent-light),var(--ds-accent));
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);font-weight:700;letter-spacing:.04em;
+  color:var(--ds-ink-on-dark);white-space:nowrap;
+}
+.rf-desc{
+  margin:var(--ds-space-sm) 0 0;max-width:34ch;
+  font-size:var(--ds-step-body);line-height:1.5;color:var(--ds-ink-soft);
+  min-height:3em;                   /* two lines — ENTERPRISE's subtitle wraps, Pro's does not */
+}
+
+.rf-priceRow{
+  display:flex;align-items:baseline;gap:var(--ds-space-sm);flex-wrap:wrap;
+  margin:var(--ds-space-lg) 0 0;
+}
+.rf-price{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);font-weight:700;line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ds-ink-heading);
+}
+.rf-per{ font-size:var(--ds-step-body);color:var(--ds-ink-soft); }
+.rf-fine{
+  margin:var(--ds-space-2xs) 0 0;
+  font-size:var(--ds-step-micro);color:var(--ds-ink-soft);
+}
+
+/* the CTA sits ABOVE the list, full width — the reference's key move */
+.rf-cta{
+  display:block;margin:var(--ds-space-lg) 0 var(--ds-space-lg);
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border-radius:var(--ds-r-control);
+  background-color:var(--ds-accent);
+  background-image:linear-gradient(100deg,var(--ds-accent-light),var(--ds-accent));
+  border:1px solid var(--ds-accent-light);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body);font-weight:700;letter-spacing:.02em;
+  color:var(--ds-ink-on-dark);text-align:center;text-decoration:none;
+  transition:filter var(--ds-dur-fast) var(--ds-ease-out);
+}
+.rf-cta:hover{ filter:brightness(1.12) }
+.rf-cta:focus-visible{ outline:2px solid var(--ds-accent-light);outline-offset:3px }
+.rf-cta--quiet{
+  background-image:none;background-color:transparent;
+  border:1px solid var(--ds-line);color:var(--ds-ink-heading);
+}
+
+.rf-body{
+  padding:0 var(--ds-space-lg) var(--ds-space-lg);
+  border-top:1px solid var(--ds-hairline);
+  padding-top:var(--ds-space-lg);
+  background:var(--ds-bg-surface);
+}
+.rf-list{ list-style:none;margin:0;padding:0;display:grid;gap:var(--ds-space-sm); }
+.rf-li{
+  display:flex;gap:var(--ds-space-sm);align-items:flex-start;
+  font-size:var(--ds-step-body);line-height:1.45;color:var(--ds-ink);
+}
+.rf-tick{
+  flex:0 0 auto;width:.6em;height:.32em;margin-top:.42em;
+  border-left:2px solid var(--ds-accent-light);
+  border-bottom:2px solid var(--ds-accent-light);
+  transform:rotate(-45deg);
+}
+.rf-mod{ font-style:italic;font-weight:600;color:var(--ds-ink-heading) }
+.rf-extras{
+  list-style:none;margin:var(--ds-space-lg) 0 0;padding:var(--ds-space-md) 0 0;
+  border-top:1px solid var(--ds-hairline);
+  display:grid;gap:var(--ds-space-sm);
+}
+.rf-plusli{
+  display:flex;gap:var(--ds-space-sm);align-items:flex-start;
+  font-size:var(--ds-step-body);line-height:1.45;font-weight:600;color:var(--ds-ink-heading);
+}
+.rf-plus{ position:relative;flex:0 0 auto;width:.7em;height:.7em;margin-top:.36em }
+.rf-plus::before,.rf-plus::after{ content:"";position:absolute;background:var(--ds-accent-light) }
+.rf-plus::before{ left:0;right:0;top:calc(50% - 1px);height:2px }
+.rf-plus::after{ top:0;bottom:0;left:calc(50% - 1px);width:2px }
+
+@media (max-width:900px){
+  .rf-wrap{grid-template-columns:1fr;padding:var(--ds-space-md)}
+}
+@media (prefers-reduced-motion:reduce){
+  .rf-cta{transition:none}
+}
+</style>
+
+<section class="opt" id="opt-ref">
+  <h2 class="opt__title">E · Reference-led — product card, CTA above the list</h2>
+
+  <div class="rf-wrap">
+
+    <article class="rf-card rf-card--lead">
+      <div class="rf-head">
+        <div class="rf-top">
+          <h3 class="rf-name">MARKETING <em>Pro</em></h3>
+          <p class="rf-badge">Most Popular!</p>
+        </div>
+        <p class="rf-desc">Guaranteed results</p>
+        <p class="rf-priceRow">
+          <span class="rf-price">$4,200</span><span class="rf-per">per month</span>
+        </p>
+        <p class="rf-fine">+$3,000/Additional Location</p>
+        <a class="rf-cta" href="#close">Book demo</a>
+      </div>
+      <div class="rf-body">
+        <ul class="rf-list">
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">SEO Pro</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">WEB Plus</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">Web Graphics</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+        </ul>
+        <ul class="rf-extras">
+          <li class="rf-plusli"><span class="rf-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="rf-card">
+      <div class="rf-head">
+        <div class="rf-top">
+          <h3 class="rf-name">ENTERPRISE</h3>
+          <p class="rf-badge">Full Suite</p>
+        </div>
+        <p class="rf-desc">Guaranteed Results + Boost your retention</p>
+        <p class="rf-priceRow">
+          <span class="rf-price">$6,500</span><span class="rf-per">per month</span>
+        </p>
+        <p class="rf-fine">+$3,000/Additional Location</p>
+        <a class="rf-cta rf-cta--quiet" href="#close">Book demo</a>
+      </div>
+      <div class="rf-body">
+        <ul class="rf-list">
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">SEO Pro</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">WEB Pro</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">CREATIVE Pro</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">OUTREACH Email</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span><em class="rf-mod">OUTREACH SMS</em> INCLUDED</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Review Management</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+          <li class="rf-li"><span class="rf-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+        </ul>
+        <ul class="rf-extras">
+          <li class="rf-plusli"><span class="rf-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          <li class="rf-plusli"><span class="rf-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="opt" id="opt-current"><h2 class="opt__title">CONTROL · what ships today</h2>
+<div class="mc-pkgs">
+        <article class="mc-pkg" data-reveal>
+          <p class="mc-pkg__badge">Most Popular!</p>
+          <div class="mc-pkg__inner">
+            <h3 class="mc-pkg__name">MARKETING <em>Pro</em></h3>
+            <p class="mc-pkg__sub">Guaranteed results</p>
+            <p class="mc-pkg__price">$4,200<span class="mc-pkg__unit">/Mo</span></p>
+            <p class="mc-pkg__add">+$3,000/Additional Location</p>
+            <ul class="mc-pkg__list">
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">SEO Pro</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">WEB Plus</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">Web Graphics</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+            </ul>
+          </div>
+          <ul class="mc-pkg__extras">
+              <li class="mc-pkg__plusli"><span class="mc-pkg__plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          </ul>
+        </article>
+        <article class="mc-pkg mc-pkg--full" data-reveal>
+          <p class="mc-pkg__badge">Full Suite</p>
+          <div class="mc-pkg__inner">
+            <h3 class="mc-pkg__name">ENTERPRISE</h3>
+            <p class="mc-pkg__sub">Guaranteed Results + Boost your retention</p>
+            <p class="mc-pkg__price">$6,500<span class="mc-pkg__unit">/Mo</span></p>
+            <p class="mc-pkg__add">+$3,000/Additional Location</p>
+            <ul class="mc-pkg__list">
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">SEO Pro</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">WEB Pro</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">CREATIVE Pro</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">OUTREACH Email</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span><em class="mc-pkg__mod">OUTREACH SMS</em> INCLUDED</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Review Management</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+              <li class="mc-pkg__li"><span class="mc-pkg__tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+            </ul>
+          </div>
+          <ul class="mc-pkg__extras">
+              <li class="mc-pkg__plusli"><span class="mc-pkg__plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+              <li class="mc-pkg__plusli"><span class="mc-pkg__plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+          </ul>
+        </article>
+        </div>
+</section>
+
+<style>
+/* ===========================================================================
+   OPTION "matrix" — the two plans hung on ONE shared feature spine.
+   FIXES: Pro's 159px dead gap becomes structurally impossible — the plans share
+   rows, so neither column can outrun the other and there is nothing to pad; and
+   the 20 rendered lines collapse to the 14 unique facts, so the 6 duplicated
+   lines render ONCE and the block gets shorter. Width is left alone: the feature
+   spine is the widest track, so the 409px line never fights a 516px box.
+   GIVES UP: down-a-column reading — you read across, so someone who only wants
+   Enterprise still scans Pro. And below 800px it restacks into per-plan cards,
+   which costs a DOM duplicate of the 6 shared lines (a card cannot share a row).
+   WRONG WHEN: one plan is meant to dominate. A matrix says "same axis, pick a
+   column" and flattens a hero plan into just another column.
+   =========================================================================== */
+
+/* ── shell ───────────────────────────────────────────────────────────────── */
+.matrix-wrap{
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink);
+  max-width:var(--ds-container-max);
+  margin:0 auto;
+  padding:0 var(--ds-space-md);
+}
+
+/* the matrix card. --matrix-col is a private layout track, not a design token. */
+.matrix-board{
+  --matrix-col:285px;
+  background:var(--ds-bg-warm);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-inset-hi),var(--ds-shadow-card);
+  overflow:hidden;
+}
+
+/* every band — header, each row, the foot — runs the SAME three tracks, so the
+   columns line up without subgrid (the 1fr resolves identically in each band). */
+.matrix-band{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) var(--matrix-col) var(--matrix-col);
+  align-items:stretch;
+}
+
+/* ── header band: these must read as PRODUCTS, not as table headings ───────
+   ONE grid owns the whole band (5 rows: badge / name / subtitle / price /
+   add-on) so both plans align band-for-band. Two independent flex columns
+   drifted out of step the moment "MARKETING Pro" wrapped to two lines and
+   "ENTERPRISE" did not — which defeats the point of a comparison header. */
+.matrix-head{
+  position:sticky;
+  top:0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) var(--matrix-col) var(--matrix-col);
+  grid-template-rows:repeat(5,auto);
+  background:var(--ds-bg-warm);
+  border-bottom:1px solid var(--ds-line);
+  box-shadow:var(--ds-shadow-rest);
+}
+.matrix-headlabel{
+  grid-column:1;
+  grid-row:1 / 6;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:var(--ds-space-md);
+  min-width:0;
+}
+/* one band of one plan header */
+.matrix-hcell{
+  padding-left:var(--ds-space-sm);
+  padding-right:var(--ds-space-sm);
+  border-left:1px solid var(--ds-line);
+  min-width:0;
+}
+.matrix-hcell--pro{grid-column:2;background:var(--ds-bg-surface-2);}
+.matrix-hcell--ent{grid-column:3;}
+.matrix-hr1{grid-row:1;padding-top:var(--ds-space-md);}
+.matrix-hr2{grid-row:2;padding-top:var(--ds-space-2xs);}
+.matrix-hr3{grid-row:3;padding-top:var(--ds-space-2xs);}
+.matrix-hr4{grid-row:4;padding-top:var(--ds-space-xs);}
+.matrix-hr5{grid-row:5;padding-top:var(--ds-space-2xs);padding-bottom:var(--ds-space-md);}
+.matrix-hcell--pro.matrix-hr1{border-top:2px solid var(--ds-accent);}
+.matrix-eyebrow{
+  font-family:var(--ds-font-body);
+  font-size:var(--ds-step-micro);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-ink-soft);
+}
+
+/* the featured column is the ELEVATED plane, and it keeps that plane all the
+   way down the board so the column reads as one object. */
+.matrix-badge{
+  display:inline-block;
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ds-ink-on-dark);
+  background:var(--ds-accent);
+  border-radius:var(--ds-r-pill);
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  margin:0;
+}
+.matrix-badge--deep{background:var(--ds-accent-deep);}
+.matrix-name{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:800;
+  line-height:1.08;
+  letter-spacing:-.01em;
+  color:var(--ds-ink-heading);
+  margin:0;
+}
+.matrix-em{font-style:italic;font-weight:700;}
+.matrix-sub{
+  font-size:var(--ds-step-micro);
+  line-height:1.35;
+  color:var(--ds-ink-soft);
+  margin:0;
+}
+/* flex-wrap is the anti-truncation guarantee: if a wider face than the one
+   measured here ever pushes "/Mo" past the column, it drops to the next line
+   rather than being clipped. A price is never allowed to render partially. */
+.matrix-price{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:var(--ds-space-2xs);
+  margin:0;
+  min-width:0;
+}
+.matrix-amt{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--ds-ink-heading);
+  font-variant-numeric:tabular-nums;
+}
+.matrix-unit{
+  font-size:var(--ds-step-body);
+  font-weight:500;
+  color:var(--ds-ink-soft);
+}
+.matrix-addon{
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro);
+  line-height:1.3;
+  color:var(--ds-accent-light);
+  margin:0;
+}
+
+/* ── the spine: 14 rows, 6 of them shared, each fact written once ─────────── */
+.matrix-rows{list-style:none;margin:0;padding:0;}
+.matrix-row{border-bottom:1px solid var(--ds-hairline);}
+.matrix-row--last{border-bottom:0;}
+.matrix-feat{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:var(--ds-space-2xs);
+  padding:var(--ds-space-xs) var(--ds-space-md);
+  font-size:var(--ds-step-body);
+  line-height:1.3;
+  color:var(--ds-ink);
+  min-width:0;
+  overflow-wrap:break-word;
+}
+/* a module name is a product, the trailing INCLUDED is a status word */
+.matrix-mod{
+  font-family:var(--ds-font-display);
+  font-weight:700;
+  color:var(--ds-ink-heading);
+}
+.matrix-inc{
+  font-size:var(--ds-step-micro);
+  font-weight:600;
+  letter-spacing:.14em;
+  color:var(--ds-ink-soft);
+}
+.matrix-cell{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border-left:1px solid var(--ds-line);
+}
+.matrix-cell--pro{background:var(--ds-bg-surface-2);}
+
+/* marks are drawn, never imaged: tick = clip-path check, miss = a rule,
+   extra = a plus. Shape carries the meaning; colour only reinforces it. */
+.matrix-tick{
+  display:block;
+  width:17px;height:17px;
+  background:var(--ds-accent-light);
+  clip-path:polygon(43% 74%, 91% 20%, 100% 30%, 44% 93%, 0% 55%, 9% 45%);
+}
+.matrix-miss{
+  display:block;
+  width:14px;height:2px;
+  background:var(--ds-ink-soft);
+  border-radius:var(--ds-r-pill);
+}
+.matrix-plus{
+  display:block;
+  flex:none;
+  width:13px;height:13px;
+  background:var(--ds-accent-light);
+  clip-path:polygon(42% 0, 58% 0, 58% 42%, 100% 42%, 100% 58%, 58% 58%, 58% 100%, 42% 100%, 42% 58%, 0 58%, 0 42%, 42% 42%);
+}
+
+/* ── foot: the extras, at the bottom of each column ──────────────────────── */
+.matrix-foot{border-top:1px solid var(--ds-line);}
+.matrix-footlabel{
+  display:flex;
+  align-items:flex-start;
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  min-width:0;
+}
+.matrix-extras{
+  list-style:none;
+  margin:0;
+  padding:var(--ds-space-sm);
+  border-left:1px solid var(--ds-line);
+  display:flex;
+  flex-direction:column;
+  gap:var(--ds-space-2xs);
+  min-width:0;
+}
+.matrix-extras--pro{background:var(--ds-bg-surface-2);}
+.matrix-extra{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--ds-space-2xs);
+  font-size:var(--ds-step-micro);
+  line-height:1.35;
+  color:var(--ds-ink);
+  overflow-wrap:break-word;
+  min-width:0;
+}
+
+/* ── the stacked-card rendering, mobile only ─────────────────────────────── */
+.matrix-stack{display:none;}
+.matrix-card{
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-inset-hi),var(--ds-shadow-card);
+  padding:var(--ds-space-md);
+  margin:0 0 var(--ds-space-md) 0;
+}
+.matrix-card--last{margin-bottom:0;}
+.matrix-card--pro{border-top:2px solid var(--ds-accent);}
+.matrix-cardhead{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--ds-space-2xs);
+  padding:0 0 var(--ds-space-sm) 0;
+  border-bottom:1px solid var(--ds-line);
+}
+.matrix-list{
+  list-style:none;
+  margin:var(--ds-space-sm) 0 0 0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:var(--ds-space-xs);
+}
+.matrix-item{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--ds-space-xs);
+  font-size:var(--ds-step-body);
+  line-height:1.3;
+  color:var(--ds-ink);
+  overflow-wrap:break-word;
+}
+.matrix-item .matrix-tick{flex:none;margin:2px 0 0 0;}
+.matrix-plusline{
+  margin:var(--ds-space-sm) 0 0 0;
+  padding:var(--ds-space-sm) 0 0 0;
+  border-top:1px solid var(--ds-hairline);
+}
+
+.matrix-sr{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+/* ── 1024: narrow the plan columns so the spine keeps the long line ──────── */
+@media (max-width:1100px){
+  .matrix-board{--matrix-col:230px;}
+}
+
+/* ── below 800 a 3-col matrix stops working, so it becomes stacked cards ─── */
+@media (max-width:800px){
+  .matrix-board{display:none;}
+  .matrix-stack{display:block;}
+}
+@media (max-width:420px){
+  .matrix-wrap{padding:0 var(--ds-space-sm);}
+  .matrix-card{padding:var(--ds-space-sm);}
+}
+</style>
+
+<section class="opt" id="opt-matrix">
+  <h2 class="opt__title">A · Shared spine — one comparison matrix</h2>
+
+  <div class="matrix-wrap">
+
+    <!-- ================= THE MATRIX (>800px) ================= -->
+    <div class="matrix-board">
+
+      <div class="matrix-head">
+        <div class="matrix-headlabel">
+          <p class="matrix-eyebrow">What's included</p>
+        </div>
+
+        <div class="matrix-hcell matrix-hcell--pro matrix-hr1"><p class="matrix-badge">Most Popular!</p></div>
+        <div class="matrix-hcell matrix-hcell--ent matrix-hr1"><p class="matrix-badge matrix-badge--deep">Full Suite</p></div>
+
+        <div class="matrix-hcell matrix-hcell--pro matrix-hr2"><h3 class="matrix-name">MARKETING <em class="matrix-em">Pro</em></h3></div>
+        <div class="matrix-hcell matrix-hcell--ent matrix-hr2"><h3 class="matrix-name">ENTERPRISE</h3></div>
+
+        <div class="matrix-hcell matrix-hcell--pro matrix-hr3"><p class="matrix-sub">Guaranteed results</p></div>
+        <div class="matrix-hcell matrix-hcell--ent matrix-hr3"><p class="matrix-sub">Guaranteed Results + Boost your retention</p></div>
+
+        <div class="matrix-hcell matrix-hcell--pro matrix-hr4"><p class="matrix-price"><span class="matrix-amt">$4,200</span><span class="matrix-unit">/Mo</span></p></div>
+        <div class="matrix-hcell matrix-hcell--ent matrix-hr4"><p class="matrix-price"><span class="matrix-amt">$6,500</span><span class="matrix-unit">/Mo</span></p></div>
+
+        <div class="matrix-hcell matrix-hcell--pro matrix-hr5"><p class="matrix-addon">+$3,000/Additional Location</p></div>
+        <div class="matrix-hcell matrix-hcell--ent matrix-hr5"><p class="matrix-addon">+$3,000/Additional Location</p></div>
+      </div>
+
+      <ul class="matrix-rows">
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">SEO Pro</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">WEB Plus</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: not included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">WEB Pro</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: not included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">Web Graphics</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: not included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">CREATIVE Pro</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: not included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat">Monthly Strategy Sessions</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: not included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">OUTREACH Email</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: not included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat"><span class="matrix-mod">OUTREACH SMS</span> <span class="matrix-inc">INCLUDED</span></span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: not included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat">Review Management</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-miss" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: not included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat">Monthly + Quarterly Advanced Reporting &amp; Attribution</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat">Dedicated Campaign Strategist</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat">General Marketing Consulting</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row">
+          <span class="matrix-feat">Technology &amp; Integrations Support</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+        <li class="matrix-band matrix-row matrix-row--last">
+          <span class="matrix-feat">Semi-Exclusivity</span>
+          <span class="matrix-cell matrix-cell--pro"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">MARKETING Pro: included</span></span>
+          <span class="matrix-cell"><span class="matrix-tick" aria-hidden="true"></span><span class="matrix-sr">ENTERPRISE: included</span></span>
+        </li>
+
+      </ul>
+
+      <div class="matrix-band matrix-foot">
+        <div class="matrix-footlabel">
+          <p class="matrix-eyebrow">Extras</p>
+        </div>
+        <ul class="matrix-extras matrix-extras--pro">
+          <li class="matrix-extra"><span class="matrix-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+        </ul>
+        <ul class="matrix-extras">
+          <li class="matrix-extra"><span class="matrix-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          <li class="matrix-extra"><span class="matrix-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ============ STACKED CARDS (<=800px) — a card cannot share a row, ============
+         so each plan carries its own full list here, in its own exact order. -->
+    <div class="matrix-stack">
+
+      <div class="matrix-card matrix-card--pro">
+        <div class="matrix-cardhead">
+          <p class="matrix-badge">Most Popular!</p>
+          <h3 class="matrix-name">MARKETING <em class="matrix-em">Pro</em></h3>
+          <p class="matrix-sub">Guaranteed results</p>
+          <p class="matrix-price"><span class="matrix-amt">$4,200</span><span class="matrix-unit">/Mo</span></p>
+          <p class="matrix-addon">+$3,000/Additional Location</p>
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">SEO Pro</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">WEB Plus</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">Web Graphics</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+        </ul>
+        <ul class="matrix-list matrix-plusline">
+          <li class="matrix-item"><span class="matrix-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+        </ul>
+      </div>
+
+      <div class="matrix-card matrix-card--last">
+        <div class="matrix-cardhead">
+          <p class="matrix-badge matrix-badge--deep">Full Suite</p>
+          <h3 class="matrix-name">ENTERPRISE</h3>
+          <p class="matrix-sub">Guaranteed Results + Boost your retention</p>
+          <p class="matrix-price"><span class="matrix-amt">$6,500</span><span class="matrix-unit">/Mo</span></p>
+          <p class="matrix-addon">+$3,000/Additional Location</p>
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">SEO Pro</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">WEB Pro</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">CREATIVE Pro</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">OUTREACH Email</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span><span class="matrix-mod">OUTREACH SMS</span> <span class="matrix-inc">INCLUDED</span></span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Review Management</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+          <li class="matrix-item"><span class="matrix-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+        </ul>
+        <ul class="matrix-list matrix-plusline">
+          <li class="matrix-item"><span class="matrix-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          <li class="matrix-item"><span class="matrix-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+/* B - EMPHASIS PAIR. The conservative option: same two cards, same badge lid, same
+   +extras foot as what ships. FIXES two faults - (1) the 159px dead gap under Pro's
+   list, by letting each card size to its own content (align-items:start, no flex:1
+   filler) with the price boxes calc-locked so both feature lists still start on the
+   same line; (2) Pro reads as the promoted plan via ring + accent bloom + raised
+   plane + a metric-scale figure, not by colour alone.
+   GIVES UP: the redundancy is untouched - 20 lines still carry 14 facts, 6 verbatim
+   twice - and the block is still as tall as ENTERPRISE. Card width is deliberately
+   unchanged so the 409px line keeps its single line at 1440.
+   WRONG CHOICE when the brief is "make this section shorter": nothing here deletes a
+   line. Pick the shared-core or table option for that. */
+
+.pair-wrap{
+  max-width:var(--ds-container-max);
+  margin-inline:auto;
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink);
+}
+
+/* THE FIX FOR THE DEAD GAP: start, not stretch. Each card is as tall as its own
+   content; the tops stay locked to one line so the two still read as a pair. */
+.pair-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--ds-space-lg);
+  align-items:start;
+}
+
+.pair-card{
+  position:relative;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  border-radius:var(--ds-r-surface);
+  overflow:hidden;
+  border:1px solid var(--ds-line);
+  background:var(--ds-bg-warm);
+  box-shadow:var(--ds-shadow-rest),var(--ds-inset-hi);
+}
+
+/* DOMINANCE, four axes at once so none of them is carried by hue alone:
+   a lit ring, a bloom that reads as light coming off the card, the elevated
+   plane under it, and the largest figure in the section. */
+.pair-card--pro{
+  background:var(--ds-bg-surface-2);
+  border-color:var(--ds-accent);
+  box-shadow:
+    0 0 0 1px var(--ds-accent),
+    0 0 46px -14px var(--ds-accent),
+    var(--ds-shadow-card),
+    var(--ds-inset-hi);
+}
+
+/* the lid, kept: a full-width strip so the label reads as printed ON the package.
+   Both lids are the same height, which is what holds the two card tops on one line. */
+.pair-badge{
+  margin:0;
+  padding:var(--ds-space-sm) var(--ds-space-lg);
+  background:var(--ds-accent-deep);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.14em;
+  line-height:1.25;
+  text-transform:uppercase;
+  text-align:center;
+  color:var(--ds-ink-on-dark);
+}
+.pair-card--pro .pair-badge{background:var(--ds-accent)}
+
+.pair-body{padding:var(--ds-space-lg)}
+
+.pair-name{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:800;
+  line-height:1.1;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+  color:var(--ds-ink-heading);
+}
+.pair-em{font-style:italic;font-weight:800}
+
+.pair-sub{
+  margin:var(--ds-space-2xs) 0 0;
+  font-size:var(--ds-step-body);
+  font-weight:600;
+  line-height:1.4;
+  color:var(--ds-accent-ink);
+}
+
+/* Pro takes the section's largest step; ENTERPRISE keeps the figure step and is
+   pushed down by exactly the difference, so the two prices sit on ONE baseline and
+   both feature lists start on ONE line even though the type sizes differ. */
+.pair-price{
+  margin:var(--ds-space-md) 0 0;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-metric);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-heading);
+}
+.pair-card--ent .pair-price{
+  font-size:var(--ds-step-figure);
+  margin-top:calc(var(--ds-space-md) + (var(--ds-step-metric) - var(--ds-step-figure)));
+}
+.pair-unit{
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro);
+  font-weight:400;
+  line-height:1;
+  letter-spacing:.06em;
+  color:var(--ds-ink-soft);
+  margin-left:.25em;
+}
+.pair-add{
+  margin:var(--ds-space-2xs) 0 0;
+  font-size:var(--ds-step-micro);
+  line-height:1.5;
+  color:var(--ds-ink-soft);
+}
+
+.pair-list{
+  list-style:none;
+  margin:var(--ds-space-lg) 0 0;
+  padding:var(--ds-space-md) 0 0;
+  border-top:1px solid var(--ds-hairline);
+  display:grid;
+  gap:var(--ds-space-sm);
+}
+.pair-item,.pair-extra{
+  display:flex;
+  gap:var(--ds-space-sm);
+  align-items:flex-start;
+  font-size:var(--ds-step-body);
+  line-height:1.5;
+  color:var(--ds-ink);
+}
+.pair-text{min-width:0;overflow-wrap:break-word}
+.pair-mod{font-style:italic;font-weight:600;color:var(--ds-ink-heading)}
+
+/* ticks and plus marks are drawn from borders - no icon font, no request */
+.pair-tick{
+  flex:0 0 auto;
+  width:.62em;height:.34em;
+  margin-top:.42em;
+  border-left:2px solid var(--ds-accent-light);
+  border-bottom:2px solid var(--ds-accent-light);
+  transform:rotate(-45deg);
+}
+
+/* the foot, kept: extras sit on their own plane, one step below the card body,
+   because they are additions TO the package rather than lines within it */
+.pair-foot{
+  padding:var(--ds-space-md) var(--ds-space-lg);
+  background:var(--ds-bg-surface);
+  border-top:1px solid var(--ds-hairline);
+}
+.pair-card--pro .pair-foot{background:var(--ds-bg-warm)}
+.pair-extras{list-style:none;margin:0;padding:0;display:grid;gap:var(--ds-space-sm)}
+.pair-extra{font-weight:600;color:var(--ds-ink-heading)}
+.pair-plus{
+  position:relative;
+  flex:0 0 auto;
+  width:.72em;height:.72em;
+  margin-top:.36em;
+}
+.pair-plus::before,.pair-plus::after{content:"";position:absolute;background:var(--ds-ink-heading)}
+.pair-plus::before{left:0;right:0;top:calc(50% - 1px);height:2px}
+.pair-plus::after{top:0;bottom:0;left:calc(50% - 1px);width:2px}
+
+.pair-card{transition:box-shadow var(--ds-dur-fast) var(--ds-ease-out)}
+@media (prefers-reduced-motion:reduce){
+  .pair-card{transition:none}
+}
+
+@media (max-width:1100px){
+  .pair-wrap{padding-inline:var(--ds-space-md)}
+  .pair-body{padding:var(--ds-space-md)}
+  .pair-foot{padding:var(--ds-space-md)}
+  .pair-badge{padding:var(--ds-space-sm) var(--ds-space-md)}
+}
+
+/* one column: the promoted plan leads, and the price offset is dropped because
+   there is no second card beside it to align to */
+@media (max-width:900px){
+  .pair-grid{grid-template-columns:1fr;gap:var(--ds-space-lg)}
+  .pair-card--ent .pair-price{margin-top:var(--ds-space-md)}
+}
+
+@media (max-width:480px){
+  .pair-wrap{padding-inline:var(--ds-space-sm)}
+  .pair-badge{letter-spacing:.10em}
+}
+</style>
+
+<section class="opt" id="opt-pair">
+  <h2 class="opt__title">B · Emphasis pair — natural height, Pro dominant</h2>
+
+  <div class="pair-wrap">
+    <div class="pair-grid">
+
+      <article class="pair-card pair-card--pro" aria-labelledby="pair-name-pro">
+        <p class="pair-badge">Most Popular!</p>
+        <div class="pair-body">
+          <h3 class="pair-name" id="pair-name-pro">MARKETING <em class="pair-em">Pro</em></h3>
+          <p class="pair-sub">Guaranteed results</p>
+          <p class="pair-price">$4,200<span class="pair-unit">/Mo</span></p>
+          <p class="pair-add">+$3,000/Additional Location</p>
+          <ul class="pair-list">
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">SEO Pro</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">WEB Plus</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">Web Graphics</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Monthly Strategy Sessions</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Dedicated Campaign Strategist</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">General Marketing Consulting</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Technology &amp; Integrations Support</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Semi-Exclusivity</span></li>
+          </ul>
+        </div>
+        <div class="pair-foot">
+          <ul class="pair-extras" aria-label="MARKETING Pro additions">
+            <li class="pair-extra"><span class="pair-plus" aria-hidden="true"></span><span class="pair-text">Performance Benchmarks</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="pair-card pair-card--ent" aria-labelledby="pair-name-ent">
+        <p class="pair-badge">Full Suite</p>
+        <div class="pair-body">
+          <h3 class="pair-name" id="pair-name-ent">ENTERPRISE</h3>
+          <p class="pair-sub">Guaranteed Results + Boost your retention</p>
+          <p class="pair-price">$6,500<span class="pair-unit">/Mo</span></p>
+          <p class="pair-add">+$3,000/Additional Location</p>
+          <ul class="pair-list">
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">SEO Pro</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">WEB Pro</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">CREATIVE Pro</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">OUTREACH Email</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text"><em class="pair-mod">OUTREACH SMS</em> INCLUDED</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Review Management</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Dedicated Campaign Strategist</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">General Marketing Consulting</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Technology &amp; Integrations Support</span></li>
+            <li class="pair-item"><span class="pair-tick" aria-hidden="true"></span><span class="pair-text">Semi-Exclusivity</span></li>
+          </ul>
+        </div>
+        <div class="pair-foot">
+          <ul class="pair-extras" aria-label="ENTERPRISE additions">
+            <li class="pair-extra"><span class="pair-plus" aria-hidden="true"></span><span class="pair-text">Performance Benchmarks</span></li>
+            <li class="pair-extra"><span class="pair-plus" aria-hidden="true"></span><span class="pair-text">Includes all A La Carte Upgrades</span></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+/* ============================================================================
+   OPTION C "bands" — one full-bleed row per plan, stacked, grounds alternated.
+   FIXES (headless-measured @1440): the 159px DEAD GAP is gone — the bands are
+     independent, so nothing is stretched; worst intra-band slack is 32px. Total
+     height 709px vs 943px (-25%). The 9 and 11 feature lines run 3 balanced
+     columns across the whole 1120px container, not a 409px ribbon in a 516px
+     card. NOT fixed: 20 lines still print for 14 unique facts.
+   GIVES UP / WRONG WHEN: $4,200 and $6,500 sit ~355px apart and are never in
+     one glance — so this is the wrong pick if the job is head-to-head compare.
+   ========================================================================== */
+
+.bands-wrap{
+  /* private layout dial (a length, not a colour): the split between the lead
+     block and the feature columns. Swept empirically — see the header note. */
+  --bands-lead-w:380px;
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink);
+  overflow-wrap:break-word;
+}
+
+/* ── THE BANDS ─────────────────────────────────────────────────────────────
+   Full width of whatever holds them; the CONTENT is what gets capped at
+   --ds-container-max. Grounds alternate across the three near-black planes so
+   the stack never reads as one long list. ─────────────────────────────────── */
+.bands-band{
+  width:100%;
+  border-top:1px solid var(--ds-hairline);
+}
+.bands-band:last-child{ border-bottom:1px solid var(--ds-hairline); }
+.bands-band--pro{ background:var(--ds-bg-surface-2); box-shadow:var(--ds-inset-hi); }
+.bands-band--ent{ background:var(--ds-bg-warm); }
+
+.bands-inner{
+  max-width:var(--ds-container-max);
+  margin-left:auto;
+  margin-right:auto;
+  padding:var(--ds-space-md);
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--ds-space-md);
+}
+
+/* ── LEFT BLOCK — badge / name / subtitle / price / add-on / CTA ─────────── */
+.bands-lead{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--ds-space-xs);
+  padding:var(--ds-space-md);
+  border-radius:var(--ds-r-surface);
+  border:1px solid var(--ds-line);
+  min-width:0;
+}
+.bands-band--pro .bands-lead{
+  background:var(--ds-accent-deep);
+  border-color:var(--ds-accent);
+  box-shadow:var(--ds-inset-hi);
+}
+.bands-band--ent .bands-lead{
+  background:var(--ds-bg-surface);
+  border-color:var(--ds-line);
+}
+
+.bands-badge{
+  margin:0;
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.14em;
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  border:1px solid var(--ds-line);
+}
+.bands-band--pro .bands-badge{
+  background:var(--ds-ink-on-dark);
+  color:var(--ds-accent-deep);
+  border-color:var(--ds-ink-on-dark);
+}
+.bands-band--ent .bands-badge{
+  background:var(--ds-accent-deep);
+  color:var(--ds-ink-on-dark);
+  border-color:var(--ds-accent);
+}
+
+.bands-name{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.01em;
+}
+.bands-band--pro .bands-name{ color:var(--ds-ink-on-dark); }
+.bands-band--ent .bands-name{ color:var(--ds-ink-heading); }
+.bands-name__em{ font-style:italic; font-weight:600; }
+
+.bands-sub{
+  margin:0;
+  font-size:var(--ds-step-body);
+  line-height:1.35;
+}
+.bands-band--pro .bands-sub{ color:var(--ds-ink); }
+.bands-band--ent .bands-sub{ color:var(--ds-ink-soft); }
+
+/* The band's height is decided HERE, not in the feature columns: measured at
+   1440 the lead block is the taller side in every configuration. The price ink
+   is 242px and the button 156px, so they cannot share a row inside any lead
+   narrow enough to leave the columns usable — but the add-on line and the
+   button CAN, and that pairing buys ~30px of band height at no cost to either. */
+.bands-buy{
+  width:100%;
+  margin-top:var(--ds-space-xs);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--ds-space-sm);
+}
+.bands-terms{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--ds-space-sm);
+}
+
+.bands-price{
+  margin:0;
+  display:flex;
+  align-items:baseline;
+  gap:var(--ds-space-2xs);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure);
+  font-weight:800;
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.bands-band--pro .bands-price{ color:var(--ds-ink-on-dark); }
+.bands-band--ent .bands-price{ color:var(--ds-ink-heading); }
+.bands-unit{
+  font-family:var(--ds-font-body);
+  font-size:var(--ds-step-body);
+  font-weight:500;
+}
+.bands-band--pro .bands-unit{ color:var(--ds-ink); }
+.bands-band--ent .bands-unit{ color:var(--ds-accent-light); }
+
+.bands-add{
+  margin:0;
+  font-size:var(--ds-step-micro);
+  line-height:1.25;
+  letter-spacing:.03em;
+  /* opts OUT of the wrapper's break-word net: squeezed beside the button this
+     string broke mid-word ("Additi / onal") at 1024. It may only wrap at the
+     slash or the space, never inside a word, and it never shrinks below its
+     own min-content (no min-width:0 here, on purpose). */
+  overflow-wrap:normal;
+  word-break:normal;
+}
+.bands-band--pro .bands-add{ color:var(--ds-ink); }
+.bands-band--ent .bands-add{ color:var(--ds-ink-soft); }
+
+.bands-cta{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  gap:var(--ds-space-xs);
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border-radius:var(--ds-r-control);
+  border:1px solid var(--ds-line);
+  font-size:var(--ds-step-body);
+  font-weight:700;
+  line-height:1;
+  text-decoration:none;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.bands-band--pro .bands-cta{
+  background:var(--ds-ink-on-dark);
+  color:var(--ds-accent-deep);
+  border-color:var(--ds-ink-on-dark);
+}
+.bands-band--ent .bands-cta{
+  background:var(--ds-accent);
+  color:var(--ds-ink-on-dark);
+  border-color:var(--ds-accent);
+}
+.bands-cta:hover{ transform:translateY(-1px); box-shadow:var(--ds-shadow-rest); }
+.bands-cta:focus-visible{ outline:2px solid var(--ds-accent-light); outline-offset:3px; }
+.bands-chev{
+  width:7px; height:7px;
+  border-right:2px solid var(--ds-line);
+  border-bottom:2px solid var(--ds-line);
+  transform:rotate(-45deg);
+  flex:0 0 auto;
+}
+.bands-band--pro .bands-chev{ border-right-color:var(--ds-accent-deep); border-bottom-color:var(--ds-accent-deep); }
+.bands-band--ent .bands-chev{ border-right-color:var(--ds-ink-on-dark); border-bottom-color:var(--ds-ink-on-dark); }
+
+/* ── RIGHT BLOCK — the feature list, flowed in columns ───────────────────── */
+.bands-feat{ min-width:0; }
+
+.bands-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  column-gap:var(--ds-space-lg);
+  column-rule:1px solid var(--ds-hairline);
+}
+.bands-li{
+  break-inside:avoid;
+  -webkit-column-break-inside:avoid;
+  display:flex;
+  align-items:flex-start;
+  gap:var(--ds-space-xs);
+  margin:0 0 var(--ds-space-sm);
+  font-size:var(--ds-step-body);
+  line-height:1.35;
+  color:var(--ds-ink);
+}
+.bands-li:last-child{ margin-bottom:0; }
+
+.bands-tick{
+  flex:0 0 auto;
+  position:relative;
+  width:17px; height:17px;
+  margin-top:3px;
+  border:1px solid var(--ds-accent-light);
+  border-radius:var(--ds-r-pill);
+}
+.bands-tick::after{
+  content:"";
+  position:absolute;
+  left:5px; top:3px;
+  width:4px; height:8px;
+  border-right:2px solid var(--ds-accent-light);
+  border-bottom:2px solid var(--ds-accent-light);
+  transform:rotate(42deg);
+}
+
+.bands-mod{
+  font-family:var(--ds-font-display);
+  font-style:normal;
+  font-weight:700;
+  color:var(--ds-ink-heading);
+}
+.bands-inc{
+  font-size:var(--ds-step-micro);
+  font-weight:600;
+  letter-spacing:.12em;
+  color:var(--ds-ink-soft);
+}
+
+/* ── EXTRAS — additions TO the package, marked with a + not a tick ───────── */
+.bands-extras{
+  list-style:none;
+  margin:var(--ds-space-sm) 0 0;
+  padding:var(--ds-space-sm) 0 0;
+  border-top:1px solid var(--ds-hairline);
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--ds-space-xs);
+}
+.bands-xli{
+  display:flex;
+  align-items:center;
+  gap:var(--ds-space-xs);
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  border:1px solid var(--ds-glass-border);
+  background:var(--ds-glass-bg);
+  font-size:var(--ds-step-body);
+  line-height:1.3;
+  color:var(--ds-ink);
+}
+.bands-plus{
+  flex:0 0 auto;
+  position:relative;
+  width:15px; height:15px;
+}
+.bands-plus::before,
+.bands-plus::after{
+  content:"";
+  position:absolute;
+  background:var(--ds-accent-light);
+  border-radius:var(--ds-r-control);
+}
+.bands-plus::before{ left:1px; top:6px; width:13px; height:3px; }
+.bands-plus::after{ left:6px; top:1px; width:3px; height:13px; }
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────────
+   390: everything single column (default above).
+   640+: features break into 2 columns while the lead still sits on top.
+   960+: the band becomes a real row — lead left, features right.
+   1200+: features run 3 columns so the band is at its shortest. ─────────── */
+@media (min-width:640px){
+  .bands-list{ column-count:2; }
+  .bands-extras{ gap:var(--ds-space-xs) var(--ds-space-md); }
+}
+@media (min-width:960px){
+  .bands-inner{
+    grid-template-columns:360px minmax(0,1fr);
+    gap:var(--ds-space-lg);
+    padding:var(--ds-space-lg) var(--ds-space-md);
+  }
+  /* slack in a stretched lead panel collects ABOVE the price row, so the buy
+     block sits on the panel's baseline instead of leaving a hole under it. */
+  .bands-buy{ margin-top:auto; }
+  /* add-on + button share one row: the button sets the row height (47px, a
+     legal tap target) and the add-on takes the remaining width, wrapping
+     inside it rather than pushing the button onto a second line. */
+  .bands-terms{
+    flex-direction:row;
+    align-items:center;
+    gap:var(--ds-space-md);
+  }
+  .bands-add{ flex:1 1 auto; }
+}
+@media (min-width:1200px){
+  .bands-inner{
+    grid-template-columns:var(--bands-lead-w) minmax(0,1fr);
+    padding-left:var(--ds-space-lg);
+    padding-right:var(--ds-space-lg);
+  }
+  .bands-list{ column-count:3; column-gap:var(--ds-space-md); }
+}
+@media (prefers-reduced-motion:reduce){
+  .bands-cta{ transition:none; }
+  .bands-cta:hover{ transform:none; }
+}
+</style>
+
+<section class="opt" id="opt-bands">
+  <h2 class="opt__title">C · Full-bleed bands — one row per plan</h2>
+
+  <div class="bands-wrap">
+
+    <!-- BAND 1 . MARKETING Pro . ground = elevated plane, violet lead panel -->
+    <article class="bands-band bands-band--pro" aria-labelledby="bands-name-pro">
+      <div class="bands-inner">
+
+        <div class="bands-lead">
+          <p class="bands-badge">Most Popular!</p>
+          <h3 class="bands-name" id="bands-name-pro">MARKETING <em class="bands-name__em">Pro</em></h3>
+          <p class="bands-sub">Guaranteed results</p>
+          <div class="bands-buy">
+            <p class="bands-price">$4,200<span class="bands-unit">/Mo</span></p>
+            <div class="bands-terms">
+              <p class="bands-add">+$3,000/Additional Location</p>
+              <a class="bands-cta" href="contact.html">Book demo<span class="bands-chev" aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bands-feat">
+          <ul class="bands-list" aria-label="What MARKETING Pro includes">
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">SEO Pro</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">WEB Plus</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">Web Graphics</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+          </ul>
+          <ul class="bands-extras" aria-label="Added to the MARKETING Pro package">
+            <li class="bands-xli"><span class="bands-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- BAND 2 . ENTERPRISE . ground = mid plane, canvas-dark lead panel -->
+    <article class="bands-band bands-band--ent" aria-labelledby="bands-name-ent">
+      <div class="bands-inner">
+
+        <div class="bands-lead">
+          <p class="bands-badge">Full Suite</p>
+          <h3 class="bands-name" id="bands-name-ent">ENTERPRISE</h3>
+          <p class="bands-sub">Guaranteed Results + Boost your retention</p>
+          <div class="bands-buy">
+            <p class="bands-price">$6,500<span class="bands-unit">/Mo</span></p>
+            <div class="bands-terms">
+              <p class="bands-add">+$3,000/Additional Location</p>
+              <a class="bands-cta" href="contact.html">Book demo<span class="bands-chev" aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="bands-feat">
+          <ul class="bands-list" aria-label="What ENTERPRISE includes">
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">SEO Pro</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">WEB Pro</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">CREATIVE Pro</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">OUTREACH Email</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span><em class="bands-mod">OUTREACH SMS</em> <span class="bands-inc">INCLUDED</span></span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Review Management</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
+            <li class="bands-li"><span class="bands-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
+          </ul>
+          <ul class="bands-extras" aria-label="Added to the ENTERPRISE package">
+            <li class="bands-xli"><span class="bands-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+            <li class="bands-xli"><span class="bands-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<style>
+/* D - BASE + DELTA. MARKETING Pro is listed in full; ENTERPRISE is written as the upgrade on top of it.
+   FIXES: the 159px dead gap is gone - the grid is align-items:start, so heights are NATURAL and never force-matched, and the delta framing lands the two cards 28px apart (measured 680/710 @1440) instead of 159px apart. Block height measures 710px vs 943px (-25%); 805px with the carried-over group expanded, still under the control.
+   HONESTY: ENTERPRISE genuinely carries all 6 shared lines, so BOTH honesty routes are taken - the claim block states the inclusion in words, AND the 6 lines are real text in the markup inside a labelled <details> ("Carried over from MARKETING Pro - 6 shared lines, all included"), collapsed so the card stays short. ENTERPRISE carrying WEB Pro where Pro carries WEB Plus is an UPGRADE of one module, not both - stated on the card, along with the two Pro lines that do NOT carry over.
+   PARTLY FIXED: the duplication. All 20 lines stay in the DOM for the 14 facts - deleting a line ENTERPRISE actually has would be a lie - but only 14 are painted at rest, the 6 duplicates sitting behind a labelled control. Width is untouched: it was never the problem.
+   GIVES UP: line-for-line side-by-side scanning, and the 6 shared lines cost ENTERPRISE readers one click. ENTERPRISE no longer reads as a standalone spec sheet - it only makes sense next to Pro.
+   WRONG CHOICE WHEN: ENTERPRISE is the anchor plan a buyer lands on first, or the buyer is diffing this against a competitor's spec sheet row by row - then a flat, symmetric two-list layout wins. */
+
+.delta-wrap{
+  max-width:var(--ds-container-max);
+  margin:0 auto;
+  font-family:var(--ds-font-body);
+  color:var(--ds-ink);
+  font-size:var(--ds-step-body,1rem);
+  line-height:1.5;
+}
+
+.delta-lede{
+  max-width:var(--ds-measure,62ch);
+  margin:0 0 var(--ds-space-lg);
+  color:var(--ds-ink-soft);
+  font-size:var(--ds-step-body,1rem);
+}
+.delta-lede-k{color:var(--ds-ink);font-weight:600;}
+
+.delta-grid{
+  display:grid;
+  gap:var(--ds-space-md);
+  align-items:start; /* the anti-dead-gap move: cards are never stretched to match */
+}
+
+/* ── CARD ─────────────────────────────────────────────────────────────── */
+.delta-card{
+  position:relative;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  padding:var(--ds-space-md);
+  border-radius:var(--ds-r-surface);
+  border:1px solid var(--ds-line);
+  background:var(--ds-bg-surface-2);
+  box-shadow:var(--ds-shadow-rest),var(--ds-inset-hi);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.delta-card:hover{transform:translateY(-2px);box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);}
+
+.delta-card-ent{
+  border-color:var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+}
+.delta-card-ent::before{
+  content:"";
+  position:absolute;
+  inset:-1px -1px auto -1px;
+  height:3px;
+  border-radius:var(--ds-r-surface) var(--ds-r-surface) 0 0;
+  background:linear-gradient(90deg,var(--ds-accent-deep),var(--ds-accent),var(--ds-accent-light));
+}
+
+/* ── CARD HEAD ────────────────────────────────────────────────────────── */
+.delta-badge{
+  align-self:flex-start;
+  display:inline-block;
+  margin:0;
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro,.75rem);
+  line-height:1.2;
+  letter-spacing:.04em;
+  padding:.4em .8em;
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-accent);
+  color:var(--ds-ink-on-dark);
+}
+.delta-badge-ent{background:var(--ds-accent-deep);border:1px solid var(--ds-accent);}
+
+.delta-name{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-sub,1.75rem);
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:-.01em;
+  color:var(--ds-ink-heading);
+  margin:var(--ds-space-xs) 0 var(--ds-space-2xs);
+}
+.delta-em{font-style:italic;}
+
+.delta-sub{
+  margin:0;
+  color:var(--ds-ink-soft);
+  font-size:var(--ds-step-body,1rem);
+}
+
+.delta-price{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:var(--ds-space-2xs);
+  margin:var(--ds-space-sm) 0 0;
+}
+.delta-amt{
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-figure,2.75rem);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--ds-ink-heading);
+}
+.delta-unit{
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-body,1rem);
+  color:var(--ds-ink-soft);
+}
+.delta-addon{
+  margin:var(--ds-space-2xs) 0 0;
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro,.75rem);
+  color:var(--ds-ink-soft);
+}
+
+/* ── LIST HEADS ───────────────────────────────────────────────────────── */
+.delta-h{
+  margin:var(--ds-space-sm) 0 var(--ds-space-sm);
+  padding-top:var(--ds-space-sm);
+  border-top:1px solid var(--ds-hairline);
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro,.75rem);
+  font-weight:500;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--ds-ink-soft);
+}
+
+/* the "everything in Pro, plus" claim, stated in words before the delta list */
+.delta-claim{
+  position:relative;
+  margin:var(--ds-space-sm) 0 var(--ds-space-sm);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-control);
+  overflow:hidden;
+}
+.delta-claim::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--ds-accent);
+  opacity:.10;
+  pointer-events:none;
+}
+.delta-claim-h{
+  position:relative;
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-body,1.125rem);
+  font-weight:700;
+  line-height:1.25;
+  color:var(--ds-ink-heading);
+}
+.delta-claim-p{
+  position:relative;
+  margin:var(--ds-space-2xs) 0 0;
+  font-size:var(--ds-step-micro,.75rem);
+  line-height:1.45;
+  color:var(--ds-ink);
+}
+
+/* ── FEATURE LINES ────────────────────────────────────────────────────── */
+.delta-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:var(--ds-space-xs);
+}
+.delta-item{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--ds-space-xs);
+  min-width:0;
+  font-size:var(--ds-step-body,1rem);
+  line-height:1.35;
+  color:var(--ds-ink);
+}
+.delta-txt{
+  display:flex;
+  flex:1 1 auto;
+  min-width:0;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:var(--ds-space-2xs);
+  overflow-wrap:break-word;
+}
+.delta-mod{color:var(--ds-ink-heading);font-weight:600;}
+.delta-inc{
+  margin-left:auto;
+  flex:0 0 auto;
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro,.75rem);
+  letter-spacing:.1em;
+  line-height:1.4;
+  color:var(--ds-accent-light);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-pill);
+  padding:.1em .5em;
+  white-space:nowrap;
+}
+
+/* tick: soft accent disc + a check drawn from two borders */
+.delta-tick{
+  position:relative;
+  flex:0 0 auto;
+  width:1.15em;
+  height:1.15em;
+  margin-top:.1em;
+}
+.delta-tick::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:var(--ds-accent);
+  opacity:.20;
+}
+.delta-tick::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:48%;
+  width:.30em;
+  height:.56em;
+  border:2px solid var(--ds-accent-light);
+  border-top:0;
+  border-left:0;
+  transform:translate(-50%,-55%) rotate(45deg);
+}
+
+/* plus: the extras are additions TO the package, not features of it */
+.delta-plus{
+  position:relative;
+  flex:0 0 auto;
+  width:1.15em;
+  height:1.15em;
+  margin-top:.1em;
+}
+.delta-plus::before,
+.delta-plus::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  background:var(--ds-accent-light);
+  transform:translate(-50%,-50%);
+}
+.delta-plus::before{width:.76em;height:2px;}
+.delta-plus::after{width:2px;height:.76em;}
+
+.delta-extras{
+  margin-top:var(--ds-space-sm);
+  padding-top:var(--ds-space-xs);
+  border-top:1px dashed var(--ds-hairline);
+}
+.delta-cap{
+  margin:0 0 var(--ds-space-xs);
+  font-family:var(--ds-font-mono);
+  font-size:var(--ds-step-micro,.75rem);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--ds-ink-soft);
+}
+
+/* ── CARRIED-OVER GROUP (the 6 shared lines, present + demoted, never hidden) ── */
+.delta-carry{
+  margin-top:var(--ds-space-sm);
+  padding-top:var(--ds-space-sm);
+  border-top:1px solid var(--ds-hairline);
+}
+.delta-carry-sum{
+  display:inline-flex;
+  align-items:center;
+  gap:var(--ds-space-xs);
+  cursor:pointer;
+  list-style:none;
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-pill);
+  font-size:var(--ds-step-micro,.75rem);
+  font-weight:600;
+  line-height:1.4;
+  color:var(--ds-accent-light);
+  transition:border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.delta-carry-sum:hover{border-color:var(--ds-accent);}
+.delta-carry-sum::-webkit-details-marker{display:none;}
+.delta-carry-sum:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:3px;
+  border-radius:var(--ds-r-control);
+}
+.delta-chev{
+  flex:0 0 auto;
+  width:.5em;
+  height:.5em;
+  border:2px solid var(--ds-accent-light);
+  border-top:0;
+  border-left:0;
+  transform:rotate(-45deg);
+  transform-origin:center;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out);
+}
+.delta-carry[open] .delta-chev{transform:rotate(45deg);}
+
+.delta-shared{
+  list-style:none;
+  margin:var(--ds-space-sm) 0 0;
+  padding:0;
+  display:grid;
+  gap:var(--ds-space-xs);
+}
+.delta-shared-i{
+  display:flex;
+  align-items:flex-start;
+  gap:var(--ds-space-xs);
+  min-width:0;
+  font-size:var(--ds-step-micro,.75rem);
+  line-height:1.4;
+  color:var(--ds-ink-soft);
+}
+.delta-shared-i .delta-mod{color:var(--ds-ink);font-weight:600;}
+.delta-shared-i .delta-inc{margin-left:var(--ds-space-2xs);}
+
+.delta-note{
+  margin:var(--ds-space-sm) 0 0;
+  padding-left:var(--ds-space-sm);
+  border-left:2px solid var(--ds-accent);
+  font-size:var(--ds-step-micro,.75rem);
+  line-height:1.5;
+  color:var(--ds-ink-soft);
+}
+.delta-note-k{color:var(--ds-accent-light);font-weight:700;}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────── */
+@media (min-width:880px){
+  .delta-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--ds-space-lg);}
+}
+@media (min-width:1180px){
+  .delta-shared{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:var(--ds-space-md);}
+}
+@media (prefers-reduced-motion:reduce){
+  .delta-card,.delta-chev{transition:none;}
+  .delta-card:hover{transform:none;}
+}
+</style>
+
+<section class="opt" id="opt-delta">
+  <h2 class="opt__title">D &middot; Base + delta &mdash; &ldquo;everything in Pro, plus&hellip;&rdquo;</h2>
+
+  <div class="delta-wrap">
+    <p class="delta-lede"><span class="delta-lede-k">MARKETING Pro is listed in full.</span> ENTERPRISE is written as the upgrade on top of it &mdash; what it adds first, then the lines it carries over. All 11 ENTERPRISE features are on its card.</p>
+
+    <div class="delta-grid">
+
+      <!-- ── PLAN 1 : the base ─────────────────────────────────────────── -->
+      <article class="delta-card">
+        <p class="delta-badge">Most Popular!</p>
+        <h3 class="delta-name">MARKETING <em class="delta-em">Pro</em></h3>
+        <p class="delta-sub">Guaranteed results</p>
+
+        <p class="delta-price"><span class="delta-amt">$4,200</span><span class="delta-unit">/Mo</span></p>
+        <p class="delta-addon">+$3,000/Additional Location</p>
+
+        <h4 class="delta-h">What&rsquo;s included</h4>
+        <ul class="delta-list">
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">SEO Pro</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">WEB Plus</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">Web Graphics</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Monthly Strategy Sessions</span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Dedicated Campaign Strategist</span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">General Marketing Consulting</span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Technology &amp; Integrations Support</span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Semi-Exclusivity</span></li>
+        </ul>
+
+        <div class="delta-extras">
+          <p class="delta-cap">Added to the package</p>
+          <ul class="delta-list">
+            <li class="delta-item"><span class="delta-plus" aria-hidden="true"></span><span class="delta-txt">Performance Benchmarks</span></li>
+          </ul>
+        </div>
+
+        <p class="delta-note"><span class="delta-note-k">This is the base.</span> ENTERPRISE is written as a change to this list.</p>
+      </article>
+
+      <!-- ── PLAN 2 : the delta ────────────────────────────────────────── -->
+      <article class="delta-card delta-card-ent">
+        <p class="delta-badge delta-badge-ent">Full Suite</p>
+        <h3 class="delta-name">ENTERPRISE</h3>
+        <p class="delta-sub">Guaranteed Results + Boost your retention</p>
+
+        <p class="delta-price"><span class="delta-amt">$6,500</span><span class="delta-unit">/Mo</span></p>
+        <p class="delta-addon">+$3,000/Additional Location</p>
+
+        <div class="delta-claim">
+          <h4 class="delta-claim-h">Everything in MARKETING <em class="delta-em">Pro</em>, plus</h4>
+          <p class="delta-claim-p">All 6 shared lines are included &mdash; listed at the foot of this card.</p>
+        </div>
+
+        <ul class="delta-list">
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">WEB Pro</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">CREATIVE Pro</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">OUTREACH Email</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">OUTREACH SMS</span> <span class="delta-inc">INCLUDED</span></span></li>
+          <li class="delta-item"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Review Management</span></li>
+        </ul>
+
+        <div class="delta-extras">
+          <p class="delta-cap">Added to the package</p>
+          <ul class="delta-list">
+            <li class="delta-item"><span class="delta-plus" aria-hidden="true"></span><span class="delta-txt">Performance Benchmarks</span></li>
+            <li class="delta-item"><span class="delta-plus" aria-hidden="true"></span><span class="delta-txt">Includes all A La Carte Upgrades</span></li>
+          </ul>
+        </div>
+
+        <details class="delta-carry">
+          <summary class="delta-carry-sum"><span class="delta-chev" aria-hidden="true"></span>Carried over from MARKETING Pro &mdash; 6 shared lines, all included</summary>
+          <ul class="delta-shared">
+            <li class="delta-shared-i"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt"><span class="delta-mod">SEO Pro</span> <span class="delta-inc">INCLUDED</span></span></li>
+            <li class="delta-shared-i"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
+            <li class="delta-shared-i"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Dedicated Campaign Strategist</span></li>
+            <li class="delta-shared-i"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">General Marketing Consulting</span></li>
+            <li class="delta-shared-i"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Technology &amp; Integrations Support</span></li>
+            <li class="delta-shared-i"><span class="delta-tick" aria-hidden="true"></span><span class="delta-txt">Semi-Exclusivity</span></li>
+          </ul>
+        </details>
+
+        <p class="delta-note"><span class="delta-note-k">An upgrade, not an addition:</span> ENTERPRISE carries WEB Pro in place of WEB Plus &mdash; one module at a higher tier, not both. Web Graphics and Monthly Strategy Sessions are MARKETING Pro only.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+</div>
+</body></html>

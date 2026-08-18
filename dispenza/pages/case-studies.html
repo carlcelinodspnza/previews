@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispensary marketing case studies and results</title>
+<meta name="description" content="Real dispensaries, named cities, measured lifts. See what changed and over what window.">
+<meta name="robots" content="noindex,nofollow">
+<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
+     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
+     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
+     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
+     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
+     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
+     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
+     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
+<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
+     pages despite a complete local corpus, and shipping a malformed format("font_weight")
+     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+
+</head>
+<body class="site-body">
+<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
+     Header + mobile drawer + footer. Pages inject their body between them.
+     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
+     rail-shell class, never renamed, so no CSS selector changed. -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. Owner-approved layout 2026-08-17 (was: two columns of four).
+         A PREVIEW slab left, the full eight as a two-column ROW-FLOW index right — so column one
+         reads 01/03/05/07 and column two 02/04/06/08. It repeats the rail's corner and hairline;
+         it does not glow.
+         THE PREVIEW IS NOT NAVIGATION: a div, aria-hidden, unfocusable. It mirrors whichever row is
+         hovered or focused and rests on 01. Every title and description stays permanently visible in
+         the list, so the preview never holds the only copy of anything — nothing is hover-gated for
+         touch or keyboard users. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
+             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
+             nav left the note pointing at a page a visitor could no longer reach from the nav — a
+             true sentence with a dead end behind it. Linking it restores the route without inventing
+             copy or re-adding a nav item. -->
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
+      </div>
+
+      <div class="svc-body">
+
+        <div class="svc-preview" id="svc-preview" aria-hidden="true">
+          <span class="svc-preview__num" id="svc-pv-num">01</span>
+          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
+          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
+          <span class="svc-preview__slot">Preview</span>
+        </div>
+
+        <div class="panel__grid panel__grid--services svc-list">
+          <a class="panel__item svc-row" href="performance-marketing.html"
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+            <span class="svc-row__num" aria-hidden="true">01</span>
+            <span>
+              <span class="panel__title">Performance marketing</span>
+              <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="branding-graphic-design.html"
+             data-n="02" data-title="Brand and package design" data-desc="Identity, packaging and in-store collateral.">
+            <span class="svc-row__num" aria-hidden="true">02</span>
+            <span>
+              <span class="panel__title">Brand and package design</span>
+              <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="webdesign-development.html"
+             data-n="03" data-title="Web design and development" data-desc="Menu-connected sites built to be updated by staff.">
+            <span class="svc-row__num" aria-hidden="true">03</span>
+            <span>
+              <span class="panel__title">Web design and development</span>
+              <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="ads-design.html"
+             data-n="04" data-title="Advertisement design" data-desc="Creative sized for every placement you actually run.">
+            <span class="svc-row__num" aria-hidden="true">04</span>
+            <span>
+              <span class="panel__title">Advertisement design</span>
+              <span class="panel__desc">Creative sized for every placement you actually run.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="conversion-rate-optimization.html"
+             data-n="05" data-title="Conversion rate optimization" data-desc="Turning the traffic you already pay for into orders.">
+            <span class="svc-row__num" aria-hidden="true">05</span>
+            <span>
+              <span class="panel__title">Conversion rate optimization</span>
+              <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="integrations.html"
+             data-n="06" data-title="Integrations" data-desc="Menu, POS and loyalty systems talking to each other.">
+            <span class="svc-row__num" aria-hidden="true">06</span>
+            <span>
+              <span class="panel__title">Integrations</span>
+              <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="consulting.html"
+             data-n="07" data-title="Consulting" data-desc="Operator-level advice when you run the marketing yourself.">
+            <span class="svc-row__num" aria-hidden="true">07</span>
+            <span>
+              <span class="panel__title">Consulting</span>
+              <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+            </span>
+          </a>
+          <a class="panel__item svc-row" href="reports.html"
+             data-n="08" data-title="Reports" data-desc="What ran, what it cost, what it returned.">
+            <span class="svc-row__num" aria-hidden="true">08</span>
+            <span>
+              <span class="panel__title">Reports</span>
+              <span class="panel__desc">What ran, what it cost, what it returned.</span>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+
+<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
+     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
+<main id="main" class="site-main">
+<!-- ==========================================================================
+     case-studies (T-INDEX) . CONTENT FRAGMENT
+     Wrapped by _build/_template.html. Nav, drawer, footer and the demo form are
+     the LOCKED CHROME and are not re-authored here.
+
+     DESIGN PROVENANCE. Every idiom below is lifted from the locked concept,
+     foundation-1-measured-column, not invented:
+       .mc-section / --light             the section vocabulary
+       .mc-head + .mc-head__turn         the two-part head, second word gradient
+       .container / .row / .col          the measured column
+       .mc-actions + .btn--solid/--ghost the locked action cluster and button pair
+       the violet stat tile              .mc-result on the homepage #results band
+       the coverage map                  the same figure the homepage #results uses
+       head + standfirst                 .cs-fan__head / .cs-fan__standfirst
+       mark-plate + lead/sub figures     .cs-fan__card / __figs on the homepage
+     The page therefore reads as a sibling of the homepage: it repeats the home
+     page's dark to light to dark inversion, and it presents the SAME two bodies
+     of proof at full length instead of a subset.
+
+     WHERE THIS PAGE'S CSS LIVES. In dispenza-structural.css, under the fenced
+     "PAGE SIGNATURE . case-studies" section, in an `rs-` namespace that appears
+     nowhere else in the sheet. NOT in pages/case-studies.css: G-ORPHAN scans only
+     _design/*.css, and build.mjs links exactly three sheets (tokens, chrome,
+     structural), so a page-local sheet is both un-writable past the gate and
+     never linked. The reasoning is recorded in full at the head of that section.
+
+     DOM GRAMMAR. Every content object sits at
+     section -> .container -> .row -> .col -> object, with no exceptions. The head
+     lattice is a full-bleed decoration but it still lives inside a .col and is
+     taken out of flow by CSS rather than by being hoisted up the tree.
+
+     BAND IDENTITY is declared with data-surface on each section, which is the
+     build's surface convention, so the rhythm is legible from the markup alone
+     and does not depend on which stylesheet a reader happens to have open.
+
+     IMAGERY is governed by _design/imagery-system.md, which this page's frames
+     are the first entries in. The per-mark plate polarity in section 3 is
+     specified there in full, with the measurements behind it.
+
+     NO CAROUSEL, NO AUTOPLAY, NO SCROLL-REVEAL. Every figure and every card is
+     painted on load. The shell adds no .js class and mounts no reveal observer,
+     so [data-reveal] is deliberately absent rather than left inert.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     SECTION 1 . PAGE HEAD . KIND: MEASURE
+
+     The H1 and the trust line, alone on the dark canvas. The head pays its own
+     top clearance for the fixed rail; see .rs-head in dispenza-structural.css.
+
+     THE LATTICE is decorative and aria-hidden: the locked concept's 44px brand
+     grid (--ds-grid / --ds-grid-size) redrawn as an inline SVG so it can carry a
+     radial mask and dissolve instead of ending at a hard edge. It is the same
+     motif as the hero's isometric field, at rest and without its engine. It
+     holds no information, so nothing is lost to a reader who never sees it.
+     It sits inside the .col per the DOM grammar and is lifted out of flow with
+     position:absolute against the section, so it still reads full bleed.
+
+     NO EYEBROW, on this section or the two below. .mc-eyebrow is part of the
+     concept's vocabulary and would sit well here, but the source page carries no
+     eyebrow string for any of these sections and inventing one is forbidden.
+     ========================================================================== -->
+<!-- pick: HERO-COMPOSITIONS.md #10 | considered: #22,#5,#11 | why: this head owns exactly two source strings and neither an image nor a CTA, so a text-only centred head is the only composition it can honestly fill; #22 statistics-heavy would drag the eight city figures up into the head and spend the page's proof before the section that owns it, #5 full-bleed needs a photograph the source does not supply for this page, and #11 wants a CTA icon grid that would be four invented labels. -->
+<section class="mc-section rs-head surface-dark" id="results-head" data-surface="dark">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <svg class="rs-head__lattice" viewBox="0 0 1440 560" width="1440" height="560"
+             aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <pattern id="rsGrid" width="44" height="44" patternUnits="userSpaceOnUse">
+              <path d="M44 0 H0 V44" fill="none" stroke="currentColor" stroke-width="1"/>
+            </pattern>
+            <radialGradient id="rsGridFade" cx="0.72" cy="0.28" r="0.72">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="1"/>
+              <stop offset="0.55" stop-color="#ffffff" stop-opacity="0.45"/>
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+            <mask id="rsGridMask">
+              <rect width="1440" height="560" fill="url(#rsGridFade)"/>
+            </mask>
+          </defs>
+          <rect width="1440" height="560" fill="url(#rsGrid)" mask="url(#rsGridMask)"/>
+        </svg>
+
+        <h1 class="rs-head__title">OUR <span class="mc-head__turn">RESULTS</span></h1>
+        <p class="rs-head__deck">BUILDING LONG-TERM RELATIONSHIPS BASED ON TRUST, TRANSPARENCY AND RESULTS SINCE 2012.</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 2 . FINANCIAL CASE STUDIES . KIND: STAT GRID ON AN INVERTED GROUND
+
+     THE ONE INVERSION. The homepage puts this same material on white because the
+     owner asked for it against white, matching their own live site. This page
+     keeps that decision, so the proof moment reads the same way twice.
+
+     ALL EIGHT ARE ALWAYS VISIBLE. The homepage carries these eight in a scroll
+     deck with prev/next controls because they share a viewport with a map and a
+     claim. Here they are the section's whole subject, so they become a static
+     4 x 2 grid: no deck, no controls, no show-more, nothing to operate. The grid
+     steps 4 / 2 / 1 columns so the last row is never ragged.
+
+     BARE BY INSTRUCTION, AND BOTH AUTHORITIES AGREE. The source rail also
+     carries a per-row label ("Total Sale Increase") and a window ("in the first
+     3 months"). Those two atom families belong to the homepage brief, which is
+     explicit that this section claims the band and its heading only and that the
+     rows must not be re-typed here. The content contract for this page
+     independently supplies city and figure ONLY, and copy-fidelity does not ask
+     for them on this slug. So each tile is city + figure and nothing else.
+
+     PRECISION IS VERBATIM, including the source's own inconsistency: 51.37 and
+     50.1 and 94.5 keep their decimals, 196 and 198 and 733 have none. Nothing
+     here is rounded or padded to match its neighbour.
+
+     THE MAP is the same figure and the same alt text the homepage's #results band
+     already carries, seated beside the head rather than above the tiles so the
+     eight figures keep the section's punch. Eight named cities and a coverage
+     plate belong together; this is the one place on the page where a picture adds
+     something the type cannot.
+     ⚠ It is a GENERATED asset carrying a coverage claim. It is reused here
+     because it is already approved and shipping in that role on the locked
+     homepage concept, not because this page assessed the claim independently.
+     ========================================================================== -->
+<!-- pick: TRUST-STATS-SECTIONS.md #4 | considered: #3,#1,#2 | why: eight peer figures have to be comparable at a glance and all present at once, which is what a big-number band does and what the client's own live page does with them; #3 count-up 3-up is built for three values so six of the eight would have to be deferred or dropped, and #1 and #2 are logo rows that carry no numerals at all. -->
+<section class="mc-section mc-section--light rs-fin" id="financial-case-studies" data-surface="light">
+  <div class="container">
+
+    <div class="row rs-fin__intro">
+      <div class="col rs-fin__introText">
+        <h2 class="mc-head">FINANCIAL <span class="mc-head__turn">CASE STUDIES</span></h2>
+      </div>
+      <div class="col rs-fin__introMap">
+        <figure class="rs-fin__map">
+          <img src="../assets/generated/results-map.webp"
+               alt="Map of North America with the states and provinces Dispenza operates in highlighted."
+               width="940" height="628" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <!-- A DESCRIPTION LIST, not a deck of headings. Each tile is a
+             label/value pair and the source gives it no other copy, so dt/dd is
+             the honest structure: the city names the result, the figure IS the
+             result. A div wrapping each dt/dd pair is valid inside a dl. -->
+        <dl class="rs-fin__grid">
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Oceanside, CA</dt>
+            <dd class="rs-fin__figure">+51.37%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Mid City, LA, CA</dt>
+            <dd class="rs-fin__figure">+50.1%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Edmond, OK</dt>
+            <dd class="rs-fin__figure">+196%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Seaside, CA</dt>
+            <dd class="rs-fin__figure">+94.5%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Oakland, CA</dt>
+            <dd class="rs-fin__figure">+94.5%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Needles, CA</dt>
+            <dd class="rs-fin__figure">+198%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Downtown LA, CA</dt>
+            <dd class="rs-fin__figure">+55.2%</dd>
+          </div>
+
+          <div class="rs-fin__tile">
+            <dt class="rs-fin__city">Las Vegas, NV</dt>
+            <dd class="rs-fin__figure">+733%</dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 3 . CUSTOMER JOURNEYS . KIND: GRID PLUS A CLOSING FEATURE
+
+     Back to the dark canvas, mirroring the homepage's #case-studies ground.
+
+     THE HEAD keeps the source's two-part H2, CUSTOMER plus a highlighted
+     JOURNEYS, carried by the concept's own .mc-head__turn. The live capture's
+     longer H2 sits directly beneath it as the standfirst, which is exactly the
+     head + standfirst pair the homepage's .cs-fan__head already uses. Both
+     captures are preserved and neither contradicts the other.
+
+     FIVE CARDS DO NOT DIVIDE INTO A GRID, so the fifth is promoted rather than
+     squeezed: 01 to 04 sit in a clean 2 x 2 and Firehouse 360 closes the section
+     as a full-measure feature, shot left and figures right. That keeps the
+     source's card order exactly (nuleafnv, norcal, tcg, flwrco, firehouse) while
+     giving the pin the page brief asks for to the client whose numbers are the
+     largest on the page. No row is ever ragged and no card is deferred.
+
+     TWO FIGURES WHERE THE SOURCE CARRIES TWO. tcg, flwrco and firehouse each
+     render their pair in source order, lead then sub, on the concept's existing
+     lead/sub ladder. nuleafnv and norcal carry the single figure this slug owns;
+     their second figures are cross-page atoms owned by the homepage brief and
+     are bound there, not re-authored here.
+
+     MARK-PLATE POLARITY IS MEASURED, NOT CHOSEN, and is specified in
+     _design/imagery-system.md section 2.3. The five mandated marks are a split
+     set, so no single plate ground can carry all of them: NuLeaf, Norcal and
+     Flower Co are dark-inked and take the LIGHT plate, TCG and Firehouse are
+     near-white and take the DARK plate. Every plate keeps the same size, radius
+     and padding; only the ground flips. Left on one ground, Norcal would have
+     rendered at 1.08:1 and Flower Co at 1.16:1, which is invisible.
+
+     THE CARD CTA is the source's own shared label, placed once in the corpus and
+     repeated by this template on every card. Treatment is CTA-PATTERNS #6, a
+     ghost text-link with an arrow: it is the quietest of the CTA set, which is
+     right for a label that repeats five times and must not compete with the
+     figure above it. Because the label is identical on all five, each link
+     carries an aria-label pairing it with its own client so a screen-reader list
+     of links is not five identical rows. Both strings in that pair are existing
+     atoms; no new words are composed.
+
+     ⚠ THE FIVE CTA TARGETS DO NOT EXIST YET. nuleafnv / norcal / tcg / flwrco /
+     firehouse are tier-3 pages in the locked sitemap and are not built at the
+     time this fragment was authored. The hrefs are the source page's own flat
+     filenames, matching the chrome's convention, so they resolve the moment
+     those pages land. Until then they are five dead links and that is flagged,
+     not hidden.
+
+     PORTFOLIO SHOTS carry alt="" by intent. They are decorative work samples,
+     the source ships them with empty alt, and each card's meaning is carried by
+     the mark's alt text plus the figures beside it.
+
+     SOURCE DEFECT FIXED: on the live page the NorCal mark carries alt="Nuleaf
+     NV", a copy-paste error. Each mark here is named for the brand it shows.
+
+     THE SECOND BAND, at the foot of this section, is the source's trailing
+     four-card metric group. It has NO heading of its own in the source, so it is
+     FOLDED INTO THIS SECTION and inherits this heading rather than being given
+     an invented one. It is the same four clients carrying a different KPI, so it
+     belongs to the same subject; a hairline and a recessed ground mark the seam
+     without a single added word. Its compact shape (mark plus figure, no shot)
+     is deliberately unlike the cards above so it never reads as duplicated ones.
+     ========================================================================== -->
+<!-- pick: PROOF-SECTIONS.md #5 | considered: #4,#3,#1 | why: every card the source supplies is a portfolio shot married to a measured result, which is literally an image plus result split, and promoting the fifth card to a full-measure feature absorbs the awkward remainder instead of leaving a hole in a three-across; #4 metric-led card alone would throw away all five portfolio images, #3 carousel is on the owner's forbidden-motion list and would hide how long the client roster is, and #1 wants testimonial quotes that do not exist for these clients. -->
+<section class="mc-section rs-jrn surface-dark" id="customer-journeys" data-surface="dark">
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <div class="rs-jrn__head">
+          <h2 class="mc-head">CUSTOMER <span class="mc-head__turn">JOURNEYS</span></h2>
+          <p class="rs-jrn__standfirst">Navigating Customer Journeys: Success Stories in Cannabis Marketing</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <ul class="rs-jrn__grid" role="list">
+
+          <li class="rs-jrn__cell">
+            <article class="rs-jrn__card rs-lift">
+              <div class="rs-jrn__shot">
+                <img src="../assets/in-pages/dispensary-marketing-portfolio-by-dispenza.webp"
+                     alt="" width="589" height="433" loading="lazy" decoding="async">
+              </div>
+              <div class="rs-jrn__body">
+                <span class="rs-plate rs-plate--light">
+                  <img class="rs-plate__mark" src="../assets/in-pages/NuLeaf.webp"
+                       alt="NuLeaf NV" width="200" height="200" loading="lazy" decoding="async">
+                </span>
+                <ul class="rs-figs" role="list">
+                  <li class="rs-figs__lead">700% Sales Increase</li>
+                </ul>
+                <a class="rs-cta" href="nuleafnv.html" aria-label="VIEW CASE STUDY: NuLeaf NV">
+                  VIEW CASE STUDY
+                  <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </li>
+
+          <li class="rs-jrn__cell">
+            <article class="rs-jrn__card rs-lift">
+              <div class="rs-jrn__shot">
+                <img src="../assets/in-pages/marketing-portfolio-cannabis-menu-mobile-view.webp"
+                     alt="" width="589" height="433" loading="lazy" decoding="async">
+              </div>
+              <div class="rs-jrn__body">
+                <span class="rs-plate rs-plate--light">
+                  <img class="rs-plate__mark" src="../assets/in-pages/Norcal.webp"
+                       alt="NorCal" width="174" height="172" loading="lazy" decoding="async">
+                </span>
+                <ul class="rs-figs" role="list">
+                  <li class="rs-figs__lead">Sales Records Just 4 Months In</li>
+                </ul>
+                <a class="rs-cta" href="norcal.html" aria-label="VIEW CASE STUDY: NorCal">
+                  VIEW CASE STUDY
+                  <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </li>
+
+          <li class="rs-jrn__cell">
+            <article class="rs-jrn__card rs-lift">
+              <div class="rs-jrn__shot">
+                <img src="../assets/in-pages/dispenary-marketing-portfolio-by-dispenza2.webp"
+                     alt="" width="589" height="433" loading="lazy" decoding="async">
+              </div>
+              <div class="rs-jrn__body">
+                <span class="rs-plate rs-plate--dark">
+                  <img class="rs-plate__mark" src="../assets/in-pages/TCG.webp"
+                       alt="The Cannabis Guys" width="219" height="190" loading="lazy" decoding="async">
+                </span>
+                <ul class="rs-figs" role="list">
+                  <li class="rs-figs__lead"># 1 Local Search Ranking</li>
+                  <li class="rs-figs__sub">10% Monthly Sales Increase</li>
+                </ul>
+                <a class="rs-cta" href="tcg.html" aria-label="VIEW CASE STUDY: The Cannabis Guys">
+                  VIEW CASE STUDY
+                  <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </li>
+
+          <li class="rs-jrn__cell">
+            <article class="rs-jrn__card rs-lift">
+              <div class="rs-jrn__shot">
+                <img src="../assets/in-pages/dispenza-portfolio-flwr-co.webp"
+                     alt="" width="680" height="457" loading="lazy" decoding="async">
+              </div>
+              <div class="rs-jrn__body">
+                <span class="rs-plate rs-plate--light">
+                  <img class="rs-plate__mark" src="../assets/in-pages/dispenza-flwrco-logo.webp"
+                       alt="Flower Co" width="1300" height="600" loading="lazy" decoding="async">
+                </span>
+                <ul class="rs-figs" role="list">
+                  <li class="rs-figs__lead">+5.3x Search Requests</li>
+                  <li class="rs-figs__sub">+11x Direction Requests</li>
+                </ul>
+                <a class="rs-cta" href="flwrco.html" aria-label="VIEW CASE STUDY: Flower Co">
+                  VIEW CASE STUDY
+                  <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </li>
+
+          <!-- THE CLOSING FEATURE. Last in source order and largest in figure,
+               so it takes the full measure instead of a quarter of it. -->
+          <li class="rs-jrn__cell rs-jrn__cell--feature">
+            <article class="rs-jrn__card rs-lift">
+              <div class="rs-jrn__shot">
+                <img src="../assets/in-pages/dispenza-portfolio-firehouse-dispensary.webp"
+                     alt="" width="638" height="510" loading="lazy" decoding="async">
+              </div>
+              <div class="rs-jrn__body">
+                <span class="rs-plate rs-plate--dark">
+                  <img class="rs-plate__mark" src="../assets/in-pages/Firehouse.webp"
+                       alt="Firehouse 360" width="200" height="200" loading="lazy" decoding="async">
+                </span>
+                <ul class="rs-figs" role="list">
+                  <li class="rs-figs__lead">+1504% Increase In Discovery Traffic</li>
+                  <li class="rs-figs__sub">+180% Website Visits</li>
+                </ul>
+                <a class="rs-cta" href="firehouse.html" aria-label="VIEW CASE STUDY: Firehouse 360">
+                  VIEW CASE STUDY
+                  <svg class="rs-cta__arrow" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.4 2H8v4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </article>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <!-- THE FOLDED BAND. No heading by instruction: the source gives this group
+         none, and inventing one is forbidden. It sits inside CUSTOMER JOURNEYS
+         and is covered by that heading. -->
+    <div class="row">
+      <div class="col">
+        <ul class="rs-more" role="list">
+
+          <li class="rs-more__cell">
+            <span class="rs-plate rs-plate--light rs-plate--sm">
+              <img class="rs-plate__mark" src="../assets/in-pages/NuLeaf.webp"
+                   alt="NuLeaf" width="200" height="200" loading="lazy" decoding="async">
+            </span>
+            <p class="rs-more__metric">350% Direction Request Increase</p>
+          </li>
+
+          <li class="rs-more__cell">
+            <span class="rs-plate rs-plate--light rs-plate--sm">
+              <img class="rs-plate__mark" src="../assets/in-pages/Norcal.webp"
+                   alt="Norcal" width="174" height="172" loading="lazy" decoding="async">
+            </span>
+            <p class="rs-more__metric">300% Phone Call Increase</p>
+          </li>
+
+          <li class="rs-more__cell">
+            <span class="rs-plate rs-plate--dark rs-plate--sm">
+              <img class="rs-plate__mark" src="../assets/in-pages/TCG.webp"
+                   alt="TCG" width="219" height="190" loading="lazy" decoding="async">
+            </span>
+            <p class="rs-more__metric">480% Direction Request Increase</p>
+          </li>
+
+          <li class="rs-more__cell">
+            <span class="rs-plate rs-plate--dark rs-plate--sm">
+              <img class="rs-plate__mark" src="../assets/in-pages/Firehouse.webp"
+                   alt="Firehouse" width="200" height="200" loading="lazy" decoding="async">
+            </span>
+            <p class="rs-more__metric">180% Website Visits Increase</p>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 4 . THE CLOSING ASK . KIND: NAVIGATIONAL
+
+     NOT ONE WORD OF NEW COPY, by instruction. The reader has just scanned the
+     proof, so the close hands them the two onward routes the page brief names:
+     the published price ladder on how-it-works, so they can self-qualify without
+     booking a call, and contact, so they can book. Both labels are existing
+     sitewide chrome strings ("Book demo" from the rail and drawer, "How It Works"
+     from the footer nav) and both buttons are the locked pair, unmodified. There
+     is no heading and no standfirst because either would have to be invented.
+
+     IT SITS BEFORE THE PARTNER LINE, not after it. The brief numbers partners
+     ahead of the close, but the brief's own section 5 text places partners "at
+     the foot of the page content" and burying a conversion route under an
+     administrative footnote is a real conversion defect. Both instructions are
+     satisfied this way round: the ask closes the argument, the footnote is
+     genuinely last.
+     ========================================================================== -->
+<!-- pick: CTA-PATTERNS.md #7 | considered: #11,#1,#8 | why: the page brief gives this slot exactly two destinations of unequal weight, which is the definition of a primary-plus-secondary cluster, and side by side they let a reader who is not ready to book still leave via the price ladder instead of bouncing; #11 full-width band CTA would need a headline this slot is forbidden from inventing, #1 solid pill alone would drop the price-ladder route the whole positioning wedge rests on, and #8 stacking them implies a ranking the brief does not state. -->
+<section class="mc-section rs-close surface-dark" id="closing-ask" data-surface="dark">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="mc-actions">
+          <a class="btn btn--solid" href="contact.html">Book demo</a>
+          <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SECTION 5 . PARTNER LINKS . KIND: QUIET PROSE LINE
+
+     PROVENANCE AND THE HONESTY CORRECTION. These three strings sit inside a
+     hidden injected block on the live page. The no-drop rule keeps the words;
+     the honesty rule refuses the hiding, so they render as a visible, quiet
+     small-type line at the foot of the page content.
+
+     ⚠ RENDERED AS TEXT, NOT AS LINKS, AND THIS IS A FLAG NOT A PREFERENCE. The
+     page brief asks for the two partners with "links intact". No destination URL
+     for either partner exists anywhere in the handoff: the fact registry records
+     both verbatim strings with a null canonical_value and no href, and the
+     cloned source no longer contains the injected block that carried them.
+     Inventing a URL for a named third party is worse than shipping the name
+     unlinked, so the words ship visible and unlinked, and the two URLs are
+     raised to the owner as an open item.
+     ========================================================================== -->
+<!-- pick: LEGAL-SECTIONS.md #1 | considered: #2,#3 | why: this is three short strings of administrative prose with no internal structure to navigate, so a single-measure prose container is the whole requirement; #2 and #3 are both tables-of-contents for long documents and would generate navigation furniture for a one-line footnote. -->
+<section class="mc-section rs-partners surface-dark" id="partner-links" data-surface="dark">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="rs-partners__line">
+          <span class="rs-partners__label">Partners Links:</span>
+          <span class="rs-partners__name">JTek Resources</span>
+          <span class="rs-partners__name">Outsourced Marketing Inc.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
+     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
+     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+</script>
+</body>
+</html>
