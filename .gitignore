@@ -8,3 +8,9 @@ dispenza/_design/_tournament/templates/
 dispenza/_design/hero/_prev-column/
 dispenza/_design/hero/_retired/
 */pages/*.content.html
+
+# in-progress layout prototypes — never published
+dispenza/pages/pm-layouts.html
+dispenza/pages/pm-body-layouts.html
+dispenza/pages/pm-body-image-layouts.html
+dispenza/pages/pm-sleek-concepts.html
