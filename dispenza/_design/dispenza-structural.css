@@ -7328,14 +7328,14 @@ a.hw-cell__value:focus-visible{
 /* the rung numeral: the source prints 01..09 beside each module and they are real
    corpus atoms, but they are an ORDINAL, not a claim, so they take the mono face
    at micro scale and the accent ink rather than heading weight. */
-.hz-rung__n{
-  display:block;
-  font-family:var(--ds-font-mono);
-  font-size:var(--ds-step-micro);
-  letter-spacing:.16em;
-  color:var(--ds-accent-ink);
-  margin-bottom:var(--ds-space-2xs);
-}
+/* .hz-rung__n (the 01-09 module ordinals) was removed from the markup at the owner's direction.
+   The rule stays as the record of what the slot was, but the row spacing it implied does not: it was
+   display:block ABOVE the module name, so each id cell carried an extra line of height that the name
+   alone no longer needs. .hz-rung__id gets that line back as tightened vertical padding so the name
+   sits at the row top instead of floating in the space the ordinal used to occupy. */
+.hz-rung__n{display:none}
+.hz-table .hz-rung > .hz-rung__id{ padding-top:var(--ds-space-md); padding-bottom:var(--ds-space-md) }
+.hz-table .hz-rung > .hz-rung__id .hz-name{ margin-top:0 }
 .hz-rung__price{width:15%;white-space:nowrap}
 /* the plan card's price is the top of the type ladder because there are two of
    them; nine of it would be a wall, so the rung price steps down one rung. */
@@ -7862,3 +7862,82 @@ a.hw-cell__value:focus-visible{
 /* ===========================================================================
    T-CONTACT block closed
    =========================================================================== */
+
+/* ===========================================================================
+   BREATHING ROOM UNDER A FULL-BLEED MARQUEE.
+   MEASURED: on the pricing section the marquee band ran straight into the section
+   title - 20px from the band's bottom edge to the "THE PLANS" eyebrow, with the rest
+   of the stack equally tight at 14px eyebrow-to-headline and 24px headline-to-lede.
+   A full-bleed band is a hard horizontal edge; a kicker sitting on it reads as part
+   of the band rather than as the start of the section.
+   The section itself cannot supply the space: .mc-section pads by --ds-rhythm, but
+   #pricing's padding-top is 0 precisely BECAUSE the band is a full-bleed first child.
+   So the space goes on the container that FOLLOWS the band, and the rest of the stack
+   is put back on the token scale instead of its ad-hoc 14/24.
+   Scoped with :has(.mc-salesband) - measured across all 27 pages, index is the only
+   one with a marquee followed by a titled container, so nothing else shifts.
+   =========================================================================== */
+.container--full:has(.mc-salesband) + .container{ padding-top:var(--ds-space-2xl) }
+
+/* A --banded SECTION THAT NO LONGER HAS A BAND MUST PAY ITS RHYTHM AGAIN.
+   .mc-section--banded zeroes padding-top on purpose: a section that OPENS with a full-bleed marquee
+   wants the band to touch the dark section above it and read as the seam. #pricing carried that
+   modifier - then the owner removed its "OUR SUITE" marquee, and the zero stayed behind. Measured:
+   padding-top 0 with the eyebrow 0px from the section's top edge, flush against #benchmarks, while
+   every comparable section (#benchmarks, #case-studies) opens 151px down.
+   Written as :not(:has(.mc-salesband)) rather than pinned to #pricing so it maintains itself: put a
+   band back and the section returns to a zero top edge automatically. #results still has its
+   "Increase Sales" band and is untouched. */
+.mc-section--banded:not(:has(.mc-salesband)){ padding-top:var(--ds-rhythm) }
+.container--full:has(.mc-salesband) + .container .mc-eyebrow + .mc-head{ margin-top:var(--ds-space-md) }
+.container--full:has(.mc-salesband) + .container .mc-head + .mc-body,
+.container--full:has(.mc-salesband) + .container .mc-head ~ .mc-body{ margin-top:var(--ds-space-lg) }
+
+/* ===========================================================================
+   CASE-STUDY CARDS - OPTION C (owner pick, 2026-08-19).
+   The photograph fills the card; the copy sits on a scrim at the foot; the client
+   mark floats top-left with NO white plate.
+   ON THE MARKS: the owner reviewed all five side by side and chose the artwork
+   UNTOUCHED. Flattening them to white was tried and rejected - it renders each mark's
+   SILHOUETTE, which is fine for NuLeaf, NorCal and Firehouse (dark artwork) but turns
+   The Cannabis Guys into a solid blob and Flower Co into a plain disc, because those
+   two are filled badges whose identity lives in their internal contrast. All five are
+   transparent PNGs and all five already carry enough white to read on a dark card, so
+   they ship as-is with a drop shadow to hold them over a light photograph.
+   =========================================================================== */
+.rs-jrn__card{ position:relative; isolation:isolate; min-height:460px }
+.rs-jrn__card > .rs-jrn__shot{
+  position:absolute; inset:0; z-index:0; aspect-ratio:auto; min-height:0;
+}
+.rs-jrn__card > .rs-jrn__shot img{ width:100%; height:100%; object-fit:cover }
+.rs-jrn__card > .rs-jrn__shot::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(10,10,14,.12) 0%, rgba(10,10,14,.32) 38%, rgba(10,10,14,.74) 68%, rgba(10,10,14,.95) 100%);
+}
+.rs-jrn__card > .rs-jrn__body{
+  position:relative; z-index:1; margin-top:auto; flex:0 0 auto;
+  padding:var(--ds-space-md); gap:var(--ds-space-sm);
+}
+/* the mark: out of the flow at the top, no plate, no background */
+.rs-jrn__card .rs-plate,
+.rs-jrn__card .rs-plate--light{
+  /* IN THE STACK, not floated. The mark is the first child of .rs-jrn__body and the owner asked for it
+     to sit on its own line directly above the result, so it stays in normal flow and simply loses the
+     plate. Floating it top-left (the first pass) put it a card-height away from the words it belongs to. */
+  position:static; z-index:2;
+  background:none; border:0; box-shadow:none; padding:0;
+  display:block; width:max-content; margin:0 0 var(--ds-space-xs);
+}
+.rs-jrn__card .rs-plate__mark{
+  max-height:46px; max-width:150px;
+  filter:drop-shadow(0 1px 7px rgba(0,0,0,.6));
+}
+/* copy on a photograph is always light here, whatever the card's own surface says */
+.rs-jrn__card .rs-figs__lead{ color:#fff }
+.rs-jrn__card .rs-figs__sub{ color:rgba(255,255,255,.74) }
+.rs-jrn__card .rs-cta{ color:#fff }
+/* the feature cell overrode the shot to sit beside the copy; that no longer applies */
+.rs-jrn__cell--feature .rs-jrn__shot{ flex:none; min-height:0 }
+.rs-jrn__cell--feature .rs-jrn__body{ flex:0 0 auto; justify-content:flex-end }
+
