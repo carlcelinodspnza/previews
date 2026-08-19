@@ -8585,14 +8585,26 @@ a.hw-cell__value:focus-visible{
    xl (64px) is the value that was in the build through both complaints and was never
    actually on screen for either. A row of saturated card faces with a hard top edge
    does want more than the 40px the prose took, and less than a full 2xl. */
-.pm-defdeck{ margin-top:var(--ds-space-xl) }
+.pm-defdeck{ margin-top:var(--ds-space-lg) }
 
 @media (max-width:1023px){
   .pm-defdeck{ --mc-card-min:264px }
   /* stacked the card is 264px wide, so the sides come back to md - 32px either
      side of a 264px card would leave a 200px column and start breaking words. */
   .pm-defdeck .mc-result{ padding:var(--ds-space-lg) var(--ds-space-md) }
-  .pm-defdeck{ margin-top:var(--ds-space-lg) }   /* stacked, one step down as always */
+  .pm-defdeck{ margin-top:var(--ds-space-md) }   /* stacked, one step down as always */
 }
+
+/* THE CLOSING INTERVAL INTO THE FOOTER. Measured across the set at 1440: this page
+   ran 243px from its last content to the footer's card edge, and its four T-ARTICLE
+   siblings run 227px - so the roomy figure is a SITE-WIDE pattern, not something this
+   page introduced. It is .tc-doc's closing --ds-rhythm (151.2px) plus the footer's own
+   opening 96px, and the footer legitimately keeps its opening interval because it is a
+   visible panel with its own edge, which is exactly the case the rhythm rules carve out.
+
+   Reduced HERE ONLY, because only this page has been reviewed. The selector requires
+   .mc-dissolve, so consulting, ads-design, integrations and webdesign-development keep
+   227px until the owner decides whether the whole set should follow. 64 + 96 = 160px. */
+.mc-dissolve ~ .tc-doc{ padding-bottom:var(--ds-space-xl) }
 
 /* ▲▲▲ .pm-defcard — closed ▲▲▲ */
