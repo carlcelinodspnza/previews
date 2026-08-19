@@ -233,7 +233,44 @@
 
        THE BOOK DEMO HERE IS THE SOURCE'S OWN FIRST BUTTON (atoms node 4), not a
        label written for this build. -->
-  <header class="mc-section tc-head surface-dark" data-surface="dark">
+  <header class="mc-section tc-head tc-head--brandbg surface-dark mc-smokerise" data-surface="dark" data-smokerise>
+    <!-- THE SMOKE, PORTED NOT RE-AUTHORED. Same engine, same tuning table, same
+         pointer wake as the home page's #benchmarks band and the sibling lander's
+         head: _design/smoke-engine.js holds the model and section-smoke-rise.js
+         supplies only the 'ceiling' emitter. Nothing new is authored here - a second
+         particle file would put a second copy of the wind constants on the site,
+         which is the non-propagation trap the build rules name.
+
+         WHY THE CORRIDOR IS RE-CUT FOR THIS HEAD, AND WHY THAT IS NOT A RETUNE OF
+         ANYONE ELSE'S. The base lid clears a 240px type band measured against the
+         rhythm token; this head runs 826px at 1440 and its copy column is 514px
+         tall, so the base vertical mask would seat smoke straight through the lede.
+         The sibling lander keeps the base lid untouched (its head is a short wordmark
+         that falls inside the cleared band) and the five case heads keep --casehead.
+         This page carries its own modifier for the same reason those two do.
+
+         THE SHAPE IS MEASURED, NOT GUESSED. Reveals settled, at three widths:
+         desktop the copy column ends at 57.2% (1440) / 60.2% (1024) and the phone
+         runs 65.0-87.2% / 66.4-97.7%, so the corridor is HORIZONTAL - smoke lives
+         right of 61% only, which is the phone's own column and nothing else. Stacked
+         at 390 the grid is one column and both blocks are full width, so the corridor
+         turns VERTICAL instead: copy ends at 48.0%, phone starts at 51.0%, smoke
+         below 49%. Type is never in the smoke at any width.
+
+         AND IT KEEPS THE ATMOSPHERE OFF THE CONVERSION ROUTE. The rule this head had
+         to answer is the one ads1 is built on - no field near a control. BOOK DEMO
+         sits at x:12.8-57.2%, y:72.8-77.9% on desktop and above the fold line at 390;
+         the corridor excludes it on both axes, so the field can open the page without
+         ever sitting behind the button. -->
+    <div class="container container--full container--plane">
+      <div class="row">
+        <div class="col">
+          <div class="mc-smokerise__lid mc-smokerise__lid--phonehead" aria-hidden="true">
+            <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="row"><div class="col">
         <div class="tc-head__grid tc-head__grid--media">
@@ -259,7 +296,25 @@
                render this asset 1070x1723 at a 2.3x upscale, three times over. The
                320px head-media column renders it 320x515 at 0.69x instead: the same
                asset, legible, at its own scale. -->
-          <div class="tc-head__media tc-lift" data-media-in>
+          <!-- THE PHONE FLOATS. Three changes, each one removing something rather than
+                 adding a second mechanism:
+                 - .tc-lift is KEPT, but RE-EXPRESSED. Its hover state paints
+                   --ds-shadow-lift, a BOX shadow, and this asset is a genuine RGBA cutout
+                   (461x742, corner alpha 0) - a box shadow behind a cutout draws the
+                   rectangle the owner asked to remove. Dropping the class was the first
+                   thing tried and it is WRONG: the hover-lift is one of the locked
+                   globals-overlay signals, and removing it strips the page of an applied
+                   global rather than of a box. So the class stays and the CSS swaps its
+                   shadow for a drop-shadow, which follows the alpha and traces the phone.
+                 - data-media-in is DROPPED because the locked `.js [data-media-in] img`
+                   rule owns `transform` on the img, and the idle float needs it. The
+                   parent keeps the entrance instead, via the parallax offset.
+                 - data-parallax is the EXISTING engine in page-effects.js, not a new
+                   one: it writes --ds-par on this element and the CSS composes it. On a
+                   514px-tall box its own cap gives min(514*0.06, 40) = 30.8px of travel.
+                 The parallax rides the PARENT and the idle float rides the IMG, so the
+                 two transforms live on different elements and can never fight. -->
+            <div class="tc-head__media tc-head__media--float tc-lift" data-parallax>
             <img src="../assets/in-pages/beverly-hills-dispensary-mobile-phone-location.webp"
                  alt="beverly hills dispensary mobile phone location" width="461" height="742" loading="lazy" decoding="async">
           </div>
@@ -421,6 +476,32 @@
       </div>
     </div>
   </section>
+
+<!-- THE FIELD CARRIES ITS OWN BEHAVIOUR, INSIDE <main>, and is linked PER PAGE
+       rather than from the chrome. Every byte outside <main> is the LOCKED CHROME
+       BLOCK stamped into all 27 pages: smoke-engine.js is 23KB, and a page that runs
+       no field has no reason to fetch it. The chrome already links page-effects.js for
+       the reveals, counters and the parallax this head now uses, which every page does
+       use; the atmospherics are opt-in per page and this is the opt-in.
+
+       ONE SMOKE ENGINE. The model, the tuning table, the curl field and the pointer
+       wake all live in smoke-engine.js; section-smoke-rise.js supplies the 'ceiling'
+       emitter and nothing else. Loaded FIRST and WITHOUT defer so window.DispenzaSmoke
+       is defined by the time the emitter module runs. smoke-engine.js honours
+       prefers-reduced-motion.
+
+       hex-field.js is NOT linked: this page mounts no hex plane, and the module is
+       48KB. The head's hex texture is a 29KB static webp behind the section, not the
+       live plane. -->
+  <!-- CARRIER-RELATIVE, NOT PAGE-RELATIVE. promote-concept rebases src/href from the
+       CARRIER's depth to pages/, so the path written here must resolve from this file
+       (4 levels down inside _design/_tournament/templates/T-ARTICLE/<carrier>/), not
+       from pages/. Writing the page-relative "../_design/smoke-engine.js" rebases to
+       "../_design/_tournament/templates/T-ARTICLE/_design/smoke-engine.js" and 404s -
+       verified in the browser, both scripts. The sibling lander writes the same four
+       hops for the same reason. -->
+  <script src="../_design/smoke-engine.js"></script>
+  <script src="../_design/section-smoke-rise.js" defer></script>
 
 </main>
 

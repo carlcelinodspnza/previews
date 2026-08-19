@@ -7941,3 +7941,186 @@ a.hw-cell__value:focus-visible{
 .rs-jrn__cell--feature .rs-jrn__shot{ flex:none; min-height:0 }
 .rs-jrn__cell--feature .rs-jrn__body{ flex:0 0 auto; justify-content:flex-end }
 
+/* ===========================================================================
+   BRAND HEX BACKGROUND on a page header (owner-supplied, 2026-08-19).
+   Scoped to a MODIFIER, not to .tc-head, so it lands on the one header the owner
+   asked for rather than all seventeen. The plate is 1920x1080 and very dark, so the
+   white display type keeps its contrast without a scrim; a soft vignette is still
+   laid over it so the mesh fades out behind the copy column instead of competing
+   with the lede, and so the header still reads as one surface at any height.
+   background-size:cover with a top-centre origin keeps the dense part of the mesh
+   in the upper right, where the photograph sits, and the empty lower-left under the
+   headline and the button.
+   =========================================================================== */
+.tc-head--brandbg{
+  position:relative;
+  background-image:
+    linear-gradient(90deg, var(--ds-bg-surface) 0%, rgba(10,10,14,.86) 38%, rgba(10,10,14,.35) 72%, rgba(10,10,14,.25) 100%),
+    url("../assets/in-pages/brands-section-hex-bg.webp");
+  background-size:cover, cover;
+  background-position:center, top center;
+  background-repeat:no-repeat, no-repeat;
+}
+/* the section's own children must sit above the plate */
+.tc-head--brandbg > *{ position:relative; z-index:1 }
+@media (max-width: 900px){
+  /* on a narrow screen the copy runs the full width, so the mesh is pushed further back */
+  .tc-head--brandbg{
+    background-image:
+      linear-gradient(180deg, rgba(10,10,14,.62) 0%, rgba(10,10,14,.88) 55%, var(--ds-bg-surface) 100%),
+      url("../assets/in-pages/brands-section-hex-bg.webp");
+  }
+}
+
+/* ===========================================================================
+   ▼▼▼ THE FLOATING PHONE + ITS SMOKE — performance-marketing head — 2026-08-19 ▼▼▼
+
+   Owner call: "remove the container box, retain the phone, create a parallax
+   effect to make the phone like it's floating, and add the smoke effect we have
+   in hero." Three asks, and every one of them is answered by REMOVING a rule or
+   by re-pointing an engine that already ships. Nothing new is authored: the
+   parallax is page-effects.js's existing [data-parallax] pass, the smoke is
+   smoke-engine.js + section-smoke-rise.js, the same pair the home page's
+   #benchmarks band and the sibling lander's head already run.
+
+   1. THE BOX. It was never a wrapper - it is `border:1px solid var(--ds-line)`
+      plus a radius on `.tc-head__media img`, a rule that is correct for the eight
+      other T-ARTICLE heads whose media is a rectangular screenshot. This asset is
+      not one: it is a 461x742 RGBA CUTOUT (corner alpha measured 0), so the border
+      was drawing a box around transparency. Removing it is scoped to the float
+      modifier, so the other eight heads keep their plate.
+
+   2. THE FLOAT. drop-shadow, NOT box-shadow. drop-shadow follows the alpha channel
+      and so traces the phone; box-shadow would redraw the rectangle we just deleted.
+      That is also why .tc-lift came off the element in the markup - its hover state
+      is a box shadow.
+
+   3. WHY TWO ELEMENTS CARRY THE MOTION. The scroll parallax rides the PARENT and
+      the idle float rides the IMG. Both are `transform`, and one element cannot
+      hold two independent transforms without one clobbering the other - the same
+      trap `.mc-band__media img` solves by composing translate and scale into a
+      single declaration. Here there is no need to compose: the wrapper and the
+      image are different boxes, so each keeps its own.
+
+   4. THE CORRIDOR IS MEASURED. Reveals settled, three widths:
+        1440  copy x:12.8-57.2%   phone x:65.0-87.2%   btn y:72.8-77.9%
+        1024  copy x: 2.3-60.2%   phone x:66.4-97.7%   btn y:66.4-71.8%
+         390  copy y: 9.7-48.0%   phone y:51.0-92.6%   (one column, full width)
+      Above 1024 the corridor is HORIZONTAL - smoke right of 61% only, which is the
+      phone's column and nothing else. Stacked, it turns VERTICAL - smoke below 49%,
+      under the copy and around the phone. Type is out of the smoke at every width,
+      and so is BOOK DEMO, which is the ads1 rule (no field near a control) honoured
+      rather than waived.
+   =========================================================================== */
+
+/* THE PLANE MUST STAY OUT OF THE POSITIONING CHAIN. .container--plane guarantees
+   `position:static` at (0,1,0), but the brand-plate rule above declares
+   `.tc-head--brandbg > *{position:relative}` at (0,2,0) and would win - making the
+   zero-height wrapper the lid's containing block and collapsing the field to
+   nothing. This is the identical specificity trap #case-studies already carries an
+   id-scoped override for; same fix, scoped to this head. */
+.tc-head--brandbg > .container.container--plane{position:static;z-index:auto}
+
+/* THE LID. Mobile-first: the stacked corridor is vertical, so the mask clears the
+   copy block and opens under it. The base lid's rhythm-anchored stops are replaced
+   outright rather than adjusted - this head is 1319px tall at 390 against the 240px
+   band those stops were measured for. */
+.mc-smokerise__lid--phonehead{
+  -webkit-mask-image:linear-gradient(180deg,
+    transparent           0%,
+    transparent           49%,
+    var(--ds-ink-on-dark) 54%,
+    var(--ds-ink-on-dark) 100%);
+          mask-image:linear-gradient(180deg,
+    transparent           0%,
+    transparent           49%,
+    var(--ds-ink-on-dark) 54%,
+    var(--ds-ink-on-dark) 100%);
+}
+/* stacked, the corridor is already cut vertically, so the canvas runs full width */
+.mc-smokerise__lid--phonehead > .mc-smoke--rise{
+  z-index:auto;
+  -webkit-mask-image:none;
+          mask-image:none;
+}
+
+@media (min-width:1024px){
+  /* two columns: the corridor swaps axis. The lid opens fully... */
+  .mc-smokerise__lid--phonehead{
+    -webkit-mask-image:none;
+            mask-image:none;
+  }
+  /* ...and the canvas cuts it horizontally instead, right of the copy column.
+     61% is clear of the widest copy measurement (60.2% at 1024); the ramp is full
+     by 68%, so the phone sits in settled smoke rather than in the gradient. */
+  .mc-smokerise__lid--phonehead > .mc-smoke--rise{
+    -webkit-mask-image:linear-gradient(90deg,
+      transparent           0%,
+      transparent           61%,
+      var(--ds-ink-on-dark) 68%,
+      var(--ds-ink-on-dark) 100%);
+            mask-image:linear-gradient(90deg,
+      transparent           0%,
+      transparent           61%,
+      var(--ds-ink-on-dark) 68%,
+      var(--ds-ink-on-dark) 100%);
+  }
+}
+
+/* THE LIFT, RE-EXPRESSED FOR A CUTOUT. .tc-lift stays on the element - it is a locked
+   globals-overlay signal, and stripping it to avoid its shadow would remove an applied
+   global, not a box. Its box-shadow is cancelled here (a box shadow behind a 461x742
+   RGBA cutout draws the rectangle we just deleted) and the depth is carried by the
+   image's drop-shadow instead, deepened on hover so the interaction survives intact.
+
+   The transform has to COMPOSE, not replace: .tc-lift:hover sets translateY(-3px) on
+   the same element the parallax writes --ds-par to, so the bare rule would clobber the
+   scroll offset on hover and the phone would jump. Both values ride one translate3d. */
+.tc-head--brandbg .tc-head__media--float.tc-lift:hover,
+.tc-head--brandbg .tc-head__media--float.tc-lift:focus-within{
+  box-shadow:none;
+  transform:translate3d(0, calc(var(--ds-par, 0px) - 3px), 0);
+}
+.tc-head--brandbg .tc-head__media--float.tc-lift:hover img,
+.tc-head--brandbg .tc-head__media--float.tc-lift:focus-within img{
+  filter:
+    drop-shadow(0 34px 42px rgba(0,0,0,.62))
+    drop-shadow(0 6px 14px color-mix(in srgb, var(--ds-accent) 38%, transparent));
+}
+
+/* THE PARALLAX, on the wrapper. page-effects.js writes --ds-par here; on a 514px
+   box its own cap yields min(514*0.06, 40) = 30.8px of travel. The fallback is 0px,
+   so with no script the phone simply sits still - the same fail-open the reveals use. */
+.tc-head__media--float{
+  transform:translate3d(0, var(--ds-par, 0px), 0);
+  will-change:transform;
+}
+
+/* THE CUTOUT, on the image. Border and radius off; the shadow now traces the phone
+   instead of a box, and a low violet bloom ties it to the mesh behind it. */
+.tc-head--brandbg .tc-head__media--float img{
+  border:0;
+  border-radius:0;
+  filter:
+    drop-shadow(0 26px 34px rgba(0,0,0,.55))
+    drop-shadow(0 4px 10px color-mix(in srgb, var(--ds-accent) 26%, transparent));
+  animation:tc-phonefloat 7s var(--ds-ease-out, ease-in-out) infinite;
+  will-change:transform;
+}
+
+@keyframes tc-phonefloat{
+  0%,100%{ transform:translate3d(0, -7px, 0) }
+  50%    { transform:translate3d(0,  7px, 0) }
+}
+
+/* Motion off: the phone holds its place, the smoke engine already honours the query
+   itself, and the drop-shadow stays because it is not motion - it is what replaced
+   the border. */
+@media (prefers-reduced-motion:reduce){
+  .tc-head__media--float{transform:none}
+  .tc-head--brandbg .tc-head__media--float.tc-lift:hover,
+  .tc-head--brandbg .tc-head__media--float.tc-lift:focus-within{transform:none}
+  .tc-head--brandbg .tc-head__media--float img{animation:none}
+}
+
+/* ▲▲▲ THE FLOATING PHONE + ITS SMOKE — closed ▲▲▲ */
