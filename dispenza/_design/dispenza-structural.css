@@ -8124,3 +8124,335 @@ a.hw-cell__value:focus-visible{
 }
 
 /* ▲▲▲ THE FLOATING PHONE + ITS SMOKE — closed ▲▲▲ */
+
+
+/* ===========================================================================
+   ▼▼▼ .mc-dissolve — THE EDGELESS BAND (performance-marketing body) — 2026-08-19
+
+   Owner picked concept C2 of five and asked for the spacing to be made proper.
+   The concept is unchanged; three geometry faults from its authoring context are
+   corrected, each one measured rather than eyeballed:
+
+     1. it carried a -24px inline margin to escape a .container gutter that does
+        not exist in .container--full  ->  removed;
+     2. its copy ran to the viewport edge instead of the page column, a measured
+        160px misalignment at 1440    ->  container geometry restated on __copy;
+     3. its media cap was a bare 1180px, 60px off the 1120px container and so
+        reading as an accident        ->  re-expressed as container + one space-xl.
+
+   Vertical rhythm is deliberately NOT set here: the host .mc-section pays it, and
+   the site's `.mc-section + .mc-section` rule collapses the joint to one rhythm.
+   =========================================================================== */
+/* ===========================================================================
+   .mc-dissolve — EDGELESS DISSOLVE
+   The photograph has no edges. Three intersecting gradient masks fade it to
+   nothing on every side, so it materialises out of --ds-bg-surface and melts
+   back into it. There is no card, no frame, no border, no radius and no scrim.
+   The copy sits where the photograph has been masked AWAY — contrast is solved
+   by absence, not by a wash laid over the image.
+   NOTE ON rgba(): every rgba(0,0,0,x) below is a MASK ALPHA STOP, not a painted
+   colour. No token expresses a mask ramp, and the brief allows rgba for exactly
+   this. Every PAINTED colour is a token, and painted gradients fade out with
+   the `transparent` keyword rather than rgba.
+   =========================================================================== */
+
+.mc-dissolve{
+  position:relative;
+  /* THE BAND IS ALREADY FULL WIDTH. It is mounted in .container--full, which
+     ships max-width:none;padding:0, so there is no gutter to break out of. The
+     concept was authored inside a padded .container and carried a negative
+     inline margin to escape it -- kept here it would pull the band 24px past the
+     viewport on BOTH sides and reintroduce the horizontal overflow the mask work
+     was careful to avoid. Removed, not neutralised.
+
+     NO VERTICAL PADDING HERE EITHER. .mc-section already pays var(--ds-rhythm)
+     top and bottom, and `.mc-section + .mc-section` collapses the joint to a
+     single rhythm. A padding-block on the band would be a second, competing
+     rhythm that the metronome rule could not see or collapse. */
+  overflow:hidden;
+  isolation:isolate;
+
+  /* How far the copy rides up into the photograph's dissolved tail.
+     The cap is 56px, NOT a larger vw-driven value: .mc-dissolve__media stops growing at
+     max-width:1180px (629px tall), so past ~1180px viewport a vw-scaled lift
+     keeps climbing while the box it climbs into does not. Computed against the
+     --mcd-mv ramp, the copy's top edge lands at mask alpha .055 at 1024-1180px
+     and .060 from 1280px up — under the .07 ceiling at every desktop width.
+     (At the previously authored 72px cap it reached .107 from ~1600px up.) */
+  --mcd-lift:clamp(28px, 4.4vw, 56px);
+  --mcd-gutter:clamp(32px, 5vw, 88px);
+
+  /* THE DISSOLVE.
+     Desktop box is aspect-ratio 15/8 with object-position center 46%, which
+     places the glowing Search bar at box-y 47.5%-60.0%, box-x 18%-83%. Every
+     stop below holds FULL opacity across that rectangle — the bar is the point
+     of the picture and nothing is allowed to touch it. Checked against the
+     stops: the bar sits inside the vertical alpha-1 run (28%-64%) and the
+     horizontal one (14%-86%) with >=3% margin on all four sides, and inside
+     the radial's alpha-1 ellipse with 0.28 of slack. */
+  --mcd-mv:linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,.14) 9%, rgba(0,0,0,.58) 18%, rgb(0,0,0) 28%,
+    rgb(0,0,0) 64%, rgba(0,0,0,.72) 72%, rgba(0,0,0,.30) 81%,
+    rgba(0,0,0,.07) 90%, rgba(0,0,0,0) 98%);
+  --mcd-mh:linear-gradient(to right,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,.16) 3%, rgba(0,0,0,.55) 8%, rgb(0,0,0) 14%,
+    rgb(0,0,0) 86%, rgba(0,0,0,.55) 92%, rgba(0,0,0,.16) 97%, rgba(0,0,0,0) 100%);
+  --mcd-mr:radial-gradient(104% 122% at 50% 40%,
+    rgb(0,0,0) 42%, rgba(0,0,0,.55) 75%, rgba(0,0,0,0) 100%);
+}
+
+/* ── THE SUBSTRATE ─────────────────────────────────────────────────────────
+   The page's own hexagonal mesh, revealed BY the dissolve: masked to be
+   strongest exactly where the photograph has gone. The image reads as melting
+   into the site's material rather than lying on top of it. The lattice is an
+   alpha MASK and carries no colour of its own — the colour is the token. */
+.mc-dissolve__hex{
+  position:absolute;inset:0;
+  z-index:var(--ds-z-below);
+  background:var(--ds-accent-soft);
+  pointer-events:none;
+  -webkit-mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),
+    radial-gradient(78% 62% at 50% 72%, rgb(0,0,0) 0%, rgba(0,0,0,.55) 58%, rgba(0,0,0,0) 100%);
+          mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),
+    radial-gradient(78% 62% at 50% 72%, rgb(0,0,0) 0%, rgba(0,0,0,.55) 58%, rgba(0,0,0,0) 100%);
+  -webkit-mask-size:52px 90px, 100% 100%;
+          mask-size:52px 90px, 100% 100%;
+  -webkit-mask-repeat:repeat, no-repeat;
+          mask-repeat:repeat, no-repeat;
+  -webkit-mask-composite:source-in, source-in;
+          mask-composite:intersect, intersect;
+}
+
+.mc-dissolve__frame{ position:relative; width:100% }
+
+/* Violet light sitting BEHIND the photograph, centred on the Search bar, so it
+   spills out through the dissolved margins. The page's glow/smoke vocabulary,
+   carried in without adding a single new decorative object. */
+.mc-dissolve__bloom{
+  position:absolute;
+  top:2%;left:50%;
+  width:min(124%, 1500px);
+  height:88%;
+  transform:translateX(-50%);
+  background:var(--ds-glow-wash);
+  opacity:.52;
+  pointer-events:none;
+  z-index:0;
+  animation:c2-breathe 19s ease-in-out infinite;
+}
+@keyframes c2-breathe{
+  0%,100%{ opacity:.44; transform:translateX(-50%) scale(1) }
+  50%    { opacity:.66; transform:translateX(-50%) scale(1.05) }
+}
+
+/* ── THE PHOTOGRAPH ─────────────────────────────────────────────────────── */
+.mc-dissolve__media{
+  position:relative;
+  z-index:1;
+  margin:0 auto;
+  width:100%;
+  /* One --ds-space-xl wider than the text column on each side is the whole
+     relationship: the photograph is deliberately broader than the copy so the
+     dissolve happens OUTSIDE the measure rather than across it. Derived from the
+     container rather than left as the concept's bare 1180px, which was 60px off
+     the container and read as an accident. */
+  max-width:calc(var(--ds-container-max) + var(--ds-space-xl));
+  aspect-ratio:15 / 8;
+  -webkit-mask-image:var(--mcd-mv), var(--mcd-mh), var(--mcd-mr);
+          mask-image:var(--mcd-mv), var(--mcd-mh), var(--mcd-mr);
+  -webkit-mask-size:100% 100%, 100% 100%, 100% 100%;
+          mask-size:100% 100%, 100% 100%, 100% 100%;
+  -webkit-mask-repeat:no-repeat, no-repeat, no-repeat;
+          mask-repeat:no-repeat, no-repeat, no-repeat;
+  -webkit-mask-composite:source-in, source-in, source-in;
+          mask-composite:intersect, intersect, intersect;
+}
+.mc-dissolve__media img{
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 46%;   /* holds the Search bar in the opaque core */
+}
+
+/* If an engine cannot mask, the photograph must not read as a raw rectangle —
+   it falls back to the site's own media radius. */
+@supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){
+  .mc-dissolve__media{ border-radius:var(--ds-r-surface); overflow:hidden }
+}
+
+/* ── THE COPY ──────────────────────────────────────────────────────────────
+   Rides up into the last breath of the dissolve and returns to the container
+   gutter the band broke out of. */
+.mc-dissolve__copy{
+  position:relative;
+  z-index:2;
+  margin-top:calc(var(--mcd-lift) * -1);
+  /* THE ALIGNMENT FIX. In .container--full the band is viewport-wide, so without
+     this the copy started 24px from the viewport edge while every other block on
+     the page starts at the container's inner edge -- measured 184px at 1440, a
+     160px misalignment against the head above and the definitions below. These
+     three declarations ARE .container (max-width:var(--ds-container-max);
+     margin:0 auto; padding:0 var(--ds-space-md)), restated inside the bleed so
+     the text returns to the page's own column while the photograph stays wide. */
+  max-width:var(--ds-container-max);
+  margin-inline:auto;
+  padding-inline:var(--ds-space-md);
+}
+
+/* The one label the page is allowed to lend, set as a registration mark: text
+   on the left axis, a hairline running out of it that fades to nothing. */
+.mc-dissolve__label{
+  display:flex;
+  align-items:center;
+  gap:var(--ds-space-md);
+  margin:0 0 var(--ds-space-lg);
+  font-family:var(--ds-font-display);
+  font-size:var(--ds-step-micro);
+  font-weight:700;
+  letter-spacing:.24em;
+  line-height:1.4;
+  text-transform:uppercase;
+  color:var(--ds-accent-light);
+}
+.mc-dissolve__label-rule{
+  flex:1 1 auto;
+  height:1px;
+  background:linear-gradient(to right,
+    var(--ds-line) 0%, var(--ds-line) 52%, transparent 100%);
+}
+
+.mc-dissolve__cols{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);
+  column-gap:var(--mcd-gutter);
+}
+.mc-dissolve__col{ position:relative; min-width:0 }
+
+/* The gutter hairline — the second and last rule in the section, and it too
+   fades at both ends. Nothing here owns a hard edge. */
+.mc-dissolve__col--sec::before{
+  content:"";
+  position:absolute;
+  left:calc(var(--mcd-gutter) / -2);
+  top:0;bottom:0;
+  width:1px;
+  background:linear-gradient(to bottom,
+    transparent 0%, var(--ds-line) 12%, var(--ds-line) 74%, transparent 100%);
+}
+
+.mc-dissolve__p{ margin:0 }
+
+/* HIERARCHY — the fault D was rejected for. Two voices one rung apart: the
+   first paragraph is the claim (bright ink, --ds-ink-on-dark, on a looser
+   scale); the second is the elaboration (the page's own .mc-body step, soft
+   ink). Size and ink do the ranking — no invented headline. */
+.mc-dissolve__p--lead{
+  font-family:var(--ds-font-body);
+  font-size:clamp(19px, 1.4vw, 21px);
+  line-height:1.58;
+  letter-spacing:-.006em;
+  color:var(--ds-ink-on-dark);
+}
+
+.mc-dissolve__actions{ margin-top:var(--ds-space-lg) }
+
+.mc-dissolve .btn:focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:3px;
+}
+
+/* ── <= 1023px ─────────────────────────────────────────────────────────────
+   The photograph drops its crop and runs at native 3:2, so the Search bar
+   stays whole down to 390px. New box coordinates, so new vertical stops. */
+@media (max-width:1023px){
+  .mc-dissolve{
+    --mcd-lift:clamp(18px, 4vw, 40px);
+    --mcd-gutter:0px;
+    /* native ratio: the Search bar returns to box-y 44%-54%, box-x 18%-83% */
+    --mcd-mv:linear-gradient(to bottom,
+      rgba(0,0,0,0) 0%, rgba(0,0,0,.14) 7%, rgba(0,0,0,.58) 15%, rgb(0,0,0) 24%,
+      rgb(0,0,0) 58%, rgba(0,0,0,.70) 67%, rgba(0,0,0,.28) 78%,
+      rgba(0,0,0,.06) 88%, rgba(0,0,0,0) 96%);
+    --mcd-mr:radial-gradient(112% 104% at 50% 34%,
+      rgb(0,0,0) 44%, rgba(0,0,0,.55) 78%, rgba(0,0,0,0) 100%);
+  }
+  /* here the box scales with the viewport, so the lift stays proportional:
+     the copy's top edge lands at mask alpha .033 at 320px and .014-.022 from
+     390px up — well under the .07 ceiling. */
+  .mc-dissolve__media{
+    aspect-ratio:1600 / 1068;
+    max-width:none;
+  }
+  .mc-dissolve__media img{ object-position:center center }
+  .mc-dissolve__bloom{ width:min(132%, 900px); height:82% }
+
+  /* the mesh is proportionally 3x coarser on a phone — retuned, not dropped */
+  .mc-dissolve__hex{
+    opacity:.62;
+    -webkit-mask-size:34px 59px, 100% 100%;
+            mask-size:34px 59px, 100% 100%;
+  }
+
+  .mc-dissolve__cols{
+    grid-template-columns:minmax(0,1fr);
+    row-gap:var(--ds-space-lg);
+    /* one column must not run to 85ch: hold the site's measure, pinned to the
+       LEFT axis rather than centred, exactly as .col--measure does. A cap, not
+       a width — at 390px the column is viewport-width minus the gutter. */
+    max-width:640px;
+  }
+  /* the gutter hairline turns on its side rather than disappearing */
+  .mc-dissolve__col--sec::before{
+    left:0;right:0;
+    top:calc(var(--ds-space-lg) / -2);
+    bottom:auto;
+    width:auto;height:1px;
+    background:linear-gradient(to right,
+      var(--ds-line) 0%, var(--ds-line) 46%, transparent 100%);
+  }
+  .mc-dissolve__label{ margin-bottom:var(--ds-space-md) }
+  .mc-dissolve__actions{ margin-top:var(--ds-space-md) }
+}
+
+@media (max-width:479px){
+  .mc-dissolve__label{ gap:var(--ds-space-sm); letter-spacing:.18em }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mc-dissolve__bloom{ animation:none; opacity:.5 }
+  .mc-dissolve .btn{ transition:none }
+  .mc-dissolve .btn:hover{ transform:none }
+}
+/* -- THE TWO SEAMS. Inserting a section between .tc-head and .tc-doc broke a
+      handoff the container states explicitly, and it broke it at BOTH ends.
+      Measured at 1440 before this rule: seal->image 0px, BOOK DEMO->h2 247px.
+
+      .tc-head sets `padding-bottom:0` on purpose - "the closing hairline IS the
+      bottom edge; the interval below it is paid by the body column" - and
+      `.col.tc-doc__body{padding-top:var(--ds-space-2xl)}` is that payment. So the
+      head pays nothing and the NEXT thing owes 96px. With the band in the middle:
+
+        TOP SEAM   the band also paid nothing, so the head's closing rule sat
+                   flush against the photograph - 0px, the two touching.
+        BOTTOM SEAM the band pays a full closing --ds-rhythm AND the body column
+                   still paid its delegated 96px on top of it: 151.2 + 96 = 247px,
+                   the same double-payment class as the three gaps fixed on the
+                   home page. Neither figure was authored; both were arithmetic
+                   nobody performed.
+
+      So the band takes over the head's delegated interval at the top, and
+      releases the body column from paying at the bottom, where the band's own
+      closing rhythm is already the whole gap. Both selectors require
+      .mc-dissolve, so no other T-ARTICLE page is retuned by either. */
+/* SPECIFICITY, NOT PREFERENCE. The collapse rule is
+      `.mc-section + .mc-section:not(.mc-section--warm):not(.mc-section--band)`,
+      which scores (0,4,0) because each :not() contributes its argument. A plain
+      `.tc-head + .mc-dissolve` is (0,2,0) and LOSES - written that way first, and
+      the seam measured 0px again. Both class names are restated with .mc-section
+      to reach (0,4,0) and win on source order, being later in the sheet. */
+.mc-section.tc-head + .mc-section.mc-dissolve{ padding-top:var(--ds-space-2xl) }
+.mc-dissolve + .tc-doc .col.tc-doc__body{ padding-top:0 }
+
+/* ▲▲▲ .mc-dissolve — closed ▲▲▲ */

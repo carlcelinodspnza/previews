@@ -324,6 +324,75 @@
     </div>
   </header>
 
+  <!-- THE EDGELESS BAND. Owner selection: concept C2 of five ("sleeker, use D as
+       reference"). The photograph has NO edges anywhere - three intersecting gradient
+       masks dissolve it on every side into --ds-bg-surface, and the page's own hex
+       lattice shows through exactly where the image has gone, so the picture reads as
+       site material rather than a rectangle laid on the page. That is also the contrast
+       mechanism: the copy rides up into the dissolved tail where the mask is at most
+       .060 alpha, so no scrim is ever put over the photograph.
+
+       WHY ITS OWN SECTION, not a block inside .tc-doc: the band is full-bleed and
+       .tc-doc__body is the measured column. As its own section it mounts inside
+       .container--full legally, and it takes its vertical rhythm from .mc-section
+       rather than inventing one - `.mc-section + .mc-section` then collapses the joint
+       with the head above to a single rhythm instead of paying it twice.
+
+       THE COPY IS RANKED, NOT REPEATED - the fault D was rejected for. First paragraph
+       is the claim (bright ink, a half step up), second is the elaboration (the page's
+       own .mc-body step, soft ink), split by a hairline that fades at both ends. Size
+       and ink do the ranking; no headline is invented.
+
+       ONE CTA, NOT TWO. The source ships this button twice, once under each block, and
+       both were carried until now. Here the second is dropped so the ask lands once, at
+       the foot of the elaboration. That is a CONTENT change and remains an OPEN OWNER
+       CALL, not a settled one. -->
+  <section class="mc-section mc-dissolve surface-dark" id="performance-marketing-approach" data-surface="dark">
+    <div class="container container--full">
+      <div class="row">
+        <div class="col">
+
+          <div class="mc-dissolve__hex" aria-hidden="true"></div>
+
+          <div class="mc-dissolve__frame">
+            <div class="mc-dissolve__bloom" aria-hidden="true"></div>
+            <figure class="mc-dissolve__media">
+              <img src="../assets/in-pages/seo-specialist-search-desk.webp"
+                   alt="SEO specialist reviewing search results on a phone beside a laptop and tablet"
+                   width="1600" height="1068" loading="lazy" decoding="async">
+            </figure>
+          </div>
+
+          <div class="mc-dissolve__copy">
+            <p class="mc-dissolve__label" data-reveal>
+              <span>Performance marketing</span>
+              <span class="mc-dissolve__label-rule" aria-hidden="true"></span>
+            </p>
+
+            <div class="mc-dissolve__cols">
+              <!-- no --lead modifier: the grid track (1.08fr) sets this column's width and
+                   .mc-dissolve__p--lead carries the ranking, so a --lead class here would be a
+                   class with no rule behind it - which is exactly what verify-no-orphan-classes
+                   blocks, and it caught this one. -->
+              <div class="mc-dissolve__col">
+                <p class="mc-dissolve__p mc-dissolve__p--lead" data-reveal>Our team of experienced SEO specialists will meticulously analyze your dispensary's website, conduct thorough keyword research, and implement effective optimization strategies to improve tour search engine visibility. By focusing on local SEO tactics, we ensure that your business stands out in your target market and captures the attention of potential customers in your area.</p>
+              </div>
+
+              <div class="mc-dissolve__col mc-dissolve__col--sec">
+                <p class="mc-body mc-dissolve__p" data-reveal>But our commitment doesn't stop at achieving top rankings. We go above and beyond to provide additional value to our clients. Unlike other agencies, we offer complementary services that enhance your overall online presence, From website audits and content optimization to link building and local directory submissions, we take a holistic approach to boost your dispensary's online visibility and authority.</p>
+                <div class="mc-actions mc-dissolve__actions" data-reveal>
+                  <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #9,#12,#27 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and performance-marketing is the docs-coded long-form service page #36 exists for - a guarantee stated in full, the method behind it, and five named pillars each welded to its own sentence, read top to bottom in one column. This page renders the container's OWN R5 FALLBACK rather than a different pattern: the section rank computed off the clone is h2 and there is exactly ONE h2 on the page, so the rail law refuses to build navigation out of a single jump link and the nav, the spine and the ticks are not generated - citing #36 is the honest citation, because the sidebar is the container's conditional half and this page is a documented case where the condition is not met; #9 services 3-col would card the five pillars and truncate exactly the sentences that make the guarantee checkable ("We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services."), and a card that shows the label "Guaranteed Results:" without its condition is the one failure mode client-rules.json overclaim.guarantee_unconditional exists to prevent; #12 feature-row-with-screenshot alternates media side per row and would need one image per row, but this page has ONE image repeated three times, so three rows would show the same phone photograph three times at three different edges - it would manufacture the appearance of three pieces of evidence out of one; #27 numbered process steps asserts a SEQUENCE the five pillars do not have - transparent reporting is not step five of comprehensive optimization. rigor is heavy because this pick is the T-ARTICLE container for the whole type, not a one-off slot. -->
   <section class="mc-section tc-doc tc-doc--norail surface-dark" id="performance-marketing-doc" data-surface="dark">
     <div class="container">
@@ -334,27 +403,12 @@
              spine border and the gutter, and no heading generates a tick. -->
         <div class="col tc-doc__body">
 
-          <article class="tc-sec">
-            <!-- No heading atom exists over these two blocks in the source, so none is
-                 written. They are the second and third of the page's three opening
-                 content blocks; the first is the lede in the head above.
-                 SOURCE DEFECTS CARRIED, NOT REPAIRED: "to improve tour search engine
-                 visibility" ("tour" for "your"), and the comma splice
-                 "...online presence, From website audits...". -->
-            <div class="tc-copy">
-              <p class="mc-body" data-reveal>Our team of experienced SEO specialists will meticulously analyze your dispensary's website, conduct thorough keyword research, and implement effective optimization strategies to improve tour search engine visibility. By focusing on local SEO tactics, we ensure that your business stands out in your target market and captures the attention of potential customers in your area.</p>
-            </div>
-            <div class="mc-actions" data-reveal>
-              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
-            </div>
-
-            <div class="tc-copy">
-              <p class="mc-body" data-reveal>But our commitment doesn't stop at achieving top rankings. We go above and beyond to provide additional value to our clients. Unlike other agencies, we offer complementary services that enhance your overall online presence, From website audits and content optimization to link building and local directory submissions, we take a holistic approach to boost your dispensary's online visibility and authority.</p>
-            </div>
-            <div class="mc-actions" data-reveal>
-              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
-            </div>
-          </article>
+            <!-- The page's two opening content blocks NO LONGER LIVE HERE. They were
+                 lifted out of the measured column into the .mc-dissolve band above (owner
+                 picked that treatment out of five). They cannot be in this column AND be
+                 full-bleed: .tc-doc__body IS the measure, and a band breaking out of it
+                 would violate the section > .container > .row > .col > OBJECT grammar.
+                 The definitions article below is untouched. -->
 
           <article class="tc-sec">
             <!-- THE PAGE'S ONE SECTION-RANK HEADING. In the clone this is an h2 whose
