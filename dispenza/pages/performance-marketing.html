@@ -380,10 +380,16 @@
 
               <div class="mc-dissolve__col mc-dissolve__col--sec">
                 <p class="mc-body mc-dissolve__p" data-reveal>But our commitment doesn't stop at achieving top rankings. We go above and beyond to provide additional value to our clients. Unlike other agencies, we offer complementary services that enhance your overall online presence, From website audits and content optimization to link building and local directory submissions, we take a holistic approach to boost your dispensary's online visibility and authority.</p>
-                <div class="mc-actions mc-dissolve__actions" data-reveal>
-                  <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
-                </div>
               </div>
+            </div>
+
+            <!-- THE CTA SITS AFTER BOTH COLUMNS, CENTRED. It was inside the second
+                 column, which tied the ask to the elaboration and hung it off the
+                 right-hand axis. Out here it belongs to the whole band: it clears
+                 both paragraphs, and centring it on the copy's own container width
+                 keeps it on the page's centre line rather than a column's. -->
+            <div class="mc-actions mc-dissolve__actions" data-reveal>
+              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
           </div>
 
@@ -431,30 +437,71 @@
                  IN THE SAME BLOCK: "secure a top 3 ranking in local search results on
                  Google.com" carries the scope, "If we don't deliver on this promise,
                  you won't be charged for our services" carries the condition. -->
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Guaranteed Results:</h3>
-              <p class="tc-defs__d">We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services.</p>
-            </div>
+              <!-- THE EXPECTATIONS DECK. Owner asked for these five as cards in a carousel,
+                   matching the case-study fan. They were a two-up prose list.
 
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Comprehensive Optimization:</h3>
-              <p class="tc-defs__d">Our SEO specialists will optimize every aspect of your website, from on-page elements like meta tags and headings to technical factors such as site speed and mobile responsiveness. We leave no stone unturned in our quest to maximize your online visibility.</p>
-            </div>
+                   THE CAROUSEL IS THE SITE'S OWN. `[data-deck]` in page-effects.js already
+                   drives #results on the home page; its card selector is hardcoded to
+                   `.mc-result`, so each card carries that class and the engine picks them up
+                   with NO change to shared code. `.mc-result` is also already the violet face
+                   the reference shows, so the look comes from reuse rather than from a second
+                   card component. `.pm-defcard` adds only the index badge, the rule and the
+                   prose type.
 
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Local SEO Focus:</h3>
-              <p class="tc-defs__d">We understand the importance of targeting your local audience. Through strategic keyword targeting, location-specific optimization, and local directory submissions, we ensure that your dispensary is visible to the right customers at the right time.</p>
-            </div>
+                   THE h3 RANK IS UNCHANGED. These were `.tc-defs__t` h3s under the section's
+                   one h2 and they stay h3s here, so the document outline is identical -- only
+                   the presentation moved. The five bodies are the corpus strings verbatim.
 
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Value-Added Services:</h3>
-              <p class="tc-defs__d">In addition to our performance marketing guarantee, we provide complementary services that enhance your online presence. From website audits to content optimization, we'll work hand in hand with you to optimize your digital assets and drive long-term success.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Transparent Reporting:</h3>
-              <p class="tc-defs__d">We believe in complete transparency, which is why we provide detailed reports that highlight the progress and results of our performance marketing efforts. You'll have a clear understanding of how your dispensary is performing and the impact our strategies are making.</p>
-            </div>
+                   NO-SCRIPT: `.mc-deck__stage` is a plain grid column until the engine adds
+                   `.is-slider`, so with scripting off this degrades to five stacked cards
+                   rather than to a row that cannot be scrolled. -->
+              <div class="mc-deck pm-defdeck" data-deck data-reveal>
+                <div class="mc-deck__viewport">
+                  <div class="mc-deck__stage" role="group" aria-label="What to expect">
+                <div class="mc-result pm-defcard">
+                  <p class="pm-defcard__idx" aria-hidden="true">01</p>
+                  <h3 class="pm-defcard__t">Guaranteed Results:</h3>
+                  <p class="pm-defcard__d">We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services.</p>
+                </div>
+                <div class="mc-result pm-defcard">
+                  <p class="pm-defcard__idx" aria-hidden="true">02</p>
+                  <h3 class="pm-defcard__t">Comprehensive Optimization:</h3>
+                  <p class="pm-defcard__d">Our SEO specialists will optimize every aspect of your website, from on-page elements like meta tags and headings to technical factors such as site speed and mobile responsiveness. We leave no stone unturned in our quest to maximize your online visibility.</p>
+                </div>
+                <div class="mc-result pm-defcard">
+                  <p class="pm-defcard__idx" aria-hidden="true">03</p>
+                  <h3 class="pm-defcard__t">Local SEO Focus:</h3>
+                  <p class="pm-defcard__d">We understand the importance of targeting your local audience. Through strategic keyword targeting, location-specific optimization, and local directory submissions, we ensure that your dispensary is visible to the right customers at the right time.</p>
+                </div>
+                <div class="mc-result pm-defcard">
+                  <p class="pm-defcard__idx" aria-hidden="true">04</p>
+                  <h3 class="pm-defcard__t">Value-Added Services:</h3>
+                  <p class="pm-defcard__d">In addition to our performance marketing guarantee, we provide complementary services that enhance your online presence. From website audits to content optimization, we'll work hand in hand with you to optimize your digital assets and drive long-term success.</p>
+                </div>
+                <div class="mc-result pm-defcard">
+                  <p class="pm-defcard__idx" aria-hidden="true">05</p>
+                  <h3 class="pm-defcard__t">Transparent Reporting:</h3>
+                  <p class="pm-defcard__d">We believe in complete transparency, which is why we provide detailed reports that highlight the progress and results of our performance marketing efforts. You'll have a clear understanding of how your dispensary is performing and the impact our strategies are making.</p>
+                </div>
+                  </div>
+                </div>
+                <div class="mc-deck__bar">
+                  <span class="mc-deck__label">What to expect</span>
+                  <span class="mc-deck__count" data-deck-count aria-live="polite">01 / 05</span>
+                  <div class="mc-deck__btns">
+                    <button class="mc-deck__btn" type="button" data-deck-prev aria-label="Previous expectation">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
+                              stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="mc-deck__btn" type="button" data-deck-next aria-label="More expectations">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
+                              stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
           </article>
 
           <!-- ####################################################################
