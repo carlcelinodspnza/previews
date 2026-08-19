@@ -8573,19 +8573,26 @@ a.hw-cell__value:focus-visible{
 }
 
 /* The heading the deck answers keeps its own interval above the viewport. */
-/* THE INTERVAL UNDER THE HEADING. xl (64px) was measured and looked adequate in
-   isolation, but the owner read it as crowded twice - and they are right: what sits
-   below is not prose any more, it is a row of saturated card faces whose top edge is
-   a hard boundary, so it needs more air off a 2-line display heading than the 40px
-   the prose blocks used to take. 2xl. */
-.pm-defdeck{ margin-top:var(--ds-space-2xl) }
+/* THE INTERVAL UNDER THE HEADING, and the history matters because it explains why
+   this landed on the middle value rather than an end of the scale.
+     - lg (40px) is what the prose blocks this deck replaced used to take.
+     - The owner called it crowded TWICE, but both times their browser was serving a
+       cached stylesheet in which .pm-defdeck did not exist at all - so the gap they
+       were reacting to was 0px, not the 40 or the 64 in the build. The complaint was
+       real; the number it was aimed at was not the one I changed.
+     - Raised to 2xl (96px) on that reading. Seen for the first time on the current
+       sheet, the owner called 96px too much.
+   xl (64px) is the value that was in the build through both complaints and was never
+   actually on screen for either. A row of saturated card faces with a hard top edge
+   does want more than the 40px the prose took, and less than a full 2xl. */
+.pm-defdeck{ margin-top:var(--ds-space-xl) }
 
 @media (max-width:1023px){
   .pm-defdeck{ --mc-card-min:264px }
   /* stacked the card is 264px wide, so the sides come back to md - 32px either
      side of a 264px card would leave a 200px column and start breaking words. */
   .pm-defdeck .mc-result{ padding:var(--ds-space-lg) var(--ds-space-md) }
-  .pm-defdeck{ margin-top:var(--ds-space-xl) }   /* stacked: one step down, still up from lg */
+  .pm-defdeck{ margin-top:var(--ds-space-lg) }   /* stacked, one step down as always */
 }
 
 /* ▲▲▲ .pm-defcard — closed ▲▲▲ */
