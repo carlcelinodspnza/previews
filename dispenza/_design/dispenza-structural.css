@@ -8809,4 +8809,102 @@ a.hw-cell__value:focus-visible{
   background:none;
 }
 
+/* ===========================================================================
+   .bg-logorow — the Logo Design item, as a two-column row.
+   Replaces a marquee that scrolled (a roster you had to wait for) and sat 4px under
+   its own sentence, so it read as attached to the copy rather than beside it.
+   =========================================================================== */
+.bg-logorow{ list-style:none }
+.bg-logorow__copy{ margin:0 }
+
+/* One column stacked; two side by side once the body column can afford it.
+   THE CAP LIVES ON THE UL, NOT THE ITEM. .tc-list carries max-width:var(--ds-measure)
+   (640px), so max-width:none on the <li> could never win - an item cannot outgrow its
+   list. Released on the LIST here, and the measure handed back to every sibling item so
+   the prose bullets keep their reading width; only the row spends the full panel (759px
+   at 1440, measured). Scoped by :has() so no other .tc-list on the site is touched. */
+@media (min-width:1024px){
+  .tc-list:has(.bg-logorow){ max-width:none }
+  /* Every item runs the FULL list width so the 1px rules all end on the same edge -
+     capping the siblings by WIDTH left a measured 119px ragged edge, the logo row's
+     third column overhanging its neighbours' rules. The prose items carry no inner
+     wrapper to cap, so the reading measure comes back as padding: the box is 759px,
+     the text column inside it is 640px. max() keeps it at 0 if the panel is narrower. */
+  .tc-list:has(.bg-logorow) > .tc-list__item:not(.bg-logorow){
+    padding-right:max(0px, calc(100% - var(--ds-measure)));
+  }
+  .tc-list .bg-logorow{
+    display:grid;
+    /* the logo side takes the larger share: at 759px with a 40px gutter this leaves
+       ~369px, so each of the three cells gets ~107px - a wordmark survives that. */
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1.05fr);
+    column-gap:var(--ds-space-lg);
+    align-items:center;
+  }
+}
+
+/* THE MARKS. Two rows of three - see the markup note: three across leaves ~107px per
+   mark in the ~369px column, which a wordmark survives; six across leaves ~60px, which
+   it does not. Sized by the CELL rather than per-file --h values, because a static
+   grid wants a common optical height rather than the marquee's per-artwork tuning. */
+.bg-logos{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:var(--ds-space-lg) var(--ds-space-md);
+  margin:var(--ds-space-lg) 0 0;
+  padding:0;
+  list-style:none;
+}
+.bg-logos__cell{
+  display:flex; align-items:center; justify-content:center;
+  min-height:52px;
+}
+.bg-logos__cell img{
+  max-width:100%; max-height:52px;
+  width:auto; height:auto;
+  object-fit:contain;
+  /* the same muted treatment the roster carries on the home page, so the two read as
+     one system rather than two different greys */
+  filter:grayscale(1) brightness(1.35);
+  opacity:.72;
+}
+
+@media (min-width:1024px){
+  /* beside the copy the row has its own air; stacked it needs a real interval instead */
+  .bg-logos{ margin-top:0 }
+}
+@media (max-width:1023px){
+  .bg-logos{ gap:var(--ds-space-md) var(--ds-space-sm) }
+  .bg-logos__cell img{ max-height:44px }
+}
+
+
+/* ===========================================================================
+   .bg-board / .bg-tri — the board and the three delivery columns beneath it.
+   The board left the panel-top figure slot so it sits directly above the items it
+   is evidence for; the three items became a band rather than three full-width rules.
+   =========================================================================== */
+
+/* Mid-panel now, not the panel's lead image, so it needs a leading interval as well as
+   a trailing one - .tc-tabs__fig ships margin-bottom only, which is right at the top of
+   a panel and wrong in the middle of one. */
+.tc-tabs__fig.bg-board{ margin-top:var(--ds-space-xl) }
+
+/* Three columns share the full panel, so the band drops .tc-list's --ds-measure cap -
+   at 759px with two 24px gutters each column gets ~237px, which carries these blurbs at
+   roughly 30 characters a line. Below 1024 it falls back to the stacked list it already
+   was, because 237px does not survive being divided again. */
+.bg-tri{ max-width:none }
+@media (min-width:1024px){
+  .bg-tri{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    column-gap:var(--ds-space-md);
+  }
+  /* each cell is headed by its own rule; the shared last-child bottom rule would
+     underline only the third column, so it is withdrawn here */
+  .bg-tri > .tc-list__item{ padding-bottom:0 }
+  .bg-tri > .tc-list__item:last-child{ border-bottom:0 }
+}
+
 /* ▲▲▲ .tc-tabs — closed ▲▲▲ */

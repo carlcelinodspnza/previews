@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=2f11ad0a">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c1936fe3">
 
 </head>
 <body class="site-body">
@@ -271,11 +271,6 @@
         <div class="col tc-doc__body">
 
                         <div class="tc-tabs__panel" id="bgdpanel-1" role="tabpanel" aria-labelledby="bgdtab-1">
-                <figure class="tc-tabs__fig tc-tabs__fig--bare">
-                  <img src="../assets/in-pages/svc-branding-graphic-design-brand-creation-digital.webp"
-                       alt="Brand manual spreads showing logo, typography and colour specifications"
-                       width="1200" height="900" loading="lazy" decoding="async">
-                </figure>
                 <p class="tc-tabs__pn" aria-hidden="true">01</p>
                 <h2 class="tc-tabs__t" data-reveal>Brand Creation (Digital)</h2>
 
@@ -285,54 +280,50 @@
                  source class says card; this direction draws none, and nothing is
                  lost. -->
             <ul class="tc-list" data-reveal>
-              <li class="tc-list__item">Logo Design: Our experienced designers will craft a unique and visually compelling logo that captures the essence of your brand.
-                <!-- THE CLIENT LOGOS RUN AS A MARQUEE, not a flattened screenshot. The page
-                     shipped a single picture of a logo grid; this is the site's OWN .mc-marquee
-                     with the same twelve artwork files the home page already uses, so the
-                     roster is one asset set rather than a photograph of one.
+              <li class="tc-list__item bg-logorow">
+                <!-- THE MARQUEE IS GONE. It scrolled, which made a client roster something you
+                     had to wait for, and it sat 4px under the copy - measured - so it read as
+                     attached to the sentence rather than beside it. This is a static two-column
+                     row instead: the claim on the left, the evidence on the right.
 
-                     A DIV, NOT THE <section> the home page uses: this sits inside a tabpanel,
-                     where a section would add an outline entry a reader never meets as one -
-                     the same reason the panels themselves are divs.
-
-                     TWO IDENTICAL GROUPS, because the track animates translateX(-50%) and the
-                     second group is what makes that loop seamless. It is aria-hidden with empty
-                     alt on every image, so the roster is announced once, not twice. -->
-                <div class="mc-marquee" role="group" aria-label="Dispenza client roster">
-                  <div class="mc-marquee__viewport">
-                    <div class="mc-marquee__track">
-                    <div class="mc-marquee__group">
-                      <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.png" alt="High Level Health, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.png" alt="NuLeaf, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.png" alt="Tree of Life, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.png" alt="Sundial Collective, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.png" alt="Root&#39;d in the 510, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.png" alt="MaryJane&#39;s, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.png" alt="Royal Weed, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.png" alt="The Cannabis Guys, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.png" alt="LA Cannabis Co, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.png" alt="Perfect Union, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.png" alt="Coachella Canna Club, a Dispenza client" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.png" alt="Firehouse 365, a Dispenza client" loading="lazy" decoding="async"></div>
-                    </div>
-                    <div class="mc-marquee__group" aria-hidden="true">
-                      <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.png" alt="" loading="lazy" decoding="async"></div>
-                      <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.png" alt="" loading="lazy" decoding="async"></div>
-                    </div>
-                    </div>
-                  </div>
-                </div>
+                     SIX LOGOS, NOT TWELVE, and that is arithmetic rather than curation. The row
+                     gets ~376px for the logo column at 1440; three across leaves ~112px per mark,
+                     which carries a wordmark like SUNDIAL COLLECTIVE. Six across would leave 77px
+                     and those wordmarks stop being readable. Two rows of three is what fits.
+                     The full twelve still run on the home page. -->
+                <p class="bg-logorow__copy">Logo Design: Our experienced designers will craft a unique and visually compelling logo that captures the essence of your brand.</p>
+                <ul class="bg-logos" role="list" aria-label="Selected Dispenza clients">
+                    <li class="bg-logos__cell"><img src="../assets/brand/marquee/hlh.png" alt="High Level Health, a Dispenza client" loading="lazy" decoding="async"></li>
+                    <li class="bg-logos__cell"><img src="../assets/brand/marquee/nuleaf.png" alt="NuLeaf, a Dispenza client" loading="lazy" decoding="async"></li>
+                    <li class="bg-logos__cell"><img src="../assets/brand/marquee/tree-of-life.png" alt="Tree of Life, a Dispenza client" loading="lazy" decoding="async"></li>
+                    <li class="bg-logos__cell"><img src="../assets/brand/marquee/rootd.png" alt="Root&#39;d in the 510, a Dispenza client" loading="lazy" decoding="async"></li>
+                    <li class="bg-logos__cell"><img src="../assets/brand/marquee/royal-weed.png" alt="Royal Weed, a Dispenza client" loading="lazy" decoding="async"></li>
+                    <li class="bg-logos__cell"><img src="../assets/brand/marquee/cannabis-guys.png" alt="The Cannabis Guys, a Dispenza client" loading="lazy" decoding="async"></li>
+                </ul>
               </li>
+            </ul>
+
+            <!-- THE BOARD, moved out of the panel-top figure slot to sit directly above the
+                 three delivery items, and those items turned into a tri-column band beneath it.
+                 The board is the evidence for what the three columns describe, so it reads as a
+                 caption in reverse rather than a lead image detached from its own list.
+                 A figure cannot live between list items - a ul takes only li - so the ONE list is
+                 split in two, which is also what lets the band drop the reading measure. -->
+<figure class="tc-tabs__fig tc-tabs__fig--bare bg-board">
+                  <!-- Owner-supplied board (brand card.png). Kept on its FULL 1080x600 canvas
+                       rather than trimmed to the 930x532 artwork: the transparent margin carries
+                       the card's own drop shadow, which is what --bare exists to let through.
+                       width/height restated from the real file - the previous pair said 1200x900
+                       against a 1400x746 asset, which is a CLS bug, not a description. -->
+                  <img src="../assets/in-pages/svc-branding-graphic-design-brand-card.webp"
+                       alt="Dspnza brand board: wordmark, monogram, script and sans type specimens, colour swatches, packaging, tote bags, delivery van and social posts"
+                       width="1080" height="600" loading="lazy" decoding="async">
+                </figure>
+
+            <!-- Three columns, not three stacked rules. Each cell keeps its own border-top so the
+                 band reads as three headed columns; the last-child bottom rule is dropped, since in
+                 a grid it would underline the third column alone. -->
+            <ul class="tc-list bg-tri" data-reveal>
               <li class="tc-list__item">Brand Guidelines: We will develop comprehensive brand guidelines that outline the visual elements, including colors, typography, and logo usage, ensuring consistency across all platforms.</li>
               <li class="tc-list__item">Logo Variations: We provide you with different versions of your logo to accommodate various applications and scenarios.</li>
               <li class="tc-list__item">Brand Collateral: Our team can create essential brand collateral, such as letterheads and business cards, that reflect your brand identity.</li>
