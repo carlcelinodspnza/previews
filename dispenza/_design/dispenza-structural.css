@@ -8993,4 +8993,13 @@ a.hw-cell__value:focus-visible{
    collage moved above its paragraph. Scoped to that adjacency; it occurs on this page alone. */
 .tc-plate + .tc-copy{ margin-top:var(--ds-space-lg) }
 
+/* A PANEL FIGURE AT ITS OWN RATIO. .tc-tabs__fig pins 16/9 and crops with
+   object-fit:cover, which is right for the landscape generated art in the other panels and
+   wrong for a square board: cover would cut 44% of this one's height (measured, 1.000 vs
+   1.778). The ratio, the crop and the overflow clip are released together - with nothing
+   overflowing there is nothing left to clip. Declared here, AFTER .tc-tabs__fig img, because
+   both selectors are (0,2,0) and source order is what decides between them. */
+.tc-tabs__fig--natural{ aspect-ratio:auto; overflow:visible }
+.tc-tabs__fig--natural img{ height:auto; object-fit:contain }
+
 /* ▲▲▲ .tc-tabs — closed ▲▲▲ */
