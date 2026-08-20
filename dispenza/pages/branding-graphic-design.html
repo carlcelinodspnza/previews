@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=98bc4032">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=2f11ad0a">
 
 </head>
 <body class="site-body">
@@ -223,12 +223,24 @@
   <header class="mc-section tc-head surface-dark" data-surface="dark">
     <div class="container">
       <div class="row"><div class="col">
-        <div class="tc-head__grid">
+        <div class="tc-head__grid tc-head__grid--media">
           <div class="tc-head__copy">
             <h1 class="tc-head__title" id="branding-title" data-reveal>BRAND & PACKAGE DESIGN</h1>
             <p class="tc-head__lede" data-reveal>As part of our comprehensive suite of services, Dispenza offers professional branding and package design solutions.</p>
             <p class="tc-head__lede" data-reveal>We understand the importance of creating a cohesive and impactful brand presence, and our talented team of designers is here to assist you every step of the way.</p>
           </div>
+
+            <!-- THE BRAND BOARD, beside the title. Same treatment as the phone on
+                 performance-marketing: a genuine RGBA cutout (verified 49% transparent
+                 inside its trim, transparent corners - unlike the hero phone's source,
+                 which arrived on an opaque white plate) on the existing [data-parallax]
+                 engine, borderless, with a drop-shadow that follows the alpha rather
+                 than a box-shadow that would draw a rectangle behind it. -->
+            <div class="tc-head__media tc-head__media--wide tc-head__media--float tc-lift" data-parallax>
+              <img src="../assets/in-pages/brand-package-board.webp"
+                   alt="Dispenza brand board with dispensary logos, packaging and printed collateral"
+                   width="880" height="984" loading="lazy" decoding="async">
+            </div>
         </div>
         <hr class="tc-head__seal" data-reveal>
       </div></div>
@@ -259,9 +271,9 @@
         <div class="col tc-doc__body">
 
                         <div class="tc-tabs__panel" id="bgdpanel-1" role="tabpanel" aria-labelledby="bgdtab-1">
-                <figure class="tc-tabs__fig">
+                <figure class="tc-tabs__fig tc-tabs__fig--bare">
                   <img src="../assets/in-pages/svc-branding-graphic-design-brand-creation-digital.webp"
-                       alt="An abstract brand mark forming from separating layers"
+                       alt="Brand manual spreads showing logo, typography and colour specifications"
                        width="1200" height="900" loading="lazy" decoding="async">
                 </figure>
                 <p class="tc-tabs__pn" aria-hidden="true">01</p>
@@ -278,10 +290,52 @@
               <li class="tc-list__item">Logo Variations: We provide you with different versions of your logo to accommodate various applications and scenarios.</li>
               <li class="tc-list__item">Brand Collateral: Our team can create essential brand collateral, such as letterheads and business cards, that reflect your brand identity.</li>
             </ul>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/dispenza-dispensaries-logo.webp"
-                   alt="dispenza dispensaries logo" width="532" height="546" loading="lazy" decoding="async">
-            </figure>
+              <!-- THE CLIENT LOGOS RUN AS A MARQUEE, not a flattened screenshot. The page
+                   shipped a single picture of a logo grid; this is the site's OWN .mc-marquee
+                   with the same twelve artwork files the home page already uses, so the
+                   roster is one asset set rather than a photograph of one.
+
+                   A DIV, NOT THE <section> the home page uses: this sits inside a tabpanel,
+                   where a section would add an outline entry a reader never meets as one -
+                   the same reason the panels themselves are divs.
+
+                   TWO IDENTICAL GROUPS, because the track animates translateX(-50%) and the
+                   second group is what makes that loop seamless. It is aria-hidden with empty
+                   alt on every image, so the roster is announced once, not twice. -->
+              <div class="mc-marquee" role="group" aria-label="Dispenza client roster">
+                <div class="mc-marquee__viewport">
+                  <div class="mc-marquee__track">
+                  <div class="mc-marquee__group">
+                    <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.png" alt="High Level Health, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.png" alt="NuLeaf, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.png" alt="Tree of Life, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.png" alt="Sundial Collective, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.png" alt="Root&#39;d in the 510, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.png" alt="MaryJane&#39;s, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.png" alt="Royal Weed, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.png" alt="The Cannabis Guys, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.png" alt="LA Cannabis Co, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.png" alt="Perfect Union, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.png" alt="Coachella Canna Club, a Dispenza client" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.png" alt="Firehouse 365, a Dispenza client" loading="lazy" decoding="async"></div>
+                  </div>
+                  <div class="mc-marquee__group" aria-hidden="true">
+                    <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.png" alt="" loading="lazy" decoding="async"></div>
+                    <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.png" alt="" loading="lazy" decoding="async"></div>
+                  </div>
+                  </div>
+                </div>
+              </div>
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>

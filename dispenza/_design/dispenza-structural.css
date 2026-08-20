@@ -6923,10 +6923,8 @@ a.hw-cell__value:focus-visible{
   transform:translate(-50%, -50%)
             translate3d(var(--px, 0px), calc(var(--py, 0px) + var(--bob, 0px)), 0);
   will-change:transform;
-  /* narrowed from min(44%,560px): the phone now occupies part of the track the coin
-     used to have to itself, and at 560px the two overlapped by 175px at 1440. */
-  width:min(26%, 360px);
-  height:min(48%, 360px);
+  width:min(44%, 560px);
+  height:min(72%, 560px);
   z-index:var(--ds-z-below);display:block;
   /* THE COIN IS GRABBABLE, so it must receive pointer events -- it is the only
      element in the hero that does. The drag is hit-tested against its box in
@@ -6988,12 +6986,11 @@ a.hw-cell__value:focus-visible{
      minus this column's own left offset and a 40px breathing gap. Because both
      sides resolve against the same containing block, they cannot drift apart the
      way two independently-tuned numbers do. */
-  /* the third term is now the PHONE's left edge, expressed in the phone's own
-     variables exactly as it used to be expressed in the coin's:
-         phone left = --phone-cx * 100% - (phone width / 2)
-         phone width = min(20%, 240px)  ->  half = min(10%, 120px) */
+  /* THE THIRD TERM IS THE COIN'S LEFT EDGE, restored when the hero phone was pulled:
+         coin left = --token-cx * 100% - (coin width / 2)
+         coin width = min(44%, 560px)   ->  half = min(22%, 280px) */
   width:min(46%, 620px,
-            calc(var(--phone-cx, 0.60) * 100% - min(10%, 120px) - var(--hero-pad) - 40px));
+            calc(var(--token-cx, 0.72) * 100% - min(22%, 280px) - var(--hero-pad) - 40px));
   text-align:left;
   /* the claim lifts slightly as the platform lands under it, so the two read as
      one movement rather than two. Driven by --coaster-p, which the scrub writes. */
@@ -7024,19 +7021,7 @@ a.hw-cell__value:focus-visible{
 }
 
 /* the split, declared ONCE and read by both the CSS and the renderer */
-/* THREE COLUMNS NOW, NOT TWO: claim, phone, coin. --token-cx moves the coin right
-   and --phone-cx introduces the phone's own centre, so the two media never share an
-   arithmetic. MEASURED at 1440 (hero-pad resolves to 100.8px there):
-     phone  centre 0.60 -> 864px, width 240  -> spans 744-984
-     coin   centre 0.87 -> 1253px, width 360 -> spans 1073-1433, inside the 1440 frame
-     gap between them 89px; claim column 603px, down 13px from the 616px it had.
-   The claim's width formula below now clears the PHONE, because the phone - not the
-   coin - is the leftmost media it can collide with. */
-.mc-hero__pin{
-  --hero-pad:clamp(24px, 7vw, 116px);
-  --token-cx:0.87;
-  --phone-cx:0.60;
-}
+.mc-hero__pin{--hero-pad:clamp(24px, 7vw, 116px); --token-cx:0.72}
 
 /* the smoke sits between the field and the token: the token is IN it, not
    behind it, and it must never eat a click meant for a CTA */
@@ -8161,13 +8146,13 @@ a.hw-cell__value:focus-visible{
    The transform has to COMPOSE, not replace: .tc-lift:hover sets translateY(-3px) on
    the same element the parallax writes --ds-par to, so the bare rule would clobber the
    scroll offset on hover and the phone would jump. Both values ride one translate3d. */
-.tc-head--brandbg .tc-head__media--float.tc-lift:hover,
-.tc-head--brandbg .tc-head__media--float.tc-lift:focus-within{
+.tc-head__media--float.tc-lift:hover,
+.tc-head__media--float.tc-lift:focus-within{
   box-shadow:none;
   transform:translate3d(0, calc(var(--ds-par, 0px) - 3px), 0);
 }
-.tc-head--brandbg .tc-head__media--float.tc-lift:hover img,
-.tc-head--brandbg .tc-head__media--float.tc-lift:focus-within img{
+.tc-head__media--float.tc-lift:hover img,
+.tc-head__media--float.tc-lift:focus-within img{
   filter:
     drop-shadow(0 34px 42px rgba(0,0,0,.62))
     drop-shadow(0 6px 14px color-mix(in srgb, var(--ds-accent) 38%, transparent));
@@ -8183,7 +8168,7 @@ a.hw-cell__value:focus-visible{
 
 /* THE CUTOUT, on the image. Border and radius off; the shadow now traces the phone
    instead of a box, and a low violet bloom ties it to the mesh behind it. */
-.tc-head--brandbg .tc-head__media--float img{
+.tc-head__media--float img{
   border:0;
   border-radius:0;
   filter:
@@ -8203,9 +8188,9 @@ a.hw-cell__value:focus-visible{
    the border. */
 @media (prefers-reduced-motion:reduce){
   .tc-head__media--float{transform:none}
-  .tc-head--brandbg .tc-head__media--float.tc-lift:hover,
-  .tc-head--brandbg .tc-head__media--float.tc-lift:focus-within{transform:none}
-  .tc-head--brandbg .tc-head__media--float img{animation:none}
+  .tc-head__media--float.tc-lift:hover,
+  .tc-head__media--float.tc-lift:focus-within{transform:none}
+  .tc-head__media--float img{animation:none}
 }
 
 /* THE CLOSING HAIRLINE COMES OFF THIS HEAD. .tc-head__seal is the T-ARTICLE
@@ -8813,51 +8798,15 @@ a.hw-cell__value:focus-visible{
 }
 .tc-head__media--wide img{ width:100%; height:auto; border-radius:var(--ds-r-surface) }
 
-/* THE HERO PHONE. Positioned on the same absolute pattern as the coin so the two are
-   placed by one grammar rather than two, and driven by the SAME [data-parallax] engine
-   the performance-marketing head uses — --ds-par is written by page-effects.js. */
-.mc-hero__media{
-  position:absolute;
-  top:50%;
-  left:calc(var(--phone-cx, 0.60) * 100%);
-  width:min(20%, 240px);
-  /* PARALLAX IN TWO PHASES, because this hero has two.
-     The pin is position:sticky, so while it holds, the phone's viewport rect never
-     moves and the scroll-driven [data-parallax] engine correctly reports zero -
-     measured 0.00px from y=0 through y=900, which is the whole time the hero is on
-     screen. --ds-par only starts moving at y=1400, once the pin releases and the hero
-     is leaving. So the visible phase is driven by the hero's OWN scrub instead:
-     --coaster-p runs 0 -> 0.96 across the pin, and the claim already lifts on it
-     (margin-top: --coaster-p * -6vh, measured -52px at the end of the pin).
-     The phone lifts 20px against the claim's 52px. Moving at a DIFFERENT RATE is what
-     makes it parallax rather than two things sliding together; the engine's --ds-par is
-     added on top so the drift continues after the pin lets go. */
-  transform:translate(-50%, -50%)
-            translate3d(0, calc(var(--coaster-p, 0) * -20px + var(--ds-par, 0px)), 0);
-  z-index:var(--ds-z-below);
-  pointer-events:none;          /* the coin is the only grabbable thing in this hero */
-  will-change:transform;
-}
-.mc-hero__media img{
-  display:block; width:100%; height:auto;
-  /* drop-shadow, not box-shadow: it follows the cutout's alpha instead of drawing a
-     rectangle behind a transparent phone. */
-  filter:drop-shadow(0 26px 40px rgba(0,0,0,.55))
-         drop-shadow(0 4px 12px color-mix(in srgb, var(--ds-accent) 26%, transparent));
-}
-/* THE PHONE STANDS DOWN ON EXACTLY THE CONDITION THE HERO STACKS ON, not on a
-   breakpoint of my choosing. The hero switches to its stacked branch at
-   `(max-aspect-ratio: 115/100), (max-width:1100px)` - coin centred, claim full width -
-   and a max-width:1023px guard left the phone absolutely positioned across the
-   1024-1100px band. MEASURED at 1100: claim 190-910, phone 550-770, coin 350-750,
-   overlapping by 360px and 420px. Matching the hero own condition verbatim means the
-   two can never disagree about which layout is in force. */
-@media (max-aspect-ratio: 115/100), (max-width:1100px){
-  .mc-hero__media{ display:none }
-}
-@media (prefers-reduced-motion:reduce){
-  /* both phases neutralised, not just the engine one */
-  .mc-hero__media{ transform:translate(-50%, -50%) }
+/* A BARE PANEL FIGURE. .tc-tabs__fig carries a hairline and a radius, which is right
+   for the opaque generated art in most panels - it gives a flat rectangle an edge. It is
+   wrong for artwork that already has soft or transparent edges: the border then draws a
+   visible box around an image that was meant to bleed. Opt-in per figure, so the other
+   40 panels keep their frame. */
+.tc-tabs__fig--bare{
+  border:0;
+  border-radius:0;
+  background:none;
 }
 
 /* ▲▲▲ .tc-tabs — closed ▲▲▲ */
