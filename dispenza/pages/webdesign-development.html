@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -246,9 +246,26 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #12,#9,#27 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and webdesign-development is the docs-coded long-form service page #36 exists for - four paired statement-and-evidence blocks read top to bottom, then six named differentiators each welded to its own sentence. This page renders the container's OWN R5 FALLBACK rather than a different pattern: the section rank read off the clone is h4 and the page carries exactly ONE h4, so the rail law refuses to build navigation out of a single jump link and the nav, the spine and the ticks are not generated; #12 feature-row-with-screenshot is the pattern this page most invites, because it genuinely has four paragraph-plus-screenshot pairs - and it is the one it must NOT be composed as, because alternating the media side per row would give the page four different left edges, and the source's own four screenshots are a website report, a menu design sheet, a dispensary design sheet and a development shot at four different aspect ratios (856x683, 761x536, 2072x1804, 764x766), so a fixed half-width media column would letterbox two of them and crop the numbers out of the first; #9 services 3-col would card the six differentiators and truncate exactly the sentences that qualify this page's two checkable claims - "typically 1 -3 weeks" and "at no additional cost" - which is the one thing _copy/webdesign-development.md marks as mandatory binding; #27 numbered process steps asserts a SEQUENCE the six differentiators do not have: ongoing enhancements is not step six of a custom WordPress platform. rigor is heavy because this pick is the T-ARTICLE container for the whole type, not a one-off slot. -->
-  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="webdesign-development-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="webdesign-development-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
+          <div class="col tc-doc__rail">
+            <!-- THE RAIL IS THE TABLIST. Items are BUTTONS, not links: they control a panel
+                 rather than navigate. Behaviour is _design/doc-tabs.js; every panel ships
+                 VISIBLE and the script applies the hiding, so a failed script degrades to a
+                 readable stack rather than to one panel and N dead rail items. -->
+            <nav class="tc-rail tc-rail--tabs" aria-label="What this includes" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="wdtab-1" role="tab" aria-controls="wdpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Custom Wordpress Platform</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="wdtab-2" role="tab" aria-controls="wdpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Perfect Performance Scores</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="wdtab-3" role="tab" aria-controls="wdpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Modern User Experience</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="wdtab-4" role="tab" aria-controls="wdpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Conversion Rate Optimization</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="wdtab-5" role="tab" aria-controls="wdpanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Timely Delivery</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="wdtab-6" role="tab" aria-controls="wdpanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Ongoing Enhancements</span></button></li>
+              </ul>
+            </nav>
+          </div>
+
 
         <!-- THE BODY COLUMN, RAIL-LESS. R5: with one section-rank entry there is no
              rail element at all, so this row is a single .col, the body col drops the
@@ -341,35 +358,66 @@
                  for "optimal"; "We create website that engage" (missing plural);
                  "carefully grafted" for "crafted"; "are build with" for "are built
                  with"; and the "1 -3 weeks" spacing again. -->
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Custom Wordpress Platform:</h3>
-              <p class="tc-defs__d">Our custom-built version of WordPress is specifically designed to meet the unique needs of dispensary retail operations. It combines high-performance capabilities with an intuitive and user-friendly interface.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Perfect Performance Scores:</h3>
-              <p class="tc-defs__d">Our websites achieve exceptional performance scores, ensuring fast load times, smooth navigation, and an optimical user experience.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Modern User Experience:</h3>
-              <p class="tc-defs__d">We create website that engage and delight your visitors and modern design elements, intuitive layouts, and seamless interactions. Every aspect of your website is carefully grafted to enhance user engagement and drive conversions.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Conversion Rate Optimization:</h3>
-              <p class="tc-defs__d">Our websites are build with conversion in mind. We implement proven CRO strategies and tools to maximize your website's ability to convert visitors into customers.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Timely Delivery:</h3>
-              <p class="tc-defs__d">With our efficient design and development process, we aim to launch your website within 1 -3 weeks, providing you with a powerful online presence quickly and effectively.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Ongoing Enhancements:</h3>
-              <p class="tc-defs__d">We believe in continuous improvement. We regularly update, enhance, and add new features to our clients' websites, ensuring they remain at the forefront of industry standards and user expectations.</p>
-            </div>
+                          <div class="tc-tabs__panel" id="wdpanel-1" role="tabpanel" aria-labelledby="wdtab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-webdesign-development-custom-wordpress-platform.webp"
+                       alt="Modular glass content blocks assembling into a page layout"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h3 class="tc-tabs__t">Custom Wordpress Platform:</h3>
+                <p class="tc-tabs__d">Our custom-built version of WordPress is specifically designed to meet the unique needs of dispensary retail operations. It combines high-performance capabilities with an intuitive and user-friendly interface.</p>
+              </div>
+              <div class="tc-tabs__panel" id="wdpanel-2" role="tabpanel" aria-labelledby="wdtab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-webdesign-development-perfect-performance-scores.webp"
+                       alt="A performance gauge arc glowing near its maximum"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h3 class="tc-tabs__t">Perfect Performance Scores:</h3>
+                <p class="tc-tabs__d">Our websites achieve exceptional performance scores, ensuring fast load times, smooth navigation, and an optimical user experience.</p>
+              </div>
+              <div class="tc-tabs__panel" id="wdpanel-3" role="tabpanel" aria-labelledby="wdtab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-webdesign-development-modern-user-experience.webp"
+                       alt="A hand reaching toward a floating translucent interface card"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h3 class="tc-tabs__t">Modern User Experience:</h3>
+                <p class="tc-tabs__d">We create website that engage and delight your visitors and modern design elements, intuitive layouts, and seamless interactions. Every aspect of your website is carefully grafted to enhance user engagement and drive conversions.</p>
+              </div>
+              <div class="tc-tabs__panel" id="wdpanel-4" role="tabpanel" aria-labelledby="wdtab-4">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-webdesign-development-conversion-rate-optimization.webp"
+                       alt="A funnel of light rings narrowing toward a single bright point"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h3 class="tc-tabs__t">Conversion Rate Optimization:</h3>
+                <p class="tc-tabs__d">Our websites are build with conversion in mind. We implement proven CRO strategies and tools to maximize your website's ability to convert visitors into customers.</p>
+              </div>
+              <div class="tc-tabs__panel" id="wdpanel-5" role="tabpanel" aria-labelledby="wdtab-5">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-webdesign-development-timely-delivery.webp"
+                       alt="A progress ring completing around a small glowing package form"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">05</p>
+                <h3 class="tc-tabs__t">Timely Delivery:</h3>
+                <p class="tc-tabs__d">With our efficient design and development process, we aim to launch your website within 1 -3 weeks, providing you with a powerful online presence quickly and effectively.</p>
+              </div>
+              <div class="tc-tabs__panel" id="wdpanel-6" role="tabpanel" aria-labelledby="wdtab-6">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-webdesign-development-ongoing-enhancements.webp"
+                       alt="Translucent panels stacking upward in sequence"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">06</p>
+                <h3 class="tc-tabs__t">Ongoing Enhancements:</h3>
+                <p class="tc-tabs__d">We believe in continuous improvement. We regularly update, enhance, and add new features to our clients' websites, ensuring they remain at the forefront of industry standards and user expectations.</p>
+              </div>
           </article>
 
           <!-- ####################################################################
@@ -430,6 +478,9 @@
       </div>
     </div>
   </section>
+
+  <!-- the tablist engine, carrier-relative so promote rebases it to ../_design/ -->
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 

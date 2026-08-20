@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -262,9 +262,26 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #15,#9,#27 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and conversion-rate-optimization is the docs-coded long-form service page #36 exists for - two evidence blocks that each weld a claim to the screenshot that backs it, six named differentiators, and a closing statement, read top to bottom in one column. This page renders the container's OWN R5 FALLBACK rather than a different pattern: the section rank read off the clone is h2 and the page carries exactly ONE h2, so the rail law refuses to build navigation out of a single jump link and the nav, the spine and the ticks are not generated; #15 comparison table is the pattern the numbers on this page invite - 53% on Dutchie, over 22% average, the highest rates in 2021 - and it is the one this page must NOT be composed as, because a table cell is a container that strips a figure of the clause around it, and every one of those three figures is qualified INSIDE its own sentence (platform, client, population, measurement window) in a way _copy/conversion-rate-optimization.md marks as inseparable; tabulating them would publish four unscoped superlatives out of copy that is currently honest; #9 services 3-col would card the six differentiators and truncate the sentence that states the 90-day cadence twice, which is the page's one checkable operational promise; #27 numbered process steps asserts a SEQUENCE the six differentiators do not have - continuous monitoring is not step six of data-driven decision making. rigor is heavy because this pick is the T-ARTICLE container for the whole type, not a one-off slot. -->
-  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="conversion-rate-optimization-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="conversion-rate-optimization-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
+          <div class="col tc-doc__rail">
+            <!-- THE RAIL IS THE TABLIST. Items are BUTTONS, not links: they control a panel
+                 rather than navigate. Behaviour is _design/doc-tabs.js; every panel ships
+                 VISIBLE and the script applies the hiding, so a failed script degrades to a
+                 readable stack rather than to one panel and N dead rail items. -->
+            <nav class="tc-rail tc-rail--tabs" aria-label="What this includes" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-1" role="tab" aria-controls="cropanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Data-Driven Decision Making</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-2" role="tab" aria-controls="cropanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Continuous Enhancements</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-3" role="tab" aria-controls="cropanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Industry Expertise</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-4" role="tab" aria-controls="cropanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Proven Results</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-5" role="tab" aria-controls="cropanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Comprehensive Approach</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-6" role="tab" aria-controls="cropanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Continuous Monitoring</span></button></li>
+              </ul>
+            </nav>
+          </div>
+
 
         <!-- THE BODY COLUMN, RAIL-LESS. R5: one section-rank entry, so no rail element
              at all - a single .col, no spine border, no gutter, no ticks. -->
@@ -325,35 +342,66 @@
             <!-- SIX CARDS, ONE SOURCE CARD PER BLOCK. Title and body are one pair and
                  never split. Card 2 restates the SAME 90-day cadence the opening
                  paragraph states - one claim said twice, not two different cadences. -->
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Data-Driven Decision Making:</h3>
-              <p class="tc-defs__d">Our CRO strategies are based on in-depth data analysis, allowing us to make informed decisions that lead to tangible improvements in conversion rates.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Continuous Enhancements:</h3>
-              <p class="tc-defs__d">We don't stop at the initial website development. We proactively enhance our clients' websites every 90 days to address any potential roadblocks and optimize the user experience.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Industry Expertise:</h3>
-              <p class="tc-defs__d">With our extensive experience in the cannabis industry, we understand the unique challenges and opportunities that dispensaries face. Our strategies are tailored specifically to this niche market, ensuring optimal results.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Proven Results:</h3>
-              <p class="tc-defs__d">Our track record speaks for itself. We have achieved exceptional conversion rates for our clients, outperforming competitors and helping them maximize their return on investment.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Comprehensive Approach:</h3>
-              <p class="tc-defs__d">Our CRO services cover all aspects of the customer journey, from initial website interaction to final conversion. We optimize each touchpoint to provide a seamless and compelling user experience.</p>
-            </div>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Continuous Monitoring:</h3>
-              <p class="tc-defs__d">We closely monitor website performance, conversion rates, and user behavior to identify areas for improvement and make timely adjustments to enhance results.</p>
-            </div>
+                          <div class="tc-tabs__panel" id="cropanel-1" role="tabpanel" aria-labelledby="crotab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-conversion-rate-optimization-data-driven-decision-making.webp"
+                       alt="Connected bright nodes among faint data points on a dark surface"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h3 class="tc-tabs__t">Data-Driven Decision Making:</h3>
+                <p class="tc-tabs__d">Our CRO strategies are based on in-depth data analysis, allowing us to make informed decisions that lead to tangible improvements in conversion rates.</p>
+              </div>
+              <div class="tc-tabs__panel" id="cropanel-2" role="tabpanel" aria-labelledby="crotab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-conversion-rate-optimization-continuous-enhancements.webp"
+                       alt="An ascending staircase of translucent slabs receding into haze"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h3 class="tc-tabs__t">Continuous Enhancements:</h3>
+                <p class="tc-tabs__d">We don't stop at the initial website development. We proactively enhance our clients' websites every 90 days to address any potential roadblocks and optimize the user experience.</p>
+              </div>
+              <div class="tc-tabs__panel" id="cropanel-3" role="tabpanel" aria-labelledby="crotab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-conversion-rate-optimization-industry-expertise.webp"
+                       alt="A magnifying lens over an abstract topographic surface"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h3 class="tc-tabs__t">Industry Expertise:</h3>
+                <p class="tc-tabs__d">With our extensive experience in the cannabis industry, we understand the unique challenges and opportunities that dispensaries face. Our strategies are tailored specifically to this niche market, ensuring optimal results.</p>
+              </div>
+              <div class="tc-tabs__panel" id="cropanel-4" role="tabpanel" aria-labelledby="crotab-4">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-conversion-rate-optimization-proven-results.webp"
+                       alt="A tall light column rising above shorter ones on a reflective plane"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h3 class="tc-tabs__t">Proven Results:</h3>
+                <p class="tc-tabs__d">Our track record speaks for itself. We have achieved exceptional conversion rates for our clients, outperforming competitors and helping them maximize their return on investment.</p>
+              </div>
+              <div class="tc-tabs__panel" id="cropanel-5" role="tabpanel" aria-labelledby="crotab-5">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-conversion-rate-optimization-comprehensive-approach.webp"
+                       alt="Interlocking geometric rings forming one continuous loop"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">05</p>
+                <h3 class="tc-tabs__t">Comprehensive Approach:</h3>
+                <p class="tc-tabs__d">Our CRO services cover all aspects of the customer journey, from initial website interaction to final conversion. We optimize each touchpoint to provide a seamless and compelling user experience.</p>
+              </div>
+              <div class="tc-tabs__panel" id="cropanel-6" role="tabpanel" aria-labelledby="crotab-6">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-conversion-rate-optimization-continuous-monitoring.webp"
+                       alt="A radar sweep across a subtle grid with glowing tracked points"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">06</p>
+                <h3 class="tc-tabs__t">Continuous Monitoring:</h3>
+                <p class="tc-tabs__d">We closely monitor website performance, conversion rates, and user behavior to identify areas for improvement and make timely adjustments to enhance results.</p>
+              </div>
           </article>
 
           <!-- THE CLOSE, FOLDED INLINE - NOT A SECOND CLOSING BAND. Both strings are
@@ -450,6 +498,9 @@
       </div>
     </div>
   </section>
+
+  <!-- the tablist engine, carrier-relative so promote rebases it to ../_design/ -->
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 

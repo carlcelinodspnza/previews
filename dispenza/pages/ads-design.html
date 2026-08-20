@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -245,9 +245,26 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #9,#12,#13 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and #36's docs-coded long-form page is what ads-design is - one continuous service document read top to bottom, an includes list of six named deliverables each welded to its own sentence, and four pieces of real ad work shown at a size where the work is legible. This page renders the container's OWN R5 FALLBACK, not a different pattern: R4 joins "Here's what our" + "advertisement design" + "service includes:" into ONE section-rank title, which leaves exactly one entry, and the rail law refuses to build a rail out of one link, so the nav, the spine and the ticks are not generated and the document takes the page's left axis alone. Citing #36 is therefore the honest citation - the sidebar is the container's conditional half, and this page is the documented case where the condition is not met; #9 services 3-col would card the six includes-items and truncate exactly the sentences ("To ensure that your vision is fully realized. With this feature, you can request as many changes as you need, without any extra cost.") that make the unlimited-revisions promise checkable, which is this page's strongest operator-facing claim; #12 feature-row-with-screenshot alternates media side per row and would give the page four different left edges, breaking the single left axis the whole direction rests on; #13 bento feature grid needs 8 to 12 tiles of roughly equal weight and this page has six items of very unequal sentence length, so a bento would either stretch three of them or crop three. rigor is heavy because this pick is the T-ARTICLE container for 17 pages, not a one-off slot. -->
-  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="ads-design-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="ads-design-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
+          <div class="col tc-doc__rail">
+            <!-- THE RAIL IS THE TABLIST. Items are BUTTONS, not links: they control a panel
+                 rather than navigate. Behaviour is _design/doc-tabs.js; every panel ships
+                 VISIBLE and the script applies the hiding, so a failed script degrades to a
+                 readable stack rather than to one panel and N dead rail items. -->
+            <nav class="tc-rail tc-rail--tabs" aria-label="What this includes" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-1" role="tab" aria-controls="adpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Customized Ad Designs</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-2" role="tab" aria-controls="adpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Engaging Visuals</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-3" role="tab" aria-controls="adpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Persuasive Ad Copy</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-4" role="tab" aria-controls="adpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Multiple Ad Formats</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-5" role="tab" aria-controls="adpanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Consistency and Branding</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-6" role="tab" aria-controls="adpanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Unlimited Revisions</span></button></li>
+              </ul>
+            </nav>
+          </div>
+
 
         <!-- THE BODY COLUMN, RAIL-LESS. R5: with one section-rank entry there is no
              rail element at all, so this row is a single .col, the body col drops the
@@ -282,34 +299,66 @@
                  locked sheets, so a class for it would render unstyled. -->
             <h2 class="tc-sec__h" data-reveal>Here's what our advertisement design service includes:</h2>
 
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Customized Ad Designs</h3>
-              <p class="tc-defs__d">We create custom ad designs that align with your brand identity and objectives, ensuring that your ads stand out from the competition.</p>
-              <h3 class="tc-defs__t">Engaging Visuals</h3>
-              <p class="tc-defs__d">Our designers will craft visually stunning graphics that capture attention and convey your message effectively.</p>
-            </div>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/dispenza-graphic-design-work-example-1.webp"
-                   alt="Dispenza Graphic Design Work Example 1" width="500" height="552" loading="lazy" decoding="async">
-            </figure>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Persuasive Ad Copy</h3>
-              <p class="tc-defs__d">We understand the power of persuasive copywriting. Our team will develop compelling ad copy that drives action and encourages users to engage with your brand.</p>
-              <h3 class="tc-defs__t">Multiple Ad Formats</h3>
-              <p class="tc-defs__d">From social media ads to display ads and beyond, we have expertise in creating ad designs for various platforms and formats.</p>
-            </div>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/dispenza-graphic-design-work-example-6.webp"
-                   alt="Dispenza Graphic Design Work Example 6" width="500" height="500" loading="lazy" decoding="async">
-            </figure>
-
-            <div class="tc-defs" data-reveal>
-              <h3 class="tc-defs__t">Consistency and Branding</h3>
-              <p class="tc-defs__d">We ensure that your advertisements maintain consistency with your overall brand image, helping to reinforce brand recognition and trust.</p>
-              <h3 class="tc-defs__t">Unlimited Revisions</h3>
-              <p class="tc-defs__d">To ensure that your vision is fully realized. With this feature, you can request as many changes as you need, without any extra cost.</p>
-            </div>
+                          <div class="tc-tabs__panel" id="adpanel-1" role="tabpanel" aria-labelledby="adtab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-ads-design-customized-ad-designs.webp"
+                       alt="Blank advertisement frames of different sizes floating in dark space"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h3 class="tc-tabs__t">Customized Ad Designs</h3>
+                <p class="tc-tabs__d">We create custom ad designs that align with your brand identity and objectives, ensuring that your ads stand out from the competition.</p>
+              </div>
+              <div class="tc-tabs__panel" id="adpanel-2" role="tabpanel" aria-labelledby="adtab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-ads-design-engaging-visuals.webp"
+                       alt="A burst of violet light shards radiating from a dark centre"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h3 class="tc-tabs__t">Engaging Visuals</h3>
+                <p class="tc-tabs__d">Our designers will craft visually stunning graphics that capture attention and convey your message effectively.</p>
+              </div>
+              <div class="tc-tabs__panel" id="adpanel-3" role="tabpanel" aria-labelledby="adtab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-ads-design-persuasive-ad-copy.webp"
+                       alt="A stylus resting on a blank card on a dark desk"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h3 class="tc-tabs__t">Persuasive Ad Copy</h3>
+                <p class="tc-tabs__d">We understand the power of persuasive copywriting. Our team will develop compelling ad copy that drives action and encourages users to engage with your brand.</p>
+              </div>
+              <div class="tc-tabs__panel" id="adpanel-4" role="tabpanel" aria-labelledby="adtab-4">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-ads-design-multiple-ad-formats.webp"
+                       alt="A grid of blank rectangles in many aspect ratios at varying depth"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h3 class="tc-tabs__t">Multiple Ad Formats</h3>
+                <p class="tc-tabs__d">From social media ads to display ads and beyond, we have expertise in creating ad designs for various platforms and formats.</p>
+              </div>
+              <div class="tc-tabs__panel" id="adpanel-5" role="tabpanel" aria-labelledby="adtab-5">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-ads-design-consistency-and-branding.webp"
+                       alt="Three identical geometric brand marks aligned in a row"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">05</p>
+                <h3 class="tc-tabs__t">Consistency and Branding</h3>
+                <p class="tc-tabs__d">We ensure that your advertisements maintain consistency with your overall brand image, helping to reinforce brand recognition and trust.</p>
+              </div>
+              <div class="tc-tabs__panel" id="adpanel-6" role="tabpanel" aria-labelledby="adtab-6">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-ads-design-unlimited-revisions.webp"
+                       alt="Circular arrows looping around a dark glossy sphere"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">06</p>
+                <h3 class="tc-tabs__t">Unlimited Revisions</h3>
+                <p class="tc-tabs__d">To ensure that your vision is fully realized. With this feature, you can request as many changes as you need, without any extra cost.</p>
+              </div>
             <figure class="tc-plate tc-lift" data-media-in>
               <img src="../assets/in-pages/dispenza-graphic-design-work-example-4.webp"
                    alt="Dispenza Graphic Design Work Example 4" width="500" height="500" loading="lazy" decoding="async">
@@ -320,6 +369,9 @@
       </div>
     </div>
   </section>
+
+  <!-- the tablist engine, carrier-relative so promote rebases it to ../_design/ -->
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 

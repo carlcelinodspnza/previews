@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -400,9 +400,26 @@
 
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #9,#12,#27 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and performance-marketing is the docs-coded long-form service page #36 exists for - a guarantee stated in full, the method behind it, and five named pillars each welded to its own sentence, read top to bottom in one column. This page renders the container's OWN R5 FALLBACK rather than a different pattern: the section rank computed off the clone is h2 and there is exactly ONE h2 on the page, so the rail law refuses to build navigation out of a single jump link and the nav, the spine and the ticks are not generated - citing #36 is the honest citation, because the sidebar is the container's conditional half and this page is a documented case where the condition is not met; #9 services 3-col would card the five pillars and truncate exactly the sentences that make the guarantee checkable ("We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services."), and a card that shows the label "Guaranteed Results:" without its condition is the one failure mode client-rules.json overclaim.guarantee_unconditional exists to prevent; #12 feature-row-with-screenshot alternates media side per row and would need one image per row, but this page has ONE image repeated three times, so three rows would show the same phone photograph three times at three different edges - it would manufacture the appearance of three pieces of evidence out of one; #27 numbered process steps asserts a SEQUENCE the five pillars do not have - transparent reporting is not step five of comprehensive optimization. rigor is heavy because this pick is the T-ARTICLE container for the whole type, not a one-off slot. -->
-  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="performance-marketing-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="performance-marketing-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
+          <div class="col tc-doc__rail">
+            <!-- THE RAIL IS THE TABLIST. It controls panels rather than navigating, so
+                 the items are BUTTONS: a link that changes nothing about the URL and
+                 moves no scroll position is not a link. Behaviour is in
+                 _design/doc-tabs.js; every panel below ships VISIBLE and the script
+                 applies the hiding, so a failed script leaves a readable stack. -->
+            <nav class="tc-rail tc-rail--tabs" aria-label="What to expect" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-1" role="tab" aria-controls="pmpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Guaranteed Results</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-2" role="tab" aria-controls="pmpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Comprehensive Optimization</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-3" role="tab" aria-controls="pmpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Local SEO Focus</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-4" role="tab" aria-controls="pmpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Value-Added Services</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-5" role="tab" aria-controls="pmpanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Transparent Reporting</span></button></li>
+              </ul>
+            </nav>
+          </div>
+
 
         <!-- THE BODY COLUMN, RAIL-LESS. R5: with one section-rank entry there is no
              rail element at all, so this row is a single .col, the body col drops the
@@ -455,52 +472,90 @@
                    NO-SCRIPT: `.mc-deck__stage` is a plain grid column until the engine adds
                    `.is-slider`, so with scripting off this degrades to five stacked cards
                    rather than to a row that cannot be scrolled. -->
-              <div class="mc-deck pm-defdeck" data-deck data-reveal>
-                <div class="mc-deck__viewport">
-                  <div class="mc-deck__stage" role="group" aria-label="What to expect">
-                <div class="mc-result pm-defcard">
-                  <p class="pm-defcard__idx" aria-hidden="true">01</p>
-                  <h3 class="pm-defcard__t">Guaranteed Results:</h3>
-                  <p class="pm-defcard__d">We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services.</p>
-                </div>
-                <div class="mc-result pm-defcard">
-                  <p class="pm-defcard__idx" aria-hidden="true">02</p>
-                  <h3 class="pm-defcard__t">Comprehensive Optimization:</h3>
-                  <p class="pm-defcard__d">Our SEO specialists will optimize every aspect of your website, from on-page elements like meta tags and headings to technical factors such as site speed and mobile responsiveness. We leave no stone unturned in our quest to maximize your online visibility.</p>
-                </div>
-                <div class="mc-result pm-defcard">
-                  <p class="pm-defcard__idx" aria-hidden="true">03</p>
-                  <h3 class="pm-defcard__t">Local SEO Focus:</h3>
-                  <p class="pm-defcard__d">We understand the importance of targeting your local audience. Through strategic keyword targeting, location-specific optimization, and local directory submissions, we ensure that your dispensary is visible to the right customers at the right time.</p>
-                </div>
-                <div class="mc-result pm-defcard">
-                  <p class="pm-defcard__idx" aria-hidden="true">04</p>
-                  <h3 class="pm-defcard__t">Value-Added Services:</h3>
-                  <p class="pm-defcard__d">In addition to our performance marketing guarantee, we provide complementary services that enhance your online presence. From website audits to content optimization, we'll work hand in hand with you to optimize your digital assets and drive long-term success.</p>
-                </div>
-                <div class="mc-result pm-defcard">
-                  <p class="pm-defcard__idx" aria-hidden="true">05</p>
-                  <h3 class="pm-defcard__t">Transparent Reporting:</h3>
-                  <p class="pm-defcard__d">We believe in complete transparency, which is why we provide detailed reports that highlight the progress and results of our performance marketing efforts. You'll have a clear understanding of how your dispensary is performing and the impact our strategies are making.</p>
-                </div>
-                  </div>
-                </div>
-                <div class="mc-deck__bar">
-                  <span class="mc-deck__label">What to expect</span>
-                  <span class="mc-deck__count" data-deck-count aria-live="polite">01 / 05</span>
-                  <div class="mc-deck__btns">
-                    <button class="mc-deck__btn" type="button" data-deck-prev aria-label="Previous expectation">
-                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.2"
-                              stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                    <button class="mc-deck__btn" type="button" data-deck-next aria-label="More expectations">
-                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2"
-                              stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                  </div>
-                </div>
+                            <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
+                   were right to object: G-SVAR read five identical section shapes stacked in a
+                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
+                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
+                   visible and they are not parallel document sections. <section> also puts five
+                   entries in the document outline that a reader never encounters as sections.
+                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
+              <div class="tc-tabs__panel" id="pmpanel-1" role="tabpanel" aria-labelledby="pmtab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/pm-def-guaranteed-results.webp"
+                       alt="A phone showing three stacked map-pin ranking markers, the top one lit"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h3 class="tc-tabs__t">Guaranteed Results:</h3>
+                <p class="tc-tabs__d">We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services.</p>
+              </div>
+              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
+                   were right to object: G-SVAR read five identical section shapes stacked in a
+                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
+                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
+                   visible and they are not parallel document sections. <section> also puts five
+                   entries in the document outline that a reader never encounters as sections.
+                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
+              <div class="tc-tabs__panel" id="pmpanel-2" role="tabpanel" aria-labelledby="pmtab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/pm-def-comprehensive-optimization.webp"
+                       alt="A laptop screen showing wireframe layout blocks and a page-speed gauge"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h3 class="tc-tabs__t">Comprehensive Optimization:</h3>
+                <p class="tc-tabs__d">Our SEO specialists will optimize every aspect of your website, from on-page elements like meta tags and headings to technical factors such as site speed and mobile responsiveness. We leave no stone unturned in our quest to maximize your online visibility.</p>
+              </div>
+              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
+                   were right to object: G-SVAR read five identical section shapes stacked in a
+                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
+                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
+                   visible and they are not parallel document sections. <section> also puts five
+                   entries in the document outline that a reader never encounters as sections.
+                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
+              <div class="tc-tabs__panel" id="pmpanel-3" role="tabpanel" aria-labelledby="pmtab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/pm-def-local-seo-focus.webp"
+                       alt="A dark relief city map with glowing location pins and radius rings"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h3 class="tc-tabs__t">Local SEO Focus:</h3>
+                <p class="tc-tabs__d">We understand the importance of targeting your local audience. Through strategic keyword targeting, location-specific optimization, and local directory submissions, we ensure that your dispensary is visible to the right customers at the right time.</p>
+              </div>
+              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
+                   were right to object: G-SVAR read five identical section shapes stacked in a
+                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
+                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
+                   visible and they are not parallel document sections. <section> also puts five
+                   entries in the document outline that a reader never encounters as sections.
+                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
+              <div class="tc-tabs__panel" id="pmpanel-4" role="tabpanel" aria-labelledby="pmtab-4">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/pm-def-value-added-services.webp"
+                       alt="Two people reviewing printed layout sheets and a tablet on a dark desk"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h3 class="tc-tabs__t">Value-Added Services:</h3>
+                <p class="tc-tabs__d">In addition to our performance marketing guarantee, we provide complementary services that enhance your online presence. From website audits to content optimization, we'll work hand in hand with you to optimize your digital assets and drive long-term success.</p>
+              </div>
+              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
+                   were right to object: G-SVAR read five identical section shapes stacked in a
+                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
+                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
+                   visible and they are not parallel document sections. <section> also puts five
+                   entries in the document outline that a reader never encounters as sections.
+                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
+              <div class="tc-tabs__panel" id="pmpanel-5" role="tabpanel" aria-labelledby="pmtab-5">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/pm-def-transparent-reporting.webp"
+                       alt="A glass dashboard panel showing rising bar columns and an ascending curve"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">05</p>
+                <h3 class="tc-tabs__t">Transparent Reporting:</h3>
+                <p class="tc-tabs__d">We believe in complete transparency, which is why we provide detailed reports that highlight the progress and results of our performance marketing efforts. You'll have a clear understanding of how your dispensary is performing and the impact our strategies are making.</p>
               </div>
           </article>
 
@@ -601,6 +656,7 @@
        "../_design/_tournament/templates/T-ARTICLE/_design/smoke-engine.js" and 404s -
        verified in the browser, both scripts. The sibling lander writes the same four
        hops for the same reason. -->
+  <script src="../_design/doc-tabs.js" defer></script>
   <script src="../_design/smoke-engine.js"></script>
   <script src="../_design/section-smoke-rise.js" defer></script>
 

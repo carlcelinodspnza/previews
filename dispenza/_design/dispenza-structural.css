@@ -5407,6 +5407,14 @@ a.hw-cell__value:focus-visible{
    and eats the first 70px of the viewport, so the band pays one extra --ds-space-xl
    on top of the section rhythm. Copied as ARITHMETIC, not as a magic number. */
 .lg-head{ padding-block:calc(var(--ds-rhythm) + var(--ds-space-xl)); }
+/* privacy-policy KEEPS its 215px closing and is deliberately NOT brought down to the
+   --ds-space-xl the rest of the set now pays. Tried and REVERTED: verify-section-rhythm
+   failed at all three widths - "@1440 §0 leading≠trailing: top 215px vs bottom 64px" -
+   citing the owner rule "leading must equal trailing across all sections". The top
+   value is not free either: it is the .rs-head clearance arithmetic, because the fixed
+   chrome eats the first 70px. So the 312px gap into the footer on this one page is the
+   consequence of a rule, not an oversight, and cutting it needs an owner decision on
+   the symmetry rule rather than a CSS edit. */
 /* The document's own title. Display step, same face/weight/tracking as
    .rs-head__title so the two page heads read as one family. It is NOT set in
    caps: a legal document's title is a proper noun, and .mc-head's uppercase
@@ -6324,7 +6332,18 @@ a.hw-cell__value:focus-visible{
    col's left border, so it is exactly as tall as the content and starts at the
    head's closing rule. Below 1024 the .row falls back to the sheet's flex default
    and the two cols stack, rail first — see block 8. */
-.tc-doc{padding-bottom:var(--ds-rhythm)}
+/* THE CLOSING INTERVAL INTO THE FOOTER, --ds-rhythm -> --ds-space-xl.
+   Measured across the whole set at 1440 before changing anything: 21 pages sat at
+   227px from their last content to the footer's card edge, thank-you at 247px and the
+   six team pages at 293px, against 125px on the home page and 140px on case-studies.
+   The interval is this closing rhythm plus the footer's own opening 96px, and the
+   footer legitimately keeps its opening because it is a visible panel with its own
+   edge. So the rhythm is the half to cut, not the footer.
+   Owner reviewed the 160px result on performance-marketing and asked for the rest of
+   the set to follow, which is why this is now the base rule rather than a scoped one.
+   `.tc-doc--run{padding-bottom:0}` still wins for non-final sections in a run, so a
+   multi-section page like contact is unaffected between its own sections. */
+.tc-doc{padding-bottom:var(--ds-space-xl)}
 .tc-head + .tc-doc{padding-top:0}
 .row.tc-doc__grid{gap:var(--ds-space-xl) 0}
 .col.tc-doc__body{padding-top:var(--ds-space-2xl)}
@@ -8595,16 +8614,118 @@ a.hw-cell__value:focus-visible{
   .pm-defdeck{ margin-top:var(--ds-space-md) }   /* stacked, one step down as always */
 }
 
-/* THE CLOSING INTERVAL INTO THE FOOTER. Measured across the set at 1440: this page
-   ran 243px from its last content to the footer's card edge, and its four T-ARTICLE
-   siblings run 227px - so the roomy figure is a SITE-WIDE pattern, not something this
-   page introduced. It is .tc-doc's closing --ds-rhythm (151.2px) plus the footer's own
-   opening 96px, and the footer legitimately keeps its opening interval because it is a
-   visible panel with its own edge, which is exactly the case the rhythm rules carve out.
-
-   Reduced HERE ONLY, because only this page has been reviewed. The selector requires
-   .mc-dissolve, so consulting, ads-design, integrations and webdesign-development keep
-   227px until the owner decides whether the whole set should follow. 64 + 96 = 160px. */
-.mc-dissolve ~ .tc-doc{ padding-bottom:var(--ds-space-xl) }
+/* The page-scoped closing-interval override that used to live here is GONE, not
+   commented out: the owner accepted 160px and the base .tc-doc rule now carries the
+   same --ds-space-xl, so this selector would have been a no-op that reads like an
+   exception. One value, stated once. */
 
 /* ▲▲▲ .pm-defcard — closed ▲▲▲ */
+
+/* ===========================================================================
+   ▼▼▼ .tc-tabs — THE SERVICE-PAGE RAIL AS A TABLIST — 2026-08-20
+
+   Owner direction, arrived at over four rounds: the rail from the branding page,
+   but driving ONE panel at a time on the right, each panel carrying a rectangular
+   image. Applied to the eight pages the site's own Services menu names (01-08).
+
+   IT REPLACES A CAROUSEL, AND FIXES WHAT THE CAROUSEL COST. The deck showed three
+   cards at once, which forced the copy into a 300px column; the full-width
+   alternative pushed it to a measured 91 characters per line, against a 65-72
+   token window. One panel at a time removes the pressure entirely - the copy holds
+   --ds-measure at ~60 characters and the image gets the width instead.
+
+   BEHAVIOUR LIVES IN _design/doc-tabs.js, linked per page. The markup ships every
+   panel VISIBLE and the script applies the hiding, so a page whose script fails
+   degrades to a readable stack rather than to one panel and four dead rail items.
+   =========================================================================== */
+
+/* -- THE RAIL ITEMS. They are <button>s now, not links, because they control a
+      panel rather than navigate, so the link styling has to be restated. */
+.tc-tabs__link{
+  display:flex; align-items:baseline; gap:var(--ds-space-sm);
+  width:100%; text-align:left;
+  background:none; border:0; cursor:pointer;
+  font:inherit; color:inherit;
+  /* the index used to sit at 0px from the item edge, which is exactly where the
+     active indicator paints - the violet bar and the numeral were touching. */
+  padding:var(--ds-space-sm) 0 var(--ds-space-sm) var(--ds-space-md);
+}
+.tc-tabs__n{
+  font-family:var(--ds-font-mono, var(--ds-font-display));
+  font-size:var(--ds-step-micro); font-weight:700; letter-spacing:.12em;
+  color:color-mix(in srgb, var(--ds-ink-on-dark) 34%, transparent);
+  transition:color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.tc-tabs__link[aria-selected="true"]{ color:var(--ds-ink-on-dark) }
+.tc-tabs__link[aria-selected="true"] .tc-tabs__n{ color:var(--ds-accent-light) }
+.tc-rail__item:has(> .tc-tabs__link[aria-selected="true"]){
+  box-shadow:inset 2px 0 0 var(--ds-accent);
+}
+.tc-tabs__link:focus-visible{ outline:2px solid var(--ds-accent-light); outline-offset:3px }
+
+/* THE LIST ALIGNS WITH THE TITLE. .tc-rail carries margin-top:96px for its normal
+   use; as a tablist it sits beside a heading and that offset put the first item
+   76px below it. The sticky offset is deliberately NOT touched. */
+.tc-doc__rail .tc-rail--tabs{ margin-top:0 }
+
+/* -- THE PANEL ------------------------------------------------------------- */
+.tc-tabs__panel{ max-width:none }
+.tc-tabs__panel[hidden]{ display:none }
+
+/* THE IMAGE CONTAINER. A fixed 16/9 rectangle so every panel is the same height
+   whatever its art does - the generated files are 4:3, and letting them set their
+   own height makes the panel jump on each tab change. cover crops rather than
+   letterboxes, so no panel shows dead bars. */
+.tc-tabs__fig{
+  margin:0 0 var(--ds-space-lg);
+  aspect-ratio:16 / 9;
+  overflow:hidden;
+  border-radius:var(--ds-r-surface);
+  border:1px solid var(--ds-glass-border);
+  background:var(--ds-bg-surface-2, var(--ds-bg-surface));
+}
+.tc-tabs__fig img{ display:block; width:100%; height:100%; object-fit:cover; object-position:center }
+
+.tc-tabs__pn{
+  margin:0 0 var(--ds-space-2xs);
+  font-family:var(--ds-font-mono, var(--ds-font-display));
+  font-size:var(--ds-step-micro); font-weight:700; letter-spacing:.16em;
+  color:var(--ds-accent-light);
+}
+.tc-tabs__t{
+  margin:0 0 var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:clamp(22px, 2vw, 30px); font-weight:800;
+  line-height:1.16; letter-spacing:-.02em;
+  color:var(--ds-ink-on-dark);
+}
+/* the copy keeps the reading measure even though the panel is wider: one block at
+   a time means there is no pressure to fill the column with text. */
+.tc-tabs__d{
+  margin:0; max-width:var(--ds-measure);
+  font-size:var(--ds-step-body); line-height:1.68;
+  color:var(--ds-ink-soft);
+}
+
+/* THE HEADING, on a tabbed doc. Two corrections, both measured:
+   - margin-bottom: the figure was overlapping the heading by 20px, because
+     .tc-sec__h ships margin:0 and the panel adds no top offset.
+   - ::before: that 64x1px hairline is the docked-heading tick, already hidden on
+     rail-less pages. Turning the rail on brought it back, where it reads as a
+     stray line into the title rather than as a tick on a spine. */
+.tc-doc--tabs .tc-sec__h{ max-width:none; margin-bottom:var(--ds-space-xl) }
+.tc-doc--tabs .tc-sec__h::before{ display:none }
+
+@media (max-width:1023px){
+  .tc-tabs__fig{ margin-bottom:var(--ds-space-md) }
+  /* stacked, a vertical rail would push every panel below a five-item list, so the
+     tablist turns horizontal and wraps. */
+  .tc-doc--tabs .tc-rail__list{ display:flex; flex-wrap:wrap; gap:var(--ds-space-2xs) }
+  .tc-doc--tabs .tc-rail__item{ flex:0 0 auto }
+  .tc-tabs__link{ padding-left:var(--ds-space-sm) }
+}
+@media (prefers-reduced-motion:reduce){
+  .tc-tabs__link, .tc-tabs__n{ transition:none }
+}
+
+/* ▲▲▲ .tc-tabs — closed ▲▲▲ */

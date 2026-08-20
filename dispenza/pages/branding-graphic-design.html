@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -236,7 +236,7 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #9,#12,#27 | rigor: heavy | why: branding is three peer service blocks (identity, packaging, merchandise) that a dispensary operator reads to answer one question - is the design work I need already inside the suite - and #36's left topic column answers it in the first viewport by naming all three before the reader commits to scrolling, which is the whole job of this page; #9 services 3-col would card the three peers and force the deliverable sentences ("Brand Guidelines: We will develop comprehensive brand guidelines that outline the visual elements...") into card bodies they do not fit, truncating the exact detail the operator came for; #12 feature-row-with-screenshot alternates media side per block and would give a three-block page three different left edges, breaking the single left axis the direction rests on; #27 numbered process steps would assert that identity, packaging and merchandise happen in that ORDER, which the source never says - a dispensary can buy merchandise design without ever changing its logo. rigor is heavy because this pick is the T-ARTICLE container for 17 pages, not a one-off slot. -->
-  <section class="mc-section tc-doc surface-dark" id="branding-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="branding-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
 
@@ -245,21 +245,29 @@
              rail; R3 takes the shallowest rank below it (h2); R5's three-entry
              floor is met exactly. -->
         <div class="col tc-doc__rail">
-          <nav class="tc-rail" aria-labelledby="branding-title">
-            <ul class="tc-rail__list">
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#branding-s1">Brand Creation (Digital)</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#branding-s2">Package Design</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#branding-s3">Merchandise Design</a></li>
-            </ul>
-          </nav>
+          <nav class="tc-rail tc-rail--tabs" aria-label="Sections" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="bgdtab-1" role="tab" aria-controls="bgdpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Brand Creation (Digital)</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="bgdtab-2" role="tab" aria-controls="bgdpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Package Design</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="bgdtab-3" role="tab" aria-controls="bgdpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Merchandise Design</span></button></li>
+              </ul>
+            </nav>
         </div>
 
         <!-- THE BODY COLUMN. Its left border IS the spine; each unit head reaches
              back to it with a tick. -->
         <div class="col tc-doc__body">
 
-          <article class="tc-sec" id="branding-s1">
-            <h2 class="tc-sec__h" data-reveal>Brand Creation (Digital)</h2>
+                        <div class="tc-tabs__panel" id="bgdpanel-1" role="tabpanel" aria-labelledby="bgdtab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-branding-graphic-design-brand-creation-digital.webp"
+                       alt="An abstract brand mark forming from separating layers"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h2 class="tc-tabs__t" data-reveal>Brand Creation (Digital)</h2>
+
+            
             <!-- The four source "card-item-content" nodes are DISCRETE ITEMS, not
                  prose: label and sentence are one string each and stay welded. The
                  source class says card; this direction draws none, and nothing is
@@ -277,10 +285,18 @@
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="bgdpanel-2" role="tabpanel" aria-labelledby="bgdtab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-branding-graphic-design-package-design.webp"
+                       alt="Blank unlabelled packaging boxes and a tube under studio light"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h2 class="tc-tabs__t" data-reveal>Package Design</h2>
 
-          <article class="tc-sec" id="branding-s2">
-            <h2 class="tc-sec__h" data-reveal>Package Design</h2>
+            
             <!-- THE SUPERSEDED TWIN, RETAINED. The live site runs SearchAtlas OTTO,
                  which rewrites this page's heading in the browser AFTER load; the
                  clone carries the SERVER-rendered text. content-bible §6 records
@@ -305,10 +321,18 @@
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="bgdpanel-3" role="tabpanel" aria-labelledby="bgdtab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-branding-graphic-design-merchandise-design.webp"
+                       alt="Folded blank apparel and a plain cap under studio light"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h2 class="tc-tabs__t" data-reveal>Merchandise Design</h2>
 
-          <article class="tc-sec" id="branding-s3">
-            <h2 class="tc-sec__h" data-reveal>Merchandise Design</h2>
+            
             <div class="tc-defs" data-reveal>
               <p class="tc-defs__t">Promotional Items:</p>
               <p class="tc-defs__d">We can help you develop promotional merchandise, such as mugs, tote bags, and keychains, to engage with your audience and create memorable experiences.</p>
@@ -327,7 +351,8 @@
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
-          </article>
+          
+              </div>
 
           <!-- THE CLOSE, FOLDED INLINE - NOT A SECOND CLOSING BAND. Both strings are
                the client's own, in source order: the suite-inclusion line the source
@@ -357,6 +382,8 @@
       </div>
     </div>
   </section>
+
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 

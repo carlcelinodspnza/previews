@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -241,7 +241,7 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #9,#50,#27 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and consulting is the page the container's CONDITIONAL HALF was built for - seven peer units a dispensary operator scans to find the one problem they actually have, and #36's left topic column names all seven before the reader commits to a 16-heading scroll, which is the whole job of this page and the thing neither concept A nor B can do; this is also the only page in this batch of four that clears the three-entry floor, so it is where the rail earns its place rather than being asserted; #9 services 3-col would card the seven peers and force each block's single explanatory paragraph into a card body it does not fit, truncating exactly the sentence that scopes the guarantee ("helping you rank in the top 3 local results on Google.com") on the very first block; #50 topic columns would set the seven side by side as equal-weight peers, which would bury that the seventh, "Consulting on Additional Topics", is not a service like the other six but a CONTAINER for nine more topics - the source's own grouping, which a seven-up grid would silently flatten; #27 numbered process steps asserts a SEQUENCE these seven do not have: a dispensary can buy integrations consulting without ever touching branding, and numbering them would be template-authored meaning the client never wrote. rigor is heavy because this pick is the T-ARTICLE container for the whole type, not a one-off slot. -->
-  <section class="mc-section tc-doc surface-dark" id="consulting-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="consulting-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
 
@@ -251,17 +251,17 @@
              element, so even the accessible name is a source string. No [data-reveal]
              anywhere in here. -->
         <div class="col tc-doc__rail">
-          <nav class="tc-rail" aria-labelledby="consulting-title">
-            <ul class="tc-rail__list">
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s1">Performance Marketing</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s2">Web Design & Development</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s3">Conversion Rate Optimization</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s4">Branding & Package Design</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s5">Advertisement Design</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s6">Integrations</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#consulting-s7">Consulting on Additional Topics</a></li>
-            </ul>
-          </nav>
+          <nav class="tc-rail tc-rail--tabs" aria-label="Sections" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-1" role="tab" aria-controls="cspanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Performance Marketing</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-2" role="tab" aria-controls="cspanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Web Design &amp; Development</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-3" role="tab" aria-controls="cspanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Conversion Rate Optimization</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-4" role="tab" aria-controls="cspanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Branding &amp; Package Design</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-5" role="tab" aria-controls="cspanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Advertisement Design</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-6" role="tab" aria-controls="cspanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Integrations</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-7" role="tab" aria-controls="cspanel-7" aria-selected="false" data-tab="7"><span class="tc-tabs__n">07</span><span>Consulting on Additional Topics</span></button></li>
+              </ul>
+            </nav>
         </div>
 
         <!-- THE BODY COLUMN. Its left border IS the spine. Each unit's heading reaches
@@ -269,8 +269,16 @@
              list. -->
         <div class="col tc-doc__body">
 
-          <article class="tc-sec" id="consulting-s1">
-            <h2 class="tc-sec__h" data-reveal>Performance Marketing</h2>
+                        <div class="tc-tabs__panel" id="cspanel-1" role="tabpanel" aria-labelledby="cstab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-performance-marketing.webp"
+                       alt="A light beam striking a single raised target ring"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h2 class="tc-tabs__t" data-reveal>Performance Marketing</h2>
+
+            
             <!-- QUALIFIER BINDING, KEPT IN ONE BLOCK. The rank figure ("top 3"), its
                  scope ("local results on Google.com") and the program it belongs to
                  ("Guaranteed Performance Benchmark SEO Results") are one sentence and
@@ -286,10 +294,18 @@
               <img src="../assets/in-pages/dispenza-dispensary-consulting-service.webp"
                    alt="dispenza dispensary consulting service" width="627" height="733" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="cspanel-2" role="tabpanel" aria-labelledby="cstab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-web-design-development.webp"
+                       alt="A wireframe page structure assembling from floating rectangles"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h2 class="tc-tabs__t" data-reveal>Web Design & Development</h2>
 
-          <article class="tc-sec" id="consulting-s2">
-            <h2 class="tc-sec__h" data-reveal>Web Design & Development</h2>
+            
             <!-- "high-performance scores" is UNQUANTIFIED in the source - no metric, no
                  number, no tool named. It ships as written; no Lighthouse or PageSpeed
                  figure is attached to it. -->
@@ -300,10 +316,18 @@
               <img src="../assets/in-pages/dispenza-web-design-development.webp"
                    alt="dispenza web design development" width="743" height="779" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="cspanel-3" role="tabpanel" aria-labelledby="cstab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-conversion-rate-optimization.webp"
+                       alt="A narrowing funnel of light converging to one bright point"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h2 class="tc-tabs__t" data-reveal>Conversion Rate Optimization</h2>
 
-          <article class="tc-sec" id="consulting-s3">
-            <h2 class="tc-sec__h" data-reveal>Conversion Rate Optimization</h2>
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>We provide consulting on optimizing your conversion rates to maximize the value of your website traffic. Our data-driven approach identifies areas for improvement, and we implement strategies to enhance user experience, streamline the conversion flow, and increase overall conversion rates.</p>
             </div>
@@ -311,15 +335,23 @@
               <img src="../assets/in-pages/website-clicks-cro-marketing-result.webp"
                    alt="website clicks cro marketing result" width="602" height="482" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="cspanel-4" role="tabpanel" aria-labelledby="cstab-4">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-branding-package-design.webp"
+                       alt="A blank package beside an abstract brand mark"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h2 class="tc-tabs__t" data-reveal>Branding & Package Design</h2>
 
-          <article class="tc-sec" id="consulting-s4">
             <!-- NAMING INCONSISTENCY IN THE SOURCE, LEFT UNRECONCILED. This page heads
                  the service "Branding & Package Design"; the site nav and the standalone
                  page call it "Branding & Graphic Design" (branding-graphic-design.html).
                  Both ship verbatim to their own source location. Reconciling them would
                  mean choosing one of the client's two names for their own service. -->
-            <h2 class="tc-sec__h" data-reveal>Branding & Package Design</h2>
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>Our consulting services extend to branding and package design. We help develop your brand identity, including logo design and brand guidelines. Additionally, our team assists in designing captivating packaging for your cannabis products that align with your brand and stand out in the market.</p>
             </div>
@@ -327,10 +359,18 @@
               <img src="../assets/in-pages/dispenza-branding-graphic-desigs.webp"
                    alt="dispenza branding graphic desigs" width="569" height="449" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="cspanel-5" role="tabpanel" aria-labelledby="cstab-5">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-advertisement-design.webp"
+                       alt="Blank advertisement frames of varied sizes at depth"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">05</p>
+                <h2 class="tc-tabs__t" data-reveal>Advertisement Design</h2>
 
-          <article class="tc-sec" id="consulting-s5">
-            <h2 class="tc-sec__h" data-reveal>Advertisement Design</h2>
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>We specialize in creating engaging and effective digital advertisements. Our consulting services cover the design and copywriting of digital ads across various platforms, such as social media, display networks, and search engines. We optimize ad campaigns to drive engagement, clicks, and conversions.</p>
             </div>
@@ -338,10 +378,18 @@
               <img src="../assets/in-pages/digital-marketing-ads.webp"
                    alt="digital marketing ads" width="496" height="468" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="cspanel-6" role="tabpanel" aria-labelledby="cstab-6">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-integrations.webp"
+                       alt="Two geometric halves sliding together, the seam glowing"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">06</p>
+                <h2 class="tc-tabs__t" data-reveal>Integrations</h2>
 
-          <article class="tc-sec" id="consulting-s6">
-            <h2 class="tc-sec__h" data-reveal>Integrations</h2>
+            
             <!-- CATEGORIES ONLY. The source names platform CATEGORIES - point-of-sale
                  (POS) systems, marketing technologies, menu platforms - and never a
                  vendor, and this build writes no vendor name of its own. Same rule the
@@ -353,16 +401,24 @@
               <img src="../assets/in-pages/dispensary-marketing-integrations.webp"
                    alt="dispensary marketing integrations" width="523" height="406" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="cspanel-7" role="tabpanel" aria-labelledby="cstab-7">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-consulting-additional-topics.webp"
+                       alt="Abstract tokens arranged on a round table surface"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">07</p>
+                <h2 class="tc-tabs__t" data-reveal>Consulting on Additional Topics</h2>
 
-          <article class="tc-sec" id="consulting-s7">
             <!-- THE SEVENTH UNIT IS NOT A SERVICE, IT IS A CONTAINER. The source writes
                  it at the SAME rank as the six services (h2) but its payload is nine
                  cards one rank below, so it is the seventh rail entry and its nine
                  children are term/definition pairs inside it - see R6 in the file
                  header. Rendering the nine as unit heads would tick nine more ticks
                  onto the spine that the rail does not list. -->
-            <h2 class="tc-sec__h" data-reveal>Consulting on Additional Topics</h2>
+            
 
             <!-- NINE CARDS, ONE SOURCE CARD PER BLOCK. Title and body are one pair and
                  never split. ALL NINE TITLES END IN A COLON IN THE SOURCE - that is the
@@ -415,7 +471,8 @@
               <h3 class="tc-defs__t">Finding Platforms for Cannabis Promotion:</h3>
               <p class="tc-defs__d">We help you identify platforms and marketing channels that allow cannabis promotion within legal guidelines.</p>
             </div>
-          </article>
+          
+              </div>
 
           <!-- ####################################################################
                SOURCE DEFECTS AND OMISSIONS - DECLARED, NOT SILENTLY ABSORBED
@@ -481,6 +538,8 @@
       </div>
     </div>
   </section>
+
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 

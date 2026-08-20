@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -236,7 +236,7 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #9,#12,#27 | rigor: heavy | why: reports is nine source nodes shaped as four peer heading+paragraph+screenshot units with no hierarchy between them, which is literally the docs-coded long-form page #36 describes, and its left topic column is the only pattern in the catalog that tells the reader how long the page is and what is on it before they commit to scrolling - the thing that decides whether a 58-node client page reads as a document or a scroll; #9 services 3-col would card four peers into a grid and force the four dashboard screenshots down to thumbnail width where the numbers in them stop being legible, which throws away the only real evidence this page has; #12 feature-row-with-screenshot alternates media side per row and would give the page four different left edges, breaking the single left axis the whole direction rests on; #27 numbered process steps asserts a SEQUENCE the source does not have - these four report types are read in any order, and numbering them would be template-authored meaning the client never wrote. rigor is heavy because this pick propagates: it is the T-ARTICLE container for 17 pages, not a one-off slot. -->
-  <section class="mc-section tc-doc surface-dark" id="reports-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="reports-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
 
@@ -245,14 +245,14 @@
              landmark is named with aria-labelledby pointing at the page's OWN
              title element, so even the accessible name is a source string. -->
         <div class="col tc-doc__rail">
-          <nav class="tc-rail" aria-labelledby="reports-title">
-            <ul class="tc-rail__list">
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#reports-s1">Performance Marketing Reports</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#reports-s2">Search Performance Reports</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#reports-s3">Backlink Analysis Reports</a></li>
-              <li class="tc-rail__item"><a class="tc-rail__link" href="#reports-s4">Website Traffic Reports</a></li>
-            </ul>
-          </nav>
+          <nav class="tc-rail tc-rail--tabs" aria-label="Sections" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-1" role="tab" aria-controls="rppanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Performance Marketing Reports</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-2" role="tab" aria-controls="rppanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Search Performance Reports</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-3" role="tab" aria-controls="rppanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Backlink Analysis Reports</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-4" role="tab" aria-controls="rppanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Website Traffic Reports</span></button></li>
+              </ul>
+            </nav>
         </div>
 
         <!-- THE BODY COLUMN. Its left border IS the spine. Each unit's heading
@@ -260,8 +260,16 @@
              visibly one list. -->
         <div class="col tc-doc__body">
 
-          <article class="tc-sec" id="reports-s1">
-            <h2 class="tc-sec__h" data-reveal>Performance Marketing Reports</h2>
+                        <div class="tc-tabs__panel" id="rppanel-1" role="tabpanel" aria-labelledby="rptab-1">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-reports-performance-marketing-reports.webp"
+                       alt="A dark glass report panel with metric arcs and a rising curve"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h2 class="tc-tabs__t" data-reveal>Performance Marketing Reports</h2>
+
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>Our performance marketing reports focus on the key metrics that reflect the effectiveness of your marketing campaigns. We provide detailed data on various performance indicators such as website actions, including actions taken on your website such as form submissions, clicks, and purchases. We also track website visits, direction requests, and appearances on the Google top 3 map pack. These reports help you understand the impact of our strategies on driving engagement and attracting customers to your dispensary.</p>
             </div>
@@ -269,10 +277,18 @@
               <img src="../assets/in-pages/dispenza-result-report-mobile-phone-view.webp"
                    alt="dispenza result report mobile phone view" width="714" height="672" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="rppanel-2" role="tabpanel" aria-labelledby="rptab-2">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-reports-search-performance-reports.webp"
+                       alt="A magnifier over a ranked stack of glowing bars"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h2 class="tc-tabs__t" data-reveal>Search Performance Reports</h2>
 
-          <article class="tc-sec" id="reports-s2">
-            <h2 class="tc-sec__h" data-reveal>Search Performance Reports</h2>
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>We provide reports that measure the visibility and reach of your dispensary in search engine results. These reports include search impressions, which indicate how many times your dispensary appeared in search results. We also provide top 3 ranking reports, which show the keywords and phrases for which your dispensary ranks in the top 3 positions on search engines. These reports give you valuable insights into your dispensary's organic search performance and visibility..</p>
             </div>
@@ -280,10 +296,18 @@
               <img src="../assets/in-pages/dispenza-marketing-search-performance-result.webp"
                    alt="dispenza marketing search performance result" width="646" height="488" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="rppanel-3" role="tabpanel" aria-labelledby="rptab-3">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-reports-backlink-analysis-reports.webp"
+                       alt="A web of connected nodes converging on one bright hub"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h2 class="tc-tabs__t" data-reveal>Backlink Analysis Reports</h2>
 
-          <article class="tc-sec" id="reports-s3">
-            <h2 class="tc-sec__h" data-reveal>Backlink Analysis Reports</h2>
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>Backlinks play a crucial role in improving your dispensary's online presence and search engine rankings. Our reports include an analysis of the backlinks pointing to your website. We track the number of backlinks, their quality, and their impact on your domain authority. These reports help you understand the effectiveness of our link building strategies and the overall authority of your website.</p>
             </div>
@@ -291,10 +315,18 @@
               <img src="../assets/in-pages/dispenza-backlink-performance-result.webp"
                    alt="dispenza backlink performance result" width="765" height="494" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
+              <div class="tc-tabs__panel" id="rppanel-4" role="tabpanel" aria-labelledby="rptab-4">
+                <figure class="tc-tabs__fig">
+                  <img src="../assets/in-pages/svc-reports-website-traffic-reports.webp"
+                       alt="Streams of light particles flowing toward one destination"
+                       width="1200" height="900" loading="lazy" decoding="async">
+                </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h2 class="tc-tabs__t" data-reveal>Website Traffic Reports</h2>
 
-          <article class="tc-sec" id="reports-s4">
-            <h2 class="tc-sec__h" data-reveal>Website Traffic Reports</h2>
+            
             <div class="tc-copy">
               <p class="mc-body" data-reveal>Our website traffic reports provide valuable insights into the number of visitors your website receives, the sources of traffic, and the behavior of your visitors. We track metrics such as total website visits, unique visitors, page views, and average session duration. These reports help you understand the effectiveness of your website in attracting and engaging visitors, allowing you to optimize your website's performance.</p>
             </div>
@@ -302,7 +334,8 @@
               <img src="../assets/in-pages/dispensary-marketing-website-traffic.webp"
                    alt="dispensary marketing website traffic" width="698" height="555" loading="lazy" decoding="async">
             </figure>
-          </article>
+          
+              </div>
 
           <!-- THE CLOSE, FOLDED INLINE - NOT A SECOND CLOSING BAND.
                The brief gives this page cta_primary:/contact and a §6 close, and
@@ -326,6 +359,8 @@
       </div>
     </div>
   </section>
+
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 

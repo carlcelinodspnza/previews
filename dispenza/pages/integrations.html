@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=0f912b3b">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
 
 </head>
 <body class="site-body">
@@ -241,9 +241,20 @@
   </header>
 
   <!-- pick: SECTION-COMPONENTS.md #36 | considered: #2,#15,#50 | rigor: heavy | why: the pick is the T-ARTICLE CONTAINER, and integrations is the compliance-heavy long-form page #36 exists for - four platform CATEGORIES the operator scans to find their own stack, then the migration story, then five things the engagement covers. This page renders the container's OWN R5 FALLBACK rather than a different pattern: R4 joins "Here are some of the" + "platforms and technologies" + "we work with:" into ONE section-rank title and the closing "Partner with Dispenza..." + "by integrating the right platforms and technologies." into a second, which leaves exactly two entries, and the rail law refuses a rail of two because two jump links are furniture - so no nav, no spine, no ticks, and the document takes the page's left axis alone; #2 trust-strip / logo wall is the pattern this page most invites and is the one it must NOT be COMPOSED as, because the source TEXT names PLATFORM CATEGORIES and never a single vendor, so building a wall would mean the build itself asserting partnerships the client never wrote (the only vendor marks anywhere on this page are the ones already inside the client's own screenshots, flagged in the body below); #15 comparison table needs two named things to compare and this page compares nothing, it enumerates; #50 topic columns would set the four categories side by side as peers, which would bury that "Menu and POS" is written at a DIFFERENT rank than the three categories around it - the source's own grouping, which a three-up rail would silently flatten. rigor is heavy because this pick is the T-ARTICLE container for 17 pages, not a one-off slot. -->
-  <section class="mc-section tc-doc tc-doc--norail surface-dark" id="integrations-doc" data-surface="dark">
+  <section class="mc-section tc-doc tc-doc--tabs surface-dark" id="integrations-doc" data-surface="dark">
     <div class="container">
       <div class="row tc-doc__grid">
+          <div class="col tc-doc__rail">
+            <nav class="tc-rail tc-rail--tabs" aria-label="Platforms" data-tabs>
+              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-1" role="tab" aria-controls="ingpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Point of Sale (POS)</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-2" role="tab" aria-controls="ingpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Marketing Technologies</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-3" role="tab" aria-controls="ingpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Menu and POS</span></button></li>
+                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-4" role="tab" aria-controls="ingpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Menu Platforms</span></button></li>
+              </ul>
+            </nav>
+          </div>
+
 
         <!-- THE BODY COLUMN, RAIL-LESS. R5: two section-rank entries is below the
              three-entry floor, so there is no rail element at all - the body col
@@ -285,29 +296,38 @@
                  reads that h4 as a group label sitting OVER the POS and menu pair,
                  which would move it above "Point of Sale (POS)"; the served HTML puts
                  it third. Source order wins; the owner can re-order it. -->
-            <div class="tc-defs" data-reveal><h3 class="tc-defs__t">Point of Sale (POS)</h3></div>
-            <figure class="tc-plate tc-lift" data-media-in>
+                          <div class="tc-tabs__panel" id="ingpanel-1" role="tabpanel" aria-labelledby="ingtab-1">
+                <figure class="tc-tabs__fig">
               <img src="../assets/in-pages/dispensary-menu-pos.webp"
                    alt="dispensary menu pos" width="585" height="346" loading="lazy" decoding="async">
             </figure>
-
-            <div class="tc-defs" data-reveal><h3 class="tc-defs__t">Marketing Technologies</h3></div>
-            <figure class="tc-plate tc-lift" data-media-in>
+                <p class="tc-tabs__pn" aria-hidden="true">01</p>
+                <h3 class="tc-tabs__t">Point of Sale (POS)</h3>
+              </div>
+              <div class="tc-tabs__panel" id="ingpanel-2" role="tabpanel" aria-labelledby="ingtab-2">
+                <figure class="tc-tabs__fig">
               <img src="../assets/in-pages/dispenza-dispensaries-marketing.webp"
                    alt="dispenza dispensaries marketing" width="592" height="350" loading="lazy" decoding="async">
             </figure>
-
-            <div class="tc-defs" data-reveal><h4 class="tc-defs__t">Menu and POS</h4></div>
-            <figure class="tc-plate tc-lift" data-media-in>
+                <p class="tc-tabs__pn" aria-hidden="true">02</p>
+                <h3 class="tc-tabs__t">Marketing Technologies</h3>
+              </div>
+              <div class="tc-tabs__panel" id="ingpanel-3" role="tabpanel" aria-labelledby="ingtab-3">
+                <figure class="tc-tabs__fig">
               <img src="../assets/in-pages/dispenza-menu-platform.webp"
                    alt="dispenza menu platform" width="750" height="506" loading="lazy" decoding="async">
             </figure>
-
-            <div class="tc-defs" data-reveal><h3 class="tc-defs__t">Menu Platforms</h3></div>
-            <figure class="tc-plate tc-lift" data-media-in>
+                <p class="tc-tabs__pn" aria-hidden="true">03</p>
+                <h4 class="tc-tabs__t">Menu and POS</h4>
+              </div>
+              <div class="tc-tabs__panel" id="ingpanel-4" role="tabpanel" aria-labelledby="ingtab-4">
+                <figure class="tc-tabs__fig">
               <img src="../assets/in-pages/dispensary-menu-platform.webp"
                    alt="dispensary menu platform" width="605" height="622" loading="lazy" decoding="async">
             </figure>
+                <p class="tc-tabs__pn" aria-hidden="true">04</p>
+                <h3 class="tc-tabs__t">Menu Platforms</h3>
+              </div>
           </article>
 
           <article class="tc-sec">
@@ -386,6 +406,8 @@
       </div>
     </div>
   </section>
+
+  <script src="../_design/doc-tabs.js" defer></script>
 
 </main>
 
