@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=91803ddd">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=98bc4032">
 
 </head>
 <body class="site-body">
@@ -344,6 +344,23 @@
              the same object, it simply does not move. model-viewer swaps the
              poster out for the live scene once the GLB is ready, and keeps it if
              WebGL is unavailable. -->
+
+        <!-- THE LOCAL-PACK PHONE, beside the claim. Same asset family as the
+             performance-marketing head and the same treatment: an RGBA cutout on the
+             existing [data-parallax] engine, so it drifts against the scroll rather than
+             sitting still. It is DECORATIVE — the claim and the CTAs carry the message —
+             so it is aria-hidden and adds no alt text for a screen reader to read out.
+
+             THE SUPPLIED FILE WAS NOT A CUTOUT. Its PNG carried a transparent margin but
+             the phone sat on an opaque WHITE plate — measured 65% near-white-opaque, 0%
+             transparent inside the trim. Dropped onto this dark hero it would have been a
+             white rectangle. The plate was removed by flood-filling from the EDGES only:
+             a global white-to-transparent pass would have punched holes through the phone
+             SCREEN, which is full of white UI. -->
+        <div class="mc-hero__media" data-parallax aria-hidden="true">
+          <img src="../assets/in-pages/hero-local-pack-phone.webp"
+               alt="" width="760" height="1340" decoding="async" fetchpriority="low">
+        </div>
 
         <div class="mc-hero__content mc-type">
           <p class="mc-eyebrow" data-reveal>Since 2012</p>
