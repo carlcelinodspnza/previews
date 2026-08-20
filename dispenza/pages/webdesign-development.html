@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c1936fe3">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=a8c52199">
 
 </head>
 <body class="site-body">
@@ -250,7 +250,7 @@
                  duplicated. The media column is widened for this page only: the phone on
                  performance-marketing is a portrait cutout that reads at 320px, and this is
                  a landscape collage of three separate site mockups which does not. -->
-            <div class="tc-head__media tc-head__media--wide tc-lift" data-media-in>
+            <div class="tc-head__media tc-head__media--wide tc-head__media--bare tc-lift tc-drift" data-media-in data-parallax>
               <img src="../assets/in-pages/dispenza-report-for-dispensary-client-websites.webp"
                    alt="dispenza report for dispensary client websites" loading="lazy" decoding="async">
             </div>
@@ -304,28 +304,43 @@
                  "seamless", "capticate" for "captivate", and "Wordpress" here against
                  "WordPress" in block 1 - the source is inconsistent about its own
                  product name and both spellings ship as written. -->
+            <figure class="tc-plate tc-plate--bare tc-lift tc-drift" data-media-in data-parallax>
+              <!-- Owner-supplied replacement (this is the reference.png): the SAME fanned
+                   artwork, but transparent-backed and 1080x600 rather than 761x536 on a baked
+                   white plate. That is why the plate loses its fill and hairline here - they
+                   existed to bound a white rectangle that no longer exists. -->
+              <img src="../assets/in-pages/dispenza-menu-designs-samples-transparent.webp"
+                   alt="dispenza menu designs samples" width="1080" height="600" loading="lazy" decoding="async">
+            </figure>
             <div class="tc-copy">
               <p class="mc-body" data-reveal>Our custom Wordpress platform is optimized for performance, ensuring that your website loads quickly and efficiently. This is crucial in providing a seemless user experience and keeping visitors engaged. With our high-end and modern design approach, we create visually stunning websites that capticate your audience and reflect your brand's unique identity.</p>
             </div>
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK A DEMO</a>
             </div>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/dispenza-menu-designs-samples.webp"
-                   alt="dispenza menu designs samples" width="761" height="536" loading="lazy" decoding="async">
-            </figure>
 
             <!-- BLOCK 3. -->
-            <div class="tc-copy">
-              <p class="mc-body" data-reveal>Conversion rate optimization (CRO) lies at the core of our web design and development process. We integrate proven strategies and tools into every website we build to maximize conversions and drive results. From intuitive navigation and compelling calls-to-action to optimized forms and persuasive product presentations, we leverage CRO techniques to turn visitors into loyal customers.</p>
+            <!-- BLOCK 3 AS A SPLIT. Copy and its CTA hold the left column; the client-site
+                 collage takes the right. The artwork was a 2072x1804 image on a BAKED WHITE
+                 PLATE - the white is removed here, not hidden: an edge-connected fill takes
+                 the plate, then a BOUNDED 30px dilation takes the drop shadow. Bounded because
+                 an unbounded fill leaked through a card edge and erased Tree of Life's white
+                 strip; and gated on NEUTRALITY (sat<=6) because a real shadow is grey while the
+                 Cannabis Guys card edge is pale green, which a luminance-only test chewed. -->
+            <div class="wd-split">
+              <div class="wd-split__copy">
+              <div class="tc-copy">
+                <p class="mc-body" data-reveal>Conversion rate optimization (CRO) lies at the core of our web design and development process. We integrate proven strategies and tools into every website we build to maximize conversions and drive results. From intuitive navigation and compelling calls-to-action to optimized forms and persuasive product presentations, we leverage CRO techniques to turn visitors into loyal customers.</p>
+              </div>
+              <div class="mc-actions" data-reveal>
+                <a class="btn btn--solid" href="contact.html">BOOK A DEMO</a>
+              </div>
+              </div>
+              <figure class="tc-plate tc-plate--bare tc-lift tc-drift" data-media-in data-parallax>
+                <img src="../assets/in-pages/cannabis-dispensaries-designs-samples-transparent.webp"
+                     alt="cannabis dispensaries designs sampes" width="1600" height="1393" loading="lazy" decoding="async">
+              </figure>
             </div>
-            <div class="mc-actions" data-reveal>
-              <a class="btn btn--solid" href="contact.html">BOOK A DEMO</a>
-            </div>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/cannabis-dispensaries-designs-sampes.webp"
-                   alt="cannabis dispensaries designs sampes" width="2072" height="1804" loading="lazy" decoding="async">
-            </figure>
 
             <!-- BLOCK 4. TWO BINDINGS IN ONE PARAGRAPH, BOTH KEPT WHOLE: the "1 -3
                  weeks" range is qualified by "typically" AND by its scope ("on our

@@ -6483,6 +6483,12 @@ a.hw-cell__value:focus-visible{
 /* Trailing prose that belongs to the page rather than to any unit pays the unit
    interval. */
 .tc-close{margin-top:var(--ds-space-2xl);max-width:var(--ds-measure)}
+/* When the close follows an EMPHASISED line the two are one closing thought, not two
+   sections - the source sets the suite line apart and then finishes it. 96px is the
+   section interval and read as a break between them (measured). 40px is a paragraph
+   interval: ~1.4 of the emph line's 28.9px leading. Scoped to the adjacency, so the
+   other 11 pages carrying .tc-close on its own keep the full section interval. */
+.tc-emph + .tc-close{margin-top:var(--ds-space-lg)}
 /* The ONE emphasis move inside body copy: same size, brighter ink, more weight —
    never a size that would fill the type ladder's void back in. */
 .tc-emph{
@@ -8785,7 +8791,12 @@ a.hw-cell__value:focus-visible{
      the collage still gets a 407px column - well past the 320px --tc-media that is
      sized for a portrait phone. */
   .tc-head__grid--media:has(> .tc-head__media--wide){
-    grid-template-columns:minmax(0,1fr) minmax(0, 38%);
+    /* 38% -> 44% on the owner's ask for a larger collage. The ceiling is a MEASURED
+       one: "DEVELOPMENT" sets 496px at the 63.36px the clamp yields at 1440, so the
+       title column may not fall below that. 44% leaves it 536px - 40px of margin;
+       47% leaves 8px, and 50% chops the word. 1280 and 1024 are not binding, their
+       clamped type needs 440px and 352px. */
+    grid-template-columns:minmax(0,1fr) minmax(0, 44%);
   }
 }
 /* A HARD FLOOR AGAINST THE MID-WORD CHOP. The column arithmetic above is correct for
@@ -8906,5 +8917,80 @@ a.hw-cell__value:focus-visible{
   .bg-tri > .tc-list__item{ padding-bottom:0 }
   .bg-tri > .tc-list__item:last-child{ border-bottom:0 }
 }
+
+/* The lead-in label on a welded label+sentence string. The source writes both as ONE
+   text node, so this is emphasis markup over unchanged copy - no word is added or moved.
+   Brighter ink as well as weight: at --ds-ink-soft a bold run reads as shouting rather
+   than as a label, and the site already sets this pair on .spec-caption strong. */
+.tc-lead-in{ color:var(--ds-ink); font-weight:700 }
+
+/* ===========================================================================
+   webdesign-development: the two image cards go frameless, and drift slowly.
+   Both assets are RGBA composites with transparent margins and their own baked
+   shadows, so the shared hairline was drawing a box around nothing.
+   =========================================================================== */
+
+/* SLOW, without touching the engine. page-effects.js already writes --ds-par on every
+   [data-parallax] element (travel = min(height * 0.06, 40px)); halving it here is what
+   makes this drift subtle, rather than registering a second scroll listener. Fallback
+   0px, so with no script the cards simply sit still - the same fail-open as the reveals. */
+.tc-drift{
+  transform:translate3d(0, calc(var(--ds-par, 0px) * .5), 0);
+  will-change:transform;
+}
+
+/* THE HEAD COLLAGE. Cleared HERE and not at the shared rule because
+   .tc-head__media--wide img re-asserts border-radius later in this file at equal
+   specificity - a modifier written earlier would have lost on source order. */
+.tc-head__media--bare img,
+.tc-head__media--wide.tc-head__media--bare img{ border:0; border-radius:0 }
+
+/* THE PLATE. Fill and hairline both go: they existed to bound an opaque white
+   rectangle, and the replacement artwork is transparent-backed. */
+.tc-plate--bare{ border:0; border-radius:0; background:none }
+
+/* COMPOSE, DO NOT REPLACE. .tc-lift:hover writes translateY(-3px) to the SAME element
+   the parallax writes --ds-par to, so a plain hover rule would clobber the scroll offset
+   and the card would jump on hover. Both values ride one translate3d. The lift's box
+   shadow is cancelled because behind a transparent composite it redraws the rectangle
+   these rules just deleted. */
+.tc-drift.tc-lift:hover,
+.tc-drift.tc-lift:focus-within{
+  box-shadow:none;
+  transform:translate3d(0, calc(var(--ds-par, 0px) * .5 - 3px), 0);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .tc-drift,
+  .tc-drift.tc-lift:hover,
+  .tc-drift.tc-lift:focus-within{ transform:none }
+}
+
+/* .wd-split — BLOCK 3 as two columns: copy left, the client-site collage right.
+   One column below 1024, because at half of a 663px body the copy would set ~40
+   characters a line against a collage too small to read. */
+.wd-split{ display:grid; gap:var(--ds-space-lg) }
+
+/* A grid child's default min-width is min-content, so an unbreakable run would blow the
+   column out rather than wrap. The measure cap is released alongside it: inside a half
+   column --ds-measure (640px) is never what bounds this copy - the column is. */
+.wd-split__copy{ min-width:0 }
+@media (min-width:1024px){
+  .wd-split__copy > .tc-copy{ max-width:none }
+}
+@media (min-width:1024px){
+  .wd-split{
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+    column-gap:var(--ds-space-xl);
+    align-items:center;
+  }
+  /* the plate's own leading interval is the grid's job here */
+  .wd-split .tc-plate{ margin-top:0 }
+}
+
+/* A plate followed directly by copy sat 12px clear of it - measured - because .tc-plate
+   carries a leading interval only, and nothing had ever been placed BELOW one until the
+   collage moved above its paragraph. Scoped to that adjacency; it occurs on this page alone. */
+.tc-plate + .tc-copy{ margin-top:var(--ds-space-lg) }
 
 /* ▲▲▲ .tc-tabs — closed ▲▲▲ */
