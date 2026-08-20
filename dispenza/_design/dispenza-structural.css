@@ -7971,7 +7971,19 @@ a.hw-cell__value:focus-visible{
    in the upper right, where the photograph sits, and the empty lower-left under the
    headline and the button.
    =========================================================================== */
-.tc-head--brandbg{
+/* EVERY PAGE HEAD, not just one. The mesh was authored for performance-marketing;
+   the owner asked for it site-wide. Five head components exist across the 27 pages -
+   .tc-head (23), .rs-head (case-studies), .lg-head (privacy-policy), .hw-head
+   (how-it-works) and .mc-hero (home). The first four take it.
+
+   .mc-hero is DELIBERATELY EXCLUDED. The home hero already runs a live animated hex
+   field, drifting smoke and a 3D coin; laying a static mesh under that would put two
+   competing hex treatments on the same surface. It is the one head that already has
+   a richer version of this. */
+.tc-head,
+.rs-head,
+.lg-head,
+.hw-head{
   position:relative;
   background-image:
     /* THE EXIT FADE, and it is the FIRST layer so it paints over the other two.
@@ -7992,13 +8004,32 @@ a.hw-cell__value:focus-visible{
   background-repeat:no-repeat, no-repeat, no-repeat;
 }
 /* the section's own children must sit above the plate */
-.tc-head--brandbg > *{ position:relative; z-index:1 }
+/* the section's own children sit above the plate */
+.tc-head > *,
+.rs-head > *,
+.lg-head > *,
+.hw-head > *{ position:relative; z-index:1 }
+
+/* THE SPECIFICITY TRAP, AND IT NOW APPLIES TO SIX PAGES RATHER THAN ONE.
+   `.container--plane` guarantees position:static at (0,1,0) so an absolutely
+   positioned decorative plane measures itself against the SECTION. The rule above
+   scores (0,2,0) and beats it, which would make the zero-height wrapper the plane's
+   containing block and collapse it to nothing. That already happened once on
+   performance-marketing; six heads carry .mc-smokerise smoke lids, so without this
+   the same rule would silently kill five more. */
+.tc-head > .container.container--plane,
+.rs-head > .container.container--plane,
+.lg-head > .container.container--plane,
+.hw-head > .container.container--plane{ position:static; z-index:auto }
 @media (max-width: 900px){
   /* on a narrow screen the copy runs the full width, so the mesh is pushed further back */
-  .tc-head--brandbg{
+  .tc-head,
+  .rs-head,
+  .lg-head,
+  .hw-head{
     /* the narrow variant replaces background-image wholesale, so the exit fade has to
        be restated here or it is silently dropped below 900px - and this is the width
-       where the head is TALLEST (1319px at 390), so it is the one that needs it most. */
+       where the heads are TALLEST, so it is the width that needs it most. */
     background-image:
       linear-gradient(to top, var(--ds-bg-surface) 0, transparent 160px),
       linear-gradient(180deg, rgba(10,10,14,.62) 0%, rgba(10,10,14,.88) 55%, var(--ds-bg-surface) 100%),
@@ -8167,6 +8198,11 @@ a.hw-cell__value:focus-visible{
    re-asserts the hard line the fade removes; the two cannot both be right on the
    same seam, and the owner asked for the seam to disappear. Scoped to --brandbg, so
    only this head loses its rule. */
+/* THE MODIFIER SURVIVES FOR ONE JOB ONLY: this head hands off to a full-bleed band,
+   and a crisp closing hairline drawn across that fade re-asserts the seam the fade
+   exists to remove. The other 25 heads KEEP their seal - they hand off to the same
+   dark ground, where the rule reads as the container's closing hairline rather than
+   as a seam, and hiding it would also remove its 96px top margin from 22 pages. */
 .tc-head--brandbg .tc-head__seal{ display:none }
 
 /* ▲▲▲ THE FLOATING PHONE + ITS SMOKE — closed ▲▲▲ */
@@ -8727,5 +8763,36 @@ a.hw-cell__value:focus-visible{
 @media (prefers-reduced-motion:reduce){
   .tc-tabs__link, .tc-tabs__n{ transition:none }
 }
+
+/* A WIDER HEAD MEDIA COLUMN, for a landscape collage rather than a portrait cutout.
+   --tc-media is sized for performance-marketing's phone, which is a 461x742 portrait
+   and reads perfectly at 320px. webdesign-development's head image is a 856x683
+   collage of THREE separate site mockups; at 320px each mockup renders about 100px
+   wide and none of them is legible, so the image stops being evidence and becomes
+   texture. The column is widened for this page only and the copy keeps its measure. */
+@media (min-width:1024px){
+  /* 38%, NOT 46%, AND THE NUMBER IS MEASURED. At 46% the copy column fell to 515px
+     while "DEVELOPMENT" renders 563px at the title's 72px cap - so the display type
+     chopped mid-word to "DEVELOPME / NT", which is the same failure this build already
+     hit once on five pages. The longest word is what sets this bound, not taste:
+       1440  title 72px -> word 563px, column must exceed 563
+       1280  title 67px -> word 521px
+       1024  title 53px -> word 416px
+     38% leaves the copy 601px at 1440 and 1280, clearing the worst case by 38px, and
+     the collage still gets a 407px column - well past the 320px --tc-media that is
+     sized for a portrait phone. */
+  .tc-head__grid--media:has(> .tc-head__media--wide){
+    grid-template-columns:minmax(0,1fr) minmax(0, 38%);
+  }
+}
+/* A HARD FLOOR AGAINST THE MID-WORD CHOP. The column arithmetic above is correct for
+   this title at these widths, but `overflow-wrap:break-word` on .tc-head__title means
+   ANY future copy longer than the column breaks a word rather than overflowing - the
+   failure is silent and looks like a typo. Capping the step in a wide-media head keeps
+   a longer word from ever reaching that state. */
+.tc-head__grid--media:has(> .tc-head__media--wide) .tc-head__title{
+  font-size:clamp(34px, 4.4vw, 64px);
+}
+.tc-head__media--wide img{ width:100%; height:auto; border-radius:var(--ds-r-surface) }
 
 /* ▲▲▲ .tc-tabs — closed ▲▲▲ */

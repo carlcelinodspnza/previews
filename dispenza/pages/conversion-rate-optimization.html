@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=1a2a7968">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=6b6cb5b8">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=c9363345">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=91803ddd">
 
 </head>
 <body class="site-body">
@@ -229,7 +229,7 @@
   <header class="mc-section tc-head surface-dark" data-surface="dark">
     <div class="container">
       <div class="row"><div class="col">
-        <div class="tc-head__grid">
+        <div class="tc-head__grid tc-head__grid--media">
           <div class="tc-head__copy">
             <h1 class="tc-head__title" id="conversion-rate-optimization-title" data-reveal>CONVERSION RATE OPTIMIZATION</h1>
             <!-- ####################################################################
@@ -255,6 +255,16 @@
             <p class="tc-head__lede" data-reveal>Conversion Rate Optimization (CRO) is a specialized art form, and at Dispenza, we excel in designing the easiest path for new customers to try your business. Our expertise in CRO is evident in our track record of success, including achieving a remarkable 53% conversion rate on Dutchie for NuLeaf Nevada, surpassing thousands of other dispensaries using the same platform.</p>
             <p class="tc-head__lede" data-reveal>With Dispenza, you can trust that our strategies are based on industry best practices and proven results. We eliminate guesswork and provide you with data-driven solutions.</p>
           </div>
+
+            <!-- ONLY THE FIGURE MOVES UP. This head already carries its own lede, so the
+                 body's opening paragraph and its CTA STAY IN THE BODY - lifting the
+                 paragraph out deleted copy the head then did not show, and
+                 verify-copy-fidelity blocked it, correctly. Same treatment as
+                 webdesign-development, minus the parts this page does not need. -->
+            <div class="tc-head__media tc-head__media--wide tc-lift" data-media-in>
+              <img src="../assets/in-pages/website-clicks-traffic-result.webp"
+                   alt="website clicks traffic result" loading="lazy" decoding="async">
+            </div>
         </div>
         <hr class="tc-head__seal" data-reveal>
       </div></div>
@@ -300,10 +310,6 @@
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/website-clicks-traffic-result.webp"
-                   alt="website clicks traffic result" width="698" height="555" loading="lazy" decoding="async">
-            </figure>
           </article>
 
           <article class="tc-sec">
