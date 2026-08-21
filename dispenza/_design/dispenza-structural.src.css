@@ -6629,6 +6629,24 @@ a.hw-cell__value:focus-visible{
      two-up panel, so the single-column rendering below 1100px keeps 1.72 untouched. */
   .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) .tc-defs__t,
   .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) .tc-defs__d{ line-height:1.55 }
+
+  /* VERTICAL RHYTHM. Two things had to be fixed together here.
+     (a) MARGINS STOP COLLAPSING IN A GRID. As a block, h2's 14px bottom and
+         .tc-emph's 40px top OVERLAP to 40px. The moment this panel became
+         display:grid they ADD, so the heading-to-subtitle gap silently grew to
+         54px at >=1100px while staying 40px below it. That widening was a side
+         effect of the two-column change, not an authored value.
+     (b) 40px was too loose for the tightened 1.55 leading regardless -- a gap
+         should read as a related pair, and 40px is ~1.5 line boxes of air.
+     Set explicitly rather than nudged, because in a grid these values are exact:
+     the rendered gap is simply the two adjacent margins added.
+       h2 -> .tc-emph   14 + 14 = 28px
+       .tc-emph -> defs  0 + 24 = 24px
+     .mc-actions keeps its 40px: it is a CTA and wants the separation.
+     Scoped to the two-up grid, so the single-column rendering below 1100px keeps
+     the collapsed-margin spacing it has always had. */
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-emph{ margin-top:var(--ds-space-sm) }
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-defs{ margin-top:var(--ds-space-md) }
 }
 
 
