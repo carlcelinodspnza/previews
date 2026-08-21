@@ -6621,6 +6621,14 @@ a.hw-cell__value:focus-visible{
   }
   .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > :not(.tc-defs){ grid-column:1 / -1 }
   .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-defs{ max-width:none }
+
+  /* LEADING FOLLOWS MEASURE. 1.72 is the site body leading and it is right for the
+     640px single column, which runs ~76 characters. These cells run 352px / 45
+     characters, and leading has to TIGHTEN as the measure narrows or short lines
+     drift apart -- the lines stop reading as a paragraph. Applied ONLY inside the
+     two-up panel, so the single-column rendering below 1100px keeps 1.72 untouched. */
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) .tc-defs__t,
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) .tc-defs__d{ line-height:1.55 }
 }
 
 
