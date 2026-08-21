@@ -384,7 +384,7 @@
             </div>
           
               </div>
-              <div class="tc-tabs__panel" id="bgdpanel-3" role="tabpanel" aria-labelledby="bgdtab-3">
+              <div class="tc-tabs__panel tc-tabs__panel--two-up" id="bgdpanel-3" role="tabpanel" aria-labelledby="bgdtab-3">
                 <!-- MERCHANDISE, REPLACED 2026-08-21 with the owner's branded kit. The outgoing art
                      was a generic studio photo of BLANK apparel; this is real Dspnza merchandise.
                      It is also a genuine RGBA CUT-OUT (1.98% of pixels carry partial alpha), where
@@ -405,9 +405,15 @@
                 <h2 class="tc-tabs__t" data-reveal>Merchandise Design</h2>
 
             
+            <!-- TWO BLOCKS, ONE PAIR EACH - the same shape panel 02 uses. The two-up grid is
+                 driven by the panel carrying tc-tabs__panel--two-up AND holding two CONSECUTIVE
+                 .tc-defs siblings; the class alone would leave this single block in one grid
+                 cell with the second column empty. -->
             <div class="tc-defs" data-reveal>
               <p class="tc-defs__t">Promotional Items:</p>
               <p class="tc-defs__d">We can help you develop promotional merchandise, such as mugs, tote bags, and keychains, to engage with your audience and create memorable experiences.</p>
+            </div>
+            <div class="tc-defs" data-reveal>
               <p class="tc-defs__t">Custom Apparel and Accessories:</p>
               <p class="tc-defs__d">Our designers can assist you in creating branded merchandise, including apparel, hats, and accessories, to enhance your brand visibility.</p>
             </div>
