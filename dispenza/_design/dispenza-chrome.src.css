@@ -284,6 +284,51 @@ a:focus-visible,button:focus-visible{
 .rail__burger span{display:block;width:16px;height:2px;background:var(--ds-ink);border-radius:var(--ds-r-pill)}
 .rail__burger span + span{margin-top:4px}
 
+/* ---------------------------------------------------------------------------
+   HAMBURGER: the bug, then the treatment.
+
+   THE BUG. .rail__burger is display:inline-flex with align-items/justify-content
+   centred, but it never set flex-direction. Flex defaults to ROW, so the three
+   16px bars laid out SIDE BY SIDE -- 48px of bars in a 42px box -- and the
+   `span + span{margin-top:4px}` above then pushed the 2nd and 3rd down a step,
+   which is why it rendered as two short offset dashes instead of a menu icon.
+   flex-direction:column is the entire fix; the margin-top rule is correct and is
+   left alone, because in a column it does exactly what it was written to do.
+
+   THE TREATMENT. Glow built from the accent TOKEN via color-mix, the same way
+   .tc-head__media--float already derives its purple drop-shadow, so it follows
+   --ds-accent rather than pinning a second copy of the brand purple. Kept sleek:
+   a hairline accent ring, a 10%-ish fill, one soft outer bloom -- no neon, no
+   pulse. The bars use --ds-accent-light so they read as lit rather than painted.
+   --------------------------------------------------------------------------- */
+.rail__burger{
+  flex-direction:column;                    /* THE FIX */
+  border-color:color-mix(in srgb, var(--ds-accent) 48%, transparent);
+  background:color-mix(in srgb, var(--ds-accent) 12%, transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb, var(--ds-accent) 18%, transparent),
+             0 0 14px color-mix(in srgb, var(--ds-accent) 30%, transparent);
+}
+.rail__burger span{
+  background:var(--ds-accent-light);
+  box-shadow:0 0 6px color-mix(in srgb, var(--ds-accent-light) 65%, transparent);
+}
+/* Pressed / open and keyboard focus both brighten the same way, so the control
+   never looks inert once it has been used. */
+.rail__burger:hover,
+.rail__burger:focus-visible,
+.rail__burger[aria-expanded="true"]{
+  border-color:color-mix(in srgb, var(--ds-accent) 78%, transparent);
+  background:color-mix(in srgb, var(--ds-accent) 20%, transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb, var(--ds-accent) 34%, transparent),
+             0 0 20px color-mix(in srgb, var(--ds-accent) 48%, transparent);
+}
+.rail__burger:hover span,
+.rail__burger:focus-visible span,
+.rail__burger[aria-expanded="true"] span{
+  background:#fff;
+  box-shadow:0 0 8px color-mix(in srgb, var(--ds-accent-light) 85%, transparent);
+}
+
 .drawer-scrim{
   position:fixed;inset:0;z-index:var(--ds-z-overlay);
   background:var(--ds-scrim);

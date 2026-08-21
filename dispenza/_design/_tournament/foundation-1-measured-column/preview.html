@@ -1,41 +1,212 @@
-<!DOCTYPE html>
+<!--META concept=1 name=measured-column stage=foundation -->
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cannabis dispensary marketing agency | Dispenza</title>
-<meta name="description" content="Published pricing, a performance guarantee, and per-city results. See every tier and what we promise before you book a demo.">
-<meta name="robots" content="noindex,nofollow">
-<!-- FAVICON: brand-neutral default so every build satisfies the publish launch-floor (P-Q). Each site
-     ships its own assets/favicon.svg; pages emit from pages/ so the ref is ../assets/ (rewritten to
-     assets/ at publish). derive-shell preserves this line verbatim as part of the tokenized head. -->
-<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-<!-- FONTS: hardcoded in the head (SSOT model — the chrome head carries NO font TOKEN; only the head
-     slots TITLE/META_DESC/NOINDEX/DESIGN_CSS_LINKS/SIGNATURE_LINKS + CONTENT are dynamic; see the
-     derive-shell ALLOWED set). A per-site shell (the locked _build/_template.html from the CHROME
-     stage) SWAPS these three lines for the brand's chosen families — exactly as the passing builds do
-     (batchworks: Oswald/Poppins/Space Grotesk; harborline-proof: Roboto Slab/Inter/IBM Plex Mono).
-     These canonical defaults are slug-/brand-NEUTRAL placeholders; never a brand literal. -->
-<!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
-     pages despite a complete local corpus, and shipping a malformed format("font_weight")
-     first source that 404s. Both defects are fixed here: no network request, correct sources. -->
-<link rel="stylesheet" href="../_design/dispenza-fonts.css">
-<link rel="stylesheet" href="../_design/dispenza-tokens.css?v=bf07bcdb">
-<link rel="stylesheet" href="../_design/dispenza-chrome.css?v=c338a3e6">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=47f33a0f">
+<title>Dispenza / Foundation 1 / Measured Column</title>
+<meta name="description" content="Foundation concept 1 of 3 for Dispenza: a body built around one strict text measure that never widens, one repeated vertical interval, a two step type ladder with a deliberate void in the middle, and one motion gesture used identically everywhere.">
 
+<!-- FAIL OPEN. The scroll reveal hides content until it is observed, so the hiding
+     is scoped to this class. No script, no class, no hidden content. -->
+<script>document.documentElement.className += ' js';</script>
+
+<!-- THE THREE LOCKED SHEETS, in dependency order, then the body sheet this
+     concept proposes. -->
+<link rel="stylesheet" href="../../dispenza-fonts.css">
+<link rel="stylesheet" href="../../dispenza-tokens.css">
+<link rel="stylesheet" href="../../dispenza-chrome.css">
+<link rel="stylesheet" href="dispenza-structural.css">
+
+<!--
+  DISPENZA / FOUNDATION CONCEPT 1 "MEASURED COLUMN"
+  ================================================
+
+  WHAT THIS FILE IS. The locked chrome wrapped around a real body, so the BODY can
+  be judged: its rhythm, its use of the type scale, its treatment of imagery and
+  where it spends motion. Identity and frame are already owner locked and are not
+  reinterpreted here.
+
+  ARTIFACT (b), THE PROPOSED BODY CSS, IS ./dispenza-structural.css.
+  It is linked above rather than pasted into this file, deliberately. That sheet is
+  already the extraction target under its final name: if this concept wins, it is
+  copied to _design/dispenza-structural.css and nothing has to be lifted out of a
+  style block first. One copy means the specimen and the deliverable can never
+  drift apart. The sheet is fully commented and is organised as the sections the
+  build will inherit.
+
+  GATE NOTE, RECORDED HONESTLY. The brief said to author the body CSS inline and
+  "link what exists". That combination cannot be written here: verify-stylesheet-linked
+  is wired as a PreToolUse hook, this path is NOT in its chrome stage exemption, so it
+  requires a link ending in structural.css that RESOLVES ON DISK relative to this
+  page. Verified by running the gate directly against a tokens-plus-chrome-only
+  payload: exit 2, "missing link to: structural.css". Authoring the sheet as a real
+  file in this concept folder satisfies the gate without faking it and without
+  pre-empting the owner pick, because it lives inside the concept folder rather than
+  at _design/.
+
+  ------------------------------------------------------------------------------
+  THE CONCEPT, AND WHAT A JUDGE SHOULD LOOK AT
+  ------------------------------------------------------------------------------
+  1. THE MEASURE NEVER WIDENS. One column width, min(68ch, 640px), pinned to the
+     same left axis from the hero to the closing ask. It does not widen for a
+     "wider" section, it does not re-centre, and it does not change when a
+     photograph arrives beside it. Sight down the left edge of the page: every
+     text block starts on the same line. The one object allowed to set the measure
+     aside is the price table, because a table is not prose; that exception is what
+     makes the measure elsewhere read as a decision.
+
+  2. THE INTERVAL IS ONE VALUE, REPEATED. Every body section pays exactly
+     var(--ds-rhythm) top and bottom. No section gets a bespoke pad. The full bleed
+     bands pay zero of their own, so the gap between the last line of text and the
+     top of a photograph is still exactly one interval, paid by the neighbour. The
+     page is a metronome; the imagery is what plays over it.
+
+  3. THE TYPE LADDER HAS A HOLE IN IT ON PURPOSE. Display, head, figure, then
+     nothing at all until 17px body. There is no 20px lead and no 24px standfirst
+     anywhere on this page, including in the hero. Emphasis inside body copy is
+     carried by ink colour, never by a size that would fill the hole back in.
+
+  4. MOTION IS ONE GESTURE. Fade plus a 20px rise, identical duration, identical
+     curve, on every section. Used everywhere, it stops reading as an effect and
+     starts reading as rhythm. The only additions are a 1.04 to 1.0 scale in on
+     media and a 0.94x drift on the two band photographs, which is the entire
+     motion budget for the body.
+
+  5. THREE SECTION KINDS, NOTHING ELSE. MEASURE (text in the column), BAND (a full
+     bleed photograph as an event), SPEC (structured data at container width). The
+     split rows are a MEASURE with a picture beside it, not a fourth kind, which is
+     why the column keeps its exact width there.
+
+  ------------------------------------------------------------------------------
+  DESIGN SYSTEM PROVENANCE. What this body is built FROM, not invented against.
+  ------------------------------------------------------------------------------
+  BLUEPRINT . composition-agency-creative (V1 AGENCY / CREATIVE / STUDIO in
+    _PAGE-COMPOSITION-LIBRARY). Dispenza is an agency, so V1 is the spine: a
+    type-led opener, positioning band, stats EARLY, the services rows, the payload,
+    one dark anchor, one closing ask, glass nav. Two documented DEPARTURES, both
+    forced by this client's facts rather than by taste. First, V1's zone 6 payload
+    is a portfolio gallery; Dispenza's payload is the PUBLISHED PRICE LADDER,
+    because the positioning wedge is that nine tiers are printed while eighteen
+    crawled competitor pages publish nothing, so the price table takes the
+    gravitational centre a work gallery would normally hold. Second, V1 defaults to
+    a B2 type-led hero; this page uses a full-bleed media hero because the owner's
+    swappable-hero contract requires an isolated media layer and the real asset
+    exists. The rest of the V1 arc is intact, including stats-early and the single
+    near-black anchor before the close.
+  SPINE . _PAGE-COMPOSITION-LIBRARY section 0.1, the eight zone skeleton, used in
+    order: NAV, HERO, TRUST/INTRO folded into the stat band, VALUE/SERVICES, PROOF,
+    VERTICAL BLOCK (the ladder), CONVERSION, FOOTER. Seven body sections, inside the
+    verified 7 to 15 band, and one of each moment only: one stat band, one dark
+    anchor, one focal full bleed pair, one closing CTA.
+  LIBRARY . _MODERN-WOW-SPEC, the technique ceiling, applied as follows and
+    deliberately NOT applied where the owner rejected spectacle:
+      section 1 depth      layered ambient plus key shadows from the tokens, hairline
+                           borders, the inset top highlight on the table surface and
+                           the plan cards, and real figure/ground across the three
+                           near-black planes rather than one flat field.
+      section 2 motion     staggered scroll reveal, media scale in, gentle parallax,
+                           count up on the metrics, hover lift on the CTAs. Every one
+                           behind prefers-reduced-motion.
+      section 4 type       display-scale contrast against calm body, tight tracking
+                           on display, oversized tabular numerals for every metric,
+                           and a refined measure. This is where the concept spends
+                           most of its effort.
+      section 5 light      one accent wash behind the closing ask. That is the whole
+                           budget for the body.
+      section 7 detail     one radius language from the tokens, refined pill badges,
+                           hairline dividers doing the dividing, visible focus rings.
+    NOT ADOPTED, on purpose: the BeTheme SVG shape dividers (its section A). The
+    composition library's own anti-pattern list keeps dividers off registers where
+    the mood does not fit, and a wave or tilt between every band would be exactly the
+    varying rhythm this concept refuses. The transitions here are the sanctioned
+    alternative: colour-band contrast, whitespace, and the image bottom fade using
+    the brand's own --ds-fade-to-paper.
+
+  ------------------------------------------------------------------------------
+  IMAGERY. Every image on this page is a real file in this build. Five are used:
+  the swappable hero slot, two of the eight service editorials, and two of the
+  three full bleed bands. There is no grey box and no gradient standing in for a
+  photograph anywhere.
+
+  ------------------------------------------------------------------------------
+  CONTRAST LEDGER (computed, not asserted; sRGB relative luminance, WCAG 2.1)
+
+  ON THE CANVAS  --ds-bg-surface #15161a
+    body      --ds-ink        #f5f3f9   16.42:1
+    heading   --ds-ink-heading #ffffff  18.08:1
+    muted     --ds-ink-soft   #9f9f9f    6.83:1
+    accent    --ds-accent-ink #ae76ef    5.71:1
+  ON THE MID PLANE --ds-bg-warm #1b1d22
+    body 15.31:1 . heading 16.86:1 . muted 6.37:1 . accent 5.33:1
+  ON THE ELEVATED PLANE --ds-bg-surface-2 #222429  (the price table surface)
+    body 14.10:1 . heading 15.53:1 . muted 5.87:1 . accent 4.91:1
+  BUTTONS
+    #ffffff on --ds-primary #8d3fe8    5.24:1
+
+  THE RAW BRAND VIOLET IS NEVER PAINTED AS TEXT. #8d3fe8 measures 3.45 / 3.22 /
+  2.96:1 across the three planes, all below the 4.5:1 floor. On this page it
+  appears only as a BORDER (the list rules, the badge outline) and as a CTA FILL.
+  Every small accent text role is --ds-accent-ink.
+
+  TEXT OVER PHOTOGRAPHS, PROVEN AGAINST THE WORST CASE. A photograph cannot be
+  measured as a single colour, so both scrims were computed against a pure WHITE
+  underlying pixel, which is the worst thing any photo can put under the type.
+    HERO. The side scrim is the canvas token at 94% or denser across the whole
+    text region. Composite over white = rgb(35,36,40):
+      heading 15.50:1 . body 14.08:1 . accent eyebrow 4.90:1 . muted 5.86:1
+    BANDS. --ds-scrim at .72 composited over white = rgb(80,79,84):
+      heading 8.12:1 . body ink 7.37:1
+    Because that composite gives --ds-ink-soft only 3.07:1 and --ds-accent-ink only
+    2.57:1, NEITHER of those two roles is used over a photograph anywhere on this
+    page. Over a band the page speaks in heading ink and body ink only. That is a
+    design rule derived from the measurement, not a hope about the artwork.
+
+  ------------------------------------------------------------------------------
+  MOTION LEDGER, against the owner spec
+    scroll reveal   fade + 20px rise . 520ms . cubic-bezier(.16,1,.3,1) . once . 15%
+    stagger         70ms, groups only (the four figures, the two plans, the pairs)
+    media scale in  1.04 to 1.0 . 600ms . same curve
+    parallax        0.94x drift, the two band photographs only, transform only
+    count up        the four influence figures, on reveal, once
+    hover lift      3px at 160ms, the two button variants, inherited from the chrome
+    ABSENT ON PURPOSE: no bounce, no overshoot, no rotation, no flip, no confetti,
+    no typewriter, no autoplay carousel, no animated gradient, no cursor trail, no
+    in-viewport loop. Only transform and opacity are animated.
+  REDUCED MOTION: every transform is dropped, every transition is removed, the
+    parallax offset is zeroed and the band images go back to filling their frame,
+    the count up prints the final value that is already in the markup, and every
+    section is visible at rest. Nothing is lost.
+
+  ------------------------------------------------------------------------------
+  DOM GRAMMAR. Every body section is section > .container > .row > .col > object.
+  The structure classes carry layout only; every skin class (mc-*) sits on the
+  object inside the .col. The chrome header, drawer, sticky bar and footer are the
+  locked block and are exempt by design.
+
+  LINK CONVENTION. Chrome and body hrefs use the build's page relative "<slug>.html"
+  form from _handoff/sitemap.yaml. In this standalone specimen those siblings do not
+  exist yet, which is expected at this stage.
+
+  COPY. Every claim on this page is the client's own, from the P6 corpus via
+  _handoff/briefs/index.md. Nothing is invented. Section eyebrows are neutral
+  structural labels, not claims.
+-->
 </head>
-<body class="site-body">
-<!-- LOCKED CHROME CARRIER - sourced verbatim from chrome-1-floating-rail.
-     Header + mobile drawer + footer. Pages inject their body between them.
-     Parity hooks (#siteHeader / .site-header) were ADDED alongside the existing
-     rail-shell class, never renamed, so no CSS selector changed. -->
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================================================ LOCKED CHROME
+     Sourced verbatim from _design/_chrome-block.html (chrome concept 1, owner
+     locked). Not re-derived, not restyled, not grammar wrapped.
+     ============================================================ -->
 <header class="rail-shell site-header" id="rail-shell">
   <div class="rail-dock" id="rail-dock">
 
     <div class="rail">
       <a class="rail__logo" href="index.html" aria-label="Dispenza home">
-        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200" decoding="async">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
       </a>
 
       <nav class="rail__nav" aria-label="Primary">
@@ -79,11 +250,6 @@
     <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
       <div class="panel__head">
         <span class="panel__eyebrow">Our suite</span>
-        <!-- "one page" is a LINK, not prose. The claim was already TRUE (how-it-works is the
-             T-PRICING page, "Pricing and the performance guarantee"), but removing Pricing from the
-             nav left the note pointing at a page a visitor could no longer reach from the nav — a
-             true sentence with a dead end behind it. Linking it restores the route without inventing
-             copy or re-adding a nav item. -->
         <span class="panel__note">Eight service pages. Pricing for all of them sits on <a class="panel__note-link" href="how-it-works.html">one page</a>.</span>
       </div>
 
@@ -174,7 +340,7 @@
 
 <div class="drawer" id="mobile-drawer" aria-label="Menu">
   <div class="drawer-head">
-    <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200" decoding="async">
+    <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
     <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
     </button>
@@ -214,70 +380,19 @@
 </div>
 
 
-<!-- CONTENT SLOT - derive-shell injects each page body here. The chrome above and below
-     is a LOCKED BLOCK and is identical on every one of the 27 pages. -->
-<main id="main" class="site-main">
-<!-- ============================================================ PAGE META
-     Hoisted to the top of the promoted fragment by promote-concept.mjs (it
-     prefers a META block found INSIDE <main>, which is why this sits here and
-     not in the document head above -- that head belongs to the specimen preview,
-     the fragment is what ships.
-
-     ⚠ A TRAP WORTH LEAVING A SIGN ON. Two gates decide whether this payload is a
-     FULL HTML DOCUMENT or a body FRAGMENT by sniffing the raw bytes for the three
-     document-shell opening tags -- doctype, root element, document head -- and the
-     sniff does NOT skip comments. Writing any of those three tag names in prose
-     anywhere in this file silently reclassifies the fragment:
-       verify-stylesheet-linked then demands the two foundation <link>s a fragment
-         must never carry (build.mjs supplies them through the template) -> FAILS;
-       verify-dom-structure then looks for a main element, finds none in a
-         fragment, and FAIL-OPENS -> the grammar stops being checked at all.
-     Both were observed here, in that order, from a single tag name typed into this
-     very comment. The second is the dangerous one: it turns the gate GREEN while
-     switching it off. Describe those tags; never spell them.)
-
-     PROVENANCE. Both strings are the /index row of _handoff/seo-enrichment.md
-     section 1 (the master table), row "/  [U]".
-
-     ONE CHARACTER IS CHANGED, and only one. The prescribed title reads
-     "Cannabis dispensary marketing agency (em dash) Dispenza". G-NODASH
-     (verify-no-dashes.mjs) bans U+2014/U+2013 and their entities across every
-     content-phase path, so the enrichment's own separator cannot ship. It is
-     replaced with a pipe, which is the separator build.mjs's own fallback title
-     uses. Nothing else is touched: the primary_keyword "Cannabis dispensary
-     marketing" is still a literal substring inside the first 30 characters, the
-     brand token is still present, and the meta is byte-for-byte the row's.
-     47 chars / 124 chars -- inside title-quality's 8-70 and the enrichment's
-     own <=60 and <=160.
-     ====================================================================== -->
-
+<main id="main">
 
 <!-- ==========================================================================
      SECTION 1 . HERO . KIND: BAND + MEASURE
      ========================================================================== -->
 <!-- pick: HERO-COMPOSITIONS.md #5 Full-bleed image + overlay text | considered: #10,#9,#22 | why: this concept's whole claim is that a strict measured column sits in generous dark space, so the hero has to be the moment where that column is FIRST established against something, and a full bleed media layer is the only opener that sets the column's left axis while the picture runs past its right edge, which is exactly the "full-bleed imagery alternating with tightly measured text" the owner adopted; the swappable hero contract in visual-direction.md section 6 also wants the media as a separate layer, and #5 is the pattern whose media layer is already isolated from the content layer. That isolation was then CASHED IN rather than left theoretical: on 2026-08-12 the owner replaced the raster with a generated isometric hex-prism field, and because #5 keeps the media absolutely positioned and contributing no height, the swap changed the picture and moved nothing else on the page. The argument for #5 is now stronger than when it was made, because the media is generated rather than photographic, so it is resolution independent, it carries the brand violet in its own geometry instead of borrowing it from a scrim, and its light can be driven by scroll position without a single layout-affecting property being animated. #10 centred headline only was the closest rival and is rejected because a centred hero would establish a CENTRE axis and then every section below would have to break it, killing the one-axis discipline before the page starts, and because it would waste the real hero asset that exists. #9 cinematic letterbox caps the hero near 50vh, which makes the opener a band rather than a room and leaves no space for the promise plus two actions at this type scale. #22 statistics-heavy hero would put the four influence totals above the claim, which both buries the positioning line and spends the page's one stat moment in the first viewport, leaving section 2 with nothing. -->
 <!-- HeroSection, inlined verbatim from _design/hero/hero-section.html (the SSOT).
-     Its SCRIPTS still ride with the component (below the section). Its STYLESHEET
-     no longer does, and that is the one deliberate divergence from the specimen.
-
-     WHY. The specimen carries <link rel="stylesheet" href="../_design/_tournament/templates/hero/hero-section.css">
-     right here -- heroContract.style_isolation, keeping hero CSS off the 26 pages
-     that have no hero, and rel="stylesheet" is body-ok in the HTML Living Standard.
-     But a PROMOTED page links only the three core sheets, so verify-no-orphan-classes
-     resolves this fragment's classes against tokens/chrome/structural ONLY and read
-     nine hero classes (ch, mc-coin, mc-hero__content/__field/__pin/__scrim/__stage,
-     mc-lead-wrap, mc-type) as defined nowhere. The sheet is therefore migrated
-     VERBATIM into _design/dispenza-structural.css, at the END of the file, inside
-     the fenced "G-ORPHAN MIGRATION FENCE - T-INDEX" block -- end-of-structural is
-     the same cascade position this body <link> held, so nothing wins or loses a tie
-     that did not before.
-
-     WHAT IT COSTS, recorded rather than discovered later: style_isolation is spent.
-     The 26 pages with no hero now parse ~25kb of hero CSS they will never match.
-     No page renders differently -- none of them carries a .mc-hero* element -- but
-     the contract in client-rules.heroContract is no longer literally true, and the
-     honest place to note that is here, next to the reason. -->
-<section class="mc-hero surface-dark" id="hero">
+     Its stylesheet and script ride WITH the component rather than sitting in the
+     page preamble: heroContract.style_isolation keeps hero CSS off the 26 pages
+     that have no hero, and rel="stylesheet" is body-ok in the HTML Living
+     Standard. The link precedes the section so the hero never paints unstyled. -->
+<link rel="stylesheet" href="../../hero/hero-section.css">
+<section class="mc-hero" id="hero">
   <!-- The PIN. It carries .container--full so the DOM grammar stays legal
        (section > .container > .row > .col > object); a bare sticky wrapper
        between the section and the container would break G-DOM. -->
@@ -325,11 +440,11 @@
              ============================================================ -->
         <!-- shadow-intensity is 0 on purpose: the coin must read as FLOATING,
              and a contact shadow implies a surface underneath it. -->
-        <model-viewer class="mc-coin" src="../assets/3d/dispenza-coin.glb"
+        <model-viewer class="mc-coin" src="../../../assets/3d/dispenza-coin.glb"
                       alt="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."
                       camera-orbit="90deg 90deg 2.75m" field-of-view="22deg"
-                      poster="../assets/3d/coin-poster.webp"
-                      environment-image="../assets/3d/studio-lensshine.hdr"
+                      poster="../../../assets/3d/coin-poster.webp"
+                      environment-image="../../../assets/3d/studio-lensshine.hdr"
                       exposure="1.15" tone-mapping="neutral"
                       shadow-intensity="0"
                       disable-zoom disable-pan disable-tap
@@ -344,7 +459,8 @@
              the same object, it simply does not move. model-viewer swaps the
              poster out for the live scene once the GLB is ready, and keeps it if
              WebGL is unavailable. -->
-                <div class="mc-hero__content mc-type">
+
+        <div class="mc-hero__content mc-type">
           <p class="mc-eyebrow" data-reveal>Since 2012</p>
           <!-- Every character is authored HERE, in its own span. The reveal
                animates OPACITY only; no script writes text into the DOM.
@@ -373,8 +489,8 @@
 </section>
 <!-- Loaded AFTER the section so the svg elements they fill already exist in the
      DOM; no DOMContentLoaded wrapper is needed and none is used. -->
-<script src="../_design/hero/hero-field.js"></script>
-<script src="../_design/hero/hero-coin-pose.js"></script>
+<script src="../../hero/hero-field.js"></script>
+<script src="../../hero/hero-coin-pose.js"></script>
 <!-- Loaded IMMEDIATELY (owner). The earlier deferral was a workaround for a
      typing stall whose real cause turned out to be elsewhere: the pose engine was
      writing the pose as CSS custom properties on .mc-hero every frame, which
@@ -386,7 +502,7 @@
      WebGL exists: without that guard model-viewer throws an uncaught TypeError
      on a machine with 3D disabled, which is a real user path and the whole
      reason the SVG coin is still here. -->
-<script src="../_design/hero/hero-coin3d.js"></script>
+<script src="../../hero/hero-coin3d.js"></script>
 <!-- smoke LAST: it measures the token's placed position, so the coaster must
      have drawn at least once before it looks. -->
 <!-- ONE SMOKE ENGINE, TWO FIELDS. The physics used to be duplicated between the
@@ -394,8 +510,8 @@
      non-propagation trap, so the model lives in one module and each field
      supplies only its emitter. Loaded before both callers, without defer, so it
      is defined by the time either runs. -->
-<script src="../_design/smoke-engine.js"></script>
-<script src="../_design/hero/hero-smoke.js"></script>
+<script src="../../smoke-engine.js"></script>
+<script src="../../hero/hero-smoke.js"></script>
 
 
 <!-- ==========================================================================
@@ -409,32 +525,32 @@
         <div class="mc-marquee__viewport">
           <div class="mc-marquee__track">
           <div class="mc-marquee__group">
-            <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.webp" alt="High Level Health, a Dispenza client" width="297" height="176" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.webp" alt="NuLeaf, a Dispenza client" width="196" height="48" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.webp" alt="Tree of Life, a Dispenza client" width="292" height="293" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.webp" alt="Sundial Collective, a Dispenza client" width="294" height="76" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.webp" alt="Root'd in the 510, a Dispenza client" width="295" height="127" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.webp" alt="MaryJane's, a Dispenza client" width="911" height="190" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.webp" alt="Royal Weed, a Dispenza client" width="299" height="101" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.webp" alt="The Cannabis Guys, a Dispenza client" width="186" height="152" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.webp" alt="LA Cannabis Co, a Dispenza client" width="298" height="77" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.webp" alt="Perfect Union, a Dispenza client" width="299" height="116" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.webp" alt="Coachella Canna Club, a Dispenza client" width="293" height="212" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.webp" alt="Firehouse 365, a Dispenza client" width="194" height="160" decoding="async" loading="lazy"></div>
+            <div class="mc-marquee__item" style="--h:47.1px"><img src="../../../assets/brand/marquee/hlh.webp" alt="High Level Health, a Dispenza client" width="297" height="176" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:37.9px"><img src="../../../assets/brand/marquee/nuleaf.webp" alt="NuLeaf, a Dispenza client" width="196" height="48" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/tree-of-life.webp" alt="Tree of Life, a Dispenza client" width="292" height="293" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.6px"><img src="../../../assets/brand/marquee/sundial.webp" alt="Sundial Collective, a Dispenza client" width="294" height="76" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:45.3px"><img src="../../../assets/brand/marquee/rootd.webp" alt="Root'd in the 510, a Dispenza client" width="295" height="127" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:35.4px"><img src="../../../assets/brand/marquee/maryjanes.webp" alt="MaryJane's, a Dispenza client" width="911" height="190" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.6px"><img src="../../../assets/brand/marquee/royal-weed.webp" alt="Royal Weed, a Dispenza client" width="299" height="101" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:58.1px"><img src="../../../assets/brand/marquee/cannabis-guys.webp" alt="The Cannabis Guys, a Dispenza client" width="186" height="152" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.8px"><img src="../../../assets/brand/marquee/la-cannabis-co.webp" alt="LA Cannabis Co, a Dispenza client" width="298" height="77" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.8px"><img src="../../../assets/brand/marquee/perfect-union.webp" alt="Perfect Union, a Dispenza client" width="299" height="116" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:60.1px"><img src="../../../assets/brand/marquee/coachella-canna-club.webp" alt="Coachella Canna Club, a Dispenza client" width="293" height="212" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/firehouse.webp" alt="Firehouse 365, a Dispenza client" width="194" height="160" decoding="async"></div>
           </div>
           <div class="mc-marquee__group" data-dup="1" aria-hidden="true">
-            <div class="mc-marquee__item" style="--h:47.1px"><img src="../assets/brand/marquee/hlh.webp" alt="" width="297" height="176" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:37.9px"><img src="../assets/brand/marquee/nuleaf.webp" alt="" width="196" height="48" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/tree-of-life.webp" alt="" width="292" height="293" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:40.6px"><img src="../assets/brand/marquee/sundial.webp" alt="" width="294" height="76" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:45.3px"><img src="../assets/brand/marquee/rootd.webp" alt="" width="295" height="127" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:35.4px"><img src="../assets/brand/marquee/maryjanes.webp" alt="" width="911" height="190" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:42.6px"><img src="../assets/brand/marquee/royal-weed.webp" alt="" width="299" height="101" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:58.1px"><img src="../assets/brand/marquee/cannabis-guys.webp" alt="" width="186" height="152" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:42.8px"><img src="../assets/brand/marquee/la-cannabis-co.webp" alt="" width="298" height="77" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:40.8px"><img src="../assets/brand/marquee/perfect-union.webp" alt="" width="299" height="116" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:60.1px"><img src="../assets/brand/marquee/coachella-canna-club.webp" alt="" width="293" height="212" decoding="async" loading="lazy"></div>
-            <div class="mc-marquee__item" style="--h:62.0px"><img src="../assets/brand/marquee/firehouse.webp" alt="" width="194" height="160" decoding="async" loading="lazy"></div>
+            <div class="mc-marquee__item" style="--h:47.1px"><img src="../../../assets/brand/marquee/hlh.webp" alt="" width="297" height="176" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:37.9px"><img src="../../../assets/brand/marquee/nuleaf.webp" alt="" width="196" height="48" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/tree-of-life.webp" alt="" width="292" height="293" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.6px"><img src="../../../assets/brand/marquee/sundial.webp" alt="" width="294" height="76" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:45.3px"><img src="../../../assets/brand/marquee/rootd.webp" alt="" width="295" height="127" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:35.4px"><img src="../../../assets/brand/marquee/maryjanes.webp" alt="" width="911" height="190" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.6px"><img src="../../../assets/brand/marquee/royal-weed.webp" alt="" width="299" height="101" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:58.1px"><img src="../../../assets/brand/marquee/cannabis-guys.webp" alt="" width="186" height="152" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:42.8px"><img src="../../../assets/brand/marquee/la-cannabis-co.webp" alt="" width="298" height="77" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:40.8px"><img src="../../../assets/brand/marquee/perfect-union.webp" alt="" width="299" height="116" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:60.1px"><img src="../../../assets/brand/marquee/coachella-canna-club.webp" alt="" width="293" height="212" decoding="async"></div>
+            <div class="mc-marquee__item" style="--h:62.0px"><img src="../../../assets/brand/marquee/firehouse.webp" alt="" width="194" height="160" decoding="async"></div>
           </div>
         </div>
       </div>
@@ -470,7 +586,7 @@
      SECTION 2 . INFLUENCE HIGHLIGHTS . KIND: SPEC
      ========================================================================== -->
 <!-- pick: SECTION-COMPONENTS.md #3 Stat strip / metric band | considered: #2,#13,#7 | why: the four totals are the client's only whole-business numbers and they arrive immediately after the claim, which is where the composition library puts quantified credibility, but the reason this concept wants a stat STRIP specifically is that four figures divided by hairlines sit in open space with nothing carded, which is the first proof that a section can carry structured data without the measured column widening or a box appearing; the oversized numerals also demonstrate the top of the type ladder in a non-heading role. #2 trust strip or logo wall was the obvious alternative and is rejected here because the twenty five client marks all carry empty alt text and no confirmed right to display, so a logo wall would be a claim the build cannot yet stand behind. #13 bento feature grid would introduce an asymmetric tile grid, which is precisely the varying rhythm this concept exists to refuse, and it would need eight to twelve pitches that do not exist at this point in the page. #7 problem framing would put a paragraph of pain here, delaying the first number to the fourth section and wasting the fact that this client's numbers are its strongest asset. -->
-<section class="mc-section surface-dark" id="influence">
+<section class="mc-section" id="influence">
   <div class="container">
     <div class="row">
       <!-- full-width col, not col--measure: the statement heading is meant to
@@ -515,7 +631,7 @@
      SECTION 3 . OUR SUITE, TWO ALTERNATING FEATURE ROWS . KIND: MEASURE + MEDIA
      ========================================================================== -->
 <!-- pick: SECTION-COMPONENTS.md #11 Service pillars 2-col with image | considered: #9,#12,#13 | why: the owner adopted "feature blocks that alternate image-left, image-right" by name, and #11 is the catalog's only entry whose row IS that alternation, one image plus headline plus body plus link per row with the media side flipping; it is also the pattern that lets this concept prove its hardest claim, which is that the text column does NOT change width when a picture arrives beside it, because the measure keeps its exact px and the media simply takes whatever is left. The media plus cards law does not bite here: this is the alternating single-row arm, not one capped image beside a card stack, and the media column is set to stretch so the two columns end level. #9 services 3-col would flatten eight services into three equal cards and give the two real service editorials nowhere to live at size. #12 feature row with screenshot assumes a product screenshot is the subject, but the assets here are atmospheric editorials, not UI. #13 bento is refused for the same reason as in section 2: an asymmetric tile grid is a varying rhythm, and this page's argument is that the rhythm does not vary. -->
-<section class="mc-section mc-section--tight surface-dark" id="suite">
+<section class="mc-section mc-section--tight" id="suite">
   <div class="container">
     <!-- THE TRAVELLING RULE. The same light the hero runs through its field, on a
          hairline: a bright segment revealed as the divider crosses the viewport.
@@ -528,6 +644,42 @@
         </div>
       </div>
     </div>
+    <!-- The rule carries its own behaviour, INSIDE <main>, for the same reason the
+         marquee and the hero do: G-CHROME-CARRIER-REDIRECT treats every byte
+         outside <main> as the locked chrome frame. Keeping the driver with the
+         component also makes the divider liftable into another page without
+         remembering to bring a line of global script with it. -->
+    <script>
+    (function () {
+      /* THE HERO'S LIGHT, ON A HAIRLINE, and it has NO TIMELINE, which is what
+         keeps it off the forbidden list. The spec bans animated gradients and
+         anything looping in the viewport; nothing here repeats. The bright
+         segment's position is a pure function of how far the rule has crossed the
+         viewport, the same drive hero-field.js uses: alive while the visitor
+         scrolls, perfectly still the moment they stop. */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      [].slice.call(document.querySelectorAll('[data-divider]')).forEach(function (el) {
+        var light = el.querySelector('.mc-divider__light');
+        if (!light) { return; }
+
+        function place() {
+          var box = el.getBoundingClientRect();
+          var p = 1 - (box.top + box.height) / (window.innerHeight + box.height);
+          if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
+          light.style.transform = 'translate3d(' + (p * el.clientWidth).toFixed(1) + 'px,0,0)';
+        }
+
+        if (reduce.matches) {
+          /* frozen, but placed mid-rule so the resting divider is LIT, not dark */
+          light.style.transform = 'translate3d(' + (el.clientWidth * 0.5).toFixed(1) + 'px,0,0)';
+        } else {
+          place();
+          window.addEventListener('scroll', place, { passive: true });
+          window.addEventListener('resize', place);
+        }
+      });
+    }());
+    </script>
     <div class="row">
       <div class="col col--measure">
         <p class="mc-eyebrow" data-reveal>Two of eight</p>
@@ -602,10 +754,10 @@
                    so the static twin is the fallback and motion is opted into. -->
               <picture>
                 <source media="(prefers-reduced-motion: no-preference)"
-                        srcset="../assets/generated/svc-webdesign-layers.svg">
-                <img src="../assets/generated/svc-webdesign-layers-static.svg"
+                        srcset="../../../assets/generated/svc-webdesign-layers.svg">
+                <img src="../../../assets/generated/svc-webdesign-layers-static.svg"
                      alt="Four stacked translucent layers, representing a site built in maintainable tiers."
-                     width="1741" height="2150" decoding="async" loading="lazy">
+                     width="1741" height="2150" decoding="async">
               </picture>
             </div>
             <h3 class="mc-head">Web design and development</h3>
@@ -622,67 +774,18 @@
       </div>
     </div>
   </section>
-<!-- G-DOM 2026-08-18: this driver USED TO SIT INSIDE the section (see the note it
-     carries). verify-dom-structure allows no exception for a <script>: any non-.container
-     child of a section element, and any non-.row child of a .container, is R4
-     orphan-content. The section tag is NOT spelled out in this comment on purpose:
-     three gates count top-level sections with a bare regex that does not skip
-     comments, so one unmatched opening tag typed in prose swallows every following
-     close and collapsed nine sections into four here. Observed, then fixed.
-     It is moved OUT to sit beside the section instead of being wrapped in an empty
-     .container > .row > .col, because a wrapper would add a real (if zero-height) box to
-     an approved layout to hold something that renders nothing. The component still
-     travels with its behaviour -- the script is still adjacent to it, still inside
-     <main>, and still runs after its own markup has parsed, which is the only ordering
-     it depends on. -->
-<!-- The rule carries its own behaviour, INSIDE <main>, for the same reason the
-     marquee and the hero do: G-CHROME-CARRIER-REDIRECT treats every byte
-     outside <main> as the locked chrome frame. Keeping the driver with the
-     component also makes the divider liftable into another page without
-     remembering to bring a line of global script with it. -->
-<script>
-(function () {
-  /* THE HERO'S LIGHT, ON A HAIRLINE, and it has NO TIMELINE, which is what
-     keeps it off the forbidden list. The spec bans animated gradients and
-     anything looping in the viewport; nothing here repeats. The bright
-     segment's position is a pure function of how far the rule has crossed the
-     viewport, the same drive hero-field.js uses: alive while the visitor
-     scrolls, perfectly still the moment they stop. */
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  [].slice.call(document.querySelectorAll('[data-divider]')).forEach(function (el) {
-    var light = el.querySelector('.mc-divider__light');
-    if (!light) { return; }
-
-    function place() {
-      var box = el.getBoundingClientRect();
-      var p = 1 - (box.top + box.height) / (window.innerHeight + box.height);
-      if (p < 0) { p = 0; } else if (p > 1) { p = 1; }
-      light.style.transform = 'translate3d(' + (p * el.clientWidth).toFixed(1) + 'px,0,0)';
-    }
-
-    if (reduce.matches) {
-      /* frozen, but placed mid-rule so the resting divider is LIT, not dark */
-      light.style.transform = 'translate3d(' + (el.clientWidth * 0.5).toFixed(1) + 'px,0,0)';
-    } else {
-      place();
-      window.addEventListener('scroll', place, { passive: true });
-      window.addEventListener('resize', place);
-    }
-  });
-}());
-</script>
 </div><!-- /.mc-smokefield -->
 
 <!-- The band carries its own behaviour, INSIDE <main>, for the same reason the
      marquee and the divider do: every byte outside <main> is the locked chrome. -->
-<script src="../_design/section-smoke.js" defer></script>
+<script src="../../section-smoke.js" defer></script>
 
 
 <!-- ==========================================================================
      SECTION 4 . INCREASE SALES . KIND: BAND (full bleed event)
      ========================================================================== -->
 <!-- pick: SECTION-COMPONENTS.md #3 stat grid on an inverted ground | considered: #58,#21,#22 | why: the owner asked for this section against WHITE, matching the treatment their own live site gives it, and the eight city results are the page's strongest asset so each one gets its own card rather than two being shown and six deferred to another page. The light ground is the page's ONE inversion, which is what makes it read as the proof moment rather than as another dark panel. #58 image divider full-bleed is what this replaced and is rejected now because a photographic band cannot carry eight discrete figures without becoming a list on top of a picture. #21 case studies 3-col and #22 featured-plus-two both card the results at a size that forces either a subset or a carousel, and a carousel is on the owner's forbidden-motion list AND hides the roster length that is doing the persuading. -->
-<section class="mc-section mc-section--light mc-section--tight mc-section--banded" id="results" data-surface="light">
+<section class="mc-section mc-section--light mc-section--tight mc-section--banded" id="results">
   <!-- FULL-BLEED BAND. It is the transition between the dark section above and
        this white one, so it has to run edge to edge -- constrained to the
        container it read as a block sitting IN the section rather than as the
@@ -719,7 +822,7 @@
              "+51.37%", keeping the map in that row pinned it to 422px. Out of
              the row it reaches 900px -- its native 949 is the real ceiling. -->
         <figure class="mc-results__map" data-reveal>
-        <img src="../assets/generated/results-map.webp"
+        <img src="../../../assets/generated/results-map.webp"
         alt="Map of North America with the states and provinces Dispenza operates in highlighted."
         width="940" height="628" decoding="async">
         </figure>
@@ -731,15 +834,6 @@
        edge, controls in a bottom bar. It sits OUTSIDE .container on purpose and
        carries the container's left offset as padding, so the text still lines up
        with every other section while the cards escape to the viewport edge. -->
-  <!-- G-DOM 2026-08-18: the bleed row now sits in the grammar. It is wrapped in
-       .container--full (max-width:none; padding:0) > .row > .col, which is the SAME
-       wrapper the "Increase Sales" band twelve lines up already uses, so the box the
-       browser lays out is unchanged: the row is a flex parent with one 100%-basis
-       child. The comment above still holds -- the bleed keeps computing its own
-       container offset in padding-left, and nothing above it constrains its width. -->
-  <div class="container container--full">
-    <div class="row">
-      <div class="col">
   <div class="mc-results__bleed">
     <div class="mc-results__say">
       <h2 class="mc-head mc-results__line" data-reveal>We help dispensaries outrank competitors and get new customers everyday.</h2>
@@ -826,9 +920,6 @@
       </div>
     </div>
   </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- SECTION 4 . THE PROMISE was here and was REMOVED at the owner's direction
@@ -851,7 +942,7 @@
      SECTION 5 . PERFORMANCE BENCHMARKS . KIND: COMPARISON
      ========================================================================== -->
 <!-- pick: SECTION-COMPONENTS.md #31 comparison/spec module | considered: #3,#21,#13 | why: the brief asks for "the four day-0-against-the-month tables reproduced whole, with room, instead of stacked into one dense block", and #31 is the entry whose job is exactly that - paired label/value rows at two points in time, aligned across a set so the reader compares ACROSS the cards rather than reading each one alone. The fourth card takes the brand ground because that is the distinction the source draws between the benchmark set and Dispenza's own client. #3 stat strip is already spent twice on this page and would flatten four tables into four headline numbers, losing the day-0 baseline that makes them credible. #21 case studies would need narrative copy that does not exist for these four. #13 bento grid would impose an asymmetric rhythm on four items that are deliberately identical in shape. -->
-<section class="mc-section mc-section--tight mc-smokerise surface-dark" id="benchmarks" data-smokerise>
+<section class="mc-section mc-section--tight mc-smokerise" id="benchmarks" data-smokerise>
   <!-- THE SMOKE THAT CLINGS. Same engine and same pointer wake as the
        influence/suite band; the emitter differs and nothing else. It rises out
        of the bottom of the section and gathers under the top edge instead of
@@ -872,20 +963,8 @@
        and .mc-smoke makes the canvas pointer-events:none, so neither can ever
        eat a click. The POINTER WAKE still works -- the engine listens on the
        SECTION, which receives pointermove by bubbling from whatever is on top. -->
-  <!-- G-DOM 2026-08-18: the lid is a decorative PLANE, and a plane still has to sit in
-       the grammar. .container--plane is .container--full plus one guarantee: it never
-       enters the positioning or stacking chain, so the lid's inset:0 still resolves
-       against the SECTION (measured: offsetParent stays #benchmarks) and its
-       z-index:--ds-z-below still resolves inside .mc-smokerise's own isolate context.
-       The wrapper contributes no height, because its only descendant is absolute. -->
-  <div class="container container--full container--plane">
-    <div class="row">
-      <div class="col">
-        <div class="mc-smokerise__lid" aria-hidden="true">
-          <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
-        </div>
-      </div>
-    </div>
+  <div class="mc-smokerise__lid" aria-hidden="true">
+    <canvas class="mc-smoke mc-smoke--rise" aria-hidden="true"></canvas>
   </div>
   <div class="container">
     <div class="row">
@@ -918,11 +997,11 @@
           <button class="mc-case__tab" type="button" data-case-tab
                   aria-expanded="true" aria-controls="case-lowkey">
             <img class="mc-case__art mc-case__art--shut"
-                 src="../assets/brand/cases/lowkey-card.webp"
-                 alt="" aria-hidden="true" decoding="async" width="244" height="575" loading="lazy">
+                 src="../../../assets/brand/cases/lowkey-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
             <img class="mc-case__art mc-case__art--open"
-                 src="../assets/brand/cases/lowkey-open.webp"
-                 alt="" aria-hidden="true" decoding="async" width="722" height="205" loading="lazy">
+                 src="../../../assets/brand/cases/lowkey-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
             <span class="mc-case__name">Low Key</span>
           </button>
         </h3>
@@ -942,11 +1021,11 @@
           <button class="mc-case__tab" type="button" data-case-tab
                   aria-expanded="false" aria-controls="case-rootd">
             <img class="mc-case__art mc-case__art--shut"
-                 src="../assets/brand/cases/rootd-card.webp"
-                 alt="" aria-hidden="true" decoding="async" width="244" height="575" loading="lazy">
+                 src="../../../assets/brand/cases/rootd-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
             <img class="mc-case__art mc-case__art--open"
-                 src="../assets/brand/cases/rootd-open.webp"
-                 alt="" aria-hidden="true" decoding="async" width="722" height="205" loading="lazy">
+                 src="../../../assets/brand/cases/rootd-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
             <span class="mc-case__name">Root'd in the 510</span>
           </button>
         </h3>
@@ -966,11 +1045,11 @@
           <button class="mc-case__tab" type="button" data-case-tab
                   aria-expanded="false" aria-controls="case-kanna">
             <img class="mc-case__art mc-case__art--shut"
-                 src="../assets/brand/cases/kanna-card.webp"
-                 alt="" aria-hidden="true" decoding="async" width="244" height="575" loading="lazy">
+                 src="../../../assets/brand/cases/kanna-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
             <img class="mc-case__art mc-case__art--open"
-                 src="../assets/brand/cases/kanna-open.webp"
-                 alt="" aria-hidden="true" decoding="async" width="722" height="205" loading="lazy">
+                 src="../../../assets/brand/cases/kanna-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
             <span class="mc-case__name">Kanna</span>
           </button>
         </h3>
@@ -990,11 +1069,11 @@
           <button class="mc-case__tab" type="button" data-case-tab
                   aria-expanded="false" aria-controls="case-cookies">
             <img class="mc-case__art mc-case__art--shut"
-                 src="../assets/brand/cases/cookies-card.webp"
-                 alt="" aria-hidden="true" decoding="async" width="244" height="575" loading="lazy">
+                 src="../../../assets/brand/cases/cookies-card.webp"
+                 alt="" aria-hidden="true" decoding="async" width="244" height="575">
             <img class="mc-case__art mc-case__art--open"
-                 src="../assets/brand/cases/cookies-open.webp"
-                 alt="" aria-hidden="true" decoding="async" width="722" height="205" loading="lazy">
+                 src="../../../assets/brand/cases/cookies-open.webp"
+                 alt="" aria-hidden="true" decoding="async" width="722" height="205">
             <span class="mc-case__name">Cookies Sunland Park</span>
           </button>
         </h3>
@@ -1013,87 +1092,56 @@
       </div>
     </div>
   </div>
+    <!-- The accordion carries its own behaviour, INSIDE <main>, for the same reason
+         the marquee and the divider do: every byte outside <main> is locked chrome. -->
+    <script>
+    (function () {
+      /* NO TIMELINE, so it is not the autoplay carousel the motion spec bans: it
+         moves on a click or a key and never on its own. One panel open at a time.
+         The panels are only ever CLIPPED by their card, never removed, so all four
+         clients' numbers stay in the DOM and in the accessibility tree whatever is
+         open. aria-expanded is what tells assistive tech which one is showing. */
+      var wrap = document.querySelector('[data-cases]');
+      if (!wrap) { return; }
+      var cases = [].slice.call(wrap.querySelectorAll('[data-case]'));
+
+      function open(card) {
+        cases.forEach(function (c) {
+          var on = (c === card);
+          c.classList.toggle('is-open', on);
+          var t = c.querySelector('[data-case-tab]');
+          if (t) { t.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+        });
+      }
+
+      cases.forEach(function (c, i) {
+        var tab = c.querySelector('[data-case-tab]');
+        if (!tab) { return; }
+        tab.addEventListener('click', function () { open(c); });
+        tab.addEventListener('keydown', function (e) {
+          var n = null;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { n = cases[(i + 1) % cases.length]; }
+          if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { n = cases[(i - 1 + cases.length) % cases.length]; }
+          if (!n) { return; }
+          e.preventDefault();
+          open(n);
+          n.querySelector('[data-case-tab]').focus();
+        });
+      });
+    }());
+    </script>
 </section>
-<!-- G-DOM 2026-08-18: this driver USED TO SIT INSIDE the section (see the note it
-     carries). verify-dom-structure allows no exception for a <script>: any non-.container
-     child of a section element, and any non-.row child of a .container, is R4
-     orphan-content. The section tag is NOT spelled out in this comment on purpose:
-     three gates count top-level sections with a bare regex that does not skip
-     comments, so one unmatched opening tag typed in prose swallows every following
-     close and collapsed nine sections into four here. Observed, then fixed.
-     It is moved OUT to sit beside the section instead of being wrapped in an empty
-     .container > .row > .col, because a wrapper would add a real (if zero-height) box to
-     an approved layout to hold something that renders nothing. The component still
-     travels with its behaviour -- the script is still adjacent to it, still inside
-     <main>, and still runs after its own markup has parsed, which is the only ordering
-     it depends on. -->
-<!-- The accordion carries its own behaviour, INSIDE <main>, for the same reason
-     the marquee and the divider do: every byte outside <main> is locked chrome. -->
-<script>
-(function () {
-  /* NO TIMELINE, so it is not the autoplay carousel the motion spec bans: it
-     moves on a click or a key and never on its own. One panel open at a time.
-     The panels are only ever CLIPPED by their card, never removed, so all four
-     clients' numbers stay in the DOM and in the accessibility tree whatever is
-     open. aria-expanded is what tells assistive tech which one is showing. */
-  var wrap = document.querySelector('[data-cases]');
-  if (!wrap) { return; }
-  var cases = [].slice.call(wrap.querySelectorAll('[data-case]'));
-
-  function open(card) {
-    cases.forEach(function (c) {
-      var on = (c === card);
-      c.classList.toggle('is-open', on);
-      var t = c.querySelector('[data-case-tab]');
-      if (t) { t.setAttribute('aria-expanded', on ? 'true' : 'false'); }
-    });
-  }
-
-  cases.forEach(function (c, i) {
-    var tab = c.querySelector('[data-case-tab]');
-    if (!tab) { return; }
-    tab.addEventListener('click', function () { open(c); });
-    tab.addEventListener('keydown', function (e) {
-      var n = null;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { n = cases[(i + 1) % cases.length]; }
-      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { n = cases[(i - 1 + cases.length) % cases.length]; }
-      if (!n) { return; }
-      e.preventDefault();
-      open(n);
-      n.querySelector('[data-case-tab]').focus();
-    });
-  });
-}());
-</script>
 
 <!-- The section carries its own behaviour, INSIDE <main>, for the same reason
      the band and the divider do. -->
-<script src="../_design/section-smoke-rise.js" defer></script>
+<script src="../../section-smoke-rise.js" defer></script>
 
 
 <!-- ==========================================================================
      SECTION 5 . THE LADDER . KIND: SPEC
      ========================================================================== -->
 <!-- pick: PRICING-SECTIONS.md #2 Comparison table to cards on mobile | considered: #1,#3,#5 | why: the client's positioning wedge is that nine tiers and both plans are published while eighteen crawled competitor pages publish nothing, and the recorded live defect is that the feature lists are hidden behind click to expand panels, so the pricing treatment has to be the one that shows everything at once without an interaction; #2 is the only entry built as a real semantic table with a scrollable wrapper and a per-row card reflow, which means every price, every per location add-on and every included line is readable on a phone with its column header printed beside it. It is also the right register for this concept: a table is structured information, so it is the one object allowed to set the measure aside without the page looking like it changed its mind about column width. #1 three-tier cards, middle featured is rejected because carding forces one tier to be visually promoted and this ladder has nine rungs plus two plans, so three cards would either hide six tiers or shrink to unreadable. #3 monthly and annual toggle needs a second cadence to toggle to, and none is published. #5 plain-deal honesty stance is a creed band with no figures at all, which is the opposite of a wedge whose entire content is the printed number. -->
-<section class="mc-section mc-section--light mc-section--banded" id="pricing" data-surface="light">
-
-  <!-- ══ THE SUITE BAND ══ ADDED 2026-08-18, completing the approved composition.
-       D-SRC-INDEX-0071 "OUR SUITE OUR SUITE OUR SUITE" is a REPEATED-PHRASE MARQUEE in
-       the source, and in the source it runs immediately above the nine A-La-Carte rungs
-       -- it is the ladder's own header. The page already owns that object: .mc-salesband
-       is the "Increase Sales" band that opens #results, so this is the SAME component
-       with the SAME grammar wrapper (.container--full > .row > .col), not a new pattern.
-       .mc-section--banded is added for the same reason #results carries it: a section
-       that OPENS with a full-bleed band pays no top rhythm, so the band touches the dark
-       section above it and reads as the seam between the two rather than as a slab
-       floating inside a white panel.
-       The h2 carries set A and the duplicate is aria-hidden, so the phrase is announced
-       once. Reduced motion stops the run dead (@keyframes gate already in structural). -->
-  <div class="container container--full">
-    <!-- "OUR SUITE" MARQUEE REMOVED (owner, 2026-08-19), with the table it introduced. -->
-
-  </div>
-
+<section class="mc-section mc-section--light" id="pricing">
   <div class="container">
     <div class="row">
       <div class="col col--measure">
@@ -1102,36 +1150,6 @@
         <p class="mc-body" data-reveal>Both plans carry their monthly figure, their per-location add-on and every module they fold in. Nothing is behind a click.</p>
       </div>
     </div>
-    <!-- ══ THE NINE RUNGS ══ ADDED 2026-08-18, completing the approved pick.
-         WHAT WAS MISSING. The pick above commits, in as many words, to "nine tiers and
-         both plans ... a real semantic table with a scrollable wrapper and a per-row card
-         reflow ... every price, every per location add-on and every included line". The
-         specimen shipped only the two PLAN cards; the nine A-La-Carte rungs the argument
-         is actually about were never built, and with them went 68 of the page's required
-         index atoms. This is the table the pick names, so it completes the approved
-         decision rather than reinterpreting it. The two plan cards below are untouched.
-
-         CONTENT. Every module name, figure, per-location line and feature line is lifted
-         VERBATIM from _source/atoms/index.json (atoms 98-236); each <li> carries its atom
-         index in a src comment. Where the source wrapped ONE list item across two atoms
-         ("Full Service" / "Web Management"), the item is rejoined as the source renders
-         it, not split into two claims. Rung 09 has no per-location line in the source, so
-         its cell is EMPTY -- nothing is invented to fill it.
-
-         THE FOUR COLUMN HEADERS are neutral structural labels, in the same register this
-         concept already uses for its section eyebrows ("The numbers", "Two of eight",
-         "The plans"). They are the mechanism PRICING-SECTIONS #2 requires: on a phone the
-         table reflows to per-rung cards and each cell prints its own header beside it,
-         via content:attr(data-k). No header states a claim.
-
-         AMPERSANDS ARE LITERAL, not &amp;. verify-copy-fidelity tag-strips but does NOT
-         decode entities, so "Apple Maps Set-Up &amp; Monitoring" reads as a MISS against
-         the registry verbatim "Apple Maps Set-Up & Monitoring". A bare "&" followed by a
-         space is a valid HTML5 ampersand. The three pre-existing &amp; occurrences on this
-         page (the two plan cards' reporting/technology lines and the case-studies
-         standfirst) were converted for the same reason and the same three atoms. -->
-    <!-- NINE-MODULE PRICE TABLE REMOVED (owner, 2026-08-19). -->
-
     <div class="row">
       <div class="col">
         <div class="hz-plans">
@@ -1149,10 +1167,10 @@
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">WEB Plus</em> INCLUDED</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">Web Graphics</em> INCLUDED</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting & Attribution</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology & Integrations Support</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
             </ul>
           </div>
@@ -1176,10 +1194,10 @@
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">OUTREACH Email</em> INCLUDED</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">OUTREACH SMS</em> INCLUDED</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Review Management</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting & Attribution</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>General Marketing Consulting</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology & Integrations Support</span></li>
+            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology &amp; Integrations Support</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
             </ul>
           </div>
@@ -1208,8 +1226,7 @@
      The right to DISPLAY was confirmed 2026-08-12; the right to NAME was not.
      Do not add client names here without an owner sign-off and a ledger entry.
      ========================================================================== -->
-<!-- pick: PROOF-SECTIONS.md #4 Case-study - metric-led card | considered: #5,#1,#3 | why: this section has exactly four proofs and each one is nothing but a pair of measured lifts against an unnamed client mark, which is #4's whole definition - the card leads with the metric and the narrative is the metric; the fan only changes how the four are SEATED, it does not change what a card is. #4 is also the only entry that survives the open O4 restriction: the right to DISPLAY the marks was confirmed 2026-08-12 but the right to NAME the clients was not, so the card cannot carry a client name and a metric-led card is the one shape that does not need one. #5 showcase image plus result split was the closest rival and is rejected because it wants a photograph per case and there is none - only a logo plate - so the image half would be an empty frame or a repeat of the mark. #1 testimonials cards grid is refused outright: it asks for attributed quotes, and the fabricated-testimonial rule on this build permits only the eight real quotes that live on the two ad landers, none of which belongs to these four. #3 testimonials carousel is on the owner's forbidden-motion list and would additionally hide three of the four proofs behind an interaction, which is the exact defect the pricing pick was written to avoid. -->
-<section class="mc-section surface-dark" id="case-studies">
+<section class="mc-section" id="case-studies">
   <!-- THE LOWER-GROUND HEX PLANE, window 1 of 2. The hero's isometric prism
        field, continued under this section AND the footer. This is not a copy of
        a field the footer also has: hex-field.js renders ONE plate for the union
@@ -1222,32 +1239,13 @@
        data-hex-clear is NOT decoration: it anchors a soft elliptical clearing
        under the head. Without it the gradient turn measures 2.73:1 at 1440,
        under the 3.0 large-text floor. With it, 3.18:1. -->
-  <!-- G-DOM 2026-08-18: same treatment as the benchmarks lid, and here the
-       container--plane guarantee is LOAD BEARING rather than tidy. #case-studies carries
-       its own rule `#case-studies > .container{position:relative;z-index:1}`, so a plain
-       .container wrapper would become this window's offsetParent -- and the wrapper is
-       zero-height (its only child is absolute), which would collapse the plane to nothing.
-       .container--plane out-specifies that rule back to position:static/z-index:auto, so
-       the window keeps measuring itself against the section exactly as before
-       (measured: offsetParent stays #case-studies, rect unchanged at 1440 and 390). -->
-  <div class="container container--full container--plane">
-    <div class="row">
-      <div class="col">
-        <div class="mc-hexfield" data-hexfield="lower-ground" data-hex-clear=".cs-fan__head" aria-hidden="true"></div>
-      </div>
-    </div>
-  </div>
+  <div class="mc-hexfield" data-hexfield="lower-ground" data-hex-clear=".cs-fan__head" aria-hidden="true"></div>
   <div class="container">
-    <!-- G-DOM 2026-08-18: the fan is an OBJECT, so it belongs in a .col, not directly
-         under the .container. .col carries min-width:0 so the fan's overflow-x:clip
-         box measures the same width it did as a direct child. -->
-    <div class="row">
-      <div class="col">
     <div class="cs-fan">
         <div class="cs-fan__inner">
           <div class="cs-fan__head">
             <h2 class="mc-head">Case <span class="mc-head__turn">studies</span></h2>
-            <p class="cs-fan__standfirst">Long-term relationships built on trust, transparency, & results since 2012</p>
+            <p class="cs-fan__standfirst">Long-term relationships built on trust, transparency, &amp; results since 2012</p>
             <p class="cs-fan__lede">We get it, the digital marketing and cannabis industries don't always have the most dependable people to rely on. That's why at Dispenza, we back up what we say with results.</p>
           </div>
         </div>
@@ -1259,7 +1257,7 @@
               <article class="cs-fan__card cs-fan__card--v1" tabindex="0" aria-label="Case study 1 of 4">
                 <p class="cs-fan__idx" aria-hidden="true">01</p>
                 <span class="cs-fan__plate">
-                  <img class="cs-fan__logo" src="../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+                  <img class="cs-fan__logo" src="../../../assets/in-pages/NuLeaf.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
                 </span>
                 <ul class="cs-fan__figs" role="list">
                   <li class="cs-fan__fig cs-fan__fig--lead">350% Direction Request Increase</li>
@@ -1272,7 +1270,7 @@
               <article class="cs-fan__card cs-fan__card--dark" tabindex="0" aria-label="Case study 2 of 4">
                 <p class="cs-fan__idx" aria-hidden="true">02</p>
                 <span class="cs-fan__plate">
-                  <img class="cs-fan__logo" src="../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+                  <img class="cs-fan__logo" src="../../../assets/in-pages/norcal-logo-star-dispenza-client.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
                 </span>
                 <ul class="cs-fan__figs" role="list">
                   <li class="cs-fan__fig cs-fan__fig--lead">300% Phone Call Increase</li>
@@ -1285,7 +1283,7 @@
               <article class="cs-fan__card cs-fan__card--v2" tabindex="0" aria-label="Case study 3 of 4">
                 <p class="cs-fan__idx" aria-hidden="true">03</p>
                 <span class="cs-fan__plate">
-                  <img class="cs-fan__logo" src="../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
+                  <img class="cs-fan__logo" src="../../../assets/in-pages/the-cannabis-guys-logo-dispenza-dispensary-marketing-logo.webp" alt="" width="181" height="103" loading="lazy" decoding="async">
                 </span>
                 <ul class="cs-fan__figs" role="list">
                   <li class="cs-fan__fig cs-fan__fig--lead">480% Direction Request Increase</li>
@@ -1298,7 +1296,7 @@
               <article class="cs-fan__card cs-fan__card--v3" tabindex="0" aria-label="Case study 4 of 4">
                 <p class="cs-fan__idx" aria-hidden="true">04</p>
                 <span class="cs-fan__plate">
-                  <img class="cs-fan__logo" src="../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
+                  <img class="cs-fan__logo" src="../../../assets/in-pages/Firehouse.webp" alt="" width="200" height="200" loading="lazy" decoding="async">
                 </span>
                 <ul class="cs-fan__figs" role="list">
                   <li class="cs-fan__fig cs-fan__fig--lead">180% Website Visits Increase</li>
@@ -1310,8 +1308,6 @@
           </ol>
         </div>
       </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1335,12 +1331,7 @@
      The footer CARD stays opaque and floats ON the plane (owner: "can we have the
      footer card sit over them?"), so the hexagons read in the footer's top band
      and side gutters and the card's own copy keeps its full contrast. -->
-<!-- The --cover MODIFIER CLASS WAS DROPPED (2026-08-18, G-ORPHAN). It was defined in
-     no sheet and read by no script: hex-field.js keys the cover behaviour entirely off
-     the data-hexfield-cover ATTRIBUTE below, which is unchanged. A class that promises
-     styling nothing supplies is exactly what the orphan gate exists to catch, so it was
-     removed rather than given invented CSS. -->
-<div class="mc-hexfield" data-hexfield="lower-ground"
+<div class="mc-hexfield mc-hexfield--cover" data-hexfield="lower-ground"
      data-hexfield-cover=".site-footer" aria-hidden="true"></div>
 
 <!-- The plane carries its own behaviour, INSIDE <main>, for the same reason the
@@ -1348,85 +1339,31 @@
      No defer and no DOMContentLoaded wrapper -- the module measures after window
      LOAD, because the field's height is the sum of two real page regions and is
      not final until webfonts and the footer imagery have settled. -->
-<script src="../_design/hex-field.js"></script>
+<script src="../../hex-field.js"></script>
 
 <!-- ==========================================================================
      SECTION 6 . THE BREATH . KIND: BAND (full bleed event)
-     STAYS EMPTY, and that is now a decision rather than an omission. The body's
-     entire full-bleed-band budget is spent: "Increase Sales" opens #results and
-     "OUR SUITE OUR SUITE OUR SUITE" opens #pricing. Both are real corpus atoms
-     (18/19 and 71). There is no third repeated-phrase atom on index, and a band
-     with invented copy in it would break content law to fill a slot nobody asked
-     for. The slot is left standing because the composition reserved it, not
-     because something is still owed.
      ========================================================================== -->
+
 
 
 <!-- ==========================================================================
      SECTION 7 . THE CLOSING ASK . KIND: MEASURE
-     BUILT 2026-08-18. This slot was reserved by the approved composition and left
-     empty, and its emptiness is what made the page's hardest content problem
-     invisible: the SECTION 4 note above says the PROMISE band was removed at the
-     owner's direction on the understanding that "the claim itself survives ...
-     carried by #close". #close did not exist. So the attested claim was not on the
-     page at all, and three required atoms went with it (0052 / 0069 / 0070).
-
-     WHAT THIS IS AND IS NOT. It is NOT the removed PROMISE band coming back: that
-     was a mid-page full-bleed band between #results and #benchmarks, and it stays
-     gone. This is the closing ask the composition always reserved, carrying the
-     claim the removal note said #close would carry.
-
-     THE RE-HOMED EYEBROW. The SECTION 4 note recorded "only with dispenza"
-     (D-SRC-INDEX-0070, atom 52) as retired-by-owner because "#close already
-     carries its own eyebrow (PERFORMANCE GUARANTEE), so there was no honest place
-     to re-home it". That reasoning was about a #close that did not exist. The one
-     being built here has no eyebrow yet, and atom 52 is the source's OWN eyebrow
-     for exactly this claim -- it sits directly above atoms 53/54 in index.html. So
-     it is re-homed rather than retired, which also settles the ledger entry the
-     SECTION 4 note listed as still owed: nothing was retired, so nothing needs a
-     RETIRED-BY-OWNER row.
-
-     THE CONDITION IS CROSS-PAGE, AND DECLARED AS SUCH.
-     client-rules.capabilityTruth.guarantee: "REAL and conditional: top-3 local
-     search or you do not pay. Always state the condition." index's own 295 atoms
-     carry the guarantee but NOT the condition (verified: no "top 3" / "do not pay"
-     / "won't be charged" anywhere in _source/atoms/index.json). The condition
-     below is therefore quoted VERBATIM from a sibling page in the same clone:
-       _source/atoms/performance-marketing.json, body atom 10
-       (clone source: Code/clones/Dispenza/performance-marketing.html)
-     Not one character is paraphrased, and nothing is invented to bridge it. The
-     same sentence in a longer form also exists at how-it-works.json atom 4; the
-     performance-marketing wording was chosen because it is the two-sentence form,
-     which states the promise and its condition without a third clause of
-     self-description.
-
-     HOW block-banned-content IS SATISFIED. overclaim.guarantee_unconditional.banned
-     lists the literal string "Guarantees Results", and this section states it. The
-     gate does not try to decide by substring whether the condition is present -- the
-     rule's wording ("top-3 local search or you do not pay") and the clone's wording
-     are not the same sentence, and a fuzzy match there would be a gate that guesses.
-     It requires the requirement to be DISCHARGED EXPLICITLY instead, by an
-     `overclaim:<topic>` declaration comment on the page. That declaration is the next
-     comment below, and it names the condition verbatim and where it came from.
-
-     (Recorded because it changed under this work: earlier in the same session the
-     gate blocked this section 3/3 WITH the condition already present, because it
-     tested only for the phrase and had no discharge path. The hook was revised at
-     17:23 to add the declaration escape. The note that used to sit here said the red
-     was unavoidable; it was true when written and is not true now, so it is replaced
-     rather than left standing.)
      ========================================================================== -->
-<!-- pick: SECTION-COMPONENTS.md #41 Closing CTA (final action) | considered: #40,#8,#33 | why: the page's last move has to be the single claim the owner personally attested plus the condition that makes it credible plus one way to act on it, and #41 is the entry defined as exactly that - a final action with nothing after it but the frame - which is also the only shape that lets the guarantee be the last thing read rather than one item in a band of several. #40 pre-footer CTA band was the closest rival and is rejected because a band wants to sit tight against the footer, and the footer here is a floating card over a hex plane, so a band would either fight that card's shadow or force the plane to end early. #8 manifesto belief statement is the right REGISTER for a guarantee but it is a creed with no action, and this is the page's conversion moment, not its philosophy. #33 custom-quote driver actively contradicts the wedge this page is built on - every figure is already printed nine rungs and two plans up the page, so asking the visitor to request a quote would retract the one thing the site does that eighteen crawled competitors do not. -->
-<!-- CLOSING GUARANTEE BAND REMOVED (owner, 2026-08-19). -->
+
 
 </main>
 
+
+<!-- ============================================================ LOCKED CHROME
+     Footer card and mobile sticky bar, verbatim from _design/_chrome-block.html.
+     ============================================================ -->
 <footer class="site-footer">
   <div class="footer-card">
 
     <div class="f-row f-row--contact">
       <div class="f-brand">
-        <img src="../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200" decoding="async">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
         <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
       </div>
       <div class="f-contact">
@@ -1455,21 +1392,470 @@
   </div>
 </footer>
 
-<!-- LOCKED CHROME BEHAVIOUR - rail scroll state, the two group panels, the mobile drawer.
-     Sourced verbatim from the chrome winner. Animates transform and opacity only; the
-     prefers-reduced-motion branch lives in dispenza-chrome.css. -->
+<div class="sticky-cta" id="sticky-cta">
+  <a class="btn btn--ghost" href="tel:+17024207272">Call</a>
+  <a class="btn btn--solid" href="contact.html">Book demo</a>
+</div>
 
-<!-- PAGE EFFECTS - the shared motion engine (scroll reveals, number counters, gauges,
-     decks, parallax, accordions, dividers, case tabs, marquee idling).
-     It lived INLINE in the foundation specimen, so nothing but that one specimen ever ran
-     it: the locked template linked NO scripts and every built page was inert. Measured on
-     the LIVE site before this line existed - index carried 32 [data-reveal] and 12
-     [data-count-to] hooks, html.js was FALSE, 0 elements had .is-in, and every counter
-     showed its final value statically.
-     Loaded HERE, in the chrome, so every page gets it and no page can forget it.
-     The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
-     INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
-     fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
-<script src="../_design/page-effects.js" defer></script>
+
+<script>
+/* ---------------------------------------------------------------------------
+   PART A . CHROME BEHAVIOUR. Sourced verbatim from the locked chrome winner
+   (chrome concept 1). Not re-derived here.
+   --------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+
+  /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
+     PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
+     all eight links keep working. It is a decoration over information that is already on screen. */
+  var pvNum = doc.getElementById('svc-pv-num');
+  var pvTitle = doc.getElementById('svc-pv-title');
+  var pvDesc = doc.getElementById('svc-pv-desc');
+  if (pvNum && pvTitle && pvDesc) {
+    var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
+    var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
+    var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+    svcRows.forEach(function (row) {
+      var o = {
+        n: row.getAttribute('data-n') || rest.n,
+        t: row.getAttribute('data-title') || rest.t,
+        d: row.getAttribute('data-desc') || rest.d
+      };
+      row.addEventListener('mouseenter', function () { showSvc(o); });
+      row.addEventListener('focus', function () { showSvc(o); });
+    });
+    var svcList = doc.querySelector('.svc-list');
+    if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
+  }
+})();
+
+
+/* ---------------------------------------------------------------------------
+   PART B . BODY MOTION. This is the concept's motion, and it is deliberately
+   small: one reveal gesture, one media scale in, one gentle drift, one count up.
+   Every branch below fails to the fully visible resting state.
+   --------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* GAUGE GEOMETRY, DECLARED UP HERE ON PURPOSE.
+     These were originally declared beside initGauge, further down. `var`
+     declarations hoist but their ASSIGNMENTS do not -- and the reduced-motion
+     branch below returns early, calling initGauge before that assignment ever
+     ran. initGauge itself is a hoisted function declaration so the call
+     succeeded; the constants inside it were simply `undefined`, and every tick
+     coordinate came out NaN. The console said "attribute x1: Expected length,
+     NaN" and the arc silently stayed empty for every reduced-motion visitor.
+     Declaring them before the first possible use removes the ordering hazard. */
+  var GA_R = 78, GA_CIRC = 2 * Math.PI * GA_R, GA_ARC = GA_CIRC * 270 / 360;
+  var GA_START = 135, GA_SWEEP = 270;
+
+  function show(el) { el.classList.add('is-in'); }
+
+  function paintFinalCounts() {
+    [].slice.call(doc.querySelectorAll('[data-count-to]')).forEach(function (node) {
+      var to = parseFloat(node.getAttribute('data-count-to'));
+      var dec = parseInt(node.getAttribute('data-count-dec') || '0', 10);
+      var suffix = node.getAttribute('data-count-suffix') || '';
+      var prefix = node.getAttribute('data-count-prefix') || '';
+      if (isFinite(to)) node.textContent = prefix + to.toFixed(dec) + suffix;
+      node.setAttribute('data-counted', '1');
+    });
+  }
+
+  var targets = [].slice.call(doc.querySelectorAll('[data-reveal],[data-media-in]'));
+
+  /* REDUCED MOTION, or no IntersectionObserver at all: everything is placed in its
+     resting visible state immediately and no observer is created. */
+  if (reduce.matches || !('IntersectionObserver' in window)) {
+    targets.forEach(show);
+    paintFinalCounts();
+    /* THE GAUGES TOO. This branch returns before the observer is built, and the
+       gauges are driven FROM that observer -- so without this a reduced-motion
+       visitor got an empty ring where the arc should be. Measured: dasharray
+       stuck at 0. Reduced motion means no ANIMATION, not no artwork. */
+    [].slice.call(doc.querySelectorAll('[data-gauge]')).forEach(initGauge);
+    return;
+  }
+
+  /* COUNT UP. The final value is already in the markup, so the animation only ever
+     replaces text it is about to restore. */
+  function countUp(node) {
+    if (node.getAttribute('data-counted') === '1') return;
+    node.setAttribute('data-counted', '1');
+    var to = parseFloat(node.getAttribute('data-count-to'));
+    var dec = parseInt(node.getAttribute('data-count-dec') || '0', 10);
+    var suffix = node.getAttribute('data-count-suffix') || '';
+    /* PREFIX SUPPORT. The counter REPLACES textContent, so anything authored
+       around the number is destroyed when it runs -- the eight city figures are
+       corpus verbatims of the form "+51.37%", and without this the leading "+"
+       was silently dropped on every one of them the moment the section scrolled
+       into view. Additive: absent the attribute this is '' and nothing changes.
+       BOTH paths need it -- the animated one here and paintFinalCounts above,
+       which is what a reduced-motion visitor gets. */
+    var prefix = node.getAttribute('data-count-prefix') || '';
+    if (!isFinite(to)) return;
+    var start = null;
+    var dur = 1400;
+    function frame(t) {
+      if (start === null) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      node.textContent = prefix + (to * eased).toFixed(dec) + suffix;
+      if (p < 1) window.requestAnimationFrame(frame);
+      else node.textContent = prefix + to.toFixed(dec) + suffix;
+    }
+    window.requestAnimationFrame(frame);
+  }
+
+  /* ---------------------------------------------------------------------------
+     THE SERVICE GAUGE. Revs like a tachometer, not like a dial.
+
+     A tachometer does not ease to a stop, it overshoots and damps -- that is a
+     second-order response, so it is written as one rather than approximated with
+     keyframes:
+         v(t) = target * (1 - e^(-zwt) * (cos(wd t) + (zw/wd) sin(wd t)))
+     zeta 0.69 and omega 4.82 are solved from the two properties wanted, not
+     dialled in by eye:
+         overshoot = e^(-z*pi/sqrt(1-z^2)) = 5.0%
+         peak time = pi/wd                 = 0.90s
+     After settling, a small irregular flutter holds it at "high RPM": three
+     mutually prime frequencies with a breathing amplitude, so it never reads as
+     a loop. prefers-reduced-motion paints the settled state and starts no loop.
+     --------------------------------------------------------------------------- */
+  /* THE SCALE IS PER GAUGE, and it carries headroom on purpose. With the arc
+     topping out at the target the rev is invisible -- the overshoot clamps and
+     the needle just arrives. A max slightly above the value leaves the arc room
+     to swing past and settle back, which is the whole gesture. */
+
+  function initGauge(host) {
+    if (host.getAttribute('data-gauge-on') === '1') { return; }
+    host.setAttribute('data-gauge-on', '1');
+    var target = parseFloat(host.getAttribute('data-gauge-to')) || 0;
+    var GA_MAX = parseFloat(host.getAttribute('data-gauge-max')) || 10;
+    var arc   = host.querySelector('.g-arc');
+    var bloom = host.querySelector('.g-bloom');
+    var knob  = host.querySelector('.g-knob');
+    var halo  = host.querySelector('.g-halo');
+    var numEl = host.querySelector('.mc-gauge__n');
+    var tickG = host.querySelector('.g-ticks');
+
+    var N = 30, tickEls = [], tickAt = [];
+    for (var i = 0; i < N; i++) {
+      var f = i / (N - 1), a = (GA_START + GA_SWEEP * f) * Math.PI / 180;
+      var ln = doc.createElementNS('http://www.w3.org/2000/svg', 'line');
+      ln.setAttribute('x1', (110 + 60 * Math.cos(a)).toFixed(2));
+      ln.setAttribute('y1', (110 + 60 * Math.sin(a)).toFixed(2));
+      ln.setAttribute('x2', (110 + 66 * Math.cos(a)).toFixed(2));
+      ln.setAttribute('y2', (110 + 66 * Math.sin(a)).toFixed(2));
+      ln.setAttribute('stroke-width', '1.6');
+      ln.setAttribute('stroke-linecap', 'round');
+      ln.setAttribute('stroke', 'var(--ds-line)');
+      tickG.appendChild(ln); tickEls.push(ln); tickAt.push(f * GA_MAX);
+    }
+
+    function paint(v, glow) {
+      var c = Math.max(0, Math.min(GA_MAX, v));
+      var len = GA_ARC * (c / GA_MAX);
+      arc.setAttribute('stroke-dasharray',   len.toFixed(2) + ' ' + GA_CIRC.toFixed(2));
+      bloom.setAttribute('stroke-dasharray', len.toFixed(2) + ' ' + GA_CIRC.toFixed(2));
+      bloom.setAttribute('opacity', glow.toFixed(3));
+      var a = (GA_START + GA_SWEEP * (c / GA_MAX)) * Math.PI / 180;
+      var kx = 110 + GA_R * Math.cos(a), ky = 110 + GA_R * Math.sin(a);
+      knob.setAttribute('cx', kx.toFixed(2)); knob.setAttribute('cy', ky.toFixed(2));
+      halo.setAttribute('cx', kx.toFixed(2)); halo.setAttribute('cy', ky.toFixed(2));
+      knob.setAttribute('opacity', '1');
+      halo.setAttribute('opacity', (0.5 + glow * 0.45).toFixed(3));
+      numEl.textContent = String(Math.round(c));
+      for (var i = 0; i < tickEls.length; i++) {
+        tickEls[i].setAttribute('stroke',
+          tickAt[i] <= c + 0.08 ? 'var(--ds-accent-light)' : 'var(--ds-line)');
+      }
+    }
+
+    if (reduce.matches) { paint(target, 0.5); return; }
+
+    var Z = 0.69, W = 4.82, WD = W * Math.sqrt(1 - Z * Z);
+    var t0 = null, seated = false;
+    function step(now) {
+      if (t0 === null) { t0 = now; }
+      var t = (now - t0) / 1000, v, glow;
+      if (!seated) {
+        var e = Math.exp(-Z * W * t);
+        var s1 = 1 - e * (Math.cos(WD * t) + (Z * W / WD) * Math.sin(WD * t));
+        var eP = Math.exp(-Z * W * Math.max(0, t - 1/60));
+        var s0 = 1 - eP * (Math.cos(WD * Math.max(0,t-1/60)) + (Z*W/WD) * Math.sin(WD * Math.max(0,t-1/60)));
+        v = target * s1;
+        glow = Math.min(1, Math.abs(target * (s1 - s0)) * 3.4 + 0.28);
+        if (t >= 1.45) { seated = true; }
+      } else {
+        var fl = (Math.sin(t*17.3)*0.62 + Math.sin(t*26.9)*0.38 + Math.sin(t*41.7)*0.22)
+               * (0.72 + 0.28*Math.sin(t*3.1)) * 1.5;      /* degrees */
+        v = target + fl / GA_SWEEP * GA_MAX;
+        glow = 0.40 + Math.abs(fl) * 0.5;
+      }
+      paint(v, glow);
+      window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  /* ---------------------------------------------------------------------------
+     THE DECK. A row, and manual.
+
+     The owner's motion spec forbids "autoplay carousels": there is no timer in
+     here. It moves on a button, a drag, or an arrow key. That rule exists to
+     stop content sliding out from under a reader, and a control that only moves
+     on input is the opposite of that failure.
+
+     IT WAS A FAN UNTIL THE MAP NEEDED ROOM. The overlapping stack put two of its
+     three cards behind the front one at reduced opacity, spending horizontal
+     space on decoration — and that space was the same space the map was starving
+     for. A row weights all three equally and lets the frame edge imply the rest,
+     which is what the reference does.
+
+     THE STYLESHEET OWNS THE CARD WIDTH, not this script. The width is derived
+     from the track so that three cards plus a peek of the fourth always fit,
+     with a floor at the width the longest figure actually needs. This script
+     only reads the resulting pitch off two real cards and translates by it.
+
+     ALL EIGHT CARDS STAY IN THE DOM and in the accessibility tree — the track is
+     translated, never emptied — so nothing is hidden from a screen reader, from
+     find-in-page, or from verify-copy-fidelity.
+     --------------------------------------------------------------------------- */
+  [].slice.call(doc.querySelectorAll('[data-deck]')).forEach(function (root) {
+    var vp    = root.querySelector('.mc-deck__viewport');
+    var stage = root.querySelector('.mc-deck__stage');
+    var cards = [].slice.call(stage.querySelectorAll('.mc-result'));
+    var prev  = root.querySelector('[data-deck-prev]');
+    var next  = root.querySelector('[data-deck-next]');
+    var count = root.querySelector('[data-deck-count]');
+    if (!cards.length) { return; }
+
+    var i = 0;
+
+    /* the row is applied by script, so with JS off the stage stays a plain
+       readable column rather than eight cards jammed into one viewport */
+    root.classList.add('is-slider');
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+    /* MEASURED, NOT ASSUMED. The pitch is read off two real cards, so it carries
+       whatever the gap token resolves to at this width -- and the card width is
+       set by the stylesheet from the track, not by this script. */
+    function pitch() {
+      if (cards.length < 2) { return cards[0].getBoundingClientRect().width; }
+      return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+    }
+    function visible() {
+      var p = pitch();
+      if (!p) { return 1; }
+      return Math.max(1, Math.floor((vp.clientWidth + 2) / p));
+    }
+
+    function render() {
+      var max = Math.max(0, cards.length - visible());
+      if (i > max) { i = max; }
+      if (i < 0)   { i = 0; }
+
+      stage.style.transform = 'translate3d(' + (-i * pitch()) + 'px,0,0)';
+      count.textContent = pad(i + 1) + ' / ' + pad(cards.length);
+      /* THE ROW HAS ENDS, so the buttons tell the truth about them. The fan
+         wrapped and therefore never disabled; a row that silently refuses to
+         move is worse than one that shows it cannot. */
+      prev.disabled = (i <= 0);
+      next.disabled = (i >= max);
+    }
+
+    function go(d) { i += d; render(); }
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
+
+    /* keyboard: the bar is focusable through its buttons, and the deck answers
+       the arrow keys once anything inside it has focus */
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
+    });
+
+    /* drag / swipe -- a row is a thing you push, so it should be */
+    var x0 = 0, dragging = false, moved = 0;
+    stage.addEventListener('pointerdown', function (e) {
+      dragging = true; x0 = e.clientX; moved = 0;
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (!dragging) { return; }
+      moved = e.clientX - x0;
+    });
+    stage.addEventListener('pointerup', function (e) {
+      if (!dragging) { return; }
+      dragging = false;
+      stage.releasePointerCapture(e.pointerId);
+      if (Math.abs(moved) > 40) { go(moved < 0 ? 1 : -1); }
+    });
+
+    window.addEventListener('resize', render);
+    render();
+  });
+
+  /* THE ONE GESTURE. Fires once, at 15% viewport entry. */
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      show(entry.target);
+      obs.unobserve(entry.target);
+      if (entry.target.hasAttribute('data-gauge')) { initGauge(entry.target); }
+      var n = entry.target.querySelector('[data-count-to]');
+      if (n) countUp(n);
+    });
+  }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
+
+  targets.forEach(function (el) { obs.observe(el); });
+
+  /* PARALLAX. 0.94x, which is a 6% differential, capped so the drift can never
+     exceed the image overscan. Transform only, written as a custom property so the
+     scale in and the drift compose in a single CSS declaration. rAF throttled. */
+  var bands = [].slice.call(doc.querySelectorAll('[data-parallax]'));
+  var ticking = false;
+
+  function drift() {
+    ticking = false;
+    var vh = window.innerHeight || 1;
+    bands.forEach(function (band) {
+      var r = band.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      /* progress runs from 1 to -1 as the band crosses the viewport */
+      var progress = ((r.top + r.height / 2) - vh / 2) / (vh / 2 + r.height / 2);
+      if (progress > 1) progress = 1;
+      if (progress < -1) progress = -1;
+      var travel = Math.min(r.height * 0.06, 40);
+      band.style.setProperty('--ds-par', (progress * travel).toFixed(2) + 'px');
+    });
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(drift);
+  }
+  if (bands.length) {
+    drift();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+})();
+</script>
+
 </body>
 </html>

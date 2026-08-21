@@ -1,0 +1,1028 @@
+<!--META concept=1 name=floating-rail stage=chrome -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispenza / Chrome 1 / Floating Rail</title>
+<meta name="description" content="Chrome concept 1 of 3 for Dispenza: a floating, self-contained nav rail inset from the viewport, two floating group panels, and the brand's inset charcoal footer card, on the locked luminous-depth identity.">
+
+<link rel="stylesheet" href="../../dispenza-fonts.css">
+<link rel="stylesheet" href="../../dispenza-tokens.css">
+
+<!--
+  DISPENZA / CHROME CONCEPT 1 "FLOATING RAIL"
+  ==========================================
+  WHAT THIS FILE IS. The site FRAME that wraps all 27 pages: the nav rail, the two
+  group panels (Services 8, Team 6), the mobile drawer, the mobile sticky action bar
+  and the footer card. The hero and the one content band below are SCAFFOLDING so the
+  frame can be judged against real page material; they are not the deliverable.
+
+  THE ARCHITECTURE (what makes this concept 1 and not 2 or 3).
+  The nav DETACHES from the page edge. It is a rounded bar inset from the viewport on
+  all three sides, so the dark page runs visibly underneath and past it. The two group
+  panels drop as SEPARATE floating surfaces that repeat the same corner language rather
+  than growing out of a full-width header. The footer answers with the brand's existing
+  inset charcoal card, so the page is bracketed top and bottom by two floating surfaces
+  and the canvas reads as one continuous dark field running behind both.
+
+  THE LOCKED IDENTITY IS NOT REINTERPRETED HERE. Every colour, radius, shadow, spacing
+  and motion value is read from _design/dispenza-tokens.css (concept 3 "luminous depth",
+  owner-locked). No raw hex in the stylesheet. The three near-black planes
+  (--ds-bg-surface / --ds-bg-warm / --ds-bg-surface-2) do the depth work; the violet is
+  deployed as LIGHT, never as fill on a large surface. Raw px appears only where the
+  token system carries no value: hairline widths, font sizes, line heights, the logo
+  height, the panel widths and the media-query breakpoints.
+
+  WHERE THE ONE GLOW IS SPENT (the standing risk the owner flagged).
+  Exactly one moment lights up on this frame: the rail's SCROLLED state. Over the hero
+  the rail is fully transparent and carries no border, no shadow and no light. Past 8px
+  of scroll it gains glass, a hairline, and a violet edge-catch: a gradient hairline
+  along its lower edge plus a soft --ds-glow-wash bloom under it. Nothing else on the
+  page glows. The panels, the cards, the drawer, the sticky bar and the footer card all
+  carry hairline plus layered shadow only. Restraint here is FEWER, LARGER moments.
+
+  ACCESSIBILITY. Measured pairings are recorded in the CONTRAST LEDGER comment block
+  further down. The raw brand violet is never painted as small text on any dark plane
+  (3.45:1); --ds-accent-ink carries every small accent text role instead.
+
+  MOTION. Owner spec is binding: transparent-over-hero to solid-with-blur on scroll;
+  hover lift of 2px to 4px at var(--ds-dur-fast) 160ms, inside the owner's 150ms to
+  200ms window; transform and opacity only for element motion. FLAGGED HONESTLY: the
+  rail's state change runs at var(--ds-dur) 220ms rather than a literal 200ms, because
+  220ms is the locked token and writing a raw 200ms would put a motion value outside the
+  token system. The rail's state change also transitions background, border and shadow
+  because the owner spec asks for that state change by name; no other element animates a
+  paint property. No bounce, no overshoot, no rotation, no flip, no loop, no autoplay.
+  Full prefers-reduced-motion support is at the bottom of the sheet.
+
+  LINK CONVENTION. Nav and footer hrefs use the build's page-relative "<slug>.html"
+  form (the routes are in _handoff/sitemap.yaml). In this standalone specimen they do
+  not resolve; once the chrome is promoted into the shell they resolve under pages/.
+-->
+
+<style>
+/* ===========================================================================
+   0. RESET + PAGE GROUND
+   =========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--ds-bg-surface);
+  color:var(--ds-ink);
+  font-family:var(--ds-font-body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{margin:0;padding:0;list-style:none}
+h1,h2,h3,p{margin:0}
+
+/* Focus. One visible ring for every interactive role in the frame. */
+a:focus-visible,button:focus-visible{
+  outline:2px solid var(--ds-accent-ink);
+  outline-offset:3px;
+  border-radius:var(--ds-r-control);
+}
+
+.skip{
+  position:absolute;left:var(--ds-space-md);top:calc(-1 * var(--ds-space-2xl));
+  z-index:var(--ds-z-modal);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  background:var(--ds-bg-surface-2);color:var(--ds-ink);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-control);
+  font-size:14px;
+}
+.skip:focus{top:var(--ds-space-md)}
+
+/* Structure grammar: section > .container > .row > .col > object. */
+.container{width:100%;max-width:var(--ds-container-max);margin:0 auto;padding:0 var(--ds-space-md)}
+.row{display:flex;flex-wrap:wrap;gap:var(--ds-space-md)}
+.row--center{justify-content:center}
+.col{min-width:0;flex:1 1 100%}
+.col--measure{max-width:760px;margin:0 auto}
+.col--span-4{flex:1 1 260px}
+
+/* ===========================================================================
+   1. THE FLOATING RAIL
+   The shell is fixed and inset; the rail inside it is the floating surface.
+   At rest it is invisible glass over the hero. Scrolled, it is the one lit thing.
+   =========================================================================== */
+.rail-shell{
+  position:fixed;top:var(--ds-space-sm);left:0;right:0;
+  z-index:var(--ds-z-sticky);
+  padding:0 var(--ds-space-md);
+}
+.rail-dock{position:relative;max-width:var(--ds-container-max);margin:0 auto}
+
+.rail{
+  position:relative;
+  display:flex;align-items:center;gap:var(--ds-space-md);
+  padding:var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-md);
+  border:1px solid transparent;
+  border-radius:var(--ds-r-pill);
+  background:transparent;
+  transition:
+    background-color var(--ds-dur) var(--ds-ease),
+    border-color var(--ds-dur) var(--ds-ease),
+    box-shadow var(--ds-dur) var(--ds-ease),
+    backdrop-filter var(--ds-dur) var(--ds-ease);
+}
+.is-stuck .rail{
+  background:var(--ds-glass-bg);
+  -webkit-backdrop-filter:var(--ds-glass-blur);
+  backdrop-filter:var(--ds-glass-blur);
+  border-color:var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+}
+
+/* THE ONE GLOW. A gradient hairline catching the rail's lower edge, plus a soft
+   wash bloom beneath it. Both appear only in the scrolled state. */
+.rail::after,.rail::before{content:"";position:absolute;pointer-events:none;opacity:0;
+  transition:opacity var(--ds-dur) var(--ds-ease)}
+.rail::after{
+  left:9%;right:9%;bottom:-1px;height:1px;
+  background:var(--ds-grad-brand);
+}
+.rail::before{
+  left:14%;right:14%;bottom:calc(-1 * var(--ds-space-md));height:var(--ds-space-md);
+  background:var(--ds-glow-wash);
+  filter:blur(6px);
+}
+.is-stuck .rail::after{opacity:1}
+.is-stuck .rail::before{opacity:var(--ds-opacity-scrim)}
+
+.rail__logo{display:inline-flex;align-items:center;flex:0 0 auto;padding:var(--ds-space-2xs) 0}
+.rail__logo img{height:26px;width:auto}
+
+.rail__nav{flex:1 1 auto;display:flex;justify-content:center}
+.rail__list{display:flex;align-items:center;gap:var(--ds-space-2xs)}
+.rail__group{position:static}
+.rail__link{
+  position:relative;
+  display:inline-flex;align-items:center;gap:var(--ds-space-2xs);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  color:var(--ds-ink);
+  font-size:14px;line-height:1.2;font-weight:500;letter-spacing:.005em;
+  transition:color var(--ds-dur-fast) var(--ds-ease-out),background-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.rail__link:hover{color:var(--ds-ink-heading);background:var(--ds-accent-soft)}
+.rail__link[aria-current="page"]{color:var(--ds-ink-heading)}
+.rail__link[aria-current="page"]::after{
+  content:"";position:absolute;left:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-2xs);
+  height:2px;border-radius:var(--ds-r-pill);background:var(--ds-primary);
+}
+.rail__caret{width:9px;height:9px;flex:0 0 auto;transition:transform var(--ds-dur-fast) var(--ds-ease-out)}
+.rail__trigger[aria-expanded="true"]{color:var(--ds-ink-heading);background:var(--ds-accent-soft)}
+.rail__trigger[aria-expanded="true"] .rail__caret{transform:rotate(180deg)}
+.rail__ext{width:9px;height:9px;flex:0 0 auto;opacity:var(--ds-opacity-muted)}
+
+.rail__actions{display:flex;align-items:center;gap:var(--ds-space-xs);flex:0 0 auto}
+
+/* ===========================================================================
+   2. BUTTONS. The brand ships exactly two variants and this frame adds none.
+   =========================================================================== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--ds-space-2xs);
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border:1px solid transparent;border-radius:var(--ds-r-pill);
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;line-height:1;
+  white-space:nowrap;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out),
+             background-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.btn--solid{background:var(--ds-primary);color:var(--ds-ink-on-dark);box-shadow:var(--ds-shadow-rest)}
+.btn--solid:hover{transform:translateY(-3px);box-shadow:var(--ds-shadow-card)}
+.btn--ghost{border-color:var(--ds-primary);color:var(--ds-accent-ink);background:transparent}
+.btn--ghost:hover{transform:translateY(-3px);background:var(--ds-accent-soft)}
+.btn--wide{width:100%}
+
+/* ===========================================================================
+   3. THE FLOATING GROUP PANELS
+   Separate surfaces with the rail's corner language, not a full-width mega band.
+   =========================================================================== */
+.rail-panel{
+  position:absolute;top:calc(100% + var(--ds-space-xs));
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  padding:var(--ds-space-lg);
+  opacity:0;visibility:hidden;
+  transform:translateY(-6px);
+  transition:opacity var(--ds-dur) var(--ds-ease),
+             transform var(--ds-dur) var(--ds-ease),
+             visibility var(--ds-dur) var(--ds-ease);
+}
+.rail-panel.is-open{opacity:1;visibility:visible;transform:translateY(0)}
+.rail-panel--services{left:0;right:0}
+.rail-panel--team{left:50%;margin-left:-270px;width:540px}
+
+.panel__head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-sm);margin-bottom:var(--ds-space-md);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.panel__eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.panel__note{font-size:13px;color:var(--ds-ink-soft)}
+
+.panel__grid{display:grid;gap:var(--ds-space-2xs)}
+.panel__grid--services{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-lg)}
+.panel__grid--team{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--ds-space-md)}
+
+.panel__item{
+  display:block;padding:var(--ds-space-sm);
+  border:1px solid transparent;border-radius:var(--ds-r-control);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             background-color var(--ds-dur-fast) var(--ds-ease-out),
+             border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.panel__item:hover{transform:translateY(-2px);background:var(--ds-bg-warm);border-color:var(--ds-line)}
+.panel__title{display:block;font-family:var(--ds-font-display);font-size:15px;font-weight:600;color:var(--ds-ink-heading);letter-spacing:-.005em}
+.panel__desc{display:block;margin-top:var(--ds-space-2xs);font-size:13px;line-height:1.5;color:var(--ds-ink-soft)}
+
+.panel__person{display:flex;align-items:center;gap:var(--ds-space-sm)}
+.panel__mono{
+  flex:0 0 auto;width:38px;height:38px;border-radius:var(--ds-r-pill);
+  display:grid;place-items:center;
+  background:var(--ds-primary-soft);border:1px solid var(--ds-line);
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.04em;
+  color:var(--ds-accent-ink);
+}
+
+/* ===========================================================================
+   4. BURGER + MOBILE DRAWER. The drawer is the rail's own language at 375:
+   an inset floating card, not an edge-to-edge takeover.
+   =========================================================================== */
+.rail__burger{
+  display:none;flex:0 0 auto;
+  width:42px;height:42px;border-radius:var(--ds-r-pill);
+  border:1px solid var(--ds-line);
+  align-items:center;justify-content:center;
+}
+.rail__burger span{display:block;width:16px;height:2px;background:var(--ds-ink);border-radius:var(--ds-r-pill)}
+.rail__burger span + span{margin-top:4px}
+
+.drawer-scrim{
+  position:fixed;inset:0;z-index:var(--ds-z-overlay);
+  background:var(--ds-scrim);
+  opacity:0;visibility:hidden;
+  transition:opacity var(--ds-dur) var(--ds-ease),visibility var(--ds-dur) var(--ds-ease);
+}
+.is-drawer-open .drawer-scrim{opacity:1;visibility:visible}
+
+.drawer{
+  position:fixed;z-index:var(--ds-z-drawer);
+  top:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-sm);
+  width:min(340px,calc(100vw - var(--ds-space-md)));
+  display:flex;flex-direction:column;
+  padding:var(--ds-space-md);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+  overflow-y:auto;
+  transform:translateX(calc(100% + var(--ds-space-lg)));
+  visibility:hidden;
+  transition:transform var(--ds-dur) var(--ds-ease),visibility var(--ds-dur) var(--ds-ease);
+}
+.is-drawer-open .drawer{transform:translateX(0);visibility:visible}
+
+.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:var(--ds-space-md);
+  padding-bottom:var(--ds-space-md);border-bottom:1px solid var(--ds-hairline)}
+.drawer-head img{height:24px;width:auto}
+.drawer-close{width:38px;height:38px;border-radius:var(--ds-r-pill);border:1px solid var(--ds-line);
+  display:grid;place-items:center;color:var(--ds-ink)}
+.drawer-nav{padding:var(--ds-space-sm) 0;flex:1 1 auto}
+.drawer-nav > ul > li + li{border-top:1px solid var(--ds-hairline)}
+.drawer-link,.acc-trigger{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--ds-space-sm);
+  width:100%;padding:var(--ds-space-sm) var(--ds-space-2xs);
+  font-family:var(--ds-font-display);font-size:16px;font-weight:600;color:var(--ds-ink);
+  text-align:left;
+}
+.drawer-link[aria-current="page"]{color:var(--ds-accent-ink)}
+.acc-trigger[aria-expanded="true"]{color:var(--ds-ink-heading)}
+.acc-trigger[aria-expanded="true"] .rail__caret{transform:rotate(180deg)}
+.acc-sub{display:none;padding:0 0 var(--ds-space-sm) var(--ds-space-sm)}
+.acc-sub.is-open{display:block}
+.acc-sub a{display:block;padding:var(--ds-space-xs) 0;font-size:14px;color:var(--ds-ink-soft)}
+.acc-sub a:hover{color:var(--ds-ink)}
+.drawer-cta{display:grid;gap:var(--ds-space-xs);padding-top:var(--ds-space-md);border-top:1px solid var(--ds-hairline)}
+
+/* ===========================================================================
+   5. STICKY ACTION BAR (mobile). A floating pill inset from all three edges,
+   the same geometry as the rail, so the frame reads as one system.
+   =========================================================================== */
+.sticky-cta{
+  position:fixed;z-index:var(--ds-z-sticky);
+  left:var(--ds-space-md);right:var(--ds-space-md);bottom:var(--ds-space-md);
+  display:none;align-items:center;gap:var(--ds-space-xs);
+  padding:var(--ds-space-2xs);
+  background:var(--ds-glass-bg);
+  -webkit-backdrop-filter:var(--ds-glass-blur);
+  backdrop-filter:var(--ds-glass-blur);
+  border:1px solid var(--ds-glass-border);
+  border-radius:var(--ds-r-pill);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+  transition:opacity var(--ds-dur) var(--ds-ease),transform var(--ds-dur) var(--ds-ease);
+}
+.sticky-cta .btn{flex:1 1 auto}
+.sticky-cta .btn--ghost{flex:0 1 40%}
+.sticky-cta.is-hidden{opacity:0;transform:translateY(140%);pointer-events:none}
+
+/* ===========================================================================
+   6. SCAFFOLDING BODY (hero band + one content band). Not the deliverable.
+   =========================================================================== */
+.hero{
+  position:relative;overflow:hidden;
+  background:var(--ds-bg-warm);
+  padding:calc(var(--ds-section-py) + var(--ds-space-2xl)) 0 var(--ds-section-py);
+  text-align:center;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--ds-grid);background-size:var(--ds-grid-size);
+  opacity:var(--ds-opacity-texture);
+  -webkit-mask-image:linear-gradient(180deg,black 0%,transparent 78%);
+  mask-image:linear-gradient(180deg,black 0%,transparent 78%);
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:var(--ds-divider-h);
+  background:var(--ds-fade-to-paper);
+}
+.hero .container{position:relative;z-index:var(--ds-z-raised)}
+.eyebrow{
+  font-family:var(--ds-font-display);font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ds-accent-ink);
+}
+.h-hero{
+  margin:var(--ds-space-md) 0 var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:clamp(38px,5.4vw,64px);line-height:1.04;letter-spacing:-.028em;
+  font-weight:800;color:var(--ds-ink-heading);
+}
+.lead{font-size:clamp(16px,1.5vw,18px);line-height:1.65;color:var(--ds-ink-soft)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm);justify-content:center;margin-top:var(--ds-space-lg)}
+
+.suite{padding:var(--ds-section-py) 0;background:var(--ds-bg-surface)}
+.sec-head{max-width:640px;margin:0 0 var(--ds-space-xl)}
+.h2{margin-top:var(--ds-space-sm);font-family:var(--ds-font-display);font-size:clamp(26px,3vw,38px);
+  line-height:1.12;letter-spacing:-.02em;font-weight:700;color:var(--ds-ink-heading)}
+.svc{
+  display:block;height:100%;padding:var(--ds-space-lg);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.svc:hover{transform:translateY(-4px);box-shadow:var(--ds-shadow-lift)}
+.svc h3{font-family:var(--ds-font-display);font-size:18px;font-weight:600;color:var(--ds-ink-heading);letter-spacing:-.01em}
+.svc p{margin-top:var(--ds-space-xs);font-size:14px;color:var(--ds-ink-soft)}
+.svc-index{display:block;margin-bottom:var(--ds-space-sm);font-family:var(--ds-font-display);
+  font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--ds-accent-ink)}
+
+/* ===========================================================================
+   7. THE FOOTER CARD. The brand signature: dark charcoal, rounded, inset from
+   the page edge, so it answers the rail as the second floating surface.
+   =========================================================================== */
+.site-footer{padding:var(--ds-space-2xl) var(--ds-space-md) var(--ds-space-lg)}
+.footer-card{
+  max-width:var(--ds-container-max);margin:0 auto;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+  overflow:hidden;
+}
+.f-row{padding:var(--ds-space-lg) var(--ds-space-lg)}
+.f-row + .f-row{border-top:1px solid var(--ds-hairline)}
+.f-row--contact{display:flex;flex-wrap:wrap;gap:var(--ds-space-xl);justify-content:space-between}
+.f-brand{flex:1 1 280px;max-width:380px}
+.f-brand img{height:28px;width:auto}
+.f-brand p{margin-top:var(--ds-space-sm);font-size:14px;color:var(--ds-ink-soft)}
+.f-contact{flex:0 1 340px;display:grid;gap:var(--ds-space-sm);align-content:start}
+.f-label{font-family:var(--ds-font-display);font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-accent-ink)}
+.f-contact a,.f-contact address{font-style:normal;font-size:15px;color:var(--ds-ink);line-height:1.5}
+.f-contact a{transition:color var(--ds-dur-fast) var(--ds-ease-out)}
+.f-contact a:hover{color:var(--ds-accent-ink)}
+.f-row--links{display:flex;flex-wrap:wrap;align-items:center;gap:var(--ds-space-md) var(--ds-space-xl);
+  padding-top:var(--ds-space-md);padding-bottom:var(--ds-space-md)}
+.f-links{display:flex;flex-wrap:wrap;gap:var(--ds-space-md) var(--ds-space-lg)}
+.f-links a{position:relative;font-size:15px;color:var(--ds-ink);padding:var(--ds-space-2xs) 0}
+.f-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--ds-primary);transition:right var(--ds-dur) var(--ds-ease)}
+.f-links a:hover::after{right:0}
+.f-row--legal{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm) var(--ds-space-lg);
+  justify-content:space-between;align-items:center;
+  padding-top:var(--ds-space-sm);padding-bottom:var(--ds-space-sm);
+  background:var(--ds-bg-warm)}
+.f-fine{font-size:13px;color:var(--ds-ink-soft)}
+
+/* ===========================================================================
+   8. THE 375 DRAWER SPECIMEN (a second frame, so the open drawer is judgeable
+   at desktop width). It is a static reproduction, clearly labelled, and sits
+   outside the page proper.
+   =========================================================================== */
+.specimen{padding:0 var(--ds-space-md) var(--ds-space-2xl);background:var(--ds-bg-surface)}
+.specimen-inner{max-width:var(--ds-container-max);margin:0 auto;
+  border-top:1px solid var(--ds-hairline);padding-top:var(--ds-space-xl)}
+.specimen-head{display:flex;flex-wrap:wrap;gap:var(--ds-space-sm) var(--ds-space-md);
+  align-items:baseline;justify-content:space-between;margin-bottom:var(--ds-space-lg)}
+.specimen-stage{display:flex;flex-wrap:wrap;gap:var(--ds-space-xl)}
+.device{
+  position:relative;width:375px;max-width:100%;height:640px;overflow:hidden;
+  background:var(--ds-bg-warm);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card);
+}
+.device::before{
+  content:"";position:absolute;inset:0;
+  background-image:var(--ds-grid);background-size:var(--ds-grid-size);
+  opacity:var(--ds-opacity-texture);
+}
+.device-scrim{position:absolute;inset:0;background:var(--ds-scrim)}
+.spec-bar{position:absolute;top:var(--ds-space-sm);left:var(--ds-space-sm);right:var(--ds-space-sm);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);background:var(--ds-glass-bg);border:1px solid var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-rest)}
+.spec-bar img{height:20px;width:auto}
+.spec-drawer{
+  position:absolute;top:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-sm);
+  width:300px;display:flex;flex-direction:column;overflow:hidden;
+  padding:var(--ds-space-md);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-glass-border);border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-lift),var(--ds-inset-hi);
+}
+.spec-caption{max-width:340px;font-size:14px;color:var(--ds-ink-soft)}
+.spec-caption strong{color:var(--ds-ink);font-weight:600}
+.spec-caption ul{margin-top:var(--ds-space-sm);display:grid;gap:var(--ds-space-xs)}
+.spec-caption li{padding-left:var(--ds-space-sm);border-left:2px solid var(--ds-primary)}
+
+/* ===========================================================================
+   9. RESPONSIVE
+   =========================================================================== */
+@media (max-width:1023px){
+  .rail__nav,.rail__actions{display:none}
+  .rail__burger{display:inline-flex}
+  /* The compressed rail tightens its right padding so the burger hugs the rail's
+     own right edge: at 375 the burger is the rightmost control and sits within
+     4px of the header's content edge, which is the mobile-chrome rule. */
+  .rail{justify-content:space-between;padding-right:var(--ds-space-2xs)}
+  .rail-panel{display:none}
+}
+@media (max-width:900px){
+  .sticky-cta{display:flex}
+  .site-footer{padding-bottom:calc(var(--ds-space-2xl) + var(--ds-space-lg))}
+}
+@media (max-width:767px){
+  .f-row{padding:var(--ds-space-lg) var(--ds-space-md)}
+  .f-row--contact{gap:var(--ds-space-lg)}
+  .hero{padding-top:calc(var(--ds-section-py) + var(--ds-space-lg))}
+}
+
+/* ===========================================================================
+   10. REDUCED MOTION. Every transform is dropped and every surface is shown in
+   its resting, fully visible state. No information is lost.
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    transition-duration:1ms !important;
+    animation-duration:1ms !important;
+    animation-iteration-count:1 !important;
+  }
+  .btn:hover,.svc:hover,.panel__item:hover{transform:none}
+  .rail-panel,.rail-panel.is-open{transform:none}
+  .drawer{transform:translateX(0);display:none}
+  .is-drawer-open .drawer{display:flex}
+  .sticky-cta.is-hidden{transform:none}
+}
+</style>
+</head>
+
+<body class="surface-dark">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===========================================================================
+     CONTRAST LEDGER (measured, sRGB relative luminance, WCAG 2.1)
+     The rail is translucent, so its pairings are measured against the COMPOSITE
+     it actually paints: var(--ds-glass-bg) over the canvas resolves to #1e2025 and
+     over the hero plane to #202227. The elevated plane #222429 is the LIGHTEST
+     ground any rail or panel text can sit on, so it is quoted as the worst case.
+
+       ink        on #222429  worst-case rail and panel ground ....  14.10:1
+       ink        on #1e2025  rail glass over the canvas .........   14.80:1
+       white      on #8d3fe8  BOOK DEMO solid fill ...............    5.24:1
+       accent-ink on #222429  CALL US label, panel eyebrows ......    4.91:1
+       accent-ink on #1e2025  CALL US on the scrolled rail .......    5.15:1
+       ink-soft   on #222429  panel descriptors, footer fine .....    5.87:1
+       ink-soft   on #1b1d22  hero lead ..........................    6.37:1
+       white      on #1b1d22  hero headline ......................   16.86:1
+       ink        on #222429  footer links, address, phone .......   14.10:1
+       REJECTED   raw violet as small text on #15161a ...........     3.45:1
+
+     Every text pairing shipped here clears 4.5:1. The raw brand violet is used
+     only as fill, border and the 2px active underline, where 3:1 is the floor.
+     =========================================================================== -->
+
+<!-- pick: NAV-PATTERNS.md #1 Floating pill, centered | considered: #2,#13,#14 | why: the concept is a rail that DETACHES from the page edge, and #1 is the only entry whose desktop, mobile and drawer states are specified as one floating-pill system, so the frame stays one idea at every width; #2 is a full-bleed bar welded to the viewport edge, which kills the "dark page runs underneath" read this brand's luminous-depth canvas is built on, and #13 puts an always-visible hamburger beside the logo, buying progressive disclosure a seven-item nav does not need while adding a second competing affordance; #14 hides the whole nav behind one button, wrong for a site whose eight service pages and six team pages are the thing being sold. #1 also gives the scrolled state a natural place to spend the single glow: a pill has real edges to catch light, which a full-width bar does not. -->
+<header class="rail-shell" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="rail__link" href="how-it-works.html">Pricing</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-team" aria-expanded="false" aria-controls="panel-team">
+              Team
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SERVICES: 8 items. A floating panel spanning the rail's own width, two
+         columns of four, each item carrying the page's one-line job. It repeats
+         the rail's 14px corner and hairline; it does not glow. -->
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+      </div>
+      <div class="panel__grid panel__grid--services">
+        <a class="panel__item" href="performance-marketing.html">
+          <span class="panel__title">Performance marketing</span>
+          <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+        </a>
+        <a class="panel__item" href="branding-graphic-design.html">
+          <span class="panel__title">Brand and package design</span>
+          <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+        </a>
+        <a class="panel__item" href="webdesign-development.html">
+          <span class="panel__title">Web design and development</span>
+          <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+        </a>
+        <a class="panel__item" href="ads-design.html">
+          <span class="panel__title">Advertisement design</span>
+          <span class="panel__desc">Creative sized for every placement you actually run.</span>
+        </a>
+        <a class="panel__item" href="conversion-rate-optimization.html">
+          <span class="panel__title">Conversion rate optimization</span>
+          <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+        </a>
+        <a class="panel__item" href="integrations.html">
+          <span class="panel__title">Integrations</span>
+          <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+        </a>
+        <a class="panel__item" href="consulting.html">
+          <span class="panel__title">Consulting</span>
+          <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+        </a>
+        <a class="panel__item" href="reports.html">
+          <span class="panel__title">Reports</span>
+          <span class="panel__desc">What ran, what it cost, what it returned.</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- TEAM: 6 items. A narrower panel, same corner language, two columns of
+         three, monogram plus name plus role. Deliberately a different WIDTH from
+         the services panel so the two groups do not read as one undifferentiated
+         mega-menu, but the same SURFACE so the frame stays one system. -->
+    <div class="rail-panel rail-panel--team" id="panel-team" role="region" aria-label="Team">
+      <div class="panel__head">
+        <span class="panel__eyebrow">The people</span>
+        <span class="panel__note">Six named pages.</span>
+      </div>
+      <div class="panel__grid panel__grid--team">
+        <a class="panel__item panel__person" href="frances.html">
+          <span class="panel__mono" aria-hidden="true">FH</span>
+          <span><span class="panel__title">Frances Hutzel</span><span class="panel__desc">Accounts</span></span>
+        </a>
+        <a class="panel__item panel__person" href="sergio.html">
+          <span class="panel__mono" aria-hidden="true">SR</span>
+          <span><span class="panel__title">Sergio Ruiz</span><span class="panel__desc">Design</span></span>
+        </a>
+        <a class="panel__item panel__person" href="james.html">
+          <span class="panel__mono" aria-hidden="true">JC</span>
+          <span><span class="panel__title">James Compton</span><span class="panel__desc">Client strategy</span></span>
+        </a>
+        <a class="panel__item panel__person" href="shay.html">
+          <span class="panel__mono" aria-hidden="true">SS</span>
+          <span><span class="panel__title">Shay Spatz</span><span class="panel__desc">Content</span></span>
+        </a>
+        <a class="panel__item panel__person" href="nick.html">
+          <span class="panel__mono" aria-hidden="true">NM</span>
+          <span><span class="panel__title">Nick Marx</span><span class="panel__desc">Media buying</span></span>
+        </a>
+        <a class="panel__item panel__person" href="thomas.html">
+          <span class="panel__mono" aria-hidden="true">TR</span>
+          <span><span class="panel__title">Thomas B. Robinson</span><span class="panel__desc">Development</span></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li><a class="drawer-link" href="how-it-works.html">Pricing</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-team" aria-expanded="false" aria-controls="acc-team">
+          Team
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-team">
+          <ul>
+            <li><a href="frances.html">Frances Hutzel</a></li>
+            <li><a href="james.html">James Compton</a></li>
+            <li><a href="nick.html">Nick Marx</a></li>
+            <li><a href="sergio.html">Sergio Ruiz</a></li>
+            <li><a href="shay.html">Shay Spatz</a></li>
+            <li><a href="thomas.html">Thomas B. Robinson</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- pick: HERO-COMPOSITIONS.md #10 Centered headline only | considered: #5,#7,#22 | why: this file is judged on the FRAME, so the hero has to prove the rail is legible and correctly weighted over a real band without a photograph doing the work for it; #5 full-bleed image and #7 floating stat cards would both hand the rail an easy contrast backdrop and hide the exact failure mode a floating rail has, which is washing out over a busy plate, and #22 a numbers-led hero would pull the eye to figures this specimen has no owner-attested values for. Centered text on the mid plane with only the token grid texture is the honest, hardest test, and it leaves the whole upper band empty so the rail's inset geometry reads as a deliberate shape. -->
+  <section class="hero">
+    <div class="container">
+      <div class="row row--center">
+        <div class="col col--measure">
+          <p class="eyebrow">Chrome specimen &middot; concept 1</p>
+          <h1 class="h-hero">Marketing for dispensary owners, priced in the open.</h1>
+          <p class="lead">Dispenza runs performance marketing, web build and conversion work for licensed dispensaries. What you are judging on this page is the frame: the floating rail, the two group panels, the drawer, the sticky action bar and the footer card. The body copy is scaffolding.</p>
+          <div class="hero-actions">
+            <a class="btn btn--solid" href="contact.html">Book demo</a>
+            <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- pick: SECTION-COMPONENTS.md #9 Services 3-col | considered: #13,#11,#3 | why: the frame needs ONE band of real elevated surfaces under the rail so a judge can see whether the rail's glass reads as a distinct layer or merges with the cards it floats over; three equal cards on the elevated plane is the plainest way to show that separation, and it is the same card surface the eight service pages will use. #13 bento would introduce an asymmetric grid this specimen has no content to justify and would compete with the panels for attention, #11 pillars-with-image needs photography the chrome stage has not selected, and #3 a stat band would put oversized numerals directly under the rail and steal the one place the eye should be checking the frame. -->
+  <section class="suite">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="sec-head">
+            <p class="eyebrow">Scaffolding body</p>
+            <h2 class="h2">Three of the eight service pages the rail has to carry.</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col--span-4">
+          <a class="svc" href="performance-marketing.html">
+            <span class="svc-index">01</span>
+            <h3>Performance marketing</h3>
+            <p>Paid and organic demand for a licensed dispensary, reported against spend.</p>
+          </a>
+        </div>
+        <div class="col col--span-4">
+          <a class="svc" href="webdesign-development.html">
+            <span class="svc-index">02</span>
+            <h3>Web design and development</h3>
+            <p>Menu-connected sites your own staff can update without a ticket.</p>
+          </a>
+        </div>
+        <div class="col col--span-4">
+          <a class="svc" href="conversion-rate-optimization.html">
+            <span class="svc-index">03</span>
+            <h3>Conversion rate optimization</h3>
+            <p>Turning the traffic you already pay for into completed orders.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- pick: FOOTER-STYLES.md #22 Multi-row layered | considered: #1,#17,#14 | why: the client's existing footer is a dark charcoal rounded card INSET from the page edge, a real brand signature and the exact counterweight this concept needs at the bottom of the page, so the only open question is what goes INSIDE that card; #22's three stacked rows (brand and contact, then the link row, then the legal strip) let the card stay ONE surface with hairline seams instead of four columns, which is what keeps it reading as a floating object rather than a grid. #1 four-column dark would need four link groups and this footer carries five links plus one contact block, so a column layout would pad itself with invented headings; #17 centered minimal drops the address, phone and email the brand's footer card exists to carry; #14 hours-and-contact assumes opening hours, which an agency does not publish. -->
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- pick: STICKY-CTA-BAR.md #6 Floating pill bar | considered: #2,#1,#7 | why: the conversion goal is BOOK DEMO, a high-intent goal, so a mobile bar is mandatory, and #6 is the only entry whose geometry is the same idea as the rail: a pill inset from the edges, floating clear of the bottom, so the page is bracketed by two floating surfaces at 375 exactly as it is at 1440. #2's full-width edge-flush bar and #1's single edge-flush pill both weld the action to the hardware edge, which breaks the one architectural claim this concept makes; #7 glassmorphism is the surface treatment kept from that family and it is applied here on top of #6's geometry. The pill carries BOOK DEMO as the primary plus a compact CALL US sibling, because a phone call is the brand's declared secondary conversion and dropping it would hide it at the one width where tapping to call is free. -->
+<div class="sticky-cta" id="sticky-cta">
+  <a class="btn btn--ghost" href="tel:+17024207272">Call</a>
+  <a class="btn btn--solid" href="contact.html">Book demo</a>
+</div>
+
+<!-- SECOND FRAME. A static 375 reproduction of the drawer in its OPEN state, so
+     the mobile half of the nav system is judgeable at desktop width. The live
+     drawer above is the real one; this is a specimen of the same markup. -->
+<section class="specimen" aria-label="Mobile drawer specimen">
+  <div class="specimen-inner">
+    <div class="specimen-head">
+      <p class="eyebrow">Second frame &middot; drawer open at 375</p>
+      <p class="spec-caption">The drawer is the rail's own geometry at mobile: an inset floating card, not a full-bleed takeover.</p>
+    </div>
+
+    <div class="specimen-stage">
+      <div class="device">
+        <div class="spec-bar">
+          <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+          <span class="btn btn--solid">Book demo</span>
+        </div>
+        <div class="device-scrim"></div>
+
+        <div class="spec-drawer">
+          <div class="drawer-head">
+            <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+            <span class="drawer-close" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+          </div>
+          <nav class="drawer-nav" aria-label="Mobile drawer specimen">
+            <ul>
+              <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+              <li><a class="drawer-link" href="how-it-works.html">Pricing</a></li>
+              <li>
+                <button class="acc-trigger" type="button" aria-expanded="true" tabindex="-1">
+                  Services
+                  <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="acc-sub is-open">
+                  <ul>
+                    <li><a href="performance-marketing.html" tabindex="-1">Performance marketing</a></li>
+                    <li><a href="webdesign-development.html" tabindex="-1">Web design and development</a></li>
+                    <li><a href="conversion-rate-optimization.html" tabindex="-1">Conversion rate optimization</a></li>
+                    <li><a href="branding-graphic-design.html" tabindex="-1">Brand and package design</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a class="drawer-link" href="case-studies.html" tabindex="-1">Results</a></li>
+              <li>
+                <button class="acc-trigger" type="button" aria-expanded="false" tabindex="-1">
+                  Team
+                  <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </li>
+              <li><a class="drawer-link" href="contact.html" tabindex="-1">Contact</a></li>
+              <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener" tabindex="-1">Login</a></li>
+            </ul>
+          </nav>
+          <div class="drawer-cta">
+            <a class="btn btn--solid btn--wide" href="contact.html" tabindex="-1">Book demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-caption">
+        <p><strong>What to read in this frame.</strong></p>
+        <ul>
+          <li>The compressed rail keeps its pill and its inset, so the mobile bar is the same object as the desktop one.</li>
+          <li>The drawer repeats the 14px surface corner and the hairline border; it does not invent a new edge language.</li>
+          <li>Services and Team open as in-drawer accordions, so the eight and six item groups stay in one scroll rather than pushing a second screen.</li>
+          <li>Nothing in the drawer glows. The single lit moment stays on the scrolled rail.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* Chrome behaviour. Four interactions, each of which degrades to a visible,
+   operable state when JavaScript or motion is unavailable. */
+(function () {
+  'use strict';
+
+  var doc = document;
+  var root = doc.documentElement;
+
+  /* 1. RAIL STATE. Transparent over the hero; glass plus hairline plus the single
+        violet edge-catch past 8px of scroll. The class is the only thing JS sets. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+  syncRail();
+  window.addEventListener('scroll', syncRail, { passive: true });
+
+  /* 2. GROUP PANELS. Click toggles, hover opens on fine pointers, Escape and an
+        outside click close. aria-expanded is the source of truth so the keyboard
+        path and the pointer path always agree. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    var group = trigger.parentNode;
+    group.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* 3. DRAWER. Opens the inset card, locks the page scroll, moves focus to the
+        close control, and restores focus to the burger on close. */
+  var burger = doc.getElementById('hamburger');
+  var drawer = doc.getElementById('mobile-drawer');
+  var scrim = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger) burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closePanels(null); closeDrawer(); }
+  });
+
+  /* Drawer accordions for the two groups. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var sub = doc.getElementById(trigger.getAttribute('data-acc'));
+      if (!sub) return;
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (open) sub.classList.remove('is-open');
+      else sub.classList.add('is-open');
+    });
+  });
+
+  /* 4. STICKY ACTION BAR. It must never sit on top of the footer card, where the
+        same two actions are already reachable. An IntersectionObserver watches
+        .site-footer and hides the bar the moment the footer enters the viewport. */
+  var sticky = doc.getElementById('sticky-cta');
+  var footer = doc.querySelector('.site-footer');
+  if (sticky && footer && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.classList.toggle('is-hidden', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    io.observe(footer);
+  }
+})();
+</script>
+
+</body>
+</html>

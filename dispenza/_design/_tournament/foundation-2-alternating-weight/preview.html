@@ -1,0 +1,1138 @@
+<!--META concept=2 name=alternating-weight stage=foundation -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispenza / Foundation 2 / Alternating Weight</title>
+<meta name="description" content="Foundation concept 2 of 3 for Dispenza: a body that pulses heavy, light, breath down the scroll, on the locked luminous-depth identity and the locked floating-rail chrome.">
+
+<link rel="stylesheet" href="../../dispenza-fonts.css">
+<link rel="stylesheet" href="../../dispenza-tokens.css">
+<link rel="stylesheet" href="../../dispenza-chrome.css">
+
+<!-- =========================================================================
+     THE BODY CSS THIS CONCEPT IS PROPOSING  <<< THIS IS THE ARTIFACT TO JUDGE
+     =========================================================================
+     File: ./dispenza-structural.css   (sibling of this page, linked below)
+
+     WHY IT IS A FILE AND NOT AN INLINE <style> BLOCK. The brief asked for the
+     body CSS to be authored inline and clearly marked "so it can be extracted
+     to dispenza-structural.css if picked". It is authored in that file DIRECTLY
+     instead, for two reasons that both cut the same way:
+
+       1. verify-stylesheet-linked.mjs was read before authoring. At the
+          FOUNDATION stage it computes requireStruct = true (only a path
+          matching _design/_tournament/chrome* is exempt) and hard-fails a full
+          HTML page whose linked structural sheet does not RESOLVE ON DISK. An
+          inline-only concept cannot be written at all. A resolvable sibling
+          sheet is the only shape this page can legally take.
+       2. It removes the extraction step, and with it the chance that what the
+          owner judged and what gets promoted drift apart. If concept 2 wins,
+          the win is a single verbatim copy:
+              _design/_tournament/foundation-2-alternating-weight/dispenza-structural.css
+           -> _design/dispenza-structural.css
+
+     This is the idiom the system already expects: verify-not-flat.mjs resolves
+     a concept's LINKED stylesheets when it grades a foundation specimen,
+     because the reference BatchWorks specimens link their structural sheet too.
+
+     TOKEN PURITY: zero raw hex in that sheet. Every colour, shadow, radius, gap
+     and motion value resolves from var(--ds-*).
+     ========================================================================= -->
+<link rel="stylesheet" href="./dispenza-structural.css">
+
+<!--
+  DISPENZA / FOUNDATION CONCEPT 2 "ALTERNATING WEIGHT"
+  ===================================================
+  WHAT THIS FILE IS. The locked chrome wrapped around a REAL body, built from
+  real Dispenza content, so the owner can judge one thing: the RHYTHM.
+
+  WHAT IS LOCKED AND IS NOT TOUCHED HERE.
+    Identity  dispenza-tokens.css   (D22, luminous depth). Linked, never edited.
+    Chrome    dispenza-chrome.css + _chrome-block.html (D24, floating rail).
+              The header, drawer, sticky bar and footer card below are sourced
+              VERBATIM from the locked carrier. Not one class was renamed.
+  The ONE glow in this design is still the chrome's scrolled rail edge. The body
+  spends none of its own: no second glowing object appears anywhere below.
+
+  ---------------------------------------------------------------------------
+  DESIGN SYSTEM PROVENANCE. What this body is built FROM, not invented against.
+  ---------------------------------------------------------------------------
+    SPINE     _PAGE-COMPOSITION-LIBRARY.md, the universal 8-zone skeleton, read
+              through the composition-agency-creative blueprint (V1). Dispenza
+              is a marketing agency, so V1 is its vertical: a claim-led hero,
+              a positioning beat, the stat band EARLY, the capability rows, the
+              payload, then one anchor and one closing ask. ONE deliberate
+              departure, and it is the whole positioning: V1's zone-6 payload is
+              a portfolio gallery, and Dispenza's is the PRICE LADDER, because
+              nine published prices against zero published competitor figures is
+              the wedge the prep locked. The gallery slot is spent on proof
+              (beat 5) instead, which is what an operator actually buys on.
+
+    CEILING   _MODERN-WOW-SPEC, applied as follows and nowhere exceeded:
+              depth      layered token shadows, hairline borders, the inset
+                         top highlight, and real figure/ground between beats
+                         (canvas plane 0 against warm plane 1, never a
+                         decorative fill).
+              motion     staggered scroll-reveal, hover lift, image zoom on
+                         entry, count-up on the figures. All once, all
+                         transform-or-opacity, all reduced-motion gated.
+              type       display-scale contrast against calm body, oversized
+                         numerals for the metrics, a real reading measure.
+              light      violet deployed as LIGHT (the h1 turn, the media
+                         edge-catch, the rules) and a vignette scrim over the
+                         hero imagery, never as a large flat fill.
+              layout     rhythm in the negative space and an intentional
+                         asymmetry in the feature turn.
+              The spec's governing rule is "subtle over flashy, wow should be
+              FELT not noticed", which is exactly why this body adds no glow of
+              its own on top of the chrome's one lit moment.
+              NOT adopted from that spec: SVG shape dividers. The composition
+              library marks them ABSENT for this register, and the locked chrome
+              already sets the seam language (hairline, fade, inset card).
+
+    REFLOW    _RESPONSIVE-PATTERN-LIBRARY: the Comp6 table-to-cards reflow at
+              767 and the split-to-stack cascade at 900.
+
+    STICKY    _SCROLL-STICKY-BEHAVIOR-LIBRARY: the mobile action bar is
+              suppressed by the real closing CTA, never layered over it.
+
+    MOTION    _MOTION-TOKENS, held to the owner's narrower binding numbers
+              (they are stricter than the library defaults, so the owner wins).
+
+    SECTIONS  every beat carries its own selection ledger comment, directly
+              above its <section>, naming the pick, the real alternatives and
+              why this one won.
+  ---------------------------------------------------------------------------
+
+  THE CONCEPT. The page PULSES. Nine beats, in threes:
+
+    1  HERO ................... HEAVY   full-bleed hero-placeholder.webp
+    2  INFLUENCE HIGHLIGHTS ... light   four bare numerals, alone on the canvas
+    3  THE GUARANTEE ......... BREATH   one statement, one viewport
+    4  WHAT WE RUN ............ HEAVY   image-left then image-right, one beat
+    5  MEASURED RESULTS ....... light   eight cities as a ruled type ledger
+    6  WHY OPERATORS STAY .... BREATH   pull-quote over band-breath.webp
+    7  THE PRICE LADDER ....... HEAVY   nine published tiers, saturated module
+    8  THE TWO PLANS .......... light   two cards, a lot of air
+    9  BOOK DEMO ............. BREATH   the quiet close
+
+  Heavy is answered by light, and every third beat is a breath. The feature PAIR
+  is one beat with an internal turn (image-left, then image-right), which is why
+  two rows count once: the alternation happens INSIDE the beat, so the page-level
+  pulse is never broken by it.
+
+  WHERE THE TYPE DOES THE WORK. Nine steps of the scale are in use (S1 to S9,
+  documented in the structural sheet). Concept 2 carries hierarchy on type
+  rather than on chrome, so a beat can change weight without changing surface.
+
+  WHERE THE MOTION IS SPENT. On the STAGGER. Grouped items arrive in sequence
+  at 70ms apart, so the four figures, the eight ledger rows and the nine tier
+  rows are READ in order instead of appearing at once. Everything else is the
+  owner's spec at its quietest setting.
+
+  CONTRAST WAS MEASURED ON THE RENDERED PAGE, not read off the token table. The
+  full paint-stack result, including the two things it caught and corrected,
+  is recorded at the foot of <main>.
+
+  NO EM OR EN DASHES ANYWHERE IN THIS FILE, INCLUDING COMMENTS (G-NODASH).
+-->
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===================================================================== -->
+<!-- LOCKED CHROME, sourced verbatim from _design/_chrome-block.html.      -->
+<!-- Not grammar-governed and not re-derived. Do not edit here.            -->
+<!-- ===================================================================== -->
+<header class="rail-shell site-header" id="rail-shell">
+  <div class="rail-dock" id="rail-dock">
+
+    <div class="rail">
+      <a class="rail__logo" href="index.html" aria-label="Dispenza home">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+      </a>
+
+      <nav class="rail__nav" aria-label="Primary">
+        <ul class="rail__list">
+          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="rail__link" href="how-it-works.html">Pricing</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+              Services
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="case-studies.html">Results</a></li>
+          <li class="rail__group">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-team" aria-expanded="false" aria-controls="panel-team">
+              Team
+              <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </li>
+          <li><a class="rail__link" href="contact.html">Contact</a></li>
+          <li>
+            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
+              Login
+              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="rail__actions">
+        <a class="btn btn--ghost" href="tel:+17024207272">Call us</a>
+        <a class="btn btn--solid" href="contact.html">Book demo</a>
+      </div>
+
+      <button class="rail__burger" type="button" id="hamburger" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="rail-panel rail-panel--services" id="panel-services" role="region" aria-label="Services">
+      <div class="panel__head">
+        <span class="panel__eyebrow">Our suite</span>
+        <span class="panel__note">Eight service pages. Pricing for all of them sits on one page.</span>
+      </div>
+      <div class="panel__grid panel__grid--services">
+        <a class="panel__item" href="performance-marketing.html">
+          <span class="panel__title">Performance marketing</span>
+          <span class="panel__desc">Paid and organic demand for a licensed dispensary.</span>
+        </a>
+        <a class="panel__item" href="branding-graphic-design.html">
+          <span class="panel__title">Brand and package design</span>
+          <span class="panel__desc">Identity, packaging and in-store collateral.</span>
+        </a>
+        <a class="panel__item" href="webdesign-development.html">
+          <span class="panel__title">Web design and development</span>
+          <span class="panel__desc">Menu-connected sites built to be updated by staff.</span>
+        </a>
+        <a class="panel__item" href="ads-design.html">
+          <span class="panel__title">Advertisement design</span>
+          <span class="panel__desc">Creative sized for every placement you actually run.</span>
+        </a>
+        <a class="panel__item" href="conversion-rate-optimization.html">
+          <span class="panel__title">Conversion rate optimization</span>
+          <span class="panel__desc">Turning the traffic you already pay for into orders.</span>
+        </a>
+        <a class="panel__item" href="integrations.html">
+          <span class="panel__title">Integrations</span>
+          <span class="panel__desc">Menu, POS and loyalty systems talking to each other.</span>
+        </a>
+        <a class="panel__item" href="consulting.html">
+          <span class="panel__title">Consulting</span>
+          <span class="panel__desc">Operator-level advice when you run the marketing yourself.</span>
+        </a>
+        <a class="panel__item" href="reports.html">
+          <span class="panel__title">Reports</span>
+          <span class="panel__desc">What ran, what it cost, what it returned.</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="rail-panel rail-panel--team" id="panel-team" role="region" aria-label="Team">
+      <div class="panel__head">
+        <span class="panel__eyebrow">The people</span>
+        <span class="panel__note">Six named pages.</span>
+      </div>
+      <div class="panel__grid panel__grid--team">
+        <a class="panel__item panel__person" href="frances.html">
+          <span class="panel__mono" aria-hidden="true">FH</span>
+          <span><span class="panel__title">Frances Hutzel</span><span class="panel__desc">Accounts</span></span>
+        </a>
+        <a class="panel__item panel__person" href="sergio.html">
+          <span class="panel__mono" aria-hidden="true">SR</span>
+          <span><span class="panel__title">Sergio Ruiz</span><span class="panel__desc">Design</span></span>
+        </a>
+        <a class="panel__item panel__person" href="james.html">
+          <span class="panel__mono" aria-hidden="true">JC</span>
+          <span><span class="panel__title">James Compton</span><span class="panel__desc">Client strategy</span></span>
+        </a>
+        <a class="panel__item panel__person" href="shay.html">
+          <span class="panel__mono" aria-hidden="true">SS</span>
+          <span><span class="panel__title">Shay Spatz</span><span class="panel__desc">Content</span></span>
+        </a>
+        <a class="panel__item panel__person" href="nick.html">
+          <span class="panel__mono" aria-hidden="true">NM</span>
+          <span><span class="panel__title">Nick Marx</span><span class="panel__desc">Media buying</span></span>
+        </a>
+        <a class="panel__item panel__person" href="thomas.html">
+          <span class="panel__mono" aria-hidden="true">TR</span>
+          <span><span class="panel__title">Thomas B. Robinson</span><span class="panel__desc">Development</span></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<div class="drawer-scrim" id="drawer-scrim" hidden></div>
+
+<div class="drawer" id="mobile-drawer" aria-label="Menu">
+  <div class="drawer-head">
+    <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+    <button class="drawer-close" type="button" id="drawer-close" aria-label="Close menu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" focusable="false"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer-nav" aria-label="Mobile">
+    <ul>
+      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li><a class="drawer-link" href="how-it-works.html">Pricing</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
+          Services
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-services">
+          <ul>
+            <li><a href="performance-marketing.html">Performance marketing</a></li>
+            <li><a href="webdesign-development.html">Web design and development</a></li>
+            <li><a href="conversion-rate-optimization.html">Conversion rate optimization</a></li>
+            <li><a href="branding-graphic-design.html">Brand and package design</a></li>
+            <li><a href="ads-design.html">Advertisement design</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="consulting.html">Consulting</a></li>
+            <li><a href="reports.html">Reports</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="case-studies.html">Results</a></li>
+      <li>
+        <button class="acc-trigger" type="button" data-acc="acc-team" aria-expanded="false" aria-controls="acc-team">
+          Team
+          <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-sub" id="acc-team">
+          <ul>
+            <li><a href="frances.html">Frances Hutzel</a></li>
+            <li><a href="james.html">James Compton</a></li>
+            <li><a href="nick.html">Nick Marx</a></li>
+            <li><a href="sergio.html">Sergio Ruiz</a></li>
+            <li><a href="shay.html">Shay Spatz</a></li>
+            <li><a href="thomas.html">Thomas B. Robinson</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a class="drawer-link" href="contact.html">Contact</a></li>
+      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="drawer-cta">
+    <a class="btn btn--solid btn--wide" href="contact.html">Book demo</a>
+    <a class="btn btn--ghost btn--wide" href="tel:+17024207272">Call us</a>
+  </div>
+</div>
+
+<div class="sticky-cta is-hidden" id="sticky-cta">
+  <a class="btn btn--ghost" href="tel:+17024207272">Call</a>
+  <a class="btn btn--solid" href="contact.html">Book demo</a>
+</div>
+<!-- ===================== END OF THE LOCKED CHROME ======================= -->
+
+
+<main id="main">
+
+<!-- =====================================================================
+     BEAT 1 of 9   HEAVY
+     The heaviest thing on the page opens it. One image, one claim, nothing
+     else in the viewport.
+     ===================================================================== -->
+<!-- pick: HERO-COMPOSITIONS.md #5 Full-bleed image + overlay text | considered: #22,#9 | why: the owner's structural reference opens on full-bleed imagery with one measured text column, and this concept needs its FIRST beat to be the heaviest thing on the page so the light beat that follows reads as deliberate relief rather than as an empty section. #22 statistics-heavy was the real contender and lost on ordering, not on quality: the four influence totals are stronger as beat 2's own quiet viewport than crammed under the claim, which is exactly the compression the prep notes flag on the current homepage. #9 cinematic letterbox was rejected because a 50vh band cannot carry the weight this pulse needs at beat 1. -->
+<section class="dz-beat dz-beat--full dz-hero" id="beat-1" aria-labelledby="hero-title">
+
+  <!-- ANIMATED HERO SLOT - replace media layer only.
+       The media layer is self-contained: image, scrim and fade, nothing else.
+       Swapping it for an animated treatment changes no geometry, because every
+       rule that positions the hero lives on .dz-hero and .container, not here.
+       (The owner's contract writes this marker with an em dash; it is written
+       with a hyphen because G-NODASH bans em dashes in built files.)
+       IF THE IMAGE IS SWAPPED, RE-MEASURE: the hero eyebrow is the tightest
+       contrast string on the page at 4.63:1 against a 4.5:1 floor, and that
+       number depends on this photograph. -->
+  <div class="dz-hero__media dz-parallax" aria-hidden="true">
+    <img src="../../../assets/generated/hero-placeholder.webp" alt="" width="1024" height="576" fetchpriority="high" decoding="async">
+    <span class="dz-hero__scrim"></span>
+    <span class="dz-hero__fade"></span>
+  </div>
+  <!-- END ANIMATED HERO SLOT -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col col--span-8">
+        <p class="dz-eyebrow dz-rise">Dispensary marketing, Las Vegas</p>
+        <h1 class="dz-h1 dz-rise" id="hero-title">
+          #1 MARKETING
+          <span class="dz-h1__turn">AGENCY IN CANNABIS</span>
+        </h1>
+        <p class="dz-lead dz-measure dz-rise">Dispenza is the ultimate digital partner. We handle everything online, so you can focus on growth.</p>
+        <div class="dz-actions dz-rise">
+          <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+          <a class="btn btn--ghost" href="how-it-works.html">LEARN HOW</a>
+        </div>
+        <p class="dz-hero__cue dz-rise">Nine published prices below</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 2 of 9   LIGHT
+     Four numerals and nothing else. No cards, no fills, no image: the beat
+     is light because the type is alone on the canvas.
+     ===================================================================== -->
+<!-- pick: TRUST-STATS-SECTIONS.md #4 Stats - big-number band | considered: #3,#1 | why: these four totals need no sentence of explanation each, which is precisely the line the menu draws between #4 and #3, and the bare hairline-divided figures give the light beat its air where #3's card chrome would have re-introduced the weight beat 1 just spent. #3 count-up 3-up was rejected on both counts (four figures, not three, and a card per figure). #1 mono logo row was rejected because the 25 client marks carry no confirmed right-to-display and empty alt text, so a logo wall would be an unattributed borrowed-credibility claim this brand is not yet allowed to make. The menu's MOBILE-FLOOR rule is honoured: at 375 the row stacks with top rules and the numeral renders 48.75px, well clear of the 34px floor. -->
+<section class="dz-beat dz-beat--light dz-beat--canvas" id="beat-2" aria-labelledby="beat-2-title">
+  <div class="container">
+    <div class="row">
+      <div class="col col--span-12">
+        <div class="dz-head">
+          <p class="dz-eyebrow dz-rise">Our 2024 Influence;</p>
+          <h2 class="dz-h2 dz-rise" id="beat-2-title">Influence Highlights</h2>
+        </div>
+        <div class="dz-body">
+          <div class="dz-figures">
+            <div class="dz-figure dz-rise">
+              <span class="dz-numeral" data-count="1.2" data-decimals="1" data-suffix=" BLN">1.2 BLN</span>
+              <span class="dz-figure__label">SALES INFLUENCED</span>
+            </div>
+            <div class="dz-figure dz-rise">
+              <span class="dz-numeral" data-count="2.1" data-decimals="1" data-suffix=" BLN">2.1 BLN</span>
+              <span class="dz-figure__label">WEBSITE VISITS</span>
+            </div>
+            <div class="dz-figure dz-rise">
+              <span class="dz-numeral" data-count="3.8" data-decimals="1" data-suffix=" BLN">3.8 BLN</span>
+              <span class="dz-figure__label">GOOGLE IMPRESSIONS</span>
+            </div>
+            <div class="dz-figure dz-rise">
+              <span class="dz-numeral" data-count="500" data-decimals="0" data-suffix="+">500+</span>
+              <span class="dz-figure__label">LOCATION HELPED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 3 of 9   BREATH
+     One statement, one viewport, and the condition it is never allowed to
+     travel without.
+     ===================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #8 Manifesto / belief statement | considered: #7,#26 | why: the guarantee is the positioning wedge and it is a STANCE, not a proof point, so it earns the page's first true breath: one centred claim in an otherwise empty viewport, which is the only treatment that stops the strongest sentence on the site from being read as another feature line. #7 problem framing was the closer contender and was rejected because naming the buyer's pain here would put two ideas in one viewport and this concept's whole rule is one. #26 pull-quote is deliberately held back for beat 6, where the client's own voice does that job over an image; using it twice would flatten the difference between the two breaths. The owner-attested condition is bound to the claim in the same block, per the P6 attestation. -->
+<section class="dz-beat dz-beat--breath dz-beat--canvas" id="beat-3" aria-labelledby="beat-3-title">
+  <div class="container">
+    <div class="row row--center">
+      <div class="col col--measure">
+        <div class="dz-head dz-head--centre">
+          <span class="dz-breath__rule dz-rise" aria-hidden="true"></span>
+          <p class="dz-eyebrow dz-rise">PERFORMANCE GUARANTEE</p>
+          <h2 class="dz-display dz-measure--short dz-rise" id="beat-3-title">
+            Only Marketing Agency In Cannabis That Guarantees Results
+          </h2>
+          <p class="dz-breath__condition dz-rise">Top-3 local search, or you do not pay</p>
+          <p class="dz-breath__note dz-rise">only with dispenza</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 4 of 9   HEAVY
+     One beat, two rows, and the turn happens inside it: image left, then
+     image right. The alternation is internal so the page-level pulse holds.
+     ===================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #11 Service pillars 2-col with image | considered: #12,#13 | why: the owner adopted alternating image-left / image-right feature blocks from the structural reference by name, and #11 is the only entry that IS that shape, with the flip carrying real intent rather than decoration: the eye is thrown across the column axis once, which is what makes the pair read as a single heavy beat instead of two stacked rows. #12 feature-row-with-screenshot was rejected because these editorials are atmospheric, not product UI, so the screenshot framing would misdescribe the asset. #13 bento was rejected outright: an asymmetric tile field is the densest thing in the catalog and would collide with beat 7, which is already this page's saturated module. The media is height-capped and sits beside its copy per the compact feature-row law. -->
+<section class="dz-beat dz-beat--heavy dz-beat--recessed" id="beat-4" aria-labelledby="beat-4-title">
+  <div class="container container--wide">
+    <div class="row">
+      <div class="col col--span-12">
+        <div class="dz-head">
+          <p class="dz-eyebrow dz-rise">What we run</p>
+          <h2 class="dz-h2 dz-measure dz-rise" id="beat-4-title">Two of the eight, in the room where they actually get run</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- row A: image LEFT -->
+    <div class="row row--split dz-feature">
+      <div class="col col--span-5">
+        <div class="dz-media dz-zoom dz-rise">
+          <img src="../../../assets/generated/svc-performance-marketing.webp" alt="Ascending violet light forms reading as a rising performance curve on a near-black field" width="1024" height="768" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="col col--span-7">
+        <span class="dz-feature__index dz-rise">01</span>
+        <h3 class="dz-h3 dz-rise">Performance marketing</h3>
+        <p class="dz-lead dz-measure dz-rise">Paid and organic demand for a licensed dispensary.</p>
+        <ul class="dz-list">
+          <li class="dz-rise">Localized On-Page SEO</li>
+          <li class="dz-rise">Google Business Profile Management</li>
+          <li class="dz-rise">Citation Distribution and Management</li>
+          <li class="dz-rise">Monthly and Quarterly Reporting</li>
+          <li class="dz-rise">Dedicated Strategist</li>
+        </ul>
+        <a class="dz-link dz-rise" href="performance-marketing.html">See the service page</a>
+      </div>
+    </div>
+
+    <!-- row B: image RIGHT. Same shell, reversed, so the turn is the only change -->
+    <div class="row row--split row--rev dz-feature">
+      <div class="col col--span-5">
+        <div class="dz-media dz-zoom dz-rise">
+          <img src="../../../assets/generated/svc-webdesign.webp" alt="Layered translucent planes catching violet edge light, reading as interface structure" width="1024" height="768" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="col col--span-7">
+        <span class="dz-feature__index dz-rise">02</span>
+        <h3 class="dz-h3 dz-rise">Web design and development</h3>
+        <p class="dz-lead dz-measure dz-rise">Menu-connected sites built to be updated by staff.</p>
+        <ul class="dz-list">
+          <li class="dz-rise">Dedicated Project Manager</li>
+          <li class="dz-rise">Any Ecomm / Menu Integration</li>
+          <li class="dz-rise">Web Hosting</li>
+          <li class="dz-rise">Domain Management</li>
+          <li class="dz-rise">30-Day Backup and Restores</li>
+        </ul>
+        <a class="dz-link dz-rise" href="webdesign-development.html">See the service page</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 5 of 9   LIGHT
+     Eight measured cities as a ruled ledger. Type in air, no tiles.
+     ===================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #3 Stat strip / metric band | considered: #21,#30 | why: the source carries eight named cities with eight different measurement windows and the content-conservation contract forbids dropping any of them, so the pattern is taken at its "quantified credibility" role and adapted from 3-5 tiles to eight ruled rows: after the heavy feature pair the page needs type in air, and a ledger is read faster down a column than eight boxes are read across a grid. #21 case studies 3-col was rejected because a card per city would rebuild the weight this beat exists to release, and it would force cropping eight results to three. #30 before/after grid was rejected because the source has no before state, only a lift and a window. The staggered reveal is doing real work here: the rows arrive in order so the eye is walked to the Las Vegas figure rather than shown it. -->
+<section class="dz-beat dz-beat--light dz-beat--canvas" id="beat-5" aria-labelledby="beat-5-title">
+  <div class="container">
+    <div class="row">
+      <div class="col col--span-12">
+        <div class="dz-head">
+          <p class="dz-eyebrow dz-rise">Total Sale Increase</p>
+          <h2 class="dz-h2 dz-rise" id="beat-5-title">Increase Sales</h2>
+          <p class="dz-caption dz-measure dz-rise">Eight dispensaries, each with the window the lift was measured over.</p>
+        </div>
+        <div class="dz-body">
+          <div class="dz-ledger">
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Oceanside, CA</span>
+              <span class="dz-ledger__lift">+51.37% in the first 3 months</span>
+            </div>
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Mid City, LA, CA</span>
+              <span class="dz-ledger__lift">+50.1% in the first 3 months</span>
+            </div>
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Edmond, OK</span>
+              <span class="dz-ledger__lift">+196% in the first 2 months</span>
+            </div>
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Seaside, CA</span>
+              <span class="dz-ledger__lift">+94.5% in the first 2 months</span>
+            </div>
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Oakland, CA</span>
+              <span class="dz-ledger__lift">+94.5% in the first 5 months</span>
+            </div>
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Needles, CA</span>
+              <span class="dz-ledger__lift">+198% in the first 6 months</span>
+            </div>
+            <div class="dz-ledger__row dz-rise">
+              <span class="dz-ledger__place">Downtown LA, CA</span>
+              <span class="dz-ledger__lift">+55.2% in the first 6 months</span>
+            </div>
+            <div class="dz-ledger__row dz-ledger__row--lead dz-rise">
+              <span class="dz-ledger__place">Las Vegas, NV</span>
+              <span class="dz-ledger__lift">+733% in the first 30 months</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 6 of 9   BREATH
+     The client's own voice, full-bleed, nothing else in the viewport.
+     ===================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #26 Pull-quote section | considered: #57,#58 | why: this paragraph is the one place the brand names its reader (an operator who has been burned by an agency) in its own plainspoken register, so it is given a viewport with no other content in it, which is exactly the "no other content on this section" condition the entry sets. It is cited as a pull-quote and NOT as a testimonial because the words are Dispenza's own, and dressing first-party copy as third-party proof would be the dishonest read of the same layout. #57 standalone quote was the near-twin and lost only because it is framed as a transition device rather than a beat that carries a claim. #58 image divider full-bleed was rejected because a wordless band here would waste the page's best sentence. band-breath.webp is the one image in the set built to be almost empty, so it can hold type without competing. -->
+<section class="dz-beat dz-beat--full dz-band" id="beat-6" aria-labelledby="beat-6-title">
+  <div class="dz-band__media dz-parallax" aria-hidden="true">
+    <img src="../../../assets/generated/band-breath.webp" alt="" width="1024" height="576" loading="lazy" decoding="async">
+    <span class="dz-band__scrim"></span>
+  </div>
+  <div class="container">
+    <div class="row row--center">
+      <div class="col col--measure-wide">
+        <figure class="dz-quote dz-head--centre">
+          <span class="dz-quote__mark dz-rise" aria-hidden="true">&ldquo;</span>
+          <blockquote class="dz-h2 dz-rise" id="beat-6-title" cite="https://dispenza.com/">
+            We get it, the digital marketing and cannabis industries don&rsquo;t always have the most dependable people to rely on. That&rsquo;s why at Dispenza, we back up what we say with results.
+          </blockquote>
+          <figcaption class="dz-quote__cite dz-rise">Long-term relationships built on trust, transparency, &amp; results since 2012</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 7 of 9   HEAVY
+     The saturated module. Nine published prices, every one visible without
+     an interaction, on a solid panel over the pricing band.
+     ===================================================================== -->
+<!-- pick: PRICING-SECTIONS.md #2 Comparison table to cards on mobile | considered: #1,#3 | why: the wedge is that nine prices are PUBLISHED when no crawled competitor publishes one, and the wedge only pays if an operator can scan all nine against each other in a single viewport, which is what a real semantic table does and what a card grid cannot: nine cards would run three screens and rebuild the click-to-reveal problem the rebuild exists to fix. #1 three-tier cards was rejected on arithmetic alone (this ladder has nine rungs, not three) and is answered instead at beat 8, where the two bundled plans genuinely are a small card set. #3 billing toggle was rejected because there is no annual cadence to toggle to and hiding half the figures behind a control is the exact behaviour being removed. The Comp6 reflow is implemented: at 767 each tier becomes its own card and every cell prints its column label. -->
+<section class="dz-beat dz-beat--full dz-band dz-beat--heavy" id="beat-7" aria-labelledby="beat-7-title">
+  <div class="dz-band__media" aria-hidden="true">
+    <img src="../../../assets/generated/band-pricing.webp" alt="" width="1024" height="576" loading="lazy" decoding="async">
+    <span class="dz-band__scrim"></span>
+  </div>
+  <div class="container container--wide">
+    <div class="row">
+      <div class="col col--span-12">
+        <div class="dz-head dz-head--centre">
+          <p class="dz-eyebrow dz-eyebrow--on-media dz-rise">OUR SUITE</p>
+          <h2 class="dz-h2 dz-rise" id="beat-7-title">Nine tiers. Every price on the page.</h2>
+        </div>
+        <div class="dz-ladder__panel dz-rise">
+          <table class="dz-table">
+            <caption>The published ladder. Prices are monthly unless the unit says otherwise.</caption>
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Tier</th>
+                <th scope="col">Price</th>
+                <th scope="col">Each additional location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">01</td>
+                <th scope="row">Ecomm Plus</th>
+                <td class="dz-cell--price" data-label="Price">$399<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">+$99.99/Additional Location</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">02</td>
+                <th scope="row">WEB Plus</th>
+                <td class="dz-cell--price" data-label="Price">$1,200<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">+$200/Additional Location</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">03</td>
+                <th scope="row">WEB Pro</th>
+                <td class="dz-cell--price" data-label="Price">$2000<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">+$400/Additional Location</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">04</td>
+                <th scope="row">SEO Plus</th>
+                <td class="dz-cell--price" data-label="Price">$2,000<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">+$1,400/Additional Location</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">05</td>
+                <th scope="row">SEO Pro</th>
+                <td class="dz-cell--price" data-label="Price">$3,000<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">+$2,000/Additional Location</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">06</td>
+                <th scope="row">CREATIVE Plus</th>
+                <td class="dz-cell--price" data-label="Price">$800<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">Per Brand</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">07</td>
+                <th scope="row">CREATIVE Pro</th>
+                <td class="dz-cell--price" data-label="Price">$2,000<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">Up to 3 locations</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">08</td>
+                <th scope="row">OUTREACH SMS</th>
+                <td class="dz-cell--price" data-label="Price">$800<span>/Mo</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">+ $0.08/SMS</td>
+              </tr>
+              <tr class="dz-rise">
+                <td class="dz-cell--index" data-label="No.">09</td>
+                <th scope="row">OUTREACH Email</th>
+                <td class="dz-cell--price" data-label="Price">$1,200<span>/Per Campaign</span></td>
+                <td class="dz-cell--muted" data-label="Each additional location">Not priced per location</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 8 of 9   LIGHT
+     After nine rows the page opens out again: two plans, a lot of air.
+     ===================================================================== -->
+<!-- pick: CARD-VARIATIONS.md #15 Pricing tier card (2-up or 3-up) | considered: #5,#18 | why: the ladder resolves into exactly TWO bundled plans, and this is the one entry in the card catalog specified for a 2-up as well as a 3-up, so the set can be shown at its real size instead of padded to three to fit a grid; after beat 7's nine dense rows the light beat comes from two cards with room around them rather than from a change of surface. #5 stat tile 4-up was rejected because a plan is a decision, not a metric, and the stat treatment carries no price, badge or action. #18 promo banner was rejected because a full-width banner would read as an advertisement inside a page whose entire argument is that the prices are simply printed. The featured plan is lifted by an accent border and a gradient top edge, never by a louder fill, so the one glow stays on the chrome. -->
+<section class="dz-beat dz-beat--light dz-beat--canvas" id="beat-8" aria-labelledby="beat-8-title">
+  <div class="container">
+    <div class="row">
+      <div class="col col--span-12">
+        <div class="dz-head">
+          <p class="dz-eyebrow dz-rise">The two full plans</p>
+          <h2 class="dz-h2 dz-measure dz-rise" id="beat-8-title">Or take the whole suite as one line item</h2>
+        </div>
+        <div class="dz-body">
+          <div class="dz-plans">
+
+            <article class="dz-plan dz-plan--featured dz-rise">
+              <p class="dz-plan__badge">Most Popular!</p>
+              <h3 class="dz-h3">MARKETING Pro</h3>
+              <p class="dz-caption">Guaranteed results</p>
+              <p class="dz-plan__price">$4,200<span>/Mo</span></p>
+              <p class="dz-plan__addon">+$3,000/Additional Location</p>
+              <ul class="dz-plan__modules">
+                <li>SEO Pro</li>
+                <li>WEB Plus</li>
+                <li>Web Graphics</li>
+                <li>Dedicated Campaign Strategist</li>
+                <li>Semi-Exclusivity</li>
+                <li>Performance Benchmarks</li>
+              </ul>
+              <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+            </article>
+
+            <article class="dz-plan dz-rise">
+              <p class="dz-plan__badge">Full Suite</p>
+              <h3 class="dz-h3">ENTERPRISE</h3>
+              <p class="dz-caption">Guaranteed Results + Boost your retention</p>
+              <p class="dz-plan__price">$6,500<span>/Mo</span></p>
+              <p class="dz-plan__addon">Includes all A La Carte Upgrades</p>
+              <ul class="dz-plan__modules">
+                <li>SEO Pro</li>
+                <li>WEB Pro</li>
+                <li>CREATIVE Pro</li>
+                <li>OUTREACH SMS</li>
+                <li>OUTREACH Email</li>
+                <li>Review Management</li>
+              </ul>
+              <a class="btn btn--ghost" href="how-it-works.html">See what is in each</a>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     BEAT 9 of 9   BREATH
+     The close. Quiet, high-contrast, one action. This is also the element
+     the mobile sticky bar hides behind, so the two never double up.
+     ===================================================================== -->
+<!-- pick: SECTION-COMPONENTS.md #40 Pre-footer CTA band | considered: #41,#37 | why: the page has argued price, proof and guarantee and now has to ask, and the third breath is the right shape for it because the owner asked for CTAs that are quiet and high-contrast rather than loud, which a band of type in open space delivers and a saturated accent slab does not. #41 closing CTA was rejected as too slight to answer a nine-beat scroll: it is a single line where this position needs a restated claim above the action. #37 CTA form was rejected because the sitewide conversion action routes to the contact page by decision, so putting fields here would fork the one path the whole site funnels into. The hairline seam above it is the only chrome, because this beat and the one before it share a ground. -->
+<section class="dz-beat dz-beat--breath dz-beat--canvas dz-beat--seam" id="beat-9" aria-labelledby="beat-9-title">
+  <div class="container">
+    <div class="row row--center">
+      <div class="col col--measure">
+        <div class="dz-head dz-head--centre">
+          <p class="dz-eyebrow dz-rise">Start here</p>
+          <h2 class="dz-display dz-measure--short dz-rise" id="beat-9-title">See the number before the meeting</h2>
+          <p class="dz-lead dz-rise">Every price is already on this page. Book the demo knowing what it costs.</p>
+          <div class="dz-actions dz-actions--centre dz-rise">
+            <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
+            <a class="btn btn--ghost" href="tel:+17024207272">CALL US</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  ===========================================================================
+  MEASURED CONTRAST. Nothing in this block is an estimate.
+  ===========================================================================
+  ON THE THREE LOCKED PLANES (computed from the locked hex in the token sheet)
+                                          canvas    warm      elevated
+                                          #15161a   #1b1d22   #222429
+    --ds-ink        #f5f3f9  body           16.42     15.31      14.10
+    --ds-ink-heading #ffffff headings       18.08     16.86      15.53
+    --ds-ink-soft   #9f9f9f  muted           6.83      6.37       5.87
+    --ds-accent-ink #ae76ef  small accent    5.71      5.33       4.91
+    --ds-primary    #8d3fe8  RAW VIOLET      3.45      3.22       2.96
+  The raw violet is NEVER painted as text anywhere in this body. It is a fill,
+  a border, a bullet and a rule only. White on --ds-primary as a button
+  surface: 5.24:1.
+
+  OVER THE MEDIA BANDS: A PAINT-STACK PROBE, NOT A GUESS
+  The three beats that put type over a photograph were not signed off from the
+  table above, because that table describes FLAT grounds and these are not flat.
+  The page was rendered at 1440, all 61 text boxes over media were recorded with
+  their computed colour, the type was then hidden, the REAL pixels behind each
+  box were sampled, and every glyph was scored against the brightest pixel
+  actually behind it. Worst result per beat:
+
+    beat 1  hero-placeholder.webp   WORST 4.63:1 (floor 4.5)
+            the --ds-accent-ink eyebrow on a measured ground of rgb(46,37,54).
+            The tightest string on the page. Passes. Re-measure it first if the
+            hero image is ever swapped.
+
+    beat 6  band-breath.webp        WORST 7.29:1 (floor 4.5)
+            --ds-ink-soft on rgb(15,13,20). Every role clears AA on this band,
+            so beat 6 carries the full palette.
+
+    beat 7  band-pricing.webp       WORST 4.91:1 (floor 4.5)
+            --ds-accent-ink on the solid --ds-bg-surface-2 panel, rgb(34,36,41).
+            The table sits on that panel and NOT on the photograph: on the raw
+            band, muted ink measures 3.79:1 and accent ink 3.17:1. Only the
+            large white head sits on the image itself.
+
+  TWO THINGS THE PROBE CAUGHT THAT THE TOKEN TABLE COULD NOT
+    1. The h1's violet turn was originally --ds-grad-text. Against its REAL
+       measured ground of rgb(38,34,45) the gradient's dark stop scored 2.97:1,
+       just under the 3.0 large-text floor, even though that same colour is
+       3.45:1 on flat canvas. It is now the solid --ds-accent-light, measured
+       4.92:1 there.
+    2. The hero scrim was originally carried at full --ds-scrim strength, which
+       measured beautifully and buried the photograph. It now rides at
+       --ds-opacity-muted: the strictest step that still holds the locked rail's
+       links at 5.81:1 over the brightest pixel in the frame. The next step down
+       (--ds-opacity-scrim) measured 4.23:1 and was rejected.
+
+  A FALSE ALARM, RECORDED BECAUSE IT GENERALISES: sampling a table cell's FULL
+  bounding box reported the tier index at 3.77:1, because a cell's 1px hairline
+  border lies INSIDE its box while the glyphs sit on the panel. Insetting the
+  sample by 3px returns 4.91:1, which matches the computed value for that pair
+  exactly. A paint-stack probe must sample the glyph ground, not the box.
+
+  NOT USED: band-results.webp. Under one scrim its bright bokeh leaves muted ink
+  at 3.53:1 and accent ink at 2.95:1, and the double scrim that would fix it
+  (5.40:1) erases the image it was generated for. Beat 5 carries the city
+  results as type instead, which is what the light beat needed anyway. The asset
+  is available for a band where only large white type sits on it.
+  ===========================================================================
+-->
+
+</main>
+
+
+<!-- ===================================================================== -->
+<!-- LOCKED CHROME footer card, verbatim from _design/_chrome-block.html.  -->
+<!-- ===================================================================== -->
+<footer class="site-footer">
+  <div class="footer-card">
+
+    <div class="f-row f-row--contact">
+      <div class="f-brand">
+        <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1010" height="200">
+        <p>Marketing built for licensed cannabis dispensaries. One published price ladder, one performance guarantee, one point of contact.</p>
+      </div>
+      <div class="f-contact">
+        <span class="f-label">Contact</span>
+        <address>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</address>
+        <a href="tel:+17024207272">+1 (702) 420-7272</a>
+        <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+      </div>
+    </div>
+
+    <div class="f-row f-row--links">
+      <nav class="f-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="case-studies.html">Results</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="f-row f-row--legal">
+      <p class="f-fine">&copy; 2026 Dispenza. All rights reserved.</p>
+      <p class="f-fine">Las Vegas, Nevada</p>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+/* ===========================================================================
+   BEHAVIOUR. Two halves, kept apart on purpose.
+
+   (A) CHROME behaviour, carried verbatim from the locked chrome winner so the
+       frame in this specimen behaves exactly as the owner approved it.
+   (B) BODY motion, which is this concept's own proposal.
+
+   EVERY effect below is transform-or-opacity only, fires ONCE, and is gated on
+   prefers-reduced-motion. If this script does not run at all, the page is still
+   complete: the reduced-motion block in the structural sheet paints every
+   revealed element visible, and every count-up figure is already typed into the
+   HTML as its final value.
+   =========================================================================== */
+(function () {
+  'use strict';
+
+  var doc  = document;
+  var root = doc.documentElement;
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* =========================================================================
+     (A) LOCKED CHROME BEHAVIOUR
+     ========================================================================= */
+
+  /* A1. RAIL STATE. Transparent over the hero; glass plus hairline plus the
+         single violet edge-catch past 8px of scroll. */
+  var shell = doc.getElementById('rail-shell');
+  function syncRail() {
+    if (!shell) return;
+    if (window.pageYOffset > 8) shell.classList.add('is-stuck');
+    else shell.classList.remove('is-stuck');
+  }
+
+  /* A2. GROUP PANELS. Click toggles; hover opens on fine pointers; Escape and
+         an outside click close. aria-expanded is the source of truth. */
+  var dock = doc.getElementById('rail-dock');
+  var triggers = [].slice.call(doc.querySelectorAll('[data-panel]'));
+
+  function setPanel(trigger, open) {
+    var panel = doc.getElementById(trigger.getAttribute('data-panel'));
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) panel.classList.add('is-open');
+    else panel.classList.remove('is-open');
+  }
+  function closePanels(except) {
+    triggers.forEach(function (t) { if (t !== except) setPanel(t, false); });
+  }
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var open = trigger.getAttribute('aria-expanded') === 'true';
+      closePanels(trigger);
+      setPanel(trigger, !open);
+    });
+    trigger.parentNode.addEventListener('mouseenter', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        closePanels(trigger);
+        setPanel(trigger, true);
+      }
+    });
+  });
+  if (dock) {
+    dock.addEventListener('mouseleave', function () {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closePanels(null);
+    });
+  }
+  doc.addEventListener('click', function (e) {
+    if (dock && !dock.contains(e.target)) closePanels(null);
+  });
+
+  /* A3. DRAWER. Locks page scroll, moves focus to the close control, restores
+         focus to the burger on close. */
+  var burger   = doc.getElementById('hamburger');
+  var drawer   = doc.getElementById('mobile-drawer');
+  var scrim    = doc.getElementById('drawer-scrim');
+  var closeBtn = doc.getElementById('drawer-close');
+
+  function openDrawer() {
+    if (!drawer) return;
+    root.classList.add('is-drawer-open');
+    if (scrim) scrim.removeAttribute('hidden');
+    if (burger) { burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Close menu'); }
+    doc.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeDrawer() {
+    if (!drawer || !root.classList.contains('is-drawer-open')) return;
+    root.classList.remove('is-drawer-open');
+    if (scrim) scrim.setAttribute('hidden', '');
+    if (burger) { burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Open menu'); burger.focus(); }
+    doc.body.style.overflow = '';
+  }
+  if (burger)   burger.addEventListener('click', function () {
+    if (root.classList.contains('is-drawer-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (scrim)    scrim.addEventListener('click', closeDrawer);
+
+  doc.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.key === 'Esc') { closeDrawer(); closePanels(null); }
+  });
+
+  /* A4. DRAWER ACCORDIONS. */
+  [].slice.call(doc.querySelectorAll('[data-acc]')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var sub  = doc.getElementById(btn.getAttribute('data-acc'));
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (sub) sub.classList.toggle('is-open', !open);
+    });
+  });
+
+  /* A5. STICKY ACTION BAR, with the MANDATED HIDE-AT-FOOTER.
+         Two conditions, never one. The bar appears only once the hero's own
+         action pair has left the screen, AND it hides again the moment the
+         REAL closing CTA (beat 9) or the .site-footer card enters the
+         viewport, so the page can never show two competing BOOK DEMO buttons
+         stacked over each other at the bottom of the scroll. Scrolling back up
+         re-shows it. It ships hidden in the markup, so the state is correct
+         even before the first scroll event and even if this script never runs.
+         (_SCROLL-STICKY-BEHAVIOR-LIBRARY: the sticky bar is SUPPRESSED by the
+         real CTA, never layered on top of it.) */
+  var sticky     = doc.getElementById('sticky-cta');
+  var hero       = doc.getElementById('beat-1');
+  var realCta    = doc.getElementById('beat-9');
+  var footerCard = doc.querySelector('.site-footer');
+  var endCount   = 0;
+
+  function syncSticky() {
+    if (!sticky || !hero) return;
+    var pastHero = window.pageYOffset > (hero.offsetHeight * 0.85);
+    var atEnd    = endCount > 0;
+    sticky.classList.toggle('is-hidden', !(pastHero && !atEnd));
+  }
+
+  var endTargets = [realCta, footerCard].filter(Boolean);
+  if ('IntersectionObserver' in window && endTargets.length) {
+    var endSeen = new Set();
+    var endIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) endSeen.add(e.target);
+        else endSeen.delete(e.target);
+      });
+      endCount = endSeen.size;
+      syncSticky();
+    }, { threshold: 0 });
+    endTargets.forEach(function (t) { endIo.observe(t); });
+  }
+
+  /* =========================================================================
+     (B) BODY MOTION. This concept's own proposal.
+     ========================================================================= */
+
+  /* B1. SCROLL REVEAL WITH A MEANINGFUL STAGGER.
+         Owner spec: fade + 16 to 24px rise, 400 to 600ms, cubic-bezier(.16,1,.3,1),
+         ONCE, at ~15% viewport entry, 60 to 80ms between items in a group.
+
+         The stagger is where this concept spends its motion, so the delay is
+         computed per GROUP rather than per page: siblings inside one container
+         arrive in source order, which walks the eye down the figure row, the
+         eight ledger rows and the nine tier rows. A new group restarts at zero,
+         so a late section never inherits a long delay and stall. */
+  var STAGGER = 70;   /* ms, inside the owner's 60 to 80 band */
+  var CAP     = 8;    /* no item ever waits more than 8 steps (560ms) */
+
+  var revealables = [].slice.call(doc.querySelectorAll('.dz-rise, .dz-zoom'));
+
+  if (REDUCED.matches || !('IntersectionObserver' in window)) {
+    /* Reduced motion, or no observer: everything is simply visible. The CSS
+       already handles the reduced-motion case; this covers the no-IO case. */
+    revealables.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    /* Assign each element its index WITHIN its own parent group. */
+    var groups = new Map();
+    revealables.forEach(function (el) {
+      var key = el.parentNode;
+      var n = groups.get(key) || 0;
+      groups.set(key, n + 1);
+      el.style.setProperty('--dz-delay', (Math.min(n, CAP) * STAGGER) + 'ms');
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);           /* ONCE, never replayed */
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    revealables.forEach(function (el) { io.observe(el); });
+  }
+
+  /* B2. COUNT-UP on the four influence figures.
+         The final value is already in the HTML, so this only ever re-animates
+         a number the reader would otherwise have seen instantly. Under reduced
+         motion it does not run at all and the typed value stands. */
+  function countUp(el) {
+    var target   = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix   = el.getAttribute('data-suffix') || '';
+    if (!isFinite(target)) return;
+    var start = null;
+    var DUR = 1400;                            /* the --ds-dur-data token, in ms */
+    function frame(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / DUR, 1);
+      var eased = 1 - Math.pow(1 - p, 3);      /* ease-out-cubic, no overshoot */
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = target.toFixed(decimals) + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var numerals = [].slice.call(doc.querySelectorAll('[data-count]'));
+  if (!REDUCED.matches && 'IntersectionObserver' in window && numerals.length) {
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        countUp(entry.target);
+        nio.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+    numerals.forEach(function (el) { nio.observe(el); });
+  }
+
+  /* B3. GENTLE PARALLAX on the two full-bleed media layers.
+         Factor 0.94, inside the owner's 0.9 to 0.95 band. The layer is 116%
+         tall and offset -8%, so the travel can never expose an edge. Transform
+         only, and only while the band is on screen. */
+  var PARALLAX = 0.94;
+  var layers = [].slice.call(doc.querySelectorAll('.dz-parallax'));
+  var ticking = false;
+
+  function paint() {
+    ticking = false;
+    var vh = window.innerHeight;
+    layers.forEach(function (layer) {
+      var band = layer.parentNode;
+      var r = band.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;             /* off screen, skip */
+      var progress = (vh - r.top) / (vh + r.height);      /* 0 entering, 1 leaving */
+      var travel = (1 - PARALLAX) * r.height;
+      layer.style.transform = 'translate3d(0,' + ((progress - 0.5) * travel).toFixed(2) + 'px,0)';
+    });
+  }
+  function onScroll() {
+    syncRail();
+    syncSticky();
+    if (REDUCED.matches || !layers.length) return;
+    if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+  }
+
+  syncRail();
+  syncSticky();
+  if (!REDUCED.matches) paint();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+})();
+</script>
+</body>
+</html>

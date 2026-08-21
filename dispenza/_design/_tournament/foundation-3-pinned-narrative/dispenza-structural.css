@@ -1,0 +1,834 @@
+/* =============================================================================
+   dispenza-structural.css  --  FOUNDATION TOURNAMENT, CONCEPT 3 "PINNED NARRATIVE"
+   The proposed BODY layer. Identity (dispenza-tokens.css) and chrome
+   (dispenza-chrome.css) are LOCKED and are not restated or overridden here.
+
+   EXTRACTION. If this concept wins, this file IS _design/dispenza-structural.css.
+   Copy it verbatim to _design/dispenza-structural.css; nothing needs rewriting.
+
+   TOKEN PURITY. Zero raw hex. Every colour, radius, shadow, ease and duration
+   resolves from a var(--ds-*) declared in dispenza-tokens.css. Alpha variants are
+   built with color-mix() FROM those same tokens so a scrim is provably the brand
+   ground at a stated opacity, never a hand-picked new colour. Raw px/ch/em/vw
+   appear only for geometry the token system does not carry: type steps, measures,
+   media caps, hairline widths and breakpoints.
+
+   ch DISCIPLINE (G8 A3). A ch measure resolves against the element's OWN font, so
+   ch is used ONLY on body-font reading columns (--ds-measure / --ds-measure-lead
+   on .dz-body / .dz-lead / .dz-head). Display-font blocks take an em measure
+   (--ds-measure-display); hero and caption widths take px. No ch ever governs a
+   display-font line.
+
+   THE CONCEPT IN ONE LINE. Two pinned moments carry the page (the results matrix
+   and the price ladder); everything between and around them is calm, wide and
+   unfussy, so the pins read as deliberate rather than as an effect.
+
+   THE FALLBACK IS THE BASE LAYER. Every pin, reveal, parallax and count-up is an
+   ENHANCEMENT written on top of a layout that is already correct without it. The
+   base rules below are the no-JS, reduced-motion, narrow-viewport rendering. The
+   pin only switches on inside one guarded block (section 12). Delete every script
+   on the page and nothing is lost.
+   ============================================================================= */
+
+
+/* ===========================================================================
+   1. STRUCTURAL DERIVATIONS
+   Not identity. Type STEPS, measures and rhythm: the values the body needs that
+   a token sheet does not carry. Namespaced --ds-* so the body speaks one
+   vocabulary with the locked sheets. No colour is declared in this file.
+   =========================================================================== */
+:root {
+
+  /* -- TYPE SCALE. Eight steps, and the page uses all eight, once each per role.
+     Montserrat (--ds-font-display) carries hero/h2/title/metric/eyebrow;
+     DM Sans (--ds-font-body) carries lead/body/fine. -- */
+  --ds-t-eyebrow: 11px;                        /* section eyebrows, spec labels  */
+  --ds-t-fine:    13px;                        /* measurement windows, footnotes */
+  --ds-t-body:    16px;                        /* inherits the chrome body size  */
+  --ds-t-lead:    clamp(17px, 1.25vw, 20px);   /* section ledes, band statement  */
+  --ds-t-title:   clamp(19px, 1.5vw, 22px);    /* card and feature-row headings  */
+  --ds-t-h2:      clamp(30px, 3.4vw, 50px);    /* section heads, the pull quote  */
+  --ds-t-metric:  clamp(36px, 4.2vw, 64px);    /* the count-up and lift figures  */
+  --ds-t-hero:    clamp(42px, 5.6vw, 78px);    /* the one hero display step      */
+
+  /* -- MEASURE. The owner's 65 to 72 character column for body-font text, plus a
+     narrower em measure for display-font blocks so a 50px heading does not run
+     the same width as 16px body. -- */
+  --ds-measure:         68ch;   /* body font only */
+  --ds-measure-lead:    62ch;   /* body font only */
+  --ds-measure-display: 17em;   /* display font   */
+  --ds-measure-hero:    790px;   /* holds "AGENCY IN CANNABIS" on ONE line at the
+                                    hero step; at 640px the first line broke and
+                                    orphaned "#1" on a line of its own */
+  --ds-measure-sub:     480px;
+
+  /* -- VERTICAL RHYTHM. Three steps only, all inside the owner's envelope
+     (64 to 80 mobile, 96 to 160 desktop). --ds-section-py is the locked token
+     and resolves 72px at 375 to 136px at 1440. -- */
+  --ds-rhythm:       var(--ds-section-py);
+  --ds-rhythm-air:   clamp(88px, 12vw, 160px);   /* the breath beats            */
+  --ds-rhythm-tight: clamp(64px, 7vw, 96px);     /* the quiet metric band       */
+
+  /* -- PIN GEOMETRY. The chrome rail is fixed at top:14px and stands about 60px
+     tall, so a pinned surface must clear 74px. 88px gives it 14px of air, which
+     is the rail's own inset repeated. -- */
+  --ds-pin-top:    calc(var(--ds-space-xl) + var(--ds-space-md));
+  --ds-pin-h:      min(74vh, 620px);
+
+  /* -- MOTION. The owner's binding numbers, named once so every rule quotes the
+     same figures instead of re-typing them. --ds-ease-settle is the owner's
+     cubic-bezier(0.16, 1, 0.3, 1); --ds-ease-out is the locked token curve. -- */
+  --ds-ease-settle:  cubic-bezier(.16, 1, .3, 1);
+  --ds-dur-reveal:   520ms;
+  --ds-dur-media:    700ms;
+  --ds-stagger:      70ms;
+  --ds-rise:         20px;
+  --ds-lift:         3px;
+
+  /* -- MEDIA CAPS. A feature row's media can never balloon the row
+     (SECTION-COMPONENTS 14b compact feature-row law). -- */
+  --ds-media-cap:  clamp(280px, 32vw, 420px);
+}
+
+
+/* ===========================================================================
+   2. SECTION RHYTHM + GRAMMAR EXTENSIONS
+   Layout on the structure (section / .container / .row / .col); skin on the
+   object inside the col. The chrome sheet already defines .container, .row and
+   .col; this file only adds the column modifiers and the band variants.
+   =========================================================================== */
+
+.site-main { display: block; }
+
+/* Every body section is one idea and owns its own vertical room. */
+.dz-section { position: relative; padding: var(--ds-rhythm) 0; }
+.dz-section--tight { padding: var(--ds-rhythm-tight) 0; }
+.dz-section--air   { padding: var(--ds-rhythm-air) 0; }
+.dz-section--flush { padding: 0; }
+
+/* Figure and ground. Two of the three near-black planes alternate down the page
+   so the scroll has a floor that changes without any chrome between bands. */
+.dz-ground-0 { background: var(--ds-bg-surface); }
+.dz-ground-1 { background: var(--ds-bg-warm); }
+
+/* The one grammar extension the body needs: a container that gives up its
+   measure so a band can run edge to edge. */
+.container--bleed { max-width: none; padding-left: 0; padding-right: 0; }
+
+/* Column modifiers. The chrome's .col is flex:1 1 100%; these give the two-column
+   compositions their tracks without any new layout element. */
+.col--measure-body { max-width: var(--ds-measure); }
+.col--stage { position: relative; }
+
+/* A row that becomes a grid. .row is flex by default in the chrome sheet; the
+   two-column compositions need real tracks and a stretched sibling, so they
+   opt into grid on the row itself. */
+.dz-grid { display: grid; gap: var(--ds-space-xl); align-items: stretch; }
+
+/* Stacked rows inside one section get one consistent gap. The feature pair
+   overrides this with a larger one in section 7. */
+.dz-section .row + .row { margin-top: var(--ds-space-xl); }
+
+/* Section heads. One shape, used by every section, so the page has a spine. */
+.dz-head { max-width: var(--ds-measure-lead); }
+.dz-head--center { margin-left: auto; margin-right: auto; text-align: center; }
+.dz-eyebrow {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-eyebrow);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ds-accent-ink);
+}
+.dz-h2 {
+  margin-top: var(--ds-space-sm);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-h2);
+  line-height: 1.06;
+  letter-spacing: -.024em;
+  font-weight: 800;
+  color: var(--ds-ink-heading);
+}
+.dz-lead {
+  margin-top: var(--ds-space-md);
+  max-width: var(--ds-measure-lead);
+  font-size: var(--ds-t-lead);
+  line-height: 1.6;
+  color: var(--ds-ink-soft);
+}
+.dz-body {
+  margin-top: var(--ds-space-md);
+  max-width: var(--ds-measure);
+  font-size: var(--ds-t-body);
+  line-height: 1.68;
+  color: var(--ds-ink);
+}
+.dz-fine {
+  font-size: var(--ds-t-fine);
+  line-height: 1.5;
+  color: var(--ds-ink-soft);
+}
+.dz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-sm);
+  margin-top: var(--ds-space-lg);
+}
+.dz-actions--center { justify-content: center; }
+
+
+/* ===========================================================================
+   3. MOTION PRIMITIVES
+   Transform and opacity only. Nothing here runs on load; every rule waits for
+   the element to enter the viewport, fires once, and then stops.
+
+   THE NO-JS CONTRACT. The hidden state is scoped to html.dz-motion, and that
+   class is only ever set by the head script AFTER it has confirmed both that
+   scripting is live and that reduced motion is NOT requested. No script or
+   reduced motion means the class never lands and every element below renders in
+   its final, fully visible state. The fallback is therefore the default.
+   =========================================================================== */
+
+.dz-motion [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--ds-rise), 0);
+  transition:
+    opacity   var(--ds-dur-reveal) var(--ds-ease-settle),
+    transform var(--ds-dur-reveal) var(--ds-ease-settle);
+  transition-delay: calc(var(--i, 0) * var(--ds-stagger));
+  will-change: opacity, transform;
+}
+.dz-motion [data-reveal].is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Media scale-in: 1.04 to 1.0 as the frame enters. Applied to the IMG inside an
+   overflow-hidden frame, never to an element that also carries parallax, so two
+   transforms can never fight over the same node. */
+.dz-motion [data-reveal-media] img {
+  transform: scale(1.04);
+  transition: transform var(--ds-dur-media) var(--ds-ease-settle);
+  will-change: transform;
+}
+.dz-motion [data-reveal-media].is-in img { transform: scale(1); }
+
+/* Parallax targets. The JS writes translate3d on these and on nothing else. The
+   frame is overflow-hidden and the image is oversized top and bottom, so the
+   travel can never expose an edge. 0.94x of the scroll rate. */
+.dz-parallax { overflow: hidden; }
+.dz-parallax > img {
+  width: 100%;
+  height: 114%;
+  position: absolute;
+  top: -7%;
+  left: 0;
+  object-fit: cover;
+}
+
+/* Hover lift. 3px, 170ms, on the two card families and nothing else. */
+.dz-lift {
+  transition:
+    transform  var(--ds-dur-fast) var(--ds-ease-out),
+    box-shadow var(--ds-dur-fast) var(--ds-ease-out),
+    border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.dz-lift:hover {
+  transform: translateY(calc(-1 * var(--ds-lift)));
+  box-shadow: var(--ds-shadow-lift);
+  border-color: var(--ds-glass-border);
+}
+
+/* Count-up figures reserve their own width so the number cannot reflow the row
+   while it animates. */
+.dz-count { font-variant-numeric: tabular-nums; }
+
+
+/* ===========================================================================
+   4. THE HERO
+   The swappable slot required by visual-direction section 6: the MEDIA layer, the
+   SCRIM layer and the CONTENT layer are three separate children of one stage, so
+   the jpg can be exchanged for video or canvas with no layout reflow and no
+   change to anything below.
+
+   CONTRAST. The scrim is a directional gradient built from --ds-bg-surface. It
+   reaches 94% opacity across the copy column and falls to 30% at the far right
+   where no text sits. Measured against the brightest pixel in hero-placeholder
+   .jpg (202,177,209): at 94% the composite is (32,31,37), on which
+   --ds-accent-ink reads 5.16:1 and --ds-ink reads 14.82:1. Both clear AA.
+   =========================================================================== */
+
+.dz-hero {
+  position: relative;
+  padding: calc(var(--ds-rhythm) + var(--ds-space-2xl)) 0 var(--ds-rhythm-air);
+  background: var(--ds-bg-surface);
+  overflow: hidden;
+}
+/* z-index BASE, never BELOW. --ds-z-below is -1, and a negative-z child paints
+   underneath its own ancestor's background box, so the section's opaque
+   --ds-bg-surface fill painted straight over the hero photograph and the hero
+   rendered as a flat black rectangle with the image loaded and complete. Base
+   (0) sits the stage above the section background and still below the content
+   layer, which carries --ds-z-raised. */
+.dz-hero__stage { position: absolute; inset: 0; z-index: var(--ds-z-base); }
+
+/* LAYER 1: media. Replace this element alone to swap the hero. */
+.dz-hero__media { position: absolute; inset: 0; margin: 0; }
+.dz-hero__media > img { position: absolute; inset: 0; width: 100%; height: 114%; top: -7%; object-fit: cover; }
+
+/* LAYER 2: scrim + the brand grid texture + the bottom fade into the canvas. */
+.dz-hero__scrim { position: absolute; inset: 0; pointer-events: none; }
+.dz-hero__scrim::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* The falloff is VERTICAL, and it is set by two measured facts rather than by
+     eye. FACT ONE: a luminance sample of hero-placeholder.webp on a 48x27 grid puts
+     every bright cell in the UPPER LEFT, rows 0 to 8 of 27, peaking at (193,169,200);
+     the lower two thirds and the whole right half are effectively pure black. The
+     asset's own prompt says the bloom sits lower left, and it does not. A
+     horizontal wash therefore crushed the only luminous part of the frame and
+     revealed the empty part, which is why an earlier pass rendered as a black
+     rectangle while measuring perfectly. FACT TWO: at 1440 the hero copy starts at
+     roughly 32 percent of the section height, and everything above that is the
+     transparent chrome rail.
+     So the top band stays open at 52 percent, which is the floor that keeps the
+     rail's 14px --ds-ink links at 4.9:1 against the brightest pixel, and the plane
+     closes to 94 percent by 34 percent height, before the accent eyebrow. The glow
+     reads as light falling from above the type instead of being deleted. */
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--ds-bg-surface) 52%, transparent) 0%,
+      color-mix(in srgb, var(--ds-bg-surface) 56%, transparent) 18%,
+      color-mix(in srgb, var(--ds-bg-surface) 94%, transparent) 30%,
+      color-mix(in srgb, var(--ds-bg-surface) 96%, transparent) 100%);
+}
+.dz-hero__scrim::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: var(--ds-space-2xl);
+  background: var(--ds-fade-to-paper);
+}
+.dz-hero__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--ds-grid);
+  background-size: var(--ds-grid-size);
+  opacity: var(--ds-opacity-faint);
+  -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
+          mask-image: linear-gradient(180deg, black 0%, transparent 70%);
+}
+
+/* LAYER 3: content. Widths are px here, never ch: this column governs the
+   display-font hero line and a ch would resolve against the wrong face. */
+.dz-hero .container { position: relative; z-index: var(--ds-z-raised); }
+.dz-hero__copy { max-width: var(--ds-measure-hero); }
+.dz-hero__title {
+  margin: var(--ds-space-md) 0 0;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-hero);
+  line-height: .98;
+  letter-spacing: -.032em;
+  font-weight: 800;
+  color: var(--ds-ink-heading);
+  text-wrap: balance;
+}
+.dz-hero__title span { display: block; }
+/* The second line takes the brand gradient as LIGHT on the letterforms. It is
+   display scale, so 3:1 is the applicable floor and the gradient's darkest stop
+   (--ds-accent-deep) is never used as the visible face on its own. */
+.dz-hero__title .dz-hero__title-2 {
+  background: var(--ds-grad-text);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+.dz-hero__sub {
+  margin-top: var(--ds-space-md);
+  max-width: var(--ds-measure-sub);
+  font-size: var(--ds-t-lead);
+  line-height: 1.55;
+  color: var(--ds-ink);
+}
+.dz-hero__note {
+  margin-top: var(--ds-space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-xs);
+  font-size: var(--ds-t-fine);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  color: var(--ds-accent-ink);
+}
+.dz-hero__note::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--ds-primary);
+}
+
+
+/* ===========================================================================
+   5. THE QUIET METRIC BAND
+   The one place a number counts up. Four figures, no card, no border, no glow:
+   a low-contrast band whose only job is to hand the eye down the page.
+   =========================================================================== */
+
+.dz-metrics__row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ds-space-lg); }
+.dz-metric { padding-top: var(--ds-space-md); border-top: 1px solid var(--ds-line); }
+.dz-metric__fig {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-metric);
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-weight: 800;
+  color: var(--ds-ink-heading);
+}
+.dz-metric__label {
+  display: block;
+  margin-top: var(--ds-space-sm);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-eyebrow);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   6. THE PIN (shared shell)
+   One shell, two deployments, mirrored. The media column is a framed surface in
+   the chrome's own language (14px corner, hairline, violet-cast shadow) rather
+   than a viewport bleed, because the locked chrome is an INSET floating system
+   and a body panel running past the rail would contradict it.
+
+   FALLBACK FIRST. Everything below is the unpinned rendering: one column, media
+   capped to 16:9, cards in normal flow. The pin is added in section 12 inside a
+   single guarded block and nowhere else.
+   =========================================================================== */
+
+.dz-pin__row { grid-template-columns: minmax(0, 1fr); }
+
+.dz-pin__panel {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--ds-bg-surface-2);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  box-shadow: var(--ds-shadow-card), var(--ds-inset-hi);
+}
+.dz-pin__frame { position: relative; aspect-ratio: 16 / 9; }
+.dz-pin__cap { padding: var(--ds-space-md) var(--ds-space-lg) var(--ds-space-lg); }
+.dz-pin__cap-k {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-eyebrow);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ds-accent-ink);
+}
+.dz-pin__cap-v {
+  display: block;
+  margin-top: var(--ds-space-xs);
+  font-size: var(--ds-t-fine);
+  line-height: 1.5;
+  color: var(--ds-ink-soft);
+}
+.dz-pin__flow > * + * { margin-top: var(--ds-space-xl); }
+
+
+/* -- 6a. PIN ONE: the results matrix -------------------------------------- */
+
+.dz-results { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-md); }
+.dz-result {
+  padding: var(--ds-space-lg);
+  background: var(--ds-bg-surface-2);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  box-shadow: var(--ds-shadow-card);
+}
+.dz-result__city {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-title);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--ds-ink-heading);
+}
+.dz-result__lift {
+  display: block;
+  margin-top: var(--ds-space-sm);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-metric);
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-weight: 800;
+  color: var(--ds-accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+.dz-result__win { display: block; margin-top: var(--ds-space-xs); }
+
+
+/* -- 6b. PIN TWO: the price ladder, a spec module -------------------------- */
+
+.dz-tiers > * + * { margin-top: var(--ds-space-md); }
+.dz-tier {
+  padding: var(--ds-space-lg);
+  background: var(--ds-bg-surface-2);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  box-shadow: var(--ds-shadow-card);
+}
+.dz-tier__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-sm) var(--ds-space-md);
+  padding-bottom: var(--ds-space-md);
+  border-bottom: 1px solid var(--ds-hairline);
+}
+.dz-tier__id {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-t-fine);
+  letter-spacing: .16em;
+  color: var(--ds-accent-ink);
+}
+.dz-tier__name {
+  display: block;
+  margin-top: var(--ds-space-2xs);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-title);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ds-ink-heading);
+}
+.dz-tier__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-2xs);
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--ds-ink-heading);
+  font-variant-numeric: tabular-nums;
+}
+.dz-tier__amt { font-size: var(--ds-t-metric); line-height: 1; }
+.dz-tier__unit {
+  font-size: var(--ds-t-fine);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ds-ink-soft);
+}
+.dz-tier__add {
+  display: block;
+  margin-top: var(--ds-space-xs);
+  text-align: right;
+  font-size: var(--ds-t-fine);
+  color: var(--ds-ink-soft);
+}
+.dz-spec { margin: var(--ds-space-md) 0 0; display: grid; gap: var(--ds-space-2xs); }
+.dz-spec li {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: var(--ds-space-sm);
+  align-items: start;
+  padding: var(--ds-space-2xs) 0;
+  font-size: var(--ds-t-body);
+  line-height: 1.5;
+  color: var(--ds-ink);
+}
+.dz-spec li::before {
+  content: "";
+  margin-top: .55em;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--ds-r-pill);
+  background: var(--ds-primary);
+  box-shadow: 0 0 0 4px var(--ds-primary-soft);
+}
+.dz-ladder__foot {
+  margin-top: var(--ds-space-lg);
+  padding-top: var(--ds-space-md);
+  border-top: 1px solid var(--ds-hairline);
+}
+
+
+/* ===========================================================================
+   7. FEATURE ROWS (alternating, compact)
+   SECTION-COMPONENTS 14b: media and copy side by side inside one viewport, with
+   the media height-CAPPED so a row can never balloon. The pair alternates side,
+   which is the calm stretch that sits between the two pins.
+   =========================================================================== */
+
+.dz-feature + .dz-feature { margin-top: var(--ds-rhythm); }
+.dz-feature__row { grid-template-columns: minmax(0, 1fr); align-items: center; }
+.dz-feature__media {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  max-height: var(--ds-media-cap);
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--ds-r-surface);
+  border: 1px solid var(--ds-line);
+  box-shadow: var(--ds-shadow-card);
+}
+.dz-feature__media img { width: 100%; height: 100%; object-fit: cover; }
+/* The one violet edge-catch the body spends on a frame: a hairline of brand
+   light along the media's top edge, so a framed image reads as lit rather than
+   as a cut-out. */
+.dz-feature__media::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 0;
+  height: 1px;
+  background: var(--ds-grad-brand);
+  opacity: var(--ds-opacity-veil);
+}
+.dz-feature__k {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-xs);
+  padding: var(--ds-space-2xs) var(--ds-space-sm);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-pill);
+  background: var(--ds-accent-soft);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-eyebrow);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ds-accent-ink);
+}
+.dz-feature__title {
+  margin-top: var(--ds-space-md);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-h2);
+  line-height: 1.08;
+  letter-spacing: -.024em;
+  font-weight: 800;
+  color: var(--ds-ink-heading);
+}
+
+
+/* ===========================================================================
+   8. THE FULL-BLEED STATEMENT BAND
+   The page's one edge-to-edge photographic moment and its single loudest idea.
+   One statement, nothing else in the viewport.
+
+   CONTRAST. band-breath.webp is genuinely dark (brightest sampled pixel
+   58,42,55). The scrim still runs at 92% of --ds-bg-surface so the measurement
+   holds regardless of how the image is later re-cropped: composite (24,24,28),
+   --ds-ink-heading 17.75:1, --ds-accent-ink 5.61:1.
+   =========================================================================== */
+
+.dz-band { position: relative; overflow: hidden; }
+.dz-band__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: min(78vh, 680px);
+  padding: var(--ds-rhythm-air) var(--ds-space-md);
+}
+.dz-band__media { position: absolute; inset: 0; margin: 0; z-index: var(--ds-z-below); }
+.dz-band__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ds-bg-surface) 92%, transparent);
+}
+/* A single soft violet bloom behind the statement. This is the body's ONE glow;
+   the chrome spends its own on the scrolled rail and the two never co-occur. */
+.dz-band__bloom {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(760px, 90%);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: var(--ds-glow-wash);
+  opacity: var(--ds-opacity-scrim);
+  pointer-events: none;
+}
+.dz-band__copy { position: relative; text-align: center; max-width: var(--ds-measure-lead); }
+.dz-band__statement {
+  margin-top: var(--ds-space-md);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-h2);
+  line-height: 1.04;
+  letter-spacing: -.028em;
+  font-weight: 800;
+  color: var(--ds-ink-heading);
+}
+.dz-band__note {
+  margin-top: var(--ds-space-lg);
+  font-size: var(--ds-t-lead);
+  line-height: 1.6;
+  color: var(--ds-ink);
+}
+
+
+/* ===========================================================================
+   9. THE BREATH / PULL QUOTE
+   No image, no card, no border. One paragraph at display scale on the mid plane,
+   with a single hairline rule doing the attribution. The page exhales here.
+   The measure is em, not ch, because this block is set in the display face.
+   =========================================================================== */
+
+.dz-breath__quote {
+  margin: 0 auto;
+  max-width: var(--ds-measure-display);
+  text-align: center;
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-t-h2);
+  line-height: 1.16;
+  letter-spacing: -.022em;
+  font-weight: 700;
+  color: var(--ds-ink-heading);
+  text-wrap: pretty;
+}
+.dz-breath__cite {
+  display: block;
+  margin: var(--ds-space-xl) auto 0;
+  padding-top: var(--ds-space-md);
+  max-width: var(--ds-measure-sub);
+  border-top: 1px solid var(--ds-line);
+  text-align: center;
+  font-style: normal;
+  font-size: var(--ds-t-fine);
+  letter-spacing: .04em;
+  color: var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   10. THE PRE-FOOTER CTA
+   Quiet and high contrast, per the owner's brief. A single inset plate on the
+   canvas so it answers the footer card below it without out-shouting it.
+   =========================================================================== */
+
+.dz-cta__plate {
+  padding: var(--ds-rhythm-tight) var(--ds-space-lg);
+  text-align: center;
+  background: var(--ds-bg-warm);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  box-shadow: var(--ds-shadow-card), var(--ds-inset-hi);
+}
+.dz-cta__plate .dz-head { margin-left: auto; margin-right: auto; }
+.dz-cta__fine { margin-top: var(--ds-space-md); }
+
+
+/* ===========================================================================
+   11. RESPONSIVE (the layout ladder, mobile first)
+   =========================================================================== */
+
+/* 640: the results matrix goes two across. */
+@media (min-width: 640px) {
+  .dz-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* 900 and below: the metric band leaves its 4-up row. Measured at 768: four
+   64px-track numerals with an 11px tracked label under each is legible but
+   cramped, and "GOOGLE IMPRESSIONS" wraps. 2x2 gives each figure room at every
+   width between the phone and the desktop grid. */
+@media (max-width: 900px) {
+  .dz-metrics__row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-lg) var(--ds-space-md); }
+}
+
+/* 767 and below: the tier head unstacks its right-aligned price and the band
+   releases its viewport-height floor. */
+@media (max-width: 767px) {
+  .dz-metrics__row { gap: var(--ds-space-md); }
+  .dz-tier__head { flex-direction: column; align-items: flex-start; }
+  .dz-tier__add { text-align: left; }
+  .dz-band__stage { min-height: auto; }
+}
+
+@media (min-width: 768px) {
+  .dz-feature__row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  /* Alternation happens in the STRUCTURE, not the DOM: the copy keeps its
+     reading order in source, and only the visual order flips. */
+  .dz-feature--flip .dz-feature__media-col { order: 2; }
+}
+
+/* 1024: the pins acquire their two tracks. The sticky itself is still off; only
+   the geometry lands here, so a 1024 viewport with reduced motion gets a normal,
+   correct two-column section. */
+@media (min-width: 1024px) {
+  .dz-pin--media-left  .dz-pin__row { grid-template-columns: minmax(0, .82fr) minmax(0, 1fr); }
+  .dz-results { gap: var(--ds-space-lg); }
+
+  /* The ladder takes a WIDER flow track than the results pin, because a tier card
+     carries a price header plus up to eight inclusion lines and a narrow track
+     forces it tall. Measured at 1440 before this rule: the ladder section rendered
+     4942px, 5.49 viewports, with the four tiers stacked in one 553px column. That
+     is the "scroll up and down just to read one section" failure, and it also
+     strands the pinned panel for four viewports, which is precisely how a pin
+     starts feeling broken. Two tier columns in a 665px track bring the section
+     back to roughly two viewports, which is one pin's worth of travel. */
+  .dz-pin--media-right .dz-pin__row { grid-template-columns: minmax(0, 1fr) minmax(0, .58fr); }
+  .dz-tiers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-md); }
+  .dz-tiers > * + * { margin-top: 0; }
+}
+
+
+/* ===========================================================================
+   12. THE PIN, AS AN ENHANCEMENT
+   The ONLY block in this sheet that makes anything stick. It is gated on BOTH a
+   viewport wide enough to hold two tracks AND an explicit no-preference answer
+   on reduced motion, so the pin can never appear where it would misbehave. Take
+   this block out and the page is still complete and correct.
+   =========================================================================== */
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .dz-pin__panel {
+    position: sticky;
+    top: var(--ds-pin-top);
+    height: var(--ds-pin-h);
+  }
+  .dz-pin__frame { aspect-ratio: auto; flex: 1 1 auto; min-height: 0; }
+}
+
+
+/* ===========================================================================
+   13. REDUCED MOTION (the full stop)
+   Every transform off, every transition off, every element in its final state,
+   the pin released to normal flow. Nothing on this page is delivered by motion,
+   so nothing is lost. The rules below are belt and braces: html.dz-motion is
+   never set under reduced motion in the first place, and the JS returns before
+   it registers a single observer or scroll handler.
+   =========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .dz-motion [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  [data-reveal-media] img,
+  .dz-motion [data-reveal-media] img {
+    transform: none !important;
+    transition: none !important;
+  }
+  .dz-lift:hover { transform: none; }
+  .dz-parallax > img { transform: none !important; }
+  .dz-pin__panel { position: static !important; height: auto !important; }
+  .dz-pin__frame { aspect-ratio: 16 / 9 !important; flex: 0 0 auto; }
+}

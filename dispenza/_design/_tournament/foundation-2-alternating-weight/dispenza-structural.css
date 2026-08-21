@@ -1,0 +1,849 @@
+/* =============================================================================
+   dispenza-structural.css  --  FOUNDATION CONCEPT 2, "ALTERNATING WEIGHT"
+   The PROPOSED BODY of the Dispenza site. Candidate, not yet locked.
+
+   WHAT THIS FILE IS. The body CSS this tournament concept is proposing. It is
+   authored here, already in its promotion shape, so that if concept 2 wins the
+   file is COPIED VERBATIM to _design/dispenza-structural.css. There is no
+   extract-from-HTML step and therefore no chance of drift between what was
+   judged and what ships. (The companion preview.html links this sheet and marks
+   the block; the sibling gate verify-not-flat.mjs already resolves a concept's
+   linked stylesheets for exactly this idiom.)
+
+   WHAT IT DOES NOT TOUCH. The IDENTITY (dispenza-tokens.css) and the CHROME
+   (dispenza-chrome.css) are locked and are not restated, overridden or
+   reinterpreted anywhere below. This sheet styles the BODY between the locked
+   rail and the locked footer card, and nothing else.
+
+   TOKEN PURITY. Zero raw hex. Every colour, shadow, radius, gap and motion
+   value resolves from var(--ds-*). Raw numbers appear only where the token
+   system carries no value: type sizes and line heights (the same discipline
+   dispenza-chrome.css already follows), hairline widths, aspect ratios,
+   opacities inside a mask, and media-query breakpoints.
+
+   THE CONCEPT IN ONE LINE. The page PULSES. A heavy beat (full-bleed image or
+   a saturated spec module) is answered by a light one (type in a lot of air),
+   and every third beat is a breath. Nine beats: H L B / H L B / H L B.
+
+   NO EM OR EN DASHES ANYWHERE IN THIS FILE, INCLUDING COMMENTS (G-NODASH).
+   ============================================================================= */
+
+
+/* ===========================================================================
+   0. THE BEAT SYSTEM - the whole concept lives in this one block
+   ===========================================================================
+   Three section weights. The owner's envelope is 96-160px desktop and 64-80px
+   mobile, and every weight below is expressed as the locked --ds-section-py
+   token modulated by a spacing token so it lands inside that envelope:
+
+     LIGHT   var(--ds-section-py)                              ->  72 to 136px
+     HEAVY   --ds-section-py + --ds-space-md                   ->  96 to 160px
+     BREATH  heavy padding + a min-height and centred content
+
+   The BREATH does NOT buy its air with more padding (that would leave the
+   owner's 160px ceiling). It buys air with an empty min-height around a very
+   short line, which is what "a single sentence in a lot of space" actually
+   means. Mobile drops all three into the 64-80px band at the foot of this file.
+   =========================================================================== */
+
+.dz-beat            { position:relative; padding:var(--ds-section-py) 0; }
+.dz-beat--heavy     { padding:calc(var(--ds-section-py) + var(--ds-space-md)) 0; }
+.dz-beat--light     { padding:var(--ds-section-py) 0; }
+
+.dz-beat--breath {
+  padding:calc(var(--ds-section-py) + var(--ds-space-md)) 0;
+  min-height:78vh;
+  display:flex;
+  align-items:center;
+}
+
+/* The two grounds the body alternates between. Depth is read as VALUE, per the
+   locked identity: the canvas is plane 0, a recessed beat drops to plane 1.
+   No beat invents a third ground and no beat carries a decorative fill. */
+.dz-beat--canvas    { background:var(--ds-bg-surface); }
+.dz-beat--recessed  { background:var(--ds-bg-warm); }
+
+/* A full-bleed media beat. The media is a LAYER, never a background-image, so
+   it is a real <img> with real alt handling and a real width/height. */
+.dz-beat--full      { overflow:hidden; }
+
+/* Hairline seam. Used only where two same-value grounds meet and the beat
+   change would otherwise be invisible. */
+.dz-beat--seam      { border-top:1px solid var(--ds-hairline); }
+
+
+/* ===========================================================================
+   1. STRUCTURE EXTENSIONS
+   dispenza-chrome.css already defines .container / .row / .col / .col--measure
+   / .col--span-4. This section EXTENDS that grammar; it never redefines it.
+   The forced grammar is section > .container > .row > .col > object.
+   =========================================================================== */
+
+/* The owner asked for a 1200-1280px content width; the locked identity token is
+   1120px. Rather than override a locked token, the wide beats add one spacing
+   token to it: 1120 + 96 = 1216px, inside the owner's band, still token-pure. */
+.container--wide  { max-width:calc(var(--ds-container-max) + var(--ds-space-2xl)); }
+.container--full  { max-width:none; padding:0; }
+
+.row--split   { gap:var(--ds-space-xl); align-items:center; }
+.row--rev     { flex-direction:row-reverse; }
+
+/* A wider centred column than the chrome's .col--measure (760px). The display
+   pull-quote needs it: at 760px a 168-character quote set in the S2 step breaks
+   to eleven lines of roughly four words, which reads as a poem rather than as a
+   statement. At 940px in the S3 step it settles to six lines of about 27
+   characters, which is the editorial pull-quote measure. */
+.col--measure-wide { max-width:940px; margin:0 auto; }
+
+.col--span-5  { flex:1 1 340px; }
+.col--span-7  { flex:1 1 440px; }
+.col--span-8  { flex:1 1 560px; }
+.col--span-12 { flex:1 1 100%; }
+
+/* The reading measure. The owner's brief asks for 65 to 72 characters. The cap
+   is expressed in em (font-relative) rather than in ch or px, so ONE rule holds
+   the measure at every type step: the lead runs at 21px and the body at 16px
+   and both land in the same character band. 35em against DM Sans mixed-case
+   English is ~68 characters; the rendered count is verified at review, not
+   assumed. */
+.dz-measure       { max-width:35em; }
+.dz-measure--short { max-width:27em; }
+
+
+/* ===========================================================================
+   2. THE TYPE SCALE - nine steps, and this concept USES all nine
+   ===========================================================================
+   Concept 2 puts more of the hierarchy load on type than on chrome, so the
+   scale has more steps IN USE than a two-step display/body pairing would.
+   Every step is fluid (the owner asked for a viewport-interpolated scale).
+
+     S1  display XL   hero h1 only
+     S2  display L    the breath statement and the full-bleed band lines
+     S3  display M    section h2
+     S4  display S    feature-row h3 and plan names
+     S5  lead         the one paragraph under a head
+     S6  body         16px, inherited from the chrome reset
+     S7  caption      supporting and table text
+     S8  micro        eyebrows, labels, table headers
+     S9  numeral      stat figures and prices
+   =========================================================================== */
+
+/* S1 */
+.dz-h1 {
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(44px,7.4vw,104px);
+  line-height:.96;
+  letter-spacing:-.035em;
+  font-weight:800;
+  text-transform:uppercase;
+  color:var(--ds-ink-heading);
+}
+/* The second hero line is the violet TURN: the brand's light landing on the
+   claim. It is a SOLID --ds-accent-light and deliberately NOT the --ds-grad-text
+   gradient, and that decision came from a measurement, not a preference.
+
+   A paint-stack probe rendered the page, hid the type, sampled the real pixels
+   behind this line and scored each gradient stop against them. The h1 does not
+   sit on flat canvas: it sits where the hero fade is still resolving, so its
+   true ground measured rgb(38,34,45), lighter than the canvas. Against that:
+       --ds-accent-light #ae76ef (light stop)   4.92:1   PASS
+       --ds-primary      #8d3fe8 (dark stop)    2.97:1   FAIL (floor is 3.0)
+   The gradient's dark end therefore missed the large-text floor on the real
+   page even though the same colour clears 3.45:1 on flat canvas. Rather than
+   darken the hero again (which is what was burying the photograph), the line
+   is painted in the solid light violet, which clears the LARGE floor by 64%
+   and clears even the 4.5:1 SMALL-text floor. The signature is kept, the
+   arithmetic is honest. --ds-grad-brand still carries the gradient elsewhere,
+   on fills and rules where no text sits on it. */
+.dz-h1__turn {
+  display:block;
+  color:var(--ds-accent-light);
+}
+
+/* S2 */
+.dz-display {
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(34px,5vw,68px);
+  line-height:1.06;
+  letter-spacing:-.028em;
+  font-weight:700;
+  color:var(--ds-ink-heading);
+}
+
+/* S3 */
+.dz-h2 {
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(28px,3.4vw,46px);
+  line-height:1.1;
+  letter-spacing:-.024em;
+  font-weight:700;
+  color:var(--ds-ink-heading);
+}
+
+/* S4 */
+.dz-h3 {
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(21px,1.9vw,28px);
+  line-height:1.2;
+  letter-spacing:-.014em;
+  font-weight:600;
+  color:var(--ds-ink-heading);
+}
+
+/* S5 */
+.dz-lead {
+  margin:0;
+  font-size:clamp(17px,1.5vw,21px);
+  line-height:1.62;
+  color:var(--ds-ink);
+}
+
+/* S7 */
+.dz-caption {
+  margin:0;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--ds-ink-soft);
+}
+
+/* S8. Accent-ink on any of the three locked planes measures 5.71 / 5.33 /
+   4.91:1, all clear of 4.5:1. The raw brand violet is never used as text. */
+.dz-eyebrow {
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+/* The one variant that sits over a photographic band. Measured worst case over
+   band-pricing.webp under one --ds-scrim layer: accent-ink 3.17:1 (fails), so
+   over a bright band the eyebrow goes to heading ink at 10.03:1 instead. */
+.dz-eyebrow--on-media { color:var(--ds-ink-heading); }
+
+/* S9 */
+.dz-numeral {
+  display:block;
+  font-family:var(--ds-font-display);
+  font-size:clamp(46px,6vw,92px);
+  line-height:.9;
+  letter-spacing:-.045em;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:var(--ds-ink-heading);
+}
+
+/* Section head. One head shape reused by every beat that has one. */
+.dz-head            { display:grid; gap:var(--ds-space-sm); }
+.dz-head--centre    { justify-items:center; text-align:center; }
+.dz-head + .dz-body { margin-top:var(--ds-space-xl); }
+.dz-body            { display:grid; gap:var(--ds-space-lg); }
+
+.dz-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--ds-space-sm);
+  margin-top:var(--ds-space-lg);
+}
+.dz-actions--centre { justify-content:center; }
+
+
+/* ===========================================================================
+   3. BEAT 1 - THE HERO (heavy)
+   ===========================================================================
+   The media layer is SEPARATED from the content layer so the placeholder can be
+   swapped for an animated treatment with no reflow and nothing else touched
+   (the owner's hero contract). Everything that positions the hero lives on
+   .dz-hero and its container; the media layer owns only itself.
+
+   THE CONTRAST DECISION, MEASURED ON THE RENDERED PAGE. An early draft of this
+   comment claimed the hero copy "sits on solid canvas, so it is deterministic
+   rather than image-dependent". That was WRONG and a paint-stack probe caught
+   it: the page was rendered, the type hidden, the real pixels behind each text
+   box sampled, and every glyph colour scored against them. The copy block
+   starts around 36% down the hero, where --ds-fade-to-paper is still resolving
+   and the scrimmed photograph still shows through, so the true ground under the
+   headline measured rgb(38,34,45) and under the eyebrow rgb(46,37,54) - both
+   lighter than the canvas, neither of them flat.
+
+   What the probe returned for this beat, against those real grounds:
+     eyebrow    --ds-accent-ink 11px bold    4.63:1   (floor 4.5) PASS, tightest
+     h1 turn    --ds-accent-light 104px      4.92:1   (floor 3.0) PASS
+     lead       --ds-ink                     over 9:1            PASS
+     cue        --ds-ink-soft                over 6:1            PASS
+   The eyebrow is the tightest string on the page. It passes, and it is the one
+   to re-measure first if the hero image is ever swapped, which is exactly why
+   the number is written down here instead of being assumed.
+   =========================================================================== */
+
+.dz-hero {
+  display:flex;
+  align-items:flex-end;
+  min-height:min(94vh,900px);
+  padding:calc(var(--ds-section-py) + var(--ds-space-2xl)) 0 calc(var(--ds-section-py) + var(--ds-space-md));
+  background:var(--ds-bg-surface);
+}
+
+/* ---- the swappable media layer. Nothing below this rule leaks out of it. --- */
+.dz-hero__media { position:absolute; inset:0; z-index:var(--ds-z-base); overflow:hidden; }
+.dz-hero__media img {
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:50% 40%;
+}
+/* The scrim is carried at --ds-opacity-muted, NOT at full strength, and the
+   number was chosen by measurement rather than by eye. --ds-scrim is .72 alpha;
+   at full strength it buries an already near-black photograph so completely
+   that the "full-bleed image" beat stops showing an image at all. Sweeping the
+   opacity tokens against the brightest pixel in the frame:
+     full .720 -> rail ink 10.04:1   (image effectively gone)
+     veil .612 -> rail ink  7.48:1
+     MUTED .518 -> rail ink 5.81:1   <- chosen: most image, still clear of AA
+     scrim .396 -> rail ink  4.23:1  (FAILS the 4.5:1 floor, rejected)
+   The locked rail is transparent over this image and its links are --ds-ink,
+   so the rail's legibility is the binding constraint, and .518 clears it with
+   real margin while letting the violet bloom actually read. */
+.dz-hero__scrim { position:absolute; inset:0; background:var(--ds-scrim); opacity:var(--ds-opacity-muted); }
+.dz-hero__fade  { position:absolute; inset:0; background:var(--ds-fade-to-paper); }
+/* ---- end of the swappable media layer ------------------------------------ */
+
+.dz-hero .container { position:relative; z-index:var(--ds-z-raised); }
+.dz-hero .dz-lead   { margin-top:var(--ds-space-md); color:var(--ds-ink); }
+.dz-hero .dz-eyebrow { margin-bottom:var(--ds-space-md); }
+
+/* The scroll cue. A static mark, not a loop: the owner bans anything looping in
+   the viewport, so this reads as a rule with a label and never animates. */
+.dz-hero__cue {
+  display:flex;
+  align-items:center;
+  gap:var(--ds-space-sm);
+  margin-top:var(--ds-space-xl);
+  font-family:var(--ds-font-display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-ink-soft);
+}
+.dz-hero__cue::before {
+  content:"";
+  width:var(--ds-space-xl);
+  height:1px;
+  background:var(--ds-primary);
+}
+
+
+/* ===========================================================================
+   4. BEAT 2 - THE FIGURE ROW (light)
+   ===========================================================================
+   Bare numerals in open space. No cards, no chrome, no fills: the light beat
+   is light because the type is alone on the canvas. Hairline separators only.
+   =========================================================================== */
+
+.dz-figures {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--ds-space-lg);
+}
+/* The cell is a column and the label is pushed to its foot, so the four labels
+   sit on ONE line even though "1.2 BLN" wraps to two lines and "500+" does not.
+   Without this the labels stagger and the row reads accidental. */
+.dz-figure {
+  display:flex;
+  flex-direction:column;
+  padding-left:var(--ds-space-lg);
+  border-left:1px solid var(--ds-line);
+}
+.dz-figure:first-child { padding-left:0; border-left:0; }
+.dz-figure__label {
+  display:block;
+  margin-top:auto;
+  padding-top:var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   5. BEATS 3, 6 and 9 - THE BREATHS
+   ===========================================================================
+   One idea, one viewport, nothing competing. Beat 3 is a statement on bare
+   canvas, beat 6 is a pull-quote over the band-breath image, beat 9 is the
+   closing ask. All three are the same shape at three densities.
+   =========================================================================== */
+
+.dz-breath__rule {
+  width:var(--ds-space-2xl);
+  height:2px;
+  margin:0 auto var(--ds-space-lg);
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-grad-brand);
+}
+.dz-breath__note {
+  margin-top:var(--ds-space-lg);
+  font-size:15px;
+  line-height:1.6;
+  color:var(--ds-ink-soft);
+}
+/* The guarantee condition never travels without the guarantee. It is set as a
+   deliberate, legible line rather than as fine print. */
+.dz-breath__condition {
+  display:inline-block;
+  margin-top:var(--ds-space-md);
+  padding:var(--ds-space-xs) var(--ds-space-md);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-primary-soft);
+  font-family:var(--ds-font-display);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+
+/* The pull-quote band. Measured over the real band-breath.webp under one
+   --ds-scrim layer the brightest composite is rgb(25,19,28): heading ink
+   18.24:1, body ink 16.57:1, muted ink 6.89:1 and accent ink 5.77:1. Every
+   role clears AA over this band, so the band can carry the full palette. */
+.dz-band { position:relative; display:flex; align-items:center; min-height:76vh; }
+.dz-band__media { position:absolute; inset:0; z-index:var(--ds-z-base); overflow:hidden; }
+.dz-band__media img { width:100%; height:100%; object-fit:cover; }
+.dz-band__scrim { position:absolute; inset:0; background:var(--ds-scrim); }
+.dz-band .container { position:relative; z-index:var(--ds-z-raised); }
+
+.dz-quote { margin:0; }
+.dz-quote__mark {
+  display:block;
+  margin-bottom:var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:clamp(48px,6vw,84px);
+  line-height:.6;
+  font-weight:800;
+  color:var(--ds-accent-ink);
+}
+.dz-quote__cite {
+  display:block;
+  margin-top:var(--ds-space-lg);
+  font-size:15px;
+  line-height:1.6;
+  font-style:normal;
+  color:var(--ds-ink-soft);
+}
+
+
+/* ===========================================================================
+   6. BEAT 4 - THE ALTERNATING FEATURE PAIR (heavy)
+   ===========================================================================
+   Image left, then image right, and the flip is the point: the two rows are
+   read as one beat with an internal turn, which is why the pair counts once in
+   the pulse. The media is height-CAPPED and sits BESIDE its copy in one
+   viewport (the compact feature-row law) so the beat can never sprawl.
+   =========================================================================== */
+
+.dz-feature + .dz-feature { margin-top:calc(var(--ds-section-py) - var(--ds-space-md)); }
+
+.dz-media {
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  max-height:460px;
+  width:100%;
+  min-width:0;
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.dz-media img { width:100%; height:100%; object-fit:cover; }
+.dz-media:hover { transform:translateY(-4px); box-shadow:var(--ds-shadow-lift); }
+/* The violet is deployed as LIGHT catching the frame's top edge, not as fill. */
+.dz-media::after {
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:1px;
+  background:var(--ds-grad-brand);
+  opacity:var(--ds-opacity-scrim);
+}
+
+.dz-feature__index {
+  display:block;
+  margin-bottom:var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.16em;
+  color:var(--ds-accent-ink);
+}
+.dz-feature .dz-lead { margin-top:var(--ds-space-md); color:var(--ds-ink-soft); }
+
+.dz-list { display:grid; gap:var(--ds-space-xs); margin-top:var(--ds-space-lg); }
+.dz-list li {
+  position:relative;
+  padding-left:var(--ds-space-md);
+  font-size:15px;
+  line-height:1.55;
+  color:var(--ds-ink);
+}
+.dz-list li::before {
+  content:"";
+  position:absolute; left:0; top:.62em;
+  width:6px; height:6px;
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-primary);
+}
+
+/* The inline text link. An underline that draws in on hover, matching the
+   footer link language already locked in the chrome. */
+.dz-link {
+  position:relative;
+  display:inline-block;
+  margin-top:var(--ds-space-lg);
+  padding-bottom:var(--ds-space-2xs);
+  font-family:var(--ds-font-display);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+.dz-link::after {
+  content:"";
+  position:absolute; left:0; right:100%; bottom:0; height:1px;
+  background:var(--ds-primary);
+  transition:right var(--ds-dur) var(--ds-ease);
+}
+.dz-link:hover::after { right:0; }
+
+
+/* ===========================================================================
+   7. BEAT 5 - THE RESULTS LEDGER (light)
+   ===========================================================================
+   Eight measured city results as a ruled typographic ledger. No cards and no
+   image: after the heavy feature pair the page needs type in air, and a ledger
+   reads faster than eight tiles anyway. The staggered reveal runs the eye down
+   the column in order, which is the whole reason the rows are rows.
+   =========================================================================== */
+
+.dz-ledger { display:grid; }
+.dz-ledger__row {
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:baseline;
+  gap:var(--ds-space-md);
+  padding:var(--ds-space-md) 0;
+  border-top:1px solid var(--ds-hairline);
+}
+.dz-ledger__row:last-child { border-bottom:1px solid var(--ds-hairline); }
+.dz-ledger__place {
+  font-family:var(--ds-font-display);
+  font-size:clamp(18px,1.7vw,24px);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--ds-ink-heading);
+}
+.dz-ledger__lift {
+  font-family:var(--ds-font-display);
+  font-size:clamp(17px,1.6vw,22px);
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.015em;
+  color:var(--ds-ink);
+  text-align:right;
+}
+/* The one row the eye should land on. The largest measured lift gets the
+   accent; accent ink on the canvas is 5.71:1, clear of the small-text floor. */
+.dz-ledger__row--lead { padding:var(--ds-space-lg) 0; }
+.dz-ledger__row--lead .dz-ledger__place,
+.dz-ledger__row--lead .dz-ledger__lift { color:var(--ds-accent-ink); }
+.dz-ledger__row--lead .dz-ledger__lift { font-size:clamp(22px,2.4vw,34px); }
+
+
+/* ===========================================================================
+   8. BEAT 7 - THE PRICE LADDER (heavy, the saturated module)
+   ===========================================================================
+   The band-pricing image is the ground and a solid elevated panel carries the
+   table. That split is a CONTRAST decision, not a stylistic one: measured over
+   the real band-pricing.webp under one --ds-scrim layer, heading ink is 10.03:1
+   (fine) but muted ink is 3.79:1 and accent ink 3.17:1 (both fail AA). Table
+   text is small and there is a lot of it, so it goes on --ds-bg-surface-2
+   where the three body roles measure 14.10 / 5.87 / 4.91:1 and none of it
+   depends on which pixel of a photograph sits behind it.
+   =========================================================================== */
+
+.dz-ladder__panel {
+  margin-top:var(--ds-space-xl);
+  padding:var(--ds-space-lg);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card),var(--ds-inset-hi);
+}
+
+.dz-table { width:100%; border-collapse:collapse; text-align:left; }
+.dz-table caption {
+  margin-bottom:var(--ds-space-md);
+  font-size:14px;
+  line-height:1.6;
+  text-align:left;
+  color:var(--ds-ink-soft);
+}
+.dz-table th,
+.dz-table td { padding:var(--ds-space-sm) var(--ds-space-md); vertical-align:baseline; }
+.dz-table thead th {
+  font-family:var(--ds-font-display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+  border-bottom:1px solid var(--ds-line);
+}
+.dz-table tbody tr + tr th,
+.dz-table tbody tr + tr td { border-top:1px solid var(--ds-hairline); }
+.dz-table tbody th {
+  font-family:var(--ds-font-display);
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:-.005em;
+  color:var(--ds-ink-heading);
+}
+.dz-table td { font-size:15px; color:var(--ds-ink); }
+.dz-table .dz-cell--muted { color:var(--ds-ink-soft); font-size:14px; }
+.dz-table .dz-cell--index {
+  font-family:var(--ds-font-display);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.14em;
+  color:var(--ds-accent-ink);
+}
+.dz-cell--price {
+  font-family:var(--ds-font-display);
+  font-size:clamp(18px,1.6vw,22px);
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.02em;
+  color:var(--ds-ink-heading);
+  white-space:nowrap;
+}
+
+
+/* ===========================================================================
+   9. BEAT 8 - THE TWO PLANS (light)
+   ===========================================================================
+   After nine dense rows the page opens out again: two cards, a lot of air, and
+   the featured one lifted by an accent border and a gradient top edge rather
+   than by a louder fill.
+   =========================================================================== */
+
+.dz-plans { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--ds-space-md); }
+
+.dz-plan {
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap:var(--ds-space-sm);
+  padding:var(--ds-space-lg);
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out),
+             box-shadow var(--ds-dur-fast) var(--ds-ease-out);
+}
+.dz-plan:hover { transform:translateY(-4px); box-shadow:var(--ds-shadow-lift); }
+
+.dz-plan--featured { border-color:var(--ds-primary); }
+.dz-plan--featured::before {
+  content:"";
+  position:absolute; left:0; right:0; top:0; height:3px;
+  background:var(--ds-grad-brand);
+}
+
+.dz-plan__badge {
+  align-self:flex-start;
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border-radius:var(--ds-r-pill);
+  background:var(--ds-primary-soft);
+  border:1px solid var(--ds-line);
+  font-family:var(--ds-font-display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+.dz-plan__price {
+  font-family:var(--ds-font-display);
+  font-size:clamp(34px,3.4vw,52px);
+  line-height:1;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.035em;
+  color:var(--ds-ink-heading);
+}
+.dz-plan__price span {
+  font-size:clamp(15px,1.2vw,18px);
+  font-weight:700;
+  letter-spacing:0;
+  color:var(--ds-ink-soft);
+}
+.dz-plan__addon { font-size:14px; color:var(--ds-ink-soft); }
+.dz-plan__modules {
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--ds-space-2xs);
+  margin-top:var(--ds-space-xs);
+}
+.dz-plan__modules li {
+  padding:var(--ds-space-2xs) var(--ds-space-sm);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-control);
+  font-size:13px;
+  color:var(--ds-ink);
+}
+.dz-plan .btn { margin-top:var(--ds-space-md); }
+
+
+/* ===========================================================================
+   10. MOTION
+   ===========================================================================
+   The owner's spec, implemented literally and nowhere exceeded:
+     reveal      fade + 20px rise, 520ms, cubic-bezier(.16,1,.3,1), once, ~15%
+     stagger     70ms between siblings in a group (this concept's signature)
+     media       scale 1.04 -> 1.0 as the media enters
+     parallax    0.94x on the two full-bleed bands
+     hover       lift 4px at 160ms (the --ds-dur-fast token)
+     count-up    on the four figures
+   Only transform and opacity are ever animated. Nothing loops in the viewport.
+
+   The stagger is where THIS concept spends its motion: grouped items arrive in
+   sequence, so the figure row, the ledger and the table are READ in order
+   instead of appearing all at once. It is the one thing the eye is led by.
+   =========================================================================== */
+
+.dz-rise {
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 520ms cubic-bezier(.16,1,.3,1),
+             transform 520ms cubic-bezier(.16,1,.3,1);
+  transition-delay:var(--dz-delay,0ms);
+}
+.dz-rise.is-in { opacity:1; transform:none; }
+
+.dz-zoom img {
+  transform:scale(1.04);
+  transition:transform 620ms cubic-bezier(.16,1,.3,1);
+}
+.dz-zoom.is-in img { transform:scale(1); }
+
+/* Parallax. The layer is translated by JS on a 0.94 factor and clamped, and the
+   media layer is over-sized so the travel can never expose an edge. */
+.dz-parallax { top:-8%; height:116%; will-change:transform; }
+
+
+/* ===========================================================================
+   11. RESPONSIVE
+   =========================================================================== */
+
+@media (max-width:1023px){
+  .dz-figures { grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--ds-space-xl) var(--ds-space-lg); }
+  .dz-figure:nth-child(3) { padding-left:0; border-left:0; }
+  .dz-plans   { grid-template-columns:1fr; }
+}
+
+@media (max-width:900px){
+  /* Both split rows un-flip and stack media-first, so the alternation never
+     leaves the reader with a copy block whose image is below the fold. */
+  .row--split,
+  .row--rev { flex-direction:column; align-items:stretch; gap:var(--ds-space-lg); }
+  .dz-media { max-height:340px; }
+  .dz-band  { min-height:auto; }
+  .dz-beat--breath { min-height:auto; }
+}
+
+@media (max-width:767px){
+  /* The owner's mobile envelope is 64-80px. --ds-space-xl is 64 and
+     --ds-space-xl + --ds-space-sm is 78, so all three weights land inside it. */
+  .dz-beat,
+  .dz-beat--light  { padding:var(--ds-space-xl) 0; }
+  .dz-beat--heavy,
+  .dz-beat--breath { padding:calc(var(--ds-space-xl) + var(--ds-space-sm)) 0; }
+  .dz-hero { min-height:min(88vh,760px); padding:calc(var(--ds-space-2xl) + var(--ds-space-xl)) 0 var(--ds-space-2xl); }
+
+  .dz-figures { grid-template-columns:1fr; gap:var(--ds-space-lg); }
+  .dz-figure  { padding-left:0; border-left:0; padding-top:var(--ds-space-md); border-top:1px solid var(--ds-hairline); }
+  .dz-figure:first-child { padding-top:0; border-top:0; }
+  /* The stat figure is the message, so it keeps a large floor when the row
+     stacks. It never shrinks to fit a narrow column. */
+  .dz-numeral { font-size:clamp(46px,13vw,60px); }
+
+  .dz-ledger__row { grid-template-columns:1fr; gap:var(--ds-space-2xs); }
+  .dz-ledger__lift { text-align:left; }
+
+  /* Comp6: the spec table drops its header row and each tier becomes a card,
+     every cell printing its own column label, so no value loses its meaning. */
+  .dz-ladder__panel { padding:var(--ds-space-md); }
+  .dz-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  .dz-table,
+  .dz-table tbody,
+  .dz-table tr,
+  .dz-table th,
+  .dz-table td { display:block; width:100%; }
+  .dz-table tr {
+    padding:var(--ds-space-md);
+    border:1px solid var(--ds-line);
+    border-radius:var(--ds-r-control);
+  }
+  .dz-table tr + tr { margin-top:var(--ds-space-xs); }
+  .dz-table tbody tr + tr th,
+  .dz-table tbody tr + tr td { border-top:0; }
+  .dz-table th,
+  .dz-table td { padding:var(--ds-space-2xs) 0; }
+  .dz-table td::before {
+    content:attr(data-label) " ";
+    display:block;
+    font-family:var(--ds-font-display);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ds-ink-soft);
+  }
+}
+
+
+/* ===========================================================================
+   12. REDUCED MOTION
+   ===========================================================================
+   FULL support, as the owner requires. Every transform is dropped, every
+   revealed element is painted in its final visible state, the media zoom rests
+   at 1.0, the parallax layer is returned to its resting inset, and the JS
+   count-up writes its final value immediately. Nothing is lost and nothing is
+   left invisible: this block alone (with no JS at all) is enough to render the
+   whole page complete.
+   =========================================================================== */
+
+@media (prefers-reduced-motion: reduce){
+  .dz-rise {
+    opacity:1;
+    transform:none;
+    transition:none;
+    transition-delay:0ms;
+  }
+  .dz-zoom img,
+  .dz-zoom.is-in img { transform:none; transition:none; }
+  .dz-parallax { top:0; height:100%; transform:none !important; }
+  .dz-media:hover,
+  .dz-plan:hover { transform:none; }
+}

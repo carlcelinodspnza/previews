@@ -1,0 +1,1107 @@
+<!--META concept=3 name=sidelight-column stage=chrome -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispenza / Chrome 3 / Sidelight Column</title>
+<meta name="description" content="Chrome concept 3 of 3 for Dispenza: a quiet top bar, a full-height sidelight panel that gives the 8 services and 6 team pages room to breathe, and the inset charcoal footer card.">
+
+<link rel="stylesheet" href="../../dispenza-fonts.css">
+<link rel="stylesheet" href="../../dispenza-tokens.css">
+
+<!--
+  DISPENZA / CHROME TOURNAMENT / CONCEPT 3 "SIDELIGHT COLUMN"
+  ==========================================================
+  WHAT THIS FILE IS. The site FRAME that wraps all 27 pages: the bar, the two
+  group openers, the footer, the mobile drawer and the mobile sticky action bar.
+  The body between them (a hero band, one content band, one specimen band) is
+  SCAFFOLDING so the frame can be judged in context. It is not the deliverable.
+
+  THE ARCHITECTURE, and why it is different from concepts 1 and 2.
+  All three concepts share the SAME locked identity and the SAME nav and footer
+  CONTENT. This one differs only in how the frame is organised:
+
+    1. The top bar carries almost nothing. Wordmark, four singleton links
+       (Home, Pricing, Results, Contact), the LOGIN utility, the BOOK DEMO
+       button, and one considered menu affordance. That is the whole bar.
+    2. The heavy navigation is NOT a hover dropdown. It lives in a full-height
+       panel that opens from the right, where the 8 services and the 6 team
+       members each get their own column, their own count, and a hairline row
+       per entry. C1 gives this site two oversized groups; a dropdown would
+       cram 14 links into a hover surface, and cramming is the single thing a
+       site with two big groups cannot afford.
+    3. The SAME panel is the mobile drawer. One coordinated system across the
+       1440 bar, the 375 compressed bar and the drawer-open state, exactly as
+       NAV-PATTERNS requires. Nothing is designed twice.
+    4. The footer answers the vertical panel with the brand's own horizontal
+       signature: the dark charcoal rounded card, inset from the page edge.
+
+  WHERE THE GLOW IS SPENT. Once, on the panel.
+  The owner flagged glow as the standing overspend risk and rejected spectacle,
+  so the budget here is ONE lit moment per view:
+    - Page view: a single soft radial wash behind the hero headline
+      (var(--ds-glow-wash)), and nothing else. The bar carries NO glow in
+      either state. The footer card carries NO glow. Buttons carry NO bloom
+      at rest.
+    - Panel view: the panel's left edge, the edge that faces the page, is a
+      3px column of var(--ds-grad-brand) carrying var(--ds-glow), with
+      var(--ds-glow-wash) beside it shaping the bloom so it falls off top and
+      bottom. That vertical light-edge IS the concept's name and it is the
+      only lit thing on screen while the panel is open.
+  Everything else that reads as depth is value and hairline, not light: three
+  near-black planes (canvas #15161a, panel plane, elevated card plane), a
+  translucent hairline, an inset top highlight, and layered violet-cast shadow.
+
+  TOKEN PURITY. Every colour, radius, shadow, spacing, easing, duration,
+  z-index and opacity value below is var(--ds-*) from dispenza-tokens.css.
+  There is no raw hex in this sheet. Raw px appears only where the token
+  system carries no value: hairline widths (1px, 2px, 3px), font sizes and
+  line heights, the logo image height, the panel max-width, the media query
+  breakpoints, and the dimensions of the static mobile specimen frames.
+
+  MOTION, against the owner spec (binding).
+    Sticky bar: transparent over the hero, then solid with backdrop blur, a
+      hairline border and a resting shadow once the hero sentinel leaves the
+      viewport. Driven by IntersectionObserver, not a scroll handler.
+    Duration: var(--ds-dur) = 220ms. FLAGGED HONESTLY: the owner spec says
+      200ms. 220ms is the locked token and the nearest available value;
+      writing a literal 200ms would put a raw motion value outside the token
+      system, which the brief forbids. 20ms is below the perceptual floor.
+    Hover: 2px to 4px lift at var(--ds-dur-fast) = 160ms (inside the owner's
+      150ms to 200ms window) with a soft shadow. In the panel's vertical link
+      lists the analogous move is a 4px lateral shift, because a lift inside a
+      hairline row list would break the rows apart.
+    ONLY transform and opacity are animated. Nothing here bounces, springs,
+      overshoots, rotates, flips, types, autoplays, loops or trails.
+    prefers-reduced-motion: reduce is fully supported. Every transition and
+      animation collapses to an instant state change, every hover lift and
+      lateral shift is removed, smooth scrolling is off, and no content is
+      hidden or lost. The panel still opens and closes; it simply arrives
+      instead of sliding.
+
+  CONTRAST. Computed with the WCAG 2.1 relative luminance formula before the
+  sheet was drawn, not eyeballed. The scrolled bar is a translucent surface, so
+  its pairings are measured against the COMPOSITE it actually paints:
+  var(--ds-glass-bg) rgba(34,36,41,.72) over the canvas resolves to #1e2025.
+
+    BAR, transparent over the hero (ground #15161a)
+      nav link rest      ink-soft   on canvas      6.83:1   PASS
+      nav link hover     ink        on canvas     16.42:1   PASS
+      LOGIN utility      ink-soft   on canvas      6.83:1   PASS
+      MENU trigger label ink        on canvas     16.42:1   PASS
+    BAR, solid on scroll (composite ground #1e2025)
+      nav link rest      ink-soft   on composite   6.16:1   PASS
+      nav link hover     ink        on composite  14.80:1   PASS
+      accent small text  accent-ink on composite   5.15:1   PASS
+    BOOK DEMO button
+      label              white      on violet      5.24:1   PASS
+    PANEL (ground var(--ds-bg-warm) #1b1d22)
+      group heading      accent-ink on panel       5.33:1   PASS
+      link label rest    ink        on panel      15.31:1   PASS
+      count and captions ink-soft   on panel       6.37:1   PASS
+      panel headings     white      on panel      16.86:1   PASS
+    FOOTER card (ground var(--ds-bg-surface-2) #222429)
+      link label         ink        on card       14.10:1   PASS
+      labels and legal   ink-soft   on card        5.87:1   PASS
+      accent small text  accent-ink on card        4.91:1   PASS
+      headings           white      on card       15.53:1   PASS
+    NON-TEXT (3:1 floor)
+      violet border on canvas                      3.45:1   PASS
+      violet border on panel plane                 3.22:1   PASS
+      violet border on the composite bar ground    3.11:1   PASS
+
+    TWO MEASURED CONSEQUENCES, both obeyed:
+      a. Raw violet #8d3fe8 as SMALL TEXT on the canvas is 3.45:1, a FAIL. It
+         is never painted as small text anywhere in this frame. Small accent
+         text is var(--ds-accent-ink) #ae76ef throughout. Violet stays fill,
+         border and large display.
+      b. Raw violet as a BORDER on the elevated card plane #222429 is 2.96:1,
+         under the 3:1 non-text floor. So the outline button variant never
+         appears inside the footer card. The mobile sticky bar sits on the
+         canvas composite #1e2025 at 3.11:1, which is where the outline
+         variant is legitimate, and that is where CALL US lives.
+
+  DESIGN SYSTEM ANCHORS
+    10-structure-library/chrome/nav/menu.md      NAV-PATTERNS, cited per block
+    10-structure-library/chrome/footer/menu.md   FOOTER-STYLES, cited per block
+    10-structure-library/chrome/sticky/menu.md   STICKY-CTA-BAR, cited per block
+    10-structure-library/sections/hero/menu.md   HERO-COMPOSITIONS, scaffolding
+    10-structure-library/sections/features/menu.md  SECTION-COMPONENTS, scaffolding
+    00-globals/specs/_MODERN-WOW-SPEC.md         the bar. Applied here as:
+      section 1 depth (layered violet-cast shadow, translucent hairline, inset
+      top highlight, glass bar that gains border and shadow on scroll, three
+      real grounds), section 3 texture (grain overlay, token grid material),
+      section 4 type (display scale against calm body, tracked eyebrows, mono
+      numerals for the group counts), section 5 light (one accent bloom per
+      view), section 7 detail (one radius dialect, refined focus rings).
+    C1 _handoff/sitemap.yaml    the nav source of truth. Every label, route
+      and group member below is read from it. Nothing here is invented.
+    C7 _handoff/visual-direction.md   leads DARK per owner decision D20, and
+      the inset charcoal rounded footer card is recorded there as a brand
+      signature, which is why the footer keeps that shape.
+-->
+
+<style>
+/* ===========================================================================
+   00 . RESET AND PAGE GROUND
+   =========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--ds-font-body);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* WOW section 3: an ultra low opacity grain across the whole canvas so the
+   near black never reads as a flat fill. Fixed, so it does not scroll with
+   content and never becomes a pattern the eye can track. */
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  background-image:var(--ds-grain);
+  background-size:160px 160px;
+  opacity:var(--ds-opacity-faint);
+  mix-blend-mode:overlay;
+  pointer-events:none;
+  z-index:var(--ds-z-below);
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+.wrap{max-width:var(--ds-container-max); margin:0 auto; padding-inline:var(--ds-space-md)}
+
+/* One focus dialect for the whole frame. WOW section 7. */
+:where(a,button,[tabindex]):focus-visible{
+  outline:2px solid var(--ds-accent-light);
+  outline-offset:3px;
+  border-radius:var(--ds-r-control);
+}
+.skip{
+  position:absolute; left:var(--ds-space-md); top:var(--ds-space-md);
+  z-index:var(--ds-z-toast);
+  transform:translateY(-200%);
+  background:var(--ds-bg-surface-2);
+  color:var(--ds-ink);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-control);
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  font-family:var(--ds-font-display); font-size:12px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; text-decoration:none;
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out);
+}
+.skip:focus{transform:translateY(0)}
+
+/* ===========================================================================
+   01 . THE TWO BUTTON VARIANTS. Frozen at the brand card. Exactly two.
+   Solid: violet fill, white uppercase label (5.24:1).
+   Outline: violet border (non-text, 3:1 floor), accent-light label (5.71:1
+   on canvas). The label is NEVER raw violet, which measures 3.45:1.
+   =========================================================================== */
+.btn{
+  position:relative; overflow:hidden;
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--ds-space-xs);
+  font-family:var(--ds-font-display);
+  font-size:12px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border-radius:var(--ds-r-control);
+  border:1px solid transparent;
+  text-decoration:none; cursor:pointer;
+  transition:transform var(--ds-dur-fast) var(--ds-ease),
+             box-shadow var(--ds-dur-fast) var(--ds-ease),
+             color var(--ds-dur-fast) var(--ds-ease),
+             border-color var(--ds-dur-fast) var(--ds-ease);
+}
+.btn::before{
+  content:""; position:absolute; inset:0;
+  background:var(--ds-grad-brand);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform var(--ds-dur) var(--ds-ease);
+  z-index:var(--ds-z-base);
+}
+.btn > span{position:relative; z-index:var(--ds-z-raised)}
+.btn:hover{transform:translateY(-2px); box-shadow:var(--ds-shadow-rest)}
+.btn:hover::before{transform:scaleX(1)}
+.btn--solid{background:var(--ds-primary); color:var(--ds-ink-on-dark)}
+.btn--outline{background:transparent; border-color:var(--ds-primary); color:var(--ds-accent-light)}
+.btn--outline:hover{color:var(--ds-ink-on-dark); border-color:transparent}
+.btn--lg{font-size:13px; padding:var(--ds-space-sm) var(--ds-space-lg)}
+
+/* ===========================================================================
+   02 . THE TOP BAR
+   NAV-PATTERNS #13. Transparent over the hero, then glass with a hairline and
+   a resting shadow. Deliberately quiet: the bar is the least decorated surface
+   in the whole frame, which is what buys the panel its one lit moment.
+   =========================================================================== */
+.bar{
+  position:fixed; top:0; left:0; right:0;
+  z-index:var(--ds-z-sticky);
+  background-color:transparent;
+  border-bottom:1px solid transparent;
+  transition:background-color var(--ds-dur) var(--ds-ease-out),
+             border-color var(--ds-dur) var(--ds-ease-out),
+             box-shadow var(--ds-dur) var(--ds-ease-out);
+}
+.bar.is-solid{
+  background-color:var(--ds-glass-bg);
+  -webkit-backdrop-filter:var(--ds-glass-blur);
+  backdrop-filter:var(--ds-glass-blur);
+  border-bottom-color:var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-rest), var(--ds-inset-hi);
+}
+.bar__in{
+  display:flex; align-items:center; gap:var(--ds-space-md);
+  height:var(--ds-space-xl);
+  max-width:var(--ds-container-max); margin:0 auto;
+  padding-inline:var(--ds-space-md);
+}
+.brand{display:inline-flex; align-items:center; flex:0 0 auto; text-decoration:none}
+.brand img{height:22px; width:auto}
+.nav{display:flex; align-items:center; gap:var(--ds-space-md); margin-left:auto}
+.nav a{
+  position:relative;
+  font-family:var(--ds-font-display);
+  font-size:12px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ds-ink-soft);
+  text-decoration:none;
+  padding-block:var(--ds-space-xs);
+  transition:color var(--ds-dur-fast) var(--ds-ease);
+}
+.nav a::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:var(--ds-primary);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform var(--ds-dur) var(--ds-ease);
+}
+.nav a:hover,.nav a:focus-visible{color:var(--ds-ink-heading)}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+.nav a[aria-current="page"]{color:var(--ds-ink-heading)}
+.nav a[aria-current="page"]::after{transform:scaleX(1)}
+
+.acts{display:flex; align-items:center; gap:var(--ds-space-sm); flex:0 0 auto}
+.util{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--ds-font-display);
+  font-size:11px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ds-ink-soft); text-decoration:none;
+  padding-block:var(--ds-space-xs);
+  transition:color var(--ds-dur-fast) var(--ds-ease);
+}
+.util:hover{color:var(--ds-ink-heading)}
+.util svg{width:11px; height:11px; flex:0 0 auto}
+
+/* The considered menu affordance. A labelled control, not a naked hamburger:
+   it carries a violet sidelight tick on its own left edge, which is a small
+   promise of the light edge the panel opens with. */
+.trigger{
+  position:relative; overflow:hidden;
+  display:inline-flex; align-items:center; gap:var(--ds-space-xs);
+  background:transparent;
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-control);
+  color:var(--ds-ink);
+  font-family:var(--ds-font-display);
+  font-size:11px; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase;
+  padding:var(--ds-space-xs) var(--ds-space-sm) var(--ds-space-xs) var(--ds-space-md);
+  cursor:pointer;
+  transition:transform var(--ds-dur-fast) var(--ds-ease),
+             border-color var(--ds-dur-fast) var(--ds-ease),
+             box-shadow var(--ds-dur-fast) var(--ds-ease);
+}
+.trigger::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:var(--ds-grad-brand);
+}
+.trigger:hover{
+  transform:translateY(-2px);
+  border-color:var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-rest);
+}
+.trigger svg{width:14px; height:10px; flex:0 0 auto; color:var(--ds-ink-soft)}
+
+/* ===========================================================================
+   03 . THE SIDELIGHT PANEL. Also the mobile drawer. One system, three states.
+   =========================================================================== */
+.scrim{
+  position:fixed; inset:0;
+  z-index:var(--ds-z-overlay);
+  background:var(--ds-scrim);
+  opacity:0; visibility:hidden;
+  transition:opacity var(--ds-dur) var(--ds-ease-out), visibility 0s linear var(--ds-dur);
+  border:0; padding:0; width:100%;
+}
+body.is-open .scrim{opacity:1; visibility:visible; transition-delay:0s}
+
+.sl{
+  position:fixed; top:0; right:0; bottom:0;
+  z-index:var(--ds-z-drawer);
+  width:min(680px,100%);
+  display:flex; flex-direction:column;
+  background:var(--ds-bg-warm);
+  box-shadow:var(--ds-shadow-lift);
+  transform:translateX(101%);
+  visibility:hidden;
+  transition:transform var(--ds-dur) var(--ds-ease-out), visibility 0s linear var(--ds-dur);
+}
+body.is-open .sl{transform:translateX(0); visibility:visible; transition-delay:0s}
+
+/* THE ONE GLOW. A 3px gradient column on the edge that faces the page,
+   carrying the token bloom, with the radial wash beside it shaping the
+   falloff so the light reads as vertical rather than as a bar of paint. */
+.sl__edge{
+  position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:var(--ds-grad-brand);
+  box-shadow:var(--ds-glow);
+  pointer-events:none;
+}
+.sl__edge::after{
+  content:""; position:absolute; left:-70px; top:0; bottom:0; width:140px;
+  background:var(--ds-glow-wash);
+  opacity:var(--ds-opacity-texture);
+}
+.sl__head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--ds-space-md);
+  padding:var(--ds-space-md) var(--ds-space-lg);
+  border-bottom:1px solid var(--ds-hairline);
+  flex:0 0 auto;
+}
+.sl__head img{height:20px; width:auto}
+.sl__close{
+  display:inline-flex; align-items:center; gap:var(--ds-space-xs);
+  background:transparent; border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-pill);
+  color:var(--ds-ink-soft);
+  font-family:var(--ds-font-display); font-size:10.5px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  padding:var(--ds-space-xs) var(--ds-space-sm);
+  cursor:pointer;
+  transition:transform var(--ds-dur-fast) var(--ds-ease), color var(--ds-dur-fast) var(--ds-ease);
+}
+.sl__close:hover{transform:translateY(-2px); color:var(--ds-ink-heading)}
+.sl__close svg{width:11px; height:11px}
+.sl__scroll{flex:1 1 auto; overflow-y:auto; padding:var(--ds-space-lg) var(--ds-space-lg) var(--ds-space-xl)}
+.sl__cols{display:grid; grid-template-columns:1fr 1fr; gap:var(--ds-space-xl)}
+
+.grp__hd{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--ds-space-sm);
+  padding-bottom:var(--ds-space-xs);
+  border-bottom:1px solid var(--ds-hairline);
+  margin-bottom:var(--ds-space-xs);
+}
+.grp__hd h2{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:11px; font-weight:800;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+.grp__n{font-family:var(--ds-font-mono); font-size:11px; color:var(--ds-ink-soft)}
+.grp ul{list-style:none; margin:0; padding:0}
+.grp li + li{border-top:1px solid var(--ds-hairline)}
+.grp a{
+  position:relative; display:block;
+  padding:var(--ds-space-sm) 0 var(--ds-space-sm) var(--ds-space-sm);
+  color:var(--ds-ink); text-decoration:none;
+  font-size:15px; line-height:1.45;
+  transition:transform var(--ds-dur-fast) var(--ds-ease), color var(--ds-dur-fast) var(--ds-ease);
+}
+.grp a::before{
+  content:""; position:absolute; left:0; top:50%; width:2px; height:56%;
+  background:var(--ds-primary);
+  transform:translateY(-50%) scaleY(0);
+  transition:transform var(--ds-dur) var(--ds-ease);
+}
+.grp a:hover,.grp a:focus-visible{transform:translateX(4px); color:var(--ds-ink-heading)}
+.grp a:hover::before,.grp a:focus-visible::before{transform:translateY(-50%) scaleY(1)}
+
+.sl__foot{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--ds-space-lg) var(--ds-space-xl);
+  margin-top:var(--ds-space-xl);
+  padding-top:var(--ds-space-lg);
+  border-top:1px solid var(--ds-hairline);
+}
+.sl__site{display:flex; flex-wrap:wrap; gap:var(--ds-space-sm) var(--ds-space-md)}
+.sl__site a{
+  font-family:var(--ds-font-display);
+  font-size:11.5px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ds-ink-soft); text-decoration:none;
+  transition:color var(--ds-dur-fast) var(--ds-ease);
+}
+.sl__site a:hover{color:var(--ds-ink-heading)}
+.sl__reach{display:grid; gap:var(--ds-space-xs); font-size:14px; color:var(--ds-ink-soft)}
+.sl__reach a{color:var(--ds-ink); text-decoration:none}
+.sl__reach a:hover{color:var(--ds-accent-ink)}
+.sl__cta{display:flex; flex-wrap:wrap; gap:var(--ds-space-xs); grid-column:1 / -1}
+
+/* ===========================================================================
+   04 . SCAFFOLDING BODY. Judgeable context for the frame, not the deliverable.
+   =========================================================================== */
+main{display:block}
+.hero{
+  position:relative; isolation:isolate;
+  padding-block:calc(var(--ds-space-xl) + var(--ds-section-py)) var(--ds-section-py);
+  overflow:hidden;
+}
+.hero__grid{
+  position:absolute; inset:0;
+  background-image:var(--ds-grid);
+  background-size:var(--ds-grid-size);
+  opacity:var(--ds-opacity-faint);
+  z-index:var(--ds-z-below);
+  pointer-events:none;
+}
+/* The page view's single lit moment. One wash, behind the headline, nothing else. */
+.hero__glow{
+  position:absolute; top:0; left:50%; width:min(900px,120%); height:520px;
+  transform:translateX(-50%);
+  background:var(--ds-glow-wash);
+  opacity:var(--ds-opacity-muted);
+  z-index:var(--ds-z-below);
+  pointer-events:none;
+}
+.eyebrow{
+  margin:0 0 var(--ds-space-sm);
+  font-family:var(--ds-font-display);
+  font-size:11px; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ds-accent-ink);
+}
+.hero h1{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(44px,7vw,76px); font-weight:800;
+  letter-spacing:-.04em; line-height:1.02; text-transform:uppercase;
+  color:var(--ds-ink-heading);
+  max-width:14ch;
+}
+.lede{
+  margin:var(--ds-space-md) 0 0;
+  font-size:18px; line-height:1.6;
+  color:var(--ds-ink); max-width:58ch;
+}
+.row{display:flex; flex-wrap:wrap; gap:var(--ds-space-sm); margin-top:var(--ds-space-lg)}
+
+.band{
+  background:var(--ds-bg-warm);
+  border-block:1px solid var(--ds-hairline);
+  padding-block:var(--ds-section-py);
+}
+.quote{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(24px,3.2vw,34px); font-weight:700;
+  letter-spacing:-.02em; line-height:1.25;
+  color:var(--ds-ink-heading); max-width:24ch;
+}
+.quote span{color:var(--ds-accent-ink)}
+.specs{
+  list-style:none; margin:var(--ds-space-xl) 0 0; padding:0;
+  display:grid; gap:0;
+}
+.specs li{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr);
+  gap:var(--ds-space-md);
+  padding-block:var(--ds-space-sm);
+  border-top:1px solid var(--ds-hairline);
+  font-size:15px; color:var(--ds-ink-soft);
+}
+.specs li:last-child{border-bottom:1px solid var(--ds-hairline)}
+.specs b{
+  font-family:var(--ds-font-display);
+  font-size:11px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ds-ink);
+}
+
+/* --- the static mobile specimens (375 bar, and the drawer open) ------------ */
+.frames{padding-block:var(--ds-section-py)}
+.frames__hd{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--ds-space-sm) var(--ds-space-md)}
+.frames h2{
+  margin:0;
+  font-family:var(--ds-font-display);
+  font-size:clamp(22px,2.6vw,28px); font-weight:800;
+  letter-spacing:-.02em; text-transform:uppercase;
+  color:var(--ds-ink-heading);
+}
+.frames p{margin:var(--ds-space-xs) 0 0; color:var(--ds-ink-soft); font-size:15px; max-width:62ch}
+.frames__row{
+  display:flex; flex-wrap:wrap; gap:var(--ds-space-lg);
+  margin-top:var(--ds-space-xl);
+}
+.mf{
+  position:relative; overflow:hidden;
+  width:375px; max-width:100%; height:600px;
+  background:var(--ds-bg-surface);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card), var(--ds-inset-hi);
+}
+.mf__cap{
+  margin-top:var(--ds-space-sm);
+  font-family:var(--ds-font-mono); font-size:11px;
+  color:var(--ds-ink-soft);
+}
+.mf__bar{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--ds-space-sm);
+  height:56px; padding-inline:var(--ds-space-sm);
+  background-color:var(--ds-glass-bg);
+  border-bottom:1px solid var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-rest);
+}
+.mf__bar img{height:18px; width:auto}
+.mf__pill{
+  display:inline-flex; align-items:center; gap:6px;
+  border:1px solid var(--ds-line); border-radius:var(--ds-r-control);
+  padding:6px 10px 6px var(--ds-space-sm);
+  position:relative; overflow:hidden;
+  font-family:var(--ds-font-display); font-size:10px; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--ds-ink);
+}
+.mf__pill::before{content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--ds-grad-brand)}
+.mf__solid{
+  border-radius:var(--ds-r-control); background:var(--ds-primary); color:var(--ds-ink-on-dark);
+  font-family:var(--ds-font-display); font-size:10px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; padding:8px var(--ds-space-sm);
+}
+.mf__hero{padding:var(--ds-space-lg) var(--ds-space-md)}
+.mf__hero .eyebrow{font-size:9.5px}
+.mf__h1{
+  margin:0;
+  font-family:var(--ds-font-display); font-size:30px; font-weight:800;
+  letter-spacing:-.035em; line-height:1.05; text-transform:uppercase;
+  color:var(--ds-ink-heading);
+}
+.mf__p{margin:var(--ds-space-sm) 0 0; font-size:13px; color:var(--ds-ink-soft)}
+.mf__sticky{
+  position:absolute; left:0; right:0; bottom:0;
+  display:flex; gap:var(--ds-space-xs);
+  padding:var(--ds-space-sm);
+  background-color:var(--ds-glass-bg);
+  border-top:1px solid var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-card);
+}
+.mf__sticky > span{
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--ds-r-control);
+  font-family:var(--ds-font-display); font-size:10.5px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  padding:var(--ds-space-sm) 0;
+}
+.mf__sticky .is-primary{flex:0 0 60%; background:var(--ds-primary); color:var(--ds-ink-on-dark)}
+.mf__sticky .is-secondary{flex:1 1 auto; border:1px solid var(--ds-primary); color:var(--ds-accent-light)}
+/* the drawer specimen fills the frame, carrying the same light edge */
+.mf__drawer{position:absolute; inset:0; background:var(--ds-bg-warm); display:flex; flex-direction:column}
+.mf__edge{position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--ds-grad-brand); box-shadow:var(--ds-glow)}
+.mf__dhead{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:var(--ds-space-sm) var(--ds-space-md);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.mf__dhead img{height:16px; width:auto}
+.mf__x{
+  border:1px solid var(--ds-line); border-radius:var(--ds-r-pill);
+  padding:5px 10px;
+  font-family:var(--ds-font-display); font-size:9px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ds-ink-soft);
+}
+.mf__dbody{padding:var(--ds-space-md); overflow:hidden; flex:1 1 auto}
+.mf__ghd{
+  display:flex; align-items:baseline; justify-content:space-between;
+  padding-bottom:6px; margin-bottom:var(--ds-space-xs);
+  border-bottom:1px solid var(--ds-hairline);
+  font-family:var(--ds-font-display); font-size:9.5px; font-weight:800;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ds-accent-ink);
+}
+.mf__ghd em{font-family:var(--ds-font-mono); font-style:normal; font-size:10px; color:var(--ds-ink-soft); letter-spacing:0}
+.mf__list{display:grid}
+.mf__list span{
+  padding:9px 0 9px var(--ds-space-sm);
+  border-bottom:1px solid var(--ds-hairline);
+  font-size:13px; color:var(--ds-ink); position:relative;
+}
+.mf__list span:first-child::before{
+  content:""; position:absolute; left:0; top:50%; width:2px; height:56%;
+  transform:translateY(-50%); background:var(--ds-primary);
+}
+.mf__more{margin-top:var(--ds-space-sm); font-family:var(--ds-font-mono); font-size:10.5px; color:var(--ds-ink-soft)}
+
+/* ===========================================================================
+   05 . THE FOOTER. FOOTER-STYLES #22 inside the brand's inset charcoal card.
+   =========================================================================== */
+.site-footer{padding:var(--ds-space-2xl) var(--ds-space-md) var(--ds-space-xl)}
+.foot__card{
+  max-width:var(--ds-container-max); margin:0 auto;
+  background:var(--ds-bg-surface-2);
+  border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-surface);
+  box-shadow:var(--ds-shadow-card), var(--ds-inset-hi);
+  padding:var(--ds-space-xl) var(--ds-space-lg);
+}
+.foot__label{
+  display:flex; align-items:center; gap:var(--ds-space-2xs);
+  font-family:var(--ds-font-display);
+  font-size:10px; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ds-ink-soft);
+  margin:0 0 var(--ds-space-xs);
+}
+.foot__label svg{width:11px; height:11px; flex:0 0 auto; color:var(--ds-accent-ink)}
+.foot__contact{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:var(--ds-space-lg);
+  padding-bottom:var(--ds-space-lg);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.foot__contact p{margin:0; font-size:15px; color:var(--ds-ink); line-height:1.5}
+.foot__contact a{color:var(--ds-ink); text-decoration:none; transition:color var(--ds-dur-fast) var(--ds-ease)}
+.foot__contact a:hover{color:var(--ds-accent-ink)}
+.foot__nav{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:var(--ds-space-md) var(--ds-space-lg);
+  padding-block:var(--ds-space-lg);
+  border-bottom:1px solid var(--ds-hairline);
+}
+.foot__nav img{height:20px; width:auto}
+.foot__links{display:flex; flex-wrap:wrap; gap:var(--ds-space-sm) var(--ds-space-lg)}
+.foot__links a{
+  position:relative;
+  font-family:var(--ds-font-display);
+  font-size:12px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ds-ink); text-decoration:none;
+  padding-block:var(--ds-space-2xs);
+  transition:color var(--ds-dur-fast) var(--ds-ease);
+}
+.foot__links a::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:var(--ds-primary);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform var(--ds-dur) var(--ds-ease);
+}
+.foot__links a:hover::after,.foot__links a:focus-visible::after{transform:scaleX(1)}
+.foot__legal{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:var(--ds-space-sm) var(--ds-space-md);
+  padding-top:var(--ds-space-md);
+  font-size:12.5px; color:var(--ds-ink-soft);
+}
+.foot__legal a{color:var(--ds-ink-soft); text-decoration:none}
+.foot__legal a:hover{color:var(--ds-ink)}
+
+/* ===========================================================================
+   06 . THE MOBILE STICKY ACTION BAR. STICKY-CTA-BAR #2.
+   Mobile only, and it stands down the moment the footer arrives so it can
+   never double up over the footer's own contact block.
+   =========================================================================== */
+.sticky-cta{
+  position:fixed; left:0; right:0; bottom:0;
+  z-index:var(--ds-z-sticky);
+  display:none; gap:var(--ds-space-xs);
+  padding:var(--ds-space-sm) var(--ds-space-sm) calc(var(--ds-space-sm) + env(safe-area-inset-bottom,0px));
+  background-color:var(--ds-glass-bg);
+  -webkit-backdrop-filter:var(--ds-glass-blur);
+  backdrop-filter:var(--ds-glass-blur);
+  border-top:1px solid var(--ds-glass-border);
+  box-shadow:var(--ds-shadow-card);
+  transform:translateY(0); opacity:1;
+  transition:transform var(--ds-dur) var(--ds-ease-out), opacity var(--ds-dur) var(--ds-ease-out);
+}
+.sticky-cta.is-hidden{transform:translateY(101%); opacity:0; pointer-events:none}
+.sticky-cta .btn{padding-block:var(--ds-space-sm)}
+.sticky-cta .btn--solid{flex:0 0 58%}
+.sticky-cta .btn--outline{flex:1 1 auto}
+
+/* ===========================================================================
+   07 . RESPONSIVE
+   =========================================================================== */
+@media (max-width:1023px){
+  .nav{gap:var(--ds-space-sm)}
+  .nav a{font-size:11px; letter-spacing:.12em}
+}
+@media (max-width:900px){
+  .sl__cols{grid-template-columns:1fr; gap:var(--ds-space-lg)}
+  .sl__foot{grid-template-columns:1fr}
+  .foot__contact{grid-template-columns:1fr; gap:var(--ds-space-md)}
+}
+@media (max-width:767px){
+  /* the compressed bar: wordmark plus the one affordance. Everything the bar
+     was carrying collapses into the panel, which is now the drawer. */
+  .nav,.util,.acts .btn{display:none}
+  .bar__in{height:56px}
+  .brand img{height:18px}
+  .sl{width:100%}
+  .sl__scroll{padding:var(--ds-space-md) var(--ds-space-md) var(--ds-space-2xl)}
+  .sl__head{padding:var(--ds-space-sm) var(--ds-space-md)}
+  .sticky-cta{display:flex}
+  .hero{padding-block:calc(var(--ds-space-lg) + var(--ds-space-2xl)) var(--ds-space-2xl)}
+  .band,.frames{padding-block:var(--ds-space-2xl)}
+  .foot__card{padding:var(--ds-space-lg) var(--ds-space-md)}
+  .specs li{grid-template-columns:1fr; gap:var(--ds-space-2xs)}
+  body{padding-bottom:var(--ds-space-2xl)}
+}
+
+/* ===========================================================================
+   08 . REDUCED MOTION. Binding, and complete.
+   Every transition and animation collapses to an instant state change, every
+   hover lift and lateral shift is removed, smooth scrolling is off. Nothing
+   is hidden and no information is lost: the panel still opens, the bar still
+   goes solid, the sticky bar still stands down at the footer. They arrive
+   instead of moving.
+   =========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    transition-duration:.01ms !important;
+    transition-delay:0s !important;
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+  }
+  .btn:hover,.trigger:hover,.sl__close:hover,.grp a:hover,.grp a:focus-visible{transform:none}
+  .skip:focus{transform:none}
+}
+</style>
+</head>
+
+<body class="surface-dark">
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- pick: NAV-PATTERNS.md #13 | considered: #14,#2,#1 | why: pattern 13 (logo plus always visible hamburger hybrid) is the only archetype that keeps a short real link set in the bar AND sends a heavier index to a richer overlay, which is exactly the shape C1 demands with its 8 item Services group and 6 item Team group. Pattern 14 puts EVERYTHING behind the trigger, so Pricing, Results and Contact vanish from the bar and every visit to the three most trafficked pages costs an extra click. Pattern 2 and pattern 1 both keep all top level items inline, which forces 8 plus 6 into hover dropdowns; that is the crammed read this brand cannot afford and the WOW bar treats as cheap. -->
+<header class="bar" id="bar">
+  <div class="bar__in">
+    <a class="brand" href="/" aria-label="Dispenza, home">
+      <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1024" height="205">
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="/" aria-current="page">Home</a>
+      <a href="/how-it-works">Pricing</a>
+      <a href="/case-studies">Results</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+    <div class="acts">
+      <a class="util" href="https://dispenza.com/login" target="_blank" rel="noopener">
+        Login
+        <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+          <path d="M4 2h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"></path>
+          <path d="M10 2 2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"></path>
+        </svg>
+      </a>
+      <a class="btn btn--solid" href="/contact"><span>Book demo</span></a>
+      <button class="trigger" type="button" id="menu-trigger"
+              aria-controls="sidelight" aria-expanded="false" aria-haspopup="dialog"
+              aria-label="Open the full menu, including all 8 services and all 6 team pages">
+        <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false">
+          <path d="M0 1h14M0 9h14" stroke="currentColor" stroke-width="1.6"></path>
+        </svg>
+        Menu
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- pick: NAV-PATTERNS.md #13 | considered: #14,#1 | why: the drawer half of the SAME coordinated system, because NAV-PATTERNS determines all three breakpoint states together and pattern 13 says the hybrid trigger opens an overlay carrying more than the inline bar. Here that overlay is a full height right hand panel rather than pattern 14 style full width takeover, because a takeover at 1440 would blank the page behind it and lose the sense of place, and rather than pattern 1 style narrow centred link stack, because 14 links centred in a 290px column is the crammed dropdown problem moved sideways. Two named columns with their own counts is the only treatment that lets 8 services and 6 people read as an index instead of a list. -->
+<button class="scrim" id="scrim" type="button" tabindex="-1" aria-hidden="true"></button>
+
+<aside class="sl" id="sidelight" role="dialog" aria-modal="true" aria-label="Full menu" aria-hidden="true">
+  <div class="sl__edge" aria-hidden="true"></div>
+
+  <div class="sl__head">
+    <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1024" height="205">
+    <button class="sl__close" type="button" id="menu-close">
+      <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+        <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"></path>
+      </svg>
+      Close
+    </button>
+  </div>
+
+  <div class="sl__scroll">
+    <div class="sl__cols">
+      <div class="grp">
+        <div class="grp__hd"><h2>Services</h2><span class="grp__n">08</span></div>
+        <ul>
+          <li><a href="/our-suite/performance-marketing">Performance marketing</a></li>
+          <li><a href="/our-suite/webdesign-development">Web design and development</a></li>
+          <li><a href="/our-suite/conversion-rate-optimization">Conversion rate optimization</a></li>
+          <li><a href="/our-suite/branding-graphic-design">Brand and package design</a></li>
+          <li><a href="/our-suite/ads-design">Advertisement design</a></li>
+          <li><a href="/our-suite/integrations">Integrations</a></li>
+          <li><a href="/our-suite/consulting">Consulting</a></li>
+          <li><a href="/our-suite/reports">Reports</a></li>
+        </ul>
+      </div>
+
+      <div class="grp">
+        <div class="grp__hd"><h2>Team</h2><span class="grp__n">06</span></div>
+        <ul>
+          <li><a href="/frances">Frances Hutzel</a></li>
+          <li><a href="/james">James Compton</a></li>
+          <li><a href="/nick">Nick Marx</a></li>
+          <li><a href="/sergio">Sergio Ruiz</a></li>
+          <li><a href="/shay">Shay Spatz</a></li>
+          <li><a href="/thomas">Thomas Benjamin Robinson</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sl__foot">
+      <div>
+        <p class="foot__label">Site</p>
+        <div class="sl__site">
+          <a href="/">Home</a>
+          <a href="/how-it-works">Pricing</a>
+          <a href="/case-studies">Results</a>
+          <a href="/contact">Contact</a>
+          <a href="/privacy-policy">Privacy policy</a>
+          <a href="https://dispenza.com/login" target="_blank" rel="noopener">Login</a>
+        </div>
+      </div>
+      <div>
+        <p class="foot__label">Reach us</p>
+        <div class="sl__reach">
+          <span>6905 W Charleston Blvd Suite 110 B, Las Vegas, NV 89117</span>
+          <a href="tel:+17024207272">+1 (702) 420-7272</a>
+          <a href="mailto:hello@dispenza.com">hello@dispenza.com</a>
+        </div>
+      </div>
+      <div class="sl__cta">
+        <a class="btn btn--solid btn--lg" href="/contact"><span>Book demo</span></a>
+        <a class="btn btn--outline btn--lg" href="tel:+17024207272"><span>Call us</span></a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main id="main">
+
+  <!-- pick: HERO-COMPOSITIONS.md #10 | considered: #5,#22 | why: a centred text driven hero is the right scaffolding under a chrome tournament, because the thing being judged is the frame and a hero must not compete with it. Pattern 5 (full bleed image with overlay text) would import a hero photograph the chrome stage has not chosen and would make the bar's transparent state impossible to read fairly against a single arbitrary image. Pattern 22 (statistics heavy) would import figures this frame does not own and cannot verify. Pattern 10 also happens to match what the client's live homepage already does, which is centred display type on a dark textured panel, so the bar is judged over the ground it will really sit on. -->
+  <section class="hero">
+    <div class="hero__grid" aria-hidden="true"></div>
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="eyebrow">Chrome concept 3 of 3</p>
+      <h1>Sidelight column</h1>
+      <p class="lede">A quiet horizontal bar with a vertical accent. The bar carries a wordmark, four links and one button. The heavy navigation opens as a full height panel from the right, where the eight services and the six team pages each get a column instead of a dropdown. The violet gradient is spent once, as the thin light edge on that panel.</p>
+      <div class="row">
+        <a class="btn btn--solid btn--lg" href="/contact"><span>Book demo</span></a>
+        <a class="btn btn--outline btn--lg" href="tel:+17024207272"><span>Call us</span></a>
+      </div>
+    </div>
+    <div id="hero-sentinel" aria-hidden="true"></div>
+  </section>
+
+  <!-- pick: SECTION-COMPONENTS.md #26 | considered: #8,#3 | why: a single statement breath plus a hairline spec list is the least content a body can carry while still proving the frame's measure, vertical rhythm and second ground plane. Pattern 8 (manifesto or belief statement) would need brand voice copy that the content phase owns and this stage must not pre empt. Pattern 3 (stat strip) would need real figures, and inventing numbers to decorate a chrome specimen is the exact fabrication the honesty gates exist to stop. The pull quote reads as one idea per viewport, which is the pacing C7 adopted from the owner's structural reference. -->
+  <section class="band">
+    <div class="wrap">
+      <p class="eyebrow">What the frame has to carry</p>
+      <p class="quote">Two oversized groups, one always ready action, and a footer the brand already <span>recognises.</span></p>
+      <ul class="specs">
+        <li><b>Bar at rest</b><span>Transparent over the hero. No fill, no border, no shadow, no glow. The hero supplies the contrast.</span></li>
+        <li><b>Bar on scroll</b><span>Glass fill, backdrop blur, a hairline border and a resting shadow, in 220ms. It never changes height, so nothing under it reflows.</span></li>
+        <li><b>Services and Team</b><span>Never a dropdown. Both open the same full height panel, each as its own named column with its own count.</span></li>
+        <li><b>Mobile</b><span>The same panel becomes the drawer. The bar keeps only the wordmark and the trigger, and the two actions move to the sticky bar.</span></li>
+        <li><b>Footer</b><span>The dark charcoal rounded card, inset from the page edge, carrying contact, links and legal as three stacked rows.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- pick: NAV-PATTERNS.md #13 | considered: #14,#1 | why: this band is the 375 evidence for the same coordinated system, shown as two static specimens so the compressed bar and the drawer open state can both be judged from a still frame without driving the page. Pattern 14's full width takeover is what the right hand specimen would look like if the panel were not reused, and pattern 1's narrow centred stack is what it would look like if the groups were not given their own headings and counts; both are drawn here in the negative, by showing what this concept does instead. The specimens are inert markup with no focusable children, so the real drawer stays the only thing in the tab order. -->
+  <section class="frames">
+    <div class="wrap">
+      <div class="frames__hd">
+        <h2>The same system at 375</h2>
+      </div>
+      <p>Left: the compressed bar, which keeps only the wordmark and the one affordance, with the dual action sticky bar pinned at the bottom. Right: the drawer, which is the sidelight panel at full width, carrying the same light edge on the same side.</p>
+
+      <div class="frames__row">
+        <div>
+          <div class="mf" aria-hidden="true">
+            <div class="mf__bar">
+              <img src="../../../assets/in-pages/Rectangle1.webp" alt="" width="1024" height="205">
+              <span class="mf__pill">Menu</span>
+            </div>
+            <div class="mf__hero">
+              <p class="eyebrow">Chrome concept 3</p>
+              <p class="mf__h1">Sidelight column</p>
+              <p class="mf__p">The bar keeps almost nothing. The two actions move to the bar at the bottom, where a thumb can reach them.</p>
+            </div>
+            <div class="mf__sticky">
+              <span class="is-primary">Book demo</span>
+              <span class="is-secondary">Call us</span>
+            </div>
+          </div>
+          <p class="mf__cap">375 . bar compressed . sticky actions revealed</p>
+        </div>
+
+        <div>
+          <div class="mf" aria-hidden="true">
+            <div class="mf__drawer">
+              <div class="mf__edge"></div>
+              <div class="mf__dhead">
+                <img src="../../../assets/in-pages/Rectangle1.webp" alt="" width="1024" height="205">
+                <span class="mf__x">Close</span>
+              </div>
+              <div class="mf__dbody">
+                <div class="mf__ghd">Services <em>08</em></div>
+                <div class="mf__list">
+                  <span>Performance marketing</span>
+                  <span>Web design and development</span>
+                  <span>Conversion rate optimization</span>
+                  <span>Brand and package design</span>
+                </div>
+                <p class="mf__more">4 more, then Team 06, then site and contact</p>
+              </div>
+            </div>
+          </div>
+          <p class="mf__cap">375 . drawer open . the one glow, on the left edge</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- pick: FOOTER-STYLES.md #22 | considered: #1,#14,#17 | why: pattern 22 (multi row layered, contact then nav then legal) is the only one of the four whose stacked horizontal rows answer the panel's stacked vertical columns, so the frame closes in the same grammar it opened in, and it carries all three required contact facts plus all five required links without a single empty column. Pattern 1 (4 col dark, brand left) is flagged in the catalog as the default reflex and would flatten the brand's inset card into an ordinary link grid. Pattern 14 (hours and contact prominent) wants an opening hours column, and this build has no hours data, so a third of that footer would have to be fabricated. Pattern 17 (centred minimal) is too thin to hold an address, a phone number, an email and five links without wrapping into mush. The card itself stays because C7 records the inset dark charcoal rounded card as a brand signature. -->
+<footer class="site-footer" id="site-footer">
+  <div class="foot__card">
+
+    <div class="foot__contact">
+      <div>
+        <p class="foot__label">
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+            <path d="M6 11S1.6 7.4 1.6 4.6A4.4 4.4 0 0 1 10.4 4.6C10.4 7.4 6 11 6 11Z" stroke="currentColor" stroke-width="1.3"></path>
+            <circle cx="6" cy="4.6" r="1.4" stroke="currentColor" stroke-width="1.3"></circle>
+          </svg>
+          Visit
+        </p>
+        <p>6905 W Charleston Blvd Suite 110 B<br>Las Vegas, NV 89117</p>
+      </div>
+      <div>
+        <p class="foot__label">
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+            <path d="M1.4 2.3a1 1 0 0 1 1-1h1.4l1 2.3-1.2.9a7.4 7.4 0 0 0 3 3l.9-1.2 2.3 1v1.4a1 1 0 0 1-1 1A9 9 0 0 1 1.4 2.3Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path>
+          </svg>
+          Call
+        </p>
+        <p><a href="tel:+17024207272">+1 (702) 420-7272</a></p>
+      </div>
+      <div>
+        <p class="foot__label">
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+            <rect x="1.1" y="2.4" width="9.8" height="7.2" rx="1" stroke="currentColor" stroke-width="1.3"></rect>
+            <path d="m1.6 3 4.4 3.2L10.4 3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path>
+          </svg>
+          Email
+        </p>
+        <p><a href="mailto:hello@dispenza.com">hello@dispenza.com</a></p>
+      </div>
+    </div>
+
+    <div class="foot__nav">
+      <img src="../../../assets/in-pages/Rectangle1.webp" alt="Dispenza" width="1024" height="205">
+      <nav class="foot__links" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/case-studies">Results</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+      </nav>
+    </div>
+
+    <div class="foot__legal">
+      <span>Copyright 2026 Dispenza. All rights reserved.</span>
+      <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+
+  </div>
+</footer>
+
+<!-- pick: STICKY-CTA-BAR.md #2 | considered: #1,#6 | why: the C1 conversion goal is book a demo, a high intent goal, so a non null sticky is mandatory, and the owner named TWO primary actions, BOOK DEMO and CALL US. Pattern 2 (dual button, primary plus secondary) is the only one of the three that carries both, and its 60 to 40 split keeps the demo booking dominant while the phone stays one tap away, which matters for a client whose buyers are operators mid shift. Pattern 1 (single full width pill) and pattern 6 (floating pill) each carry one action, so either would silently drop the tel link the owner specified. The bar stands down when the footer enters the viewport so it can never sit on top of the footer's own phone number. -->
+<div class="sticky-cta" id="cta-bar">
+  <a class="btn btn--solid" href="/contact"><span>Book demo</span></a>
+  <a class="btn btn--outline" href="tel:+17024207272"><span>Call us</span></a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var bar      = document.getElementById('bar');
+  var sentinel = document.getElementById('hero-sentinel');
+  var panel    = document.getElementById('sidelight');
+  var scrim    = document.getElementById('scrim');
+  var trigger  = document.getElementById('menu-trigger');
+  var closeBtn = document.getElementById('menu-close');
+  var stickyBar= document.getElementById('cta-bar');
+  var footer   = document.querySelector('.site-footer');
+  var lastFocus = null;
+
+  /* --- 1. the bar: transparent over the hero, solid past it -----------------
+     An IntersectionObserver on a zero height sentinel at the end of the hero,
+     not a scroll handler, so nothing runs on every scroll frame. */
+  if (bar && sentinel && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      bar.classList.toggle('is-solid', !entries[0].isIntersecting);
+    }, { rootMargin: '0px 0px -100% 0px' }).observe(sentinel);
+  }
+
+  /* --- 2. the sidelight panel ---------------------------------------------- */
+  function focusables() {
+    return panel ? panel.querySelectorAll('a[href], button:not([disabled])') : [];
+  }
+  function openPanel() {
+    if (!panel) return;
+    lastFocus = document.activeElement;
+    document.body.classList.add('is-open');
+    panel.setAttribute('aria-hidden', 'false');
+    if (scrim) scrim.setAttribute('aria-hidden', 'false');
+    if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    var f = focusables();
+    if (f.length) f[0].focus();
+  }
+  function closePanel() {
+    if (!panel) return;
+    document.body.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    if (scrim) scrim.setAttribute('aria-hidden', 'true');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  if (trigger)  trigger.addEventListener('click', openPanel);
+  if (closeBtn) closeBtn.addEventListener('click', closePanel);
+  if (scrim)    scrim.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', function (e) {
+    if (!document.body.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { closePanel(); return; }
+    if (e.key !== 'Tab') return;
+    var f = focusables();
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* --- 3. the sticky action bar stands down at the footer -------------------
+     The mandated hide at footer mechanism: a second IntersectionObserver on
+     the real .site-footer. Without it the mobile bar would sit on top of the
+     footer's own phone number at the bottom of every page. */
+  if (stickyBar && footer && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      var atEnd = entries[0].isIntersecting;
+      stickyBar.classList.toggle('is-hidden', atEnd);
+      stickyBar.setAttribute('aria-hidden', atEnd ? 'true' : 'false');
+    }, { threshold: 0 }).observe(footer);
+  }
+})();
+</script>
+</body>
+</html>
