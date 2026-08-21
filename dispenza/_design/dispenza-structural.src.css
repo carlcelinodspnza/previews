@@ -6492,7 +6492,11 @@ a.hw-cell__value:focus-visible{
 /* The ONE emphasis move inside body copy: same size, brighter ink, more weight —
    never a size that would fill the type ladder's void back in. */
 .tc-emph{
-  margin:var(--ds-space-lg) 0 0;
+  /* RHYTHM 2026-08-21: was --ds-space-lg (40px). 40 read as ~1.5 line boxes of air
+     between a heading and the subtitle that belongs to it. --ds-space-md (24px) is the
+     next token down; 28px was trialled in the Package Design panel but is not on the
+     token scale (4/8/14/24/40/64/96), and 4px does not justify breaking it. */
+  margin:var(--ds-space-md) 0 0;
   font-size:var(--ds-step-body);
   font-weight:700;line-height:1.7;letter-spacing:.06em;
   color:var(--ds-ink);
@@ -6547,7 +6551,9 @@ a.hw-cell__value:focus-visible{
 /* term / definition pairs. Term and definition are the SAME SIZE, separated by ink
    and weight only — the ladder's void again, there is no size between 34px and
    17px to promote a term into. */
-.tc-defs{margin:var(--ds-space-lg) 0 0;max-width:var(--ds-measure)}
+/* RHYTHM 2026-08-21: --ds-space-lg -> --ds-space-md, matching .tc-emph above. This also
+   tightens the gap between CONSECUTIVE .tc-defs blocks (consulting stacks nine). */
+.tc-defs{margin:var(--ds-space-md) 0 0;max-width:var(--ds-measure)}
 
 /* TWO-UP DEFINITION LIST ON A WIDE CANVAS.
    MEASURED PROBLEM: a page whose body is only definition pairs used 44% of the 1440 canvas and ran
@@ -6611,24 +6617,29 @@ a.hw-cell__value:focus-visible{
      :not([hidden]) makes this (0,3,0) AND makes it structurally incapable of matching a
      hidden panel, so a future reorder of this stylesheet cannot reveal every panel at once.
 
-     Requires two CONSECUTIVE .tc-defs, so it fires ONLY on a panel authored as one block
-     per pair. Panel 03 (Merchandise Design) keeps its single block and stays one column. */
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs){
+     OPT-IN CLASS, NOT A STRUCTURAL SELECTOR. This first shipped as
+     :has(> .tc-defs + .tc-defs), which reads as "a panel authored as two pairs" but really
+     means "two or more consecutive blocks" -- and consulting's cspanel-7 stacks NINE of them,
+     so opening that tab turned it into 352px columns at 1.55 leading. That is the exact case
+     the note above says was measured and rejected. A structural selector cannot express
+     "this particular panel was designed two-up"; a class can, and it cannot capture a page
+     nobody looked at. Panel 03 and every other panel are untouched by construction. */
+  .tc-tabs__panel--two-up:not([hidden]){
     display:grid;
     grid-template-columns:repeat(2, minmax(0, 1fr));
     column-gap:56px;
     align-items:start;
   }
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > :not(.tc-defs){ grid-column:1 / -1 }
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-defs{ max-width:none }
+  .tc-tabs__panel--two-up:not([hidden]) > :not(.tc-defs){ grid-column:1 / -1 }
+  .tc-tabs__panel--two-up:not([hidden]) > .tc-defs{ max-width:none }
 
   /* LEADING FOLLOWS MEASURE. 1.72 is the site body leading and it is right for the
      640px single column, which runs ~76 characters. These cells run 352px / 45
      characters, and leading has to TIGHTEN as the measure narrows or short lines
      drift apart -- the lines stop reading as a paragraph. Applied ONLY inside the
      two-up panel, so the single-column rendering below 1100px keeps 1.72 untouched. */
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) .tc-defs__t,
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) .tc-defs__d{ line-height:1.55 }
+  .tc-tabs__panel--two-up:not([hidden]) .tc-defs__t,
+  .tc-tabs__panel--two-up:not([hidden]) .tc-defs__d{ line-height:1.55 }
 
   /* VERTICAL RHYTHM. Two things had to be fixed together here.
      (a) MARGINS STOP COLLAPSING IN A GRID. As a block, h2's 14px bottom and
@@ -6645,8 +6656,13 @@ a.hw-cell__value:focus-visible{
      .mc-actions keeps its 40px: it is a CTA and wants the separation.
      Scoped to the two-up grid, so the single-column rendering below 1100px keeps
      the collapsed-margin spacing it has always had. */
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-emph{ margin-top:var(--ds-space-sm) }
-  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-defs{ margin-top:var(--ds-space-md) }
+  /* MAKE THE GRID AGREE WITH THE BLOCK. Everywhere else on the site these gaps are produced
+     by COLLAPSING margins: h2's 14px bottom overlaps .tc-emph's 24px top and the result is 24px.
+     In this grid they cannot collapse, so the same declarations would render 14+24=38px. Zeroing
+     the heading's bottom margin here removes it from the sum, so the grid renders 0+24=24px --
+     identical to every other page, from one global value, with no per-context number to keep
+     in sync. .tc-emph and .tc-defs need no override at all now. */
+  .tc-tabs__panel--two-up:not([hidden]) > .tc-tabs__t{ margin-bottom:0 }
 }
 
 
