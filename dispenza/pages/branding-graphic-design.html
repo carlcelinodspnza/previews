@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../_design/dispenza-fonts.css">
 <link rel="stylesheet" href="../_design/dispenza-tokens.css?v=bf07bcdb">
 <link rel="stylesheet" href="../_design/dispenza-chrome.css?v=c5c8f560">
-<link rel="stylesheet" href="../_design/dispenza-structural.css?v=519a7bc8">
+<link rel="stylesheet" href="../_design/dispenza-structural.css?v=ed23f5f7">
 
 </head>
 <body class="site-body">
@@ -362,16 +362,20 @@
             <p class="tc-emph" data-reveal>Custom Package Design Solutions for Dispensaries by Dispenza</p>
             <!-- Term / definition pairs. The source writes a bolded label and its
                  own full sentence; the pair is one grid item, never split. -->
+            <!-- TWO BLOCKS, ONE PAIR EACH - not one block of two pairs. The two-column
+                 treatment is driven by the SECTION seeing two CONSECUTIVE .tc-defs
+                 siblings (see dispenza-structural.css), which is the shape the other
+                 pages already emit; `columns:2` on a single block is the recorded
+                 wrong lever. Splitting here lets the existing, already-measured grid
+                 rule do the work instead of adding a second mechanism. -->
             <div class="tc-defs" data-reveal>
               <p class="tc-defs__t">Cannabis Product Labeling:</p>
               <p class="tc-defs__d">We specialize in designing eye-catching and compliant labels for cannabis products. Our designers are well-versed in the regulations and requirements specific to the industry.</p>
+            </div>
+            <div class="tc-defs" data-reveal>
               <p class="tc-defs__t">Package Design:</p>
               <p class="tc-defs__d">We can help you create compelling and informative packaging for your cannabis products, ensuring they stand out on the shelves.</p>
             </div>
-            <figure class="tc-plate tc-lift" data-media-in>
-              <img src="../assets/in-pages/dispenza-cannabis-dispensary-products.webp"
-                   alt="dispenza cannabis dispensary products" width="821" height="357" loading="lazy" decoding="async">
-            </figure>
             <div class="mc-actions" data-reveal>
               <a class="btn btn--solid" href="contact.html">BOOK DEMO</a>
             </div>

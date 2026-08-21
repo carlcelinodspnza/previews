@@ -6581,7 +6581,48 @@ a.hw-cell__value:focus-visible{
   }
   .tc-doc--norail .tc-sec:has(> .tc-defs + .tc-defs) > :not(.tc-defs){ grid-column:1 / -1 }
   .tc-doc--norail .tc-sec:has(> .tc-defs + .tc-defs) > .tc-defs{ max-width:none }
+
 }
+
+/* Own breakpoint, NOT the 1024 block above. MEASURED: at 1024px the two cells are 304px
+   and read 38 / 35 characters per line, well under the comfortable band; at 1100px they are
+   342px and read 43 / 41. So the two-column treatment starts at 1100, and 1024-1099 keeps
+   the single 640px measured column. */
+@media (min-width: 1100px) {
+  /* TABBED PANELS TOO -- added 2026-08-21 at owner request for the Package Design panel.
+     The rule above is deliberately scoped to .tc-doc--norail because a RAILED body was
+     measured at 759px and two columns of that is 332px a cell, which consulting (9 blocks)
+     proved too narrow. That exclusion still holds for .tc-sec bodies; it does NOT hold
+     here. This page's PANEL body measures 824px, and the `max-width:none` below drops the
+     640px cap exactly as the rule above does. MEASURED OUTCOME, so it is not re-derived:
+     the panel box is 759px (the very figure the note above cites), and column-gap is a
+     LITERAL 56px here, NOT var(--ds-space-2xl) -- that token resolves to 96px, which left
+     332px cells reading 40 characters per line. At 56px the cells are 352px and read 45.
+     Measured by walking a Range over every character and taking the MAX line, never
+     characters/lines (that averages in the short final line and under-reports badly).
+     Sweeping the gap below 56px buys nothing: 40px and 32px both still measure 45,
+     because wrapping is word-driven. 45 is the floor of the comfortable band, which is
+     acceptable for two SHORT definition pairs and would not be for running prose.
+
+     :not([hidden]) IS LOAD-BEARING. Panels are hidden by `.tc-tabs__panel[hidden]{display:none}`
+     and `:has()` takes the specificity of its argument, so a bare
+     `.tc-tabs__panel:has(> .tc-defs + .tc-defs)` would be (0,2,0) -- an exact TIE with the
+     [hidden] rule, leaving the tab system's show/hide decided by source order alone. Adding
+     :not([hidden]) makes this (0,3,0) AND makes it structurally incapable of matching a
+     hidden panel, so a future reorder of this stylesheet cannot reveal every panel at once.
+
+     Requires two CONSECUTIVE .tc-defs, so it fires ONLY on a panel authored as one block
+     per pair. Panel 03 (Merchandise Design) keeps its single block and stays one column. */
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs){
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    column-gap:56px;
+    align-items:start;
+  }
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > :not(.tc-defs){ grid-column:1 / -1 }
+  .tc-tabs__panel:not([hidden]):has(> .tc-defs + .tc-defs) > .tc-defs{ max-width:none }
+}
+
 
 .tc-defs__t{
   margin:0;
