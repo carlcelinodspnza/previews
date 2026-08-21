@@ -230,16 +230,19 @@
             <p class="tc-head__lede" data-reveal>We understand the importance of creating a cohesive and impactful brand presence, and our talented team of designers is here to assist you every step of the way.</p>
           </div>
 
-            <!-- THE BRAND BOARD, beside the title. Same treatment as the phone on
-                 performance-marketing: a genuine RGBA cutout (verified 49% transparent
-                 inside its trim, transparent corners - unlike the hero phone's source,
-                 which arrived on an opaque white plate) on the existing [data-parallax]
-                 engine, borderless, with a drop-shadow that follows the alpha rather
-                 than a box-shadow that would draw a rectangle behind it. -->
+            <!-- THE BRAND BOARD, beside the title. Owner-supplied art, REPLACED 2026-08-21:
+                 the board now carries the apparel and cap alongside the packaging. Still a
+                 genuine RGBA cutout with a feathered edge - 1.69% of its pixels carry partial
+                 alpha, and webp q95 preserves that figure EXACTLY (measured, not assumed) -
+                 riding the existing [data-parallax] engine, borderless, with a drop-shadow
+                 that follows the alpha rather than a box-shadow that would draw a rectangle
+                 behind it. Dimensions moved 880x984 -> 800x800 with the art; the CSS sizes it
+                 width:100%/height:auto with no aspect-ratio or object-fit, so the new square
+                 ratio is honoured rather than cropped. -->
             <div class="tc-head__media tc-head__media--wide tc-head__media--float tc-lift" data-parallax>
               <img src="../assets/in-pages/brand-package-board.webp"
                    alt="Dispenza brand board with dispensary logos, packaging and printed collateral"
-                   width="880" height="984" loading="lazy" decoding="async">
+                   width="800" height="800" loading="lazy" decoding="async">
             </div>
         </div>
         <hr class="tc-head__seal" data-reveal>
